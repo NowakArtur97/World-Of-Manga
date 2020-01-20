@@ -15,6 +15,16 @@ CREATE TABLE `user`(
     `is_enabled` tinyint NOT NULL DEFAULT 0,
     
     PRIMARY KEY (`user_id`), 	
-    UNIQUE KEY `USER_NAME_UNIQUE`(`user_name`),
-    UNIQUE KEY `EMAIL_UNIQUE`(`email`)
+    UNIQUE KEY `USER_USER_NAME_UNIQUE`(`user_name`),
+    UNIQUE KEY `USER_EMAIL_UNIQUE`(`email`)
+)ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+
+DROP TABLE IF EXISTS `role`;
+
+CREATE TABLE `role`(
+	`role_id` int(11) NOT NULL AUTO_INCREMENT,
+    `name` varchar(30) NOT NULL,
+    
+    PRIMARY KEY(`role_id`),
+    UNIQUE `ROLE_NAME_UNIQUE` (`name`)
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
