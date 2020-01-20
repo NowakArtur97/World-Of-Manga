@@ -10,7 +10,7 @@ public class RegistrationController {
 
 	@GetMapping(path = "/register")
 	public String showRegistrationPage() {
-		
+
 		return "views/user-registration";
 	}
 }
