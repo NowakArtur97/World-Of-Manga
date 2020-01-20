@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping(path = "/user")
-public class RegistrationController {
+public class UserRegistrationController {
 
 	@GetMapping(path = "/register")
 	public String showRegistrationPage() {
