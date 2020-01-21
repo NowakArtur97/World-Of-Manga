@@ -1,4 +1,4 @@
-package com.NowakArtur97.WorldOfManga.validation;
+package com.NowakArtur97.WorldOfManga.validation.userPassword;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -10,7 +10,7 @@ import javax.validation.Constraint;
 import javax.validation.Payload;
 
 @Documented
-@Constraint(validatedBy = PasswordMatchValidator.class)
+@Constraint(validatedBy = PasswordsMatchValidator.class)
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface PasswordsMatch {
@@ -21,9 +21,9 @@ public @interface PasswordsMatch {
 
 	Class<? extends Payload>[] payload() default {};
 
-	String firstPasswordField();
+	String password();
 
-	String secondPasswordField();
+	String matchingPassword();
 
 	@Documented
 	@Target(ElementType.TYPE)
