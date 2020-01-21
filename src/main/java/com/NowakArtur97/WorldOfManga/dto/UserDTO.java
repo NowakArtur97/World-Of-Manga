@@ -1,6 +1,7 @@
 package com.NowakArtur97.WorldOfManga.dto;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
@@ -21,6 +22,7 @@ public class UserDTO {
 
 	@NotBlank(message = "${user.email.notBlank}")
 	@Size(message = "${user.email.size}", max = 100)
+	@Email(message = "${user.email.emailFormat}")
 	private String email;
 
 	@Valid
