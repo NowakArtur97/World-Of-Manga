@@ -1,6 +1,7 @@
 package com.NowakArtur97.WorldOfManga.dto;
 
 import javax.validation.Valid;
+import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -33,4 +34,7 @@ public class UserDTO {
 
 	@Size(message = "${user.lastName.size}", max = 40)
 	private String lastName;
+	
+	@AssertTrue(message = "${user.areTermsAccepted.assertTrue}")
+    private Boolean areTermsAccepted;
 }
