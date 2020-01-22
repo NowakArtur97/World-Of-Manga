@@ -12,7 +12,7 @@
   height: auto;
   color: #fff;
   position: absolute;
-  top: 37%;
+  top: 45%;
   left: 50%;
   transform: translate(-50%, -50%);
   box-sizing: border-box;
@@ -57,5 +57,7 @@
 }
 
 .form_error {
+  padding: 2px;
+  margin: 2px;
   color: red;
 }
