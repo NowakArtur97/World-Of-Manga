@@ -12,11 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.NowakArtur97.WorldOfManga.dto.UserDTO;
 
-import lombok.extern.slf4j.Slf4j;
-
 @Controller
 @RequestMapping(path = "/user")
-@Slf4j
 public class UserRegistrationController {
 
 	@GetMapping(path = "/register")
@@ -37,8 +34,6 @@ public class UserRegistrationController {
 
 			return "views/user-registration";
 		}
-
-		log.info(userDTO.toString());
 
 		return "views/user-login";
 	}

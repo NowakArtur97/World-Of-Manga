@@ -34,7 +34,7 @@ public class UserDTO {
 
 	@Size(message = "{user.lastName.size}", max = 40)
 	private String lastName;
-	
+
 	@AssertTrue(message = "{user.areTermsAccepted.assertTrue}")
-    private Boolean areTermsAccepted;
+	private Boolean areTermsAccepted;
 }

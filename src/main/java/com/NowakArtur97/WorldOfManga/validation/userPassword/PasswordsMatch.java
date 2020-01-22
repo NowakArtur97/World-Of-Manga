@@ -15,7 +15,7 @@ import javax.validation.Payload;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface PasswordsMatch {
 
-	String message() default "${userPassword.password.matchingFields}";
+	String message() default "{userPassword.password.matchingFields}";
 	
 	Class<?>[] groups() default {};
 

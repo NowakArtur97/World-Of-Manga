@@ -9,12 +9,14 @@ public class PasswordsMatchValidator implements ConstraintValidator<PasswordsMat
 
 	private String password;
 	private String matchingPassword;
+	private String message;
 
 	@Override
 	public void initialize(final PasswordsMatch passwordMatchAnnotation) {
 
 		password = passwordMatchAnnotation.password();
 		matchingPassword = passwordMatchAnnotation.matchingPassword();
+		message = passwordMatchAnnotation.message();
 	}
 
 	@Override
@@ -26,6 +28,11 @@ public class PasswordsMatchValidator implements ConstraintValidator<PasswordsMat
 		final Object matchingPasswordField = new BeanWrapperImpl(value).getPropertyValue(matchingPassword);
 
 		isValid = passwordField != null && matchingPasswordField != null && passwordField.equals(matchingPasswordField);
+
+		if (!isValid) {
+			context.buildConstraintViolationWithTemplate(message).addPropertyNode(password).addConstraintViolation()
+					.disableDefaultConstraintViolation();
+		}
 
 		return isValid;
 	}

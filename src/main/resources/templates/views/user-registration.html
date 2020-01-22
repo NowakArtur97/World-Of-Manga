@@ -45,8 +45,8 @@
             </div>
             <div class="form__group">
                 <label class="form__label" for="terms">Accept terms: </label>
-                <p class="form_error" th:if="${#fields.hasErrors('areTermsAccepted')}" th:errors="*{areTermsAccepted}"></p>
                 <input class="form__checkbox" type="checkbox" name="terms" th:field="*{areTermsAccepted}">
+                <p class="form_error" th:if="${#fields.hasErrors('areTermsAccepted')}" th:errors="*{areTermsAccepted}"></p>
             </div>
             <div class="form__group">
                 <button class="form__submit" type="submit">Submit</button>
