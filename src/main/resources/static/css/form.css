@@ -1,0 +1,57 @@
+.page {
+  margin: 0;
+  padding: 0;
+  background: url(../../static/images/romance.jpg) no-repeat fixed center;
+  background-size: cover;
+  font-family: sans-serif;
+}
+
+.form__form-box {
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 400px;
+  height: 530px;
+  color: #fff;
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-sizing: border-box;
+}
+
+.form__title {
+  text-align: center;
+  font-weight: bold;
+}
+
+.form__group {
+  margin: 0;
+  padding: 0px 5px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.form__input {
+  width: 90%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #fff;
+  outline: none;
+  color: #fff;
+  text-align: center;
+  height: 30px;
+}
+
+.form__submit {
+  border: none;
+  outline: none;
+  color: #fff;
+  background: transparent;
+  font-size: 18px;
+  border-radius: 20px;
+}
+
+.form__submit:hover {
+  background: #fff;
+  color: #000;
+  cursor: pointer;
+}
