@@ -9,7 +9,7 @@
 .form__form-box {
   background-color: rgba(0, 0, 0, 0.5);
   width: 400px;
-  height: 530px;
+  height: auto;
   color: #fff;
   position: absolute;
   top: 37%;
@@ -54,4 +54,8 @@
   background: #fff;
   color: #000;
   cursor: pointer;
+}
+
+.form_error {
+  color: red;
 }

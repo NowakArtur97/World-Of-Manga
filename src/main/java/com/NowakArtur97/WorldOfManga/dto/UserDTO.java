@@ -17,9 +17,9 @@ import lombok.NoArgsConstructor;
 @Builder
 public class UserDTO {
 
-	@NotBlank(message = "{user.userName.notBlank}")
-	@Size(message = "{user.userName.size}", max = 40)
-	private String userName;
+	@NotBlank(message = "{user.username.notBlank}")
+	@Size(message = "{user.username.size}", max = 40)
+	private String username;
 
 	@NotBlank(message = "{user.email.notBlank}")
 	@Size(message = "{user.email.size}", max = 100)

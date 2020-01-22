@@ -28,11 +28,14 @@ public class UserRegistrationController {
 	}
 
 	@PostMapping(path = "/processRegister")
-	public String processUserRegistration(@ModelAttribute("userDTO") @Valid UserDTO userDTO, BindingResult result) {
+	public String processUserRegistration(Model theModel, @ModelAttribute("userDTO") @Valid UserDTO userDTO,
+			BindingResult result) {
 
 		if (result.hasErrors()) {
 
-			return "redirect:/user/register";
+			theModel.addAttribute("userDTO", userDTO);
+
+			return "views/user-registration";
 		}
 
 		log.info(userDTO.toString());

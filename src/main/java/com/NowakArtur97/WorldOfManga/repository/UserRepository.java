@@ -8,5 +8,5 @@ import com.NowakArtur97.WorldOfManga.model.User;
 
 public interface UserRepository extends JpaRepository<User, Long>{
 	
-	Optional<User> findByUserName(String userName);
+	Optional<User> findByUsername(String username);
 }

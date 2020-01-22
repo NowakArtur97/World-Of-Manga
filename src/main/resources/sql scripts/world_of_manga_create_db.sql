@@ -8,14 +8,14 @@ DROP TABLE IF EXISTS `user`;
 
 CREATE TABLE `user` (
     `user_id` INT(11) NOT NULL AUTO_INCREMENT,
-    `user_name` VARCHAR(40) NOT NULL,
+    `username` VARCHAR(40) NOT NULL,
     `password` varchar(100) NOT NULL,
     `email` VARCHAR(100) NOT NULL,
     `first_name` VARCHAR(40),
     `last_name` VARCHAR(40),
     `is_enabled` TINYINT NOT NULL DEFAULT 0,
     PRIMARY KEY (`user_id`),
-    UNIQUE KEY `USER_USER_NAME_UNIQUE` (`user_name`),
+    UNIQUE KEY `USER_USER_NAME_UNIQUE` (`username`),
     UNIQUE KEY `USER_EMAIL_UNIQUE` (`email`)
 )  ENGINE=INNODB AUTO_INCREMENT=1 DEFAULT CHARSET=LATIN1;
 
@@ -38,7 +38,7 @@ CREATE TABLE `user_role`(
 	CONSTRAINT `FK_ROLE_USER` FOREIGN KEY (`role_id`) REFERENCES `role`(`role_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 )  ENGINE=INNODB AUTO_INCREMENT=1 DEFAULT CHARSET=LATIN1;
 
-INSERT INTO `user`(`user_name`, `password`, `email`, `is_enabled`) values 
+INSERT INTO `user`(`username`, `password`, `email`, `is_enabled`) values 
 ('user', '$2a$10$FnkNozkIGR1ec3tsByXTG.PjPlu6Ntj7cW.lgPLIFkigHe6jreSw2', 'user@email.com', '1'),
 ('admin', '$2a$10$21qh5sabaXLO/IVFOmNSbOPjLTSpUdjvpD7kiIx3Ckr9NovR7CRZO', 'admin@email.com', '1');
 

@@ -30,7 +30,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User findByUserName(String userName) throws UserNotFoundException {
 
-		User user = userRepository.findByUserName(userName)
+		User user = userRepository.findByUsername(userName)
 				.orElseThrow(() -> new UserNotFoundException("User: " + userName + " not found!"));
 
 		return user;
@@ -51,7 +51,7 @@ public class UserServiceImpl implements UserService {
 		boolean credentialsNonExpired = true;
 		boolean accountNonLocked = true;
 
-		return new org.springframework.security.core.userdetails.User(user.getUserName(), user.getPassword(),
+		return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),
 				user.isEnabled(), accountNonExpired, credentialsNonExpired, accountNonLocked,
 				mapRolesToAuthorities(user.getRoles()));
 	}
