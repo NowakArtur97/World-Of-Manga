@@ -1,7 +1,7 @@
 .page {
   margin: 0;
   padding: 0;
-  background: url(../../static/images/romance.jpg) no-repeat fixed center;
+  background: url(/images/romance.jpg) no-repeat fixed center;
   background-size: cover;
   font-family: sans-serif;
 }
@@ -12,7 +12,7 @@
   height: 530px;
   color: #fff;
   position: absolute;
-  top: 35%;
+  top: 37%;
   left: 50%;
   transform: translate(-50%, -50%);
   box-sizing: border-box;

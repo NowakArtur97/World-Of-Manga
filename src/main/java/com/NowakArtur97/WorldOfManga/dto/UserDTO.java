@@ -27,7 +27,7 @@ public class UserDTO {
 	private String email;
 
 	@Valid
-	private UserPasswordDTO password;
+	private UserPasswordDTO userPasswordDTO;
 
 	@Size(message = "{user.firstName.size}", max = 40)
 	private String firstName;
