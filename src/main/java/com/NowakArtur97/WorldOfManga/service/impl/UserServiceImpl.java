@@ -33,7 +33,11 @@ public class UserServiceImpl implements UserService {
 		return userRepository.findByUsername(userName);
 	}
 
-
+	@Override
+	public boolean isEmailAlreadyInUse(String email) {
+		return false;
+	}
+	
 	@Override
 	public boolean isUsernameAlreadyInUse(String username) {
 
@@ -75,5 +79,4 @@ public class UserServiceImpl implements UserService {
 
 		return authorities;
 	}
-
 }
