@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import com.NowakArtur97.WorldOfManga.handler.LoginAuthenticationFailureHandler;
 import com.NowakArtur97.WorldOfManga.handler.LoginAuthenticationSuccessHandler;
 import com.NowakArtur97.WorldOfManga.service.api.UserService;
 
@@ -21,10 +22,13 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 	
 	private final LoginAuthenticationSuccessHandler loginAuthenticationSuccessHandler;
 
+	private final LoginAuthenticationFailureHandler loginAuthenticationFailureHandler;
+	
 	@Autowired
-	public WebSecurityConfiguration(UserService userService, LoginAuthenticationSuccessHandler loginAuthenticationSuccessHandler) {
+	public WebSecurityConfiguration(UserService userService, LoginAuthenticationSuccessHandler loginAuthenticationSuccessHandler, LoginAuthenticationFailureHandler loginAuthenticationFailureHandler) {
 		this.userService = userService;
 		this.loginAuthenticationSuccessHandler = loginAuthenticationSuccessHandler;
+		this.loginAuthenticationFailureHandler = loginAuthenticationFailureHandler;
 	}
 
 	@Bean
@@ -61,7 +65,8 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.antMatchers("/user").anonymous()
 			.and()
 				.formLogin().loginPage("/user/login").loginProcessingUrl("/authenticateTheUser")
-				.successHandler(loginAuthenticationSuccessHandler).permitAll(false);
+				.successHandler(loginAuthenticationSuccessHandler)
+				.failureHandler(loginAuthenticationFailureHandler).permitAll(false);
 	}
 
 }
