@@ -20,7 +20,7 @@ public class LoginAuthenticationFailureHandler implements AuthenticationFailureH
 			AuthenticationException exception) throws IOException, ServletException {
 
 		if (exception instanceof BadCredentialsException) {
-			response.sendRedirect(request.getContextPath() + "/user/login?badCredentails=true");
+			response.sendRedirect(request.getContextPath() + "/user/login?badCredentials=true");
 		} else if (exception instanceof DisabledException) {
 			response.sendRedirect(request.getContextPath() + "/user/login?accountDisabled=true");
 		} else {

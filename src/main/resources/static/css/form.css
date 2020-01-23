@@ -28,6 +28,8 @@
 .form__title {
   text-align: center;
   font-weight: bold;
+  padding: 0;
+  margin: 3px;
 }
 
 .form__group {
@@ -46,6 +48,7 @@
   color: #fff;
   text-align: center;
   height: 30px;
+  font-size: 0.9rem;
 }
 
 .form__submit {
@@ -63,8 +66,9 @@
   cursor: pointer;
 }
 
-.form_error {
+.form__error {
   padding: 2px;
   margin: 2px;
   color: red;
+  text-align: center;
 }
