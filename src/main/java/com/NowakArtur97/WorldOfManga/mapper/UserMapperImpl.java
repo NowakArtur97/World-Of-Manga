@@ -1,13 +1,26 @@
 package com.NowakArtur97.WorldOfManga.mapper;
 
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import com.NowakArtur97.WorldOfManga.dto.UserDTO;
 import com.NowakArtur97.WorldOfManga.model.User;
 
+import lombok.RequiredArgsConstructor;
+
+@Component
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class UserMapperImpl implements UserMapper {
 
+	private final ModelMapper modelMapper;
+	
 	@Override
-	public User mapUserDTOTOUSer(UserDTO userDTO) {
-		return null;
+	public User mapUserDTOToUser(UserDTO userDTO) {
+		
+		User user = modelMapper.map(userDTO, User.class);
+		
+		return user;
 	}
 
 }

@@ -5,5 +5,5 @@ import com.NowakArtur97.WorldOfManga.model.User;
 
 public interface UserMapper {
 
-	User mapUserDTOTOUSer(UserDTO userDTO);
+	User mapUserDTOToUser(UserDTO userDTO);
 }
