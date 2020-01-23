@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.NowakArtur97.WorldOfManga.dto.UserDTO;
 import com.NowakArtur97.WorldOfManga.service.api.UserRegistrationService;
+import com.NowakArtur97.WorldOfManga.validation.user.UserRegistrationValidator;
 
 import lombok.RequiredArgsConstructor;
 
@@ -23,6 +24,8 @@ public class RegistrationController {
 
 	private final UserRegistrationService userRegistrationService;
 
+	private final UserRegistrationValidator userRegistrationValidator;
+	
 	@GetMapping(path = "/register")
 	public String showRegistrationPage(Model theModel) {
 
