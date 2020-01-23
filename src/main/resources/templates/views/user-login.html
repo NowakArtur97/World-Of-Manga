@@ -2,9 +2,11 @@
 <html lang="en">
 
 <head>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/form.css}" />
+    <title>Login</title>
 </head>
 
-<body>
+<body class="page page--login">
     <div layout:fragment="content" class="form page__form">
         <form th:action="@{/authenticateTheUser}" method="POST" class="form__form-box">
             <h1 class="form__title">Login</h1>
@@ -15,6 +17,9 @@
             <div class="form__group">
                 <label class="form__label" for="password">Password: </label>
                 <input class="form__input" type="password" name="password">
+            </div>
+            <div class="form__group">
+                <button class="form__submit" type="submit">Submit</button>
             </div>
         </form>
     </div>

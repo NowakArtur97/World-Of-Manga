@@ -1,4 +1,4 @@
-package com.NowakArtur97.WorldOfManga.controller.userRegistration;
+package com.NowakArtur97.WorldOfManga.controller.unloggedUser;
 
 import javax.validation.Valid;
 
@@ -20,7 +20,7 @@ import lombok.RequiredArgsConstructor;
 @Controller
 @RequestMapping(path = "/user")
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
-public class UserRegistrationController {
+public class RegistrationController {
 
 	private final UserService userService;
 	
