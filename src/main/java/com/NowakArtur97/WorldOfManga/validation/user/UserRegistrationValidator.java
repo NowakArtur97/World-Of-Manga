@@ -1,8 +1,9 @@
 package com.NowakArtur97.WorldOfManga.validation.user;
 
-import com.NowakArtur97.WorldOfManga.exception.UserAlreadyExistsException;
+import com.NowakArtur97.WorldOfManga.dto.UserDTO;
+import com.NowakArtur97.WorldOfManga.exception.UsernameAlreadyInUseException;
 
 public interface UserRegistrationValidator {
 
-	boolean valdiateUsersUsername(String username) throws UserAlreadyExistsException;
+	boolean valdiateUser(UserDTO user) throws UsernameAlreadyInUseException;
 }

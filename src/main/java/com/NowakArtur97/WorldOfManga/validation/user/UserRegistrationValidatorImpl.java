@@ -2,7 +2,8 @@ package com.NowakArtur97.WorldOfManga.validation.user;
 
 import org.springframework.stereotype.Component;
 
-import com.NowakArtur97.WorldOfManga.exception.UserAlreadyExistsException;
+import com.NowakArtur97.WorldOfManga.dto.UserDTO;
+import com.NowakArtur97.WorldOfManga.exception.UsernameAlreadyInUseException;
 import com.NowakArtur97.WorldOfManga.service.api.UserService;
 
 @Component
@@ -15,11 +16,17 @@ public class UserRegistrationValidatorImpl implements UserRegistrationValidator 
 	}
 
 	@Override
-	public boolean valdiateUsersUsername(String username) throws UserAlreadyExistsException {
+	public boolean valdiateUser(UserDTO user) throws UsernameAlreadyInUseException {
 
-		userService.findByUserName(username);
+		boolean isUsernameInUse = userService.isUsernameAlreadyInUse(user.getUsername());
+		
+		if (!isUsernameInUse) {
+			
+			throw new UsernameAlreadyInUseException("Username " + user.getUsername() + " already in use");
+		}
 
-		throw new UserAlreadyExistsException("User " + username + " already exists");
+		
+		return true;
 	}
 
 }
