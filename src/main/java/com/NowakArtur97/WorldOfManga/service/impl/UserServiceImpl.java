@@ -13,9 +13,11 @@ import org.springframework.stereotype.Service;
 
 import com.NowakArtur97.WorldOfManga.dto.UserDTO;
 import com.NowakArtur97.WorldOfManga.exception.UserNotFoundException;
+import com.NowakArtur97.WorldOfManga.mapper.UserMapper;
 import com.NowakArtur97.WorldOfManga.model.Role;
 import com.NowakArtur97.WorldOfManga.model.User;
 import com.NowakArtur97.WorldOfManga.repository.UserRepository;
+import com.NowakArtur97.WorldOfManga.service.api.RoleService;
 import com.NowakArtur97.WorldOfManga.service.api.UserService;
 
 @Service
@@ -23,9 +25,15 @@ public class UserServiceImpl implements UserService {
 
 	private final UserRepository userRepository;
 
+	private final RoleService roleService;
+	
+	private final UserMapper userMapper;
+
 	@Autowired
-	public UserServiceImpl(UserRepository userRepository) {
+	public UserServiceImpl(UserRepository userRepository, UserMapper userMapper, RoleService roleService) {
 		this.userRepository = userRepository;
+		this.userMapper = userMapper;
+		this.roleService = roleService;
 	}
 
 	@Override
@@ -40,11 +48,13 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User registerUser(UserDTO userDTO) {
 
+		User userToRegister = userMapper.mapUserDTOToUser(userDTO);
 		
-		
-		return null;
+		userRepository.save(userToRegister);
+
+		return userToRegister;
 	}
-	
+
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
