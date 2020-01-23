@@ -34,16 +34,17 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public boolean isEmailAlreadyInUse(String email) {
-		return false;
-	}
-	
-	@Override
 	public boolean isUsernameAlreadyInUse(String username) {
 
 		return userRepository.existsUserByUsername(username);
 	}
-	
+
+	@Override
+	public boolean isEmailAlreadyInUse(String email) {
+
+		return userRepository.existsUserByEmail(email);
+	}
+
 	@Override
 	public User saveUser(User user) {
 
