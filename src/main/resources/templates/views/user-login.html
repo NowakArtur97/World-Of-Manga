@@ -10,9 +10,12 @@
     <div layout:fragment="content" class="form page__form">
         <form th:action="@{/authenticateTheUser}" method="POST" class="form__form-box">
             <h1 class="form__title">Login</h1>
-            <p class="form__error" th:if="${param.badCredentials}">Invalid
+            <p class="form__message form__message--success" th:if="${param.logout}">You have been successfully logged
+                out</p>
+            <p class="form__message form__message--failure" th:if="${param.badCredentials}">Invalid
                 username or password</p>
-            <p class="form__error" th:if="${param.accountDisabled}">Activate your account before logging in</p>
+            <p class="form__message form__message--failure" th:if="${param.accountDisabled}">Activate your account
+                before logging in</p>
             <div class="form__group">
                 <label class="form__label" for="username">Username: </label>
                 <input class="form__input" type="text" name="username">

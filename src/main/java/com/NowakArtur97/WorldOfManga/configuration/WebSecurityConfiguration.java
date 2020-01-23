@@ -60,13 +60,17 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 
 		http.authorizeRequests()
-				.antMatchers("/admin").hasRole("ADMIN")
-				.antMatchers("/auth").hasAnyRole("USER", "ADMIN")
-				.antMatchers("/user").anonymous()
+				.antMatchers("/admin/**").hasRole("ADMIN")
+				.antMatchers("/auth/**").hasAnyRole("USER", "ADMIN")
+				.antMatchers("/user/**").anonymous()
 			.and()
 				.formLogin().loginPage("/user/login").loginProcessingUrl("/authenticateTheUser")
 				.successHandler(loginAuthenticationSuccessHandler)
-				.failureHandler(loginAuthenticationFailureHandler).permitAll(false);
+				.failureHandler(loginAuthenticationFailureHandler).permitAll(false)
+			.and()
+				.logout().logoutSuccessUrl("/user/login?logout=true").permitAll(false)
+			.and().exceptionHandling().accessDeniedPage("/");
+			
 	}
 
 }

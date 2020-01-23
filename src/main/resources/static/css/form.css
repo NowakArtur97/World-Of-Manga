@@ -66,9 +66,16 @@
   cursor: pointer;
 }
 
-.form__error {
+.form__message {
   padding: 2px;
   margin: 2px;
-  color: red;
   text-align: center;
+}
+
+.form__message--success {
+  color: #00e64d;
+}
+
+.form__message--failure {
+  color: red;
 }
