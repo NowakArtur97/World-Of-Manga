@@ -8,6 +8,6 @@ import com.NowakArtur97.WorldOfManga.model.User;
 public interface UserService extends UserDetailsService {
 
 	User findByUserName(String userName) throws UserNotFoundException;
-
+	
 	User saveUser(User user);
 }

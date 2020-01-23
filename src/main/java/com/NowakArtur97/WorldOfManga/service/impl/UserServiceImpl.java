@@ -31,7 +31,7 @@ public class UserServiceImpl implements UserService {
 	public User findByUserName(String userName) throws UserNotFoundException {
 
 		User user = userRepository.findByUsername(userName)
-				.orElseThrow(() -> new UserNotFoundException("User: " + userName + " not found!"));
+				.orElseThrow(() -> new UserNotFoundException("User: " + userName + " not found"));
 
 		return user;
 	}
@@ -52,7 +52,7 @@ public class UserServiceImpl implements UserService {
 		try {
 			user = findByUserName(username);
 		} catch (UserNotFoundException e) {
-			throw new UsernameNotFoundException("Invalid username or password!");
+			throw new UsernameNotFoundException("Invalid username or password");
 		}
 
 		boolean accountNonExpired = true;
