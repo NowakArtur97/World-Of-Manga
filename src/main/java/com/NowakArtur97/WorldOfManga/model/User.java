@@ -58,4 +58,9 @@ public class User {
 			CascadeType.REFRESH })
 	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private final Set<Role> roles = new HashSet<>();
+
+	public void addRole(Role role) {
+
+		this.getRoles().add(role);
+	}
 }

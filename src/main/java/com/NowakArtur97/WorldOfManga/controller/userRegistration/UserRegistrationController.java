@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.NowakArtur97.WorldOfManga.dto.UserDTO;
+import com.NowakArtur97.WorldOfManga.exception.RoleNotFoundException;
 import com.NowakArtur97.WorldOfManga.service.api.UserService;
 
 import lombok.RequiredArgsConstructor;
@@ -33,7 +34,7 @@ public class UserRegistrationController {
 
 	@PostMapping(path = "/processRegister")
 	public String processUserRegistration(Model theModel, @ModelAttribute("userDTO") @Valid UserDTO userDTO,
-			BindingResult result) {
+			BindingResult result) throws RoleNotFoundException {
 
 		if (result.hasErrors()) {
 
