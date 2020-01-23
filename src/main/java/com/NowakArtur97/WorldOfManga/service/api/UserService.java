@@ -10,5 +10,7 @@ public interface UserService extends UserDetailsService {
 
 	Optional<User> findByUserName(String userName);
 	
+	boolean isUsernameAlreadyInUse(String username);
+	
 	User saveUser(User user);
 }

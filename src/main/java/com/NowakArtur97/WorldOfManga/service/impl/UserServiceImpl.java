@@ -33,6 +33,13 @@ public class UserServiceImpl implements UserService {
 		return userRepository.findByUsername(userName);
 	}
 
+
+	@Override
+	public boolean isUsernameAlreadyInUse(String username) {
+
+		return userRepository.existsUserByUsername(username);
+	}
+	
 	@Override
 	public User saveUser(User user) {
 

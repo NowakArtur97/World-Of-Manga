@@ -3,7 +3,6 @@ package com.NowakArtur97.WorldOfManga.service.impl;
 import org.springframework.stereotype.Service;
 
 import com.NowakArtur97.WorldOfManga.dto.UserDTO;
-import com.NowakArtur97.WorldOfManga.exception.RoleNotFoundException;
 import com.NowakArtur97.WorldOfManga.mapper.UserMapper;
 import com.NowakArtur97.WorldOfManga.model.User;
 import com.NowakArtur97.WorldOfManga.service.api.RoleService;
@@ -26,11 +25,11 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
 	}
 
 	@Override
-	public User registerUser(UserDTO userDTO) throws RoleNotFoundException {
+	public User registerUser(UserDTO userDTO) {
 
 		User userToRegister = userMapper.mapUserDTOToUser(userDTO);
 
-		userToRegister.addRole(roleService.findRoleByName("ROLE_USER"));
+		userToRegister.addRole(roleService.findRoleByName("ROLE_USER").get());
 		userToRegister.setEnabled(true);
 
 		userService.saveUser(userToRegister);
