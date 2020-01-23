@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.NowakArtur97.WorldOfManga.dto.UserDTO;
 import com.NowakArtur97.WorldOfManga.exception.UserNotFoundException;
 import com.NowakArtur97.WorldOfManga.model.Role;
 import com.NowakArtur97.WorldOfManga.model.User;
@@ -36,6 +37,14 @@ public class UserServiceImpl implements UserService {
 		return user;
 	}
 
+	@Override
+	public User registerUser(UserDTO userDTO) {
+
+		
+		
+		return null;
+	}
+	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
