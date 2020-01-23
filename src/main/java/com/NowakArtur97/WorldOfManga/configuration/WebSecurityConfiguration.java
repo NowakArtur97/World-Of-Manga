@@ -12,6 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.NowakArtur97.WorldOfManga.handler.LoginAuthenticationFailureHandler;
 import com.NowakArtur97.WorldOfManga.handler.LoginAuthenticationSuccessHandler;
+import com.NowakArtur97.WorldOfManga.handler.UserAccessDeniedHandler;
 import com.NowakArtur97.WorldOfManga.service.api.UserService;
 
 @Configuration
@@ -24,11 +25,15 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	private final LoginAuthenticationFailureHandler loginAuthenticationFailureHandler;
 	
+	private final UserAccessDeniedHandler userAccessDeniedHandler;
+	
 	@Autowired
-	public WebSecurityConfiguration(UserService userService, LoginAuthenticationSuccessHandler loginAuthenticationSuccessHandler, LoginAuthenticationFailureHandler loginAuthenticationFailureHandler) {
+	public WebSecurityConfiguration(UserService userService, LoginAuthenticationSuccessHandler loginAuthenticationSuccessHandler, 
+			LoginAuthenticationFailureHandler loginAuthenticationFailureHandler, UserAccessDeniedHandler userAccessDeniedHandler) {
 		this.userService = userService;
 		this.loginAuthenticationSuccessHandler = loginAuthenticationSuccessHandler;
 		this.loginAuthenticationFailureHandler = loginAuthenticationFailureHandler;
+		this.userAccessDeniedHandler = userAccessDeniedHandler;
 	}
 
 	@Bean
@@ -63,13 +68,16 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.antMatchers("/admin/**").hasRole("ADMIN")
 				.antMatchers("/auth/**").hasAnyRole("USER", "ADMIN")
 				.antMatchers("/user/**").anonymous()
+				.antMatchers("/").permitAll()
+			.and()
+				.exceptionHandling().accessDeniedHandler(userAccessDeniedHandler)
 			.and()
 				.formLogin().loginPage("/user/login").loginProcessingUrl("/authenticateTheUser")
 				.successHandler(loginAuthenticationSuccessHandler)
 				.failureHandler(loginAuthenticationFailureHandler).permitAll(false)
 			.and()
-				.logout().logoutSuccessUrl("/user/login?logout=true").permitAll(false)
-			.and().exceptionHandling().accessDeniedPage("/");
+				.logout().logoutSuccessUrl("/user/login?logout=true").permitAll(false);
+			
 			
 	}
 
