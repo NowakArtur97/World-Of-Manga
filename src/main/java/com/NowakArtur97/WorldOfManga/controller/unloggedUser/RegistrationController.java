@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.NowakArtur97.WorldOfManga.dto.UserDTO;
 import com.NowakArtur97.WorldOfManga.exception.RoleNotFoundException;
-import com.NowakArtur97.WorldOfManga.service.api.UserService;
+import com.NowakArtur97.WorldOfManga.service.api.UserRegistrationService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -22,8 +22,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class RegistrationController {
 
-	private final UserService userService;
-	
+	private final UserRegistrationService userRegistrationService;
+
 	@GetMapping(path = "/register")
 	public String showRegistrationPage(Model theModel) {
 
@@ -43,8 +43,8 @@ public class RegistrationController {
 			return "views/user-registration";
 		}
 
-		userService.registerUser(userDTO);
-		
+		userRegistrationService.registerUser(userDTO);
+
 		return "views/user-login";
 	}
 

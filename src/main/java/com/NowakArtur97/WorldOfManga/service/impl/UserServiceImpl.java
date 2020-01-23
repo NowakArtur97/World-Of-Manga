@@ -11,14 +11,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.NowakArtur97.WorldOfManga.dto.UserDTO;
-import com.NowakArtur97.WorldOfManga.exception.RoleNotFoundException;
 import com.NowakArtur97.WorldOfManga.exception.UserNotFoundException;
-import com.NowakArtur97.WorldOfManga.mapper.UserMapper;
 import com.NowakArtur97.WorldOfManga.model.Role;
 import com.NowakArtur97.WorldOfManga.model.User;
 import com.NowakArtur97.WorldOfManga.repository.UserRepository;
-import com.NowakArtur97.WorldOfManga.service.api.RoleService;
 import com.NowakArtur97.WorldOfManga.service.api.UserService;
 
 @Service
@@ -26,15 +22,9 @@ public class UserServiceImpl implements UserService {
 
 	private final UserRepository userRepository;
 
-	private final RoleService roleService;
-
-	private final UserMapper userMapper;
-
 	@Autowired
-	public UserServiceImpl(UserRepository userRepository, UserMapper userMapper, RoleService roleService) {
+	public UserServiceImpl(UserRepository userRepository) {
 		this.userRepository = userRepository;
-		this.userMapper = userMapper;
-		this.roleService = roleService;
 	}
 
 	@Override
@@ -47,16 +37,11 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User registerUser(UserDTO userDTO) throws RoleNotFoundException {
+	public User saveUser(User user) {
 
-		User userToRegister = userMapper.mapUserDTOToUser(userDTO);
+		userRepository.save(user);
 
-		userToRegister.addRole(roleService.findRoleByName("ROLE_USER"));
-		userToRegister.setEnabled(true);
-
-		userRepository.save(userToRegister);
-
-		return userToRegister;
+		return user;
 	}
 
 	@Override
