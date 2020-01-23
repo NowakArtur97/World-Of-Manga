@@ -25,7 +25,7 @@ public class RegistrationController {
 	private final UserRegistrationService userRegistrationService;
 
 	private final UserRegistrationValidator userRegistrationValidator;
-	
+
 	@GetMapping(path = "/register")
 	public String showRegistrationPage(Model theModel) {
 
@@ -37,6 +37,8 @@ public class RegistrationController {
 	@PostMapping(path = "/processRegister")
 	public String processUserRegistration(Model theModel, @ModelAttribute("userDTO") @Valid UserDTO userDTO,
 			BindingResult result) {
+
+		userRegistrationValidator.validate(userDTO, result);
 
 		if (result.hasErrors()) {
 
