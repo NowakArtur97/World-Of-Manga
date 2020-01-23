@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import com.NowakArtur97.WorldOfManga.handler.LoginAuthenticationSuccessHandler;
 import com.NowakArtur97.WorldOfManga.service.api.UserService;
 
 @Configuration
@@ -17,10 +18,13 @@ import com.NowakArtur97.WorldOfManga.service.api.UserService;
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	private final UserService userService;
+	
+	private final LoginAuthenticationSuccessHandler loginAuthenticationSuccessHandler;
 
 	@Autowired
-	public WebSecurityConfiguration(UserService userService) {
+	public WebSecurityConfiguration(UserService userService, LoginAuthenticationSuccessHandler loginAuthenticationSuccessHandler) {
 		this.userService = userService;
+		this.loginAuthenticationSuccessHandler = loginAuthenticationSuccessHandler;
 	}
 
 	@Bean
@@ -56,7 +60,8 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.antMatchers("/auth").hasAnyRole("USER", "ADMIN")
 				.antMatchers("/user").anonymous()
 			.and()
-				.formLogin().loginPage("/user/login").loginProcessingUrl("/authenticateTheUser").permitAll(false);
+				.formLogin().loginPage("/user/login").loginProcessingUrl("/authenticateTheUser")
+				.successHandler(loginAuthenticationSuccessHandler).permitAll(false);
 	}
 
 }
