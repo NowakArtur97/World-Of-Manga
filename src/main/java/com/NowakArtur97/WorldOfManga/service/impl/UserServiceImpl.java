@@ -2,6 +2,7 @@ package com.NowakArtur97.WorldOfManga.service.impl;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.NowakArtur97.WorldOfManga.exception.UserNotFoundException;
 import com.NowakArtur97.WorldOfManga.model.Role;
 import com.NowakArtur97.WorldOfManga.model.User;
 import com.NowakArtur97.WorldOfManga.repository.UserRepository;
@@ -28,12 +28,9 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User findByUserName(String userName) throws UserNotFoundException {
+	public Optional<User> findByUserName(String userName) {
 
-		User user = userRepository.findByUsername(userName)
-				.orElseThrow(() -> new UserNotFoundException("User: " + userName + " not found"));
-
-		return user;
+		return userRepository.findByUsername(userName);
 	}
 
 	@Override
@@ -47,13 +44,8 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-		User user = null;
-
-		try {
-			user = findByUserName(username);
-		} catch (UserNotFoundException e) {
-			throw new UsernameNotFoundException("Invalid username or password");
-		}
+		User user = findByUserName(username)
+				.orElseThrow(() -> new UsernameNotFoundException("Invalid username or password"));
 
 		boolean accountNonExpired = true;
 		boolean credentialsNonExpired = true;
@@ -62,6 +54,7 @@ public class UserServiceImpl implements UserService {
 		return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),
 				user.isEnabled(), accountNonExpired, credentialsNonExpired, accountNonLocked,
 				mapRolesToAuthorities(user.getRoles()));
+
 	}
 
 	private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Set<Role> usersRoles) {

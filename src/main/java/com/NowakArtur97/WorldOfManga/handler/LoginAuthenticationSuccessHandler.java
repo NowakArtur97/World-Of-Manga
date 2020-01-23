@@ -1,6 +1,7 @@
 package com.NowakArtur97.WorldOfManga.handler;
 
 import java.io.IOException;
+import java.util.Optional;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -12,7 +13,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 
-import com.NowakArtur97.WorldOfManga.exception.UserNotFoundException;
 import com.NowakArtur97.WorldOfManga.model.User;
 import com.NowakArtur97.WorldOfManga.service.api.UserService;
 
@@ -33,16 +33,15 @@ public class LoginAuthenticationSuccessHandler implements AuthenticationSuccessH
 
 		String username = authentication.getName();
 
-		User loggedUser = null;
+		Optional<User> loggedUserOptional = userService.findByUserName(username);
 
-		try {
-			loggedUser = userService.findByUserName(username);
-		} catch (UserNotFoundException e) {
-			e.printStackTrace();
+		if (loggedUserOptional.isPresent()) {
+
+			User loggedUser = loggedUserOptional.get();
+
+			HttpSession session = request.getSession();
+			session.setAttribute("user", loggedUser);
 		}
-
-		HttpSession session = request.getSession();
-		session.setAttribute("user", loggedUser);
 
 		response.sendRedirect(request.getContextPath() + "/");
 	}
