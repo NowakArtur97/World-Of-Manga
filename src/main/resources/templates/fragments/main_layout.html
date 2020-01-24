@@ -10,30 +10,15 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/header.css}" />
 </head>
 
-<body class="page">
-    <select id="locales">
-        <option value=""></option>
-        <option value="en">en</option>
-        <option value="pl">pl</option>
-    </select>
+<body class=" page">
+
     <div th:replace="fragments/header :: header"></div>
 
     <div layout:fragment="content"></div>
 
     <div th:replace="fragments/footer :: footer"></div>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js">
-    </script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $("#locales").change(function () {
-                var selectedOption = $('#locales').val();
-                if (selectedOption != '') {
-                    window.location.replace('?lang=' + selectedOption);
-                }
-            });
-        });
-    </script>
+    <script type="text/javascript" th:src="@{/js/changeLanguage.js}"></script>
 </body>
 
 </html>
