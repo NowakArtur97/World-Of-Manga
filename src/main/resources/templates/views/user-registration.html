@@ -11,45 +11,45 @@
 <body class="page page--register">
     <div layout:fragment="content" class="form page__form">
         <form th:action="@{register}" th:object="${userDTO}" method="POST" class="form__box form__box--register">
-            <h1 class="form__title">Register</h1>
+            <h1 class="form__title" th:text="#{form.register.title}">Register</h1>
             <div class="form__group">
-                <label class="form__label" for="username">Username: </label>
+                <label class="form__label" for="username" th:text="#{form.register.username}"></label>
                 <p class="form__message form__message--failure" th:if="${#fields.hasErrors('username')}" th:errors="*{username}" ></p>
                 <input class="form__input" type="text" name="username" th:field="*{username}">
             </div>
             <div class="form__group">
-                <label class="form__label" for="firstName">First name: </label>
+                <label class="form__label" for="firstName" th:text="#{form.register.firstName}"></label>
                 <p class="form__message form__message--failure" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></p>
                 <input class="form__input" type="text" name="firstName" th:field="*{firstName}">
             </div>
             <div class="form__group">
-                <label for="lastName" class="form__label">Last name: </label>
+                <label for="lastName" class="form__label" th:text="#{form.register.lastName}"></label>
                 <p class="form__message form__message--failure" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></p>
                 <input class="form__input" type="text" name="lastName" th:field="*{lastName}">
             </div>
             <div class="form__group">
-                <label class="form__label" for="password">Password: </label>
+                <label class="form__label" for="password" th:text="#{form.register.password}"></label>
                 <p class="form__message form__message--failure" th:if="${#fields.hasErrors('userPasswordDTO.password')}" th:errors="*{userPasswordDTO.password}"></p>
                 <input class="form__input" type="password" name="password" th:field="*{userPasswordDTO.password}">
             </div>
             <div class="form__group">
-                <label class="form__label" for="matchingPassword">Matching password: </label>
+                <label class="form__label" for="matchingPassword" th:text="#{form.register.matchingPassword}"></label>
                 <p class="form__message form__message--failure" th:if="${#fields.hasErrors('userPasswordDTO.matchingPassword')}" th:errors="*{userPasswordDTO.matchingPassword}"></p>
                 <input class="form__input" type="password" name="matchingPassword"
                     th:field="*{userPasswordDTO.matchingPassword}">
             </div>
             <div class="form__group">
-                <label class="form__label" for="email">Email: </label>
+                <label class="form__label" for="email" th:text="#{form.register.email}"></label>
                 <p class="form__message form__message--failure" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
                 <input class="form__input" type="text" name="email" th:field="*{email}">
             </div>
             <div class="form__group">
-                <label class="form__label" for="terms">Accept terms: </label>
+                <label class="form__label" for="terms" th:text="#{form.register.terms}"></label>
                 <input class="form__checkbox" type="checkbox" name="terms" th:field="*{areTermsAccepted}">
                 <p class="form__message form__message--failure" th:if="${#fields.hasErrors('areTermsAccepted')}" th:errors="*{areTermsAccepted}"></p>
             </div>
             <div class="form__group">
-                <button class="form__submit" type="submit">Submit</button>
+                <button class="form__submit" type="submit" th:text="#{form.register.submit}"></button>
             </div>
         </form>
     </div>
