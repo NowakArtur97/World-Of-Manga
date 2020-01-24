@@ -10,7 +10,7 @@
 
 <body class="page page--register">
     <div layout:fragment="content" class="form page__form">
-        <form th:action="@{processRegister}" th:object="${userDTO}" method="POST" class="form__box form__box--register">
+        <form th:action="@{register}" th:object="${userDTO}" method="POST" class="form__box form__box--register">
             <h1 class="form__title">Register</h1>
             <div class="form__group">
                 <label class="form__label" for="username">Username: </label>

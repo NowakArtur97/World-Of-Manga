@@ -34,7 +34,7 @@ public class RegistrationController {
 		return "views/user-registration";
 	}
 
-	@PostMapping(path = "/processRegister")
+	@PostMapping(path = "/register")
 	public String processUserRegistration(Model theModel, @ModelAttribute("userDTO") @Valid UserDTO userDTO,
 			BindingResult result) {
 
