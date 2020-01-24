@@ -1,20 +1,16 @@
 <header th:fragment="header" class="header">
     <nav class="header__nav">
-        <label for="logo" class="header__logo"><a class="header__link" href="#" th:href="@{/}">World
-                Of
+        <label for="logo" class="header__logo"><a class="header__link" href="#" th:href="@{/}">World Of
                 Manga</a></label>
         <ul class="header__list">
-            <li sec:authorize="!isAuthenticated()" class="header__item"><a class="header__link header__link--item"
+            <li sec:authorize="!isAuthenticated()" class="header__item  "><a class="header__link header__link--item"
                     href="#" th:href="@{/user/register}">Sign up</a></li>
-            <li sec:authorize="!isAuthenticated()" class="header__item"><a class="header__link header__link--item"
-                    href="#" th:href="@{/user/login}">Sign
-                    in</a></li>
+            <li sec:authorize="!isAuthenticated()" class="header__item "><a class="header__link header__link--item"
+                    href="#" th:href="@{/user/login}">Sign in</a></li>
             <li sec:authorize="isAuthenticated()" class="header__item"><a class="header__link header__link--item"
-                    href="#" th:href="@{/auth/}">My manga
-                    word</a></li>
-            <li sec:authorize="isAuthenticated()" class=" header__item header__item--logout"><a
-                    th:href="@{/auth/logout}" class="header__link header__link--item">Sign
-                    out</a></li>
+                    href="#" th:href="@{/auth/}">My manga word</a></li>
+            <li sec:authorize="isAuthenticated()" class="header__item "><a th:href="@{/auth/logout}"
+                    class="header__link header__link--item">Sign out</a></li>
         </ul>
     </nav>
 </header>
