@@ -1,0 +1,15 @@
+.page {
+  margin: 0;
+  padding: 0;
+  background-size: cover;
+  font-family: sans-serif;
+  box-sizing: border-box;
+}
+
+.page--login {
+  background: url(/images/samurai.jpg) no-repeat fixed center;
+}
+
+.page--register {
+  background: url(/images/romance.jpg) no-repeat fixed center;
+}

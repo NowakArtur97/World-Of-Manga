@@ -1,25 +1,10 @@
-.page {
-  margin: 0;
-  padding: 0;
-  background-size: cover;
-  font-family: sans-serif;
-  box-sizing: border-box;
-}
-
-.page--login {
-  background: url(/images/samurai.jpg) no-repeat fixed center;
-}
-
-.page--register {
-  background: url(/images/romance.jpg) no-repeat fixed center;
-}
-
 .form__form-box {
   background-color: rgba(0, 0, 0, 0.5);
-  width: 400px;
+  width: 25rem;
   height: auto;
   color: #fff;
   position: absolute;
+  margin: 3rem;
   top: 45%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -30,13 +15,13 @@
   text-align: center;
   font-weight: bold;
   padding: 0;
-  margin: 3px;
+  margin: 0.2rem;
 }
 
 .form__group {
   margin: 0;
-  padding: 0px 5px;
-  margin-bottom: 10px;
+  padding: 0 0.3rem;
+  margin-bottom: 0.6rem;
   text-align: center;
 }
 
@@ -48,7 +33,7 @@
   outline: none;
   color: #fff;
   text-align: center;
-  height: 30px;
+  height: 2rem;
   font-size: 0.9rem;
 }
 
@@ -58,7 +43,7 @@
   color: #fff;
   background: transparent;
   font-size: 18px;
-  border-radius: 20px;
+  border-radius: 1rem;
 }
 
 .form__submit:hover {
@@ -68,8 +53,8 @@
 }
 
 .form__message {
-  padding: 2px;
-  margin: 2px;
+  padding: 0.125rem;
+  margin: 0.125rem;
   text-align: center;
 }
 
@@ -78,5 +63,5 @@
 }
 
 .form__message--failure {
-  color: red;
+  color: #f02525;
 }

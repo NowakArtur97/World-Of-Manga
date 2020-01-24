@@ -1,15 +1,3 @@
-.page {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  box-sizing: border-box;
-  font-family: sans-serif;
-}
-
-body {
-  background: #fff;
-}
-
 .header {
   background: #000;
   width: 100%;
@@ -61,8 +49,4 @@ body {
   background: #fff;
   color: #000;
   transition: 0.5s;
-}
-
-.header__item--move-left {
-  align-self: flex-start;
 }
