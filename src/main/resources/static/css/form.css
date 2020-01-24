@@ -3,6 +3,7 @@
   padding: 0;
   background-size: cover;
   font-family: sans-serif;
+  box-sizing: border-box;
 }
 
 .page--login {
