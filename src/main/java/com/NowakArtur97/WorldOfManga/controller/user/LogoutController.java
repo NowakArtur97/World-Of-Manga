@@ -23,7 +23,7 @@ public class LogoutController {
 		session = request.getSession(false);
 		
 		if (session != null) {
-			session.invalidate();
+			session.setAttribute("user", null);
 		}
 		
 		for(Cookie cookie : request.getCookies()) {
