@@ -5,21 +5,16 @@
                 Manga</a></label>
         <ul class="header__list">
             <li sec:authorize="!isAuthenticated()" class="header__item"><a class="header__link header__link--item"
-                    href="#" th:href="@{/user/register}">Sign in</a></li>
+                    href="#" th:href="@{/user/register}">Sign up</a></li>
             <li sec:authorize="!isAuthenticated()" class="header__item"><a class="header__link header__link--item"
                     href="#" th:href="@{/user/login}">Sign
-                    up</a></li>
+                    in</a></li>
             <li sec:authorize="isAuthenticated()" class="header__item"><a class="header__link header__link--item"
                     href="#" th:href="@{/auth/}">My manga
                     word</a></li>
             <li sec:authorize="isAuthenticated()" class=" header__item header__item--logout"><a
-                    class="header__link header__link--item">Sign
+                    th:href="@{/auth/logout}" class="header__link header__link--item">Sign
                     out</a></li>
         </ul>
     </nav>
-    <div sec:authorize="isAuthenticated()">
-        <form action="#" th:action="@{/logout}" method="POST">
-            <input type="submit" value="Logout" />
-        </form>
-    </div>
 </header>

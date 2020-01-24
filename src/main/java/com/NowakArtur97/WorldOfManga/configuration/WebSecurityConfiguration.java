@@ -76,8 +76,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.successHandler(loginAuthenticationSuccessHandler)
 				.failureHandler(loginAuthenticationFailureHandler).permitAll(false)
 			.and()
-				.logout().logoutSuccessUrl("/user/login?logout=true").permitAll(false);
-			
+				.logout().logoutUrl("/auth/logout").logoutSuccessUrl("/user/login?logout=true").permitAll(false);
 			
 	}
 
