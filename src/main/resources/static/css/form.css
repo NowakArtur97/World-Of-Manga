@@ -1,14 +1,17 @@
-.form__form-box {
+.form__box {
   background-color: rgba(0, 0, 0, 0.5);
   width: 25rem;
   height: auto;
   color: #fff;
   position: absolute;
-  margin: 3rem;
   top: 45%;
   left: 50%;
   transform: translate(-50%, -50%);
   box-sizing: border-box;
+}
+
+.form__box--register {
+  margin: 6rem 0 2rem 0;
 }
 
 .form__title {

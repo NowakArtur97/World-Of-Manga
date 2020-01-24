@@ -1,4 +1,4 @@
-package com.NowakArtur97.WorldOfManga.controller.unloggedUser;
+package com.NowakArtur97.WorldOfManga.controller.user;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
