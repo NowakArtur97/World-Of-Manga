@@ -29,7 +29,7 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
 
 		User userToRegister = userMapper.mapUserDTOToUser(userDTO);
 
-		userToRegister.addRole(roleService.findRoleByName("ROLE_USER").get());
+		userToRegister.addRole(roleService.findByName("ROLE_USER").get());
 		userToRegister.setEnabled(true);
 
 		userService.saveUser(userToRegister);

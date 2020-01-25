@@ -6,5 +6,5 @@ import com.NowakArtur97.WorldOfManga.model.Role;
 
 public interface RoleService {
 
-	Optional<Role> findRoleByName(String name);
+	Optional<Role> findByName(String name);
 }
