@@ -8,7 +8,7 @@ import com.NowakArtur97.WorldOfManga.model.User;
 
 public interface UserService extends UserDetailsService {
 
-	Optional<User> findByUserName(String userName);
+	Optional<User> findByUsername(String username);
 
 	boolean isUsernameAlreadyInUse(String username);
 

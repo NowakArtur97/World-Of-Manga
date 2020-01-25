@@ -28,9 +28,9 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public Optional<User> findByUserName(String userName) {
+	public Optional<User> findByUsername(String username) {
 
-		return userRepository.findByUsername(userName);
+		return userRepository.findByUsername(username);
 	}
 
 	@Override
@@ -56,7 +56,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-		User user = findByUserName(username)
+		User user = findByUsername(username)
 				.orElseThrow(() -> new UsernameNotFoundException("Invalid username or password"));
 
 		boolean accountNonExpired = true;

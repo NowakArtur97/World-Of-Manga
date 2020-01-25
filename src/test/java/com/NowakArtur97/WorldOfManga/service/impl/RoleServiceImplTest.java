@@ -21,7 +21,7 @@ import com.NowakArtur97.WorldOfManga.repository.RoleRepository;
 
 @ExtendWith(MockitoExtension.class)
 @DisplayName("Role Service Impl Tests")
-@Tag("RoleService_Tests")
+@Tag("RoleServiceImpl_Tests")
 public class RoleServiceImplTest {
 
 	@InjectMocks

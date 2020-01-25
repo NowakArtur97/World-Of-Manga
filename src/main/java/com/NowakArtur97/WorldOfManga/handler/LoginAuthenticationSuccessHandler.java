@@ -33,7 +33,7 @@ public class LoginAuthenticationSuccessHandler implements AuthenticationSuccessH
 
 		String username = authentication.getName();
 
-		Optional<User> loggedUserOptional = userService.findByUserName(username);
+		Optional<User> loggedUserOptional = userService.findByUsername(username);
 
 		if (loggedUserOptional.isPresent()) {
 
