@@ -23,7 +23,7 @@
   width: 100%;
   margin-bottom: 0;
   margin-top: 0;
-  margin-right: 1rem;
+  margin-right: 0.7rem;
   display: flex;
   justify-content: flex-end;
 }
@@ -40,13 +40,23 @@
   cursor: pointer;
 }
 
-.header__link--item {
+.header__link--item,
+.header__language_select {
   border: solid;
   text-transform: uppercase;
 }
 
-.header__link:hover {
+.header__link:hover,
+.header__language_select:hover {
   background: #fff;
   color: #000;
   transition: 0.5s;
+}
+
+.header__language_select {
+  background: #000;
+  color: #fff;
+  padding: 0.5rem;
+  font-size: 1.3rem;
+  cursor: pointer;
 }
