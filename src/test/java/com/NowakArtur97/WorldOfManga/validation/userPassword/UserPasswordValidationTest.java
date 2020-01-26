@@ -57,8 +57,8 @@ public class UserPasswordValidationTest {
 
 		Set<ConstraintViolation<UserPasswordDTO>> violations = validator.validate(userPasswordDTO);
 
-		assertAll(() -> assertFalse(violations.isEmpty(), () -> "should have violations, but: "),
-				() -> assertEquals(3, violations.size(), () -> "should have three violations, but: "));
+		assertAll(() -> assertFalse(violations.isEmpty(), () -> "should have violations, but: "), () -> assertEquals(3,
+				violations.size(), () -> "should have three violations, but have: " + violations.size()));
 	}
 
 	@Test
@@ -69,8 +69,8 @@ public class UserPasswordValidationTest {
 
 		Set<ConstraintViolation<UserPasswordDTO>> violations = validator.validate(userPasswordDTO);
 
-		assertAll(() -> assertFalse(violations.isEmpty(), () -> "should have violations, but: "),
-				() -> assertEquals(2, violations.size(), () -> "should have two violations, but: "));
+		assertAll(() -> assertFalse(violations.isEmpty(), () -> "should have violations, but: "), () -> assertEquals(2,
+				violations.size(), () -> "should have two violations, but have: " + violations.size()));
 	}
 
 	@Test
@@ -81,7 +81,7 @@ public class UserPasswordValidationTest {
 
 		Set<ConstraintViolation<UserPasswordDTO>> violations = validator.validate(userPasswordDTO);
 
-		assertAll(() -> assertFalse(violations.isEmpty(), () -> "should have violations, but: "),
-				() -> assertEquals(2, violations.size(), () -> "should have two violations, but: "));
+		assertAll(() -> assertFalse(violations.isEmpty(), () -> "should have violations, but: "), () -> assertEquals(2,
+				violations.size(), () -> "should have two violations, but have: " + violations.size()));
 	}
 }

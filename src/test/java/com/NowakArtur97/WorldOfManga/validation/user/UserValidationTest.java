@@ -34,23 +34,23 @@ public class UserValidationTest {
 		validator = factory.getValidator();
 	}
 
+	@Test
+	@DisplayName("when user is correct")
+	public void when_user_is_correct_should_not_have_violations() {
+
+		UserDTO userDTO = UserDTO.builder().username("username").firstName("first name").lastName("last name")
+				.userPasswordDTO(UserPasswordDTO.builder().password("password1").matchingPassword("password1").build())
+				.email("user@email.com").areTermsAccepted(true).build();
+
+		Set<ConstraintViolation<UserDTO>> violations = validator.validate(userDTO);
+
+		assertAll(() -> assertTrue(violations.isEmpty(),
+				() -> "shouldn`t have violations, but have: " + violations.size()));
+	}
+
 	@Nested
 	@DisplayName("Username Validation Tests")
 	class UsernameValidationTest {
-
-		@Test
-		@DisplayName("when user is correct")
-		public void when_user_is_correct_should_not_have_violations() {
-
-			UserDTO userDTO = UserDTO.builder().username("username").firstName("first name").lastName("last name")
-					.userPasswordDTO(
-							UserPasswordDTO.builder().password("password1").matchingPassword("password1").build())
-					.email("user@email.com").areTermsAccepted(true).build();
-
-			Set<ConstraintViolation<UserDTO>> violations = validator.validate(userDTO);
-
-			assertAll(() -> assertTrue(violations.isEmpty(), () -> "shouldn`t have violations, but: "));
-		}
 
 		@Test
 		@DisplayName("when username is null")
@@ -66,7 +66,8 @@ public class UserValidationTest {
 			Set<ConstraintViolation<UserDTO>> violations = validator.validate(userDTO);
 
 			assertAll(() -> assertFalse(violations.isEmpty(), () -> "should have violation, but: "),
-					() -> assertEquals(1, violations.size(), () -> "should have one violation, but: "));
+					() -> assertEquals(1, violations.size(),
+							() -> "should have one violation, , but have: " + violations.size()));
 		}
 
 		@Test
@@ -83,7 +84,8 @@ public class UserValidationTest {
 			Set<ConstraintViolation<UserDTO>> violations = validator.validate(userDTO);
 
 			assertAll(() -> assertFalse(violations.isEmpty(), () -> "should have violation, but: "),
-					() -> assertEquals(1, violations.size(), () -> "should have one violation, but: "));
+					() -> assertEquals(1, violations.size(),
+							() -> "should have one violation, , but have: " + violations.size()));
 		}
 
 		@Test
@@ -100,7 +102,68 @@ public class UserValidationTest {
 			Set<ConstraintViolation<UserDTO>> violations = validator.validate(userDTO);
 
 			assertAll(() -> assertFalse(violations.isEmpty(), () -> "should have violation, but: "),
-					() -> assertEquals(1, violations.size(), () -> "should have one violation, but: "));
+					() -> assertEquals(1, violations.size(),
+							() -> "should have one violation, , but have: " + violations.size()));
+		}
+	}
+
+	@Nested
+	@DisplayName("Email Validation Tests")
+	class EmailValidationTest {
+
+		@Test
+		@DisplayName("when email is null")
+		public void when_email_is_null_should_have_violations() {
+
+			String email = null;
+
+			UserDTO userDTO = UserDTO.builder().username("username").firstName("first name").lastName("last name")
+					.userPasswordDTO(
+							UserPasswordDTO.builder().password("password1").matchingPassword("password1").build())
+					.email(email).areTermsAccepted(true).build();
+
+			Set<ConstraintViolation<UserDTO>> violations = validator.validate(userDTO);
+
+			assertAll(() -> assertFalse(violations.isEmpty(), () -> "should have violation, but: "),
+					() -> assertEquals(1, violations.size(),
+							() -> "should have one violation, , but have: " + violations.size()));
+		}
+
+		@Test
+		@DisplayName("when email is empty")
+		public void when_email_is_empty_should_have_violations() {
+
+			String email = "";
+
+			UserDTO userDTO = UserDTO.builder().username("username").firstName("first name").lastName("last name")
+					.userPasswordDTO(
+							UserPasswordDTO.builder().password("password1").matchingPassword("password1").build())
+					.email(email).areTermsAccepted(true).build();
+
+			Set<ConstraintViolation<UserDTO>> violations = validator.validate(userDTO);
+
+			assertAll(() -> assertFalse(violations.isEmpty(), () -> "should have violation, but: "),
+					() -> assertEquals(1, violations.size(),
+							() -> "should have one violation, but have: " + violations.size()));
+		}
+
+		@Test
+		@DisplayName("when email is blank")
+		public void when_email_is_blank_should_have_violations() {
+
+			String email = "    ";
+
+			UserDTO userDTO = UserDTO.builder().username("username").firstName("first name").lastName("last name")
+					.userPasswordDTO(
+							UserPasswordDTO.builder().password("password1").matchingPassword("password1").build())
+					.email(email).areTermsAccepted(true).build();
+
+			Set<ConstraintViolation<UserDTO>> violations = validator.validate(userDTO);
+			for (var v : violations)
+				System.out.println(v.getMessage());
+			assertAll(() -> assertFalse(violations.isEmpty(), () -> "should have violation, but: "),
+					() -> assertEquals(2, violations.size(),
+							() -> "should have two violation, but have: " + violations.size()));
 		}
 	}
 }
