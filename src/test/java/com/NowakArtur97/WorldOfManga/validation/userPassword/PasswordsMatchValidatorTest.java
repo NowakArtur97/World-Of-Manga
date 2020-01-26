@@ -1,5 +1,10 @@
 package com.NowakArtur97.WorldOfManga.validation.userPassword;
 
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.util.Set;
 
 import javax.validation.ConstraintViolation;
@@ -11,12 +16,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertAll;
 
 import com.NowakArtur97.WorldOfManga.dto.UserPasswordDTO;
 
@@ -59,6 +58,15 @@ public class PasswordsMatchValidatorTest {
 
 		Set<ConstraintViolation<UserPasswordDTO>> violations = validator.validate(userPasswordDTO);
 
-		assertAll(() -> assertFalse(violations.isEmpty(), () -> "should have errors but: "));
+		ConstraintViolation<UserPasswordDTO> violation = violations.iterator().next();
+
+		assertAll(() -> assertFalse(violations.isEmpty(), () -> "should have errors, but: "),
+				() -> assertEquals("password", violation.getPropertyPath().toString(),
+						() -> "should have incorrect password field, but: "),
+				() -> assertEquals(userPasswordDTO, violation.getInvalidValue(),
+						() -> "should have incorrect value: " + violation.getInvalidValue() + ", but was: "),
+				() -> assertEquals("{userPassword.password.matchingFields}", violation.getMessage(),
+						() -> "should have message: {userPassword.password.matchingFields}" + ", but was: "
+								+ violation.getMessage()));
 	}
 }
