@@ -105,6 +105,24 @@ public class UserValidationTest {
 					() -> assertEquals(1, violations.size(),
 							() -> "should have one violation, , but have: " + violations.size()));
 		}
+
+		@Test
+		@DisplayName("when username is too long")
+		public void when_username_is_too_long_should_have_violations() {
+
+			String username = "abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij";
+
+			UserDTO userDTO = UserDTO.builder().username(username).firstName("first name").lastName("last name")
+					.userPasswordDTO(
+							UserPasswordDTO.builder().password("password1").matchingPassword("password1").build())
+					.email("user@email.com").areTermsAccepted(true).build();
+
+			Set<ConstraintViolation<UserDTO>> violations = validator.validate(userDTO);
+
+			assertAll(() -> assertFalse(violations.isEmpty(), () -> "should have violations, but: "),
+					() -> assertEquals(1, violations.size(),
+							() -> "should have one violation, but have: " + violations.size()));
+		}
 	}
 
 	@Nested
@@ -162,7 +180,7 @@ public class UserValidationTest {
 
 			assertAll(() -> assertFalse(violations.isEmpty(), () -> "should have violation, but: "),
 					() -> assertEquals(2, violations.size(),
-							() -> "should have two violation, but have: " + violations.size()));
+							() -> "should have two violations, but have: " + violations.size()));
 		}
 
 		@Test
@@ -180,7 +198,7 @@ public class UserValidationTest {
 
 			assertAll(() -> assertFalse(violations.isEmpty(), () -> "should have violations, but: "),
 					() -> assertEquals(2, violations.size(),
-							() -> "should have two violation, but have: " + violations.size()));
+							() -> "should have two violations, but have: " + violations.size()));
 		}
 
 		@Test
@@ -200,5 +218,51 @@ public class UserValidationTest {
 					() -> assertEquals(1, violations.size(),
 							() -> "should have one violation, but have: " + violations.size()));
 		}
+	}
+
+	@Test
+	@DisplayName("when firstname is too long")
+	public void when_firstname_is_too_long_should_have_violations() {
+
+		String firstname = "abcdefghijabcdefghijabcdefghijabcdefghijabcdefghij";
+
+		UserDTO userDTO = UserDTO.builder().username("username").firstName(firstname).lastName("last name")
+				.userPasswordDTO(UserPasswordDTO.builder().password("password1").matchingPassword("password1").build())
+				.email("user@email.com").areTermsAccepted(true).build();
+
+		Set<ConstraintViolation<UserDTO>> violations = validator.validate(userDTO);
+
+		assertAll(() -> assertFalse(violations.isEmpty(), () -> "should have violations, but: "), () -> assertEquals(1,
+				violations.size(), () -> "should have one violation, but have: " + violations.size()));
+	}
+
+	@Test
+	@DisplayName("when lastname is too long")
+	public void when_lastname_is_too_long_should_have_violations() {
+
+		String lastname = "abcdefghijabcdefghijabcdefghijabcdefghijabcdefghij";
+
+		UserDTO userDTO = UserDTO.builder().username("username").firstName("first name").lastName(lastname)
+				.userPasswordDTO(UserPasswordDTO.builder().password("password1").matchingPassword("password1").build())
+				.email("user@email.com").areTermsAccepted(true).build();
+
+		Set<ConstraintViolation<UserDTO>> violations = validator.validate(userDTO);
+
+		assertAll(() -> assertFalse(violations.isEmpty(), () -> "should have violations, but: "), () -> assertEquals(1,
+				violations.size(), () -> "should have one violation, but have: " + violations.size()));
+	}
+
+	@Test
+	@DisplayName("when terms are not accepted")
+	public void when_terms_are_not_accepted_should_have_violations() {
+
+		UserDTO userDTO = UserDTO.builder().username("username").firstName("first name").lastName("last name")
+				.userPasswordDTO(UserPasswordDTO.builder().password("password1").matchingPassword("password1").build())
+				.email("user@email.com").areTermsAccepted(false).build();
+
+		Set<ConstraintViolation<UserDTO>> violations = validator.validate(userDTO);
+
+		assertAll(() -> assertFalse(violations.isEmpty(), () -> "should have violations, but: "), () -> assertEquals(1,
+				violations.size(), () -> "should have one violation, but have: " + violations.size()));
 	}
 }
