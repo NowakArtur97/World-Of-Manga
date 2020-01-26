@@ -14,6 +14,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 import com.NowakArtur97.WorldOfManga.model.User;
@@ -57,5 +59,37 @@ public class UserServiceImplTest {
 				() -> assertEquals(userExpected.isEnabled(), userActual.isEnabled(),
 						() -> "should return user which is enabled"),
 				() -> verify(userRepository, times(1)).findByUsername(username));
+	}
+
+	@Test
+	@DisplayName("when username is already in use")
+	public void when_username_is_already_in_use_should_return_true() {
+
+		boolean isUsernameInUse = true;
+
+		String username = "username";
+
+		when(userRepository.existsUserByUsername(username)).thenReturn(isUsernameInUse);
+
+		boolean isUsernameInUseActual = userService.isUsernameAlreadyInUse(username);
+
+		assertAll(() -> assertTrue(isUsernameInUseActual, () -> "should return true"),
+				() -> verify(userRepository, times(1)).existsUserByUsername(username));
+	}
+
+	@Test
+	@DisplayName("when username isn`t in use")
+	public void when_username_is_not_in_use_should_return_false() {
+
+		boolean isUsernameInUse = false;
+
+		String username = "username";
+
+		when(userRepository.existsUserByUsername(username)).thenReturn(isUsernameInUse);
+
+		boolean isUsernameInUseActual = userService.isUsernameAlreadyInUse(username);
+
+		assertAll(() -> assertFalse(isUsernameInUseActual, () -> "should return false"),
+				() -> verify(userRepository, times(1)).existsUserByUsername(username));
 	}
 }
