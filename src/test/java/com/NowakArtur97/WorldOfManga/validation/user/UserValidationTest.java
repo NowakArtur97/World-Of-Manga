@@ -159,11 +159,46 @@ public class UserValidationTest {
 					.email(email).areTermsAccepted(true).build();
 
 			Set<ConstraintViolation<UserDTO>> violations = validator.validate(userDTO);
-			for (var v : violations)
-				System.out.println(v.getMessage());
+
 			assertAll(() -> assertFalse(violations.isEmpty(), () -> "should have violation, but: "),
 					() -> assertEquals(2, violations.size(),
 							() -> "should have two violation, but have: " + violations.size()));
+		}
+
+		@Test
+		@DisplayName("when email is too long")
+		public void when_email_is_too_long_should_have_violations() {
+
+			String email = "abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij@email.com";
+
+			UserDTO userDTO = UserDTO.builder().username("username").firstName("first name").lastName("last name")
+					.userPasswordDTO(
+							UserPasswordDTO.builder().password("password1").matchingPassword("password1").build())
+					.email(email).areTermsAccepted(true).build();
+
+			Set<ConstraintViolation<UserDTO>> violations = validator.validate(userDTO);
+
+			assertAll(() -> assertFalse(violations.isEmpty(), () -> "should have violations, but: "),
+					() -> assertEquals(2, violations.size(),
+							() -> "should have two violation, but have: " + violations.size()));
+		}
+
+		@Test
+		@DisplayName("when email has incorrect format")
+		public void when_email_has_incorrect_format_should_have_violations() {
+
+			String email = "email,";
+
+			UserDTO userDTO = UserDTO.builder().username("username").firstName("first name").lastName("last name")
+					.userPasswordDTO(
+							UserPasswordDTO.builder().password("password1").matchingPassword("password1").build())
+					.email(email).areTermsAccepted(true).build();
+
+			Set<ConstraintViolation<UserDTO>> violations = validator.validate(userDTO);
+
+			assertAll(() -> assertFalse(violations.isEmpty(), () -> "should have violation, but: "),
+					() -> assertEquals(1, violations.size(),
+							() -> "should have one violation, but have: " + violations.size()));
 		}
 	}
 }
