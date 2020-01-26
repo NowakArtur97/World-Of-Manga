@@ -1,9 +1,14 @@
 package com.NowakArtur97.WorldOfManga.service.impl;
 
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 import org.junit.jupiter.api.DisplayName;
@@ -14,10 +19,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertAll;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import com.NowakArtur97.WorldOfManga.model.User;
 import com.NowakArtur97.WorldOfManga.repository.UserRepository;
@@ -133,7 +136,7 @@ public class UserServiceImplTest {
 
 		@Test
 		@DisplayName("when save user")
-		public void wwhen_save_user_should_save_and_return_user() {
+		public void when_save_user_should_save_and_return_user() {
 
 			User userExpected = User.builder().username("username").firstName("first name").lastName("last name")
 					.password("password1").email("user@email.com").isEnabled(true).build();
@@ -156,6 +159,45 @@ public class UserServiceImplTest {
 					() -> assertEquals(userExpected.isEnabled(), userActual.isEnabled(),
 							() -> "should return user which is enabled"),
 					() -> verify(userRepository, times(1)).save(userExpected));
+		}
+	}
+
+	@Nested()
+	@DisplayName("User Details Integration Tests")
+	@Tag("UserDetailsIntegration_Tests")
+	class UserDetailsIntegrationTest {
+
+		@Test
+		@DisplayName("when load user details by username")
+		public void when_load_user_details_by_username_should_return_user_details() {
+
+			String username = "user";
+
+			User userExpected = User.builder().username(username).firstName("first name").lastName("last name")
+					.password("password1").email("user@email.com").isEnabled(true).build();
+
+			boolean accountNonExpired = true;
+			boolean credentialsNonExpired = true;
+			boolean accountNonLocked = true;
+
+			UserDetails userDetailsExpected = new org.springframework.security.core.userdetails.User(
+					userExpected.getUsername(), userExpected.getPassword(), userExpected.isEnabled(), accountNonExpired,
+					credentialsNonExpired, accountNonLocked, new ArrayList<SimpleGrantedAuthority>());
+
+			when(userRepository.findByUsername(username)).thenReturn(Optional.of(userExpected));
+
+			UserDetails userDetailsActual = userService.loadUserByUsername(username);
+
+			assertAll(
+					() -> assertEquals(userDetailsExpected.getUsername(), userDetailsActual.getUsername(),
+							() -> "should return user details with username"),
+					() -> assertEquals(userDetailsExpected.getPassword(), userDetailsActual.getPassword(),
+							() -> "should return user details with password"),
+					() -> assertEquals(userDetailsExpected.getAuthorities(), userDetailsActual.getAuthorities(),
+							() -> "should return user details with authorities"),
+					() -> assertEquals(userDetailsExpected.isEnabled(), userDetailsActual.isEnabled(),
+							() -> "should return user details which is enabled"),
+					() -> verify(userRepository, times(1)).findByUsername(username));
 		}
 	}
 }
