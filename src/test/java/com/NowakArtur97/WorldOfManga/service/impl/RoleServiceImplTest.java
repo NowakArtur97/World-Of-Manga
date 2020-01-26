@@ -42,7 +42,8 @@ public class RoleServiceImplTest {
 
 		Role roleActual = roleService.findByName(roleName).get();
 
-		assertAll(() -> assertEquals(roleExpected.getName(), roleActual.getName(), () -> "should return role by name"),
+		assertAll(() -> assertEquals(roleExpected.getName(), roleActual.getName(),
+				() -> "should return role with name: " + roleExpected.getName() + ", but was: " + roleActual.getName()),
 				() -> verify(roleRepository, times(1)).findByName(roleName));
 	}
 }

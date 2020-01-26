@@ -31,8 +31,8 @@ public class UserMapperImplTest {
 	private ModelMapper modelMapper;
 
 	@Test
-	@DisplayName("when model user dto")
-	public void when_model_user_dto_then_return_user_entity() {
+	@DisplayName("when map user dto")
+	public void when_map_user_dto_then_return_user_entity() {
 
 		UserDTO userDTOExpected = UserDTO.builder().username("username").firstName("first name").lastName("last name")
 				.userPasswordDTO(UserPasswordDTO.builder().password("password1").matchingPassword("password1").build())
@@ -42,22 +42,28 @@ public class UserMapperImplTest {
 				.password("password1").email("user@email.com").isEnabled(true).build();
 
 		when(userMapper.mapUserDTOToUser(userDTOExpected)).thenReturn(userExpected);
-		
+
 		User userActual = userMapper.mapUserDTOToUser(userDTOExpected);
 
 		assertAll(
 				() -> assertEquals(userExpected.getUsername(), userActual.getUsername(),
-						() -> "should return user with username"),
+						() -> "should return user with username: " + userExpected.getUsername() + ", but was: "
+								+ userActual.getUsername()),
 				() -> assertEquals(userExpected.getFirstName(), userActual.getFirstName(),
-						() -> "should return user with first name"),
+						() -> "should return user with first name: " + userExpected.getFirstName() + ", but was: "
+								+ userActual.getFirstName()),
 				() -> assertEquals(userExpected.getLastName(), userActual.getLastName(),
-						() -> "should return user with last name"),
+						() -> "should return user with last name:: " + userExpected.getLastName() + ", but was: "
+								+ userActual.getLastName()),
 				() -> assertEquals(userExpected.getPassword(), userActual.getPassword(),
-						() -> "should return user with password"),
+						() -> "should return user with password: " + userExpected.getPassword() + ", but was: "
+								+ userActual.getPassword()),
 				() -> assertEquals(userExpected.getEmail(), userActual.getEmail(),
-						() -> "should return user with email"),
+						() -> "should return user with email: " + userExpected.getEmail() + ", but was: "
+								+ userActual.getEmail()),
 				() -> assertEquals(userExpected.isEnabled(), userActual.isEnabled(),
-						() -> "should return user which is enabled"),
+						() -> "should return user which is enabled: " + userExpected.isEnabled() + ", but was: "
+								+ userActual.isEnabled()),
 				() -> verify(modelMapper, times(1)).map(userDTOExpected, User.class));
 	}
 }

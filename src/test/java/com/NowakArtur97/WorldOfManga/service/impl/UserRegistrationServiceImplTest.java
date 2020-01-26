@@ -63,17 +63,23 @@ public class UserRegistrationServiceImplTest {
 
 		assertAll(
 				() -> assertEquals(userExpected.getUsername(), userActual.getUsername(),
-						() -> "should return user with username"),
+						() -> "should return user with username: " + userExpected.getUsername() + " but was: "
+								+ userActual.getUsername()),
 				() -> assertEquals(userExpected.getFirstName(), userActual.getFirstName(),
-						() -> "should return user with first name"),
+						() -> "should return user with first name: " + userExpected.getFirstName() + " but was: "
+								+ userActual.getFirstName()),
 				() -> assertEquals(userExpected.getLastName(), userActual.getLastName(),
-						() -> "should return user with last name"),
+						() -> "should return user with last name: " + userExpected.getLastName() + " but was: "
+								+ userActual.getLastName()),
 				() -> assertEquals(userExpected.getPassword(), userActual.getPassword(),
-						() -> "should return user with password"),
+						() -> "should return user with password: " + userExpected.getPassword() + " but was: "
+								+ userActual.getPassword()),
 				() -> assertEquals(userExpected.getEmail(), userActual.getEmail(),
-						() -> "should return user with email"),
+						() -> "should return user with email: " + userExpected.getEmail() + " but was: "
+								+ userActual.getEmail()),
 				() -> assertEquals(userExpected.isEnabled(), userActual.isEnabled(),
-						() -> "should return user which is enabled"),
+						() -> "should return user which is enabled: " + userExpected.isEnabled() + " but was: "
+								+ userActual.isEnabled()),
 				() -> verify(userMapper, times(1)).mapUserDTOToUser(userDTOExpected),
 				() -> verify(roleService, times(1)).findByName(roleName),
 				() -> verify(userService, times(1)).save(userActual));

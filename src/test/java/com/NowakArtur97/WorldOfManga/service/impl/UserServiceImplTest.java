@@ -58,17 +58,23 @@ public class UserServiceImplTest {
 
 			assertAll(
 					() -> assertEquals(userExpected.getUsername(), userActual.getUsername(),
-							() -> "should return user with username"),
+							() -> "should return user with username: " + userExpected.getUsername() + ", but was: "
+									+ userActual.getUsername()),
 					() -> assertEquals(userExpected.getFirstName(), userActual.getFirstName(),
-							() -> "should return user with first name"),
+							() -> "should return user with first name: " + userExpected.getFirstName() + ", but was: "
+									+ userActual.getFirstName()),
 					() -> assertEquals(userExpected.getLastName(), userActual.getLastName(),
-							() -> "should return user with last name"),
+							() -> "should return user with last name: " + userExpected.getLastName() + ", but was: "
+									+ userActual.getLastName()),
 					() -> assertEquals(userExpected.getPassword(), userActual.getPassword(),
-							() -> "should return user with password"),
+							() -> "should return user with password: " + userExpected.getPassword() + ", but was: "
+									+ userActual.getPassword()),
 					() -> assertEquals(userExpected.getEmail(), userActual.getEmail(),
-							() -> "should return user with email"),
+							() -> "should return user with email: " + userExpected.getEmail() + ", but was: "
+									+ userActual.getEmail()),
 					() -> assertEquals(userExpected.isEnabled(), userActual.isEnabled(),
-							() -> "should return user which is enabled"),
+							() -> "should return user which is enabled: " + userExpected.isEnabled() + ", but was: "
+									+ userActual.isEnabled()),
 					() -> verify(userRepository, times(1)).findByUsername(username));
 		}
 
@@ -84,7 +90,9 @@ public class UserServiceImplTest {
 
 			boolean isUsernameInUseActual = userService.isUsernameAlreadyInUse(username);
 
-			assertAll(() -> assertTrue(isUsernameInUseActual, () -> "should return true"),
+			assertAll(
+					() -> assertTrue(isUsernameInUseActual,
+							() -> "should return true, but was: " + isUsernameInUseActual),
 					() -> verify(userRepository, times(1)).existsUserByUsername(username));
 		}
 
@@ -100,7 +108,9 @@ public class UserServiceImplTest {
 
 			boolean isUsernameInUseActual = userService.isUsernameAlreadyInUse(username);
 
-			assertAll(() -> assertFalse(isUsernameInUseActual, () -> "should return false"),
+			assertAll(
+					() -> assertFalse(isUsernameInUseActual,
+							() -> "should return false, but was: " + isUsernameInUseActual),
 					() -> verify(userRepository, times(1)).existsUserByUsername(username));
 		}
 
@@ -116,7 +126,7 @@ public class UserServiceImplTest {
 
 			boolean isEmailInUseActual = userService.isEmailAlreadyInUse(email);
 
-			assertAll(() -> assertTrue(isEmailInUseActual, () -> "should return true"),
+			assertAll(() -> assertTrue(isEmailInUseActual, () -> "should return true, but was: " + isEmailInUseActual),
 					() -> verify(userRepository, times(1)).existsUserByEmail(email));
 		}
 
@@ -132,7 +142,7 @@ public class UserServiceImplTest {
 
 			boolean isEmailInUseActual = userService.isEmailAlreadyInUse(email);
 
-			assertAll(() -> assertFalse(isEmailInUseActual, () -> "should return false"),
+			assertAll(() -> assertFalse(isEmailInUseActual, () -> "should return false, but was: " + isEmailInUseActual),
 					() -> verify(userRepository, times(1)).existsUserByEmail(email));
 		}
 
@@ -149,17 +159,23 @@ public class UserServiceImplTest {
 
 			assertAll(
 					() -> assertEquals(userExpected.getUsername(), userActual.getUsername(),
-							() -> "should return user with username"),
+							() -> "should return user with username: " + userExpected.getUsername() + ", but was: "
+									+ userActual.getUsername()),
 					() -> assertEquals(userExpected.getFirstName(), userActual.getFirstName(),
-							() -> "should return user with first name"),
+							() -> "should return user with first name: " + userExpected.getFirstName() + ", but was: "
+									+ userActual.getFirstName()),
 					() -> assertEquals(userExpected.getLastName(), userActual.getLastName(),
-							() -> "should return user with last name"),
+							() -> "should return user with last name: " + userExpected.getLastName() + ", but was: "
+									+ userActual.getLastName()),
 					() -> assertEquals(userExpected.getPassword(), userActual.getPassword(),
-							() -> "should return user with password"),
+							() -> "should return user with password: " + userExpected.getPassword() + ", but was: "
+									+ userActual.getPassword()),
 					() -> assertEquals(userExpected.getEmail(), userActual.getEmail(),
-							() -> "should return user with email"),
+							() -> "should return user with email: " + userExpected.getEmail() + ", but was: "
+									+ userActual.getEmail()),
 					() -> assertEquals(userExpected.isEnabled(), userActual.isEnabled(),
-							() -> "should return user which is enabled"),
+							() -> "should return user which is enabled: " + userExpected.isEnabled() + ", but was: "
+									+ userActual.isEnabled()),
 					() -> verify(userRepository, times(1)).save(userExpected));
 		}
 	}
@@ -192,13 +208,17 @@ public class UserServiceImplTest {
 
 			assertAll(
 					() -> assertEquals(userDetailsExpected.getUsername(), userDetailsActual.getUsername(),
-							() -> "should return user details with username"),
+							() -> "should return user details with username: " + userDetailsExpected.getUsername()
+									+ ", but was: " + userDetailsActual.getUsername()),
 					() -> assertEquals(userDetailsExpected.getPassword(), userDetailsActual.getPassword(),
-							() -> "should return user details with password"),
+							() -> "should return user details with password: " + userDetailsExpected.getPassword()
+									+ ", but was: " + userDetailsActual.getPassword()),
 					() -> assertEquals(userDetailsExpected.getAuthorities(), userDetailsActual.getAuthorities(),
-							() -> "should return user details with authorities"),
+							() -> "should return user details with authorities: " + userDetailsExpected.getAuthorities()
+									+ ", but was: " + userDetailsActual.getAuthorities()),
 					() -> assertEquals(userDetailsExpected.isEnabled(), userDetailsActual.isEnabled(),
-							() -> "should return user details which is enabled"),
+							() -> "should return user details which is enabled: " + userDetailsExpected.isEnabled()
+									+ ", but was: " + userDetailsActual.isEnabled()),
 					() -> verify(userRepository, times(1)).findByUsername(username));
 		}
 
@@ -209,12 +229,12 @@ public class UserServiceImplTest {
 			String username = "user";
 
 			Class<UsernameNotFoundException> expectedException = UsernameNotFoundException.class;
-
-			when(userRepository.findByUsername(username)).thenThrow(UsernameNotFoundException.class);
+			
+			when(userRepository.findByUsername(username)).thenThrow(expectedException);
 
 			assertAll(
 					() -> assertThrows(expectedException, () -> userService.loadUserByUsername(username),
-							() -> "should throw UsernameNotFoundException"),
+							() -> "should throw UsernameNotFoundException, but nothing was thrown"),
 					() -> verify(userRepository, times(1)).findByUsername(username));
 		}
 	}
