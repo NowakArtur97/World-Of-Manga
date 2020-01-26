@@ -19,9 +19,9 @@ import org.junit.jupiter.api.Test;
 
 import com.NowakArtur97.WorldOfManga.dto.UserPasswordDTO;
 
-@DisplayName("Passwords Match Validator Tests")
-@Tag("PasswordsMatchValidator_Tests")
-public class PasswordsMatchValidatorTest {
+@DisplayName("User Passwords Match Validator Tests")
+@Tag("UserPasswordsMatchValidator_Tests")
+public class UserPasswordsMatchValidatorTest {
 
 	private Validator validator;
 
@@ -33,8 +33,8 @@ public class PasswordsMatchValidatorTest {
 	}
 
 	@Test
-	@DisplayName("when validating correct password shouldn`t have errors")
-	public void when_validating_correct_password_should_not_have_errors() {
+	@DisplayName("when validating correct password shouldn`t have violations")
+	public void when_validating_correct_password_should_not_have_violations() {
 
 		String password = "password1";
 
@@ -43,12 +43,12 @@ public class PasswordsMatchValidatorTest {
 
 		Set<ConstraintViolation<UserPasswordDTO>> violations = validator.validate(userPasswordDTO);
 
-		assertAll(() -> assertTrue(violations.isEmpty(), () -> "shouldn`t have errors but: "));
+		assertAll(() -> assertTrue(violations.isEmpty(), () -> "shouldn`t have violations but: "));
 	}
 
 	@Test
-	@DisplayName("when validating not matching passwords should have errors")
-	public void when_validating_not_matching_passwords_should_have_errors() {
+	@DisplayName("when validating not matching passwords should have violations")
+	public void when_validating_not_matching_passwords_should_have_violations() {
 
 		String password1 = "password1";
 		String password2 = "1drowssap";
@@ -60,7 +60,7 @@ public class PasswordsMatchValidatorTest {
 
 		ConstraintViolation<UserPasswordDTO> violation = violations.iterator().next();
 
-		assertAll(() -> assertFalse(violations.isEmpty(), () -> "should have errors, but: "),
+		assertAll(() -> assertFalse(violations.isEmpty(), () -> "should have violations, but: "),
 				() -> assertEquals("password", violation.getPropertyPath().toString(),
 						() -> "should have incorrect password field, but: "),
 				() -> assertEquals(userPasswordDTO, violation.getInvalidValue(),

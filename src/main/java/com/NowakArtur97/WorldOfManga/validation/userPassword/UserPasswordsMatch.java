@@ -10,10 +10,10 @@ import javax.validation.Constraint;
 import javax.validation.Payload;
 
 @Documented
-@Constraint(validatedBy = PasswordsMatchValidator.class)
+@Constraint(validatedBy = UserPasswordsMatchValidator.class)
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface PasswordsMatch {
+public @interface UserPasswordsMatch {
 
 	String message() default "{userPassword.password.matchingFields}";
 	
@@ -29,6 +29,6 @@ public @interface PasswordsMatch {
 	@Target(ElementType.TYPE)
 	@Retention(RetentionPolicy.RUNTIME)
 	@interface List {
-		PasswordsMatch[] value();
+		UserPasswordsMatch[] value();
 	}
 }

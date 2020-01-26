@@ -2,7 +2,7 @@ package com.NowakArtur97.WorldOfManga.dto;
 
 import javax.validation.constraints.NotBlank;
 
-import com.NowakArtur97.WorldOfManga.validation.userPassword.PasswordsMatch;
+import com.NowakArtur97.WorldOfManga.validation.userPassword.UserPasswordsMatch;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,8 +13,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@PasswordsMatch.List({
-		@PasswordsMatch(password = "password", matchingPassword = "matchingPassword", message = "{userPassword.password.matchingFields}") })
+@UserPasswordsMatch.List({
+		@UserPasswordsMatch(password = "password", matchingPassword = "matchingPassword", message = "{userPassword.password.matchingFields}") })
 public class UserPasswordDTO {
 
 	@NotBlank(message = "{userPassword.password.notBlank}")

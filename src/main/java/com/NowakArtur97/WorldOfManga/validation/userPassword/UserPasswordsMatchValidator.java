@@ -5,14 +5,14 @@ import javax.validation.ConstraintValidatorContext;
 
 import org.springframework.beans.BeanWrapperImpl;
 
-public class PasswordsMatchValidator implements ConstraintValidator<PasswordsMatch, Object> {
+public class UserPasswordsMatchValidator implements ConstraintValidator<UserPasswordsMatch, Object> {
 
 	private String password;
 	private String matchingPassword;
 	private String message;
 
 	@Override
-	public void initialize(final PasswordsMatch passwordMatchAnnotation) {
+	public void initialize(final UserPasswordsMatch passwordMatchAnnotation) {
 
 		password = passwordMatchAnnotation.password();
 		matchingPassword = passwordMatchAnnotation.matchingPassword();
