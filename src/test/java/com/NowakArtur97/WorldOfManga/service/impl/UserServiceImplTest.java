@@ -38,7 +38,7 @@ public class UserServiceImplTest {
 
 		String username = "user";
 
-		User userExpected = User.builder().username(username).firstName("first nmae").lastName("user lastname")
+		User userExpected = User.builder().username(username).firstName("first name").lastName("last name")
 				.password("password1").email("user@email.com").isEnabled(true).build();
 
 		when(userRepository.findByUsername(username)).thenReturn(Optional.of(userExpected));
@@ -123,5 +123,32 @@ public class UserServiceImplTest {
 
 		assertAll(() -> assertFalse(isEmailInUseActual, () -> "should return false"),
 				() -> verify(userRepository, times(1)).existsUserByEmail(email));
+	}
+
+	@Test
+	@DisplayName("when save user")
+	public void wwhen_save_user_should_save_and_return_user() {
+
+		User userExpected = User.builder().username("username").firstName("first name").lastName("last name")
+				.password("password1").email("user@email.com").isEnabled(true).build();
+
+		when(userRepository.save(userExpected)).thenReturn(userExpected);
+
+		User userActual = userService.save(userExpected);
+
+		assertAll(
+				() -> assertEquals(userExpected.getUsername(), userActual.getUsername(),
+						() -> "should return user with username"),
+				() -> assertEquals(userExpected.getFirstName(), userActual.getFirstName(),
+						() -> "should return user with first name"),
+				() -> assertEquals(userExpected.getLastName(), userActual.getLastName(),
+						() -> "should return user with last name"),
+				() -> assertEquals(userExpected.getPassword(), userActual.getPassword(),
+						() -> "should return user with password"),
+				() -> assertEquals(userExpected.getEmail(), userActual.getEmail(),
+						() -> "should return user with email"),
+				() -> assertEquals(userExpected.isEnabled(), userActual.isEnabled(),
+						() -> "should return user which is enabled"),
+				() -> verify(userRepository, times(1)).save(userExpected));
 	}
 }

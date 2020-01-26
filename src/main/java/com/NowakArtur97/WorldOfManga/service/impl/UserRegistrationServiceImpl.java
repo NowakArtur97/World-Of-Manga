@@ -32,7 +32,7 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
 		userToRegister.addRole(roleService.findByName("ROLE_USER").get());
 		userToRegister.setEnabled(true);
 
-		userService.saveUser(userToRegister);
+		userService.save(userToRegister);
 
 		return userToRegister;
 	}

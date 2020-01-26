@@ -14,5 +14,5 @@ public interface UserService extends UserDetailsService {
 
 	boolean isEmailAlreadyInUse(String email);
 
-	User saveUser(User user);
+	User save(User user);
 }
