@@ -53,7 +53,7 @@ public class UserMapperImplTest {
 						() -> "should return user with first name: " + userExpected.getFirstName() + ", but was: "
 								+ userActual.getFirstName()),
 				() -> assertEquals(userExpected.getLastName(), userActual.getLastName(),
-						() -> "should return user with last name:: " + userExpected.getLastName() + ", but was: "
+						() -> "should return user with last name: " + userExpected.getLastName() + ", but was: "
 								+ userActual.getLastName()),
 				() -> assertEquals(userExpected.getPassword(), userActual.getPassword(),
 						() -> "should return user with password: " + userExpected.getPassword() + ", but was: "
