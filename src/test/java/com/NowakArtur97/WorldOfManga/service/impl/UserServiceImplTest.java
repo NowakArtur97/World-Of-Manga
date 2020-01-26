@@ -7,6 +7,7 @@ import static org.mockito.Mockito.when;
 import java.util.Optional;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -32,123 +33,129 @@ public class UserServiceImplTest {
 	@Mock
 	private UserRepository userRepository;
 
-	@Test
-	@DisplayName("when find by username")
-	public void when_find_by_username_should_return_user_by_username() {
+	@Nested()
+	@DisplayName("User Repository Integration Tests")
+	@Tag("UserRepositoryIntegration_Tests")
+	class UserRepositoryIntegrationTest {
 
-		String username = "user";
+		@Test
+		@DisplayName("when find by username")
+		public void when_find_by_username_should_return_user_by_username() {
 
-		User userExpected = User.builder().username(username).firstName("first name").lastName("last name")
-				.password("password1").email("user@email.com").isEnabled(true).build();
+			String username = "user";
 
-		when(userRepository.findByUsername(username)).thenReturn(Optional.of(userExpected));
+			User userExpected = User.builder().username(username).firstName("first name").lastName("last name")
+					.password("password1").email("user@email.com").isEnabled(true).build();
 
-		User userActual = userService.findByUsername(username).get();
+			when(userRepository.findByUsername(username)).thenReturn(Optional.of(userExpected));
 
-		assertAll(
-				() -> assertEquals(userExpected.getUsername(), userActual.getUsername(),
-						() -> "should return user with username"),
-				() -> assertEquals(userExpected.getFirstName(), userActual.getFirstName(),
-						() -> "should return user with first name"),
-				() -> assertEquals(userExpected.getLastName(), userActual.getLastName(),
-						() -> "should return user with last name"),
-				() -> assertEquals(userExpected.getPassword(), userActual.getPassword(),
-						() -> "should return user with password"),
-				() -> assertEquals(userExpected.getEmail(), userActual.getEmail(),
-						() -> "should return user with email"),
-				() -> assertEquals(userExpected.isEnabled(), userActual.isEnabled(),
-						() -> "should return user which is enabled"),
-				() -> verify(userRepository, times(1)).findByUsername(username));
-	}
+			User userActual = userService.findByUsername(username).get();
 
-	@Test
-	@DisplayName("when username is already in use")
-	public void when_username_is_already_in_use_should_return_true() {
+			assertAll(
+					() -> assertEquals(userExpected.getUsername(), userActual.getUsername(),
+							() -> "should return user with username"),
+					() -> assertEquals(userExpected.getFirstName(), userActual.getFirstName(),
+							() -> "should return user with first name"),
+					() -> assertEquals(userExpected.getLastName(), userActual.getLastName(),
+							() -> "should return user with last name"),
+					() -> assertEquals(userExpected.getPassword(), userActual.getPassword(),
+							() -> "should return user with password"),
+					() -> assertEquals(userExpected.getEmail(), userActual.getEmail(),
+							() -> "should return user with email"),
+					() -> assertEquals(userExpected.isEnabled(), userActual.isEnabled(),
+							() -> "should return user which is enabled"),
+					() -> verify(userRepository, times(1)).findByUsername(username));
+		}
 
-		boolean isUsernameInUse = true;
+		@Test
+		@DisplayName("when username is already in use")
+		public void when_username_is_already_in_use_should_return_true() {
 
-		String username = "username";
+			boolean isUsernameInUse = true;
 
-		when(userRepository.existsUserByUsername(username)).thenReturn(isUsernameInUse);
+			String username = "username";
 
-		boolean isUsernameInUseActual = userService.isUsernameAlreadyInUse(username);
+			when(userRepository.existsUserByUsername(username)).thenReturn(isUsernameInUse);
 
-		assertAll(() -> assertTrue(isUsernameInUseActual, () -> "should return true"),
-				() -> verify(userRepository, times(1)).existsUserByUsername(username));
-	}
+			boolean isUsernameInUseActual = userService.isUsernameAlreadyInUse(username);
 
-	@Test
-	@DisplayName("when username isn`t in use")
-	public void when_username_is_not_in_use_should_return_false() {
+			assertAll(() -> assertTrue(isUsernameInUseActual, () -> "should return true"),
+					() -> verify(userRepository, times(1)).existsUserByUsername(username));
+		}
 
-		boolean isUsernameInUse = false;
+		@Test
+		@DisplayName("when username isn`t in use")
+		public void when_username_is_not_in_use_should_return_false() {
 
-		String username = "username";
+			boolean isUsernameInUse = false;
 
-		when(userRepository.existsUserByUsername(username)).thenReturn(isUsernameInUse);
+			String username = "username";
 
-		boolean isUsernameInUseActual = userService.isUsernameAlreadyInUse(username);
+			when(userRepository.existsUserByUsername(username)).thenReturn(isUsernameInUse);
 
-		assertAll(() -> assertFalse(isUsernameInUseActual, () -> "should return false"),
-				() -> verify(userRepository, times(1)).existsUserByUsername(username));
-	}
+			boolean isUsernameInUseActual = userService.isUsernameAlreadyInUse(username);
 
-	@Test
-	@DisplayName("when email is already in use")
-	public void when_email_is_already_in_use_should_return_true() {
+			assertAll(() -> assertFalse(isUsernameInUseActual, () -> "should return false"),
+					() -> verify(userRepository, times(1)).existsUserByUsername(username));
+		}
 
-		boolean isEmailInUse = true;
+		@Test
+		@DisplayName("when email is already in use")
+		public void when_email_is_already_in_use_should_return_true() {
 
-		String email = "username@email.com";
+			boolean isEmailInUse = true;
 
-		when(userRepository.existsUserByEmail(email)).thenReturn(isEmailInUse);
+			String email = "username@email.com";
 
-		boolean isEmailInUseActual = userService.isEmailAlreadyInUse(email);
+			when(userRepository.existsUserByEmail(email)).thenReturn(isEmailInUse);
 
-		assertAll(() -> assertTrue(isEmailInUseActual, () -> "should return true"),
-				() -> verify(userRepository, times(1)).existsUserByEmail(email));
-	}
+			boolean isEmailInUseActual = userService.isEmailAlreadyInUse(email);
 
-	@Test
-	@DisplayName("when email isn`t in use")
-	public void when_email_is_not_in_use_should_return_false() {
+			assertAll(() -> assertTrue(isEmailInUseActual, () -> "should return true"),
+					() -> verify(userRepository, times(1)).existsUserByEmail(email));
+		}
 
-		boolean isEmailInUse = false;
+		@Test
+		@DisplayName("when email isn`t in use")
+		public void when_email_is_not_in_use_should_return_false() {
 
-		String email = "username@email.com";
+			boolean isEmailInUse = false;
 
-		when(userRepository.existsUserByEmail(email)).thenReturn(isEmailInUse);
+			String email = "username@email.com";
 
-		boolean isEmailInUseActual = userService.isEmailAlreadyInUse(email);
+			when(userRepository.existsUserByEmail(email)).thenReturn(isEmailInUse);
 
-		assertAll(() -> assertFalse(isEmailInUseActual, () -> "should return false"),
-				() -> verify(userRepository, times(1)).existsUserByEmail(email));
-	}
+			boolean isEmailInUseActual = userService.isEmailAlreadyInUse(email);
 
-	@Test
-	@DisplayName("when save user")
-	public void wwhen_save_user_should_save_and_return_user() {
+			assertAll(() -> assertFalse(isEmailInUseActual, () -> "should return false"),
+					() -> verify(userRepository, times(1)).existsUserByEmail(email));
+		}
 
-		User userExpected = User.builder().username("username").firstName("first name").lastName("last name")
-				.password("password1").email("user@email.com").isEnabled(true).build();
+		@Test
+		@DisplayName("when save user")
+		public void wwhen_save_user_should_save_and_return_user() {
 
-		when(userRepository.save(userExpected)).thenReturn(userExpected);
+			User userExpected = User.builder().username("username").firstName("first name").lastName("last name")
+					.password("password1").email("user@email.com").isEnabled(true).build();
 
-		User userActual = userService.save(userExpected);
+			when(userRepository.save(userExpected)).thenReturn(userExpected);
 
-		assertAll(
-				() -> assertEquals(userExpected.getUsername(), userActual.getUsername(),
-						() -> "should return user with username"),
-				() -> assertEquals(userExpected.getFirstName(), userActual.getFirstName(),
-						() -> "should return user with first name"),
-				() -> assertEquals(userExpected.getLastName(), userActual.getLastName(),
-						() -> "should return user with last name"),
-				() -> assertEquals(userExpected.getPassword(), userActual.getPassword(),
-						() -> "should return user with password"),
-				() -> assertEquals(userExpected.getEmail(), userActual.getEmail(),
-						() -> "should return user with email"),
-				() -> assertEquals(userExpected.isEnabled(), userActual.isEnabled(),
-						() -> "should return user which is enabled"),
-				() -> verify(userRepository, times(1)).save(userExpected));
+			User userActual = userService.save(userExpected);
+
+			assertAll(
+					() -> assertEquals(userExpected.getUsername(), userActual.getUsername(),
+							() -> "should return user with username"),
+					() -> assertEquals(userExpected.getFirstName(), userActual.getFirstName(),
+							() -> "should return user with first name"),
+					() -> assertEquals(userExpected.getLastName(), userActual.getLastName(),
+							() -> "should return user with last name"),
+					() -> assertEquals(userExpected.getPassword(), userActual.getPassword(),
+							() -> "should return user with password"),
+					() -> assertEquals(userExpected.getEmail(), userActual.getEmail(),
+							() -> "should return user with email"),
+					() -> assertEquals(userExpected.isEnabled(), userActual.isEnabled(),
+							() -> "should return user which is enabled"),
+					() -> verify(userRepository, times(1)).save(userExpected));
+		}
 	}
 }
