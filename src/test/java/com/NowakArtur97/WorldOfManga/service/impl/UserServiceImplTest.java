@@ -3,6 +3,7 @@ package com.NowakArtur97.WorldOfManga.service.impl;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -21,6 +22,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import com.NowakArtur97.WorldOfManga.model.User;
 import com.NowakArtur97.WorldOfManga.repository.UserRepository;
@@ -197,6 +199,22 @@ public class UserServiceImplTest {
 							() -> "should return user details with authorities"),
 					() -> assertEquals(userDetailsExpected.isEnabled(), userDetailsActual.isEnabled(),
 							() -> "should return user details which is enabled"),
+					() -> verify(userRepository, times(1)).findByUsername(username));
+		}
+
+		@Test
+		@DisplayName("when load user details by username doesn`t find user")
+		public void when_load_user_details_by_username_does_not_find_user_should_throw_UsernameNotFoundException() {
+
+			String username = "user";
+
+			Class<UsernameNotFoundException> expectedException = UsernameNotFoundException.class;
+
+			when(userRepository.findByUsername(username)).thenThrow(UsernameNotFoundException.class);
+
+			assertAll(
+					() -> assertThrows(expectedException, () -> userService.loadUserByUsername(username),
+							() -> "should throw UsernameNotFoundException"),
 					() -> verify(userRepository, times(1)).findByUsername(username));
 		}
 	}
