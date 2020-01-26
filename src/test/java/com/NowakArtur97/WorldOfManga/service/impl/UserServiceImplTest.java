@@ -38,7 +38,7 @@ public class UserServiceImplTest {
 	@Mock
 	private UserRepository userRepository;
 
-	@Nested()
+	@Nested
 	@DisplayName("User Repository Integration Tests")
 	@Tag("UserRepositoryIntegration_Tests")
 	class UserRepositoryIntegrationTest {
@@ -164,7 +164,7 @@ public class UserServiceImplTest {
 		}
 	}
 
-	@Nested()
+	@Nested
 	@DisplayName("User Details Integration Tests")
 	@Tag("UserDetailsIntegration_Tests")
 	class UserDetailsIntegrationTest {
