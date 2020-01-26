@@ -92,4 +92,36 @@ public class UserServiceImplTest {
 		assertAll(() -> assertFalse(isUsernameInUseActual, () -> "should return false"),
 				() -> verify(userRepository, times(1)).existsUserByUsername(username));
 	}
+
+	@Test
+	@DisplayName("when email is already in use")
+	public void when_email_is_already_in_use_should_return_true() {
+
+		boolean isEmailInUse = true;
+
+		String email = "username@email.com";
+
+		when(userRepository.existsUserByEmail(email)).thenReturn(isEmailInUse);
+
+		boolean isEmailInUseActual = userService.isEmailAlreadyInUse(email);
+
+		assertAll(() -> assertTrue(isEmailInUseActual, () -> "should return true"),
+				() -> verify(userRepository, times(1)).existsUserByEmail(email));
+	}
+
+	@Test
+	@DisplayName("when email isn`t in use")
+	public void when_email_is_not_in_use_should_return_false() {
+
+		boolean isEmailInUse = false;
+
+		String email = "username@email.com";
+
+		when(userRepository.existsUserByEmail(email)).thenReturn(isEmailInUse);
+
+		boolean isEmailInUseActual = userService.isEmailAlreadyInUse(email);
+
+		assertAll(() -> assertFalse(isEmailInUseActual, () -> "should return false"),
+				() -> verify(userRepository, times(1)).existsUserByEmail(email));
+	}
 }
