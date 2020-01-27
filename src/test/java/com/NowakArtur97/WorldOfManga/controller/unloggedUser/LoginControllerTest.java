@@ -1,4 +1,4 @@
-package com.NowakArtur97.WorldOfManga.controller.main;
+package com.NowakArtur97.WorldOfManga.controller.unloggedUser;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -15,25 +15,25 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 @ExtendWith(MockitoExtension.class)
-@DisplayName("Main Controller Tests")
-@Tag("MainController_Tests")
-public class MainControllerTest {
+@DisplayName("Login Controller Tests")
+@Tag("LoginController_Tests")
+public class LoginControllerTest {
 
 	private MockMvc mockMvc;
 
 	@InjectMocks
-	private MainController mainController;
+	private LoginController loginController;
 
 	@BeforeEach
 	public void setUp() {
 
-		mockMvc = MockMvcBuilders.standaloneSetup(mainController).build();
+		mockMvc = MockMvcBuilders.standaloneSetup(loginController).dispatchOptions(true).build();
 	}
 
 	@Test
 	@DisplayName("when load main page")
 	public void when_load_main_page_should_show_main_page() throws Exception {
 
-		mockMvc.perform(get("/")).andExpect(status().isOk()).andExpect(view().name("views/main"));
+		mockMvc.perform(get("/user/login")).andExpect(status().isOk()).andExpect(view().name("views/user-login"));
 	}
 }
