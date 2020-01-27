@@ -1,5 +1,6 @@
 package com.NowakArtur97.WorldOfManga.controller.unloggedUser;
 
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
@@ -27,13 +28,14 @@ public class LoginControllerTest {
 	@BeforeEach
 	public void setUp() {
 
-		mockMvc = MockMvcBuilders.standaloneSetup(loginController).dispatchOptions(true).build();
+		mockMvc = MockMvcBuilders.standaloneSetup(loginController).build();
 	}
 
 	@Test
-	@DisplayName("when load main page")
-	public void when_load_main_page_should_show_main_page() throws Exception {
+	@DisplayName("when load login page")
+	public void when_load_login_page_should_show_login_page() throws Exception {
 
-		mockMvc.perform(get("/user/login")).andExpect(status().isOk()).andExpect(view().name("views/user-login"));
+		assertAll(() -> mockMvc.perform(get("/user/login")).andExpect(status().isOk())
+				.andExpect(view().name("views/user-login")));
 	}
 }

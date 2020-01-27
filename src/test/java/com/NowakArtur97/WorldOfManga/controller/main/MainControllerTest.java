@@ -1,5 +1,6 @@
 package com.NowakArtur97.WorldOfManga.controller.main;
 
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
@@ -34,6 +35,6 @@ public class MainControllerTest {
 	@DisplayName("when load main page")
 	public void when_load_main_page_should_show_main_page() throws Exception {
 
-		mockMvc.perform(get("/")).andExpect(status().isOk()).andExpect(view().name("views/main"));
+		assertAll(() -> mockMvc.perform(get("/")).andExpect(status().isOk()).andExpect(view().name("views/main")));
 	}
 }
