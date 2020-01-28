@@ -1,4 +1,4 @@
-package com.NowakArtur97.WorldOfManga.controller.main;
+package com.NowakArtur97.WorldOfManga.controller.main.seleniumTests;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -21,7 +21,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 public class MainControllerUITest {
 
 	private WebDriver webDriver;
-	private MainControllerSeleniumPOM mainPOM;
+	private MainControllerSeleniumPOM mainPage;
 
 	@BeforeAll
 	public static void setUp() {
@@ -33,7 +33,7 @@ public class MainControllerUITest {
 	public void setupDriver() {
 
 		webDriver = new ChromeDriver();
-		mainPOM = new MainControllerSeleniumPOM(webDriver);
+		mainPage = new MainControllerSeleniumPOM(webDriver);
 	}
 
 	@AfterEach
@@ -45,13 +45,13 @@ public class MainControllerUITest {
 	}
 
 	@Test
-	@DisplayName("when load main page should")
+	@DisplayName("when load main page")
 	public void when_load_main_page_should_load_all_page_content() {
 
-		mainPOM.connectTo(MainControllerSeleniumPOM.RESOURCE_PATH);
+		mainPage.loadMainView();
 
-		assertAll(() -> assertNotNull(mainPOM.getHeaderText(), () -> "should load header fragment text"),
-				() -> assertNotNull(mainPOM.getFooterText(), () -> "should load footer fragment text"),
-				() -> assertNotNull(mainPOM.getMainPageText(), () -> "should load main fragment text"));
+		assertAll(() -> assertNotNull(mainPage.getHeaderText(), () -> "should load header fragment text"),
+				() -> assertNotNull(mainPage.getFooterText(), () -> "should load footer fragment text"),
+				() -> assertNotNull(mainPage.getMainPageText(), () -> "should load main fragment text"));
 	}
 }

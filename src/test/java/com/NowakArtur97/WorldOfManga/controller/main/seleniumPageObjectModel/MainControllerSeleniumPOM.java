@@ -28,6 +28,11 @@ public class MainControllerSeleniumPOM extends SeleniumPageObjectModel {
 		super(webDriver);
 	}
 
+	public void loadMainView() {
+		
+		super.connectTo(RESOURCE_PATH);
+	}
+	
 	public String getHeaderText() {
 
 		return header.getText();
