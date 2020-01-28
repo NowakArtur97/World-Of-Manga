@@ -1,0 +1,26 @@
+package com.NowakArtur97.WorldOfManga.testUtils;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
+
+public class SeleniumPageObjectModel {
+
+	private final static String MAIN_URL_PATH = "http://localhost:8080";
+
+	private final static int TIME_TO_WAIT = 10;
+
+	private final WebDriver webDriver;
+
+	public SeleniumPageObjectModel(WebDriver webDriver) {
+
+		AjaxElementLocatorFactory factory = new AjaxElementLocatorFactory(webDriver, TIME_TO_WAIT);
+		PageFactory.initElements(factory, this);
+		this.webDriver = webDriver;
+	}
+
+	public void connectTo(final String RESOURCE_PATH) {
+
+		webDriver.navigate().to(MAIN_URL_PATH + RESOURCE_PATH);
+	}
+}
