@@ -6,28 +6,23 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import org.openqa.selenium.WebDriver;
-import org.springframework.stereotype.Component;
 
-import lombok.Setter;
 import ru.yandex.qatools.ashot.AShot;
 import ru.yandex.qatools.ashot.Screenshot;
 import ru.yandex.qatools.ashot.shooting.ShootingStrategies;
 
-@Component
 public class ScreenshotUtil {
 
 	private final static String projectPath = System.getProperty("user.dir");
 
-	@Setter
-	private String screenshotPath;
+	private final String screenshotPath = "\\src\\test\\resources\\screenshots\\";
 
-	@Setter
-	private String screenshotFormat;
+	private final String screenshotFormat = "jpg";
 
 	private final static String DOT = ".";
 
 	public void takeScreenshot(WebDriver webDriver, String screenshotName) {
-		
+
 		Screenshot screenshot = new AShot().shootingStrategy(ShootingStrategies.viewportPasting(1000))
 				.takeScreenshot(webDriver);
 
