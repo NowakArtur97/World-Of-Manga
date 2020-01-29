@@ -11,19 +11,21 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.TestPropertySource;
 
 import com.NowakArtur97.WorldOfManga.controller.main.seleniumPageObjectModel.MainControllerSeleniumPOM;
-import com.NowakArtur97.WorldOfManga.testUtils.ScreenshotUtil;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
+@TestPropertySource("classpath:test-application.properties")
 @DisplayName("Main Controller UI Tests")
 @Tag("MainControllerUI_Tests")
 public class MainControllerUITest {
 
 	private WebDriver webDriver;
 	private MainControllerSeleniumPOM mainPage;
-	private ScreenshotUtil screenshotUtil;
 
 	@BeforeAll
 	public static void setUp() {
@@ -36,7 +38,6 @@ public class MainControllerUITest {
 
 		webDriver = new ChromeDriver();
 		mainPage = new MainControllerSeleniumPOM(webDriver);
-		screenshotUtil = new ScreenshotUtil();
 	}
 
 	@AfterEach
@@ -49,11 +50,9 @@ public class MainControllerUITest {
 
 	@Test
 	@DisplayName("when load main page")
-	public void when_load_main_page_should_load_all_page_content() throws InterruptedException {
+	public void when_load_main_page_should_load_all_page_content() {
 
 		mainPage.loadMainView();
-
-		screenshotUtil.takeScreenshot(mainPage.getWebDriver(), "main_page_error");
 
 		assertAll(() -> assertNotNull(mainPage.getHeaderText(), () -> "should load header fragment text"),
 				() -> assertNotNull(mainPage.getFooterText(), () -> "should load footer fragment text"),

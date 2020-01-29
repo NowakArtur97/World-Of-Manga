@@ -8,7 +8,7 @@ import lombok.Getter;
 
 public class SeleniumPageObjectModel {
 
-	private final static String MAIN_URL_PATH = "http://localhost:8080";
+	private final static String MAIN_URL_PATH = "http://localhost:8000";
 	
 	private final static int TIME_TO_WAIT = 10;
 
