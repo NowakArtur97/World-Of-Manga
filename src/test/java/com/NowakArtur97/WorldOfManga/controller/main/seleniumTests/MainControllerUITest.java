@@ -12,14 +12,12 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.TestPropertySource;
 
 import com.NowakArtur97.WorldOfManga.controller.main.seleniumPageObjectModel.MainControllerSeleniumPOM;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
-@TestPropertySource("classpath:test-application.properties")
 @DisplayName("Main Controller UI Tests")
 @Tag("MainControllerUI_Tests")
 public class MainControllerUITest {
