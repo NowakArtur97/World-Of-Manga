@@ -6,28 +6,36 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import org.openqa.selenium.WebDriver;
+import org.springframework.stereotype.Component;
 
+import lombok.Setter;
 import ru.yandex.qatools.ashot.AShot;
 import ru.yandex.qatools.ashot.Screenshot;
 import ru.yandex.qatools.ashot.shooting.ShootingStrategies;
 
+@Component
 public class ScreenshotUtil {
 
-	private final static String SCREENSHOT_FORMAT = "jpg";
-	private final static String SCREENSHOT_PATH = System.getProperty("user.dir")
-			+ "\\src\\test\\resources\\screenshots\\";
+	private final static String projectPath = System.getProperty("user.dir");
+
+	@Setter
+	private String screenshotPath;
+
+	@Setter
+	private String screenshotFormat;
+
 	private final static String DOT = ".";
 
 	public void takeScreenshot(WebDriver webDriver, String screenshotName) {
-
+		
 		Screenshot screenshot = new AShot().shootingStrategy(ShootingStrategies.viewportPasting(1000))
 				.takeScreenshot(webDriver);
 
 		try {
-			ImageIO.write(screenshot.getImage(), SCREENSHOT_FORMAT,
-					new File(SCREENSHOT_PATH + screenshotName + DOT + SCREENSHOT_FORMAT));
+			ImageIO.write(screenshot.getImage(), screenshotFormat,
+					new File(projectPath + screenshotPath + screenshotName + DOT + screenshotFormat));
 		} catch (IOException e) {
-			System.out.println("Can`t take screenshot on path: " + SCREENSHOT_PATH);
+			System.out.println("Can`t take screenshot on path: " + projectPath + screenshotPath);
 		}
 	}
 }
