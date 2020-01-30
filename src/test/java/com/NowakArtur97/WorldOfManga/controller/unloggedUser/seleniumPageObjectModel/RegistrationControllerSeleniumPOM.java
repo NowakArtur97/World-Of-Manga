@@ -20,7 +20,8 @@ public class RegistrationControllerSeleniumPOM extends SeleniumPageObjectModel {
 	private static final String EMAIL = "email";
 	private static final String TERMS = "areTermsAccepted";
 	private static final String SUBMIT_CLASS = "form__submit";
-	private static final String FORM_MESSAGE_FAILURE = "form__message--failure";
+	private static final String FORM_MESSAGE_FAILURE_CLASS = "form__message--failure";
+	private static final String FORM_BOX_CLASS = "form__box";
 
 	@FindBy(name = USERNAME)
 	private WebElement usernameInput;
@@ -43,9 +44,12 @@ public class RegistrationControllerSeleniumPOM extends SeleniumPageObjectModel {
 	@FindBy(name = TERMS)
 	private WebElement terms;
 
-	@FindBy(className = FORM_MESSAGE_FAILURE)
+	@FindBy(className = FORM_MESSAGE_FAILURE_CLASS)
 	private List<WebElement> failrueMessages;
 
+	@FindBy(className = FORM_BOX_CLASS)
+	private WebElement formBox;
+	
 	@FindBy(className = SUBMIT_CLASS)
 	private WebElement submitButton;
 
@@ -104,6 +108,11 @@ public class RegistrationControllerSeleniumPOM extends SeleniumPageObjectModel {
 		return failrueMessages.size();
 	}
 
+	public String getFormBoxText() {
+		
+		return formBox.getText();
+	}
+	
 	public void fillMandatoryRegistrationFields(String username, String password, String matchingPassword,
 			String email) {
 
