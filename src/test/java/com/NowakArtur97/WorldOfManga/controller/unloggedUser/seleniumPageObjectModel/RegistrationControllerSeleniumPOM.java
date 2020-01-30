@@ -13,10 +13,10 @@ public class RegistrationControllerSeleniumPOM extends SeleniumPageObjectModel {
 	private static final String USERNAME = "username";
 	private static final String FIRSTNAME = "firstName";
 	private static final String LASTNAME = "lastName";
-	private static final String PASSWORD = "password";
-	private static final String MATCHING_PASSWORD = "matchingPassword";
+	private static final String PASSWORD = "userPasswordDTO.password";
+	private static final String MATCHING_PASSWORD = "userPasswordDTO.matchingPassword";
 	private static final String EMAIL = "email";
-	private static final String TERMS = "terms";
+	private static final String TERMS = "areTermsAccepted";
 	private static final String SUBMIT_CLASS = "form__submit";
 
 	@FindBy(name = USERNAME)
@@ -109,8 +109,8 @@ public class RegistrationControllerSeleniumPOM extends SeleniumPageObjectModel {
 		clickSubmitRegistrationButton();
 	}
 
-	public void fillAllRegistrationFields(String username, String firstName, String lastName, String password,
-			String matchingPassword, String email) {
+	public void fillAllRegistrationFields(String username, String password, String matchingPassword, String email,
+			String firstName, String lastName) {
 
 		setFirstName(firstName);
 
