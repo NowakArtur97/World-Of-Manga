@@ -1,5 +1,7 @@
 package com.NowakArtur97.WorldOfManga.service.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.NowakArtur97.WorldOfManga.dto.UserDTO;
@@ -18,10 +20,15 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
 
 	private final UserService userService;
 
-	public UserRegistrationServiceImpl(RoleService roleService, UserMapper userMapper, UserService userService) {
+	private final BCryptPasswordEncoder bCryptPasswordEncoder;
+
+	@Autowired
+	public UserRegistrationServiceImpl(RoleService roleService, UserMapper userMapper, UserService userService,
+			BCryptPasswordEncoder bCryptPasswordEncoder) {
 		this.roleService = roleService;
 		this.userMapper = userMapper;
 		this.userService = userService;
+		this.bCryptPasswordEncoder = bCryptPasswordEncoder;
 	}
 
 	@Override
@@ -31,6 +38,7 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
 
 		userToRegister.addRole(roleService.findByName("ROLE_USER").get());
 		userToRegister.setEnabled(true);
+		userToRegister.setPassword(bCryptPasswordEncoder.encode(userToRegister.getPassword()));
 
 		userService.save(userToRegister);
 
