@@ -1,10 +1,13 @@
 package com.NowakArtur97.WorldOfManga.testUtils;
 
+import lombok.Getter;
+
 public enum LanguageVersion {
 
-	ENG("/?lang=eng"), PL("/?lang=pl");
+	ENG("?lang=en"), PL("?lang=pl");
 
-	public final String langUrl;
+	@Getter
+	private final String langUrl;
 
 	private LanguageVersion(String langUrl) {
 		this.langUrl = langUrl;

@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import com.NowakArtur97.WorldOfManga.testUtils.LanguageVersion;
 import com.NowakArtur97.WorldOfManga.testUtils.SeleniumPageObjectModel;
 
 public class RegistrationControllerSeleniumPOM extends SeleniumPageObjectModel {
@@ -58,9 +59,9 @@ public class RegistrationControllerSeleniumPOM extends SeleniumPageObjectModel {
 		super(webDriver);
 	}
 
-	public void loadRegistrationView() {
+	public void loadRegistrationView(LanguageVersion ver) {
 
-		super.connectTo(RESOURCE_PATH);
+		super.connectTo(RESOURCE_PATH + ver.getLangUrl());
 	}
 
 	public void setUsername(String username) {

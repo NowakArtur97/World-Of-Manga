@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -17,6 +18,7 @@ import com.NowakArtur97.WorldOfManga.controller.unloggedUser.seleniumPageObjectM
 import com.NowakArtur97.WorldOfManga.controller.unloggedUser.seleniumPageObjectModel.RegistrationControllerSeleniumPOM;
 import com.NowakArtur97.WorldOfManga.service.api.UserService;
 import com.NowakArtur97.WorldOfManga.testUtils.ControllerUITest;
+import com.NowakArtur97.WorldOfManga.testUtils.LanguageVersion;
 import com.NowakArtur97.WorldOfManga.testUtils.ScreenshotWatcher;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
@@ -46,84 +48,91 @@ public class RegistrationControllerUITest extends ControllerUITest {
 		loginPage = new LoginControllerSeleniumPOM(webDriver);
 	}
 
-	@Test
-	@DisplayName("when correct registration with all fields")
-	public void when_correct_registration_with_all_fields_should_register_user() {
+	@Nested
+	@DisplayName("Registration Controller UI Eng Tests")
+	@Tag("RegistrationControllerUIEng_Tests")
+	class RegistrationControllerUIEngTest {
 
-		String username = "user name 123";
+		@Test
+		@DisplayName("when correct registration with all fields")
+		public void when_correct_registration_with_all_fields_should_register_user() {
 
-		registrationPage.loadRegistrationView();
+			String username = "user name 123";
 
-		registrationPage.fillAllRegistrationFields(username, "password", "password", "email@email.com", "firstName",
-				"lastName");
+			registrationPage.loadRegistrationView(LanguageVersion.ENG);
 
-		assertAll(() -> assertNotNull(loginPage.getSuccessMessage(), "should show success registration message"),
-				() -> assertTrue(userService.isUsernameAlreadyInUse(username), () -> "should save user in database"));
-	}
+			registrationPage.fillAllRegistrationFields(username, "password", "password", "email@email.com", "firstName",
+					"lastName");
 
-	@Test
-	@DisplayName("when username is already in use (eng ver)")
-	public void when_username_is_already_in_use_should_have_error_ENG() {
+			assertAll(() -> assertNotNull(loginPage.getSuccessMessage(), "should show success registration message"),
+					() -> assertTrue(userService.isUsernameAlreadyInUse(username),
+							() -> "should save user in database"));
+		}
 
-		registrationPage.loadRegistrationView();
+		@Test
+		@DisplayName("when username is already in use (eng ver)")
+		public void when_username_is_already_in_use_should_have_error_ENG() {
 
-		registrationPage.fillMandatoryRegistrationFields("user", "password", "password", "email@email.com");
+			registrationPage.loadRegistrationView(LanguageVersion.ENG);
 
-		assertAll(() -> assertTrue(registrationPage.countFailureMessages() == 1, () -> "should have error"),
-				() -> assertTrue(registrationPage.getFormBoxText().contains("Username already in use"),
-						() -> "should show username already in use message"));
-	}
+			registrationPage.fillMandatoryRegistrationFields("user", "password", "password", "email@email.com");
 
-	@Test
-	@DisplayName("when email is already in use (eng ver)")
-	public void when_email_is_already_in_use_should_have_error_ENG() {
+			assertAll(() -> assertTrue(registrationPage.countFailureMessages() == 1, () -> "should have error"),
+					() -> assertTrue(registrationPage.getFormBoxText().contains("Username already in use"),
+							() -> "should show username already in use message"));
+		}
 
-		registrationPage.loadRegistrationView();
+		@Test
+		@DisplayName("when email is already in use (eng ver)")
+		public void when_email_is_already_in_use_should_have_error_ENG() {
 
-		registrationPage.fillMandatoryRegistrationFields("username", "password", "password", "user@email.com");
+			registrationPage.loadRegistrationView(LanguageVersion.ENG);
 
-		assertAll(() -> assertTrue(registrationPage.countFailureMessages() == 1, () -> "should have error"),
-				() -> assertTrue(registrationPage.getFormBoxText().contains("Email already in use"),
-						() -> "should show email already in use message"));
-	}
+			registrationPage.fillMandatoryRegistrationFields("username", "password", "password", "user@email.com");
 
-	@Test
-	@DisplayName("when incorrect registration with mandatory fields (eng ver)")
-	public void when_incorrect_registration_with_mandatory_fields_should_have_errors_ENG() {
+			assertAll(() -> assertTrue(registrationPage.countFailureMessages() == 1, () -> "should have error"),
+					() -> assertTrue(registrationPage.getFormBoxText().contains("Email already in use"),
+							() -> "should show email already in use message"));
+		}
 
-		registrationPage.loadRegistrationView();
+		@Test
+		@DisplayName("when incorrect registration with mandatory fields (eng ver)")
+		public void when_incorrect_registration_with_mandatory_fields_should_have_errors_ENG() {
 
-		registrationPage.fillMandatoryRegistrationFields("", "", "password", "email,");
+			registrationPage.loadRegistrationView(LanguageVersion.ENG);
 
-		assertAll(() -> assertTrue(registrationPage.countFailureMessages() == 3, () -> "should have three errors"),
-				() -> assertTrue(registrationPage.getFormBoxText().contains("Username is a required field"),
-						() -> "should show username is a required field message"),
-				() -> assertTrue(registrationPage.getFormBoxText().contains("Password fields must match"),
-						() -> "should password fields must match message"),
-				() -> assertTrue(registrationPage.getFormBoxText().contains("Invalid email format"),
-						() -> "should show invalid email format message"));
-	}
+			registrationPage.fillMandatoryRegistrationFields("", "", "password", "email,");
 
-	@Test
-	@DisplayName("when incorrect registration with all fields (eng ver)")
-	public void when_incorrect_registration_with_all_fields_should_have_errors_ENG() {
+			assertAll(() -> assertTrue(registrationPage.countFailureMessages() == 3, () -> "should have three errors"),
+					() -> assertTrue(registrationPage.getFormBoxText().contains("Username is a required field"),
+							() -> "should show username is a required field message"),
+					() -> assertTrue(registrationPage.getFormBoxText().contains("Password fields must match"),
+							() -> "should password fields must match message"),
+					() -> assertTrue(registrationPage.getFormBoxText().contains("Invalid email format"),
+							() -> "should show invalid email format message"));
+		}
 
-		registrationPage.loadRegistrationView();
+		@Test
+		@DisplayName("when incorrect registration with all fields (eng ver)")
+		public void when_incorrect_registration_with_all_fields_should_have_errors_ENG() {
 
-		registrationPage.fillAllRegistrationFields("", "", "", "email,",
-				"asdfghjklpasdfghjklpasdfghjklpasdfghjklpasdfghjklp",
-				"asdfghjklpasdfghjklpasdfghjklpasdfghjklpasdfghjklp");
+			registrationPage.loadRegistrationView(LanguageVersion.ENG);
 
-		assertAll(() -> assertTrue(registrationPage.countFailureMessages() == 6, () -> "should have five errors"),
-				() -> assertTrue(registrationPage.getFormBoxText().contains("Username is a required field"),
-						() -> "should show username is a required field message"),
-				() -> assertTrue(registrationPage.getFormBoxText().contains("Password is a required field"),
-						() -> "should password fields must match message"),
-				() -> assertTrue(registrationPage.getFormBoxText().contains("Invalid email format"),
-						() -> "should show invalid email format message"),
-				() -> assertTrue(registrationPage.getFormBoxText().contains("Maximal length of first name is %1$s"),
-						() -> "should show exceeded maximal length of first name message"),
-				() -> assertTrue(registrationPage.getFormBoxText().contains("Maximal length of last name is %1$s"),
-						() -> "should show exceeded maximal length of last name message"));
+			registrationPage.fillAllRegistrationFields("", "", "", "email,",
+					"asdfghjklpasdfghjklpasdfghjklpasdfghjklpasdfghjklp",
+					"asdfghjklpasdfghjklpasdfghjklpasdfghjklpasdfghjklp");
+
+			assertAll(() -> assertTrue(registrationPage.countFailureMessages() == 6, () -> "should have five errors"),
+					() -> assertTrue(registrationPage.getFormBoxText().contains("Username is a required field"),
+							() -> "should show username is a required field message"),
+					() -> assertTrue(registrationPage.getFormBoxText().contains("Password is a required field"),
+							() -> "should password fields must match message"),
+					() -> assertTrue(registrationPage.getFormBoxText().contains("Invalid email format"),
+							() -> "should show invalid email format message"),
+					() -> assertTrue(registrationPage.getFormBoxText().contains("Maximal length of first name is %1$s"),
+							() -> "should show exceeded maximal length of first name message"),
+					() -> assertTrue(registrationPage.getFormBoxText().contains("Maximal length of last name is %1$s"),
+							() -> "should show exceeded maximal length of last name message"));
+		}
 	}
 }
