@@ -49,6 +49,8 @@ public class RegistrationController {
 
 		userRegistrationService.registerUser(userDTO);
 
+		theModel.addAttribute("form.login.afterRegistration");
+		
 		return "views/user-login";
 	}
 
