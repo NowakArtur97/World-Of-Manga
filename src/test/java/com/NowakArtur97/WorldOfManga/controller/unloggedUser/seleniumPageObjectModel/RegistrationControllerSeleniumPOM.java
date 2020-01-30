@@ -1,0 +1,111 @@
+package com.NowakArtur97.WorldOfManga.controller.unloggedUser.seleniumPageObjectModel;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+
+import com.NowakArtur97.WorldOfManga.testUtils.SeleniumPageObjectModel;
+
+public class RegistrationControllerSeleniumPOM extends SeleniumPageObjectModel {
+
+	public static final String RESOURCE_PATH = "/user/register";
+
+	private static final String USERNAME = "username";
+	private static final String FIRSTNAME = "firstName";
+	private static final String LASTNAME = "lastName";
+	private static final String PASSWORD = "password";
+	private static final String MATCHING_PASSWORD = "matchingPassword";
+	private static final String EMAIL = "email";
+	private static final String TERMS = "terms";
+	private static final String SUBMIT_CLASS = "form__submit";
+
+	@FindBy(name = USERNAME)
+	private WebElement usernameInput;
+
+	@FindBy(name = FIRSTNAME)
+	private WebElement firstNameInput;
+
+	@FindBy(name = LASTNAME)
+	private WebElement lastNameInput;
+
+	@FindBy(name = PASSWORD)
+	private WebElement passwordInput;
+
+	@FindBy(name = MATCHING_PASSWORD)
+	private WebElement matchingPasswordInput;
+
+	@FindBy(name = EMAIL)
+	private WebElement emailInput;
+
+	@FindBy(name = TERMS)
+	private WebElement terms;
+
+	@FindBy(className = SUBMIT_CLASS)
+	private WebElement submitButton;
+
+	public RegistrationControllerSeleniumPOM(WebDriver webDriver) {
+
+		super(webDriver);
+	}
+
+	public void loadRegistrationView() {
+
+		super.connectTo(RESOURCE_PATH);
+	}
+
+	public void setUsername(String username) {
+
+		usernameInput.sendKeys(username);
+	}
+
+	public void setFirstName(String firstName) {
+
+		firstNameInput.sendKeys(firstName);
+	}
+
+	public void setLastName(String lastName) {
+
+		lastNameInput.sendKeys(lastName);
+	}
+
+	public void setPassword(String password) {
+
+		passwordInput.sendKeys(password);
+	}
+
+	public void setMatchingPassword(String matchingPassword) {
+
+		matchingPasswordInput.sendKeys(matchingPassword);
+	}
+
+	public void setEmail(String email) {
+
+		emailInput.sendKeys(email);
+	}
+
+	public void confirmTerms() {
+
+		terms.click();
+	}
+
+	public void clickSubmitRegistrationButton() {
+
+		submitButton.click();
+	}
+
+	public void fillMandatoryRegistrationFields(String username, String password, String matchingPassword,
+			String email) {
+
+		setUsername(username);
+
+		setPassword(password);
+
+		setMatchingPassword(matchingPassword);
+
+		setEmail(email);
+
+		confirmTerms();
+
+		clickSubmitRegistrationButton();
+	}
+}
