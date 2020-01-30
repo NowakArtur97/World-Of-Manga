@@ -1,5 +1,7 @@
 package com.NowakArtur97.WorldOfManga.controller.unloggedUser.seleniumPageObjectModel;
 
+import java.util.List;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -18,6 +20,7 @@ public class RegistrationControllerSeleniumPOM extends SeleniumPageObjectModel {
 	private static final String EMAIL = "email";
 	private static final String TERMS = "areTermsAccepted";
 	private static final String SUBMIT_CLASS = "form__submit";
+	private static final String FORM_MESSAGE_FAILURE = "form__message--failure";
 
 	@FindBy(name = USERNAME)
 	private WebElement usernameInput;
@@ -39,6 +42,9 @@ public class RegistrationControllerSeleniumPOM extends SeleniumPageObjectModel {
 
 	@FindBy(name = TERMS)
 	private WebElement terms;
+
+	@FindBy(className = FORM_MESSAGE_FAILURE)
+	private List<WebElement> failrueMessages;
 
 	@FindBy(className = SUBMIT_CLASS)
 	private WebElement submitButton;
@@ -91,6 +97,11 @@ public class RegistrationControllerSeleniumPOM extends SeleniumPageObjectModel {
 	public void clickSubmitRegistrationButton() {
 
 		submitButton.click();
+	}
+
+	public int countFailureMessages() {
+
+		return failrueMessages.size();
 	}
 
 	public void fillMandatoryRegistrationFields(String username, String password, String matchingPassword,
