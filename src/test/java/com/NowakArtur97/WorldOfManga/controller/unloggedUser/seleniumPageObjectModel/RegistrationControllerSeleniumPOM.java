@@ -50,7 +50,7 @@ public class RegistrationControllerSeleniumPOM extends SeleniumPageObjectModel {
 
 	@FindBy(className = FORM_BOX_CLASS)
 	private WebElement formBox;
-	
+
 	@FindBy(className = SUBMIT_CLASS)
 	private WebElement submitButton;
 
@@ -110,12 +110,12 @@ public class RegistrationControllerSeleniumPOM extends SeleniumPageObjectModel {
 	}
 
 	public String getFormBoxText() {
-		
+
 		return formBox.getText();
 	}
-	
-	public void fillMandatoryRegistrationFields(String username, String password, String matchingPassword,
-			String email) {
+
+	public void fillMandatoryRegistrationFields(String username, String password, String matchingPassword, String email,
+			boolean areTermsConfirmed) {
 
 		setUsername(username);
 
@@ -125,18 +125,20 @@ public class RegistrationControllerSeleniumPOM extends SeleniumPageObjectModel {
 
 		setEmail(email);
 
-		confirmTerms();
+		if (areTermsConfirmed) {
+			confirmTerms();
+		}
 
 		clickSubmitRegistrationButton();
 	}
 
 	public void fillAllRegistrationFields(String username, String password, String matchingPassword, String email,
-			String firstName, String lastName) {
+			String firstName, String lastName, boolean areTermsConfirmed) {
 
 		setFirstName(firstName);
 
 		setLastName(lastName);
 
-		fillMandatoryRegistrationFields(username, password, matchingPassword, email);
+		fillMandatoryRegistrationFields(username, password, matchingPassword, email, areTermsConfirmed);
 	}
 }
