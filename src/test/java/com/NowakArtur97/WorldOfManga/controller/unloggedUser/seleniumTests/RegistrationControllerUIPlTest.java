@@ -24,10 +24,10 @@ import com.NowakArtur97.WorldOfManga.testUtils.ScreenshotWatcher;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @ExtendWith(ScreenshotWatcher.class)
-@TestPropertySource("classpath:/validation/messages_en.properties")
-@DisplayName("Registration Controller UI Eng Tests")
-@Tag("RegistrationControllerUIEng_Tests")
-public class RegistrationControllerUIEngTest extends ControllerUITest {
+@TestPropertySource("classpath:/validation/messages_pl.properties")
+@DisplayName("Registration Controller UI Pl Tests")
+@Tag("RegistrationControllerUIPl_Tests")
+public class RegistrationControllerUIPlTest extends ControllerUITest {
 
 	private RegistrationControllerSeleniumPOM registrationPage;
 
@@ -90,7 +90,7 @@ public class RegistrationControllerUIEngTest extends ControllerUITest {
 	@DisplayName("when username is already in use")
 	public void when_username_is_already_in_use_should_have_error() {
 
-		registrationPage.loadRegistrationView(LanguageVersion.ENG);
+		registrationPage.loadRegistrationView(LanguageVersion.PL);
 
 		registrationPage.fillMandatoryRegistrationFields("user", "password", "password", "email@email.com", true);
 
@@ -103,7 +103,7 @@ public class RegistrationControllerUIEngTest extends ControllerUITest {
 	@DisplayName("when email is already in use")
 	public void when_email_is_already_in_use_should_have_error() {
 
-		registrationPage.loadRegistrationView(LanguageVersion.ENG);
+		registrationPage.loadRegistrationView(LanguageVersion.PL);
 
 		registrationPage.fillMandatoryRegistrationFields("username", "password", "password", "user@email.com", true);
 
@@ -116,7 +116,7 @@ public class RegistrationControllerUIEngTest extends ControllerUITest {
 	@DisplayName("when incorrect registration with mandatory fields")
 	public void when_incorrect_registration_with_mandatory_fields_should_have_errors() {
 
-		registrationPage.loadRegistrationView(LanguageVersion.ENG);
+		registrationPage.loadRegistrationView(LanguageVersion.PL);
 
 		registrationPage.fillMandatoryRegistrationFields("", "", "password", "", true);
 
@@ -133,7 +133,7 @@ public class RegistrationControllerUIEngTest extends ControllerUITest {
 	@DisplayName("when incorrect registration fields size with mandatory fields")
 	public void when_incorrect_registration_fields_size_with_mandatory_fields_should_have_errors() {
 
-		registrationPage.loadRegistrationView(LanguageVersion.ENG);
+		registrationPage.loadRegistrationView(LanguageVersion.PL);
 
 		registrationPage.fillMandatoryRegistrationFields("asdfghjklpasdfghjklpasdfghjklpasdfghjklpasdfghjklp", "",
 				"password", "email,", false);
@@ -155,7 +155,7 @@ public class RegistrationControllerUIEngTest extends ControllerUITest {
 
 		System.out.println(usernameNotBlankMessage);
 
-		registrationPage.loadRegistrationView(LanguageVersion.ENG);
+		registrationPage.loadRegistrationView(LanguageVersion.PL);
 
 		registrationPage.fillAllRegistrationFields("", "", "", "", "asdfghjklpasdfghjklpasdfghjklpasdfghjklpasdfghjklp",
 				"asdfghjklpasdfghjklpasdfghjklpasdfghjklpasdfghjklp", true);
@@ -166,9 +166,9 @@ public class RegistrationControllerUIEngTest extends ControllerUITest {
 				() -> assertTrue(registrationPage.getFormBoxText().contains(passwordFieldsNotBlankMessage),
 						() -> "should password fields must match message"),
 				() -> assertTrue(registrationPage.getFormBoxText().contains(firstNameSizeMessage),
-						() -> "should show exceeded maximal length of first name message"),
+						() -> "should show exceeded maximal lPlth of first name message"),
 				() -> assertTrue(registrationPage.getFormBoxText().contains(lastNameSizeMessage),
-						() -> "should show exceeded maximal length of last name message"),
+						() -> "should show exceeded maximal lPlth of last name message"),
 				() -> assertTrue(registrationPage.getFormBoxText().contains(emailNotBlankMessage),
 						() -> "should show email is a required field message"));
 	}
@@ -179,10 +179,10 @@ public class RegistrationControllerUIEngTest extends ControllerUITest {
 
 		String username = "user name 123";
 
-		registrationPage.loadRegistrationView(LanguageVersion.ENG);
+		registrationPage.loadRegistrationView(LanguageVersion.PL);
 
-		registrationPage.fillAllRegistrationFields(username, "password", "password", "user123@email.com", "firstName",
-				"lastName", true);
+		registrationPage.fillAllRegistrationFields(username, "password", "password", "user123@email.com",
+				"firstName", "lastName", true);
 
 		assertAll(() -> assertNotNull(loginPage.getSuccessMessage(), "should show success registration message"),
 				() -> assertTrue(userService.isUsernameAlreadyInUse(username), () -> "should save user in database"));
