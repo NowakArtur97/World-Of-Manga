@@ -11,6 +11,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.NowakArtur97.WorldOfManga.controller.unloggedUser.seleniumPageObjectModel.LoginControllerSeleniumPOM;
 import com.NowakArtur97.WorldOfManga.controller.unloggedUser.seleniumPageObjectModel.RegistrationControllerSeleniumPOM;
 import com.NowakArtur97.WorldOfManga.testUtils.ControllerUITest;
 import com.NowakArtur97.WorldOfManga.testUtils.ScreenshotWatcher;
@@ -23,6 +24,8 @@ public class RegistrationControllerUITest extends ControllerUITest {
 
 	private RegistrationControllerSeleniumPOM registrationPage;
 
+	private LoginControllerSeleniumPOM loginPage;
+
 	@BeforeEach
 	public void setupDriver() {
 
@@ -34,6 +37,7 @@ public class RegistrationControllerUITest extends ControllerUITest {
 		webDriver = new ChromeDriver();
 
 		registrationPage = new RegistrationControllerSeleniumPOM(webDriver);
+		loginPage = new LoginControllerSeleniumPOM(webDriver);
 	}
 
 	@Test
@@ -45,5 +49,6 @@ public class RegistrationControllerUITest extends ControllerUITest {
 		registrationPage.fillAllRegistrationFields("username", "password", "password", "email@email.com", "firstName",
 				"lastName");
 
+		assertAll(() -> assertNotNull(loginPage.getSuccessMessage()));
 	}
 }

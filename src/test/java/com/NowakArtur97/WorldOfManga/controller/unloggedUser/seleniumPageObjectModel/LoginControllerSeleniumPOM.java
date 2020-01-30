@@ -10,13 +10,13 @@ public class LoginControllerSeleniumPOM extends SeleniumPageObjectModel {
 
 	public static final String RESOURCE_PATH = "/user/login";
 
-	private static final String FORM_BOX_CLASS = "form__box";
+	private static final String FORM_MESSAGE_SUCCESS_CLASS = "form__message--success";
 	private static final String USERNAME = "username";
 	private static final String PASSWORD = "password";
 	private static final String SUBMIT_CLASS = "form__submit";
 
-	@FindBy(className = FORM_BOX_CLASS)
-	private WebElement formBox;
+	@FindBy(className = FORM_MESSAGE_SUCCESS_CLASS)
+	private WebElement successMessage;
 
 	@FindBy(name = USERNAME)
 	private WebElement usernameInput;
@@ -32,9 +32,9 @@ public class LoginControllerSeleniumPOM extends SeleniumPageObjectModel {
 		super(webDriver);
 	}
 
-	public String getFromTest() {
+	public String getSuccessMessage() {
 
-		return formBox.getText();
+		return successMessage.getText();
 	}
 
 	public void setUsername(String username) {
