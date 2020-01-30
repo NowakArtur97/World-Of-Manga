@@ -153,13 +153,13 @@ public class RegistrationControllerUIEngTest extends ControllerUITest {
 	@DisplayName("when incorrect registration with all fields")
 	public void when_incorrect_registration_with_all_fields_should_have_errors() {
 
-		System.out.println(usernameNotBlankMessage);
-
 		registrationPage.loadRegistrationView(LanguageVersion.ENG);
 
 		registrationPage.fillAllRegistrationFields("", "", "", "", "asdfghjklpasdfghjklpasdfghjklpasdfghjklpasdfghjklp",
 				"asdfghjklpasdfghjklpasdfghjklpasdfghjklpasdfghjklp", true);
 
+		System.out.println(firstNameSizeMessage);
+		
 		assertAll(() -> assertTrue(registrationPage.countFailureMessages() == 6, () -> "should have six errors"),
 				() -> assertTrue(registrationPage.getFormBoxText().contains(usernameNotBlankMessage),
 						() -> "should show username is a required field message"),

@@ -18,21 +18,21 @@ import lombok.NoArgsConstructor;
 public class UserDTO {
 
 	@NotBlank(message = "{user.username.notBlank}")
-	@Size(message = "{user.username.size}", max = 40)
+	@Size(message = "{user.username.size}{max}", max = 40)
 	private String username;
 
 	@NotBlank(message = "{user.email.notBlank}")
-	@Size(message = "{user.email.size}", max = 100)
+	@Size(message = "{user.email.size}{max}", max = 100)
 	@Email(message = "{user.email.emailFormat}")
 	private String email;
 
 	@Valid
 	private UserPasswordDTO userPasswordDTO;
 
-	@Size(message = "{user.firstName.size}", max = 40)
+	@Size(message = "{user.firstName.size}{max}", max = 40)
 	private String firstName;
 
-	@Size(message = "{user.lastName.size}", max = 40)
+	@Size(message = "{user.lastName.size}{max}", max = 40)
 	private String lastName;
 
 	@AssertTrue(message = "{user.areTermsAccepted.assertTrue}")
