@@ -4,12 +4,14 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import com.NowakArtur97.WorldOfManga.testUtils.LanguageVersion;
 import com.NowakArtur97.WorldOfManga.testUtils.SeleniumPageObjectModel;
 
 public class LoginControllerSeleniumPOM extends SeleniumPageObjectModel {
 
 	public static final String RESOURCE_PATH = "/user/login";
 
+	private static final String FORM_BOX_CLASS = "form__box";
 	private static final String FORM_MESSAGE_SUCCESS_CLASS = "form__message--success";
 	private static final String USERNAME = "username";
 	private static final String PASSWORD = "password";
@@ -27,9 +29,17 @@ public class LoginControllerSeleniumPOM extends SeleniumPageObjectModel {
 	@FindBy(className = SUBMIT_CLASS)
 	private WebElement submitButton;
 
+	@FindBy(className = FORM_BOX_CLASS)
+	private WebElement formBox;
+
 	public LoginControllerSeleniumPOM(WebDriver webDriver) {
 
 		super(webDriver);
+	}
+
+	public void loadLoginView(LanguageVersion ver) {
+
+		super.connectTo(RESOURCE_PATH + ver.getLangUrl());
 	}
 
 	public String getSuccessMessage() {
@@ -50,6 +60,11 @@ public class LoginControllerSeleniumPOM extends SeleniumPageObjectModel {
 	public void clickSubmitLoginButton() {
 
 		submitButton.click();
+	}
+
+	public String getFormBoxText() {
+
+		return formBox.getText();
 	}
 
 	public void fillMandatoryLoginFields(String username, String password) {

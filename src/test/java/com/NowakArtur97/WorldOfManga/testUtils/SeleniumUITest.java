@@ -6,7 +6,7 @@ import org.openqa.selenium.WebDriver;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
-public class ControllerUITest {
+public class SeleniumUITest {
 
 	protected static WebDriver webDriver;
 

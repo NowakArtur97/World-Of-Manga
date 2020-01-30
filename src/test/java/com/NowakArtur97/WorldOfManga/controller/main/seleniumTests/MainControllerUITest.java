@@ -12,14 +12,14 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.NowakArtur97.WorldOfManga.controller.main.seleniumPageObjectModel.MainControllerSeleniumPOM;
-import com.NowakArtur97.WorldOfManga.testUtils.ControllerUITest;
+import com.NowakArtur97.WorldOfManga.testUtils.SeleniumUITest;
 import com.NowakArtur97.WorldOfManga.testUtils.ScreenshotWatcher;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @ExtendWith(ScreenshotWatcher.class)
 @DisplayName("Main Controller UI Tests")
 @Tag("MainControllerUI_Tests")
-public class MainControllerUITest extends ControllerUITest {
+public class MainControllerUITest extends SeleniumUITest {
 
 	private MainControllerSeleniumPOM mainPage;
 

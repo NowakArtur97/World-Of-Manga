@@ -18,7 +18,7 @@ import org.springframework.test.context.TestPropertySource;
 import com.NowakArtur97.WorldOfManga.controller.unloggedUser.seleniumPageObjectModel.LoginControllerSeleniumPOM;
 import com.NowakArtur97.WorldOfManga.controller.unloggedUser.seleniumPageObjectModel.RegistrationControllerSeleniumPOM;
 import com.NowakArtur97.WorldOfManga.service.api.UserService;
-import com.NowakArtur97.WorldOfManga.testUtils.ControllerUITest;
+import com.NowakArtur97.WorldOfManga.testUtils.SeleniumUITest;
 import com.NowakArtur97.WorldOfManga.testUtils.LanguageVersion;
 import com.NowakArtur97.WorldOfManga.testUtils.ScreenshotWatcher;
 
@@ -27,7 +27,7 @@ import com.NowakArtur97.WorldOfManga.testUtils.ScreenshotWatcher;
 @TestPropertySource("classpath:/validation/messages_pl.properties")
 @DisplayName("Registration Controller UI Pl Tests")
 @Tag("RegistrationControllerUIPl_Tests")
-public class RegistrationControllerUIPlTest extends ControllerUITest {
+public class RegistrationControllerUIPlTest extends SeleniumUITest {
 
 	private RegistrationControllerSeleniumPOM registrationPage;
 
