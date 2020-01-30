@@ -108,4 +108,14 @@ public class RegistrationControllerSeleniumPOM extends SeleniumPageObjectModel {
 
 		clickSubmitRegistrationButton();
 	}
+
+	public void fillAllRegistrationFields(String username, String firstName, String lastName, String password,
+			String matchingPassword, String email) {
+
+		setFirstName(firstName);
+
+		setLastName(lastName);
+
+		fillMandatoryRegistrationFields(username, password, matchingPassword, email);
+	}
 }
