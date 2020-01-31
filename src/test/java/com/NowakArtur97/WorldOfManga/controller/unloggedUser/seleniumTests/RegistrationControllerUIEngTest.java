@@ -2,7 +2,6 @@ package com.NowakArtur97.WorldOfManga.controller.unloggedUser.seleniumTests;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -15,7 +14,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestPropertySource;
 
-import com.NowakArtur97.WorldOfManga.controller.unloggedUser.seleniumPageObjectModel.LoginControllerSeleniumPOM;
 import com.NowakArtur97.WorldOfManga.controller.unloggedUser.seleniumPageObjectModel.RegistrationControllerSeleniumPOM;
 import com.NowakArtur97.WorldOfManga.service.api.UserService;
 import com.NowakArtur97.WorldOfManga.testUtils.SeleniumUITest;
@@ -24,14 +22,12 @@ import com.NowakArtur97.WorldOfManga.testUtils.ScreenshotWatcher;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @ExtendWith(ScreenshotWatcher.class)
-@TestPropertySource("classpath:/validation/messages_en.properties")
+@TestPropertySource({ "classpath:/validation/messages_en.properties", "classpath:/pageContent/messages_en.properties" })
 @DisplayName("Registration Controller UI Eng Tests")
 @Tag("RegistrationControllerUIEng_Tests")
 public class RegistrationControllerUIEngTest extends SeleniumUITest {
 
 	private RegistrationControllerSeleniumPOM registrationPage;
-
-	private LoginControllerSeleniumPOM loginPage;
 
 	@Value("${user.username.notBlank}")
 	private String usernameNotBlankMessage;
@@ -69,6 +65,9 @@ public class RegistrationControllerUIEngTest extends SeleniumUITest {
 	@Value("${userPassword.password.notBlank}")
 	private String passwordFieldsNotBlankMessage;
 
+	@Value("${form.login.afterRegistration}")
+	private String afterRegistrationMessage;
+
 	@Autowired
 	private UserService userService;
 
@@ -83,7 +82,6 @@ public class RegistrationControllerUIEngTest extends SeleniumUITest {
 		webDriver = new ChromeDriver();
 
 		registrationPage = new RegistrationControllerSeleniumPOM(webDriver);
-		loginPage = new LoginControllerSeleniumPOM(webDriver);
 	}
 
 	@Test
@@ -159,7 +157,7 @@ public class RegistrationControllerUIEngTest extends SeleniumUITest {
 				"asdfghjklpasdfghjklpasdfghjklpasdfghjklpasdfghjklp", true);
 
 		System.out.println(firstNameSizeMessage);
-		
+
 		assertAll(() -> assertTrue(registrationPage.countFailureMessages() == 6, () -> "should have six errors"),
 				() -> assertTrue(registrationPage.getFormBoxText().contains(usernameNotBlankMessage),
 						() -> "should show username is a required field message"),
@@ -184,7 +182,8 @@ public class RegistrationControllerUIEngTest extends SeleniumUITest {
 		registrationPage.fillAllRegistrationFields(username, "password", "password", "user123@email.com", "firstName",
 				"lastName", true);
 
-		assertAll(() -> assertNotNull(loginPage.getSuccessMessage(), "should show success registration message"),
-				() -> assertTrue(userService.isUsernameAlreadyInUse(username), () -> "should save user in database"));
+		assertAll(() -> assertTrue(userService.isUsernameAlreadyInUse(username), () -> "should save user in database"),
+				() -> assertTrue(registrationPage.getFormBoxText().contains(afterRegistrationMessage),
+						() -> "should show success registration message"));
 	}
 }

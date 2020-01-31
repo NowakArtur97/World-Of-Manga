@@ -1,7 +1,7 @@
 <header th:fragment="header" class="header">
         <nav class="header__nav">
-                <label for="logo" class="header__logo"><a class="header__link" href="#" th:href="@{/}">World Of
-                                Manga</a></label>
+                <label for="logo" class="header__logo"><a class="header__link" href="#" th:href="@{/}"
+                                th:text="#{header.logo}"></a></label>
                 <ul class="header__list">
                         <li sec:authorize="!isAuthenticated()" class="header__item"><a
                                         class="header__link header__link--item" href="#" th:href="@{/user/register}"

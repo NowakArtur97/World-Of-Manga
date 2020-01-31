@@ -16,7 +16,7 @@ public class ScreenshotWatcher implements TestWatcher {
 
 		if (testInstance.isPresent()) {
 
-			var webDriver = ControllerUITest.webDriver;
+			var webDriver = SeleniumUITest.webDriver;
 
 			screenshotUtil.takeScreenshot(webDriver, context.getDisplayName());
 		}
