@@ -1,6 +1,7 @@
 package com.NowakArtur97.WorldOfManga.controller.main.seleniumTests;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -9,19 +10,35 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.TestPropertySource;
 
 import com.NowakArtur97.WorldOfManga.controller.main.seleniumPageObjectModel.MainControllerSeleniumPOM;
 import com.NowakArtur97.WorldOfManga.testUtils.SeleniumUITest;
+import com.NowakArtur97.WorldOfManga.testUtils.LanguageVersion;
 import com.NowakArtur97.WorldOfManga.testUtils.ScreenshotWatcher;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @ExtendWith(ScreenshotWatcher.class)
-@DisplayName("Main Controller UI Tests")
-@Tag("MainControllerUI_Tests")
-public class MainControllerUITest extends SeleniumUITest {
+@TestPropertySource("classpath:/pageContent/messages_en.properties")
+@DisplayName("Main Controller UI Eng Tests")
+@Tag("MainControllerUIEng_Tests")
+public class MainControllerUIEngTest extends SeleniumUITest {
 
 	private MainControllerSeleniumPOM mainPage;
+
+	@Value("${header.logo}")
+	private String headerLogo;
+
+	@Value("${header.signUp}")
+	private String headerRegistrationOption;
+
+	@Value("${header.signIn}")
+	private String headerLoginOption;
+
+	@Value("${header.language}")
+	private String headerLanguageOption;
 
 	@BeforeEach
 	public void setupDriver() {
@@ -40,9 +57,15 @@ public class MainControllerUITest extends SeleniumUITest {
 	@DisplayName("when load main page")
 	public void when_load_main_page_should_load_all_page_content() {
 
-		mainPage.loadMainView();
+		mainPage.loadMainView(LanguageVersion.ENG);
 
-		assertAll(() -> assertNotNull(mainPage.getHeaderText(), () -> "should load header fragment text"),
+		assertAll(() -> assertTrue(mainPage.getHeaderText().contains(headerLogo), () -> "should load header logo"),
+				() -> assertTrue(mainPage.getHeaderText().contains(headerRegistrationOption.toUpperCase()),
+						() -> "should load header sing up option"),
+				() -> assertTrue(mainPage.getHeaderText().contains(headerLoginOption.toUpperCase()),
+						() -> "should load header sign in option"),
+				() -> assertTrue(mainPage.getHeaderText().contains(headerLanguageOption.toUpperCase()),
+						() -> "should load header language option"),
 				() -> assertNotNull(mainPage.getFooterText(), () -> "should load footer fragment text"),
 				() -> assertNotNull(mainPage.getMainPageText(), () -> "should load main fragment text"));
 	}

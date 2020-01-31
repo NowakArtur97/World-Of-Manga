@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import com.NowakArtur97.WorldOfManga.testUtils.LanguageVersion;
 import com.NowakArtur97.WorldOfManga.testUtils.SeleniumPageObjectModel;
 
 public class MainControllerSeleniumPOM extends SeleniumPageObjectModel {
@@ -28,11 +29,11 @@ public class MainControllerSeleniumPOM extends SeleniumPageObjectModel {
 		super(webDriver);
 	}
 
-	public void loadMainView() {
-		
-		super.connectTo(RESOURCE_PATH);
+	public void loadMainView(LanguageVersion ver) {
+
+		super.connectTo(RESOURCE_PATH + ver.getLangUrl());
 	}
-	
+
 	public String getHeaderText() {
 
 		return header.getText();
