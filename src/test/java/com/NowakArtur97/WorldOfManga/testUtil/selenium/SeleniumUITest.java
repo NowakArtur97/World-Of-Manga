@@ -5,9 +5,11 @@ import org.junit.jupiter.api.BeforeAll;
 import org.openqa.selenium.WebDriver;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import lombok.Getter;
 
 public class SeleniumUITest {
 
+	@Getter
 	protected static WebDriver webDriver;
 
 	@BeforeAll
