@@ -1,4 +1,4 @@
-package com.NowakArtur97.WorldOfManga.testUtil;
+package com.NowakArtur97.WorldOfManga.testUtil.enums;
 
 import lombok.Getter;
 

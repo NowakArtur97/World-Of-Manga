@@ -1,4 +1,4 @@
-package com.NowakArtur97.WorldOfManga.testUtil;
+package com.NowakArtur97.WorldOfManga.testUtil.selenium;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;

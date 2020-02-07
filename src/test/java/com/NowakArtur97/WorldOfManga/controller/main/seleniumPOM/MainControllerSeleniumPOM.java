@@ -4,8 +4,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import com.NowakArtur97.WorldOfManga.testUtil.LanguageVersion;
 import com.NowakArtur97.WorldOfManga.testUtil.SeleniumPageObjectModel;
+import com.NowakArtur97.WorldOfManga.testUtil.enums.LanguageVersion;
 
 public class MainControllerSeleniumPOM extends SeleniumPageObjectModel {
 

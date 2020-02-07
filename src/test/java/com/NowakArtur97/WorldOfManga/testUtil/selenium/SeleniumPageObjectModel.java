@@ -1,4 +1,4 @@
-package com.NowakArtur97.WorldOfManga.testUtil;
+package com.NowakArtur97.WorldOfManga.testUtil.selenium;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;

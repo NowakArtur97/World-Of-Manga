@@ -1,4 +1,4 @@
-package com.NowakArtur97.WorldOfManga.testUtil;
+package com.NowakArtur97.WorldOfManga.testUtil.selenium;
 
 import java.io.File;
 import java.io.IOException;

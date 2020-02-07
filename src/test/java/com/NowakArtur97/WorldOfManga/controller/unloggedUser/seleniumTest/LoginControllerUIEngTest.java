@@ -1,8 +1,8 @@
 package com.NowakArtur97.WorldOfManga.controller.unloggedUser.seleniumTest;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -18,9 +18,9 @@ import org.springframework.test.context.TestPropertySource;
 import com.NowakArtur97.WorldOfManga.controller.main.seleniumPOM.MainControllerSeleniumPOM;
 import com.NowakArtur97.WorldOfManga.controller.unloggedUser.seleniumPOM.LoginControllerSeleniumPOM;
 import com.NowakArtur97.WorldOfManga.service.api.UserService;
-import com.NowakArtur97.WorldOfManga.testUtil.LanguageVersion;
-import com.NowakArtur97.WorldOfManga.testUtil.ScreenshotWatcher;
-import com.NowakArtur97.WorldOfManga.testUtil.SeleniumUITest;
+import com.NowakArtur97.WorldOfManga.testUtil.enums.LanguageVersion;
+import com.NowakArtur97.WorldOfManga.testUtil.extension.ScreenshotWatcher;
+import com.NowakArtur97.WorldOfManga.testUtil.selenium.SeleniumUITest;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @ExtendWith(ScreenshotWatcher.class)
