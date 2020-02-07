@@ -1,4 +1,4 @@
-package com.NowakArtur97.WorldOfManga.testUtils;
+package com.NowakArtur97.WorldOfManga.testUtil;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;

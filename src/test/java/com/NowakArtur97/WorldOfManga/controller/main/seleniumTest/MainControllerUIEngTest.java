@@ -1,8 +1,8 @@
-package com.NowakArtur97.WorldOfManga.controller.main.seleniumTests;
+package com.NowakArtur97.WorldOfManga.controller.main.seleniumTest;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -14,17 +14,17 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestPropertySource;
 
-import com.NowakArtur97.WorldOfManga.controller.main.seleniumPageObjectModel.MainControllerSeleniumPOM;
-import com.NowakArtur97.WorldOfManga.testUtils.LanguageVersion;
-import com.NowakArtur97.WorldOfManga.testUtils.ScreenshotWatcher;
-import com.NowakArtur97.WorldOfManga.testUtils.SeleniumUITest;
+import com.NowakArtur97.WorldOfManga.controller.main.seleniumPOM.MainControllerSeleniumPOM;
+import com.NowakArtur97.WorldOfManga.testUtil.LanguageVersion;
+import com.NowakArtur97.WorldOfManga.testUtil.ScreenshotWatcher;
+import com.NowakArtur97.WorldOfManga.testUtil.SeleniumUITest;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @ExtendWith(ScreenshotWatcher.class)
-@TestPropertySource("classpath:/pageContent/messages_pl.properties")
-@DisplayName("Main Controller UI Pl Tests")
-@Tag("MainControllerUIPl_Tests")
-public class MainControllerUIPlTest extends SeleniumUITest {
+@TestPropertySource("classpath:/pageContent/messages_en.properties")
+@DisplayName("Main Controller UI Eng Tests")
+@Tag("MainControllerUIEng_Tests")
+public class MainControllerUIEngTest extends SeleniumUITest {
 
 	private MainControllerSeleniumPOM mainPage;
 
@@ -57,7 +57,7 @@ public class MainControllerUIPlTest extends SeleniumUITest {
 	@DisplayName("when load main page")
 	public void when_load_main_page_should_load_all_page_content() {
 
-		mainPage.loadMainView(LanguageVersion.PL);
+		mainPage.loadMainView(LanguageVersion.ENG);
 
 		assertAll(() -> assertTrue(mainPage.getHeaderText().contains(headerLogo), () -> "should load header logo"),
 				() -> assertTrue(mainPage.getHeaderText().contains(headerRegistrationOption.toUpperCase()),
