@@ -156,8 +156,6 @@ public class RegistrationControllerUIEngTest extends SeleniumUITest {
 		registrationPage.fillAllRegistrationFields("", "", "", "", "asdfghjklpasdfghjklpasdfghjklpasdfghjklpasdfghjklp",
 				"asdfghjklpasdfghjklpasdfghjklpasdfghjklpasdfghjklp", true);
 
-		System.out.println(firstNameSizeMessage);
-
 		assertAll(() -> assertTrue(registrationPage.countFailureMessages() == 6, () -> "should have six errors"),
 				() -> assertTrue(registrationPage.getFormBoxText().contains(usernameNotBlankMessage),
 						() -> "should show username is a required field message"),

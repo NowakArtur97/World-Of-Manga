@@ -33,7 +33,7 @@ public class MainControllerTest {
 
 	@Test
 	@DisplayName("when load main page")
-	public void when_load_main_page_should_show_main_page() throws Exception {
+	public void when_load_main_page_should_show_main_page() {
 
 		assertAll(() -> mockMvc.perform(get("/")).andExpect(status().isOk()).andExpect(view().name("views/main")));
 	}

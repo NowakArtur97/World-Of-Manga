@@ -2,7 +2,6 @@ package com.NowakArtur97.WorldOfManga.controller.user;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -15,21 +14,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class LogoutController {
 
 	@GetMapping(path = "/logout")
-	public String logoutUser(HttpServletRequest request, HttpServletResponse response) {
-		
+	public String logoutUser(HttpServletRequest request) {
+
 		HttpSession session = request.getSession(false);
 		SecurityContextHolder.clearContext();
-		
+
 		session = request.getSession(false);
-		
+
 		if (session != null) {
-			session.invalidate();;
+			session.invalidate();
 		}
-		
-		for(Cookie cookie : request.getCookies()) {
+
+		for (Cookie cookie : request.getCookies()) {
 			cookie.setMaxAge(0);
 		}
-		
-		return "redirect:/";
+
+		return "views/main";
 	}
 }

@@ -54,7 +54,7 @@ public class RegistrationControllerTest {
 
 	@Test
 	@DisplayName("when load registration page")
-	public void when_load_registration_page_should_show_registration_page() throws Exception {
+	public void when_load_registration_page_should_show_registration_page() {
 
 		assertAll(() -> mockMvc.perform(get("/user/register")).andExpect(status().isOk())
 				.andExpect(view().name("views/user-registration"))
@@ -63,7 +63,7 @@ public class RegistrationControllerTest {
 
 	@Test
 	@DisplayName("when process registration with correct data")
-	public void when_process_registration_with_correct_data_should_show_registration_page() throws Exception {
+	public void when_process_registration_with_correct_data_should_show_registration_page() {
 
 		UserDTO userDTO = UserDTO.builder().username("username").firstName("first name").lastName("last name")
 				.userPasswordDTO(UserPasswordDTO.builder().password("password1").matchingPassword("password1").build())
@@ -80,7 +80,7 @@ public class RegistrationControllerTest {
 
 	@Test
 	@DisplayName("when process registration with incorrect data")
-	public void when_process_registration_with_incorrect_data_should_show_registration_page() throws Exception {
+	public void when_process_registration_with_incorrect_data_should_show_registration_page() {
 
 		UserPasswordDTO userPasswordDTO = UserPasswordDTO.builder().password("pass").matchingPassword("password1")
 				.build();

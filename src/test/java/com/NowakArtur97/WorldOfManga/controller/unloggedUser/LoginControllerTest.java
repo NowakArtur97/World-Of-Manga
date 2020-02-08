@@ -33,7 +33,7 @@ public class LoginControllerTest {
 
 	@Test
 	@DisplayName("when load login page")
-	public void when_load_login_page_should_show_login_page() throws Exception {
+	public void when_load_login_page_should_show_login_page() {
 
 		assertAll(() -> mockMvc.perform(get("/user/login")).andExpect(status().isOk())
 				.andExpect(view().name("views/user-login")));
