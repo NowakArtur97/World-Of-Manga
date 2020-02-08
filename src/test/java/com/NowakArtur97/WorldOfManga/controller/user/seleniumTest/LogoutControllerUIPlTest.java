@@ -16,10 +16,10 @@ import com.NowakArtur97.WorldOfManga.testUtil.extension.ScreenshotWatcher;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @ExtendWith(ScreenshotWatcher.class)
-@TestPropertySource("classpath:/pageContent/messages_en.properties")
-@DisplayName("Logout Controller UI Eng Tests")
-@Tag("LogoutControllerUIEng_Tests")
-public class LogoutControllerUIEngTest extends LogoutControllerUITest {
+@TestPropertySource("classpath:/pageContent/messages_pl.properties")
+@DisplayName("Logout Controller UI Pl Tests")
+@Tag("LogoutControllerUIPl_Tests")
+public class LogoutControllerUIPlTest extends LogoutControllerUITest {
 
 	@Test
 	@DisplayName("when correct logout")
@@ -28,7 +28,7 @@ public class LogoutControllerUIEngTest extends LogoutControllerUITest {
 		String username = "user";
 		String password = "user";
 
-		loginPage.loadLoginView(LanguageVersion.ENG);
+		loginPage.loadLoginView(LanguageVersion.PL);
 
 		loginPage.fillMandatoryLoginFields(username, password);
 

@@ -2,7 +2,7 @@ package com.NowakArtur97.WorldOfManga.controller.user;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertAll;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import javax.servlet.http.Cookie;
@@ -52,7 +52,8 @@ public class LogoutControllerTest {
 		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.get("/auth/logout").session(mockSession)
 				.cookie(cookies).flashAttr("user", user);
 
-		assertAll(() -> mockMvc.perform(mockRequest).andExpect(status().isOk()).andExpect(forwardedUrl("views/main")),
+		assertAll(
+				() -> mockMvc.perform(mockRequest).andExpect(redirectedUrl("/")).andExpect(status().is3xxRedirection()),
 				() -> assertTrue(mockSession.isInvalid(), () -> "session should has already been invalidated"));
 	}
 }

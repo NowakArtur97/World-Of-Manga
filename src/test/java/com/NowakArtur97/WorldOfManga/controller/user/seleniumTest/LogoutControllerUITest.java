@@ -1,36 +1,34 @@
-package com.NowakArtur97.WorldOfManga.controller.unloggedUser.seleniumTest;
+package com.NowakArtur97.WorldOfManga.controller.user.seleniumTest;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
 import com.NowakArtur97.WorldOfManga.controller.main.seleniumPOM.MainControllerSeleniumPOM;
 import com.NowakArtur97.WorldOfManga.controller.unloggedUser.seleniumPOM.LoginControllerSeleniumPOM;
-import com.NowakArtur97.WorldOfManga.service.api.UserService;
+import com.NowakArtur97.WorldOfManga.controller.user.seleniumPOM.LogoutControllerSeleniumPOM;
 import com.NowakArtur97.WorldOfManga.testUtil.selenium.SeleniumUITest;
 
-public class LoginControllerUITest extends SeleniumUITest {
-
-	@Value("${form.login.badCredentials}")
-	protected String badCredentialsMessage;
-
-	@Value("${form.login.accountDisabled}")
-	protected String accountDisabledMessage;
+public class LogoutControllerUITest extends SeleniumUITest {
 
 	@Value("${header.myMangaWorld}")
 	protected String userLoggedInMangaListOption;
 
 	@Value("${header.signOut}")
 	protected String userLoggedInSignOutOption;
-	
+
+	@Value("${header.signUp}")
+	protected String headerRegistrationOption;
+
+	@Value("${header.signIn}")
+	protected String headerLoginOption;
+
+	protected LogoutControllerSeleniumPOM logoutPage;
+
 	protected LoginControllerSeleniumPOM loginPage;
 
 	protected MainControllerSeleniumPOM mainPage;
 
-	@Autowired
-	protected UserService userService;
-	
 	@BeforeEach
 	public void setupDriver() {
 
@@ -41,6 +39,7 @@ public class LoginControllerUITest extends SeleniumUITest {
 
 		webDriver = new ChromeDriver();
 
+		logoutPage = new LogoutControllerSeleniumPOM(webDriver);
 		loginPage = new LoginControllerSeleniumPOM(webDriver);
 		mainPage = new MainControllerSeleniumPOM(webDriver);
 	}

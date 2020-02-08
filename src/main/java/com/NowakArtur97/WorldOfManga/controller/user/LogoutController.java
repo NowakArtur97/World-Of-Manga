@@ -29,6 +29,6 @@ public class LogoutController {
 			cookie.setMaxAge(0);
 		}
 
-		return "views/main";
+		return "redirect:/";
 	}
 }

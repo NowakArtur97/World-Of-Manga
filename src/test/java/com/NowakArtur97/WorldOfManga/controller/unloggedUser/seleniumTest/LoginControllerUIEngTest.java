@@ -4,19 +4,13 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestPropertySource;
 
-import com.NowakArtur97.WorldOfManga.controller.main.seleniumPOM.MainControllerSeleniumPOM;
-import com.NowakArtur97.WorldOfManga.controller.unloggedUser.seleniumPOM.LoginControllerSeleniumPOM;
-import com.NowakArtur97.WorldOfManga.service.api.UserService;
 import com.NowakArtur97.WorldOfManga.testUtil.enums.LanguageVersion;
 import com.NowakArtur97.WorldOfManga.testUtil.extension.ScreenshotWatcher;
 
@@ -26,27 +20,6 @@ import com.NowakArtur97.WorldOfManga.testUtil.extension.ScreenshotWatcher;
 @DisplayName("Registration Controller UI Eng Tests")
 @Tag("RegistrationControllerUIEng_Tests")
 public class LoginControllerUIEngTest extends LoginControllerUITest {
-
-	private LoginControllerSeleniumPOM loginPage;
-
-	private MainControllerSeleniumPOM mainPage;
-
-	@Autowired
-	private UserService userService;
-
-	@BeforeEach
-	public void setupDriver() {
-
-		if (webDriver != null) {
-
-			webDriver.quit();
-		}
-
-		webDriver = new ChromeDriver();
-
-		loginPage = new LoginControllerSeleniumPOM(webDriver);
-		mainPage = new MainControllerSeleniumPOM(webDriver);
-	}
 
 	@Test
 	@DisplayName("when login with bad credentials")
