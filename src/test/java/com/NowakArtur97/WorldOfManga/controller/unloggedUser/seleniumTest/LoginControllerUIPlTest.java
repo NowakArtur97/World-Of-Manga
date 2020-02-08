@@ -11,7 +11,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestPropertySource;
 
@@ -20,34 +19,21 @@ import com.NowakArtur97.WorldOfManga.controller.unloggedUser.seleniumPOM.LoginCo
 import com.NowakArtur97.WorldOfManga.service.api.UserService;
 import com.NowakArtur97.WorldOfManga.testUtil.enums.LanguageVersion;
 import com.NowakArtur97.WorldOfManga.testUtil.extension.ScreenshotWatcher;
-import com.NowakArtur97.WorldOfManga.testUtil.selenium.SeleniumUITest;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @ExtendWith(ScreenshotWatcher.class)
 @TestPropertySource("classpath:/pageContent/messages_pl.properties")
 @DisplayName("Registration Controller UI Pl Tests")
 @Tag("RegistrationControllerUIPl_Tests")
-public class LoginControllerUIPlTest extends SeleniumUITest {
+public class LoginControllerUIPlTest extends LoginControllerUITest {
 
 	private LoginControllerSeleniumPOM loginPage;
 
 	private MainControllerSeleniumPOM mainPage;
 
-	@Value("${form.login.badCredentials}")
-	private String badCredentialsMessage;
-
-	@Value("${form.login.accountDisabled}")
-	private String accountDisabledMessage;
-
-	@Value("${header.myMangaWorld}")
-	private String userLoggedInMangaListOption;
-
-	@Value("${header.signOut}")
-	private String userLoggedInSignOutOption;
-
 	@Autowired
 	private UserService userService;
-
+	
 	@BeforeEach
 	public void setupDriver() {
 
