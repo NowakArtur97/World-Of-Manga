@@ -10,7 +10,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestPropertySource;
 
@@ -18,55 +17,15 @@ import com.NowakArtur97.WorldOfManga.controller.unloggedUser.seleniumPOM.Registr
 import com.NowakArtur97.WorldOfManga.service.api.UserService;
 import com.NowakArtur97.WorldOfManga.testUtil.enums.LanguageVersion;
 import com.NowakArtur97.WorldOfManga.testUtil.extension.ScreenshotWatcher;
-import com.NowakArtur97.WorldOfManga.testUtil.selenium.SeleniumUITest;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @ExtendWith(ScreenshotWatcher.class)
 @TestPropertySource({ "classpath:/validation/messages_en.properties", "classpath:/pageContent/messages_en.properties" })
 @DisplayName("Registration Controller UI Eng Tests")
 @Tag("RegistrationControllerUIEng_Tests")
-public class RegistrationControllerUIEngTest extends SeleniumUITest {
+public class RegistrationControllerUIEngTest extends RegistrationControllerUITest {
 
 	private RegistrationControllerSeleniumPOM registrationPage;
-
-	@Value("${user.username.notBlank}")
-	private String usernameNotBlankMessage;
-
-	@Value("${user.username.size}")
-	private String usernameSizeMessage;
-
-	@Value("${user.username.inUse}")
-	private String usernameInUseMessage;
-
-	@Value("${user.email.notBlank}")
-	private String emailNotBlankMessage;
-
-	@Value("${user.email.inUse}")
-	private String emailInUseMessage;
-
-	@Value("${user.email.size}")
-	private String emailSizeMessage;
-
-	@Value("${user.email.emailFormat}")
-	private String emailFormatMessage;
-
-	@Value("${user.firstName.size}")
-	private String firstNameSizeMessage;
-
-	@Value("${user.lastName.size}")
-	private String lastNameSizeMessage;
-
-	@Value("${user.areTermsAccepted.assertTrue}")
-	private String usernameTermsMessage;
-
-	@Value("${userPassword.password.matchingFields}")
-	private String passwordMatchingFieldsMessage;
-
-	@Value("${userPassword.password.notBlank}")
-	private String passwordFieldsNotBlankMessage;
-
-	@Value("${form.login.afterRegistration}")
-	private String afterRegistrationMessage;
 
 	@Autowired
 	private UserService userService;

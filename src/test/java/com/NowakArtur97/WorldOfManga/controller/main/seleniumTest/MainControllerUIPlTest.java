@@ -10,35 +10,21 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestPropertySource;
 
 import com.NowakArtur97.WorldOfManga.controller.main.seleniumPOM.MainControllerSeleniumPOM;
 import com.NowakArtur97.WorldOfManga.testUtil.enums.LanguageVersion;
 import com.NowakArtur97.WorldOfManga.testUtil.extension.ScreenshotWatcher;
-import com.NowakArtur97.WorldOfManga.testUtil.selenium.SeleniumUITest;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @ExtendWith(ScreenshotWatcher.class)
 @TestPropertySource("classpath:/pageContent/messages_pl.properties")
 @DisplayName("Main Controller UI Pl Tests")
 @Tag("MainControllerUIPl_Tests")
-public class MainControllerUIPlTest extends SeleniumUITest {
+public class MainControllerUIPlTest extends MainControllerUITest {
 
 	private MainControllerSeleniumPOM mainPage;
-
-	@Value("${header.logo}")
-	private String headerLogo;
-
-	@Value("${header.signUp}")
-	private String headerRegistrationOption;
-
-	@Value("${header.signIn}")
-	private String headerLoginOption;
-
-	@Value("${header.language}")
-	private String headerLanguageOption;
 
 	@BeforeEach
 	public void setupDriver() {
