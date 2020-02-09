@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "role")
+@Table(name = "role", schema = "world_of_manga")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
