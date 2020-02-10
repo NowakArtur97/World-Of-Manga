@@ -11,21 +11,23 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.TestPropertySource;
 
 import com.NowakArtur97.WorldOfManga.controller.main.seleniumPOM.MainControllerSeleniumPOM;
 import com.NowakArtur97.WorldOfManga.testUtil.enums.LanguageVersion;
 import com.NowakArtur97.WorldOfManga.testUtil.extension.ScreenshotWatcher;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @ExtendWith(ScreenshotWatcher.class)
 @TestPropertySource("classpath:/pageContent/messages_pl.properties")
 @DisplayName("Main Controller UI Pl Tests")
 @Tag("MainControllerUIPl_Tests")
+@DirtiesContext
 public class MainControllerUIPlTest extends MainControllerUITest {
 
 	private MainControllerSeleniumPOM mainPage;
-	
+
 	@BeforeEach
 	public void setupDriver() {
 
@@ -36,7 +38,7 @@ public class MainControllerUIPlTest extends MainControllerUITest {
 
 		webDriver = new ChromeDriver();
 
-		mainPage = new MainControllerSeleniumPOM(webDriver, serverPort);
+		mainPage = new MainControllerSeleniumPOM(webDriver);
 	}
 
 	@Test

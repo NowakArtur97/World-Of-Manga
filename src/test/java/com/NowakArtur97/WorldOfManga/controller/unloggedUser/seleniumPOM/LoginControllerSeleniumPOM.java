@@ -28,9 +28,9 @@ public class LoginControllerSeleniumPOM extends SeleniumPageObjectModel {
 	@FindBy(className = FORM_BOX_CLASS)
 	private WebElement formBox;
 
-	public LoginControllerSeleniumPOM(WebDriver webDriver, int serverPort) {
+	public LoginControllerSeleniumPOM(WebDriver webDriver) {
 
-		super(webDriver, serverPort);
+		super(webDriver);
 	}
 
 	public void loadLoginView(LanguageVersion ver) {

@@ -4,7 +4,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.web.server.LocalServerPort;
 
 import com.NowakArtur97.WorldOfManga.controller.main.seleniumPOM.MainControllerSeleniumPOM;
 import com.NowakArtur97.WorldOfManga.controller.unloggedUser.seleniumPOM.LoginControllerSeleniumPOM;
@@ -29,9 +28,6 @@ public class LoginControllerUITest extends SeleniumUITest {
 
 	protected MainControllerSeleniumPOM mainPage;
 
-	@LocalServerPort
-	private int serverPort;
-	
 	@Autowired
 	protected UserService userService;
 	
@@ -45,7 +41,7 @@ public class LoginControllerUITest extends SeleniumUITest {
 
 		webDriver = new ChromeDriver();
 
-		loginPage = new LoginControllerSeleniumPOM(webDriver, serverPort);
-		mainPage = new MainControllerSeleniumPOM(webDriver, serverPort);
+		loginPage = new LoginControllerSeleniumPOM(webDriver);
+		mainPage = new MainControllerSeleniumPOM(webDriver);
 	}
 }

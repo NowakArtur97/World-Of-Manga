@@ -1,7 +1,7 @@
 package com.NowakArtur97.WorldOfManga.testUtil.selenium;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
@@ -12,14 +12,14 @@ public class SeleniumUITest {
 	@Getter
 	protected static WebDriver webDriver;
 
-	@BeforeAll
-	public static void setUp() {
+	@BeforeEach
+	public void setUp() {
 
 		WebDriverManager.chromedriver().setup();
 	}
 
-	@AfterAll
-	public static void tearDown() {
+	@AfterEach
+	public void tearDown() {
 
 		if (webDriver != null) {
 

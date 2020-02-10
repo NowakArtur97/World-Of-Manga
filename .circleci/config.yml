@@ -22,6 +22,8 @@ jobs:
         environment:
           POSTGRES_DB: world_of_manga
          
+      - image: selenium/standalone-chrome:3.11.0
+         
     working_directory: ~/world_of_manga
 
     environment:
@@ -30,15 +32,7 @@ jobs:
 
     steps:
       - checkout
-
-      - run: mkdir test-reports
-      - run:
-          name: Download Selenium
-          command: curl -O http://selenium-release.storage.googleapis.com/3.5/selenium-server-standalone-3.5.3.jar
-      - run:
-          name: Start Selenium
-          command: java -jar selenium-server-standalone-3.5.3.jar -log test-reports/selenium.log
-          background: true
+      - setup_remote_docker
 
       - restore_cache:
           keys:
@@ -48,10 +42,24 @@ jobs:
 
       - run: mvn dependency:go-offline
 
+      
+
       - save_cache:
           paths:
             - ~/.m2
           key: v1-dependencies-{{ checksum "pom.xml" }}
 
+      - run:
+          name: create docker network
+          command: docker network create grid
+     
+      - run:
+          name: install selenium-hub
+          command: docker run -d --rm -p 4444:4444 --net grid --name selenium-hub selenium/hub:3.11.0
+          
+      - run:
+          name: install selenium-node
+          command: docker run -d --rm --net grid -e HUB_HOST=selenium-hub -v /dev/shm:/dev/shm selenium/node-chrome:3.11.0
+      
 
       - run: mvn test

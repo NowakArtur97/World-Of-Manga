@@ -24,9 +24,9 @@ public class MainControllerSeleniumPOM extends SeleniumPageObjectModel {
 	@FindBy(className = FOOTER_CLASS)
 	private WebElement footer;
 
-	public MainControllerSeleniumPOM(WebDriver webDriver, int serverPort) {
+	public MainControllerSeleniumPOM(WebDriver webDriver) {
 
-		super(webDriver, serverPort);
+		super(webDriver);
 	}
 
 	public void loadMainView(LanguageVersion ver) {

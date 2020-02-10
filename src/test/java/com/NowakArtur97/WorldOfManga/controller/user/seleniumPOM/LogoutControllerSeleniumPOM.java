@@ -13,9 +13,9 @@ public class LogoutControllerSeleniumPOM extends SeleniumPageObjectModel {
 	@FindBy(xpath = LOGOUT_LINK)
 	private WebElement logoutLink;
 
-	public LogoutControllerSeleniumPOM(WebDriver webDriver, int serverPort) {
+	public LogoutControllerSeleniumPOM(WebDriver webDriver) {
 
-		super(webDriver, serverPort);
+		super(webDriver);
 	}
 
 	public void signOut() {
