@@ -15,7 +15,7 @@ jobs:
         
       - image: postgres:9.6
         environment:
-        POSTGRES_DB: world_of_manga
+          POSTGRES_DB: world_of_manga
          
 
     working_directory: ~/world_of_manga
