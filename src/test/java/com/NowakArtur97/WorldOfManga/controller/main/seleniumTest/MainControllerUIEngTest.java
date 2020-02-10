@@ -11,7 +11,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.IfProfileValue;
 import org.springframework.test.context.TestPropertySource;
 
 import com.NowakArtur97.WorldOfManga.controller.main.seleniumPOM.MainControllerSeleniumPOM;
@@ -23,7 +22,6 @@ import com.NowakArtur97.WorldOfManga.testUtil.extension.ScreenshotWatcher;
 @TestPropertySource("classpath:/pageContent/messages_en.properties")
 @DisplayName("Main Controller UI Eng Tests")
 @Tag("MainControllerUIEng_Tests")
-@IfProfileValue(name = "run.selenium.tests", value = "true")
 public class MainControllerUIEngTest extends MainControllerUITest {
 
 	private MainControllerSeleniumPOM mainPage;
