@@ -38,7 +38,9 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
 
 		userToRegister.addRole(roleService.findByName("ROLE_USER").get());
 		userToRegister.setEnabled(true);
-		userToRegister.setPassword(bCryptPasswordEncoder.encode(userToRegister.getPassword()));
+		
+		String hashedPassword = bCryptPasswordEncoder.encode(userToRegister.getPassword());
+		userToRegister.setPassword(hashedPassword);
 
 		userService.save(userToRegister);
 
