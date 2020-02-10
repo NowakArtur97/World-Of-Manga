@@ -9,7 +9,7 @@ jobs:
 
       - image: circleci/openjdk:11.0.1-jdk
         environment:
-        JDBC_DATABASE_URL: jdbc:mysql://localhost:3366/world_of_manga?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=Europe/Warsaw
+        JDBC_DATABASE_URL: jdbc:postgresql://localhost:5432/world_of_manga
         JDBC_DATABASE_USERNAME: root
         JDBC_DATABASE_PASSWORD: root
         
