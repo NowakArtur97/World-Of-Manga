@@ -14,7 +14,7 @@ import org.springframework.test.context.TestPropertySource;
 import com.NowakArtur97.WorldOfManga.testUtil.enums.LanguageVersion;
 import com.NowakArtur97.WorldOfManga.testUtil.extension.ScreenshotWatcher;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ExtendWith(ScreenshotWatcher.class)
 @TestPropertySource("classpath:/pageContent/messages_pl.properties")
 @DisplayName("Registration Controller UI Pl Tests")

@@ -17,7 +17,7 @@ import com.NowakArtur97.WorldOfManga.controller.main.seleniumPOM.MainControllerS
 import com.NowakArtur97.WorldOfManga.testUtil.enums.LanguageVersion;
 import com.NowakArtur97.WorldOfManga.testUtil.extension.ScreenshotWatcher;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ExtendWith(ScreenshotWatcher.class)
 @TestPropertySource("classpath:/pageContent/messages_pl.properties")
 @DisplayName("Main Controller UI Pl Tests")
@@ -25,7 +25,7 @@ import com.NowakArtur97.WorldOfManga.testUtil.extension.ScreenshotWatcher;
 public class MainControllerUIPlTest extends MainControllerUITest {
 
 	private MainControllerSeleniumPOM mainPage;
-
+	
 	@BeforeEach
 	public void setupDriver() {
 
@@ -36,7 +36,7 @@ public class MainControllerUIPlTest extends MainControllerUITest {
 
 		webDriver = new ChromeDriver();
 
-		mainPage = new MainControllerSeleniumPOM(webDriver);
+		mainPage = new MainControllerSeleniumPOM(webDriver, serverPort);
 	}
 
 	@Test

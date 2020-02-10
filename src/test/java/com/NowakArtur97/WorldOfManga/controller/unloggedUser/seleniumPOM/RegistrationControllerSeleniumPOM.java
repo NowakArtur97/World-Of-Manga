@@ -54,9 +54,9 @@ public class RegistrationControllerSeleniumPOM extends SeleniumPageObjectModel {
 	@FindBy(className = SUBMIT_CLASS)
 	private WebElement submitButton;
 
-	public RegistrationControllerSeleniumPOM(WebDriver webDriver) {
+	public RegistrationControllerSeleniumPOM(WebDriver webDriver, int serverPort) {
 
-		super(webDriver);
+		super(webDriver, serverPort);
 	}
 
 	public void loadRegistrationView(LanguageVersion ver) {
