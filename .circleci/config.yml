@@ -13,7 +13,7 @@ jobs:
         JDBC_DATABASE_USERNAME: root
         JDBC_DATABASE_PASSWORD: root
         
-      - image: circleci/postgres:9.6.5-alpha-ram
+      - image: circleci/postgres:9.6.5-alpine-ram
         environment:
         POSTGRES_DB: world_of_manga
          
