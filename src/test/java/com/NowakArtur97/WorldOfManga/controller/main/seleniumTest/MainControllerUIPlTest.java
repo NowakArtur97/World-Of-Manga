@@ -4,12 +4,16 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.concurrent.TimeUnit;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.TestPropertySource;
@@ -36,7 +40,14 @@ public class MainControllerUIPlTest extends MainControllerUITest {
 			webDriver.quit();
 		}
 
-		webDriver = new ChromeDriver();
+		DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+		ChromeOptions options = new ChromeOptions();
+		options.addArguments("--start-maximized");
+		capabilities.setCapability(ChromeOptions.CAPABILITY, options);
+		capabilities.setBrowserName("chrome");
+
+		webDriver = new RemoteWebDriver(capabilities);
+		webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
 		mainPage = new MainControllerSeleniumPOM(webDriver);
 	}

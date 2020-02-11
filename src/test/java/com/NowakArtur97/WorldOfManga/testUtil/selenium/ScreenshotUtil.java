@@ -23,14 +23,16 @@ public class ScreenshotUtil {
 
 	public void takeScreenshot(WebDriver webDriver, String screenshotName) {
 
-		Screenshot screenshot = new AShot().shootingStrategy(ShootingStrategies.viewportPasting(1000))
-				.takeScreenshot(webDriver);
+		if (webDriver != null) {
+			Screenshot screenshot = new AShot().shootingStrategy(ShootingStrategies.viewportPasting(1000))
+					.takeScreenshot(webDriver);
 
-		try {
-			ImageIO.write(screenshot.getImage(), screenshotFormat,
-					new File(projectPath + screenshotPath + screenshotName + DOT + screenshotFormat));
-		} catch (IOException e) {
-			System.out.println("Can`t take screenshot on path: " + projectPath + screenshotPath);
+			try {
+				ImageIO.write(screenshot.getImage(), screenshotFormat,
+						new File(projectPath + screenshotPath + screenshotName + DOT + screenshotFormat));
+			} catch (IOException e) {
+				System.out.println("Can`t take screenshot on path: " + projectPath + screenshotPath);
+			}
 		}
 	}
 }

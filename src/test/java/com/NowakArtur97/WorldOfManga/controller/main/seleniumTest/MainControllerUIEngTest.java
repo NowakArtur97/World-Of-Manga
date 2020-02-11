@@ -4,12 +4,18 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.concurrent.TimeUnit;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.TestPropertySource;
@@ -29,14 +35,23 @@ public class MainControllerUIEngTest extends MainControllerUITest {
 	private MainControllerSeleniumPOM mainPage;
 
 	@BeforeEach
-	public void setupDriver() {
+	public void setupDriver() throws MalformedURLException {
 
 		if (webDriver != null) {
 
 			webDriver.quit();
 		}
 
-		webDriver = new ChromeDriver();
+		String nodeURL = "http://localhost:4444/wd/hub";
+
+		DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+		ChromeOptions options = new ChromeOptions();
+		options.addArguments("--start-maximized");
+		capabilities.setCapability(ChromeOptions.CAPABILITY, options);
+		capabilities.setBrowserName("chrome");
+
+		webDriver = new RemoteWebDriver(new URL(nodeURL), capabilities);
+		webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
 		mainPage = new MainControllerSeleniumPOM(webDriver);
 	}
