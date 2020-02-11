@@ -6,7 +6,7 @@ import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 
 public class SeleniumPageObjectModel {
 
-	private final static String MAIN_URL_PATH = "http://localhost:4444";
+	private final static String MAIN_URL_PATH = "http://localhost:8000";
 
 	private final static int TIME_TO_WAIT = 10;
 
