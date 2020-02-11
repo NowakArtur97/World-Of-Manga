@@ -6,7 +6,7 @@ jobs:
       environment:
         JDBC_DATABASE_URL: jdbc:postgresql://127.0.0.1:5432/world_of_manga
         JDBC_DATABASE_USERNAME: postgres
-        JDBC_DATABASE_PASSWORD: null
+        JDBC_DATABASE_PASSWORD:
     - image: postgres:9.6
       environment:
         POSTGRES_DB: world_of_manga
@@ -27,13 +27,13 @@ jobs:
         - ~/.m2
         key: v1-dependencies-{{ checksum "pom.xml" }}
     - run:
-        name: create docker network
+        name: reate docker network
         command: docker network create grid
     - run:
-        name: install selenium-hub
+        name: Install selenium-hub
         command: docker run -d --rm -p 4444:4444 --net grid --name selenium-hub selenium/hub:3.11.0
     - run:
-        name: install selenium-node
+        name: Install selenium-node
         command: docker run -d --rm --net grid -e HUB_HOST=selenium-hub -v /dev/shm:/dev/shm selenium/node-chrome:3.11.0
     - run: mvn test
   deploy:
@@ -53,3 +53,6 @@ workflows:
     - deploy:
         requires:
         - build
+        filters:
+          branches:
+            only: master
