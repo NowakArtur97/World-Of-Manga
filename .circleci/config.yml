@@ -1,67 +1,42 @@
-# Java Maven CircleCI 2.0 configuration file
-#
-# Check https://circleci.com/docs/2.0/language-java/ for more details
-#
 version: 2
 jobs:
   build:
-  
-    branches:
-        only:
-          - master
-
     docker:
-
-      - image: circleci/openjdk:11.0.1-jdk
-        environment:
-          JDBC_DATABASE_URL: jdbc:postgresql://127.0.0.1:5432/world_of_manga
-          JDBC_DATABASE_USERNAME: postgres
-          JDBC_DATABASE_PASSWORD:
-        
-      - image: postgres:9.6
-        environment:
-          POSTGRES_DB: world_of_manga
-         
-      - image: selenium/standalone-chrome:3.11.0
-         
+    - image: circleci/openjdk:11.0.1-jdk
+      environment:
+        JDBC_DATABASE_URL: jdbc:postgresql://127.0.0.1:5432/world_of_manga
+        JDBC_DATABASE_USERNAME: postgres
+        JDBC_DATABASE_PASSWORD: null
+    - image: postgres:9.6
+      environment:
+        POSTGRES_DB: world_of_manga
+    - image: selenium/standalone-chrome:3.11.0
     working_directory: ~/world_of_manga
-
     environment:
-      # Customize the JVM maximum heap limit
       MAVEN_OPTS: -Xmx3200m
-
     steps:
-      - checkout
-      - setup_remote_docker
-
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "pom.xml" }}
-
-            - v1-dependencies-
-
-      - run: mvn dependency:go-offline
-
-      - save_cache:
-          paths:
-            - ~/.m2
-          key: v1-dependencies-{{ checksum "pom.xml" }}
-
-      - run:
-          name: create docker network
-          command: docker network create grid
-     
-      - run:
-          name: install selenium-hub
-          command: docker run -d --rm -p 4444:4444 --net grid --name selenium-hub selenium/hub:3.11.0
-          
-      - run:
-          name: install selenium-node
-          command: docker run -d --rm --net grid -e HUB_HOST=selenium-hub -v /dev/shm:/dev/shm selenium/node-chrome:3.11.0
-      
-
-      - run: mvn test
-      
+    - checkout
+    - setup_remote_docker
+    - restore_cache:
+        keys:
+        - v1-dependencies-{{ checksum "pom.xml" }}
+        - v1-dependencies-
+    - run: mvn dependency:go-offline
+    - save_cache:
+        paths:
+        - ~/.m2
+        key: v1-dependencies-{{ checksum "pom.xml" }}
+    - run:
+        name: create docker network
+        command: docker network create grid
+    - run:
+        name: install selenium-hub
+        command: docker run -d --rm -p 4444:4444 --net grid --name selenium-hub selenium/hub:3.11.0
+    - run:
+        name: install selenium-node
+        command: docker run -d --rm --net grid -e HUB_HOST=selenium-hub -v /dev/shm:/dev/shm selenium/node-chrome:3.11.0
+    - run: mvn test
+    
   deploy:
     docker:
     - image: circleci/buildpack-deps:trusty
