@@ -4,21 +4,14 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.util.concurrent.TimeUnit;
-
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.remote.RemoteWebDriver;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.TestPropertySource;
 
-import com.NowakArtur97.WorldOfManga.controller.main.seleniumPOM.MainControllerSeleniumPOM;
 import com.NowakArtur97.WorldOfManga.testUtil.enums.LanguageVersion;
 import com.NowakArtur97.WorldOfManga.testUtil.extension.ScreenshotWatcher;
 
@@ -29,28 +22,6 @@ import com.NowakArtur97.WorldOfManga.testUtil.extension.ScreenshotWatcher;
 @Tag("MainControllerUIPl_Tests")
 @DirtiesContext
 public class MainControllerUIPlTest extends MainControllerUITest {
-
-	private MainControllerSeleniumPOM mainPage;
-
-	@BeforeEach
-	public void setupDriver() {
-
-		if (webDriver != null) {
-
-			webDriver.quit();
-		}
-
-		DesiredCapabilities capabilities = DesiredCapabilities.chrome();
-		ChromeOptions options = new ChromeOptions();
-		options.addArguments("--start-maximized");
-		capabilities.setCapability(ChromeOptions.CAPABILITY, options);
-		capabilities.setBrowserName("chrome");
-
-		webDriver = new RemoteWebDriver(capabilities);
-		webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-
-		mainPage = new MainControllerSeleniumPOM(webDriver);
-	}
 
 	@Test
 	@DisplayName("when load main page")

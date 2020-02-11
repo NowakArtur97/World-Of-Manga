@@ -1,7 +1,6 @@
 package com.NowakArtur97.WorldOfManga.controller.unloggedUser.seleniumTest;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
@@ -49,21 +48,14 @@ public class RegistrationControllerUITest extends SeleniumUITest {
 
 	@Value("${form.login.afterRegistration}")
 	protected String afterRegistrationMessage;
-	
+
 	protected RegistrationControllerSeleniumPOM registrationPage;
-	
+
 	@Autowired
 	protected UserService userService;
 
 	@BeforeEach
-	public void setupDriver() {
-
-		if (webDriver != null) {
-
-			webDriver.quit();
-		}
-
-		webDriver = new ChromeDriver();
+	public void setupPOM() {
 
 		registrationPage = new RegistrationControllerSeleniumPOM(webDriver);
 	}

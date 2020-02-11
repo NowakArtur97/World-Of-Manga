@@ -1,7 +1,6 @@
 package com.NowakArtur97.WorldOfManga.controller.user.seleniumTest;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.springframework.beans.factory.annotation.Value;
 
 import com.NowakArtur97.WorldOfManga.controller.main.seleniumPOM.MainControllerSeleniumPOM;
@@ -30,14 +29,7 @@ public class LogoutControllerUITest extends SeleniumUITest {
 	protected MainControllerSeleniumPOM mainPage;
 
 	@BeforeEach
-	public void setupDriver() {
-
-		if (webDriver != null) {
-
-			webDriver.quit();
-		}
-
-		webDriver = new ChromeDriver();
+	public void setupPOM() {
 
 		logoutPage = new LogoutControllerSeleniumPOM(webDriver);
 		loginPage = new LoginControllerSeleniumPOM(webDriver);

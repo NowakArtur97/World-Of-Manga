@@ -1,7 +1,6 @@
 package com.NowakArtur97.WorldOfManga.controller.unloggedUser.seleniumTest;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
@@ -23,23 +22,16 @@ public class LoginControllerUITest extends SeleniumUITest {
 
 	@Value("${header.signOut}")
 	protected String userLoggedInSignOutOption;
-	
+
 	protected LoginControllerSeleniumPOM loginPage;
 
 	protected MainControllerSeleniumPOM mainPage;
 
 	@Autowired
 	protected UserService userService;
-	
+
 	@BeforeEach
-	public void setupDriver() {
-
-		if (webDriver != null) {
-
-			webDriver.quit();
-		}
-
-		webDriver = new ChromeDriver();
+	public void setupPOM() {
 
 		loginPage = new LoginControllerSeleniumPOM(webDriver);
 		mainPage = new MainControllerSeleniumPOM(webDriver);
