@@ -19,7 +19,7 @@ public class MainControllerUITest extends SeleniumUITest {
 
 	@Value("${header.language}")
 	protected String headerLanguageOption;
-
+	
 	protected MainControllerSeleniumPOM mainPage;
 	
 	@BeforeEach

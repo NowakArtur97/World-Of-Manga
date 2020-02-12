@@ -23,6 +23,9 @@ public class LoginControllerUITest extends SeleniumUITest {
 	@Value("${header.signOut}")
 	protected String userLoggedInSignOutOption;
 
+	@Value("${header.addManga}")
+	protected String adminAddMangaOption;
+	
 	protected LoginControllerSeleniumPOM loginPage;
 
 	protected MainControllerSeleniumPOM mainPage;

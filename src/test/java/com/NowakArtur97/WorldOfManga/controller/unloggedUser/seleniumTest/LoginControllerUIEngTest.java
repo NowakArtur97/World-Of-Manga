@@ -42,8 +42,8 @@ public class LoginControllerUIEngTest extends LoginControllerUITest {
 	}
 
 	@Test
-	@DisplayName("when correct login")
-	public void when_correct_login_should_sing_in_user() {
+	@DisplayName("when correct user login with user role")
+	public void when_correct_user_login_with_user_role_should_sing_in_user() {
 
 		String username = "user";
 		String password = "user";
@@ -58,6 +58,30 @@ public class LoginControllerUIEngTest extends LoginControllerUITest {
 				() -> assertTrue(mainPage.getHeaderText().contains(userLoggedInMangaListOption.toUpperCase()),
 						() -> "should show manga list option"),
 				() -> assertTrue(mainPage.getHeaderText().contains(userLoggedInSignOutOption.toUpperCase()),
-						() -> "should show sign out option"));
+						() -> "should show sign out option"),
+				() -> assertFalse(mainPage.getHeaderText().contains(adminAddMangaOption.toUpperCase()),
+						() -> "should show add manga option"));
+	}
+
+	@Test
+	@DisplayName("when correct user login with admin role")
+	public void when_correct_user_login_with_admin_role_should_sing_in_admin() {
+
+		String username = "admin";
+		String password = "admin";
+
+		loginPage.loadLoginView(LanguageVersion.ENG);
+
+		loginPage.fillMandatoryLoginFields(username, password);
+
+		assertAll(
+				() -> assertTrue(userService.isUsernameAlreadyInUse(username),
+						() -> "user with given username should exist: " + username),
+				() -> assertTrue(mainPage.getHeaderText().contains(userLoggedInMangaListOption.toUpperCase()),
+						() -> "should show manga list option"),
+				() -> assertTrue(mainPage.getHeaderText().contains(userLoggedInSignOutOption.toUpperCase()),
+						() -> "should show sign out option"),
+				() -> assertTrue(mainPage.getHeaderText().contains(adminAddMangaOption.toUpperCase()),
+						() -> "should show add manga option"));
 	}
 }
