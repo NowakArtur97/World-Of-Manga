@@ -12,6 +12,9 @@
                         <li sec:authorize="isAuthenticated()" class="header__item"><a
                                         class="header__link header__link--item" href="#" th:href="@{/auth/}"
                                         th:text="#{header.myMangaWorld}"></a></li>
+                        <li th:if="${#request.isUserInRole('ADMIN')}" class="header__item"><a
+                                        class="header__link header__link--item" href="#" th:href="@{/admin/addManga}"
+                                        th:text="#{header.addManga}"></a></li>
                         <li sec:authorize="isAuthenticated()" class="header__item"><a th:href="@{/auth/logout}"
                                         class="header__link header__link--item" th:text="#{header.signOut}"></a></li>
                         <li class="header__item">

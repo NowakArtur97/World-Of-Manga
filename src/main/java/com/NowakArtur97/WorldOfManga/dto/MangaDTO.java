@@ -14,8 +14,8 @@ import lombok.NoArgsConstructor;
 public class MangaDTO {
 
 	@Valid
-	private MangaTranslationDTO enTranslations = new MangaTranslationDTO();
+	private MangaTranslationDTO enTranslation = new MangaTranslationDTO();
 	
 	@Valid
-	private MangaTranslationDTO plTranslations = new MangaTranslationDTO();
+	private MangaTranslationDTO plTranslation = new MangaTranslationDTO();
 }

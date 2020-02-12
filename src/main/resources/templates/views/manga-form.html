@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{fragments/main_layout}">
+
+<head>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/form.css}" />
+    <title th:text="#{app.mangaForm.title}"></title>
+</head>
+
+<body class="page page--register">
+    <div layout:fragment="content" class="form page__form">
+        <form th:action="@{addOrUpdateManga}" th:object="${mangaDTO}" method="POST"
+            class="form__box form__box--register">
+            <h1 class="form__title" th:text="#{form.manga.title}"></h1>
+            <div class="form__group">
+                <label class="form__label" for="enTranslation" th:text="#{form.manga.enTranslation.title}"></label>
+                <p class="form__message form__message--failure" th:if="${#fields.hasErrors('enTranslation.title')}" th:errors="*{enTranslation.title}" ></p>
+                <input class="form__input" type="text" name="enTranslation" th:field="*{enTranslation.title}">
+            </div>
+            <div class="form__group">
+                <label class="form__label" for="enTranslation" th:text="#{form.manga.enTranslation.description}"></label>
+                <p class="form__message form__message--failure" th:if="${#fields.hasErrors('enTranslation.description')}" th:errors="*{enTranslation.description}" ></p>
+                <input class="form__input" type="text" name="enTranslation" th:field="*{enTranslation.description}">
+            </div>
+              <div class="form__group">
+                <label class="form__label" for="plTranslation" th:text="#{form.manga.plTranslation.title}"></label>
+                <p class="form__message form__message--failure" th:if="${#fields.hasErrors('plTranslation.title')}" th:errors="*{plTranslation.title}" ></p>
+                <input class="form__input" type="text" name="plTranslation" th:field="*{plTranslation.title}">
+            </div>
+            <div class="form__group">
+                <label class="form__label" for="plTranslation" th:text="#{form.manga.plTranslation.description}"></label>
+                <p class="form__message form__message--failure" th:if="${#fields.hasErrors('plTranslation.description')}" th:errors="*{plTranslation.description}" ></p>
+                <input class="form__input" type="text" name="plTranslation" th:field="*{plTranslation.description}">
+            </div>
+            <div class="form__group">
+                <button class="form__submit" type="submit" th:text="#{form.manga.submit}"></button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
