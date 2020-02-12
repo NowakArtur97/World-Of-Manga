@@ -35,10 +35,10 @@ public class MangaCreationControllerTest {
 	}
 
 	@Test
-	@DisplayName("when load add manga page")
-	public void when_load_add_manga_page_should_show_manga_form() {
+	@DisplayName("when load add or update manga page")
+	public void when_load_add_or_update_manga_page_should_show_manga_form() {
 
-		assertAll(() -> mockMvc.perform(get("/admin/addManga")).andExpect(status().isOk())
+		assertAll(() -> mockMvc.perform(get("/admin/addOrUpdateManga")).andExpect(status().isOk())
 				.andExpect(view().name("views/manga-form")).andExpect(model().attribute("mangaDTO", new MangaDTO())));
 	}
 }
