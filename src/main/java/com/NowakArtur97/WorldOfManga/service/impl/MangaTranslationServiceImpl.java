@@ -13,4 +13,10 @@ import lombok.RequiredArgsConstructor;
 public class MangaTranslationServiceImpl implements MangaTranslationService {
 
 	private final MangaTranslationRepository mangaTranslationRepository;
+
+	@Override
+	public boolean isMangaTitleAlreadyInUse(String title) {
+
+		return mangaTranslationRepository.existsMangaTranslationByTitle(title);
+	}
 }
