@@ -30,7 +30,7 @@ public class MangaTranslationValidator implements Validator {
 
 		MangaTranslationDTO mangaTranslationDTO = (MangaTranslationDTO)target;
 		
-		boolean isMangaTitleInUse = mangaTranslationService.isMangaTitleAlreadyInUse(mangaTranslationDTO.getTitle());
+		boolean isMangaTitleInUse = mangaTranslationService.isTitleAlreadyInUse(mangaTranslationDTO.getTitle());
 		
 		if(isMangaTitleInUse) {
 			

@@ -47,14 +47,14 @@ public class MangaTranslationValidatorTest {
 
 		Errors errors = new BeanPropertyBindingResult(mangaTranslationDTO, "mangaTranslationDTO");
 
-		when(mangaTranslationService.isMangaTitleAlreadyInUse(title)).thenReturn(false);
+		when(mangaTranslationService.isTitleAlreadyInUse(title)).thenReturn(false);
 
 		mangaTranslationValidator.validate(mangaTranslationDTO, errors);
 
 		assertAll(() -> assertFalse(errors.hasErrors(), () -> "shouldn`t have errors: " + errors.hasErrors()),
 				() -> assertNull(errors.getFieldError("title"),
 						() -> "shouldn`t title be in use, but was: " + errors.getFieldError("title")),
-				() -> verify(mangaTranslationService, times(1)).isMangaTitleAlreadyInUse(title));
+				() -> verify(mangaTranslationService, times(1)).isTitleAlreadyInUse(title));
 	}
 
 	@Test
@@ -70,13 +70,13 @@ public class MangaTranslationValidatorTest {
 
 		Errors errors = new BeanPropertyBindingResult(mangaTranslationDTO, "mangaTranslationDTO");
 
-		when(mangaTranslationService.isMangaTitleAlreadyInUse(title)).thenReturn(true);
+		when(mangaTranslationService.isTitleAlreadyInUse(title)).thenReturn(true);
 
 		mangaTranslationValidator.validate(mangaTranslationDTO, errors);
 
 		assertAll(() -> assertTrue(errors.hasErrors(), () -> "should have errors: " + errors.hasErrors()),
 				() -> assertNotNull(errors.getFieldError("title"),
 						() -> "should title be in use, but was: " + errors.getFieldError("title")),
-				() -> verify(mangaTranslationService, times(1)).isMangaTitleAlreadyInUse(title));
+				() -> verify(mangaTranslationService, times(1)).isTitleAlreadyInUse(title));
 	}
 }

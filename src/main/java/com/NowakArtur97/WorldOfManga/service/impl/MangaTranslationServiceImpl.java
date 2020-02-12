@@ -15,7 +15,7 @@ public class MangaTranslationServiceImpl implements MangaTranslationService {
 	private final MangaTranslationRepository mangaTranslationRepository;
 
 	@Override
-	public boolean isMangaTitleAlreadyInUse(String title) {
+	public boolean isTitleAlreadyInUse(String title) {
 
 		return mangaTranslationRepository.existsMangaTranslationByTitle(title);
 	}
