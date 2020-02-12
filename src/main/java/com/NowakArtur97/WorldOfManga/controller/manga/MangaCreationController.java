@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.NowakArtur97.WorldOfManga.dto.MangaDTO;
-import com.NowakArtur97.WorldOfManga.validation.manga.MangaTranslationDTOValidator;
+import com.NowakArtur97.WorldOfManga.validation.manga.MangaTranslationValidator;
 
 import lombok.RequiredArgsConstructor;
 
@@ -21,7 +21,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class MangaCreationController {
 
-	private final MangaTranslationDTOValidator mangaTranslationDTOValidator;
+	private final MangaTranslationValidator mangaTranslationDTOValidator;
 
 	@GetMapping(path = "/addOrUpdateManga")
 	public String showAddMangaPage(Model theModel) {

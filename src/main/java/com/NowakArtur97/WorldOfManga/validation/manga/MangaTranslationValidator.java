@@ -9,12 +9,12 @@ import com.NowakArtur97.WorldOfManga.dto.MangaTranslationDTO;
 import com.NowakArtur97.WorldOfManga.service.api.MangaTranslationService;
 
 @Component
-public class MangaTranslationDTOValidator implements Validator {
+public class MangaTranslationValidator implements Validator {
 
 	private final MangaTranslationService mangaTranslationService;
 
 	@Autowired
-	public MangaTranslationDTOValidator(MangaTranslationService mangaTranslationService) {
+	public MangaTranslationValidator(MangaTranslationService mangaTranslationService) {
 
 		this.mangaTranslationService = mangaTranslationService;
 	}

@@ -67,7 +67,7 @@ public class UserValidationTest {
 
 			assertAll(() -> assertFalse(violations.isEmpty(), () -> "should have violation, but: "),
 					() -> assertEquals(1, violations.size(),
-							() -> "should have one violation, , but have: " + violations.size()));
+							() -> "should have one violation, but have: " + violations.size()));
 		}
 
 		@Test
@@ -85,7 +85,7 @@ public class UserValidationTest {
 
 			assertAll(() -> assertFalse(violations.isEmpty(), () -> "should have violation, but: "),
 					() -> assertEquals(1, violations.size(),
-							() -> "should have one violation, , but have: " + violations.size()));
+							() -> "should have one violation, but have: " + violations.size()));
 		}
 
 		@Test
@@ -103,7 +103,7 @@ public class UserValidationTest {
 
 			assertAll(() -> assertFalse(violations.isEmpty(), () -> "should have violation, but: "),
 					() -> assertEquals(1, violations.size(),
-							() -> "should have one violation, , but have: " + violations.size()));
+							() -> "should have one violation, but have: " + violations.size()));
 		}
 
 		@Test
@@ -144,7 +144,7 @@ public class UserValidationTest {
 
 			assertAll(() -> assertFalse(violations.isEmpty(), () -> "should have violation, but: "),
 					() -> assertEquals(1, violations.size(),
-							() -> "should have one violation, , but have: " + violations.size()));
+							() -> "should have one violation, but have: " + violations.size()));
 		}
 
 		@Test
