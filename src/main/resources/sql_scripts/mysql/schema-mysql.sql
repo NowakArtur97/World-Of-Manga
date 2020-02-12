@@ -41,7 +41,7 @@ CREATE TABLE `user_role`(
 DROP TABLE IF EXISTS `language`;
 
 CREATE TABLE `language` (
-    `language_id` INT(11) NOT NULL,
+    `language_id` INT(11) NOT NULL AUTO_INCREMENT,
     `locale` VARCHAR(6) NOT NULL,
     PRIMARY KEY (`language_id`),
     UNIQUE `LANGUAGE_LOCALE_UNIQUE` (`locale`)
@@ -50,14 +50,14 @@ CREATE TABLE `language` (
 DROP TABLE IF EXISTS `manga`;
 
 CREATE TABLE `manga` (
-    `manga_id` INT(11) NOT NULL,
+    `manga_id` INT(11) NOT NULL AUTO_INCREMENT,
     PRIMARY KEY (`manga_id`)
 )  ENGINE=INNODB AUTO_INCREMENT=1 DEFAULT CHARSET=LATIN1;
 
 DROP TABLE IF EXISTS `manga_translation`;
 
 CREATE TABLE `manga_translation` (
-    `manga_translation_id` INT(11) NOT NULL,
+    `manga_translation_id` INT(11) NOT NULL AUTO_INCREMENT,
     `manga_id` INT(11) NOT NULL,
     `language_id` INT(11) NOT NULL,
     `title` VARCHAR(50) NOT NULL,
