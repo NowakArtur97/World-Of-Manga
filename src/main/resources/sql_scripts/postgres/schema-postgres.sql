@@ -30,3 +30,32 @@ CREATE TABLE world_of_manga.user_role(
 	CONSTRAINT "FK_USER_ROLE" FOREIGN KEY ("user_id") REFERENCES world_of_manga.user("user_id") ON DELETE NO ACTION ON UPDATE NO ACTION,
 	CONSTRAINT "FK_ROLE_USER" FOREIGN KEY ("role_id") REFERENCES world_of_manga.role("role_id") ON DELETE NO ACTION ON UPDATE NO ACTION
 ); 
+
+DROP TABLE IF EXISTS world_of_manga.language;
+
+CREATE TABLE world_of_manga.language (
+    "language_id" SERIAL PRIMARY KEY,
+    "locale" VARCHAR(6) NOT NULL UNIQUE
+);
+
+DROP TABLE IF EXISTS world_of_manga.manga;
+
+CREATE TABLE world_of_manga.manga (
+    "manga_id" SERIAL PRIMARY KEY
+);
+
+DROP TABLE IF EXISTS world_of_manga.manga_translation;
+
+CREATE TABLE world_of_manga.manga_translation (
+    "manga_translation_id" SERIAL PRIMARY KEY,
+    "manga_id" int NOT NULL,
+    "language_id" int NOT NULL,
+    "title" VARCHAR(50) NOT NULL UNIQUE,
+    "description" VARCHAR(50) NOT NULL,
+    CONSTRAINT "FK_MANGA_TRANSLATION" FOREIGN KEY ("manga_id")
+        REFERENCES world_of_manga.manga ("manga_id")
+        ON DELETE NO ACTION ON UPDATE NO ACTION,
+    CONSTRAINT "FK_TRANSLATION_LANGUAGE" FOREIGN KEY ("language_id")
+        REFERENCES world_of_manga.language ("language_id")
+        ON DELETE NO ACTION ON UPDATE NO ACTION
+);
