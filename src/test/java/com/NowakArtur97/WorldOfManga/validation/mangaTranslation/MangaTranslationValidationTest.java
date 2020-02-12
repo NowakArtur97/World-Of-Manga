@@ -1,4 +1,4 @@
-package com.NowakArtur97.WorldOfManga.validation.manga;
+package com.NowakArtur97.WorldOfManga.validation.mangaTranslation;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -44,6 +44,18 @@ public class MangaTranslationValidationTest {
 
 		assertAll(() -> assertTrue(violations.isEmpty(),
 				() -> "shouldn`t have violations, but have: " + violations.size()));
+	}
+
+	@Test
+	@DisplayName("when manga translation is incorrect")
+	public void when_manga_translation_is_incorrect_should_have_violations() {
+
+		MangaTranslationDTO mangaTranslationDTO = MangaTranslationDTO.builder().title(null).description(null).build();
+
+		Set<ConstraintViolation<MangaTranslationDTO>> violations = validator.validate(mangaTranslationDTO);
+
+		assertAll(() -> assertFalse(violations.isEmpty(), () -> "should have violation, but: "), () -> assertEquals(2,
+				violations.size(), () -> "should have two violation, but have: " + violations.size()));
 	}
 
 	@Nested
@@ -104,8 +116,8 @@ public class MangaTranslationValidationTest {
 	class DescriptionValidationTest {
 
 		@Test
-		@DisplayName("when title is null")
-		public void when_title_is_null_should_have_violations() {
+		@DisplayName("when description is null")
+		public void when_description_is_null_should_have_violations() {
 
 			String description = null;
 
@@ -120,8 +132,8 @@ public class MangaTranslationValidationTest {
 		}
 
 		@Test
-		@DisplayName("when title is empty")
-		public void when_title_is_empty_should_have_violations() {
+		@DisplayName("when description is empty")
+		public void when_description_is_empty_should_have_violations() {
 
 			String description = "";
 
@@ -136,8 +148,8 @@ public class MangaTranslationValidationTest {
 		}
 
 		@Test
-		@DisplayName("when title is blank")
-		public void when_title_is_blank_should_have_violations() {
+		@DisplayName("when description is blank")
+		public void when_description_is_blank_should_have_violations() {
 
 			String description = "     ";
 

@@ -1,4 +1,4 @@
-package com.NowakArtur97.WorldOfManga.validation.manga;
+package com.NowakArtur97.WorldOfManga.validation.mangaTranslation;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -21,6 +21,7 @@ import org.springframework.validation.Errors;
 
 import com.NowakArtur97.WorldOfManga.dto.MangaTranslationDTO;
 import com.NowakArtur97.WorldOfManga.service.api.MangaTranslationService;
+import com.NowakArtur97.WorldOfManga.validation.manga.MangaTranslationValidator;
 
 @ExtendWith(MockitoExtension.class)
 @DisplayName("MangaTranslationValidator Tests")
