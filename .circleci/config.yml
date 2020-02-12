@@ -27,7 +27,7 @@ jobs:
         - ~/.m2
         key: v1-dependencies-{{ checksum "pom.xml" }}
     - run:
-        name: reate docker network
+        name: Create docker network
         command: docker network create grid
     - run:
         name: Install selenium-hub
