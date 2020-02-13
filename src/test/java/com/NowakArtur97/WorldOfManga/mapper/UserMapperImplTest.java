@@ -31,8 +31,8 @@ public class UserMapperImplTest {
 	private ModelMapper modelMapper;
 
 	@Test
-	@DisplayName("when map user dto")
-	public void when_map_user_dto_then_return_user_entity() {
+	@DisplayName("when map user dto to entity")
+	public void when_map_user_dto_should_return_user_entity() {
 
 		UserDTO userDTOExpected = UserDTO.builder().username("username").firstName("first name").lastName("last name")
 				.userPasswordDTO(UserPasswordDTO.builder().password("password1").matchingPassword("password1").build())
