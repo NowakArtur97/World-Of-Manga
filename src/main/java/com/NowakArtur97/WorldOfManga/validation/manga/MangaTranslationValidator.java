@@ -34,12 +34,17 @@ public class MangaTranslationValidator implements Validator {
 		MangaTranslationDTO mangaTranslationDTOEn = mangaDTO.getEnTranslation();
 		MangaTranslationDTO mangaTranslationDTOPl = mangaDTO.getPlTranslation();
 
-		boolean isMangaTitleInUse = mangaTranslationService.isTitleAlreadyInUse(mangaTranslationDTOEn.getTitle())
-				|| mangaTranslationService.isTitleAlreadyInUse(mangaTranslationDTOPl.getTitle());
+		boolean isMangaEnTitleInUse = mangaTranslationService.isTitleAlreadyInUse(mangaTranslationDTOEn.getTitle());
+		boolean isMangaPlTitleInUse = mangaTranslationService.isTitleAlreadyInUse(mangaTranslationDTOPl.getTitle());
 
-		if (isMangaTitleInUse) {
+		if (isMangaEnTitleInUse) {
 
-			errors.rejectValue("title", "mangaTranslation.title.inUse");
+			errors.rejectValue("enTranslation.title", "mangaTranslation.titleEn.inUse");
+		}
+
+		if (isMangaPlTitleInUse) {
+
+			errors.rejectValue("plTranslation.title", "mangaTranslation.titlePl.inUse");
 		}
 	}
 }

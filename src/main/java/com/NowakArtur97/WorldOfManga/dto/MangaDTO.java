@@ -15,7 +15,7 @@ public class MangaDTO {
 
 	@Valid
 	private MangaTranslationDTO enTranslation = new MangaTranslationDTO();
-	
+
 	@Valid
 	private MangaTranslationDTO plTranslation = new MangaTranslationDTO();
 }

@@ -48,8 +48,8 @@ DROP TABLE IF EXISTS world_of_manga.manga_translation;
 
 CREATE TABLE world_of_manga.manga_translation (
     "manga_translation_id" SERIAL PRIMARY KEY,
-    "manga_id" int NOT NULL,
-    "language_id" int NOT NULL,
+    "manga_id" int,
+    "language_id" int,
     "title" VARCHAR(50) NOT NULL UNIQUE,
     "description" VARCHAR(50) NOT NULL,
     CONSTRAINT "FK_MANGA_TRANSLATION" FOREIGN KEY ("manga_id")
