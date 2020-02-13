@@ -20,7 +20,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Entity
-@Table(name = "manga_translation", schema = "world_fo_manga")
+@Table(name = "manga_translation", schema = "world_of_manga")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

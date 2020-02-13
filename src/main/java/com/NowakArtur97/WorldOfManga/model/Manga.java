@@ -21,7 +21,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "manga", schema = "world_fo_manga")
+@Table(name = "manga", schema = "world_of_manga")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
