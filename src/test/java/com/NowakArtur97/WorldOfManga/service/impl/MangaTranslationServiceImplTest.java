@@ -119,6 +119,8 @@ public class MangaTranslationServiceImplTest {
 				() -> verify(mangaTranslationMapper, times(1))
 						.mapMangaTranslationDTOToMangaTranslation(mangaDTO.getEnTranslation()),
 				() -> verify(mangaTranslationMapper, times(1))
-						.mapMangaTranslationDTOToMangaTranslation(mangaDTO.getPlTranslation()));
+						.mapMangaTranslationDTOToMangaTranslation(mangaDTO.getPlTranslation()),
+				() -> verify(mangaTranslationRepository, times(1)).save(mangaTranslationEnExpected),
+				() -> verify(mangaTranslationRepository, times(1)).save(mangaTranslationPlExpected));
 	}
 }
