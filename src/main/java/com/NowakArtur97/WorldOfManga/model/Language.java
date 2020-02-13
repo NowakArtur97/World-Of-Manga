@@ -10,7 +10,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -38,8 +37,13 @@ public class Language {
 	@Column(name = "locale")
 	private String locale;
 
-	@OneToMany(cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST,
+	@OneToMany(mappedBy = "language", cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST,
 			CascadeType.REFRESH }, orphanRemoval = false, fetch = FetchType.LAZY)
-	@JoinColumn(name = "manga_translation_id")
-	private Set<MangaTranslation> mangaTranslations = new HashSet<>();
+	private final Set<MangaTranslation> mangaTranslations = new HashSet<>();
+
+	public void addTranslation(MangaTranslation mangaTranslation) {
+
+		mangaTranslations.add(mangaTranslation);
+		mangaTranslation.setLanguage(this);
+	}
 }

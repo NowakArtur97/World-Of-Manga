@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.NowakArtur97.WorldOfManga.dto.MangaDTO;
+import com.NowakArtur97.WorldOfManga.exception.LanguageNotFoundException;
+import com.NowakArtur97.WorldOfManga.service.api.MangaService;
 import com.NowakArtur97.WorldOfManga.validation.manga.MangaTranslationValidator;
 
 import lombok.RequiredArgsConstructor;
@@ -23,6 +25,8 @@ public class MangaCreationController {
 
 	private final MangaTranslationValidator mangaTranslationDTOValidator;
 
+	private final MangaService mangaService;
+
 	@GetMapping(path = "/addOrUpdateManga")
 	public String showAddMangaPage(Model theModel) {
 
@@ -33,7 +37,7 @@ public class MangaCreationController {
 
 	@PostMapping(path = "/addOrUpdateManga")
 	public String processAddMangaPage(Model theModel, @ModelAttribute("mangaDTO") @Valid MangaDTO mangaDTO,
-			BindingResult result) {
+			BindingResult result) throws LanguageNotFoundException {
 
 		mangaTranslationDTOValidator.validate(mangaDTO, result);
 
@@ -43,6 +47,8 @@ public class MangaCreationController {
 
 			return "views/manga-form";
 		}
+
+		mangaService.addOrUpdate(mangaDTO);
 
 		return "redirect:/";
 	}

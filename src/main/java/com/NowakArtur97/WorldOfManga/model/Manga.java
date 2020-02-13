@@ -10,7 +10,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -35,8 +34,13 @@ public class Manga {
 	@Setter(value = AccessLevel.PRIVATE)
 	private Long id;
 
-	@OneToMany(cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST,
+	@OneToMany(mappedBy = "manga", cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST,
 			CascadeType.REFRESH }, orphanRemoval = false, fetch = FetchType.LAZY)
-	@JoinColumn(name = "manga_translation_id")
-	private Set<MangaTranslation> translations = new HashSet<>();
+	private final Set<MangaTranslation> translations = new HashSet<>();
+
+	public void addTranslation(MangaTranslation mangaTranslation) {
+
+		translations.add(mangaTranslation);
+		mangaTranslation.setManga(this);
+	}
 }

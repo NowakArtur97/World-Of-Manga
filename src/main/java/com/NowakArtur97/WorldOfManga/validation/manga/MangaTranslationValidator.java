@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
+import com.NowakArtur97.WorldOfManga.dto.MangaDTO;
 import com.NowakArtur97.WorldOfManga.dto.MangaTranslationDTO;
 import com.NowakArtur97.WorldOfManga.service.api.MangaTranslationService;
 
@@ -22,18 +23,22 @@ public class MangaTranslationValidator implements Validator {
 	@Override
 	public boolean supports(Class<?> clazz) {
 
-		return MangaTranslationDTO.class.equals(clazz);
+		return MangaDTO.class.equals(clazz);
 	}
 
 	@Override
 	public void validate(Object target, Errors errors) {
 
-		MangaTranslationDTO mangaTranslationDTO = (MangaTranslationDTO)target;
-		
-		boolean isMangaTitleInUse = mangaTranslationService.isTitleAlreadyInUse(mangaTranslationDTO.getTitle());
-		
-		if(isMangaTitleInUse) {
-			
+		MangaDTO mangaDTO = (MangaDTO) target;
+
+		MangaTranslationDTO mangaTranslationDTOEn = mangaDTO.getEnTranslation();
+		MangaTranslationDTO mangaTranslationDTOPl = mangaDTO.getPlTranslation();
+
+		boolean isMangaTitleInUse = mangaTranslationService.isTitleAlreadyInUse(mangaTranslationDTOEn.getTitle())
+				|| mangaTranslationService.isTitleAlreadyInUse(mangaTranslationDTOPl.getTitle());
+
+		if (isMangaTitleInUse) {
+
 			errors.rejectValue("title", "mangaTranslation.title.inUse");
 		}
 	}

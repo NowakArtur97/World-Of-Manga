@@ -58,8 +58,8 @@ DROP TABLE IF EXISTS `manga_translation`;
 
 CREATE TABLE `manga_translation` (
     `manga_translation_id` INT(11) NOT NULL AUTO_INCREMENT,
-    `manga_id` INT(11) NOT NULL,
-    `language_id` INT(11) NOT NULL,
+    `manga_id` INT(11),
+	`language_id` INT(11),
     `title` VARCHAR(50) NOT NULL,
     `description` VARCHAR(50) NOT NULL,
     PRIMARY KEY (`manga_translation_id`),
