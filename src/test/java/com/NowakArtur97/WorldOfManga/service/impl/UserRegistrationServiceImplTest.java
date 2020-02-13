@@ -6,8 +6,6 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import java.util.Optional;
-
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -19,6 +17,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.NowakArtur97.WorldOfManga.dto.UserDTO;
 import com.NowakArtur97.WorldOfManga.dto.UserPasswordDTO;
+import com.NowakArtur97.WorldOfManga.exception.RoleNotFoundException;
 import com.NowakArtur97.WorldOfManga.mapper.UserMapper;
 import com.NowakArtur97.WorldOfManga.model.Role;
 import com.NowakArtur97.WorldOfManga.model.User;
@@ -47,10 +46,10 @@ public class UserRegistrationServiceImplTest {
 
 	@Test
 	@DisplayName("when register user")
-	public void when_register_user_should_reigster_user() {
+	public void when_register_user_should_reigster_user() throws RoleNotFoundException {
 
 		String password = "user";
-		
+
 		UserDTO userDTOExpected = UserDTO.builder().username("username").firstName("first name").lastName("last name")
 				.userPasswordDTO(UserPasswordDTO.builder().password(password).matchingPassword(password).build())
 				.email("user@email.com").areTermsAccepted(true).build();
@@ -65,7 +64,7 @@ public class UserRegistrationServiceImplTest {
 		String hashedPassword = "$2a$10$FnkNozkIGR1ec3tsByXTG.PjPlu6Ntj7cW.lgPLIFkigHe6jreSw2";
 
 		when(userMapper.mapUserDTOToUser(userDTOExpected)).thenReturn(userExpected);
-		when(roleService.findByName(roleName)).thenReturn(Optional.of(roleExpected));
+		when(roleService.findByName(roleName)).thenReturn(roleExpected);
 		when(bCryptPasswordEncoder.encode(userExpected.getPassword())).thenReturn(hashedPassword);
 
 		User userActual = userRegistrationService.registerUser(userDTOExpected);

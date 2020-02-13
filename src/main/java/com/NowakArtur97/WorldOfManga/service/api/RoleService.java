@@ -1,10 +1,9 @@
 package com.NowakArtur97.WorldOfManga.service.api;
 
-import java.util.Optional;
-
+import com.NowakArtur97.WorldOfManga.exception.RoleNotFoundException;
 import com.NowakArtur97.WorldOfManga.model.Role;
 
 public interface RoleService {
 
-	Optional<Role> findByName(String name);
+	Role findByName(String name) throws RoleNotFoundException;
 }

@@ -1,10 +1,9 @@
 package com.NowakArtur97.WorldOfManga.service.impl;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.NowakArtur97.WorldOfManga.exception.RoleNotFoundException;
 import com.NowakArtur97.WorldOfManga.model.Role;
 import com.NowakArtur97.WorldOfManga.repository.RoleRepository;
 import com.NowakArtur97.WorldOfManga.service.api.RoleService;
@@ -18,9 +17,9 @@ public class RoleServiceImpl implements RoleService {
 	private final RoleRepository roleRepository;
 
 	@Override
-	public Optional<Role> findByName(String name) {
+	public Role findByName(String name) throws RoleNotFoundException {
 
-		return roleRepository.findByName(name);
+		return roleRepository.findByName(name)
+				.orElseThrow(() -> new RoleNotFoundException("Role with name: " + name + " not found"));
 	}
-
 }
