@@ -63,7 +63,7 @@ public class RegistrationControllerTest {
 
 	@Test
 	@DisplayName("when process registration with correct data")
-	public void when_process_registration_with_correct_data_should_show_registration_page() {
+	public void when_process_registration_with_correct_data_should_show_login_page_with_message() {
 
 		UserDTO userDTO = UserDTO.builder().username("username").firstName("first name").lastName("last name")
 				.userPasswordDTO(UserPasswordDTO.builder().password("password1").matchingPassword("password1").build())
@@ -82,11 +82,15 @@ public class RegistrationControllerTest {
 	@DisplayName("when process registration with incorrect data")
 	public void when_process_registration_with_incorrect_data_should_show_registration_page() {
 
+		String username = "";
+		String email = "useremail,";
+		boolean areTermsAccepted = false;
+
 		UserPasswordDTO userPasswordDTO = UserPasswordDTO.builder().password("pass").matchingPassword("password1")
 				.build();
 
-		UserDTO userDTO = UserDTO.builder().username("").userPasswordDTO(userPasswordDTO).email("useremail,")
-				.areTermsAccepted(false).build();
+		UserDTO userDTO = UserDTO.builder().username(username).userPasswordDTO(userPasswordDTO).email(email)
+				.areTermsAccepted(areTermsAccepted).build();
 
 		assertAll(
 				() -> mockMvc
@@ -98,9 +102,15 @@ public class RegistrationControllerTest {
 						.andExpect(model().attributeHasFieldErrors("userDTO", "userPasswordDTO.password"))
 						.andExpect(model().attributeHasFieldErrors("userDTO", "email"))
 						.andExpect(model().attributeHasFieldErrors("userDTO", "areTermsAccepted"))
-						.andExpect(model().attribute("userDTO", hasProperty("username", is(""))))
-						.andExpect(model().attribute("userDTO", hasProperty("email", is("useremail,"))))
-						.andExpect(model().attribute("userDTO", hasProperty("areTermsAccepted", is(false)))),
+						.andExpect(model().attribute("userDTO", hasProperty("username", is(username))))
+						.andExpect(model().attribute("userDTO",
+								hasProperty("userPasswordDTO",
+										hasProperty("password", is(userPasswordDTO.getPassword())))))
+						.andExpect(model().attribute("userDTO",
+								hasProperty("userPasswordDTO",
+										hasProperty("matchingPassword", is(userPasswordDTO.getMatchingPassword())))))
+						.andExpect(model().attribute("userDTO", hasProperty("email", is(email))))
+						.andExpect(model().attribute("userDTO", hasProperty("areTermsAccepted", is(areTermsAccepted)))),
 				() -> verify(userRegistrationService, never()).registerUser(userDTO));
 	}
 }
