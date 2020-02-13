@@ -1,4 +1,4 @@
-package com.NowakArtur97.WorldOfManga.validation.manga;
+package com.NowakArtur97.WorldOfManga.validation.mangaTranslation;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
