@@ -51,7 +51,7 @@ public class RoleServiceImplTest {
 
 	@Test
 	@DisplayName("when role not found")
-	public void when_role_not_found_should_throw_exception() throws RoleNotFoundException {
+	public void when_role_not_found_should_throw_exception() {
 
 		String roleName = "UNKNOWN_ROLE";
 
