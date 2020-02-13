@@ -19,6 +19,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.Errors;
 
+import com.NowakArtur97.WorldOfManga.dto.MangaDTO;
 import com.NowakArtur97.WorldOfManga.dto.MangaTranslationDTO;
 import com.NowakArtur97.WorldOfManga.service.api.MangaTranslationService;
 import com.NowakArtur97.WorldOfManga.validation.manga.MangaTranslationValidator;
@@ -42,41 +43,121 @@ public class MangaTranslationValidatorTest {
 
 		String description = "Correct description";
 
-		MangaTranslationDTO mangaTranslationDTO = MangaTranslationDTO.builder().title(title).description(description)
+		MangaTranslationDTO mangaTranslationEnDTO = MangaTranslationDTO.builder().title(title).description(description)
 				.build();
 
-		Errors errors = new BeanPropertyBindingResult(mangaTranslationDTO, "mangaTranslationDTO");
+		MangaTranslationDTO mangaTranslationPlDTO = MangaTranslationDTO.builder().title(title).description(description)
+				.build();
+
+		MangaDTO mangaDTO = MangaDTO.builder().enTranslation(mangaTranslationEnDTO).plTranslation(mangaTranslationPlDTO)
+				.build();
+
+		Errors errors = new BeanPropertyBindingResult(mangaDTO, "mangaDTO");
 
 		when(mangaTranslationService.isTitleAlreadyInUse(title)).thenReturn(false);
 
-		mangaTranslationValidator.validate(mangaTranslationDTO, errors);
+		mangaTranslationValidator.validate(mangaDTO, errors);
 
 		assertAll(() -> assertFalse(errors.hasErrors(), () -> "shouldn`t have errors: " + errors.hasErrors()),
 				() -> assertNull(errors.getFieldError("title"),
 						() -> "shouldn`t title be in use, but was: " + errors.getFieldError("title")),
-				() -> verify(mangaTranslationService, times(1)).isTitleAlreadyInUse(title));
+				() -> verify(mangaTranslationService, times(2)).isTitleAlreadyInUse(title));
 	}
 
 	@Test
-	@DisplayName("when validate correct manga translation dto but title is already in use")
-	public void when_validate_correct_manga_translation_but_title_is_already_in_use_should_have_errors() {
+	@DisplayName("when validate correct manga translation dto but title in both languages is already in use")
+	public void when_validate_correct_manga_translation_but_title_in_both_languages_is_already_in_use_should_have_errors() {
 
 		String title = "Title in use";
 
 		String description = "Correct description";
 
-		MangaTranslationDTO mangaTranslationDTO = MangaTranslationDTO.builder().title(title).description(description)
+		MangaTranslationDTO mangaTranslationEnDTO = MangaTranslationDTO.builder().title(title).description(description)
 				.build();
 
-		Errors errors = new BeanPropertyBindingResult(mangaTranslationDTO, "mangaTranslationDTO");
+		MangaTranslationDTO mangaTranslationPlDTO = MangaTranslationDTO.builder().title(title).description(description)
+				.build();
+
+		MangaDTO mangaDTO = MangaDTO.builder().enTranslation(mangaTranslationEnDTO).plTranslation(mangaTranslationPlDTO)
+				.build();
+
+		Errors errors = new BeanPropertyBindingResult(mangaDTO, "mangaDTO");
 
 		when(mangaTranslationService.isTitleAlreadyInUse(title)).thenReturn(true);
 
-		mangaTranslationValidator.validate(mangaTranslationDTO, errors);
+		mangaTranslationValidator.validate(mangaDTO, errors);
 
 		assertAll(() -> assertTrue(errors.hasErrors(), () -> "should have errors: " + errors.hasErrors()),
-				() -> assertNotNull(errors.getFieldError("title"),
-						() -> "should title be in use, but was: " + errors.getFieldError("title")),
-				() -> verify(mangaTranslationService, times(1)).isTitleAlreadyInUse(title));
+				() -> assertNotNull(errors.getFieldError("enTranslation.title"),
+						() -> "should english title be in use, but was: "
+								+ errors.getFieldError("enTranslation.title")),
+				() -> assertNotNull(errors.getFieldError("plTranslation.title"),
+						() -> "should polish title be in use, but was: " + errors.getFieldError("plTranslation.title")),
+				() -> verify(mangaTranslationService, times(2)).isTitleAlreadyInUse(title));
+	}
+
+	@Test
+	@DisplayName("when validate correct manga translation dto but title in english is already in use")
+	public void when_validate_correct_manga_translation_but_title_in_english_is_already_in_use_should_have_errors() {
+
+		String title = "Title in use";
+
+		String description = "Correct description";
+
+		MangaTranslationDTO mangaTranslationEnDTO = MangaTranslationDTO.builder().title(title).description(description)
+				.build();
+
+		MangaTranslationDTO mangaTranslationPlDTO = MangaTranslationDTO.builder().title(title).description(description)
+				.build();
+
+		MangaDTO mangaDTO = MangaDTO.builder().enTranslation(mangaTranslationEnDTO).plTranslation(mangaTranslationPlDTO)
+				.build();
+
+		Errors errors = new BeanPropertyBindingResult(mangaDTO, "mangaDTO");
+
+		when(mangaTranslationService.isTitleAlreadyInUse(title)).thenReturn(true).thenReturn(false);
+
+		mangaTranslationValidator.validate(mangaDTO, errors);
+
+		assertAll(() -> assertTrue(errors.hasErrors(), () -> "should have errors: " + errors.hasErrors()),
+				() -> assertNotNull(errors.getFieldError("enTranslation.title"),
+						() -> "should english title be in use, but was: "
+								+ errors.getFieldError("enTranslation.title")),
+				() -> assertNull(errors.getFieldError("plTranslation.title"),
+						() -> "shouldn`t polish title be in use, but was: "
+								+ errors.getFieldError("plTranslation.title")),
+				() -> verify(mangaTranslationService, times(2)).isTitleAlreadyInUse(title));
+	}
+
+	@Test
+	@DisplayName("when validate correct manga translation dto but title in polish is already in use")
+	public void when_validate_correct_manga_translation_but_title_in_polish_is_already_in_use_should_have_errors() {
+
+		String title = "Title in use";
+
+		String description = "Correct description";
+
+		MangaTranslationDTO mangaTranslationEnDTO = MangaTranslationDTO.builder().title(title).description(description)
+				.build();
+
+		MangaTranslationDTO mangaTranslationPlDTO = MangaTranslationDTO.builder().title(title).description(description)
+				.build();
+
+		MangaDTO mangaDTO = MangaDTO.builder().enTranslation(mangaTranslationEnDTO).plTranslation(mangaTranslationPlDTO)
+				.build();
+
+		Errors errors = new BeanPropertyBindingResult(mangaDTO, "mangaDTO");
+
+		when(mangaTranslationService.isTitleAlreadyInUse(title)).thenReturn(false).thenReturn(true);
+
+		mangaTranslationValidator.validate(mangaDTO, errors);
+
+		assertAll(() -> assertTrue(errors.hasErrors(), () -> "should have errors: " + errors.hasErrors()),
+				() -> assertNull(errors.getFieldError("enTranslation.title"),
+						() -> "shouldn`t english title be in use, but was: "
+								+ errors.getFieldError("enTranslation.title")),
+				() -> assertNotNull(errors.getFieldError("plTranslation.title"),
+						() -> "should polish title be in use, but was: " + errors.getFieldError("plTranslation.title")),
+				() -> verify(mangaTranslationService, times(2)).isTitleAlreadyInUse(title));
 	}
 }
