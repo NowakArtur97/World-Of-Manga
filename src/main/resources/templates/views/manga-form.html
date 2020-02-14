@@ -16,22 +16,22 @@
             <div class="form__group">
                 <label class="form__label" for="enTranslation" th:text="#{form.manga.enTranslation.title}"></label>
                 <p class="form__message form__message--failure" th:if="${#fields.hasErrors('enTranslation.title')}" th:errors="*{enTranslation.title}" ></p>
-                <input class="form__input" type="text" name="enTranslation" th:field="*{enTranslation.title}">
+                <input class="form__input" type="text" name="enTranslation.title" th:field="*{enTranslation.title}">
             </div>
             <div class="form__group">
                 <label class="form__label" for="enTranslation" th:text="#{form.manga.enTranslation.description}"></label>
                 <p class="form__message form__message--failure" th:if="${#fields.hasErrors('enTranslation.description')}" th:errors="*{enTranslation.description}" ></p>
-                <input class="form__input" type="text" name="enTranslation" th:field="*{enTranslation.description}">
+                <input class="form__input" type="text" name="enTranslation.description" th:field="*{enTranslation.description}">
             </div>
               <div class="form__group">
                 <label class="form__label" for="plTranslation" th:text="#{form.manga.plTranslation.title}"></label>
                 <p class="form__message form__message--failure" th:if="${#fields.hasErrors('plTranslation.title')}" th:errors="*{plTranslation.title}" ></p>
-                <input class="form__input" type="text" name="plTranslation" th:field="*{plTranslation.title}">
+                <input class="form__input" type="text" name="plTranslation.title" th:field="*{plTranslation.title}">
             </div>
             <div class="form__group">
                 <label class="form__label" for="plTranslation" th:text="#{form.manga.plTranslation.description}"></label>
                 <p class="form__message form__message--failure" th:if="${#fields.hasErrors('plTranslation.description')}" th:errors="*{plTranslation.description}" ></p>
-                <input class="form__input" type="text" name="plTranslation" th:field="*{plTranslation.description}">
+                <input class="form__input" type="text" name="plTranslation.description" th:field="*{plTranslation.description}">
             </div>
             <div class="form__group">
                 <button class="form__submit" type="submit" th:text="#{form.manga.submit}"></button>
