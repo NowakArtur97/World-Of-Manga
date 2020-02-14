@@ -10,6 +10,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -34,6 +35,9 @@ public class Manga {
 	@Setter(value = AccessLevel.PRIVATE)
 	private Long id;
 
+	@ManyToMany(mappedBy = "createdMangas")
+	private final Set<Author> authors = new HashSet<>();;
+
 	@OneToMany(mappedBy = "manga", cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST,
 			CascadeType.REFRESH }, orphanRemoval = false, fetch = FetchType.LAZY)
 	private final Set<MangaTranslation> translations = new HashSet<>();
@@ -42,5 +46,17 @@ public class Manga {
 
 		translations.add(mangaTranslation);
 		mangaTranslation.setManga(this);
+	}
+
+	public void addAuthor(Author author) {
+
+		this.getAuthors().add(author);
+		author.addManga(this);
+	}
+
+	public void removeAuthor(Author author) {
+
+		this.getAuthors().remove(author);
+		author.removeManga(this);
 	}
 }
