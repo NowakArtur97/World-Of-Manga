@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
 import com.NowakArtur97.WorldOfManga.controller.manga.seleniumPOM.MangaCreationControllerSeleniumPOM;
+import com.NowakArtur97.WorldOfManga.controller.unloggedUser.seleniumPOM.LoginControllerSeleniumPOM;
 import com.NowakArtur97.WorldOfManga.service.api.MangaTranslationService;
 import com.NowakArtur97.WorldOfManga.testUtil.selenium.SeleniumUITest;
 
@@ -30,11 +31,15 @@ public class MangaCreationControllerUITest extends SeleniumUITest {
 
 	protected MangaCreationControllerSeleniumPOM mangaFormPage;
 
+	protected LoginControllerSeleniumPOM loginPage;
+
 	@Autowired
 	protected MangaTranslationService mangaTranslationService;
 
 	@BeforeEach
 	public void setupPOM() {
+
+		loginPage = new LoginControllerSeleniumPOM(webDriver);
 
 		mangaFormPage = new MangaCreationControllerSeleniumPOM(webDriver);
 	}

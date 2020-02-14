@@ -1,6 +1,6 @@
 package com.NowakArtur97.WorldOfManga.testUtil.selenium;
 
-import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -35,8 +35,8 @@ public class SeleniumUITest {
 		webDriver = new ChromeDriver();
 	}
 
-	@AfterEach
-	public void tearDown() {
+	@AfterAll
+	public static void tearDown() {
 
 		if (webDriver != null) {
 

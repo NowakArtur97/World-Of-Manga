@@ -17,10 +17,10 @@ import com.NowakArtur97.WorldOfManga.testUtil.extension.ScreenshotWatcher;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @ExtendWith(ScreenshotWatcher.class)
 @TestPropertySource({ "classpath:/validation/messages_en.properties", "classpath:/pageContent/messages_en.properties" })
-@DisplayName("Registration Controller UI Eng Tests")
-@Tag("RegistrationControllerUIEng_Tests")
+@DisplayName("Registration Controller UI En Tests")
+@Tag("RegistrationControllerUIEn_Tests")
 @DirtiesContext
-public class RegistrationControllerUIEngTest extends RegistrationControllerUITest {
+public class RegistrationControllerUIEnTest extends RegistrationControllerUITest {
 
 	@Test
 	@DisplayName("when username is already in use")

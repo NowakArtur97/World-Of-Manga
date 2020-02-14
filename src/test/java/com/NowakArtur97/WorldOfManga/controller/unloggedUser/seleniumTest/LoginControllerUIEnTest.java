@@ -18,10 +18,10 @@ import com.NowakArtur97.WorldOfManga.testUtil.extension.ScreenshotWatcher;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @ExtendWith(ScreenshotWatcher.class)
 @TestPropertySource("classpath:/pageContent/messages_en.properties")
-@DisplayName("Registration Controller UI Eng Tests")
-@Tag("RegistrationControllerUIEng_Tests")
+@DisplayName("Registration Controller UI En Tests")
+@Tag("RegistrationControllerUIEn_Tests")
 @DirtiesContext
-public class LoginControllerUIEngTest extends LoginControllerUITest {
+public class LoginControllerUIEnTest extends LoginControllerUITest {
 
 	@Test
 	@DisplayName("when login with bad credentials")

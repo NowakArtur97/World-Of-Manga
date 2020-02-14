@@ -1,5 +1,7 @@
 package com.NowakArtur97.WorldOfManga.controller.manga.seleniumPOM;
 
+import java.util.List;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -15,20 +17,25 @@ public class MangaCreationControllerSeleniumPOM extends SeleniumPageObjectModel 
 	private static final String DESCRIPTION_EN = "enTranslation.description";
 	private static final String TITLE_PL = "plTranslation.title";
 	private static final String DESCRIPTION_PL = "plTranslation.description";
-	private static final String SUBMIT_CLASS = "form__submit";
+	private static final String FORM_MESSAGE_FAILURE_CLASS = "form__message--failure";
 	private static final String FORM_BOX_CLASS = "form__box";
+	private static final String SUBMIT_CLASS = "form__submit";
+	private static final String ADD_OR_UPDATE_MANGA_LINK = "//a[@href='/admin/addOrUpdateManga']";
 
-	@FindBy(className = TITLE_EN)
+	@FindBy(name = TITLE_EN)
 	private WebElement titleEnInput;
 
-	@FindBy(className = DESCRIPTION_EN)
+	@FindBy(name = DESCRIPTION_EN)
 	private WebElement descriptionEnInput;
 
-	@FindBy(className = TITLE_PL)
+	@FindBy(name = TITLE_PL)
 	private WebElement titlePlInput;
 
-	@FindBy(className = DESCRIPTION_PL)
+	@FindBy(name = DESCRIPTION_PL)
 	private WebElement descriptionPlInput;
+
+	@FindBy(className = FORM_MESSAGE_FAILURE_CLASS)
+	private List<WebElement> failrueMessages;
 
 	@FindBy(className = FORM_BOX_CLASS)
 	private WebElement formBox;
@@ -36,6 +43,9 @@ public class MangaCreationControllerSeleniumPOM extends SeleniumPageObjectModel 
 	@FindBy(className = SUBMIT_CLASS)
 	private WebElement submitButton;
 
+	@FindBy(xpath = ADD_OR_UPDATE_MANGA_LINK)
+	private WebElement addOrUpdateMangaLink;
+	
 	public MangaCreationControllerSeleniumPOM(WebDriver webDriver) {
 
 		super(webDriver);
@@ -70,21 +80,31 @@ public class MangaCreationControllerSeleniumPOM extends SeleniumPageObjectModel 
 
 		submitButton.click();
 	}
+	
+	public void clickAddOrUpdateMangaLinkButton() {
+		
+		addOrUpdateMangaLink.click();
+	}
 
 	public String getFormBoxText() {
 
 		return formBox.getText();
 	}
 
+	public int countFailureMessages() {
+
+		return failrueMessages.size();
+	}
+
 	public void fillMandatoryLoginFormFields(String enTitle, String enDescription, String plTitle,
 			String plDescription) {
 
 		setEnTitle(enTitle);
-		
+
 		setEnDescription(enDescription);
-		
+
 		setPlTitle(plTitle);
-		
+
 		setPlDescription(plDescription);
 
 		clickSubmitMangaFormButton();

@@ -1,7 +1,7 @@
-package com.NowakArtur97.WorldOfManga.controller.main.seleniumTest;
+package com.NowakArtur97.WorldOfManga.controller.user.seleniumTest;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.DisplayName;
@@ -18,25 +18,32 @@ import com.NowakArtur97.WorldOfManga.testUtil.extension.ScreenshotWatcher;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @ExtendWith(ScreenshotWatcher.class)
 @TestPropertySource("classpath:/pageContent/messages_en.properties")
-@DisplayName("Main Controller UI Eng Tests")
-@Tag("MainControllerUIEng_Tests")
+@DisplayName("Logout Controller UI En Tests")
+@Tag("LogoutControllerUIEn_Tests")
 @DirtiesContext
-public class MainControllerUIEngTest extends MainControllerUITest {
+public class LogoutControllerUIEnTest extends LogoutControllerUITest {
 
 	@Test
-	@DisplayName("when load main page")
-	public void when_load_main_page_should_load_all_page_content() {
+	@DisplayName("when correct logout")
+	public void when_correct_logout_should_sing_out_user() {
 
-		mainPage.loadMainView(LanguageVersion.ENG);
+		String username = "user";
+		String password = "user";
 
-		assertAll(() -> assertTrue(mainPage.getHeaderText().contains(headerLogo), () -> "should load header logo"),
+		loginPage.loadLoginView(LanguageVersion.ENG);
+
+		loginPage.fillMandatoryLoginFields(username, password);
+
+		logoutPage.signOut();
+
+		assertAll(
+				() -> assertFalse(mainPage.getHeaderText().contains(userLoggedInMangaListOption.toUpperCase()),
+						() -> "should not show manga list option"),
+				() -> assertFalse(mainPage.getHeaderText().contains(userLoggedInSignOutOption.toUpperCase()),
+						() -> "should not show sign out option"),
 				() -> assertTrue(mainPage.getHeaderText().contains(headerRegistrationOption.toUpperCase()),
-						() -> "should load header sing up option"),
+						() -> "should show manga list option"),
 				() -> assertTrue(mainPage.getHeaderText().contains(headerLoginOption.toUpperCase()),
-						() -> "should load header sign in option"),
-				() -> assertTrue(mainPage.getHeaderText().contains(headerLanguageOption.toUpperCase()),
-						() -> "should load header language option"),
-				() -> assertNotNull(mainPage.getFooterText(), () -> "should load footer fragment text"),
-				() -> assertNotNull(mainPage.getMainPageText(), () -> "should load main fragment text"));
+						() -> "should show sign out option"));
 	}
 }

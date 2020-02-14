@@ -33,6 +33,8 @@ public class ScreenshotUtil {
 			} catch (IOException e) {
 				System.out.println("Can`t take screenshot on path: " + projectPath + screenshotPath);
 			}
+			
+			webDriver.close();
 		}
 	}
 }
