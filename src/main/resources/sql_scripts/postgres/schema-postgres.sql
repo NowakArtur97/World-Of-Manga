@@ -31,20 +31,40 @@ CREATE TABLE world_of_manga.user_role(
 	CONSTRAINT "FK_ROLE_USER" FOREIGN KEY ("role_id") REFERENCES world_of_manga.role("role_id") ON DELETE NO ACTION ON UPDATE NO ACTION
 ); 
 
-DROP TABLE IF EXISTS world_of_manga.language;
+DROP TABLE IF EXISTS world_of_manga.language CASCADE;
 
 CREATE TABLE world_of_manga.language (
     "language_id" SERIAL PRIMARY KEY,
     "locale" VARCHAR(6) NOT NULL UNIQUE
 );
 
-DROP TABLE IF EXISTS world_of_manga.manga;
+DROP TABLE IF EXISTS world_of_manga.manga CASCADE;
 
 CREATE TABLE world_of_manga.manga (
     "manga_id" SERIAL PRIMARY KEY
 );
 
-DROP TABLE IF EXISTS world_of_manga.manga_translation;
+DROP TABLE IF EXISTS world_of_manga.author CASCADE;
+
+CREATE TABLE world_of_manga.author (
+    "author_id" SERIAL PRIMARY KEY
+);
+
+DROP TABLE IF EXISTS world_of_manga.manga_author CASCADE;
+
+CREATE TABLE world_of_manga.manga_author (
+    "manga_id" SERIAL,
+    "author_id" SERIAL,
+    PRIMARY KEY ("manga_id" , "author_id"),
+    CONSTRAINT "FK_MANGA_AUTHOR" FOREIGN KEY ("manga_id")
+        REFERENCES world_of_manga.manga ("manga_id")
+        ON DELETE NO ACTION ON UPDATE NO ACTION,
+    CONSTRAINT "FK_AUTHOR_MANGA" FOREIGN KEY ("author_id")
+        REFERENCES world_of_manga.author ("author_id")
+        ON DELETE NO ACTION ON UPDATE NO ACTION
+);
+
+DROP TABLE IF EXISTS world_of_manga.manga_translation CASCADE;
 
 CREATE TABLE world_of_manga.manga_translation (
     "manga_translation_id" SERIAL PRIMARY KEY,
