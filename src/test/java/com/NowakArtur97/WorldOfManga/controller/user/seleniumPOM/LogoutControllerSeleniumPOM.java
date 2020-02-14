@@ -1,5 +1,6 @@
 package com.NowakArtur97.WorldOfManga.controller.user.seleniumPOM;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -20,6 +21,7 @@ public class LogoutControllerSeleniumPOM extends SeleniumPageObjectModel {
 
 	public void signOut() {
 
-		logoutLink.click();
+		JavascriptExecutor executor = (JavascriptExecutor)webDriver;
+		executor.executeScript("arguments[0].click();", logoutLink);
 	}
 }

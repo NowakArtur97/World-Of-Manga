@@ -2,6 +2,7 @@ package com.NowakArtur97.WorldOfManga.controller.manga.seleniumPOM;
 
 import java.util.List;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -83,7 +84,8 @@ public class MangaCreationControllerSeleniumPOM extends SeleniumPageObjectModel 
 	
 	public void clickAddOrUpdateMangaLinkButton() {
 		
-		addOrUpdateMangaLink.click();
+		JavascriptExecutor executor = (JavascriptExecutor)webDriver;
+		executor.executeScript("arguments[0].click();", addOrUpdateMangaLink);
 	}
 
 	public String getFormBoxText() {

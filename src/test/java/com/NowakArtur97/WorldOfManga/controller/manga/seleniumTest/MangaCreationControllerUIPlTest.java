@@ -16,11 +16,11 @@ import com.NowakArtur97.WorldOfManga.testUtil.extension.ScreenshotWatcher;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @ExtendWith(ScreenshotWatcher.class)
-@TestPropertySource({ "classpath:/validation/messages_en.properties", "classpath:/pageContent/messages_en.properties" })
-@DisplayName("Manga Creation Controller UI En Tests")
-@Tag("MangaCreationControllerUIEn_Tests")
+@TestPropertySource({ "classpath:/validation/messages_pl.properties", "classpath:/pageContent/messages_pl.properties" })
+@DisplayName("Manga Creation Controller UI Pl Tests")
+@Tag("MangaCreationControllerUIPl_Tests")
 @DirtiesContext
-public class MangaCreationControllerUIEnTest extends MangaCreationControllerUITest {
+public class MangaCreationControllerUIPlTest extends MangaCreationControllerUITest {
 
 	@Test
 	@DisplayName("when correct manga creation with all fields")
@@ -29,7 +29,7 @@ public class MangaCreationControllerUIEnTest extends MangaCreationControllerUITe
 		String englishTitle = "English title";
 		String polishTitle = "Polish title";
 
-		loginPage.loadLoginView(LanguageVersion.ENG);
+		loginPage.loadLoginView(LanguageVersion.PL);
 
 		loginPage.fillMandatoryLoginFields("admin", "admin");
 
@@ -51,7 +51,7 @@ public class MangaCreationControllerUIEnTest extends MangaCreationControllerUITe
 
 		String blankField = "";
 
-		loginPage.loadLoginView(LanguageVersion.ENG);
+		loginPage.loadLoginView(LanguageVersion.PL);
 
 		loginPage.fillMandatoryLoginFields("admin", "admin");
 
@@ -72,7 +72,7 @@ public class MangaCreationControllerUIEnTest extends MangaCreationControllerUITe
 
 		String longText = "asdfghjklpasdfghjklpasdfghjklpasdfghjklpasdfghjklp!@#$%";
 
-		loginPage.loadLoginView(LanguageVersion.ENG);
+		loginPage.loadLoginView(LanguageVersion.PL);
 
 		loginPage.fillMandatoryLoginFields("admin", "admin");
 

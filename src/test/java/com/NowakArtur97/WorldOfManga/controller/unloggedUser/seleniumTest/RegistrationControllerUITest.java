@@ -55,7 +55,7 @@ public class RegistrationControllerUITest extends SeleniumUITest {
 	protected UserService userService;
 
 	@BeforeEach
-	public void setupPOM(UserService userService) {
+	public void setupPOM() {
 
 		registrationPage = new RegistrationControllerSeleniumPOM(webDriver);
 	}

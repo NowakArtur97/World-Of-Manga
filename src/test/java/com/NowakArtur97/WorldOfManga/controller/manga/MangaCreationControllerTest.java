@@ -108,7 +108,7 @@ public class MangaCreationControllerTest {
 	@DisplayName("when add manga with incorrect data")
 	public void when_add_manga_with_incorrect_data_should_show_manga_form() {
 
-		String englishTitle = "";
+		String englishTitle = "asdfghjklpasdfghjklpasdfghjklpasdfghjklpasdfghjklp!@#$%";
 		String englishDescription = "English description";
 		String polishTitle = "Polish title";
 		String polishDescription = "";
