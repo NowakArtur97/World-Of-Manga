@@ -54,6 +54,27 @@ CREATE TABLE `manga` (
     PRIMARY KEY (`manga_id`)
 )  ENGINE=INNODB AUTO_INCREMENT=1 DEFAULT CHARSET=LATIN1;
 
+DROP TABLE IF EXISTS `author`;
+
+CREATE TABLE `author` (
+    `author_id` INT(11) NOT NULL AUTO_INCREMENT,
+    PRIMARY KEY (`author_id`)
+)  ENGINE=INNODB AUTO_INCREMENT=1 DEFAULT CHARSET=LATIN1;
+
+DROP TABLE IF EXISTS `manga_author`;
+
+CREATE TABLE `manga_author` (
+    `manga_id` INT(11) NOT NULL,
+    `author_id` INT(11) NOT NULL,
+    PRIMARY KEY (`manga_id` , `author_id`),
+    CONSTRAINT `FK_MANGA_AUTHOR` FOREIGN KEY (`manga_id`)
+        REFERENCES `manga` (`manga_id`)
+        ON DELETE NO ACTION ON UPDATE NO ACTION,
+    CONSTRAINT `FK_AUTHOR_MANGA` FOREIGN KEY (`author_id`)
+        REFERENCES `author` (`author_id`)
+        ON DELETE NO ACTION ON UPDATE NO ACTION
+)  ENGINE=INNODB AUTO_INCREMENT=1 DEFAULT CHARSET=LATIN1;
+
 DROP TABLE IF EXISTS `manga_translation`;
 
 CREATE TABLE `manga_translation` (
