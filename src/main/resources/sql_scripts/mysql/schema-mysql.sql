@@ -58,7 +58,7 @@ DROP TABLE IF EXISTS `author`;
 
 CREATE TABLE `author` (
     `author_id` INT(11) NOT NULL AUTO_INCREMENT,
-    `full_name` VARCHAR(40) NOT NULL,
+    `full_name` VARCHAR(50) NOT NULL,
     PRIMARY KEY (`author_id`),
     UNIQUE `AUTHOR_FULL_NAME_UNIQUE` (`full_name`)
 )  ENGINE=INNODB AUTO_INCREMENT=1 DEFAULT CHARSET=LATIN1;

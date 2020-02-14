@@ -48,7 +48,7 @@ DROP TABLE IF EXISTS world_of_manga.author CASCADE;
 
 CREATE TABLE world_of_manga.author (
     "author_id" SERIAL PRIMARY KEY,
-	"full_name" VARCHAR(40) NOT NULL UNIQUE
+	"full_name" VARCHAR(50) NOT NULL UNIQUE
 );
 
 DROP TABLE IF EXISTS world_of_manga.manga_author CASCADE;
