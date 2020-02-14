@@ -1,4 +1,4 @@
-package com.NowakArtur97.WorldOfManga.validation.mangaTranslation;
+package com.NowakArtur97.WorldOfManga.validation.manga;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -22,14 +22,15 @@ import org.springframework.validation.Errors;
 import com.NowakArtur97.WorldOfManga.dto.MangaDTO;
 import com.NowakArtur97.WorldOfManga.dto.MangaTranslationDTO;
 import com.NowakArtur97.WorldOfManga.service.api.MangaTranslationService;
+import com.NowakArtur97.WorldOfManga.validation.mangaTranslation.MangaValidator;
 
 @ExtendWith(MockitoExtension.class)
-@DisplayName("MangaTranslationValidator Tests")
-@Tag("MangaTranslationValidator_Tests")
-public class MangaTranslationValidatorTest {
+@DisplayName("Manga Validator Tests")
+@Tag("MangaValidator_Tests")
+public class MangaValidatorTest {
 
 	@InjectMocks
-	private MangaTranslationValidator mangaTranslationValidator;
+	private MangaValidator mangaDTOValidator;
 
 	@Mock
 	private MangaTranslationService mangaTranslationService;
@@ -55,7 +56,7 @@ public class MangaTranslationValidatorTest {
 
 		when(mangaTranslationService.isTitleAlreadyInUse(title)).thenReturn(false);
 
-		mangaTranslationValidator.validate(mangaDTO, errors);
+		mangaDTOValidator.validate(mangaDTO, errors);
 
 		assertAll(() -> assertFalse(errors.hasErrors(), () -> "shouldn`t have errors: " + errors.hasErrors()),
 				() -> assertNull(errors.getFieldError("title"),
@@ -84,7 +85,7 @@ public class MangaTranslationValidatorTest {
 
 		when(mangaTranslationService.isTitleAlreadyInUse(title)).thenReturn(true);
 
-		mangaTranslationValidator.validate(mangaDTO, errors);
+		mangaDTOValidator.validate(mangaDTO, errors);
 
 		assertAll(() -> assertTrue(errors.hasErrors(), () -> "should have errors: " + errors.hasErrors()),
 				() -> assertNotNull(errors.getFieldError("enTranslation.title"),
@@ -116,7 +117,7 @@ public class MangaTranslationValidatorTest {
 
 		when(mangaTranslationService.isTitleAlreadyInUse(title)).thenReturn(true).thenReturn(false);
 
-		mangaTranslationValidator.validate(mangaDTO, errors);
+		mangaDTOValidator.validate(mangaDTO, errors);
 
 		assertAll(() -> assertTrue(errors.hasErrors(), () -> "should have errors: " + errors.hasErrors()),
 				() -> assertNotNull(errors.getFieldError("enTranslation.title"),
@@ -149,7 +150,7 @@ public class MangaTranslationValidatorTest {
 
 		when(mangaTranslationService.isTitleAlreadyInUse(title)).thenReturn(false).thenReturn(true);
 
-		mangaTranslationValidator.validate(mangaDTO, errors);
+		mangaDTOValidator.validate(mangaDTO, errors);
 
 		assertAll(() -> assertTrue(errors.hasErrors(), () -> "should have errors: " + errors.hasErrors()),
 				() -> assertNull(errors.getFieldError("enTranslation.title"),

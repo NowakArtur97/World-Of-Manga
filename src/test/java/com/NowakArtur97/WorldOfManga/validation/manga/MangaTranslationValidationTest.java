@@ -1,4 +1,4 @@
-package com.NowakArtur97.WorldOfManga.validation.mangaTranslation;
+package com.NowakArtur97.WorldOfManga.validation.manga;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;

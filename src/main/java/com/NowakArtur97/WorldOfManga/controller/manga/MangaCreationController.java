@@ -18,7 +18,7 @@ import com.NowakArtur97.WorldOfManga.exception.LanguageNotFoundException;
 import com.NowakArtur97.WorldOfManga.model.MangaTranslation;
 import com.NowakArtur97.WorldOfManga.service.api.MangaService;
 import com.NowakArtur97.WorldOfManga.service.api.MangaTranslationService;
-import com.NowakArtur97.WorldOfManga.validation.mangaTranslation.MangaTranslationValidator;
+import com.NowakArtur97.WorldOfManga.validation.mangaTranslation.MangaValidator;
 
 import lombok.RequiredArgsConstructor;
 
@@ -31,7 +31,7 @@ public class MangaCreationController {
 	
 	private final MangaTranslationService mangaTranslationService;
 
-	private final MangaTranslationValidator mangaTranslationValidator;
+	private final MangaValidator mangaValidator;
 
 	@GetMapping(path = "/addOrUpdateManga")
 	public String showAddMangaPage(Model theModel) {
@@ -45,7 +45,7 @@ public class MangaCreationController {
 	public String processAddMangaPage(Model theModel, @ModelAttribute("mangaDTO") @Valid MangaDTO mangaDTO,
 			BindingResult result) throws LanguageNotFoundException {
 
-		mangaTranslationValidator.validate(mangaDTO, result);
+		mangaValidator.validate(mangaDTO, result);
 
 		if (result.hasErrors()) {
 

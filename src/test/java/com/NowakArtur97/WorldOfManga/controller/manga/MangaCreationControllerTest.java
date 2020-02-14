@@ -36,7 +36,7 @@ import com.NowakArtur97.WorldOfManga.exception.LanguageNotFoundException;
 import com.NowakArtur97.WorldOfManga.model.MangaTranslation;
 import com.NowakArtur97.WorldOfManga.service.api.MangaService;
 import com.NowakArtur97.WorldOfManga.service.api.MangaTranslationService;
-import com.NowakArtur97.WorldOfManga.validation.mangaTranslation.MangaTranslationValidator;
+import com.NowakArtur97.WorldOfManga.validation.mangaTranslation.MangaValidator;
 
 @ExtendWith(MockitoExtension.class)
 @DisplayName("Manga Creation Controller Tests")
@@ -55,7 +55,7 @@ public class MangaCreationControllerTest {
 	private MangaTranslationService mangaTranslationService;
 
 	@Mock
-	private MangaTranslationValidator mangaTranslationValidator;
+	private MangaValidator mangaValidator;
 
 	@BeforeEach
 	public void setUp() {
