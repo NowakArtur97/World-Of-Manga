@@ -19,7 +19,7 @@ import com.NowakArtur97.WorldOfManga.exception.LanguageNotFoundException;
 import com.NowakArtur97.WorldOfManga.model.MangaTranslation;
 import com.NowakArtur97.WorldOfManga.service.api.MangaService;
 import com.NowakArtur97.WorldOfManga.service.api.MangaTranslationService;
-import com.NowakArtur97.WorldOfManga.validation.mangaTranslation.MangaValidator;
+import com.NowakArtur97.WorldOfManga.validation.manga.MangaValidator;
 
 import lombok.RequiredArgsConstructor;
 

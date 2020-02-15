@@ -1,4 +1,4 @@
-package com.NowakArtur97.WorldOfManga.validation.mangaTranslation;
+package com.NowakArtur97.WorldOfManga.validation.manga;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -9,16 +9,13 @@ import com.NowakArtur97.WorldOfManga.dto.MangaDTO;
 import com.NowakArtur97.WorldOfManga.dto.MangaTranslationDTO;
 import com.NowakArtur97.WorldOfManga.service.api.MangaTranslationService;
 
+import lombok.RequiredArgsConstructor;
+
 @Component
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class MangaValidator implements Validator {
 
 	private final MangaTranslationService mangaTranslationService;
-
-	@Autowired
-	public MangaValidator(MangaTranslationService mangaTranslationService) {
-
-		this.mangaTranslationService = mangaTranslationService;
-	}
 
 	@Override
 	public boolean supports(Class<?> clazz) {

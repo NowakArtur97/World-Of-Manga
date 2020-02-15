@@ -6,4 +6,6 @@ import com.NowakArtur97.WorldOfManga.model.Author;
 public interface AuthorService {
 
 	Author addOrUpdate(AuthorDTO authorDTO);
+
+	boolean isAuthorAlreadyInDatabase(String fullName);
 }

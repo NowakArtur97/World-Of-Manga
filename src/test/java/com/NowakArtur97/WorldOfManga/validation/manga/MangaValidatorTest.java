@@ -22,7 +22,7 @@ import org.springframework.validation.Errors;
 import com.NowakArtur97.WorldOfManga.dto.MangaDTO;
 import com.NowakArtur97.WorldOfManga.dto.MangaTranslationDTO;
 import com.NowakArtur97.WorldOfManga.service.api.MangaTranslationService;
-import com.NowakArtur97.WorldOfManga.validation.mangaTranslation.MangaValidator;
+import com.NowakArtur97.WorldOfManga.validation.manga.MangaValidator;
 
 @ExtendWith(MockitoExtension.class)
 @DisplayName("Manga Validator Tests")
