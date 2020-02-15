@@ -10,9 +10,11 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.NowakArtur97.WorldOfManga.dto.AuthorDTO;
 import com.NowakArtur97.WorldOfManga.dto.MangaTranslationDTO;
 import com.NowakArtur97.WorldOfManga.dto.UserDTO;
 import com.NowakArtur97.WorldOfManga.dto.UserPasswordDTO;
+import com.NowakArtur97.WorldOfManga.model.Author;
 import com.NowakArtur97.WorldOfManga.model.MangaTranslation;
 import com.NowakArtur97.WorldOfManga.model.User;
 
@@ -28,12 +30,18 @@ public class ModelMapperTest {
 	@DisplayName("when map user dto to entity")
 	public void when_map_user_dto_to_entity_should_return_entity() {
 
-		UserDTO userDTOExpected = UserDTO.builder().username("username").firstName("first name").lastName("last name")
-				.userPasswordDTO(UserPasswordDTO.builder().password("password1").matchingPassword("password1").build())
-				.email("user@email.com").areTermsAccepted(true).build();
+		String username = "username";
+		String firstName = "first name";
+		String lastName = "last name";
+		String password = "password1";
+		String email = "user@email.com";
 
-		User userExpected = User.builder().username("username").firstName("first name").lastName("last name")
-				.password("password1").email("user@email.com").isEnabled(true).build();
+		UserDTO userDTOExpected = UserDTO.builder().username(username).firstName(firstName).lastName(lastName)
+				.userPasswordDTO(UserPasswordDTO.builder().password(password).matchingPassword(password).build())
+				.email(email).areTermsAccepted(true).build();
+
+		User userExpected = User.builder().username(username).firstName(firstName).lastName(lastName).password(password)
+				.email(email).isEnabled(true).build();
 
 		User userActual = modelMapper.map(userDTOExpected, User.class);
 
@@ -78,5 +86,23 @@ public class ModelMapperTest {
 						() -> "should return manga translation with description: "
 								+ mangaTranslationExpected.getDescription() + ", but was: "
 								+ mangaTranslationActual.getDescription()));
+	}
+
+	@Test
+	@DisplayName("when map author dto to entity")
+	public void when_map_author_dto_to_entity_should_return_entity() {
+
+		String fullName = "Firstname Lastname";
+
+		AuthorDTO authorDTOExpected = new AuthorDTO(fullName);
+
+		Author authorExpected = new Author(fullName);
+
+		AuthorDTO authorActual = modelMapper.map(authorDTOExpected, AuthorDTO.class);
+
+		assertAll(
+				() -> assertEquals(authorExpected.getFullName(), authorActual.getFullName(),
+						() -> "should return author with full name: " + authorExpected.getFullName() + ", but was: "
+								+ authorActual.getFullName()));
 	}
 }
