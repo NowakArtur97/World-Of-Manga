@@ -37,7 +37,7 @@ public class AuthorValidationTest {
 	@DisplayName("when author is correct")
 	public void when_author_is_correct_should_not_have_violations() {
 
-		String fullName = "Firstname Lastname";
+		String fullName = "Firstname LastName";
 
 		AuthorDTO authorDTO = new AuthorDTO(fullName);
 

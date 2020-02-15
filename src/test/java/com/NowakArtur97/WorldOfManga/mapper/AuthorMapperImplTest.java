@@ -33,7 +33,7 @@ public class AuthorMapperImplTest {
 	@DisplayName("when map author dto to entity")
 	public void when_map_authorr_dto_should_return_author_entity() {
 
-		String fullName = "Firstname Lastname";
+		String fullName = "Firstname LastName";
 
 		AuthorDTO authorDTOExpected = new AuthorDTO(fullName);
 
@@ -48,6 +48,5 @@ public class AuthorMapperImplTest {
 						() -> "should return author with full name: " + authorExpected.getFullName() + ", but was: "
 								+ authorActual.getFullName()),
 				() -> verify(modelMapper, times(1)).map(authorDTOExpected, Author.class));
-
 	}
 }

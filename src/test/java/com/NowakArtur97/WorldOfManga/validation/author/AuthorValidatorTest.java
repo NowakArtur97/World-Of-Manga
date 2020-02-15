@@ -37,7 +37,7 @@ public class AuthorValidatorTest {
 	@DisplayName("when validate correct author dto")
 	public void when_validate_correct_author_dto_should_not_have_errors() {
 
-		String fullName = "Firstname Lastname";
+		String fullName = "Firstname LastName";
 
 		AuthorDTO authorDTO = new AuthorDTO(fullName);
 
@@ -57,7 +57,7 @@ public class AuthorValidatorTest {
 	@DisplayName("when validate correct author dto but author is alreadysaved")
 	public void when_validate_correct_author_dto_but_author_is_already_saved_should_have_errors() {
 
-		String fullName = "Firstname Lastname";
+		String fullName = "Firstname LastName";
 
 		AuthorDTO authorDTO = new AuthorDTO(fullName);
 
