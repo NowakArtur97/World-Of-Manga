@@ -5,8 +5,6 @@ import java.util.Set;
 
 import javax.validation.Valid;
 
-import com.NowakArtur97.WorldOfManga.model.Author;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,11 +16,16 @@ import lombok.NoArgsConstructor;
 @Builder
 public class MangaDTO {
 
-	private final Set<@Valid Author> authors = new HashSet<>();
+	private final Set<@Valid AuthorDTO> authors = new HashSet<>();
 
 	@Valid
 	private MangaTranslationDTO enTranslation = new MangaTranslationDTO();
 
 	@Valid
 	private MangaTranslationDTO plTranslation = new MangaTranslationDTO();
+
+	public void addAuthorDTO(AuthorDTO authorDTO) {
+
+		this.getAuthors().add(authorDTO);
+	}
 }

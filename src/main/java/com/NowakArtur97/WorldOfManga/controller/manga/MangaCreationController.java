@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.NowakArtur97.WorldOfManga.dto.AuthorDTO;
 import com.NowakArtur97.WorldOfManga.dto.MangaDTO;
 import com.NowakArtur97.WorldOfManga.exception.LanguageNotFoundException;
 import com.NowakArtur97.WorldOfManga.model.MangaTranslation;
@@ -28,7 +29,7 @@ import lombok.RequiredArgsConstructor;
 public class MangaCreationController {
 
 	private final MangaService mangaService;
-	
+
 	private final MangaTranslationService mangaTranslationService;
 
 	private final MangaValidator mangaValidator;
@@ -36,7 +37,11 @@ public class MangaCreationController {
 	@GetMapping(path = "/addOrUpdateManga")
 	public String showAddMangaPage(Model theModel) {
 
-		theModel.addAttribute("mangaDTO", new MangaDTO());
+		MangaDTO mangaDTO = new MangaDTO();
+		AuthorDTO authorDTO = new AuthorDTO();
+
+		theModel.addAttribute("mangaDTO", mangaDTO);
+		theModel.addAttribute("authorDTO", authorDTO);
 
 		return "views/manga-form";
 	}
@@ -50,14 +55,15 @@ public class MangaCreationController {
 		if (result.hasErrors()) {
 
 			theModel.addAttribute("mangaDTO", mangaDTO);
+			theModel.addAttribute("authorDTO", new AuthorDTO());
 
 			return "views/manga-form";
 		}
 
 		Set<MangaTranslation> mangaTranslations = mangaTranslationService.addOrUpdate(mangaDTO);
-		
+
 		mangaService.addOrUpdate(mangaDTO, mangaTranslations);
 
-		return "redirect:/";
+		return "redirect:/admin/addOrUpdateManga";
 	}
 }

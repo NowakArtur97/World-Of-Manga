@@ -9,7 +9,7 @@
 </head>
 
 <body class="page page--register">
-    <div layout:fragment="content" class="form page__form">
+    <div layout:fragment="content" class="form form--two_forms page__form">
         <form th:action="@{addOrUpdateManga}" th:object="${mangaDTO}" method="POST"
             class="form__box form__box--register">
             <h1 class="form__title" th:text="#{form.manga.title}"></h1>
@@ -33,8 +33,21 @@
                 <p class="form__message form__message--failure" th:if="${#fields.hasErrors('plTranslation.description')}" th:errors="*{plTranslation.description}" ></p>
                 <input class="form__input" type="text" name="plTranslation.description" th:field="*{plTranslation.description}">
             </div>
-            <div class="form__group">
+             <div class="form__group">
                 <button class="form__submit" type="submit" th:text="#{form.manga.submit}"></button>
+            </div>
+        </form>
+        
+         <form th:action="@{addOrUpdateAuthor}" th:object="${authorDTO}" method="POST"
+            class="form__box form__box--register">
+            <h1 class="form__title" th:text="#{form.author.title}"></h1>
+            <div class="form__group">
+                <label class="form__label" for="author" th:text="#{form.author.fullName}"></label>
+                <p class="form__message form__message--failure" th:if="${#fields.hasErrors('fullName')}" th:errors="*{fullName}" ></p>
+                <input class="form__input" type="text" name="author.fullName" th:field="*{fullName}">
+            </div>
+            <div class="form__group">
+                <button class="form__submit" type="submit" th:text="#{form.author.submit}"></button>
             </div>
         </form>
     </div>
