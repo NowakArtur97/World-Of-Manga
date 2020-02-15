@@ -41,12 +41,12 @@ import com.NowakArtur97.WorldOfManga.validation.manga.MangaValidator;
 @ExtendWith(MockitoExtension.class)
 @DisplayName("Manga Creation Controller Tests")
 @Tag("MangaCreationController_Tests")
-public class MangaCreationControllerTest {
+public class MangaControllerTest {
 
 	private MockMvc mockMvc;
 
 	@InjectMocks
-	private MangaCreationController mangaCreationController;
+	private MangaController mangaController;
 
 	@Mock
 	private MangaService mangaService;
@@ -60,7 +60,7 @@ public class MangaCreationControllerTest {
 	@BeforeEach
 	public void setUp() {
 
-		mockMvc = MockMvcBuilders.standaloneSetup(mangaCreationController).build();
+		mockMvc = MockMvcBuilders.standaloneSetup(mangaController).build();
 	}
 
 	@Test

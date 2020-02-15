@@ -26,7 +26,7 @@ import lombok.RequiredArgsConstructor;
 @Controller
 @RequestMapping(path = "/admin")
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
-public class MangaCreationController {
+public class MangaController {
 
 	private final MangaService mangaService;
 
