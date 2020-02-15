@@ -31,15 +31,12 @@ public class AuthorController {
 	@GetMapping(path = "/addOrUpdateAuthor")
 	public String showAddMangaPage(Model theModel) {
 
-		MangaDTO mangaDTO = new MangaDTO();
-		AuthorDTO authorDTO = new AuthorDTO();
-
-		theModel.addAttribute("mangaDTO", mangaDTO);
-		theModel.addAttribute("authorDTO", authorDTO);
+		theModel.addAttribute("mangaDTO", new MangaDTO());
+		theModel.addAttribute("authorDTO", new AuthorDTO());
 
 		return "views/manga-form";
 	}
-	
+
 	@PostMapping(path = "/addOrUpdateAuthor")
 	public String processAddAuthorPage(Model theModel, @ModelAttribute("authorDTO") @Valid AuthorDTO authorDTO,
 			BindingResult result) throws LanguageNotFoundException {
@@ -56,6 +53,6 @@ public class AuthorController {
 
 		authorService.addOrUpdate(authorDTO);
 
-		return "redirect:/admin/addOrUpdateManga";
+		return "redirect:/admin/addOrUpdateAuthor";
 	}
 }

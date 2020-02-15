@@ -31,7 +31,7 @@ public class AuthorValidator implements Validator {
 
 		if (isAuthorAlreadyInDatabase) {
 			
-			errors.reject("fullName", "author.fullName.alreadySaved");
+			errors.rejectValue("fullName", "author.fullName.alreadySaved");
 		}
 	}
 }

@@ -37,11 +37,8 @@ public class MangaController {
 	@GetMapping(path = "/addOrUpdateManga")
 	public String showAddMangaPage(Model theModel) {
 
-		MangaDTO mangaDTO = new MangaDTO();
-		AuthorDTO authorDTO = new AuthorDTO();
-
-		theModel.addAttribute("mangaDTO", mangaDTO);
-		theModel.addAttribute("authorDTO", authorDTO);
+		theModel.addAttribute("mangaDTO", new MangaDTO());
+		theModel.addAttribute("authorDTO", new AuthorDTO());
 
 		return "views/manga-form";
 	}
@@ -54,8 +51,8 @@ public class MangaController {
 
 		if (result.hasErrors()) {
 
-			theModel.addAttribute("mangaDTO", mangaDTO);
 			theModel.addAttribute("authorDTO", new AuthorDTO());
+			theModel.addAttribute("mangaDTO", mangaDTO);
 
 			return "views/manga-form";
 		}
