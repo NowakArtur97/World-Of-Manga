@@ -20,7 +20,7 @@ import com.NowakArtur97.WorldOfManga.testUtil.extension.ScreenshotWatcher;
 @DisplayName("Manga Creation Controller UI En Tests")
 @Tag("MangaCreationControllerUIEn_Tests")
 @DirtiesContext
-public class MangaCreationControllerUIEnTest extends MangaCreationControllerUITest {
+public class MangaControllerUIEnTest extends MangaControllerUITest {
 
 	@Test
 	@DisplayName("when correct manga creation with all fields")

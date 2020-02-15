@@ -9,7 +9,7 @@ import com.NowakArtur97.WorldOfManga.controller.unloggedUser.seleniumPOM.LoginCo
 import com.NowakArtur97.WorldOfManga.service.api.MangaTranslationService;
 import com.NowakArtur97.WorldOfManga.testUtil.selenium.SeleniumUITest;
 
-public class MangaCreationControllerUITest extends SeleniumUITest {
+public class MangaControllerUITest extends SeleniumUITest {
 
 	@Value("${mangaTranslation.titleEn.inUse}")
 	protected String mangaTranslationTitleEnInUseMessage;

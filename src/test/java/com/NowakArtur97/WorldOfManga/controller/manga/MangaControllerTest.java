@@ -30,6 +30,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import com.NowakArtur97.WorldOfManga.dto.AuthorDTO;
 import com.NowakArtur97.WorldOfManga.dto.MangaDTO;
 import com.NowakArtur97.WorldOfManga.dto.MangaTranslationDTO;
 import com.NowakArtur97.WorldOfManga.exception.LanguageNotFoundException;
@@ -39,8 +40,8 @@ import com.NowakArtur97.WorldOfManga.service.api.MangaTranslationService;
 import com.NowakArtur97.WorldOfManga.validation.manga.MangaValidator;
 
 @ExtendWith(MockitoExtension.class)
-@DisplayName("Manga Creation Controller Tests")
-@Tag("MangaCreationController_Tests")
+@DisplayName("Manga Controller Tests")
+@Tag("MangaController_Tests")
 public class MangaControllerTest {
 
 	private MockMvc mockMvc;
@@ -68,7 +69,8 @@ public class MangaControllerTest {
 	public void when_load_add_or_update_manga_page_should_show_manga_form() {
 
 		assertAll(() -> mockMvc.perform(get("/admin/addOrUpdateManga")).andExpect(status().isOk())
-				.andExpect(view().name("views/manga-form")).andExpect(model().attribute("mangaDTO", new MangaDTO())));
+				.andExpect(view().name("views/manga-form")).andExpect(model().attribute("mangaDTO", new MangaDTO()))
+				.andExpect(model().attribute("authorDTO", new AuthorDTO())));
 	}
 
 	@Test
@@ -127,6 +129,7 @@ public class MangaControllerTest {
 								.flashAttr("mangaDTO", mangaDTO))
 						.andExpect(status().isOk()).andExpect(forwardedUrl("views/manga-form"))
 						.andExpect(model().attribute("mangaDTO", mangaDTO))
+						.andExpect(model().attribute("authorDTO", new AuthorDTO()))
 						.andExpect(model().attributeHasFieldErrors("mangaDTO", "enTranslation.title"))
 						.andExpect(model().attributeHasFieldErrors("mangaDTO", "plTranslation.description"))
 						.andExpect(model().attribute("mangaDTO",
