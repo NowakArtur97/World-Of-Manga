@@ -33,6 +33,7 @@ public class AuthorController {
 
 		theModel.addAttribute("mangaDTO", new MangaDTO());
 		theModel.addAttribute("authorDTO", new AuthorDTO());
+		theModel.addAttribute("authors", authorService.findAll());
 
 		return "views/manga-form";
 	}
@@ -47,6 +48,7 @@ public class AuthorController {
 
 			theModel.addAttribute("authorDTO", authorDTO);
 			theModel.addAttribute("mangaDTO", new MangaDTO());
+			theModel.addAttribute("authors", authorService.findAll());
 
 			return "views/manga-form";
 		}

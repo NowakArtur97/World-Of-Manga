@@ -28,10 +28,17 @@
                 <p class="form__message form__message--failure" th:if="${#fields.hasErrors('plTranslation.title')}" th:errors="*{plTranslation.title}" ></p>
                 <input class="form__input" type="text" name="plTranslation.title" th:field="*{plTranslation.title}">
             </div>
-            <div class="form__group">
+             <div class="form__group">
                 <label class="form__label" for="plTranslation" th:text="#{form.manga.plTranslation.description}"></label>
                 <p class="form__message form__message--failure" th:if="${#fields.hasErrors('plTranslation.description')}" th:errors="*{plTranslation.description}" ></p>
                 <input class="form__input" type="text" name="plTranslation.description" th:field="*{plTranslation.description}">
+            </div>
+             <div class="form__group">
+                <label class="form__label" for="authors" th:text="#{form.manga.authors}"></label>
+                <p class="form__message form__message--failure" th:if="${#fields.hasErrors('authors')}" th:errors="*{authors}" ></p>
+                <span class="form__span" th:each="author : ${authors}">
+                    <input class="form__checkbox" type="checkbox" name="authors" th:field="*{authors}" th:value="${author.id}" th:text="${author.fullName}">
+                </span>
             </div>
              <div class="form__group">
                 <button class="form__submit" type="submit" th:text="#{form.manga.submit}" name="addOrUpdateMangaSubmitBtn"></button>

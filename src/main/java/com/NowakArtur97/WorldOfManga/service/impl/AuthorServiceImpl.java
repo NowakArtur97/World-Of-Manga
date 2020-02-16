@@ -1,5 +1,7 @@
 package com.NowakArtur97.WorldOfManga.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,5 +35,11 @@ public class AuthorServiceImpl implements AuthorService {
 	public boolean isAuthorAlreadyInDatabase(String fullName) {
 
 		return authorRepository.existsAuthorByFullName(fullName);
+	}
+
+	@Override
+	public List<Author> findAll() {
+
+		return authorRepository.findAll();
 	}
 }

@@ -6,9 +6,11 @@ jobs:
       environment:
         JDBC_DATABASE_URL: jdbc:postgresql://127.0.0.1:5432/world_of_manga
         JDBC_DATABASE_USERNAME: postgres
+        JDBC_DATABASE_PASSWORD: postgres
     - image: postgres:9.6
       environment:
         POSTGRES_DB: world_of_manga
+        POSTGRES_PASSWORD: postgres
     - image: selenium/standalone-chrome:3.11.0
     working_directory: ~/world_of_manga
     environment:

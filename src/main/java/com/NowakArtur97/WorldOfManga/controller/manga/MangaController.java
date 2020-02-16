@@ -17,15 +17,18 @@ import com.NowakArtur97.WorldOfManga.dto.AuthorDTO;
 import com.NowakArtur97.WorldOfManga.dto.MangaDTO;
 import com.NowakArtur97.WorldOfManga.exception.LanguageNotFoundException;
 import com.NowakArtur97.WorldOfManga.model.MangaTranslation;
+import com.NowakArtur97.WorldOfManga.service.api.AuthorService;
 import com.NowakArtur97.WorldOfManga.service.api.MangaService;
 import com.NowakArtur97.WorldOfManga.service.api.MangaTranslationService;
 import com.NowakArtur97.WorldOfManga.validation.manga.MangaValidator;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @RequestMapping(path = "/admin")
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
+@Slf4j
 public class MangaController {
 
 	private final MangaService mangaService;
@@ -34,11 +37,14 @@ public class MangaController {
 
 	private final MangaValidator mangaValidator;
 
+	private final AuthorService authorService;
+
 	@GetMapping(path = "/addOrUpdateManga")
 	public String showAddMangaPage(Model theModel) {
 
 		theModel.addAttribute("mangaDTO", new MangaDTO());
 		theModel.addAttribute("authorDTO", new AuthorDTO());
+		theModel.addAttribute("authors", authorService.findAll());
 
 		return "views/manga-form";
 	}
@@ -53,6 +59,7 @@ public class MangaController {
 
 			theModel.addAttribute("authorDTO", new AuthorDTO());
 			theModel.addAttribute("mangaDTO", mangaDTO);
+			theModel.addAttribute("authors", authorService.findAll());
 
 			return "views/manga-form";
 		}
