@@ -1,6 +1,8 @@
 package com.NowakArtur97.WorldOfManga.controller.unloggedUser.seleniumTest;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.DisplayName;
@@ -26,53 +28,79 @@ public class RegistrationControllerUIEnTest extends RegistrationControllerUITest
 	@DisplayName("when username is already in use")
 	public void when_username_is_already_in_use_should_have_error() {
 
+		String username = "user";
+		String email = "email@email.com";
+		boolean areTermsAccepted = true;
+
 		registrationPage.loadRegistrationView(LanguageVersion.ENG);
 
-		registrationPage.fillMandatoryRegistrationFields("user", "password", "password", "email@email.com", true);
+		registrationPage.fillMandatoryRegistrationFields(username, "password", "password", email, areTermsAccepted);
 
 		assertAll(() -> assertTrue(registrationPage.countFailureMessages() == 1, () -> "should have error"),
 				() -> assertTrue(registrationPage.getFormBoxText().contains(usernameInUseMessage),
-						() -> "should show username already in use message"));
+						() -> "should show username is already in use message"),
+				() -> assertEquals(username, registrationPage.getUsername(), () -> "should show incorrect username"),
+				() -> assertEquals(email, registrationPage.getEmail(), () -> "should show email"),
+				() -> assertTrue(registrationPage.getConfirmTerms(), () -> "should show accepted terms"));
 	}
 
 	@Test
 	@DisplayName("when email is already in use")
 	public void when_email_is_already_in_use_should_have_error() {
 
+		String username = "username";
+		String email = "user@email.com";
+		boolean areTermsAccepted = true;
+
 		registrationPage.loadRegistrationView(LanguageVersion.ENG);
 
-		registrationPage.fillMandatoryRegistrationFields("username", "password", "password", "user@email.com", true);
+		registrationPage.fillMandatoryRegistrationFields(username, "password", "password", email, areTermsAccepted);
 
 		assertAll(() -> assertTrue(registrationPage.countFailureMessages() == 1, () -> "should have error"),
 				() -> assertTrue(registrationPage.getFormBoxText().contains(emailInUseMessage),
-						() -> "should show email already in use message"));
+						() -> "should show email is already in use message"),
+				() -> assertEquals(username, registrationPage.getUsername(), () -> "should show username"),
+				() -> assertEquals(email, registrationPage.getEmail(), () -> "should show incorrect email"),
+				() -> assertTrue(registrationPage.getConfirmTerms(), () -> "should show accepted terms"));
 	}
 
 	@Test
 	@DisplayName("when incorrect registration with mandatory fields")
 	public void when_incorrect_registration_with_mandatory_fields_should_have_errors() {
 
+		String username = "";
+		String email = "";
+		boolean areTermsAccepted = false;
+
 		registrationPage.loadRegistrationView(LanguageVersion.ENG);
 
-		registrationPage.fillMandatoryRegistrationFields("", "", "password", "", true);
+		registrationPage.fillMandatoryRegistrationFields(username, "password", "password1", email, areTermsAccepted);
 
-		assertAll(() -> assertTrue(registrationPage.countFailureMessages() == 3, () -> "should have three errors"),
+		assertAll(() -> assertTrue(registrationPage.countFailureMessages() == 4, () -> "should have three errors"),
 				() -> assertTrue(registrationPage.getFormBoxText().contains(usernameNotBlankMessage),
 						() -> "should show username is a required field message"),
 				() -> assertTrue(registrationPage.getFormBoxText().contains(passwordMatchingFieldsMessage),
 						() -> "should password fields must match message"),
 				() -> assertTrue(registrationPage.getFormBoxText().contains(emailNotBlankMessage),
-						() -> "should show email is a required field message"));
+						() -> "should show email is a required field message"),
+				() -> assertTrue(registrationPage.getFormBoxText().contains(usernameTermsMessage),
+						() -> "should show terms not accepted message"),
+				() -> assertEquals(username, registrationPage.getUsername(), () -> "should show incorrect username"),
+				() -> assertEquals(email, registrationPage.getEmail(), () -> "should show incorrect email"),
+				() -> assertFalse(registrationPage.getConfirmTerms(), () -> "should show not accepted terms"));
 	}
 
 	@Test
 	@DisplayName("when incorrect registration fields size with mandatory fields")
 	public void when_incorrect_registration_fields_size_with_mandatory_fields_should_have_errors() {
 
+		String username = "asdfghjklpasdfghjklpasdfghjklpasdfghjklpasdfghjklp";
+		String email = "email,";
+		boolean areTermsAccepted = false;
+
 		registrationPage.loadRegistrationView(LanguageVersion.ENG);
 
-		registrationPage.fillMandatoryRegistrationFields("asdfghjklpasdfghjklpasdfghjklpasdfghjklpasdfghjklp", "",
-				"password", "email,", false);
+		registrationPage.fillMandatoryRegistrationFields(username, "", "password", email, areTermsAccepted);
 
 		assertAll(() -> assertTrue(registrationPage.countFailureMessages() == 4, () -> "should have four errors"),
 				() -> assertTrue(registrationPage.getFormBoxText().contains(usernameSizeMessage),
@@ -82,17 +110,28 @@ public class RegistrationControllerUIEnTest extends RegistrationControllerUITest
 				() -> assertTrue(registrationPage.getFormBoxText().contains(emailFormatMessage),
 						() -> "should show invalid email format message"),
 				() -> assertTrue(registrationPage.getFormBoxText().contains(usernameTermsMessage),
-						() -> "should show terms not accepted message"));
+						() -> "should show terms not accepted message"),
+				() -> assertEquals(username, registrationPage.getUsername(), () -> "should show incorrect username"),
+				() -> assertEquals(email, registrationPage.getEmail(), () -> "should show incorrect email"),
+				() -> assertFalse(registrationPage.getConfirmTerms(), () -> "should show not accepted terms"));
 	}
 
 	@Test
 	@DisplayName("when incorrect registration with all fields")
 	public void when_incorrect_registration_with_all_fields_should_have_errors() {
 
+		String username = "";
+		String email = "";
+		String password = "";
+		String matchingPassword = "";
+		boolean areTermsAccepted = true;
+		String firstName = "asdfghjklpasdfghjklpasdfghjklpasdfghjklpasdfghjklp";
+		String lastName = "asdfghjklpasdfghjklpasdfghjklpasdfghjklpasdfghjklp";
+
 		registrationPage.loadRegistrationView(LanguageVersion.ENG);
 
-		registrationPage.fillAllRegistrationFields("", "", "", "", "asdfghjklpasdfghjklpasdfghjklpasdfghjklpasdfghjklp",
-				"asdfghjklpasdfghjklpasdfghjklpasdfghjklpasdfghjklp", true);
+		registrationPage.fillAllRegistrationFields(username, email, password, matchingPassword, firstName, lastName,
+				areTermsAccepted);
 
 		assertAll(() -> assertTrue(registrationPage.countFailureMessages() == 6, () -> "should have six errors"),
 				() -> assertTrue(registrationPage.getFormBoxText().contains(usernameNotBlankMessage),
@@ -104,7 +143,13 @@ public class RegistrationControllerUIEnTest extends RegistrationControllerUITest
 				() -> assertTrue(registrationPage.getFormBoxText().contains(lastNameSizeMessage),
 						() -> "should show exceeded maximal length of last name message"),
 				() -> assertTrue(registrationPage.getFormBoxText().contains(emailNotBlankMessage),
-						() -> "should show email is a required field message"));
+						() -> "should show email is a required field message"),
+				() -> assertEquals(username, registrationPage.getUsername(), () -> "should show incorrect username"),
+				() -> assertEquals(email, registrationPage.getEmail(), () -> "should show incorrect email"),
+				() -> assertEquals(firstName, registrationPage.getFirstName(),
+						() -> "should show incorrect first name"),
+				() -> assertEquals(lastName, registrationPage.getLastName(), () -> "should show incorrect last name"),
+				() -> assertTrue(registrationPage.getConfirmTerms(), () -> "should show accepted terms"));
 	}
 
 	@Test

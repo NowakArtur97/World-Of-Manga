@@ -46,7 +46,7 @@ public class MangaControllerSeleniumPOM extends SeleniumPageObjectModel {
 
 	@FindBy(xpath = ADD_OR_UPDATE_MANGA_LINK)
 	private WebElement addOrUpdateMangaLink;
-	
+
 	public MangaControllerSeleniumPOM(WebDriver webDriver) {
 
 		super(webDriver);
@@ -57,9 +57,19 @@ public class MangaControllerSeleniumPOM extends SeleniumPageObjectModel {
 		super.connectTo(RESOURCE_PATH + ver.getLangUrl());
 	}
 
+	public String getEnTitle() {
+
+		return titleEnInput.getAttribute("value");
+	}
+
 	public void setEnTitle(String enTitle) {
 
 		titleEnInput.sendKeys(enTitle);
+	}
+
+	public String getEnDescription() {
+
+		return descriptionEnInput.getAttribute("value");
 	}
 
 	public void setEnDescription(String enDescription) {
@@ -67,9 +77,19 @@ public class MangaControllerSeleniumPOM extends SeleniumPageObjectModel {
 		descriptionEnInput.sendKeys(enDescription);
 	}
 
+	public String getPlTitle() {
+
+		return titlePlInput.getAttribute("value");
+	}
+
 	public void setPlTitle(String plTitle) {
 
 		titlePlInput.sendKeys(plTitle);
+	}
+
+	public String getPlDescription() {
+
+		return descriptionPlInput.getAttribute("value");
 	}
 
 	public void setPlDescription(String plDescription) {
@@ -81,10 +101,10 @@ public class MangaControllerSeleniumPOM extends SeleniumPageObjectModel {
 
 		submitButton.click();
 	}
-	
+
 	public void clickAddOrUpdateMangaLinkButton() {
-		
-		JavascriptExecutor executor = (JavascriptExecutor)webDriver;
+
+		JavascriptExecutor executor = (JavascriptExecutor) webDriver;
 		executor.executeScript("arguments[0].click();", addOrUpdateMangaLink);
 	}
 

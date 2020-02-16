@@ -64,14 +64,29 @@ public class RegistrationControllerSeleniumPOM extends SeleniumPageObjectModel {
 		super.connectTo(RESOURCE_PATH + ver.getLangUrl());
 	}
 
+	public String getUsername() {
+
+		return usernameInput.getAttribute("value");
+	}
+
 	public void setUsername(String username) {
 
 		usernameInput.sendKeys(username);
 	}
 
+	public String getFirstName() {
+
+		return firstNameInput.getAttribute("value");
+	}
+
 	public void setFirstName(String firstName) {
 
 		firstNameInput.sendKeys(firstName);
+	}
+
+	public String getLastName() {
+
+		return lastNameInput.getAttribute("value");
 	}
 
 	public void setLastName(String lastName) {
@@ -89,14 +104,24 @@ public class RegistrationControllerSeleniumPOM extends SeleniumPageObjectModel {
 		matchingPasswordInput.sendKeys(matchingPassword);
 	}
 
+	public String getEmail() {
+
+		return emailInput.getAttribute("value");
+	}
+
 	public void setEmail(String email) {
 
 		emailInput.sendKeys(email);
 	}
 
-	public void confirmTerms() {
+	public void setConfirmTerms() {
 
 		terms.click();
+	}
+
+	public boolean getConfirmTerms() {
+
+		return terms.isSelected();
 	}
 
 	public void clickSubmitRegistrationButton() {
@@ -126,7 +151,7 @@ public class RegistrationControllerSeleniumPOM extends SeleniumPageObjectModel {
 		setEmail(email);
 
 		if (areTermsConfirmed) {
-			confirmTerms();
+			setConfirmTerms();
 		}
 
 		clickSubmitRegistrationButton();
