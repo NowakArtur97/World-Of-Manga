@@ -11,7 +11,7 @@
 <body class="page page--register">
     <div layout:fragment="content" class="form form--two_forms page__form">
         <form th:action="@{/admin/addOrUpdateManga}" th:object="${mangaDTO}" method="POST"
-            class="form__box form__box--register">
+            class="form__box form__box--register" name="addOrUpdateMangaForm">
             <h1 class="form__title" th:text="#{form.manga.title}"></h1>
             <div class="form__group">
                 <label class="form__label" for="enTranslation" th:text="#{form.manga.enTranslation.title}"></label>
@@ -34,12 +34,12 @@
                 <input class="form__input" type="text" name="plTranslation.description" th:field="*{plTranslation.description}">
             </div>
              <div class="form__group">
-                <button class="form__submit" type="submit" th:text="#{form.manga.submit}" name="addOrUpdateManga"></button>
+                <button class="form__submit" type="submit" th:text="#{form.manga.submit}" name="addOrUpdateMangaSubmitBtn"></button>
             </div>
         </form>
 
          <form th:action="@{/admin/addOrUpdateAuthor}" th:object="${authorDTO}" method="POST"
-            class="form__box form__box--register">
+            class="form__box form__box--register" name="addOrUpdateAuthorForm">
             <h1 class="form__title" th:text="#{form.author.title}"></h1>
              <div class="form__group">
                 <label class="form__label" for="fullName" th:text="#{form.author.fullName}"></label>
@@ -47,7 +47,7 @@
                 <input class="form__input" type="text" name="fullName" th:field="*{fullName}">
             </div>
             <div class="form__group">
-                <button class="form__submit" type="submit" th:text="#{form.author.submit}" name="addOrUpdateAuthor"></button>
+                <button class="form__submit" type="submit" th:text="#{form.author.submit}" name="addOrUpdateAuthorSubmitBtn"></button>
             </div>
         </form>
     </div>

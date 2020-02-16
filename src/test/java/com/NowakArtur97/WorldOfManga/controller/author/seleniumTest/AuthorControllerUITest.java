@@ -12,15 +12,15 @@ import com.NowakArtur97.WorldOfManga.testUtil.selenium.SeleniumUITest;
 public class AuthorControllerUITest extends SeleniumUITest {
 
 	@Value("${author.fullName.notBlank}")
-	protected String authorFulNameSizeMessage;
+	protected String authorFulNameNotBlankMessage;
 
 	@Value("${author.fullName.size}")
-	protected String authorFulNameNotBlankMessage;
+	protected String authorFullNameSizeMessage;
 
 	@Value("${author.fullName.alreadySaved}")
 	protected String authorAlreadySavedMessage;
 
-	protected AuthorControllerSeleniumPOM authorForm;
+	protected AuthorControllerSeleniumPOM authorFormPage;
 
 	protected LoginControllerSeleniumPOM loginPage;
 
@@ -32,6 +32,6 @@ public class AuthorControllerUITest extends SeleniumUITest {
 
 		loginPage = new LoginControllerSeleniumPOM(webDriver);
 
-		authorForm = new AuthorControllerSeleniumPOM(webDriver);
+		authorFormPage = new AuthorControllerSeleniumPOM(webDriver);
 	}
 }

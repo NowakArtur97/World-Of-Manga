@@ -2,6 +2,7 @@ package com.NowakArtur97.WorldOfManga.controller.author.seleniumPOM;
 
 import java.util.List;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -15,9 +16,9 @@ public class AuthorControllerSeleniumPOM extends SeleniumPageObjectModel {
 
 	private static final String FULL_NAME = "fullName";
 	private static final String FORM_MESSAGE_FAILURE_CLASS = "form__message--failure";
-	private static final String FORM_BOX_CLASS = "form__box";
-	private static final String SUBMIT_AUTHOR = "addOrUpdateAuthor";
-	private static final String ADD_OR_UPDATE_MANGA_LINK = "//a[@href='/admin/addOrUpdateManga']";
+	private static final String FORM_BOX_NAME = "addOrUpdateAuthorForm";
+	private static final String SUBMIT_AUTHOR = "addOrUpdateAuthorSubmitBtn";
+	private static final String ADD_OR_UPDATE_AUTHOR_LINK = "//a[@href='/admin/addOrUpdateManga']";
 
 	@FindBy(name = FULL_NAME)
 	private WebElement fullNameInput;
@@ -25,14 +26,14 @@ public class AuthorControllerSeleniumPOM extends SeleniumPageObjectModel {
 	@FindBy(className = FORM_MESSAGE_FAILURE_CLASS)
 	private List<WebElement> failrueMessages;
 
-	@FindBy(className = FORM_BOX_CLASS)
+	@FindBy(name = FORM_BOX_NAME)
 	private WebElement formBox;
 
 	@FindBy(name = SUBMIT_AUTHOR)
 	private WebElement submitButton;
 
-	@FindBy(xpath = ADD_OR_UPDATE_MANGA_LINK)
-	private WebElement addOrUpdateMangaLink;
+	@FindBy(xpath = ADD_OR_UPDATE_AUTHOR_LINK)
+	private WebElement addOrUpdateAuthorLink;
 
 	public AuthorControllerSeleniumPOM(WebDriver webDriver) {
 
@@ -64,7 +65,13 @@ public class AuthorControllerSeleniumPOM extends SeleniumPageObjectModel {
 		return failrueMessages.size();
 	}
 
-	public void fillMandatoryLoginFormFields(String fullName) {
+	public void clickAddOrUpdateAuthorLinkButton() {
+		
+		JavascriptExecutor executor = (JavascriptExecutor)webDriver;
+		executor.executeScript("arguments[0].click();", addOrUpdateAuthorLink);
+	}
+	
+	public void fillMandatoryAuthorFormFields(String fullName) {
 
 		setFullName(fullName);
 

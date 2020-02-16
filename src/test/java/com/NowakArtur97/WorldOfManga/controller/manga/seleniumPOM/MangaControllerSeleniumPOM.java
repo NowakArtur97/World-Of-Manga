@@ -19,8 +19,8 @@ public class MangaControllerSeleniumPOM extends SeleniumPageObjectModel {
 	private static final String TITLE_PL = "plTranslation.title";
 	private static final String DESCRIPTION_PL = "plTranslation.description";
 	private static final String FORM_MESSAGE_FAILURE_CLASS = "form__message--failure";
-	private static final String FORM_BOX_CLASS = "form__box";
-	private static final String SUBMIT_MANGA = "addOrUpdateManga";
+	private static final String FORM_BOX_NAME = "addOrUpdateMangaForm";
+	private static final String SUBMIT_MANGA = "addOrUpdateMangaSubmitBtn";
 	private static final String ADD_OR_UPDATE_MANGA_LINK = "//a[@href='/admin/addOrUpdateManga']";
 
 	@FindBy(name = TITLE_EN)
@@ -38,7 +38,7 @@ public class MangaControllerSeleniumPOM extends SeleniumPageObjectModel {
 	@FindBy(className = FORM_MESSAGE_FAILURE_CLASS)
 	private List<WebElement> failrueMessages;
 
-	@FindBy(className = FORM_BOX_CLASS)
+	@FindBy(name = FORM_BOX_NAME)
 	private WebElement formBox;
 
 	@FindBy(name = SUBMIT_MANGA)

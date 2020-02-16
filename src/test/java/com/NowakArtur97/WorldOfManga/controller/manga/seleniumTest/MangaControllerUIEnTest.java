@@ -17,8 +17,8 @@ import com.NowakArtur97.WorldOfManga.testUtil.extension.ScreenshotWatcher;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @ExtendWith(ScreenshotWatcher.class)
 @TestPropertySource({ "classpath:/validation/messages_en.properties", "classpath:/pageContent/messages_en.properties" })
-@DisplayName("Manga Creation Controller UI En Tests")
-@Tag("MangaCreationControllerUIEn_Tests")
+@DisplayName("Manga Controller UI En Tests")
+@Tag("MangaControllerUIEn_Tests")
 @DirtiesContext
 public class MangaControllerUIEnTest extends MangaControllerUITest {
 
@@ -39,6 +39,7 @@ public class MangaControllerUIEnTest extends MangaControllerUITest {
 				"Polish description");
 
 		assertAll(
+				() -> assertTrue(mangaFormPage.countFailureMessages() == 0, () -> "shouldn`t have errors"),
 				() -> assertTrue(mangaTranslationService.isTitleAlreadyInUse(englishTitle),
 						() -> "should save manga translation in database"),
 				() -> assertTrue(mangaTranslationService.isTitleAlreadyInUse(polishTitle),
