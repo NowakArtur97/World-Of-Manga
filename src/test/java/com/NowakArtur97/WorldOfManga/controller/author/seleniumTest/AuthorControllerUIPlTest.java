@@ -16,11 +16,11 @@ import com.NowakArtur97.WorldOfManga.testUtil.extension.ScreenshotWatcher;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @ExtendWith(ScreenshotWatcher.class)
-@TestPropertySource({ "classpath:/validation/messages_en.properties", "classpath:/pageContent/messages_en.properties" })
-@DisplayName("Author Controller UI En Tests")
-@Tag("AuthorControllerUIEn_Tests")
+@TestPropertySource({ "classpath:/validation/messages_pl.properties", "classpath:/pageContent/messages_pl.properties" })
+@DisplayName("Author Controller UI Pl Tests")
+@Tag("AuthorControllerUIPl_Tests")
 @DirtiesContext
-public class AuthorControllerUIEnTest extends AuthorControllerUITest {
+public class AuthorControllerUIPlTest extends AuthorControllerUITest {
 
 	@Test
 	@DisplayName("when correct author creation with all fields")
@@ -28,7 +28,7 @@ public class AuthorControllerUIEnTest extends AuthorControllerUITest {
 
 		String fullName = "FirstName LastName";
 
-		loginPage.loadLoginView(LanguageVersion.ENG);
+		loginPage.loadLoginView(LanguageVersion.PL);
 
 		loginPage.fillMandatoryLoginFields("admin", "admin");
 
@@ -47,7 +47,7 @@ public class AuthorControllerUIEnTest extends AuthorControllerUITest {
 
 		String fullName = "";
 
-		loginPage.loadLoginView(LanguageVersion.ENG);
+		loginPage.loadLoginView(LanguageVersion.PL);
 
 		loginPage.fillMandatoryLoginFields("admin", "admin");
 
@@ -66,7 +66,7 @@ public class AuthorControllerUIEnTest extends AuthorControllerUITest {
 
 		String fullName = "asdfghjklpasdfghjklpasdfghjklpasdfghjklpasdfghjklp!@#$%";
 
-		loginPage.loadLoginView(LanguageVersion.ENG);
+		loginPage.loadLoginView(LanguageVersion.PL);
 
 		loginPage.fillMandatoryLoginFields("admin", "admin");
 
