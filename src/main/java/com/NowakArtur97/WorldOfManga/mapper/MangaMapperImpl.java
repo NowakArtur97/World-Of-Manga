@@ -1,25 +1,36 @@
 package com.NowakArtur97.WorldOfManga.mapper;
 
-import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.Set;
+
 import org.springframework.stereotype.Service;
 
 import com.NowakArtur97.WorldOfManga.dto.MangaDTO;
+import com.NowakArtur97.WorldOfManga.model.Author;
 import com.NowakArtur97.WorldOfManga.model.Manga;
-
-import lombok.RequiredArgsConstructor;
+import com.NowakArtur97.WorldOfManga.model.MangaTranslation;
 
 @Service
-@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class MangaMapperImpl implements MangaMapper {
 
-	private final ModelMapper modelMapper;
-
 	@Override
-	public Manga mapMangaDTOToManga(MangaDTO mangaDTO) {
+	public Manga mapMangaDTOToManga(MangaDTO mangaDTO, Set<MangaTranslation> mangaTranslations) {
 
-		Manga manga = modelMapper.map(mangaDTO, Manga.class);
+		Manga manga = new Manga();
+
+		mapMangaTranslations(manga, mangaTranslations);
+
+		mapAuthors(manga, mangaDTO.getAuthors());
 
 		return manga;
+	}
+
+	private void mapMangaTranslations(Manga manga, Set<MangaTranslation> mangaTranslations) {
+
+		mangaTranslations.stream().forEach(translation -> manga.addTranslation(translation));
+	}
+
+	private void mapAuthors(Manga manga, Set<Author> authors) {
+
+		authors.stream().forEach(author -> manga.addAuthor(author));
 	}
 }

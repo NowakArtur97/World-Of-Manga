@@ -9,5 +9,4 @@ import com.NowakArtur97.WorldOfManga.model.MangaTranslation;
 public interface MangaService {
 
 	Manga addOrUpdate(MangaDTO mangaDTO, Set<MangaTranslation> mangaTranslations);
-
 }
