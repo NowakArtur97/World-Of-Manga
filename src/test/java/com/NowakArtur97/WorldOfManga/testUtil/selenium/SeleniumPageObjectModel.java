@@ -8,7 +8,7 @@ public class SeleniumPageObjectModel {
 
 	private final static String MAIN_URL_PATH = "http://localhost:8000";
 
-	private final static int TIME_TO_WAIT = 10;
+	private final static int TIME_TO_WAIT = 15;
 
 	protected final WebDriver webDriver;
 

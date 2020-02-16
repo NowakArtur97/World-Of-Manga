@@ -1,6 +1,7 @@
 package com.NowakArtur97.WorldOfManga.controller.manga.seleniumTest;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.DisplayName;
@@ -63,7 +64,13 @@ public class MangaControllerUIPlTest extends MangaControllerUITest {
 				() -> assertTrue(mangaFormPage.getFormBoxText().contains(mangaTranslationDescriptionNotBlankMessage),
 						() -> "should show title is a required field message twice"),
 				() -> assertTrue(mangaFormPage.getFormBoxText().contains(mangaTranslationTitleNotBlankMessage),
-						() -> "should show description is a required field message twice"));
+						() -> "should show description is a required field message twice"),
+				() -> assertEquals(blankField, mangaFormPage.getEnTitle(), () -> "should show incorrect english title"),
+				() -> assertEquals(blankField, mangaFormPage.getEnDescription(),
+						() -> "should show incorrect english description"),
+				() -> assertEquals(blankField, mangaFormPage.getPlTitle(), () -> "should show incorrect polish title"),
+				() -> assertEquals(blankField, mangaFormPage.getPlDescription(),
+						() -> "should show incorrect polish description"));
 	}
 
 	@Test
@@ -84,6 +91,12 @@ public class MangaControllerUIPlTest extends MangaControllerUITest {
 				() -> assertTrue(mangaFormPage.getFormBoxText().contains(mangaTranslationTitleSizeMessage),
 						() -> "should show title is too long message twice"),
 				() -> assertTrue(mangaFormPage.getFormBoxText().contains(mangaTranslationDescriptionSizeMessage),
-						() -> "should show description is too long message twice"));
+						() -> "should show description is too long message twice"),
+				() -> assertEquals(longText, mangaFormPage.getEnTitle(), () -> "should show incorrect english title"),
+				() -> assertEquals(longText, mangaFormPage.getEnDescription(),
+						() -> "should show incorrect english description"),
+				() -> assertEquals(longText, mangaFormPage.getPlTitle(), () -> "should show incorrect polish title"),
+				() -> assertEquals(longText, mangaFormPage.getPlDescription(),
+						() -> "should show incorrect polish description"));
 	}
 }
