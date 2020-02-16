@@ -101,7 +101,7 @@ public class MangaControllerTest {
 						.perform(post("/admin/addOrUpdateManga").contentType(MediaType.APPLICATION_FORM_URLENCODED)
 								.flashAttr("mangaDTO", mangaDTO))
 						.andExpect(status().is3xxRedirection()).andExpect(model().hasNoErrors())
-						.andExpect(redirectedUrl("/")),
+						.andExpect(redirectedUrl("/admin/addOrUpdateManga")),
 				() -> verify(mangaTranslationService, times(1)).addOrUpdate(mangaDTO),
 				() -> verify(mangaService, times(1)).addOrUpdate(mangaDTO, mangaTranslations));
 	}

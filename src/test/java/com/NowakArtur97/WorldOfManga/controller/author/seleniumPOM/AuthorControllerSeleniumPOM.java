@@ -55,6 +55,11 @@ public class AuthorControllerSeleniumPOM extends SeleniumPageObjectModel {
 		fullNameInput.sendKeys(fullName);
 	}
 
+	public String getFullName() {
+
+		return fullNameInput.getAttribute("value");
+	}
+
 	public String getFormBoxText() {
 
 		return formBox.getText();
@@ -66,11 +71,11 @@ public class AuthorControllerSeleniumPOM extends SeleniumPageObjectModel {
 	}
 
 	public void clickAddOrUpdateAuthorLinkButton() {
-		
-		JavascriptExecutor executor = (JavascriptExecutor)webDriver;
+
+		JavascriptExecutor executor = (JavascriptExecutor) webDriver;
 		executor.executeScript("arguments[0].click();", addOrUpdateAuthorLink);
 	}
-	
+
 	public void fillMandatoryAuthorFormFields(String fullName) {
 
 		setFullName(fullName);
