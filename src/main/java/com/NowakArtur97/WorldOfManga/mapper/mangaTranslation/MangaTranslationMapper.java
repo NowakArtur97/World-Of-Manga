@@ -1,4 +1,4 @@
-package com.NowakArtur97.WorldOfManga.mapper;
+package com.NowakArtur97.WorldOfManga.mapper.mangaTranslation;
 
 import com.NowakArtur97.WorldOfManga.dto.MangaTranslationDTO;
 import com.NowakArtur97.WorldOfManga.model.MangaTranslation;

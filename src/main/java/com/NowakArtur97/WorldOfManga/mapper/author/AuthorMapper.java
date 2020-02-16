@@ -1,4 +1,4 @@
-package com.NowakArtur97.WorldOfManga.mapper;
+package com.NowakArtur97.WorldOfManga.mapper.author;
 
 import com.NowakArtur97.WorldOfManga.dto.AuthorDTO;
 import com.NowakArtur97.WorldOfManga.model.Author;

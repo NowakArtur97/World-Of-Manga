@@ -16,6 +16,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
 
 import com.NowakArtur97.WorldOfManga.dto.MangaTranslationDTO;
+import com.NowakArtur97.WorldOfManga.mapper.mangaTranslation.MangaTranslationMapperImpl;
 import com.NowakArtur97.WorldOfManga.model.MangaTranslation;
 
 @ExtendWith(MockitoExtension.class)

@@ -1,4 +1,4 @@
-package com.NowakArtur97.WorldOfManga.mapper;
+package com.NowakArtur97.WorldOfManga.mapper.manga;
 
 import java.util.Set;
 

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.NowakArtur97.WorldOfManga.dto.MangaDTO;
 import com.NowakArtur97.WorldOfManga.exception.LanguageNotFoundException;
-import com.NowakArtur97.WorldOfManga.mapper.MangaTranslationMapper;
+import com.NowakArtur97.WorldOfManga.mapper.mangaTranslation.MangaTranslationMapper;
 import com.NowakArtur97.WorldOfManga.model.Language;
 import com.NowakArtur97.WorldOfManga.model.MangaTranslation;
 import com.NowakArtur97.WorldOfManga.repository.MangaTranslationRepository;

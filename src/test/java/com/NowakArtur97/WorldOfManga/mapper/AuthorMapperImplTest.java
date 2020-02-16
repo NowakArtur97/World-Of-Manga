@@ -16,6 +16,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
 
 import com.NowakArtur97.WorldOfManga.dto.AuthorDTO;
+import com.NowakArtur97.WorldOfManga.mapper.author.AuthorMapperImpl;
 import com.NowakArtur97.WorldOfManga.model.Author;
 
 @ExtendWith(MockitoExtension.class)

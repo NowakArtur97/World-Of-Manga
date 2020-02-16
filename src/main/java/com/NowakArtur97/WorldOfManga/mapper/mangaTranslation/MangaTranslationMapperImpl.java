@@ -1,4 +1,4 @@
-package com.NowakArtur97.WorldOfManga.mapper;
+package com.NowakArtur97.WorldOfManga.mapper.mangaTranslation;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;

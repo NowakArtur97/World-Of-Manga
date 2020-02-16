@@ -17,7 +17,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.NowakArtur97.WorldOfManga.dto.AuthorDTO;
-import com.NowakArtur97.WorldOfManga.mapper.AuthorMapper;
+import com.NowakArtur97.WorldOfManga.mapper.author.AuthorMapper;
 import com.NowakArtur97.WorldOfManga.model.Author;
 import com.NowakArtur97.WorldOfManga.repository.AuthorRepository;
 

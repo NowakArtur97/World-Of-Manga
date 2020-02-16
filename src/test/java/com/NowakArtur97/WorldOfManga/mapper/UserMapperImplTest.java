@@ -17,6 +17,7 @@ import org.modelmapper.ModelMapper;
 
 import com.NowakArtur97.WorldOfManga.dto.UserDTO;
 import com.NowakArtur97.WorldOfManga.dto.UserPasswordDTO;
+import com.NowakArtur97.WorldOfManga.mapper.user.UserMapperImpl;
 import com.NowakArtur97.WorldOfManga.model.User;
 
 @ExtendWith(MockitoExtension.class)
