@@ -35,7 +35,7 @@ public class MangaControllerUIPlTest extends MangaControllerUITest {
 
 		mangaFormPage.clickAddOrUpdateMangaLinkButton();
 
-		mangaFormPage.fillMandatoryLoginFormFields(englishTitle, "English description", polishTitle,
+		mangaFormPage.fillMandatoryMangaFormFields(englishTitle, "English description", polishTitle,
 				"Polish description");
 
 		assertAll(
@@ -57,7 +57,7 @@ public class MangaControllerUIPlTest extends MangaControllerUITest {
 
 		mangaFormPage.clickAddOrUpdateMangaLinkButton();
 
-		mangaFormPage.fillMandatoryLoginFormFields(blankField, blankField, blankField, blankField);
+		mangaFormPage.fillMandatoryMangaFormFields(blankField, blankField, blankField, blankField);
 
 		assertAll(() -> assertTrue(mangaFormPage.countFailureMessages() == 4, () -> "should have four errors"),
 				() -> assertTrue(mangaFormPage.getFormBoxText().contains(mangaTranslationDescriptionNotBlankMessage),
@@ -78,7 +78,7 @@ public class MangaControllerUIPlTest extends MangaControllerUITest {
 
 		mangaFormPage.clickAddOrUpdateMangaLinkButton();
 
-		mangaFormPage.fillMandatoryLoginFormFields(longText, longText, longText, longText);
+		mangaFormPage.fillMandatoryMangaFormFields(longText, longText, longText, longText);
 
 		assertAll(() -> assertTrue(mangaFormPage.countFailureMessages() == 4, () -> "should have four errors"),
 				() -> assertTrue(mangaFormPage.getFormBoxText().contains(mangaTranslationTitleSizeMessage),

@@ -4,7 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
-import com.NowakArtur97.WorldOfManga.controller.manga.seleniumPOM.MangaCreationControllerSeleniumPOM;
+import com.NowakArtur97.WorldOfManga.controller.manga.seleniumPOM.MangaControllerSeleniumPOM;
 import com.NowakArtur97.WorldOfManga.controller.unloggedUser.seleniumPOM.LoginControllerSeleniumPOM;
 import com.NowakArtur97.WorldOfManga.service.api.MangaTranslationService;
 import com.NowakArtur97.WorldOfManga.testUtil.selenium.SeleniumUITest;
@@ -29,7 +29,7 @@ public class MangaControllerUITest extends SeleniumUITest {
 	@Value("${mangaTranslation.description.size}")
 	protected String mangaTranslationDescriptionSizeMessage;
 
-	protected MangaCreationControllerSeleniumPOM mangaFormPage;
+	protected MangaControllerSeleniumPOM mangaFormPage;
 
 	protected LoginControllerSeleniumPOM loginPage;
 
@@ -41,6 +41,6 @@ public class MangaControllerUITest extends SeleniumUITest {
 
 		loginPage = new LoginControllerSeleniumPOM(webDriver);
 
-		mangaFormPage = new MangaCreationControllerSeleniumPOM(webDriver);
+		mangaFormPage = new MangaControllerSeleniumPOM(webDriver);
 	}
 }

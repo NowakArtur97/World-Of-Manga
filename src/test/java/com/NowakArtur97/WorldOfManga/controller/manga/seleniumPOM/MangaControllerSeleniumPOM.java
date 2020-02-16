@@ -10,7 +10,7 @@ import org.openqa.selenium.support.FindBy;
 import com.NowakArtur97.WorldOfManga.testUtil.enums.LanguageVersion;
 import com.NowakArtur97.WorldOfManga.testUtil.selenium.SeleniumPageObjectModel;
 
-public class MangaCreationControllerSeleniumPOM extends SeleniumPageObjectModel {
+public class MangaControllerSeleniumPOM extends SeleniumPageObjectModel {
 
 	public static final String RESOURCE_PATH = "/admin/addOrUpdateManga";
 
@@ -20,7 +20,7 @@ public class MangaCreationControllerSeleniumPOM extends SeleniumPageObjectModel 
 	private static final String DESCRIPTION_PL = "plTranslation.description";
 	private static final String FORM_MESSAGE_FAILURE_CLASS = "form__message--failure";
 	private static final String FORM_BOX_CLASS = "form__box";
-	private static final String SUBMIT_CLASS = "form__submit";
+	private static final String SUBMIT_MANGA = "addOrUpdateManga";
 	private static final String ADD_OR_UPDATE_MANGA_LINK = "//a[@href='/admin/addOrUpdateManga']";
 
 	@FindBy(name = TITLE_EN)
@@ -41,13 +41,13 @@ public class MangaCreationControllerSeleniumPOM extends SeleniumPageObjectModel 
 	@FindBy(className = FORM_BOX_CLASS)
 	private WebElement formBox;
 
-	@FindBy(className = SUBMIT_CLASS)
+	@FindBy(name = SUBMIT_MANGA)
 	private WebElement submitButton;
 
 	@FindBy(xpath = ADD_OR_UPDATE_MANGA_LINK)
 	private WebElement addOrUpdateMangaLink;
 	
-	public MangaCreationControllerSeleniumPOM(WebDriver webDriver) {
+	public MangaControllerSeleniumPOM(WebDriver webDriver) {
 
 		super(webDriver);
 	}
@@ -98,7 +98,7 @@ public class MangaCreationControllerSeleniumPOM extends SeleniumPageObjectModel 
 		return failrueMessages.size();
 	}
 
-	public void fillMandatoryLoginFormFields(String enTitle, String enDescription, String plTitle,
+	public void fillMandatoryMangaFormFields(String enTitle, String enDescription, String plTitle,
 			String plDescription) {
 
 		setEnTitle(enTitle);
