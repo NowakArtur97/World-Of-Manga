@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.NowakArtur97.WorldOfManga.dto.MangaDTO;
+import com.NowakArtur97.WorldOfManga.mapper.MangaMapper;
+import com.NowakArtur97.WorldOfManga.model.Author;
 import com.NowakArtur97.WorldOfManga.model.Manga;
 import com.NowakArtur97.WorldOfManga.model.MangaTranslation;
 import com.NowakArtur97.WorldOfManga.repository.MangaRepository;
@@ -19,6 +21,8 @@ public class MangaServiceImpl implements MangaService {
 
 	private final MangaRepository mangaRepository;
 
+	private final MangaMapper mangaMapper;
+
 	@Override
 	public Manga addOrUpdate(MangaDTO mangaDTO, Set<MangaTranslation> mangaTranslations) {
 
@@ -26,6 +30,10 @@ public class MangaServiceImpl implements MangaService {
 
 		for (MangaTranslation mangaTranslation : mangaTranslations) {
 			manga.addTranslation(mangaTranslation);
+		}
+
+		for (Author author : mangaDTO.getAuthors()) {
+			manga.addAuthor(author);
 		}
 
 		mangaRepository.save(manga);
