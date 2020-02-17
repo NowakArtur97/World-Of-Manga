@@ -2,11 +2,13 @@ package com.NowakArtur97.WorldOfManga.service.impl;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -17,6 +19,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.mock.web.MockMultipartFile;
 
 import com.NowakArtur97.WorldOfManga.dto.MangaDTO;
 import com.NowakArtur97.WorldOfManga.mapper.manga.MangaMapper;
@@ -41,7 +44,7 @@ public class MangaServiceImplTest {
 
 	@Test
 	@DisplayName("when add manga should save manga")
-	public void when_add_manga_should_save_manga() {
+	public void when_add_manga_should_save_manga() throws IOException {
 
 		MangaDTO mangaDTO = new MangaDTO();
 
@@ -60,10 +63,14 @@ public class MangaServiceImplTest {
 
 		mangaDTO.setAuthors(authorsExpected);
 
+		MockMultipartFile mockMultipartFile = new MockMultipartFile("manga.jpg", "file bytes".getBytes());
+		mangaDTO.setImage(mockMultipartFile);
+
 		Manga mangaExpected = new Manga();
 		mangaExpected.addAuthor(authorExpected);
 		mangaExpected.addTranslation(mangaTranslationEnExpected);
 		mangaExpected.addTranslation(mangaTranslationPlExpected);
+		mangaExpected.setImage(mockMultipartFile.getBytes());
 
 		when(mangaMapper.mapMangaDTOToManga(mangaDTO, mangaTranslationsExpected)).thenReturn(mangaExpected);
 
@@ -80,6 +87,8 @@ public class MangaServiceImplTest {
 						() -> "should contain en translation: " + mangaTranslationEnExpected + " but wasn`t"),
 				() -> assertTrue(mangaActual.getTranslations().contains(mangaTranslationEnExpected),
 						() -> "should contain en translation: " + mangaTranslationEnExpected + " but wasn`t"),
+				() -> assertNotNull(mangaActual.getImage(),
+						() -> "should save manga with image, but was: " + mangaActual.getImage()),
 				() -> verify(mangaMapper, times(1)).mapMangaDTOToManga(mangaDTO, mangaTranslationsExpected),
 				() -> verify(mangaRepository, times(1)).save(mangaActual));
 	}
