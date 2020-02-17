@@ -8,6 +8,9 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -91,6 +94,28 @@ public class AuthorServiceImplTest {
 								+ authorActual.getFullName()),
 				() -> verify(authorMapper, times(1)).mapAuthorDTOToAuthor(authorDTOExpected),
 				() -> verify(authorRepository, times(1)).save(authorActual));
-		;
+	}
+
+	@Test
+	@DisplayName("when find all")
+	public void when_find_all_should_return_list_of_authors() {
+
+		List<Author> authorsExpected = new ArrayList<>();
+		Author authorExpected = new Author("FirstName LastName");
+		Author authorExpected2 = new Author("FirstName2 LastName2");
+		authorsExpected.add(authorExpected);
+		authorsExpected.add(authorExpected2);
+
+		when(authorRepository.findAll()).thenReturn(authorsExpected);
+
+		List<Author> authorsActual = authorService.findAll();
+
+		assertAll(
+				() -> assertEquals(authorsExpected.size(), authorsActual.size(), "should return list with all authors"),
+				() -> assertTrue(authorsActual.contains(authorExpected),
+						() -> "should contain author, but was: " + authorsActual.contains(authorExpected)),
+				() -> assertTrue(authorsActual.contains(authorExpected2),
+						() -> "should contain author, but was: " + authorsActual.contains(authorExpected2)),
+				() -> verify(authorRepository, times(1)).findAll());
 	}
 }
