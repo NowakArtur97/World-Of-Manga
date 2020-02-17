@@ -1,5 +1,6 @@
 package com.NowakArtur97.WorldOfManga.model;
 
+import java.sql.Blob;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -10,6 +11,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -34,6 +36,10 @@ public class Manga {
 	@Column(name = "manga_id")
 	@Setter(value = AccessLevel.PRIVATE)
 	private Long id;
+
+	@Column(name = "image")
+	@Lob
+	private Blob image;
 
 	@ManyToMany(mappedBy = "createdMangas")
 	private final Set<Author> authors = new HashSet<>();;
