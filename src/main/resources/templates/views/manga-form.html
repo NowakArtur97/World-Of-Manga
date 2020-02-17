@@ -9,59 +9,92 @@
 </head>
 
 <body class="page page--register">
-    <div layout:fragment="content" class="form form--two_forms page__form">
-        <form th:action="@{/admin/addOrUpdateManga}" th:object="${mangaDTO}" method="POST" enctype="multipart/form-data"
-            class="form__box form__box--register" name="addOrUpdateMangaForm">
-            <h1 class="form__title" th:text="#{form.manga.title}"></h1>
-            <div class="form__group">
-                <label class="form__label" for="enTranslation" th:text="#{form.manga.enTranslation.title}"></label>
-                <p class="form__message form__message--failure" th:if="${#fields.hasErrors('enTranslation.title')}" th:errors="*{enTranslation.title}" ></p>
-                <input class="form__input" type="text" name="enTranslation.title" th:field="*{enTranslation.title}">
-            </div>
-            <div class="form__group">
-                <label class="form__label" for="enTranslation" th:text="#{form.manga.enTranslation.description}"></label>
-                <p class="form__message form__message--failure" th:if="${#fields.hasErrors('enTranslation.description')}" th:errors="*{enTranslation.description}" ></p>
-                <input class="form__input" type="text" name="enTranslation.description" th:field="*{enTranslation.description}">
-            </div>
-              <div class="form__group">
-                <label class="form__label" for="plTranslation" th:text="#{form.manga.plTranslation.title}"></label>
-                <p class="form__message form__message--failure" th:if="${#fields.hasErrors('plTranslation.title')}" th:errors="*{plTranslation.title}" ></p>
-                <input class="form__input" type="text" name="plTranslation.title" th:field="*{plTranslation.title}">
-            </div>
-             <div class="form__group">
-                <label class="form__label" for="plTranslation" th:text="#{form.manga.plTranslation.description}"></label>
-                <p class="form__message form__message--failure" th:if="${#fields.hasErrors('plTranslation.description')}" th:errors="*{plTranslation.description}" ></p>
-                <input class="form__input" type="text" name="plTranslation.description" th:field="*{plTranslation.description}">
-            </div>
-             <div class="form__group">
-                <label class="form__label" for="authors" th:text="#{form.manga.authors}"></label>
-                <p class="form__message form__message--failure" th:if="${#fields.hasErrors('authors')}" th:errors="*{authors}" ></p>
-                <span class="form__span" th:each="author : ${authors}">
-                    <input class="form__checkbox" type="checkbox" name="authors" th:field="*{authors}" th:value="${author.id}" th:text="${author.fullName}">
-                </span>
-            </div>
-              <div class="form__group">
-                <label class="form__label" for="image" th:text="#{form.manga.image}"></label>
-                <p class="form__message form__message--failure" th:if="${#fields.hasErrors('image')}" th:errors="*{image}" ></p>
-                <input class="form__input form__input--image" type="file" name="image" th:field="*{image}" accept="image/png, image/jpeg">
-            </div>
-             <div class="form__group">
-                <button class="form__submit" type="submit" th:text="#{form.manga.submit}" name="addOrUpdateMangaSubmitBtn"></button>
-            </div>
-        </form>
-
-         <form th:action="@{/admin/addOrUpdateAuthor}" th:object="${authorDTO}" method="POST"
-            class="form__box form__box--register" name="addOrUpdateAuthorForm">
-            <h1 class="form__title" th:text="#{form.author.title}"></h1>
-             <div class="form__group">
-                <label class="form__label" for="fullName" th:text="#{form.author.fullName}"></label>
-                <p class="form__message form__message--failure" th:if="${#fields.hasErrors('fullName')}" th:errors="*{fullName}"></p>
-                <input class="form__input" type="text" name="fullName" th:field="*{fullName}">
-            </div>
-            <div class="form__group">
-                <button class="form__submit" type="submit" th:text="#{form.author.submit}" name="addOrUpdateAuthorSubmitBtn"></button>
-            </div>
-        </form>
-    </div>
+    <div layout:fragment="content">
+        <div class="form form--first_form page__form">
+            <form th:action="@{/admin/addOrUpdateManga}" th:object="${mangaDTO}" method="POST"
+                enctype="multipart/form-data" class="form__box form__box--register" name="addOrUpdateMangaForm">
+                <h1 class="form__title" th:text="#{form.manga.title}"></h1>
+                <div class="form__group">
+                    <label class="form__label" for="enTranslation" th:text="#{form.manga.enTranslation.title}"></label>
+                    <p class="form__message form__message--failure" th:if="${#fields.hasErrors('enTranslation.title')}"
+						th:errors="*{enTranslation.title}"></p>
+					<input class="form__input" type="text" name="enTranslation.title"
+						th:field="*{enTranslation.title}">
+				</div>
+				<div class="form__group">
+					<label class="form__label" for="enTranslation"
+						th:text="#{form.manga.enTranslation.description}"></label>
+					<p class="form__message form__message--failure"
+						th:if="${#fields.hasErrors('enTranslation.description')}"
+						th:errors="*{enTranslation.description}"></p>
+					<input class="form__input" type="text"
+						name="enTranslation.description"
+						th:field="*{enTranslation.description}">
+				</div>
+				<div class="form__group">
+					<label class="form__label" for="plTranslation"
+						th:text="#{form.manga.plTranslation.title}"></label>
+					<p class="form__message form__message--failure"
+						th:if="${#fields.hasErrors('plTranslation.title')}"
+						th:errors="*{plTranslation.title}"></p>
+					<input class="form__input" type="text" name="plTranslation.title"
+						th:field="*{plTranslation.title}">
+				</div>
+				<div class="form__group">
+					<label class="form__label" for="plTranslation"
+						th:text="#{form.manga.plTranslation.description}"></label>
+					<p class="form__message form__message--failure"
+						th:if="${#fields.hasErrors('plTranslation.description')}"
+						th:errors="*{plTranslation.description}"></p>
+					<input class="form__input" type="text"
+						name="plTranslation.description"
+						th:field="*{plTranslation.description}">
+				</div>
+				<div class="form__group">
+					<label class="form__label" for="authors"
+						th:text="#{form.manga.authors}"></label>
+					<p class="form__message form__message--failure"
+						th:if="${#fields.hasErrors('authors')}" th:errors="*{authors}"></p>
+					<span class="form__span" th:each="author : ${authors}"> <input
+						class="form__checkbox" type="checkbox" name="authors"
+						th:field="*{authors}" th:value="${author.id}"
+						th:text="${author.fullName}">
+					</span>
+				</div>
+				<div class="form__group">
+					<label class="form__label" for="image"
+						th:text="#{form.manga.image}"></label>
+					<p class="form__message form__message--failure"
+						th:if="${#fields.hasErrors('image')}" th:errors="*{image}"></p>
+					<input class="form__input form__input--image" type="file"
+						name="image" th:field="*{image}" accept="image/png, image/jpeg">
+				</div>
+				<div class="form__group">
+					<button class="form__submit" type="submit"
+						th:text="#{form.manga.submit}" name="addOrUpdateMangaSubmitBtn"></button>
+				</div>
+			</form>
+		</div>
+		<div class="form form--second_form  page__form">
+			<form th:action="@{/admin/addOrUpdateAuthor}"
+				th:object="${authorDTO}" method="POST"
+				class="form__box form__box--register" name="addOrUpdateAuthorForm">
+				<h1 class="form__title" th:text="#{form.author.title}"></h1>
+				<div class="form__group">
+					<label class="form__label" for="fullName"
+						th:text="#{form.author.fullName}"></label>
+					<p class="form__message form__message--failure"
+						th:if="${#fields.hasErrors('fullName')}" th:errors="*{fullName}"></p>
+					<input class="form__input" type="text" name="fullName"
+						th:field="*{fullName}">
+				</div>
+				<div class="form__group">
+					<button class="form__submit" type="submit"
+						th:text="#{form.author.submit}" name="addOrUpdateAuthorSubmitBtn"></button>
+				</div>
+			</form>
+		</div>
+	</div>
+</body>
 </body>
 </html>

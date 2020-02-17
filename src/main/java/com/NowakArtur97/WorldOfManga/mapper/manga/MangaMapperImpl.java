@@ -1,5 +1,6 @@
 package com.NowakArtur97.WorldOfManga.mapper.manga;
 
+import java.io.IOException;
 import java.util.Set;
 
 import org.springframework.stereotype.Service;
@@ -21,6 +22,8 @@ public class MangaMapperImpl implements MangaMapper {
 
 		mapAuthors(manga, mangaDTO.getAuthors());
 
+		mapMultipartFileToBlob(manga, mangaDTO);
+
 		return manga;
 	}
 
@@ -32,5 +35,14 @@ public class MangaMapperImpl implements MangaMapper {
 	private void mapAuthors(Manga manga, Set<Author> authors) {
 
 		authors.stream().forEach(author -> manga.addAuthor(author));
+	}
+
+	private void mapMultipartFileToBlob(Manga manga, MangaDTO mangaDTO) {
+
+		try {
+			manga.setImage(mangaDTO.getImage().getBytes());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }

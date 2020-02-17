@@ -5,8 +5,12 @@
   left: 50%;
 }
 
-.form--two_forms {
-  left: 35%;
+.form--first_form {
+  left: 30%;
+}
+
+.form--second_form {
+  left: 70%;
 }
 
 .form__box {
@@ -69,8 +73,7 @@
 }
 
 .form__message {
-  padding: 0.125rem;
-  margin: 0.125rem;
+  margin: 0.1rem;
   text-align: center;
 }
 

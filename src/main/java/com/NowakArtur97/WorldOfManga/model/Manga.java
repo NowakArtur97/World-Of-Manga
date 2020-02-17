@@ -1,6 +1,5 @@
 package com.NowakArtur97.WorldOfManga.model;
 
-import java.sql.Blob;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -15,6 +14,8 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Type;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -38,8 +39,9 @@ public class Manga {
 	private Long id;
 
 	@Column(name = "image")
+	@Type(type="org.hibernate.type.BinaryType")
 	@Lob
-	private Blob image;
+	private byte[] image;
 
 	@ManyToMany(mappedBy = "createdMangas")
 	private final Set<Author> authors = new HashSet<>();;
