@@ -16,13 +16,13 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.Errors;
 
 import com.NowakArtur97.WorldOfManga.dto.MangaDTO;
 import com.NowakArtur97.WorldOfManga.dto.MangaTranslationDTO;
 import com.NowakArtur97.WorldOfManga.service.api.MangaTranslationService;
-import com.NowakArtur97.WorldOfManga.validation.manga.MangaValidator;
 
 @ExtendWith(MockitoExtension.class)
 @DisplayName("Manga Validator Tests")
@@ -43,6 +43,8 @@ public class MangaValidatorTest {
 
 		String description = "Correct description";
 
+		MockMultipartFile mockMultipartFile = new MockMultipartFile("manga.jpg", "file bytes".getBytes());
+
 		MangaTranslationDTO mangaTranslationEnDTO = MangaTranslationDTO.builder().title(title).description(description)
 				.build();
 
@@ -50,7 +52,7 @@ public class MangaValidatorTest {
 				.build();
 
 		MangaDTO mangaDTO = MangaDTO.builder().enTranslation(mangaTranslationEnDTO).plTranslation(mangaTranslationPlDTO)
-				.build();
+				.image(mockMultipartFile).build();
 
 		Errors errors = new BeanPropertyBindingResult(mangaDTO, "mangaDTO");
 
@@ -72,6 +74,8 @@ public class MangaValidatorTest {
 
 		String description = "Correct description";
 
+		MockMultipartFile mockMultipartFile = new MockMultipartFile("manga.jpg", "file bytes".getBytes());
+
 		MangaTranslationDTO mangaTranslationEnDTO = MangaTranslationDTO.builder().title(title).description(description)
 				.build();
 
@@ -79,7 +83,7 @@ public class MangaValidatorTest {
 				.build();
 
 		MangaDTO mangaDTO = MangaDTO.builder().enTranslation(mangaTranslationEnDTO).plTranslation(mangaTranslationPlDTO)
-				.build();
+				.image(mockMultipartFile).build();
 
 		Errors errors = new BeanPropertyBindingResult(mangaDTO, "mangaDTO");
 
@@ -104,6 +108,8 @@ public class MangaValidatorTest {
 
 		String description = "Correct description";
 
+		MockMultipartFile mockMultipartFile = new MockMultipartFile("manga.jpg", "file bytes".getBytes());
+
 		MangaTranslationDTO mangaTranslationEnDTO = MangaTranslationDTO.builder().title(title).description(description)
 				.build();
 
@@ -111,7 +117,7 @@ public class MangaValidatorTest {
 				.build();
 
 		MangaDTO mangaDTO = MangaDTO.builder().enTranslation(mangaTranslationEnDTO).plTranslation(mangaTranslationPlDTO)
-				.build();
+				.image(mockMultipartFile).build();
 
 		Errors errors = new BeanPropertyBindingResult(mangaDTO, "mangaDTO");
 
@@ -137,6 +143,8 @@ public class MangaValidatorTest {
 
 		String description = "Correct description";
 
+		MockMultipartFile mockMultipartFile = new MockMultipartFile("manga.jpg", "file bytes".getBytes());
+
 		MangaTranslationDTO mangaTranslationEnDTO = MangaTranslationDTO.builder().title(title).description(description)
 				.build();
 
@@ -144,7 +152,7 @@ public class MangaValidatorTest {
 				.build();
 
 		MangaDTO mangaDTO = MangaDTO.builder().enTranslation(mangaTranslationEnDTO).plTranslation(mangaTranslationPlDTO)
-				.build();
+				.image(mockMultipartFile).build();
 
 		Errors errors = new BeanPropertyBindingResult(mangaDTO, "mangaDTO");
 
@@ -158,6 +166,37 @@ public class MangaValidatorTest {
 								+ errors.getFieldError("enTranslation.title")),
 				() -> assertNotNull(errors.getFieldError("plTranslation.title"),
 						() -> "should polish title be in use, but was: " + errors.getFieldError("plTranslation.title")),
+				() -> verify(mangaTranslationService, times(2)).isTitleAlreadyInUse(title));
+	}
+
+	@Test
+	@DisplayName("when validate empty image in manga dto")
+	public void when_validate_empty_image_in_manga_dto_should_have_errors() {
+
+		String title = "Correct title";
+
+		String description = "Correct description";
+
+		MockMultipartFile mockMultipartFile = null;
+
+		MangaTranslationDTO mangaTranslationEnDTO = MangaTranslationDTO.builder().title(title).description(description)
+				.build();
+
+		MangaTranslationDTO mangaTranslationPlDTO = MangaTranslationDTO.builder().title(title).description(description)
+				.build();
+
+		MangaDTO mangaDTO = MangaDTO.builder().enTranslation(mangaTranslationEnDTO).plTranslation(mangaTranslationPlDTO)
+				.image(mockMultipartFile).build();
+
+		Errors errors = new BeanPropertyBindingResult(mangaDTO, "mangaDTO");
+
+		when(mangaTranslationService.isTitleAlreadyInUse(title)).thenReturn(false).thenReturn(false);
+
+		mangaValidator.validate(mangaDTO, errors);
+
+		assertAll(() -> assertTrue(errors.hasErrors(), () -> "should have errors: " + errors.hasErrors()),
+				() -> assertNotNull(errors.getFieldError("image"),
+						() -> "should image be empty, but was: " + errors.getFieldError("image")),
 				() -> verify(mangaTranslationService, times(2)).isTitleAlreadyInUse(title));
 	}
 }
