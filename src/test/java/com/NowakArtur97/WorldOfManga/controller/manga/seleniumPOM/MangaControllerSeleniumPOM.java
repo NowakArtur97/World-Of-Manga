@@ -18,6 +18,7 @@ public class MangaControllerSeleniumPOM extends SeleniumPageObjectModel {
 	private static final String DESCRIPTION_EN = "enTranslation.description";
 	private static final String TITLE_PL = "plTranslation.title";
 	private static final String DESCRIPTION_PL = "plTranslation.description";
+	private static final String AUTHORS = "authors";
 	private static final String FORM_MESSAGE_FAILURE_CLASS = "form__message--failure";
 	private static final String FORM_BOX_NAME = "addOrUpdateMangaForm";
 	private static final String SUBMIT_MANGA = "addOrUpdateMangaSubmitBtn";
@@ -34,6 +35,9 @@ public class MangaControllerSeleniumPOM extends SeleniumPageObjectModel {
 
 	@FindBy(name = DESCRIPTION_PL)
 	private WebElement descriptionPlInput;
+
+	@FindBy(name = AUTHORS)
+	private List<WebElement> authorsCheckboxes;
 
 	@FindBy(className = FORM_MESSAGE_FAILURE_CLASS)
 	private List<WebElement> failrueMessages;
@@ -77,6 +81,16 @@ public class MangaControllerSeleniumPOM extends SeleniumPageObjectModel {
 		descriptionEnInput.sendKeys(enDescription);
 	}
 
+	public void clickFirstAuthorCheckbox() {
+
+		authorsCheckboxes.get(0).click();
+	}
+
+	public boolean isFirstAuthorCheckboxSelected() {
+
+		return authorsCheckboxes.get(0).isSelected();
+	}
+
 	public String getPlTitle() {
 
 		return titlePlInput.getAttribute("value");
@@ -118,8 +132,8 @@ public class MangaControllerSeleniumPOM extends SeleniumPageObjectModel {
 		return failrueMessages.size();
 	}
 
-	public void fillMandatoryMangaFormFields(String enTitle, String enDescription, String plTitle,
-			String plDescription) {
+	public void fillMandatoryMangaFormFields(String enTitle, String enDescription, String plTitle, String plDescription,
+			boolean selectAuthor) {
 
 		setEnTitle(enTitle);
 
@@ -128,6 +142,10 @@ public class MangaControllerSeleniumPOM extends SeleniumPageObjectModel {
 		setPlTitle(plTitle);
 
 		setPlDescription(plDescription);
+
+		if (selectAuthor) {
+			clickFirstAuthorCheckbox();
+		}
 
 		clickSubmitMangaFormButton();
 	}

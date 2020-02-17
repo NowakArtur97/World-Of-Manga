@@ -2,6 +2,7 @@ package com.NowakArtur97.WorldOfManga.controller.manga.seleniumTest;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.DisplayName;
@@ -29,6 +30,7 @@ public class MangaControllerUIEnTest extends MangaControllerUITest {
 
 		String englishTitle = "English title";
 		String polishTitle = "Polish title";
+		boolean selectAuthor = true;
 
 		loginPage.loadLoginView(LanguageVersion.ENG);
 
@@ -37,7 +39,7 @@ public class MangaControllerUIEnTest extends MangaControllerUITest {
 		mangaFormPage.clickAddOrUpdateMangaLinkButton();
 
 		mangaFormPage.fillMandatoryMangaFormFields(englishTitle, "English description", polishTitle,
-				"Polish description");
+				"Polish description", selectAuthor);
 
 		assertAll(() -> assertTrue(mangaFormPage.countFailureMessages() == 0, () -> "shouldn`t have errors"),
 				() -> assertTrue(mangaTranslationService.isTitleAlreadyInUse(englishTitle),
@@ -47,10 +49,11 @@ public class MangaControllerUIEnTest extends MangaControllerUITest {
 	}
 
 	@Test
-	@DisplayName("when incorrect manga creation with all blank fields")
-	public void when_incorrect_manga_creation_with_all_blank_fields_should_have_errors() {
+	@DisplayName("when incorrect manga creation with all blank fields and not selected author")
+	public void when_incorrect_manga_creation_with_all_blank_fields_and_not_selected_author_should_have_errors() {
 
 		String blankField = "";
+		boolean selectAuthor = false;
 
 		loginPage.loadLoginView(LanguageVersion.ENG);
 
@@ -58,9 +61,9 @@ public class MangaControllerUIEnTest extends MangaControllerUITest {
 
 		mangaFormPage.clickAddOrUpdateMangaLinkButton();
 
-		mangaFormPage.fillMandatoryMangaFormFields(blankField, blankField, blankField, blankField);
+		mangaFormPage.fillMandatoryMangaFormFields(blankField, blankField, blankField, blankField, selectAuthor);
 
-		assertAll(() -> assertTrue(mangaFormPage.countFailureMessages() == 4, () -> "should have four errors"),
+		assertAll(() -> assertTrue(mangaFormPage.countFailureMessages() == 5, () -> "should have five errors"),
 				() -> assertTrue(mangaFormPage.getFormBoxText().contains(mangaTranslationDescriptionNotBlankMessage),
 						() -> "should show title is a required field message twice"),
 				() -> assertTrue(mangaFormPage.getFormBoxText().contains(mangaTranslationTitleNotBlankMessage),
@@ -70,14 +73,16 @@ public class MangaControllerUIEnTest extends MangaControllerUITest {
 						() -> "should show incorrect english description"),
 				() -> assertEquals(blankField, mangaFormPage.getPlTitle(), () -> "should show incorrect polish title"),
 				() -> assertEquals(blankField, mangaFormPage.getPlDescription(),
-						() -> "should show incorrect polish description"));
+						() -> "should show incorrect polish description"),
+				() -> assertFalse(mangaFormPage.isFirstAuthorCheckboxSelected(), () -> "shouldn`t author be selected"));
 	}
 
 	@Test
-	@DisplayName("when incorrect manga creation with too long field sizes")
-	public void when_incorrect_manga_creation_with_too_long_field_sizes_should_have_errors() {
+	@DisplayName("when incorrect manga creation with too long field sizes and selected author")
+	public void when_incorrect_manga_creation_with_too_long_field_sizes_and_selected_author_should_have_errors() {
 
 		String longText = "asdfghjklpasdfghjklpasdfghjklpasdfghjklpasdfghjklp!@#$%";
+		boolean selectAuthor = true;
 
 		loginPage.loadLoginView(LanguageVersion.ENG);
 
@@ -85,7 +90,7 @@ public class MangaControllerUIEnTest extends MangaControllerUITest {
 
 		mangaFormPage.clickAddOrUpdateMangaLinkButton();
 
-		mangaFormPage.fillMandatoryMangaFormFields(longText, longText, longText, longText);
+		mangaFormPage.fillMandatoryMangaFormFields(longText, longText, longText, longText, selectAuthor);
 
 		assertAll(() -> assertTrue(mangaFormPage.countFailureMessages() == 4, () -> "should have four errors"),
 				() -> assertTrue(mangaFormPage.getFormBoxText().contains(mangaTranslationTitleSizeMessage),
@@ -97,6 +102,7 @@ public class MangaControllerUIEnTest extends MangaControllerUITest {
 						() -> "should show incorrect english description"),
 				() -> assertEquals(longText, mangaFormPage.getPlTitle(), () -> "should show incorrect polish title"),
 				() -> assertEquals(longText, mangaFormPage.getPlDescription(),
-						() -> "should show incorrect polish description"));
+						() -> "should show incorrect polish description"),
+				() -> assertTrue(mangaFormPage.isFirstAuthorCheckboxSelected(), () -> "should author be selected"));
 	}
 }
