@@ -63,14 +63,14 @@ public class MangaServiceImplTest {
 
 		mangaDTO.setAuthors(authorsExpected);
 
-		MockMultipartFile mockMultipartFile = new MockMultipartFile("manga.jpg", "file bytes".getBytes());
-		mangaDTO.setImage(mockMultipartFile);
+		MockMultipartFile image = new MockMultipartFile("image.jpg", "file bytes".getBytes());
+		mangaDTO.setImage(image);
 
 		Manga mangaExpected = new Manga();
 		mangaExpected.addAuthor(authorExpected);
 		mangaExpected.addTranslation(mangaTranslationEnExpected);
 		mangaExpected.addTranslation(mangaTranslationPlExpected);
-		mangaExpected.setImage(mockMultipartFile.getBytes());
+		mangaExpected.setImage(image.getBytes());
 
 		when(mangaMapper.mapMangaDTOToManga(mangaDTO, mangaTranslationsExpected)).thenReturn(mangaExpected);
 

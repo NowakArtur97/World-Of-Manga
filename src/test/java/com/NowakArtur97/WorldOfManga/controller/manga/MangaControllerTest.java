@@ -29,6 +29,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.MediaType;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
@@ -95,12 +96,14 @@ public class MangaControllerTest {
 		MangaTranslationDTO mangaTranslationPlDTO = MangaTranslationDTO.builder().title("Polish title")
 				.description("Polish description").build();
 
+		MockMultipartFile image = new MockMultipartFile("image.jpg", "file bytes".getBytes());
+
 		Set<Author> authors = new HashSet<>();
 		Author author = new Author("FirstName LastName");
 		authors.add(author);
 
 		MangaDTO mangaDTO = MangaDTO.builder().enTranslation(mangaTranslationEnDTO).plTranslation(mangaTranslationPlDTO)
-				.authors(authors).build();
+				.image(image).authors(authors).build();
 
 		MangaTranslation mangaTranslationEn = MangaTranslation.builder().title("English title")
 				.description("English description").build();
@@ -134,6 +137,8 @@ public class MangaControllerTest {
 		String polishTitle = "Polish title";
 		String polishDescription = "";
 
+		MockMultipartFile image = new MockMultipartFile("image.jpg", "file bytes".getBytes());
+
 		List<Author> authors = new ArrayList<>();
 		authors.add(new Author("FirstName LastName"));
 
@@ -147,7 +152,7 @@ public class MangaControllerTest {
 				.description(polishDescription).build();
 
 		MangaDTO mangaDTO = MangaDTO.builder().enTranslation(mangaTranslationEnDTO).plTranslation(mangaTranslationPlDTO)
-				.authors(mangaAuthors).build();
+				.image(image).authors(mangaAuthors).build();
 
 		assertAll(
 				() -> mockMvc

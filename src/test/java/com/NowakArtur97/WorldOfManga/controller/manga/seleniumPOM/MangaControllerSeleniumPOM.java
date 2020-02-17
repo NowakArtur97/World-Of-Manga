@@ -18,6 +18,7 @@ public class MangaControllerSeleniumPOM extends SeleniumPageObjectModel {
 	private static final String DESCRIPTION_EN = "enTranslation.description";
 	private static final String TITLE_PL = "plTranslation.title";
 	private static final String DESCRIPTION_PL = "plTranslation.description";
+	private static final String IMAGE = "image";
 	private static final String AUTHORS = "authors";
 	private static final String FORM_MESSAGE_FAILURE_CLASS = "form__message--failure";
 	private static final String FORM_BOX_NAME = "addOrUpdateMangaForm";
@@ -36,6 +37,9 @@ public class MangaControllerSeleniumPOM extends SeleniumPageObjectModel {
 	@FindBy(name = DESCRIPTION_PL)
 	private WebElement descriptionPlInput;
 
+	@FindBy(name = IMAGE)
+	private WebElement imageInput;
+	
 	@FindBy(name = AUTHORS)
 	private List<WebElement> authorsCheckboxes;
 

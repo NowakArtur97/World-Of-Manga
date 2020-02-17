@@ -43,7 +43,7 @@ public class MangaValidatorTest {
 
 		String description = "Correct description";
 
-		MockMultipartFile mockMultipartFile = new MockMultipartFile("manga.jpg", "file bytes".getBytes());
+		MockMultipartFile image = new MockMultipartFile("image.jpg", "file bytes".getBytes());
 
 		MangaTranslationDTO mangaTranslationEnDTO = MangaTranslationDTO.builder().title(title).description(description)
 				.build();
@@ -52,7 +52,7 @@ public class MangaValidatorTest {
 				.build();
 
 		MangaDTO mangaDTO = MangaDTO.builder().enTranslation(mangaTranslationEnDTO).plTranslation(mangaTranslationPlDTO)
-				.image(mockMultipartFile).build();
+				.image(image).build();
 
 		Errors errors = new BeanPropertyBindingResult(mangaDTO, "mangaDTO");
 
@@ -74,7 +74,7 @@ public class MangaValidatorTest {
 
 		String description = "Correct description";
 
-		MockMultipartFile mockMultipartFile = new MockMultipartFile("manga.jpg", "file bytes".getBytes());
+		MockMultipartFile image = new MockMultipartFile("image.jpg", "file bytes".getBytes());
 
 		MangaTranslationDTO mangaTranslationEnDTO = MangaTranslationDTO.builder().title(title).description(description)
 				.build();
@@ -83,7 +83,7 @@ public class MangaValidatorTest {
 				.build();
 
 		MangaDTO mangaDTO = MangaDTO.builder().enTranslation(mangaTranslationEnDTO).plTranslation(mangaTranslationPlDTO)
-				.image(mockMultipartFile).build();
+				.image(image).build();
 
 		Errors errors = new BeanPropertyBindingResult(mangaDTO, "mangaDTO");
 
@@ -108,7 +108,7 @@ public class MangaValidatorTest {
 
 		String description = "Correct description";
 
-		MockMultipartFile mockMultipartFile = new MockMultipartFile("manga.jpg", "file bytes".getBytes());
+		MockMultipartFile image = new MockMultipartFile("image.jpg", "file bytes".getBytes());
 
 		MangaTranslationDTO mangaTranslationEnDTO = MangaTranslationDTO.builder().title(title).description(description)
 				.build();
@@ -117,7 +117,7 @@ public class MangaValidatorTest {
 				.build();
 
 		MangaDTO mangaDTO = MangaDTO.builder().enTranslation(mangaTranslationEnDTO).plTranslation(mangaTranslationPlDTO)
-				.image(mockMultipartFile).build();
+				.image(image).build();
 
 		Errors errors = new BeanPropertyBindingResult(mangaDTO, "mangaDTO");
 
@@ -143,7 +143,7 @@ public class MangaValidatorTest {
 
 		String description = "Correct description";
 
-		MockMultipartFile mockMultipartFile = new MockMultipartFile("manga.jpg", "file bytes".getBytes());
+		MockMultipartFile image = new MockMultipartFile("image.jpg", "file bytes".getBytes());
 
 		MangaTranslationDTO mangaTranslationEnDTO = MangaTranslationDTO.builder().title(title).description(description)
 				.build();
@@ -152,7 +152,7 @@ public class MangaValidatorTest {
 				.build();
 
 		MangaDTO mangaDTO = MangaDTO.builder().enTranslation(mangaTranslationEnDTO).plTranslation(mangaTranslationPlDTO)
-				.image(mockMultipartFile).build();
+				.image(image).build();
 
 		Errors errors = new BeanPropertyBindingResult(mangaDTO, "mangaDTO");
 
@@ -177,7 +177,7 @@ public class MangaValidatorTest {
 
 		String description = "Correct description";
 
-		MockMultipartFile mockMultipartFile = null;
+		MockMultipartFile image = null;
 
 		MangaTranslationDTO mangaTranslationEnDTO = MangaTranslationDTO.builder().title(title).description(description)
 				.build();
@@ -186,7 +186,7 @@ public class MangaValidatorTest {
 				.build();
 
 		MangaDTO mangaDTO = MangaDTO.builder().enTranslation(mangaTranslationEnDTO).plTranslation(mangaTranslationPlDTO)
-				.image(mockMultipartFile).build();
+				.image(image).build();
 
 		Errors errors = new BeanPropertyBindingResult(mangaDTO, "mangaDTO");
 
