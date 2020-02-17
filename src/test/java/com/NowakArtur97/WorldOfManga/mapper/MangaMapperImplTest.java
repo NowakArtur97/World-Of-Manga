@@ -2,6 +2,7 @@ package com.NowakArtur97.WorldOfManga.mapper;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -9,6 +10,7 @@ import java.util.Set;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import org.springframework.mock.web.MockMultipartFile;
 
 import com.NowakArtur97.WorldOfManga.dto.MangaDTO;
 import com.NowakArtur97.WorldOfManga.mapper.manga.MangaMapperImpl;
@@ -34,6 +36,8 @@ public class MangaMapperImplTest {
 
 		Author authorExpected = new Author("FirtName LastName");
 
+		MockMultipartFile mockMultipartFile = new MockMultipartFile("manga.jpg", "file bytes".getBytes());
+
 		MangaDTO mangaDTOExpected = new MangaDTO();
 
 		Set<MangaTranslation> translationsExpected = new HashSet<>();
@@ -44,6 +48,8 @@ public class MangaMapperImplTest {
 		authorsExpected.add(authorExpected);
 		mangaDTOExpected.setAuthors(authorsExpected);
 
+		mangaDTOExpected.setImage(mockMultipartFile);
+
 		Manga mangaActual = mangaMapperImpl.mapMangaDTOToManga(mangaDTOExpected, translationsExpected);
 
 		assertAll(
@@ -51,6 +57,8 @@ public class MangaMapperImplTest {
 						() -> "should return manga with two translation, but was: "
 								+ mangaActual.getTranslations().size()),
 				() -> assertEquals(authorsExpected.size(), mangaActual.getAuthors().size(),
-						() -> "should return manga with one author, but was: " + mangaActual.getAuthors().size()));
+						() -> "should return manga with one author, but was: " + mangaActual.getAuthors().size()),
+				() -> assertNotNull(mangaActual.getImage(),
+						() -> "should return manga with image, but was: " + mangaActual.getImage()));
 	}
 }
