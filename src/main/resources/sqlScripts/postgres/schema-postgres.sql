@@ -41,7 +41,8 @@ CREATE TABLE world_of_manga.language (
 DROP TABLE IF EXISTS world_of_manga.manga CASCADE;
 
 CREATE TABLE world_of_manga.manga (
-    "manga_id" SERIAL PRIMARY KEY
+    "manga_id" SERIAL PRIMARY KEY,
+	"image" BYTEA NOT NULL
 );
 
 DROP TABLE IF EXISTS world_of_manga.author CASCADE;
