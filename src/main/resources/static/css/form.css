@@ -48,6 +48,11 @@
   font-size: 0.9rem;
 }
 
+.form__input--image {
+  border: none;
+  margin: 0 auto;
+}
+
 .form__submit {
   border: none;
   outline: none;

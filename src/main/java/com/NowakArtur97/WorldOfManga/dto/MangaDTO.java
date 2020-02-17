@@ -4,7 +4,6 @@ import java.util.Set;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -21,7 +20,6 @@ import lombok.NoArgsConstructor;
 @Builder
 public class MangaDTO {
 
-	@NotNull(message = "{manga.image.notEmpty}")
 	private MultipartFile image;
 
 	@NotEmpty(message = "{manga.authors.notEmpty}")

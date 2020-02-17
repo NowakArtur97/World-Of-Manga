@@ -43,5 +43,10 @@ public class MangaValidator implements Validator {
 
 			errors.rejectValue("plTranslation.title", "mangaTranslation.titlePl.inUse");
 		}
+
+		if (mangaDTO.getImage() == null || mangaDTO.getImage().isEmpty()) {
+
+			errors.rejectValue("image", "manga.image.notEmpty");
+		}
 	}
 }
