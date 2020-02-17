@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -18,6 +19,8 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.NowakArtur97.WorldOfManga.dto.MangaDTO;
+import com.NowakArtur97.WorldOfManga.mapper.manga.MangaMapper;
+import com.NowakArtur97.WorldOfManga.model.Author;
 import com.NowakArtur97.WorldOfManga.model.Manga;
 import com.NowakArtur97.WorldOfManga.model.MangaTranslation;
 import com.NowakArtur97.WorldOfManga.repository.MangaRepository;
@@ -32,6 +35,9 @@ public class MangaServiceImplTest {
 
 	@Mock
 	private MangaRepository mangaRepository;
+
+	@Mock
+	private MangaMapper mangaMapper;
 
 	@Test
 	@DisplayName("when add manga should save manga")
@@ -48,15 +54,33 @@ public class MangaServiceImplTest {
 		mangaTranslationsExpected.add(mangaTranslationEnExpected);
 		mangaTranslationsExpected.add(mangaTranslationPlExpected);
 
+		Set<Author> authorsExpected = new HashSet<>();
+		Author authorExpected = new Author("FirsName LastName");
+		authorsExpected.add(authorExpected);
+
+		mangaDTO.setAuthors(authorsExpected);
+
+		Manga mangaExpected = new Manga();
+		mangaExpected.addAuthor(authorExpected);
+		mangaExpected.addTranslation(mangaTranslationEnExpected);
+		mangaExpected.addTranslation(mangaTranslationPlExpected);
+
+		when(mangaMapper.mapMangaDTOToManga(mangaDTO, mangaTranslationsExpected)).thenReturn(mangaExpected);
+
 		Manga mangaActual = mangaService.addOrUpdate(mangaDTO, mangaTranslationsExpected);
 
 		assertAll(
-				() -> assertEquals(mangaActual.getTranslations().size(), 2,
-						() -> "should contain both translations: " + mangaTranslationEnExpected + " but wasn`t"),
+				() -> assertEquals(authorsExpected.size(), mangaActual.getAuthors().size(),
+						() -> "should contain one author: " + authorExpected + " but wasn`t"),
+				() -> assertTrue(mangaActual.getAuthors().contains(authorExpected),
+						() -> "should contain author: " + authorExpected + " but wasn`t"),
+				() -> assertEquals(mangaTranslationsExpected.size(), mangaActual.getTranslations().size(),
+						() -> "should contain both translations: " + mangaTranslationsExpected + " but wasn`t"),
 				() -> assertTrue(mangaActual.getTranslations().contains(mangaTranslationEnExpected),
 						() -> "should contain en translation: " + mangaTranslationEnExpected + " but wasn`t"),
 				() -> assertTrue(mangaActual.getTranslations().contains(mangaTranslationEnExpected),
 						() -> "should contain en translation: " + mangaTranslationEnExpected + " but wasn`t"),
+				() -> verify(mangaMapper, times(1)).mapMangaDTOToManga(mangaDTO, mangaTranslationsExpected),
 				() -> verify(mangaRepository, times(1)).save(mangaActual));
 	}
 }

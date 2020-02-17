@@ -111,8 +111,8 @@ public class MangaTranslationServiceImplTest {
 		Set<MangaTranslation> mangaTranslationsActual = mangaTranslationService.addOrUpdate(mangaDTO);
 
 		assertAll(
-				() -> assertEquals(mangaTranslationsActual.size(), 2,
-						() -> "should return two translations: " + mangaTranslationsActual.size() + " but was: "
+				() -> assertEquals(mangaTranslationsExpected.size(), mangaTranslationsActual.size(),
+						() -> "should return two translations: " + mangaTranslationsExpected + " but was: "
 								+ mangaTranslationsActual.size()),
 				() -> verify(languageService, times(1)).findByLocale("en"),
 				() -> verify(languageService, times(1)).findByLocale("pl"),
