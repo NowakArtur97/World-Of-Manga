@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
@@ -13,6 +14,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -28,6 +32,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import com.NowakArtur97.WorldOfManga.dto.AuthorDTO;
 import com.NowakArtur97.WorldOfManga.dto.MangaDTO;
+import com.NowakArtur97.WorldOfManga.model.Author;
 import com.NowakArtur97.WorldOfManga.service.api.AuthorService;
 import com.NowakArtur97.WorldOfManga.validation.author.AuthorValidator;
 
@@ -57,9 +62,16 @@ public class AuthorControllerTest {
 	@DisplayName("when load add or update author page")
 	public void when_load_add_or_update_author_page_should_show_author_form() {
 
+		List<Author> authors = new ArrayList<>();
+		authors.add(new Author("FirstName LastName"));
+		
+		when(authorService.findAll()).thenReturn(authors);
+		
 		assertAll(() -> mockMvc.perform(get("/admin/addOrUpdateAuthor")).andExpect(status().isOk())
 				.andExpect(view().name("views/manga-form")).andExpect(model().attribute("mangaDTO", new MangaDTO()))
-				.andExpect(model().attribute("authorDTO", new AuthorDTO())));
+				.andExpect(model().attribute("authorDTO", new AuthorDTO()))
+				.andExpect(model().attribute("authors", authors)),
+				() -> verify(authorService, times(1)).findAll());
 	}
 
 	@Test

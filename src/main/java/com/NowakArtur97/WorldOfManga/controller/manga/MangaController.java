@@ -23,12 +23,10 @@ import com.NowakArtur97.WorldOfManga.service.api.MangaTranslationService;
 import com.NowakArtur97.WorldOfManga.validation.manga.MangaValidator;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @RequestMapping(path = "/admin")
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
-@Slf4j
 public class MangaController {
 
 	private final MangaService mangaService;

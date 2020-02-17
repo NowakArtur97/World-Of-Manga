@@ -15,7 +15,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -34,7 +36,9 @@ import com.NowakArtur97.WorldOfManga.dto.AuthorDTO;
 import com.NowakArtur97.WorldOfManga.dto.MangaDTO;
 import com.NowakArtur97.WorldOfManga.dto.MangaTranslationDTO;
 import com.NowakArtur97.WorldOfManga.exception.LanguageNotFoundException;
+import com.NowakArtur97.WorldOfManga.model.Author;
 import com.NowakArtur97.WorldOfManga.model.MangaTranslation;
+import com.NowakArtur97.WorldOfManga.service.api.AuthorService;
 import com.NowakArtur97.WorldOfManga.service.api.MangaService;
 import com.NowakArtur97.WorldOfManga.service.api.MangaTranslationService;
 import com.NowakArtur97.WorldOfManga.validation.manga.MangaValidator;
@@ -58,6 +62,9 @@ public class MangaControllerTest {
 	@Mock
 	private MangaValidator mangaValidator;
 
+	@Mock
+	private AuthorService authorService;
+
 	@BeforeEach
 	public void setUp() {
 
@@ -68,9 +75,15 @@ public class MangaControllerTest {
 	@DisplayName("when load add or update manga page")
 	public void when_load_add_or_update_manga_page_should_show_manga_form() {
 
+		List<Author> authors = new ArrayList<>();
+		authors.add(new Author("FirstName LastName"));
+
+		when(authorService.findAll()).thenReturn(authors);
+
 		assertAll(() -> mockMvc.perform(get("/admin/addOrUpdateManga")).andExpect(status().isOk())
 				.andExpect(view().name("views/manga-form")).andExpect(model().attribute("mangaDTO", new MangaDTO()))
-				.andExpect(model().attribute("authorDTO", new AuthorDTO())));
+				.andExpect(model().attribute("authorDTO", new AuthorDTO()))
+				.andExpect(model().attribute("authors", authors)), () -> verify(authorService, times(1)).findAll());
 	}
 
 	@Test
@@ -82,8 +95,12 @@ public class MangaControllerTest {
 		MangaTranslationDTO mangaTranslationPlDTO = MangaTranslationDTO.builder().title("Polish title")
 				.description("Polish description").build();
 
+		Set<Author> authors = new HashSet<>();
+		Author author = new Author("FirstName LastName");
+		authors.add(author);
+
 		MangaDTO mangaDTO = MangaDTO.builder().enTranslation(mangaTranslationEnDTO).plTranslation(mangaTranslationPlDTO)
-				.build();
+				.authors(authors).build();
 
 		MangaTranslation mangaTranslationEn = MangaTranslation.builder().title("English title")
 				.description("English description").build();
@@ -93,6 +110,8 @@ public class MangaControllerTest {
 		Set<MangaTranslation> mangaTranslations = new HashSet<>();
 		mangaTranslations.add(mangaTranslationEn);
 		mangaTranslations.add(mangaTranslationPl);
+
+		mangaDTO.setAuthors(authors);
 
 		when(mangaTranslationService.addOrUpdate(mangaDTO)).thenReturn(mangaTranslations);
 
@@ -115,13 +134,20 @@ public class MangaControllerTest {
 		String polishTitle = "Polish title";
 		String polishDescription = "";
 
+		List<Author> authors = new ArrayList<>();
+		authors.add(new Author("FirstName LastName"));
+
+		when(authorService.findAll()).thenReturn(authors);
+
+		Set<Author> mangaAuthors = new HashSet<>();
+
 		MangaTranslationDTO mangaTranslationEnDTO = MangaTranslationDTO.builder().title(englishTitle)
 				.description(englishDescription).build();
 		MangaTranslationDTO mangaTranslationPlDTO = MangaTranslationDTO.builder().title(polishTitle)
 				.description(polishDescription).build();
 
 		MangaDTO mangaDTO = MangaDTO.builder().enTranslation(mangaTranslationEnDTO).plTranslation(mangaTranslationPlDTO)
-				.build();
+				.authors(mangaAuthors).build();
 
 		assertAll(
 				() -> mockMvc
@@ -130,6 +156,8 @@ public class MangaControllerTest {
 						.andExpect(status().isOk()).andExpect(forwardedUrl("views/manga-form"))
 						.andExpect(model().attribute("mangaDTO", mangaDTO))
 						.andExpect(model().attribute("authorDTO", new AuthorDTO()))
+						.andExpect(model().attribute("authors", authors))
+						.andExpect(model().attributeHasFieldErrors("mangaDTO", "authors"))
 						.andExpect(model().attributeHasFieldErrors("mangaDTO", "enTranslation.title"))
 						.andExpect(model().attributeHasFieldErrors("mangaDTO", "plTranslation.description"))
 						.andExpect(model().attribute("mangaDTO",
@@ -140,6 +168,7 @@ public class MangaControllerTest {
 								hasProperty("plTranslation", hasProperty("title", is(polishTitle)))))
 						.andExpect(model().attribute("mangaDTO",
 								hasProperty("plTranslation", hasProperty("description", is(polishDescription))))),
-				() -> verify(mangaTranslationService, never()).addOrUpdate(mangaDTO));
+				() -> verify(mangaTranslationService, never()).addOrUpdate(mangaDTO),
+				() -> verify(authorService, times(1)).findAll());
 	}
 }
