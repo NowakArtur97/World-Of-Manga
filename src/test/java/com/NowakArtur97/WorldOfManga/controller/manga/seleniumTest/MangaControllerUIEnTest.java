@@ -91,7 +91,8 @@ public class MangaControllerUIEnTest extends MangaControllerUITest {
 	@DisplayName("when incorrect manga creation with too long field sizes and selected author and image")
 	public void when_incorrect_manga_creation_with_too_long_field_sizes_and_selected_author_and_image_should_have_errors() {
 
-		String longText = "asdfghjklpasdfghjklpasdfghjklpasdfghjklpasdfghjklp!@#$%";
+		String longTitleText = "asdfghjklpasdfghjklpasdfghjklpasdfghjklpasdfghjklp!@#$%";
+		String longDescriptionText = "asdfghjklpasdfghjklpasdfghjklpasdfghjklpasdfghjklp!@#$%".repeat(30);
 		boolean selectAuthor = true;
 		boolean addImage = true;
 
@@ -101,18 +102,18 @@ public class MangaControllerUIEnTest extends MangaControllerUITest {
 
 		mangaFormPage.clickAddOrUpdateMangaLinkButton();
 
-		mangaFormPage.fillMandatoryMangaFormFields(longText, longText, longText, longText, selectAuthor, addImage);
+		mangaFormPage.fillMandatoryMangaFormFields(longTitleText, longDescriptionText, longTitleText, longDescriptionText, selectAuthor, addImage);
 
 		assertAll(() -> assertTrue(mangaFormPage.countFailureMessages() == 4, () -> "should have four errors"),
 				() -> assertTrue(mangaFormPage.getFormBoxText().contains(mangaTranslationTitleSizeMessage),
 						() -> "should show title is too long message twice"),
 				() -> assertTrue(mangaFormPage.getFormBoxText().contains(mangaTranslationDescriptionSizeMessage),
 						() -> "should show description is too long message twice"),
-				() -> assertEquals(longText, mangaFormPage.getEnTitle(), () -> "should show incorrect english title"),
-				() -> assertEquals(longText, mangaFormPage.getEnDescription(),
+				() -> assertEquals(longTitleText, mangaFormPage.getEnTitle(), () -> "should show incorrect english title"),
+				() -> assertEquals(longDescriptionText, mangaFormPage.getEnDescription(),
 						() -> "should show incorrect english description"),
-				() -> assertEquals(longText, mangaFormPage.getPlTitle(), () -> "should show incorrect polish title"),
-				() -> assertEquals(longText, mangaFormPage.getPlDescription(),
+				() -> assertEquals(longTitleText, mangaFormPage.getPlTitle(), () -> "should show incorrect polish title"),
+				() -> assertEquals(longDescriptionText, mangaFormPage.getPlDescription(),
 						() -> "should show incorrect polish description"),
 				() -> assertTrue(mangaFormPage.isFirstAuthorCheckboxSelected(), () -> "should author be selected"));
 	}
