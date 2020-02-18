@@ -1,5 +1,9 @@
-<div th:fragment="manga-list" class="manga-list">
+<div th:fragment="manga-list" class="manga_list">
     <div th:each="manga : ${mangas}">
+        <div th:each="translation : ${manga.translations}">
+            <span th:if="${#strings.equals(translation.language.locale, locale)}" th:text="${translation.title}"></span>
+            <span th:if="${#strings.equals(translation.language.locale, locale)}" th:text="${translation.description}"></span>
+        </div>
         <div th:each="author : ${manga.authors}">
             <span th:text="${author.fullName}"></span>
         </div>
