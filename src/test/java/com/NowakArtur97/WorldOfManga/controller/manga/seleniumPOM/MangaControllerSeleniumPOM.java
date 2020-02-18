@@ -14,6 +14,10 @@ public class MangaControllerSeleniumPOM extends SeleniumPageObjectModel {
 
 	public static final String RESOURCE_PATH = "/admin/addOrUpdateManga";
 
+	private final static String projectPath = System.getProperty("user.dir");
+
+	private final static String EXAMPLE_IMAGE_PATH = "\\src\\main\\resources\\static\\images\\samurai.jpg";
+
 	private static final String TITLE_EN = "enTranslation.title";
 	private static final String DESCRIPTION_EN = "enTranslation.description";
 	private static final String TITLE_PL = "plTranslation.title";
@@ -39,7 +43,7 @@ public class MangaControllerSeleniumPOM extends SeleniumPageObjectModel {
 
 	@FindBy(name = IMAGE)
 	private WebElement imageInput;
-	
+
 	@FindBy(name = AUTHORS)
 	private List<WebElement> authorsCheckboxes;
 
@@ -115,6 +119,11 @@ public class MangaControllerSeleniumPOM extends SeleniumPageObjectModel {
 		descriptionPlInput.sendKeys(plDescription);
 	}
 
+	public void addImage() {
+
+		imageInput.sendKeys(projectPath + EXAMPLE_IMAGE_PATH);
+	}
+
 	public void clickSubmitMangaFormButton() {
 
 		submitButton.click();
@@ -137,7 +146,7 @@ public class MangaControllerSeleniumPOM extends SeleniumPageObjectModel {
 	}
 
 	public void fillMandatoryMangaFormFields(String enTitle, String enDescription, String plTitle, String plDescription,
-			boolean selectAuthor) {
+			boolean selectAuthor, boolean addImage) {
 
 		setEnTitle(enTitle);
 
@@ -149,6 +158,10 @@ public class MangaControllerSeleniumPOM extends SeleniumPageObjectModel {
 
 		if (selectAuthor) {
 			clickFirstAuthorCheckbox();
+		}
+		
+		if (addImage) {
+			addImage();
 		}
 
 		clickSubmitMangaFormButton();

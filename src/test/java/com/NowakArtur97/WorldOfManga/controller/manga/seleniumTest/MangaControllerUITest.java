@@ -29,6 +29,12 @@ public class MangaControllerUITest extends SeleniumUITest {
 	@Value("${mangaTranslation.description.size}")
 	protected String mangaTranslationDescriptionSizeMessage;
 
+	@Value("${manga.authors.notEmpty}")
+	protected String mangaAuthorsRequiredMessage;
+	
+	@Value("${manga.image.notEmpty}")
+	protected String mangaImageRequiredMessage;
+	
 	protected MangaControllerSeleniumPOM mangaFormPage;
 
 	protected LoginControllerSeleniumPOM loginPage;

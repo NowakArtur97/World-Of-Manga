@@ -31,6 +31,7 @@ public class MangaControllerUIPlTest extends MangaControllerUITest {
 		String englishTitle = "English title";
 		String polishTitle = "Polish title";
 		boolean selectAuthor = true;
+		boolean addImage = true;
 
 		loginPage.loadLoginView(LanguageVersion.PL);
 
@@ -39,7 +40,7 @@ public class MangaControllerUIPlTest extends MangaControllerUITest {
 		mangaFormPage.clickAddOrUpdateMangaLinkButton();
 
 		mangaFormPage.fillMandatoryMangaFormFields(englishTitle, "English description", polishTitle,
-				"Polish description", selectAuthor);
+				"Polish description", selectAuthor, addImage);
 
 		assertAll(() -> assertTrue(mangaFormPage.countFailureMessages() == 0, () -> "shouldn`t have errors"),
 				() -> assertTrue(mangaTranslationService.isTitleAlreadyInUse(englishTitle),
@@ -49,11 +50,12 @@ public class MangaControllerUIPlTest extends MangaControllerUITest {
 	}
 
 	@Test
-	@DisplayName("when incorrect manga creation with all blank fields and not selected author")
-	public void when_incorrect_manga_creation_with_all_blank_fields_and_not_selected_author_should_have_errors() {
+	@DisplayName("when incorrect manga creation with all blank fields and not selected author or image")
+	public void when_incorrect_manga_creation_with_all_blank_fields_and_not_selected_author_or_image_should_have_errors() {
 
 		String blankField = "";
 		boolean selectAuthor = false;
+		boolean addImage = false;
 
 		loginPage.loadLoginView(LanguageVersion.PL);
 
@@ -61,13 +63,18 @@ public class MangaControllerUIPlTest extends MangaControllerUITest {
 
 		mangaFormPage.clickAddOrUpdateMangaLinkButton();
 
-		mangaFormPage.fillMandatoryMangaFormFields(blankField, blankField, blankField, blankField, selectAuthor);
+		mangaFormPage.fillMandatoryMangaFormFields(blankField, blankField, blankField, blankField, selectAuthor,
+				addImage);
 
-		assertAll(() -> assertTrue(mangaFormPage.countFailureMessages() == 5, () -> "should have five errors"),
+		assertAll(() -> assertTrue(mangaFormPage.countFailureMessages() == 6, () -> "should have six errors"),
 				() -> assertTrue(mangaFormPage.getFormBoxText().contains(mangaTranslationDescriptionNotBlankMessage),
 						() -> "should show title is a required field message twice"),
 				() -> assertTrue(mangaFormPage.getFormBoxText().contains(mangaTranslationTitleNotBlankMessage),
 						() -> "should show description is a required field message twice"),
+				() -> assertTrue(mangaFormPage.getFormBoxText().contains(mangaAuthorsRequiredMessage),
+						() -> "should show author is a required field message"),
+				() -> assertTrue(mangaFormPage.getFormBoxText().contains(mangaImageRequiredMessage),
+						() -> "should show image is a required field message"),
 				() -> assertEquals(blankField, mangaFormPage.getEnTitle(), () -> "should show incorrect english title"),
 				() -> assertEquals(blankField, mangaFormPage.getEnDescription(),
 						() -> "should show incorrect english description"),
@@ -78,11 +85,12 @@ public class MangaControllerUIPlTest extends MangaControllerUITest {
 	}
 
 	@Test
-	@DisplayName("when incorrect manga creation with too long field sizes and selected author")
-	public void when_incorrect_manga_creation_with_too_long_field_sizes_and_selected_author_should_have_errors() {
+	@DisplayName("when incorrect manga creation with too long field sizes and selected author and image")
+	public void when_incorrect_manga_creation_with_too_long_field_sizes_and_selected_author_and_image_should_have_errors() {
 
 		String longText = "asdfghjklpasdfghjklpasdfghjklpasdfghjklpasdfghjklp!@#$%";
 		boolean selectAuthor = true;
+		boolean addImage = true;
 
 		loginPage.loadLoginView(LanguageVersion.PL);
 
@@ -90,7 +98,7 @@ public class MangaControllerUIPlTest extends MangaControllerUITest {
 
 		mangaFormPage.clickAddOrUpdateMangaLinkButton();
 
-		mangaFormPage.fillMandatoryMangaFormFields(longText, longText, longText, longText, selectAuthor);
+		mangaFormPage.fillMandatoryMangaFormFields(longText, longText, longText, longText, selectAuthor, addImage);
 
 		assertAll(() -> assertTrue(mangaFormPage.countFailureMessages() == 4, () -> "should have four errors"),
 				() -> assertTrue(mangaFormPage.getFormBoxText().contains(mangaTranslationTitleSizeMessage),
