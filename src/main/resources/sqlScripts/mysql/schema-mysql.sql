@@ -85,7 +85,7 @@ CREATE TABLE `manga_translation` (
     `manga_id` INT(11),
 	`language_id` INT(11),
     `title` VARCHAR(50) NOT NULL,
-    `description` VARCHAR(50) NOT NULL,
+    `description` VARCHAR(1000) NOT NULL,
     PRIMARY KEY (`manga_translation_id`),
     CONSTRAINT `FK_MANGA_TRANSLATION` FOREIGN KEY (`manga_id`)
         REFERENCES `manga` (`manga_id`)

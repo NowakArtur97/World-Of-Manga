@@ -19,6 +19,6 @@ public class MangaTranslationDTO {
 	private String title;
 
 	@NotBlank(message = "{mangaTranslation.description.notBlank}")
-	@Size(message = "{mangaTranslation.description.size}{max}", max = 50)
+	@Size(message = "{mangaTranslation.description.size}{max}", max = 1000)
 	private String description;
 }

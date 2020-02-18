@@ -1,0 +1,7 @@
+<div th:fragment="manga-list" class="manga-list">
+    <div th:each="manga : ${mangas}">
+        <div th:each="author : ${manga.authors}">
+            <span th:text="${author.fullName}"></span>
+        </div>
+    </div>
+</div>
