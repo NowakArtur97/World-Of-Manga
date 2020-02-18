@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.api.extension.TestWatcher;
+import org.openqa.selenium.WebDriver;
 
 import com.NowakArtur97.WorldOfManga.testUtil.selenium.ScreenshotUtil;
 import com.NowakArtur97.WorldOfManga.testUtil.selenium.SeleniumUITest;
@@ -19,7 +20,7 @@ public class ScreenshotWatcher implements TestWatcher {
 
 		if (testInstance.isPresent()) {
 
-			var webDriver = SeleniumUITest.getWebDriver();
+			WebDriver webDriver = SeleniumUITest.getWebDriver();
 
 			screenshotUtil.takeScreenshot(webDriver, context.getDisplayName());
 		}

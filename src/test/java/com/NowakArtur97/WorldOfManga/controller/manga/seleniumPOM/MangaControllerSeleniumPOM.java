@@ -8,6 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import com.NowakArtur97.WorldOfManga.testUtil.enums.LanguageVersion;
+import com.NowakArtur97.WorldOfManga.testUtil.selenium.DownloadFileUtil;
 import com.NowakArtur97.WorldOfManga.testUtil.selenium.SeleniumPageObjectModel;
 
 public class MangaControllerSeleniumPOM extends SeleniumPageObjectModel {
@@ -16,7 +17,9 @@ public class MangaControllerSeleniumPOM extends SeleniumPageObjectModel {
 
 	private final static String projectPath = System.getProperty("user.dir");
 
-	private final static String EXAMPLE_IMAGE_PATH = "\\src\\main\\resources\\static\\images\\samurai.jpg";
+	private final static String EXAMPLE_IMAGE_PATH = "/image.jpg";
+//	private final static String EXAMPLE_IMAGE_PATH = "\\src\\main\\resources\\static\\images\\samurai.jpg";
+	private final static String EXAMPLE_IMAGE_URL = "https://www.google.com/url?sa=i&source=images&cd=&ved=2ahUKEwjn4_GUotvnAhVEwsQBHbKdDC8QjRx6BAgBEAQ&url=https%3A%2F%2Fwww.pickpik.com%2Fromance-love-couple-heart-design-vintage-3499&psig=AOvVaw2B5zBh1rMuY7rf58OmChgB&ust=1582120999175177";
 
 	private static final String TITLE_EN = "enTranslation.title";
 	private static final String DESCRIPTION_EN = "enTranslation.description";
@@ -59,9 +62,13 @@ public class MangaControllerSeleniumPOM extends SeleniumPageObjectModel {
 	@FindBy(xpath = ADD_OR_UPDATE_MANGA_LINK)
 	private WebElement addOrUpdateMangaLink;
 
+	private DownloadFileUtil downloadFileUtil;
+
 	public MangaControllerSeleniumPOM(WebDriver webDriver) {
 
 		super(webDriver);
+		downloadFileUtil = new DownloadFileUtil();
+		downloadFileUtil.downloadImage(EXAMPLE_IMAGE_URL);
 	}
 
 	public void loadMangaForm(LanguageVersion ver) {
@@ -159,7 +166,7 @@ public class MangaControllerSeleniumPOM extends SeleniumPageObjectModel {
 		if (selectAuthor) {
 			clickFirstAuthorCheckbox();
 		}
-		
+
 		if (addImage) {
 			addImage();
 		}

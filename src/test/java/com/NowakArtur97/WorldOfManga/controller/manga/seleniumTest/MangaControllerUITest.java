@@ -31,10 +31,10 @@ public class MangaControllerUITest extends SeleniumUITest {
 
 	@Value("${manga.authors.notEmpty}")
 	protected String mangaAuthorsRequiredMessage;
-	
+
 	@Value("${manga.image.notEmpty}")
 	protected String mangaImageRequiredMessage;
-	
+
 	protected MangaControllerSeleniumPOM mangaFormPage;
 
 	protected LoginControllerSeleniumPOM loginPage;
