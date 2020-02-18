@@ -9,7 +9,9 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.junit.jupiter.api.DisplayName;
@@ -91,5 +93,55 @@ public class MangaServiceImplTest {
 						() -> "should save manga with image, but was: " + mangaActual.getImage()),
 				() -> verify(mangaMapper, times(1)).mapMangaDTOToManga(mangaDTO, mangaTranslationsExpected),
 				() -> verify(mangaRepository, times(1)).save(mangaActual));
+	}
+	
+	@Test
+	@DisplayName("when find all")
+	public void when_find_all_should_return_list_of_mangas() throws IOException {
+
+		MangaTranslation mangaTranslationEnExpected = MangaTranslation.builder().title("English title")
+				.description("English description").build();
+		MangaTranslation mangaTranslationPlExpected = MangaTranslation.builder().title("Polish title")
+				.description("Polish description").build();
+
+		MangaTranslation mangaTranslationEnExpected2 = MangaTranslation.builder().title("English title 2")
+				.description("English description").build();
+		MangaTranslation mangaTranslationPlExpected2 = MangaTranslation.builder().title("Polish title 2")
+				.description("Polish description").build();
+
+		Set<Author> authorsExpected = new HashSet<>();
+		Author authorExpected = new Author("FirsName LastName");
+		authorsExpected.add(authorExpected);
+
+		MockMultipartFile image = new MockMultipartFile("image.jpg", "file bytes".getBytes());
+		MockMultipartFile image2 = new MockMultipartFile("image.jpg", "file bytes".getBytes());
+
+		Manga mangaExpected = new Manga();
+		mangaExpected.addAuthor(authorExpected);
+		mangaExpected.addTranslation(mangaTranslationEnExpected);
+		mangaExpected.addTranslation(mangaTranslationPlExpected);
+		mangaExpected.setImage(image.getBytes());
+		
+		Manga mangaExpected2 = new Manga();
+		mangaExpected.addAuthor(authorExpected);
+		mangaExpected.addTranslation(mangaTranslationEnExpected2);
+		mangaExpected.addTranslation(mangaTranslationPlExpected2);
+		mangaExpected.setImage(image2.getBytes());
+		
+		List<Manga> mangasExpected = new ArrayList<>();
+		mangasExpected.add(mangaExpected);
+		mangasExpected.add(mangaExpected2);
+		
+		when(mangaRepository.findAll()).thenReturn(mangasExpected);
+
+		List<Manga> mangasActual = mangaService.findAll();
+
+		assertAll(
+				() -> assertEquals(mangasExpected.size(), mangasActual.size(), "should return list with all authors"),
+				() -> assertTrue(mangasActual.contains(mangaExpected),
+						() -> "should contain author, but was: " + mangasActual.contains(mangaExpected)),
+				() -> assertTrue(mangasActual.contains(mangaExpected2),
+						() -> "should contain author, but was: " + mangasActual.contains(mangaExpected2)),
+				() -> verify(mangaRepository, times(1)).findAll());
 	}
 }
