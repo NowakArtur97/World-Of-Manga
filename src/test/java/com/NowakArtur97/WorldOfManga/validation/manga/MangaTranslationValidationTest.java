@@ -109,6 +109,22 @@ public class MangaTranslationValidationTest {
 					() -> assertEquals(1, violations.size(),
 							() -> "should have one violation, but have: " + violations.size()));
 		}
+
+		@Test
+		@DisplayName("when title is too long")
+		public void when_title_is_too_long_should_have_violations() {
+
+			String title = "asdfghjklpasdfghjklpasdfghjklpasdfghjklpasdfghjklp!@#$%";
+
+			MangaTranslationDTO mangaTranslationDTO = MangaTranslationDTO.builder().title(title)
+					.description("Description").build();
+
+			Set<ConstraintViolation<MangaTranslationDTO>> violations = validator.validate(mangaTranslationDTO);
+
+			assertAll(() -> assertFalse(violations.isEmpty(), () -> "should have violation, but: "),
+					() -> assertEquals(1, violations.size(),
+							() -> "should have one violation, but have: " + violations.size()));
+		}
 	}
 
 	@Nested
@@ -152,6 +168,22 @@ public class MangaTranslationValidationTest {
 		public void when_description_is_blank_should_have_violations() {
 
 			String description = "     ";
+
+			MangaTranslationDTO mangaTranslationDTO = MangaTranslationDTO.builder().title("Title")
+					.description(description).build();
+
+			Set<ConstraintViolation<MangaTranslationDTO>> violations = validator.validate(mangaTranslationDTO);
+
+			assertAll(() -> assertFalse(violations.isEmpty(), () -> "should have violation, but: "),
+					() -> assertEquals(1, violations.size(),
+							() -> "should have one violation, but have: " + violations.size()));
+		}
+
+		@Test
+		@DisplayName("when description is too long")
+		public void when_description_is_too_long_should_have_violations() {
+
+			String description = "asdfghjklpasdfghjklpasdfghjklpasdfghjklpasdfghjklp!@#$%".repeat(30);
 
 			MangaTranslationDTO mangaTranslationDTO = MangaTranslationDTO.builder().title("Title")
 					.description(description).build();
