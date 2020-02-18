@@ -72,7 +72,7 @@ CREATE TABLE world_of_manga.manga_translation (
     "manga_translation_id" SERIAL PRIMARY KEY,
     "manga_id" int,
     "language_id" int,
-    "title" VARCHAR(50) NOT NULL UNIQUE,
+    "title" VARCHAR(50) NOT NULL,
     "description" VARCHAR(1000) NOT NULL,
     CONSTRAINT "FK_MANGA_TRANSLATION" FOREIGN KEY ("manga_id")
         REFERENCES world_of_manga.manga ("manga_id")
