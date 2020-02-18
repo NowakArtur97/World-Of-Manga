@@ -129,13 +129,67 @@ public class MangaControllerTest {
 	}
 
 	@Test
-	@DisplayName("when add manga with incorrect data")
-	public void when_add_manga_with_incorrect_data_should_show_manga_form() {
+	@DisplayName("when add manga with blank fields and authors selected")
+	public void when_add_manga_with_blank_fields_and_authors_selected_should_show_manga_form() {
 
-		String englishTitle = "asdfghjklpasdfghjklpasdfghjklpasdfghjklpasdfghjklp!@#$%";
-		String englishDescription = "English description";
-		String polishTitle = "Polish title";
+		String englishTitle = "";
+		String englishDescription = "";
+		String polishTitle = "";
 		String polishDescription = "";
+
+		MockMultipartFile image = null;
+
+		List<Author> authors = new ArrayList<>();
+		authors.add(new Author("FirstName LastName"));
+
+		when(authorService.findAll()).thenReturn(authors);
+
+		Set<Author> mangaAuthors = new HashSet<>();
+		mangaAuthors.add(new Author("FirstName LastName"));
+
+		MangaTranslationDTO mangaTranslationEnDTO = MangaTranslationDTO.builder().title(englishTitle)
+				.description(englishDescription).build();
+		MangaTranslationDTO mangaTranslationPlDTO = MangaTranslationDTO.builder().title(polishTitle)
+				.description(polishDescription).build();
+
+		MangaDTO mangaDTO = MangaDTO.builder().enTranslation(mangaTranslationEnDTO).plTranslation(mangaTranslationPlDTO)
+				.image(image).authors(mangaAuthors).build();
+
+		assertAll(
+				() -> mockMvc
+						.perform(post("/admin/addOrUpdateManga").contentType(MediaType.APPLICATION_FORM_URLENCODED)
+								.flashAttr("mangaDTO", mangaDTO))
+						.andExpect(status().isOk()).andExpect(forwardedUrl("views/manga-form"))
+						.andExpect(model().attribute("mangaDTO", mangaDTO))
+						.andExpect(model().attribute("authorDTO", new AuthorDTO()))
+						.andExpect(model().attribute("authors", authors))
+						.andExpect(model().attributeHasFieldErrors("mangaDTO", "enTranslation.title"))
+						.andExpect(model().attributeHasFieldErrors("mangaDTO", "enTranslation.description"))
+						.andExpect(model().attributeHasFieldErrors("mangaDTO", "plTranslation.title"))
+						.andExpect(model().attributeHasFieldErrors("mangaDTO", "plTranslation.description"))
+						.andExpect(model().attribute("mangaDTO",
+								hasProperty("enTranslation", hasProperty("title", is(englishTitle)))))
+						.andExpect(model().attribute("mangaDTO",
+								hasProperty("enTranslation", hasProperty("description", is(englishDescription)))))
+						.andExpect(model().attribute("mangaDTO",
+								hasProperty("plTranslation", hasProperty("title", is(polishTitle)))))
+						.andExpect(model().attribute("mangaDTO",
+								hasProperty("plTranslation", hasProperty("description", is(polishDescription)))))
+						.andExpect(model().attribute("mangaDTO", hasProperty("authors", is(mangaAuthors)))),
+				() -> verify(mangaTranslationService, never()).addOrUpdate(mangaDTO),
+				() -> verify(authorService, times(1)).findAll());
+	}
+
+	@Test
+	@DisplayName("when add manga with long data and authors not selected")
+	public void when_add_manga_with_long_data_and_authors_not_selected_should_show_manga_form() {
+
+		String title = "asdfghjklpasdfghjklpasdfghjklpasdfghjklpasdfghjklp!@#$%";
+		String description = "asdfghjklpasdfghjklpasdfghjklpasdfghjklpasdfghjklp!@#$%".repeat(30);
+		String englishTitle = title;
+		String englishDescription = description;
+		String polishTitle = title;
+		String polishDescription = description;
 
 		MockMultipartFile image = new MockMultipartFile("image.jpg", "file bytes".getBytes());
 
@@ -164,7 +218,10 @@ public class MangaControllerTest {
 						.andExpect(model().attribute("authors", authors))
 						.andExpect(model().attributeHasFieldErrors("mangaDTO", "authors"))
 						.andExpect(model().attributeHasFieldErrors("mangaDTO", "enTranslation.title"))
+						.andExpect(model().attributeHasFieldErrors("mangaDTO", "enTranslation.description"))
+						.andExpect(model().attributeHasFieldErrors("mangaDTO", "plTranslation.title"))
 						.andExpect(model().attributeHasFieldErrors("mangaDTO", "plTranslation.description"))
+						.andExpect(model().attribute("mangaDTO", hasProperty("authors", is(mangaAuthors))))
 						.andExpect(model().attribute("mangaDTO",
 								hasProperty("enTranslation", hasProperty("title", is(englishTitle)))))
 						.andExpect(model().attribute("mangaDTO",
