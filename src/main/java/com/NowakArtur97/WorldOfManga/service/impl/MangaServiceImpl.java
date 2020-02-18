@@ -1,5 +1,6 @@
 package com.NowakArtur97.WorldOfManga.service.impl;
 
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,5 +31,11 @@ public class MangaServiceImpl implements MangaService {
 		mangaRepository.save(manga);
 
 		return manga;
+	}
+
+	@Override
+	public List<Manga> findAll() {
+
+		return mangaRepository.findAll();
 	}
 }
