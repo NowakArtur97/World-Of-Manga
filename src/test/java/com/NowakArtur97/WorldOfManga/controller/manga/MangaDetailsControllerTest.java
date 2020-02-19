@@ -73,7 +73,12 @@ public class MangaDetailsControllerTest {
 				.perform(MockMvcRequestBuilders.get("/manga/getImage/{id}", id).contentType(contentType)).andReturn()
 				.getResponse();
 
-		assertAll(() -> assertEquals(contentType, mockResponse.getContentType()),
-				() -> assertEquals(200, mockResponse.getStatus()), () -> verify(mangaService, times(1)).findById(id));
+		assertAll(
+				() -> assertEquals(contentType, mockResponse.getContentType(),
+						() -> "should load content of type: " + contentType + ", but was: "
+								+ mockResponse.getContentType()),
+				() -> assertEquals(200, mockResponse.getStatus(),
+						() -> "should return status: " + 200 + ", but was: " + mockResponse.getStatus()),
+				() -> verify(mangaService, times(1)).findById(id));
 	}
 }

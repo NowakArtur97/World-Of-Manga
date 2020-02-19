@@ -1,6 +1,9 @@
 package com.NowakArtur97.WorldOfManga.controller.main;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -21,6 +24,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
@@ -90,5 +94,21 @@ public class MainControllerTest {
 
 		assertAll(() -> mockMvc.perform(mockRequest).andExpect(status().isOk()).andExpect(view().name("views/main"))
 				.andExpect(model().attribute("mangas", mangas)));
+	}
+
+	@Test
+	@DisplayName("when load main page with locale")
+	public void when_load_main_page_with_locale_should_load_locale() throws Exception {
+
+		Locale locale = new Locale("en");
+
+		MockHttpServletRequest mockRequest = this.mockMvc.perform(MockMvcRequestBuilders.get("/").locale(locale))
+				.andReturn().getRequest();
+
+		assertAll(
+				() -> assertEquals(locale, mockRequest.getLocale(),
+						() -> "should load locale: " + locale + ", but was: " + mockRequest.getLocale()),
+				() -> verify(mangaService, times(1)).findAll(),
+				() -> verify(cookieLocaleResolver, times(1)).resolveLocale(mockRequest));
 	}
 }
