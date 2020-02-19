@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.NowakArtur97.WorldOfManga.dto.MangaDTO;
+import com.NowakArtur97.WorldOfManga.exception.MangaNotFoundException;
 import com.NowakArtur97.WorldOfManga.mapper.manga.MangaMapper;
 import com.NowakArtur97.WorldOfManga.model.Manga;
 import com.NowakArtur97.WorldOfManga.model.MangaTranslation;
@@ -31,6 +32,13 @@ public class MangaServiceImpl implements MangaService {
 		mangaRepository.save(manga);
 
 		return manga;
+	}
+
+	@Override
+	public Manga findById(Long id) throws MangaNotFoundException {
+
+		return mangaRepository.findById(id)
+				.orElseThrow(() -> new MangaNotFoundException("Manga with id:" + id + " not found"));
 	}
 
 	@Override

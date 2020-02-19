@@ -1,5 +1,6 @@
 <div th:fragment="manga-list" class="manga_list">
     <div th:each="manga : ${mangas}">
+        <img width="300" height="450" th:src="@{'/manga/getImage/' + ${manga.id}}">
         <div th:each="translation : ${manga.translations}">
             <span th:if="${#strings.equals(translation.language.locale, locale)}" th:text="${translation.title}"></span>
             <span th:if="${#strings.equals(translation.language.locale, locale)}" th:text="${translation.description}"></span>
