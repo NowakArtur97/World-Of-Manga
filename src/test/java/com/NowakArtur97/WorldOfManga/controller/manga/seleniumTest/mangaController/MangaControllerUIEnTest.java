@@ -1,4 +1,4 @@
-package com.NowakArtur97.WorldOfManga.controller.manga.seleniumTest;
+package com.NowakArtur97.WorldOfManga.controller.manga.seleniumTest.mangaController;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -20,12 +20,12 @@ import com.NowakArtur97.WorldOfManga.testUtil.extension.ScreenshotWatcher;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @ExtendWith(ScreenshotWatcher.class)
-@TestPropertySource({ "classpath:/validation/messages_pl.properties", "classpath:/pageContent/messages_pl.properties" })
-@DisplayName("Manga Controller UI Pl Tests")
-@Tag("MangaControllerUIPl_Tests")
+@TestPropertySource({ "classpath:/validation/messages_en.properties", "classpath:/pageContent/messages_en.properties" })
+@DisplayName("Manga Controller UI En Tests")
+@Tag("MangaControllerUIEn_Tests")
 @DirtiesContext
 @DisabledOnOs(OS.LINUX)
-public class MangaControllerUIPlTest extends MangaControllerUITest {
+public class MangaControllerUIEnTest extends MangaControllerUITest {
 
 	@Test
 	@DisplayName("when correct manga creation with all fields")
@@ -36,7 +36,7 @@ public class MangaControllerUIPlTest extends MangaControllerUITest {
 		boolean selectAuthor = true;
 		boolean addImage = true;
 
-		loginPage.loadLoginView(LanguageVersion.PL);
+		loginPage.loadLoginView(LanguageVersion.ENG);
 
 		loginPage.fillMandatoryLoginFields("admin", "admin");
 
@@ -60,7 +60,7 @@ public class MangaControllerUIPlTest extends MangaControllerUITest {
 		boolean selectAuthor = false;
 		boolean addImage = false;
 
-		loginPage.loadLoginView(LanguageVersion.PL);
+		loginPage.loadLoginView(LanguageVersion.ENG);
 
 		loginPage.fillMandatoryLoginFields("admin", "admin");
 
@@ -96,26 +96,23 @@ public class MangaControllerUIPlTest extends MangaControllerUITest {
 		boolean selectAuthor = true;
 		boolean addImage = true;
 
-		loginPage.loadLoginView(LanguageVersion.PL);
+		loginPage.loadLoginView(LanguageVersion.ENG);
 
 		loginPage.fillMandatoryLoginFields("admin", "admin");
 
 		mangaFormPage.clickAddOrUpdateMangaLinkButton();
 
-		mangaFormPage.fillMandatoryMangaFormFields(longTitleText, longDescriptionText, longTitleText,
-				longDescriptionText, selectAuthor, addImage);
+		mangaFormPage.fillMandatoryMangaFormFields(longTitleText, longDescriptionText, longTitleText, longDescriptionText, selectAuthor, addImage);
 
 		assertAll(() -> assertTrue(mangaFormPage.countFailureMessages() == 4, () -> "should have four errors"),
 				() -> assertTrue(mangaFormPage.getFormBoxText().contains(mangaTranslationTitleSizeMessage),
 						() -> "should show title is too long message twice"),
 				() -> assertTrue(mangaFormPage.getFormBoxText().contains(mangaTranslationDescriptionSizeMessage),
 						() -> "should show description is too long message twice"),
-				() -> assertEquals(longTitleText, mangaFormPage.getEnTitle(),
-						() -> "should show incorrect english title"),
+				() -> assertEquals(longTitleText, mangaFormPage.getEnTitle(), () -> "should show incorrect english title"),
 				() -> assertEquals(longDescriptionText, mangaFormPage.getEnDescription(),
 						() -> "should show incorrect english description"),
-				() -> assertEquals(longTitleText, mangaFormPage.getPlTitle(),
-						() -> "should show incorrect polish title"),
+				() -> assertEquals(longTitleText, mangaFormPage.getPlTitle(), () -> "should show incorrect polish title"),
 				() -> assertEquals(longDescriptionText, mangaFormPage.getPlDescription(),
 						() -> "should show incorrect polish description"),
 				() -> assertTrue(mangaFormPage.isFirstAuthorCheckboxSelected(), () -> "should author be selected"));

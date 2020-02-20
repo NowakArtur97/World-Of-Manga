@@ -10,7 +10,7 @@ import org.openqa.selenium.support.FindBy;
 import com.NowakArtur97.WorldOfManga.testUtil.enums.LanguageVersion;
 import com.NowakArtur97.WorldOfManga.testUtil.selenium.SeleniumPageObjectModel;
 
-public class AuthorControllerSeleniumPOM extends SeleniumPageObjectModel {
+public class AuthorFormPage extends SeleniumPageObjectModel {
 
 	public static final String RESOURCE_PATH = "/admin/addOrUpdateAuthor";
 
@@ -35,7 +35,7 @@ public class AuthorControllerSeleniumPOM extends SeleniumPageObjectModel {
 	@FindBy(xpath = ADD_OR_UPDATE_AUTHOR_LINK)
 	private WebElement addOrUpdateAuthorLink;
 
-	public AuthorControllerSeleniumPOM(WebDriver webDriver) {
+	public AuthorFormPage(WebDriver webDriver) {
 
 		super(webDriver);
 	}

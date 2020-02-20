@@ -1,4 +1,4 @@
-package com.NowakArtur97.WorldOfManga.controller.unloggedUser.seleniumTest;
+package com.NowakArtur97.WorldOfManga.controller.unloggedUser.seleniumTest.registrationController;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;

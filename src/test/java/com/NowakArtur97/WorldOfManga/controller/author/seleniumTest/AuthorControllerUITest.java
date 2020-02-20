@@ -4,7 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
-import com.NowakArtur97.WorldOfManga.controller.author.seleniumPOM.AuthorControllerSeleniumPOM;
+import com.NowakArtur97.WorldOfManga.controller.author.seleniumPOM.AuthorFormPage;
 import com.NowakArtur97.WorldOfManga.controller.unloggedUser.seleniumPOM.LoginPage;
 import com.NowakArtur97.WorldOfManga.service.api.AuthorService;
 import com.NowakArtur97.WorldOfManga.testUtil.selenium.SeleniumUITest;
@@ -20,7 +20,7 @@ public class AuthorControllerUITest extends SeleniumUITest {
 	@Value("${author.fullName.alreadySaved}")
 	protected String authorAlreadySavedMessage;
 
-	protected AuthorControllerSeleniumPOM authorFormPage;
+	protected AuthorFormPage authorFormPage;
 
 	protected LoginPage loginPage;
 
@@ -32,6 +32,6 @@ public class AuthorControllerUITest extends SeleniumUITest {
 
 		loginPage = new LoginPage(webDriver);
 
-		authorFormPage = new AuthorControllerSeleniumPOM(webDriver);
+		authorFormPage = new AuthorFormPage(webDriver);
 	}
 }

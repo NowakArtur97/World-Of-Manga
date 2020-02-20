@@ -1,4 +1,4 @@
-package com.NowakArtur97.WorldOfManga.controller.unloggedUser.seleniumTest;
+package com.NowakArtur97.WorldOfManga.controller.unloggedUser.seleniumTest.loginController;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertFalse;

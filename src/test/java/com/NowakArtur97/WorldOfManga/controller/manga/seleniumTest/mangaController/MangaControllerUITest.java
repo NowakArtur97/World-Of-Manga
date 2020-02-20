@@ -1,4 +1,4 @@
-package com.NowakArtur97.WorldOfManga.controller.manga.seleniumTest;
+package com.NowakArtur97.WorldOfManga.controller.manga.seleniumTest.mangaController;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
