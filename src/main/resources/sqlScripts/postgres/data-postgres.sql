@@ -8,5 +8,3 @@ VALUES ('ROLE_USER'), ('ROLE_ADMIN');
 INSERT INTO world_of_manga.user_role("user_id", "role_id") VALUES (1, 1), (2, 1), (2, 2);
 
 INSERT INTO world_of_manga.language ("locale") VALUES ('en'), ('pl');
-
-INSERT INTO world_of_manga.author ("full_name") VALUES ('Sui Ishida'), ('Eiichirō Oda');
