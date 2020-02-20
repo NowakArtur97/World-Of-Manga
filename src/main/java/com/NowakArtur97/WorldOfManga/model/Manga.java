@@ -39,7 +39,7 @@ public class Manga {
 	private Long id;
 
 	@Column(name = "image")
-	@Type(type="org.hibernate.type.BinaryType")
+	@Type(type = "org.hibernate.type.BinaryType")
 	@Lob
 	private byte[] image;
 

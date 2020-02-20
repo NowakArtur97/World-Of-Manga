@@ -12,4 +12,6 @@ public interface AuthorService {
 	boolean isAuthorAlreadyInDatabase(String fullName);
 
 	List<Author> findAll();
+
+	Author save(Author author);
 }

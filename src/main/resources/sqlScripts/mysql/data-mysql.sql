@@ -9,4 +9,4 @@ INSERT INTO `user_role`(`user_id`, `role_id`) VALUES (1, 1), (2, 1), (2, 2);
 
 INSERT INTO `language` (`locale`) VALUES ('en'), ('pl');
 
-INSERT INTO `author` (`full_name`) VALUES ('Sui Ishida'), ('Eiichirō Oda');
+--INSERT INTO `author` (`full_name`) VALUES ('Sui Ishida'), ('Eiichirō Oda');

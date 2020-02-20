@@ -19,7 +19,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.NowakArtur97.WorldOfManga.exception.LanguageNotFoundException;
 import com.NowakArtur97.WorldOfManga.model.Language;
-import com.NowakArtur97.WorldOfManga.repository.LanguageRepoitory;
+import com.NowakArtur97.WorldOfManga.repository.LanguageRepository;
 
 @ExtendWith(MockitoExtension.class)
 @DisplayName("Language Service Impl Tests")
@@ -30,7 +30,7 @@ public class LanguageServiceImplTest {
 	private LanguageServiceImpl languageService;
 
 	@Mock
-	private LanguageRepoitory languageRepoitory;
+	private LanguageRepository languageRepository;
 
 	@Test
 	@DisplayName("when find by locale")
@@ -40,7 +40,7 @@ public class LanguageServiceImplTest {
 
 		Language languageExpected = Language.builder().locale(locale).build();
 
-		when(languageRepoitory.findByLocale(locale)).thenReturn(Optional.of(languageExpected));
+		when(languageRepository.findByLocale(locale)).thenReturn(Optional.of(languageExpected));
 
 		Language languageActual = languageService.findByLocale(locale);
 
@@ -48,7 +48,7 @@ public class LanguageServiceImplTest {
 				() -> assertEquals(languageExpected.getLocale(), languageActual.getLocale(),
 						() -> "should return role with name: " + languageExpected.getLocale() + ", but was: "
 								+ languageActual.getLocale()),
-				() -> verify(languageRepoitory, times(1)).findByLocale(locale));
+				() -> verify(languageRepository, times(1)).findByLocale(locale));
 	}
 
 	@Test
@@ -59,11 +59,11 @@ public class LanguageServiceImplTest {
 
 		Class<LanguageNotFoundException> expectedException = LanguageNotFoundException.class;
 
-		when(languageRepoitory.findByLocale(locale)).thenReturn(Optional.empty());
+		when(languageRepository.findByLocale(locale)).thenReturn(Optional.empty());
 
 		assertAll(
 				() -> assertThrows(expectedException, () -> languageService.findByLocale(locale),
 						() -> "should throw LanguageNotFoundException, but nothing was thrown"),
-				() -> verify(languageRepoitory, times(1)).findByLocale(locale));
+				() -> verify(languageRepository, times(1)).findByLocale(locale));
 	}
 }

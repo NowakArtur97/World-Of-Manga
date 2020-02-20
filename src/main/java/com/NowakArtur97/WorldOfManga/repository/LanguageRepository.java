@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.NowakArtur97.WorldOfManga.model.Language;
 
-public interface LanguageRepoitory extends JpaRepository<Language, Long> {
+public interface LanguageRepository extends JpaRepository<Language, Long> {
 
 	Optional<Language> findByLocale(String locale);
 }
