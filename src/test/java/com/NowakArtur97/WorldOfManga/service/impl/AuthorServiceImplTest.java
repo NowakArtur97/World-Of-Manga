@@ -85,6 +85,7 @@ public class AuthorServiceImplTest {
 		Author authorExpected = new Author(fullName);
 
 		when(authorMapper.mapAuthorDTOToAuthor(authorDTOExpected)).thenReturn(authorExpected);
+		when(authorRepository.save(authorExpected)).thenReturn(authorExpected);
 
 		Author authorActual = authorService.addOrUpdate(authorDTOExpected);
 
@@ -96,6 +97,25 @@ public class AuthorServiceImplTest {
 				() -> verify(authorRepository, times(1)).save(authorActual));
 	}
 
+	@Test
+	@DisplayName("when save author should save author")
+	public void when_save_author_should_save_author() {
+
+		String fullName = "Firstname LastName";
+
+		Author authorExpected = new Author(fullName);
+		
+		when(authorRepository.save(authorExpected)).thenReturn(authorExpected);
+
+		Author authorActual = authorService.save(authorExpected);
+		
+		assertAll(
+				() -> assertEquals(authorExpected.getFullName(), authorActual.getFullName(),
+						() -> "should return author with full name: " + authorExpected.getFullName() + ", but was: "
+								+ authorActual.getFullName()),
+				() -> verify(authorRepository, times(1)).save(authorActual));
+	}
+	
 	@Test
 	@DisplayName("when find all")
 	public void when_find_all_should_return_list_of_authors() {
