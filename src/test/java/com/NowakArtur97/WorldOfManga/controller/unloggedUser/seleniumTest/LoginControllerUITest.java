@@ -4,8 +4,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
-import com.NowakArtur97.WorldOfManga.controller.main.seleniumPOM.MainControllerSeleniumPOM;
-import com.NowakArtur97.WorldOfManga.controller.unloggedUser.seleniumPOM.LoginControllerSeleniumPOM;
+import com.NowakArtur97.WorldOfManga.controller.main.seleniumPOM.MainPage;
+import com.NowakArtur97.WorldOfManga.controller.unloggedUser.seleniumPOM.LoginPage;
 import com.NowakArtur97.WorldOfManga.service.api.UserService;
 import com.NowakArtur97.WorldOfManga.testUtil.selenium.SeleniumUITest;
 
@@ -26,9 +26,9 @@ public class LoginControllerUITest extends SeleniumUITest {
 	@Value("${header.addManga}")
 	protected String adminAddMangaOption;
 	
-	protected LoginControllerSeleniumPOM loginPage;
+	protected LoginPage loginPage;
 
-	protected MainControllerSeleniumPOM mainPage;
+	protected MainPage mainPage;
 
 	@Autowired
 	protected UserService userService;
@@ -36,7 +36,7 @@ public class LoginControllerUITest extends SeleniumUITest {
 	@BeforeEach
 	public void setupPOM() {
 
-		loginPage = new LoginControllerSeleniumPOM(webDriver);
-		mainPage = new MainControllerSeleniumPOM(webDriver);
+		loginPage = new LoginPage(webDriver);
+		mainPage = new MainPage(webDriver);
 	}
 }

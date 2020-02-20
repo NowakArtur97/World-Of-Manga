@@ -9,7 +9,7 @@ import org.openqa.selenium.support.FindBy;
 import com.NowakArtur97.WorldOfManga.testUtil.enums.LanguageVersion;
 import com.NowakArtur97.WorldOfManga.testUtil.selenium.SeleniumPageObjectModel;
 
-public class RegistrationControllerSeleniumPOM extends SeleniumPageObjectModel {
+public class RegistrationPage extends SeleniumPageObjectModel {
 
 	public static final String RESOURCE_PATH = "/user/register";
 
@@ -54,7 +54,7 @@ public class RegistrationControllerSeleniumPOM extends SeleniumPageObjectModel {
 	@FindBy(className = SUBMIT_CLASS)
 	private WebElement submitButton;
 
-	public RegistrationControllerSeleniumPOM(WebDriver webDriver) {
+	public RegistrationPage(WebDriver webDriver) {
 
 		super(webDriver);
 	}

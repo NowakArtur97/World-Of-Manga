@@ -7,14 +7,14 @@ import org.openqa.selenium.support.FindBy;
 
 import com.NowakArtur97.WorldOfManga.testUtil.selenium.SeleniumPageObjectModel;
 
-public class LogoutControllerSeleniumPOM extends SeleniumPageObjectModel {
+public class LogoutPage extends SeleniumPageObjectModel {
 
 	private static final String LOGOUT_LINK = "//a[@href='/auth/logout']";
 
 	@FindBy(xpath = LOGOUT_LINK)
 	private WebElement logoutLink;
 
-	public LogoutControllerSeleniumPOM(WebDriver webDriver) {
+	public LogoutPage(WebDriver webDriver) {
 
 		super(webDriver);
 	}

@@ -7,7 +7,7 @@ import org.openqa.selenium.support.FindBy;
 import com.NowakArtur97.WorldOfManga.testUtil.enums.LanguageVersion;
 import com.NowakArtur97.WorldOfManga.testUtil.selenium.SeleniumPageObjectModel;
 
-public class MainControllerSeleniumPOM extends SeleniumPageObjectModel {
+public class MainPage extends SeleniumPageObjectModel {
 
 	public static final String RESOURCE_PATH = "/";
 
@@ -24,7 +24,7 @@ public class MainControllerSeleniumPOM extends SeleniumPageObjectModel {
 	@FindBy(className = FOOTER_CLASS)
 	private WebElement footer;
 
-	public MainControllerSeleniumPOM(WebDriver webDriver) {
+	public MainPage(WebDriver webDriver) {
 
 		super(webDriver);
 	}

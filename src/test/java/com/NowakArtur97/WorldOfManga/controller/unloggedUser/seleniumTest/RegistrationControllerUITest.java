@@ -4,7 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
-import com.NowakArtur97.WorldOfManga.controller.unloggedUser.seleniumPOM.RegistrationControllerSeleniumPOM;
+import com.NowakArtur97.WorldOfManga.controller.unloggedUser.seleniumPOM.RegistrationPage;
 import com.NowakArtur97.WorldOfManga.service.api.UserService;
 import com.NowakArtur97.WorldOfManga.testUtil.selenium.SeleniumUITest;
 
@@ -49,7 +49,7 @@ public class RegistrationControllerUITest extends SeleniumUITest {
 	@Value("${form.login.afterRegistration}")
 	protected String afterRegistrationMessage;
 
-	protected RegistrationControllerSeleniumPOM registrationPage;
+	protected RegistrationPage registrationPage;
 
 	@Autowired
 	protected UserService userService;
@@ -57,6 +57,6 @@ public class RegistrationControllerUITest extends SeleniumUITest {
 	@BeforeEach
 	public void setupPOM() {
 
-		registrationPage = new RegistrationControllerSeleniumPOM(webDriver);
+		registrationPage = new RegistrationPage(webDriver);
 	}
 }

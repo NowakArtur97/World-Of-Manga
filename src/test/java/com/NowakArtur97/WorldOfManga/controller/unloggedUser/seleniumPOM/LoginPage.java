@@ -7,7 +7,7 @@ import org.openqa.selenium.support.FindBy;
 import com.NowakArtur97.WorldOfManga.testUtil.enums.LanguageVersion;
 import com.NowakArtur97.WorldOfManga.testUtil.selenium.SeleniumPageObjectModel;
 
-public class LoginControllerSeleniumPOM extends SeleniumPageObjectModel {
+public class LoginPage extends SeleniumPageObjectModel {
 
 	public static final String RESOURCE_PATH = "/user/login";
 
@@ -28,7 +28,7 @@ public class LoginControllerSeleniumPOM extends SeleniumPageObjectModel {
 	@FindBy(className = FORM_BOX_CLASS)
 	private WebElement formBox;
 
-	public LoginControllerSeleniumPOM(WebDriver webDriver) {
+	public LoginPage(WebDriver webDriver) {
 
 		super(webDriver);
 	}

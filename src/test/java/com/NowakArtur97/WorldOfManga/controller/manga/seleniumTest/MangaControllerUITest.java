@@ -4,8 +4,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
-import com.NowakArtur97.WorldOfManga.controller.manga.seleniumPOM.MangaControllerSeleniumPOM;
-import com.NowakArtur97.WorldOfManga.controller.unloggedUser.seleniumPOM.LoginControllerSeleniumPOM;
+import com.NowakArtur97.WorldOfManga.controller.manga.seleniumPOM.MangaFormPage;
+import com.NowakArtur97.WorldOfManga.controller.unloggedUser.seleniumPOM.LoginPage;
 import com.NowakArtur97.WorldOfManga.service.api.MangaTranslationService;
 import com.NowakArtur97.WorldOfManga.testUtil.selenium.SeleniumUITest;
 
@@ -35,9 +35,9 @@ public class MangaControllerUITest extends SeleniumUITest {
 	@Value("${manga.image.notEmpty}")
 	protected String mangaImageRequiredMessage;
 
-	protected MangaControllerSeleniumPOM mangaFormPage;
+	protected MangaFormPage mangaFormPage;
 
-	protected LoginControllerSeleniumPOM loginPage;
+	protected LoginPage loginPage;
 
 	@Autowired
 	protected MangaTranslationService mangaTranslationService;
@@ -45,8 +45,8 @@ public class MangaControllerUITest extends SeleniumUITest {
 	@BeforeEach
 	public void setupPOM() {
 
-		loginPage = new LoginControllerSeleniumPOM(webDriver);
+		loginPage = new LoginPage(webDriver);
 
-		mangaFormPage = new MangaControllerSeleniumPOM(webDriver);
+		mangaFormPage = new MangaFormPage(webDriver);
 	}
 }

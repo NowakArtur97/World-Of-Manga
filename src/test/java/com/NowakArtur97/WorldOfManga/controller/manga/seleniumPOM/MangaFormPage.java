@@ -10,7 +10,7 @@ import org.openqa.selenium.support.FindBy;
 import com.NowakArtur97.WorldOfManga.testUtil.enums.LanguageVersion;
 import com.NowakArtur97.WorldOfManga.testUtil.selenium.SeleniumPageObjectModel;
 
-public class MangaControllerSeleniumPOM extends SeleniumPageObjectModel {
+public class MangaFormPage extends SeleniumPageObjectModel {
 
 	public static final String RESOURCE_PATH = "/admin/addOrUpdateManga";
 
@@ -59,7 +59,7 @@ public class MangaControllerSeleniumPOM extends SeleniumPageObjectModel {
 	@FindBy(xpath = ADD_OR_UPDATE_MANGA_LINK)
 	private WebElement addOrUpdateMangaLink;
 
-	public MangaControllerSeleniumPOM(WebDriver webDriver) {
+	public MangaFormPage(WebDriver webDriver) {
 
 		super(webDriver);
 	}
