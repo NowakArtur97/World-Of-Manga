@@ -7,9 +7,9 @@
 }
 
 .page--login {
-  background: url(/images/samurai.jpg) no-repeat fixed center;
+  background: url(/images/backgrounds/samurai.jpg) no-repeat fixed center;
 }
 
 .page--register {
-  background: url(/images/romance.jpg) no-repeat fixed center;
+  background: url(/images/backgrounds/romance.jpg) no-repeat fixed center;
 }
