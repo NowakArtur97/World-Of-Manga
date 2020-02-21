@@ -17,14 +17,24 @@
   cursor: pointer;
 }
 
+.manga_card__face--details {
+  display: none;
+}
+
+.manga_card:hover .manga_card__face--details {
+  display: block;
+}
+
+.manga_card:hover .manga_card__face--info {
+  display: none;
+}
+
 .manga_card:hover {
   transform: scale(1.1);
   box-shadow: 0.3rem 0.3rem 1rem rgba(0, 0, 0, 0.5);
 }
 
-.manga_card__image_container {
-  border-top-left-radius: 1rem;
-  border-top-right-radius: 1rem;
+.manga_card__container {
   height: 350px;
   width: 250px;
 }
@@ -43,6 +53,20 @@
   font-size: 1.4rem;
 }
 
+.manga_card__description {
+  font-size: 0.9rem;
+  text-align: center;
+  display: inline-block;
+  vertical-align: middle;
+  height: 100%;
+  width: 100%;
+  overflow-y: auto;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
 .manga_card__author {
   font-size: 0.9rem;
 }
@@ -53,9 +77,20 @@
   align-items: center;
   justify-content: space-evenly;
   text-transform: uppercase;
+  padding-bottom: 10px;
 }
 
 .manga_card__icon {
   width: 15px;
   height: 100%;
+}
+
+.manga_card__icon--big {
+  width: 25px;
+  height: 100%;
+  transition: 0.5s ease;
+}
+
+.manga_card__icon--big:hover {
+  transform: scale(2);
 }

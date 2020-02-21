@@ -9,13 +9,11 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.NowakArtur97.WorldOfManga.exception.MangaNotFoundException;
-import com.NowakArtur97.WorldOfManga.model.Manga;
 import com.NowakArtur97.WorldOfManga.service.api.MangaService;
 
 import lombok.RequiredArgsConstructor;
@@ -26,16 +24,6 @@ import lombok.RequiredArgsConstructor;
 public class MangaDetailsController {
 
 	private final MangaService mangaService;
-
-	@GetMapping(path = "/details/{id}")
-	public String showMangaDetailsPage(Model theModel, @PathVariable("id") Long id) throws MangaNotFoundException {
-
-		Manga manga = mangaService.findById(id);
-
-		theModel.addAttribute("manga", manga);
-
-		return "views/manga-details";
-	}
 
 	@GetMapping(path = "/getImage/{id}")
 	public void showAddMangaPage(HttpServletResponse response, @PathVariable("id") Long id)

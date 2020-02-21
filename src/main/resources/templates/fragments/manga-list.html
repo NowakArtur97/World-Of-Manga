@@ -1,18 +1,41 @@
 <div th:fragment="manga-list" class="manga_list">
     <div class="manga_card" th:each="manga : ${mangas}">
-        <div class="manga_card__image_container">
-            <img class="manga_card__image" th:src="@{'/manga/getImage/' + ${manga.id}}">
+        <div class="manga_card__face manga_card__face--info">
+            <div class="manga_card__container">
+                <img class="manga_card__image" th:src="@{'/manga/getImage/' + ${manga.id}}">
+            </div>
+            <div class="manga_card__info">
+                <span class="manga_card__title" th:each="translation : ${manga.translations}" th:if="${#strings.equals(translation.language.locale, locale)}" th:text="${translation.title}"></span>
+                <div class="manga_card__author" th:each="author : ${manga.authors}">
+                    <span th:text="${author.fullName}"></span>
+                </div> 
+            </div>
+            <div class="manga_card__stats">
+                <div class="manga_card__likes">30 <span><image class="manga_card__icon"th:src="@{'/images/icons/heart.png'}"></image></span>
+                </div>
+                <div class="manga_card_rating">9,6<span>
+                    <image class="manga_card__icon" th:src="@{'/images/icons/star.png'}"></image>
+                </div>
+            </div>
         </div>
-        <div class="manga_card__info">
-            <span class="manga_card__title" th:each="translation : ${manga.translations}" th:if="${#strings.equals(translation.language.locale, locale)}" th:text="${translation.title}"></span>
-             <div class="manga_card__author" th:each="author : ${manga.authors}">
-                <span th:text="${author.fullName}"></span>
-            </div> 
-        </div>
-        <div class="manga_card__stats">
-            <div class="manga_card__likes">30 <span><image class="manga_card__icon"th:src="@{'/images/icons/heart.png'}"></image></span></div>
-            <div class="manga_card_rating">9,6<span>
-                <image class="manga_card__icon" th:src="@{'/images/icons/star.png'}"></image></div>
+          <div class="manga_card__face manga_card__face--details">
+            <div class="manga_card__container">
+                <span class="manga_card__description" th:each="translation : ${manga.translations}"
+                    th:if="${#strings.equals(translation.language.locale, locale)}" th:text="${translation.description}"></span>
+            </div>
+            <div class="manga_card__info">
+                
+            </div>
+            <div class="manga_card__stats">
+                <div class="manga_card__likes"><span>
+                        <image class="manga_card__icon manga_card__icon--big" th:src="@{'/images/icons/heart.png'}"></image>
+                    </span>
+                </div>
+                <div class="manga_card_rating"><span>
+                        <image class="manga_card__icon manga_card__icon--big" th:src="@{'/images/icons/star.png'}"></image>
+                </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
