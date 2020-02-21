@@ -30,7 +30,10 @@ public class MainController {
 		Locale locale = cookieLocaleResolver.resolveLocale(request);
 
 		theModel.addAttribute("mangas", mangaService.findAll());
-		theModel.addAttribute("locale", locale.getLanguage());
+
+		if (locale != null) {
+			theModel.addAttribute("locale", locale.getLanguage());
+		}
 
 		return "views/main";
 	}

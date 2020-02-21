@@ -58,12 +58,20 @@ public class DatabaseSchedular {
 		URL beastarsURL = new URL("https://img.mrcdn.info/file/mrportal/h/8/8/g/Qw.veTHmoI.jpg");
 		String beastarsAuthor = "Paru Itagaki";
 
+		String myHeroAcademiaTitle = "My Hero Academia";
+		String myHeroAcademiaDescriptionEn = "One day, a four-year-old boy came to a sudden realization: the world is not fair. Eighty percent of the world's population wield special abilities, known as \"quirks,\" which have given many the power to make their childhood dreams of becoming a superhero a reality. Unfortunately, Izuku Midoriya was one of the few born without a quirk, suffering from discrimination because of it. Yet, he refuses to give up on his dream of becoming a hero; determined to do the impossible, Izuku sets his sights on the elite hero training academy, UA High. However, everything changes after a chance meeting with the number one hero and Izuku's idol, All Might. Discovering that his dream is not a dead end, the powerless boy undergoes special training, working harder than ever before. Eventually, this leads to him inheriting All Might's power, and with his newfound abilities, gets into his school of choice, beginning his grueling journey to become the successor of the best hero on the planet.";
+		String myHeroAcademiaPl = "W niedalekiej przyszłości w ludziach obudziły się nadnaturalne zdolności. Od tej pory u kolejnych pokoleń moc pojawiała się częściej i była silniejsza. W tym momencie już ponad 80% populacji posiada swój własny dar. Z reguły ukazuje się on w okolicach czwartego roku życia. Izuku Midoriya jest wyjątkiem w tym świecie - choć ma już 14 lat, to nie posiada żadnych zdolności specjalnych. Co więcej, lekarze stwierdzili, że takowe się w nim nigdy nie przebudzą. Nadal jednak marzy on o zostaniu bohaterem. Pewnego dnia zostaje zaatakowany przez potwora i w ostatniej chwili ratuje go jego idol, najsilniejszy z bohaterów, zwany \"All Might\". Czy to spotkanie odmieni życie naszego młodego protagonisty? Czy uda mu się spełnić jego największe marzenie pomimo przeszkód stojących mu na drodze?";
+		URL myHeroAcademiaURL = new URL("https://f01.mrcdn.info/file/mrportal/i/3/u/k/5q.8KFpDoE2.png");
+		String myHeroAcademiaAuthor = "Kouhei Horikoshi";
+
 		saveManga(tokyoGhoulTitle, tokyoGhoulDescriptionEn, tokyoGhoulTitle, tokyoGhoulDescriptionPl, tokyoGhoulURL,
 				tokyoGhoulAuthor);
 		saveManga(soloLevelingTitle, soloLevelingDescriptionEn, soloLevelingTitle, soloLevelingescriptionPl,
 				soloLevelingURL, soloLevelingAuthor);
 		saveManga(beastarsTitle, beastarsDescriptionEn, beastarsTitle, beastarsescriptionPl, beastarsURL,
 				beastarsAuthor);
+		saveManga(myHeroAcademiaTitle, myHeroAcademiaDescriptionEn, myHeroAcademiaTitle, myHeroAcademiaPl,
+				myHeroAcademiaURL, myHeroAcademiaAuthor);
 	}
 
 	private void saveManga(String titleEn, String descriptionEn, String titlePl, String descriptionPl, URL imageURL,

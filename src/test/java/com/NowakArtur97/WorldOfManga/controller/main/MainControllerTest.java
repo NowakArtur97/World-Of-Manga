@@ -91,7 +91,7 @@ public class MainControllerTest {
 				.flashAttr("mangas", mangas).flashAttr("locale", locale);
 
 		when(mangaService.findAll()).thenReturn(mangas);
-
+		
 		assertAll(() -> mockMvc.perform(mockRequest).andExpect(status().isOk()).andExpect(view().name("views/main"))
 				.andExpect(model().attribute("mangas", mangas)));
 	}
@@ -104,7 +104,7 @@ public class MainControllerTest {
 
 		MockHttpServletRequest mockRequest = this.mockMvc.perform(MockMvcRequestBuilders.get("/").locale(locale))
 				.andReturn().getRequest();
-
+		
 		assertAll(
 				() -> assertEquals(locale, mockRequest.getLocale(),
 						() -> "should load locale: " + locale + ", but was: " + mockRequest.getLocale()),
