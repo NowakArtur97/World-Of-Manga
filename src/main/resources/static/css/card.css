@@ -56,8 +56,7 @@
 .manga_card__description {
   font-size: 0.9rem;
   text-align: center;
-  display: inline-block;
-  vertical-align: middle;
+  display: block;
   height: 100%;
   width: 100%;
   overflow-y: auto;
@@ -88,7 +87,7 @@
 .manga_card__icon--big {
   width: 25px;
   height: 100%;
-  transition: 0.5s ease;
+  transition: 0.3s ease;
 }
 
 .manga_card__icon--big:hover {
