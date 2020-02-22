@@ -111,9 +111,11 @@ public class UserServiceImpl implements UserService {
 		Manga manga = mangaService.findById(mangaId);
 
 		User user = loadLoggedInUsername();
-		
-		user.addMangaRating(manga, rating);
-		
-		return null;
+
+		MangaRating mangaRating = user.addMangaRating(manga, rating);
+
+		save(user);
+
+		return mangaRating;
 	}
 }

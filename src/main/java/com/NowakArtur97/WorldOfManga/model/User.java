@@ -68,11 +68,13 @@ public class User {
 		this.getRoles().add(role);
 	}
 
-	public void addMangaRating(Manga manga, Long rating) {
+	public MangaRating addMangaRating(Manga manga, Long rating) {
 
 		MangaRating mangaRating = new MangaRating(manga, this, rating);
 
 		this.getMangasRatings().add(mangaRating);
 		manga.getMangasRatings().add(mangaRating);
+
+		return mangaRating;
 	}
 }

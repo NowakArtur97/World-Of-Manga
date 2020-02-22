@@ -3,6 +3,7 @@ package com.NowakArtur97.WorldOfManga.controller.mangaRating;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,7 +23,7 @@ public class MangaRatingController {
 
 	@GetMapping(path = "/rateManga")
 	public String showAddMangaPage(HttpServletRequest request, @RequestParam(name = "id") Long mangaId,
-			@RequestParam(name = "rate") Long rating) throws MangaNotFoundException {
+			@RequestParam(name = "rate") Long rating) throws MangaNotFoundException, UsernameNotFoundException {
 
 		String referer = request.getHeader("Referer");
 
