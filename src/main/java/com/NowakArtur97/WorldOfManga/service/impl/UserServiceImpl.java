@@ -8,24 +8,29 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.NowakArtur97.WorldOfManga.exception.MangaNotFoundException;
+import com.NowakArtur97.WorldOfManga.model.Manga;
+import com.NowakArtur97.WorldOfManga.model.MangaRating;
 import com.NowakArtur97.WorldOfManga.model.Role;
 import com.NowakArtur97.WorldOfManga.model.User;
 import com.NowakArtur97.WorldOfManga.repository.UserRepository;
+import com.NowakArtur97.WorldOfManga.service.api.MangaService;
 import com.NowakArtur97.WorldOfManga.service.api.UserService;
 
+import lombok.RequiredArgsConstructor;
+
 @Service
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class UserServiceImpl implements UserService {
 
 	private final UserRepository userRepository;
 
-	@Autowired
-	public UserServiceImpl(UserRepository userRepository) {
-		this.userRepository = userRepository;
-	}
+	private final MangaService mangaService;
 
 	@Override
 	public Optional<User> findByUsername(String username) {
@@ -79,5 +84,36 @@ public class UserServiceImpl implements UserService {
 		}
 
 		return authorities;
+	}
+
+	@Override
+	public User loadLoggedInUsername() throws UsernameNotFoundException {
+
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+		String username;
+
+		if (principal instanceof UserDetails) {
+			username = ((UserDetails) principal).getUsername();
+		} else {
+			username = principal.toString();
+		}
+
+		User loggedInUser = findByUsername(username)
+				.orElseThrow(() -> new UsernameNotFoundException("Invalid username or password"));
+
+		return loggedInUser;
+	}
+
+	@Override
+	public MangaRating rateManga(Long mangaId, Long rating) throws MangaNotFoundException {
+
+		Manga manga = mangaService.findById(mangaId);
+
+		User user = loadLoggedInUsername();
+		
+		user.addMangaRating(manga, rating);
+		
+		return null;
 	}
 }

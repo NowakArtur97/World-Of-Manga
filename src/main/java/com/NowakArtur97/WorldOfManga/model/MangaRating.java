@@ -1,12 +1,12 @@
 package com.NowakArtur97.WorldOfManga.model;
 
+import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -32,13 +32,13 @@ public class MangaRating {
 	@MapsId("user_id")
 	private User user;
 
-	@Transient
-	private Double rating;
+	@Column(name = "rating")
+	private Long rating;
 
-	public MangaRating(Manga manga, User user, Double rating) {
-		this.id = new MangaRatingId(manga.getId(), user.getId());
+	public MangaRating(Manga manga, User user, Long rating) {
 		this.manga = manga;
 		this.user = user;
+		this.id = new MangaRatingId(manga.getId(), user.getId());
 		this.rating = rating;
 	}
 }

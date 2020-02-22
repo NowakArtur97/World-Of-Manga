@@ -15,6 +15,4 @@ public interface MangaService {
 	List<Manga> findAll();
 
 	Manga findById(Long id) throws MangaNotFoundException;
-
-	Long rateManga(Long id, Long rating);
 }
