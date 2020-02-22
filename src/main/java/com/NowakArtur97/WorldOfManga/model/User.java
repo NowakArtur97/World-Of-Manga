@@ -62,9 +62,17 @@ public class User {
 
 	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
 	private final Set<MangaRating> mangasRatings = new HashSet<>();
-	
+
 	public void addRole(Role role) {
 
 		this.getRoles().add(role);
+	}
+
+	public void addMangaRating(Manga manga, Double rating) {
+
+		MangaRating mangaRating = new MangaRating(manga, this, rating);
+
+		this.getMangasRatings().add(mangaRating);
+		manga.getMangasRatings().add(mangaRating);
 	}
 }
