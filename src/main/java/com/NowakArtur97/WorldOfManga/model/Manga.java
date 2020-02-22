@@ -13,7 +13,9 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.PostLoad;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.Type;
 
@@ -44,6 +46,9 @@ public class Manga {
 	@Lob
 	private byte[] image;
 
+	@Transient
+	private Double rating;
+
 	@ManyToMany(mappedBy = "createdMangas")
 	@EqualsAndHashCode.Exclude
 	private final Set<Author> authors = new HashSet<>();;
@@ -56,6 +61,12 @@ public class Manga {
 	@OneToMany(mappedBy = "manga", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
 	@EqualsAndHashCode.Exclude
 	private final Set<MangaRating> mangasRatings = new HashSet<>();
+
+	@PostLoad
+	public void countRating() {
+
+		this.rating = getMangasRatings().stream().mapToDouble(MangaRating::getRating).average().orElse(Double.NaN);
+	}
 
 	public void addTranslation(MangaTranslation mangaTranslation) {
 

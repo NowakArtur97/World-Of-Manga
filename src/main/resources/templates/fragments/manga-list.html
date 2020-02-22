@@ -11,9 +11,9 @@
                 </div> 
             </div>
             <div class="manga_card__stats">
-                <div class="manga_card__likes">30 <span><image class="manga_card__icon"th:src="@{'/images/icons/heart.png'}"></image></span>
+                <div class="manga_card__likes"> <image class="manga_card__icon"th:src="@{'/images/icons/heart.png'}"></image>
                 </div>
-                <div class="manga_card_rating">9,6<span>
+                <div class="manga_card_rating"><span th:text="${manga.rating}"></span>
                     <image class="manga_card__icon" th:src="@{'/images/icons/star.png'}"></image>
                 </div>
             </div>
