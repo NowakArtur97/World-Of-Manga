@@ -94,3 +94,18 @@ CREATE TABLE `manga_translation` (
         REFERENCES `language` (`language_id`)
         ON DELETE NO ACTION ON UPDATE NO ACTION
 )  ENGINE=INNODB AUTO_INCREMENT=1 DEFAULT CHARSET=UTF8MB4;
+
+DROP TABLE IF EXISTS `manga_rating`;
+
+CREATE TABLE `manga_rating` (
+    `manga_id` INT(11),
+    `user_id` INT(11),
+    `rating` DECIMAL(3 , 2 ) DEFAULT '0.00',
+    PRIMARY KEY (`manga_id` , `user_id`),
+    CONSTRAINT `FK_RATING_MANGA_USER` FOREIGN KEY (`manga_id`)
+        REFERENCES `manga` (`manga_id`)
+        ON DELETE NO ACTION ON UPDATE NO ACTION,
+    CONSTRAINT `FK_RATING_USER_MANGA` FOREIGN KEY (`user_id`)
+        REFERENCES `user` (`user_id`)
+        ON DELETE NO ACTION ON UPDATE NO ACTION
+)  ENGINE=INNODB AUTO_INCREMENT=1 DEFAULT CHARSET=UTF8MB4;

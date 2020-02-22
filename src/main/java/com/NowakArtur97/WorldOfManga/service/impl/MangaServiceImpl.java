@@ -35,6 +35,14 @@ public class MangaServiceImpl implements MangaService {
 	}
 
 	@Override
+	public Long rateManga(Long id, Long rating) {
+
+		
+		
+		return null;
+	}
+	
+	@Override
 	public Manga findById(Long id) throws MangaNotFoundException {
 
 		return mangaRepository.findById(id)
