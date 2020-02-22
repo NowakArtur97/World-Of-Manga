@@ -59,6 +59,12 @@ public class Manga {
 		mangaTranslation.setManga(this);
 	}
 
+	public void removeTranslation(MangaTranslation mangaTranslation) {
+
+		translations.remove(mangaTranslation);
+		mangaTranslation.setManga(null);
+	}
+	
 	public void addAuthor(Author author) {
 
 		this.getAuthors().add(author);
