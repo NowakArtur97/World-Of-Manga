@@ -20,8 +20,8 @@ public class MangaRatingId implements Serializable {
 	private static final long serialVersionUID = -4902130401018115529L;
 
 	@Column(name = "manga_id")
-	private Manga manga;
+	private Long manga;
 
 	@Column(name = "user_id")
-	private User user;
+	private Long user;
 }
