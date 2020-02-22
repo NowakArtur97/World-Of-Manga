@@ -50,6 +50,9 @@ public class Manga {
 			CascadeType.REFRESH }, orphanRemoval = false, fetch = FetchType.LAZY)
 	private final Set<MangaTranslation> translations = new HashSet<>();
 
+	@OneToMany(mappedBy = "manga", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+	private final Set<MangaRating> mangasRatings = new HashSet<>();
+
 	public void addTranslation(MangaTranslation mangaTranslation) {
 
 		translations.add(mangaTranslation);

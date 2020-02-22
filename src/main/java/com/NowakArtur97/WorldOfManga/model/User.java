@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.AccessLevel;
@@ -59,6 +60,9 @@ public class User {
 	@JoinTable(name = "user_role", schema = "world_of_manga", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private final Set<Role> roles = new HashSet<>();
 
+	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+	private final Set<MangaRating> mangasRatings = new HashSet<>();
+	
 	public void addRole(Role role) {
 
 		this.getRoles().add(role);
