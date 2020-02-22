@@ -5,6 +5,8 @@ import java.util.Collection;
 import java.util.Optional;
 import java.util.Set;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -106,6 +108,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	@Transactional
 	public MangaRating rateManga(Long mangaId, Long rating) throws MangaNotFoundException {
 
 		Manga manga = mangaService.findById(mangaId);
@@ -113,8 +116,6 @@ public class UserServiceImpl implements UserService {
 		User user = loadLoggedInUsername();
 
 		MangaRating mangaRating = user.addMangaRating(manga, rating);
-
-		save(user);
 
 		return mangaRating;
 	}

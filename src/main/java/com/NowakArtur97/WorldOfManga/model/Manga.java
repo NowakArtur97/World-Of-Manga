@@ -21,6 +21,7 @@ import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
@@ -44,13 +45,16 @@ public class Manga {
 	private byte[] image;
 
 	@ManyToMany(mappedBy = "createdMangas")
+	@EqualsAndHashCode.Exclude
 	private final Set<Author> authors = new HashSet<>();;
 
 	@OneToMany(mappedBy = "manga", cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST,
 			CascadeType.REFRESH }, orphanRemoval = false, fetch = FetchType.LAZY)
+	@EqualsAndHashCode.Exclude
 	private final Set<MangaTranslation> translations = new HashSet<>();
 
 	@OneToMany(mappedBy = "manga", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+	@EqualsAndHashCode.Exclude
 	private final Set<MangaRating> mangasRatings = new HashSet<>();
 
 	public void addTranslation(MangaTranslation mangaTranslation) {
@@ -64,7 +68,7 @@ public class Manga {
 		translations.remove(mangaTranslation);
 		mangaTranslation.setManga(null);
 	}
-	
+
 	public void addAuthor(Author author) {
 
 		this.getAuthors().add(author);

@@ -4,8 +4,8 @@ import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.MapsId;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -22,14 +22,14 @@ import lombok.NoArgsConstructor;
 public class MangaRating {
 
 	@EmbeddedId
-	private MangaRatingId id;
+	private MangaRatingId mangaRatingId;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@MapsId("manga_id")
+	@JoinColumn(name = "manga_id", insertable = false, updatable = false)
 	private Manga manga;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@MapsId("user_id")
+	@JoinColumn(name = "user_id", insertable = false, updatable = false)
 	private User user;
 
 	@Column(name = "rating")
@@ -38,7 +38,7 @@ public class MangaRating {
 	public MangaRating(Manga manga, User user, Long rating) {
 		this.manga = manga;
 		this.user = user;
-		this.id = new MangaRatingId(manga.getId(), user.getId());
+		this.mangaRatingId = new MangaRatingId(manga.getId(), user.getId());
 		this.rating = rating;
 	}
 }

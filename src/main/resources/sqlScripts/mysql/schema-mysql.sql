@@ -100,7 +100,7 @@ DROP TABLE IF EXISTS `manga_rating`;
 CREATE TABLE `manga_rating` (
     `manga_id` INT(11),
     `user_id` INT(11),
-    `rating` DECIMAL(3 , 2 ),
+    `rating` INT(1),
     PRIMARY KEY (`manga_id` , `user_id`),
     CONSTRAINT `FK_RATING_MANGA_USER` FOREIGN KEY (`manga_id`)
         REFERENCES `manga` (`manga_id`)
