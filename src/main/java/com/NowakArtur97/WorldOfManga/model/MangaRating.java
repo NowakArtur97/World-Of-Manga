@@ -33,9 +33,9 @@ public class MangaRating {
 	private User user;
 
 	@Column(name = "rating")
-	private Long rating;
+	private int rating;
 
-	public MangaRating(Manga manga, User user, Long rating) {
+	public MangaRating(Manga manga, User user, int rating) {
 		this.manga = manga;
 		this.user = user;
 		this.mangaRatingId = new MangaRatingId(manga.getId(), user.getId());

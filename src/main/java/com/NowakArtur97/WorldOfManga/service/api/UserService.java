@@ -19,7 +19,7 @@ public interface UserService extends UserDetailsService {
 
 	User save(User user);
 
-	MangaRating rateManga(Long mangaId, Long rating) throws MangaNotFoundException;
+	MangaRating rateManga(Long mangaId, int rating) throws MangaNotFoundException;
 
 	User loadLoggedInUsername() throws UsernameNotFoundException;
 }

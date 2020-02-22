@@ -16,6 +16,12 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function cancelRating() {
-    stars.forEach(star => (star.src = '/images/icons/white-star.png'));
+    for (star of stars) {
+      if ((star.src = '/images/icons/star.png')) {
+        star.src = '/images/icons/white-star.png';
+      } else {
+        return;
+      }
+    }
   }
 });

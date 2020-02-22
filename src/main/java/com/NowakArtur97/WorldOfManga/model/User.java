@@ -70,7 +70,7 @@ public class User {
 		this.getRoles().add(role);
 	}
 
-	public MangaRating addMangaRating(Manga manga, Long rating) {
+	public MangaRating addMangaRating(Manga manga, int rating) {
 
 		MangaRating mangaRating = new MangaRating(manga, this, rating);
 

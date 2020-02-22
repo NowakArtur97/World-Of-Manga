@@ -22,7 +22,7 @@ public class MangaRatingController {
 
 	@GetMapping(path = "/rateManga")
 	public String rateManga(HttpServletRequest request, @RequestParam("id") Long mangaId,
-			@RequestParam("rating") Long rating) throws MangaNotFoundException {
+			@RequestParam("rating") int rating) throws MangaNotFoundException {
 
 		userService.rateManga(mangaId, rating);
 

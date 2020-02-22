@@ -65,7 +65,7 @@ public class Manga {
 	@PostLoad
 	public void countRating() {
 
-		this.rating = getMangasRatings().stream().mapToDouble(MangaRating::getRating).average().orElse(Double.NaN);
+		this.rating = getMangasRatings().stream().mapToDouble(MangaRating::getRating).average().orElse(0);
 	}
 
 	public void addTranslation(MangaTranslation mangaTranslation) {
