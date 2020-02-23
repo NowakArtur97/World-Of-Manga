@@ -9,6 +9,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.io.IOException;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Optional;
@@ -21,6 +22,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
@@ -28,8 +30,15 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
+import com.NowakArtur97.WorldOfManga.exception.MangaNotFoundException;
+import com.NowakArtur97.WorldOfManga.model.Author;
+import com.NowakArtur97.WorldOfManga.model.Manga;
+import com.NowakArtur97.WorldOfManga.model.MangaRating;
+import com.NowakArtur97.WorldOfManga.model.MangaTranslation;
 import com.NowakArtur97.WorldOfManga.model.User;
 import com.NowakArtur97.WorldOfManga.repository.UserRepository;
+import com.NowakArtur97.WorldOfManga.service.api.MangaRatingService;
+import com.NowakArtur97.WorldOfManga.service.api.MangaService;
 
 @ExtendWith(MockitoExtension.class)
 @DisplayName("User Service Impl Tests")
@@ -41,6 +50,12 @@ public class UserServiceImplTest {
 
 	@Mock
 	private UserRepository userRepository;
+
+	@Mock
+	private MangaService mangaService;
+
+	@Mock
+	private MangaRatingService mangaRatingService;
 
 	@Mock
 	private Authentication authentication;
@@ -191,6 +206,119 @@ public class UserServiceImplTest {
 							() -> "should return user which is enabled: " + userExpected.isEnabled() + ", but was: "
 									+ userActual.isEnabled()),
 					() -> verify(userRepository, times(1)).save(userExpected));
+		}
+
+		@Test
+		@DisplayName("when rate manga for first time")
+		public void when_rate_manga_for_first_time_should_update_rating() throws IOException, MangaNotFoundException {
+
+			Long mangaId = 1L;
+
+			MangaTranslation mangaTranslationEnExpected = MangaTranslation.builder().title("English title")
+					.description("English description").build();
+			MangaTranslation mangaTranslationPlExpected = MangaTranslation.builder().title("Polish title")
+					.description("Polish description").build();
+
+			Author authorExpected = new Author("FirsName LastName");
+
+			MockMultipartFile image = new MockMultipartFile("image.jpg", "file bytes".getBytes());
+
+			Manga mangaExpected = new Manga();
+			mangaExpected.addAuthor(authorExpected);
+			mangaExpected.addTranslation(mangaTranslationEnExpected);
+			mangaExpected.addTranslation(mangaTranslationPlExpected);
+			mangaExpected.setImage(image.getBytes());
+
+			String username = "principal";
+			
+			User userExpected = User.builder().username(username).firstName("first name").lastName("last name")
+					.password("user").email("user@email.com").isEnabled(true).build();
+
+			int ratingExpected = 5;
+
+			MangaRating mangaRatingExpected = new MangaRating();
+
+			SecurityContextHolder.setContext(securityContext);
+			when(mangaService.findById(mangaId)).thenReturn(mangaExpected);
+			when(mangaRatingService.findByUserAndManga(userExpected, mangaExpected)).thenReturn(mangaRatingExpected);
+			when(securityContext.getAuthentication()).thenReturn(authentication);
+			when(authentication.getPrincipal()).thenReturn(principal);
+			when(userRepository.findByUsername(username)).thenReturn(Optional.of(userExpected));
+
+			MangaRating mangaRatingActual = userService.rateManga(mangaId, ratingExpected);
+
+			assertAll(
+					() -> assertEquals(mangaExpected, mangaRatingActual.getManga(),
+							() -> "should return manga rating with manga: " + mangaExpected
+									+ ", but was: " + mangaRatingActual.getManga()),
+					() -> assertEquals(userExpected, mangaRatingActual.getUser(),
+							() -> "should return manga rating with user: " + userExpected
+									+ ", but was: " + mangaRatingActual.getUser()),
+					() -> assertEquals(ratingExpected, mangaRatingActual.getRating(),
+							() -> "should return manga rating with rating: " + mangaRatingExpected.getRating()
+									+ ", but was: " + mangaRatingActual.getRating()),
+					() -> verify(mangaService, times(1)).findById(mangaId),
+					() -> verify(mangaRatingService, times(1)).findByUserAndManga(userExpected, mangaExpected),
+					() -> verify(userRepository, times(1)).findByUsername(username),
+					() -> verify(securityContext, times(1)).getAuthentication(),
+					() -> verify(authentication, times(1)).getPrincipal());
+		}
+		
+		@Test
+		@DisplayName("when rate manga for another time")
+		public void when_rate_manga_for_another_time_should_update_rating() throws IOException, MangaNotFoundException {
+
+			Long mangaId = 1L;
+
+			MangaTranslation mangaTranslationEnExpected = MangaTranslation.builder().title("English title")
+					.description("English description").build();
+			MangaTranslation mangaTranslationPlExpected = MangaTranslation.builder().title("Polish title")
+					.description("Polish description").build();
+
+			Author authorExpected = new Author("FirsName LastName");
+
+			MockMultipartFile image = new MockMultipartFile("image.jpg", "file bytes".getBytes());
+
+			Manga mangaExpected = new Manga();
+			mangaExpected.addAuthor(authorExpected);
+			mangaExpected.addTranslation(mangaTranslationEnExpected);
+			mangaExpected.addTranslation(mangaTranslationPlExpected);
+			mangaExpected.setImage(image.getBytes());
+
+			String username = "principal";
+			
+			User userExpected = User.builder().username(username).firstName("first name").lastName("last name")
+					.password("user").email("user@email.com").isEnabled(true).build();
+
+			int ratingExpected = 5;
+
+			MangaRating mangaRatingExpected = MangaRating.builder().manga(mangaExpected).user(userExpected)
+					.rating(ratingExpected).build();
+
+			SecurityContextHolder.setContext(securityContext);
+			when(mangaService.findById(mangaId)).thenReturn(mangaExpected);
+			when(mangaRatingService.findByUserAndManga(userExpected, mangaExpected)).thenReturn(mangaRatingExpected);
+			when(securityContext.getAuthentication()).thenReturn(authentication);
+			when(authentication.getPrincipal()).thenReturn(principal);
+			when(userRepository.findByUsername(username)).thenReturn(Optional.of(userExpected));
+
+			MangaRating mangaRatingActual = userService.rateManga(mangaId, ratingExpected);
+
+			assertAll(
+					() -> assertEquals(mangaRatingExpected.getManga(), mangaRatingActual.getManga(),
+							() -> "should return manga rating with manga: " + mangaRatingExpected.getManga()
+									+ ", but was: " + mangaRatingActual.getManga()),
+					() -> assertEquals(mangaRatingExpected.getUser(), mangaRatingActual.getUser(),
+							() -> "should return manga rating with user: " + mangaRatingExpected.getUser()
+									+ ", but was: " + mangaRatingActual.getUser()),
+					() -> assertEquals(mangaRatingExpected.getRating(), mangaRatingActual.getRating(),
+							() -> "should return manga rating with rating: " + mangaRatingExpected.getRating()
+									+ ", but was: " + mangaRatingActual.getRating()),
+					() -> verify(mangaService, times(1)).findById(mangaId),
+					() -> verify(mangaRatingService, times(1)).findByUserAndManga(userExpected, mangaExpected),
+					() -> verify(userRepository, times(1)).findByUsername(username),
+					() -> verify(securityContext, times(1)).getAuthentication(),
+					() -> verify(authentication, times(1)).getPrincipal());
 		}
 	}
 

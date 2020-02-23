@@ -26,6 +26,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Table(name = "manga", schema = "world_of_manga")
@@ -50,15 +51,18 @@ public class Manga {
 	private Double rating;
 
 	@ManyToMany(mappedBy = "createdMangas")
+	@ToString.Exclude
 	@EqualsAndHashCode.Exclude
 	private final Set<Author> authors = new HashSet<>();;
 
 	@OneToMany(mappedBy = "manga", cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST,
 			CascadeType.REFRESH }, orphanRemoval = false, fetch = FetchType.LAZY)
+	@ToString.Exclude
 	@EqualsAndHashCode.Exclude
 	private final Set<MangaTranslation> translations = new HashSet<>();
 
 	@OneToMany(mappedBy = "manga", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+	@ToString.Exclude
 	@EqualsAndHashCode.Exclude
 	private final Set<MangaRating> mangasRatings = new HashSet<>();
 
