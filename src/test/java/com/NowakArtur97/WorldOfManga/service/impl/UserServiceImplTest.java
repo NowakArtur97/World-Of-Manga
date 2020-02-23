@@ -9,6 +9,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -20,7 +21,10 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
@@ -37,6 +41,15 @@ public class UserServiceImplTest {
 
 	@Mock
 	private UserRepository userRepository;
+
+	@Mock
+	private Authentication authentication;
+
+	@Mock
+	private SecurityContext securityContext;
+
+	@Mock
+	private Principal principal;
 
 	@Nested
 	@DisplayName("User Repository Integration Tests")
@@ -142,7 +155,8 @@ public class UserServiceImplTest {
 
 			boolean isEmailInUseActual = userService.isEmailAlreadyInUse(email);
 
-			assertAll(() -> assertFalse(isEmailInUseActual, () -> "should return false, but was: " + isEmailInUseActual),
+			assertAll(
+					() -> assertFalse(isEmailInUseActual, () -> "should return false, but was: " + isEmailInUseActual),
 					() -> verify(userRepository, times(1)).existsUserByEmail(email));
 		}
 
@@ -223,13 +237,70 @@ public class UserServiceImplTest {
 		}
 
 		@Test
+		@DisplayName("when load logged in user")
+		public void when_load_logged_in_user_should_return_user() {
+
+			String username = "principal";
+
+			User userExpected = User.builder().username(username).firstName("first name").lastName("last name")
+					.password("password1").email("user@email.com").isEnabled(true).build();
+
+			when(securityContext.getAuthentication()).thenReturn(authentication);
+			when(authentication.getPrincipal()).thenReturn(principal);
+			when(userRepository.findByUsername(username)).thenReturn(Optional.of(userExpected));
+
+			SecurityContextHolder.setContext(securityContext);
+
+			User userActual = userService.loadLoggedInUsername();
+
+			assertAll(
+					() -> assertEquals(userExpected.getUsername(), userActual.getUsername(),
+							() -> "should return user with username: " + userExpected.getUsername() + ", but was: "
+									+ userActual.getUsername()),
+					() -> assertEquals(userExpected.getFirstName(), userActual.getFirstName(),
+							() -> "should return user with first name: " + userExpected.getFirstName() + ", but was: "
+									+ userActual.getFirstName()),
+					() -> assertEquals(userExpected.getLastName(), userActual.getLastName(),
+							() -> "should return user with last name: " + userExpected.getLastName() + ", but was: "
+									+ userActual.getLastName()),
+					() -> assertEquals(userExpected.getPassword(), userActual.getPassword(),
+							() -> "should return user with password: " + userExpected.getPassword() + ", but was: "
+									+ userActual.getPassword()),
+					() -> assertEquals(userExpected.getEmail(), userActual.getEmail(),
+							() -> "should return user with email: " + userExpected.getEmail() + ", but was: "
+									+ userActual.getEmail()),
+					() -> assertEquals(userExpected.isEnabled(), userActual.isEnabled(),
+							() -> "should return user which is enabled: " + userExpected.isEnabled() + ", but was: "
+									+ userActual.isEnabled()),
+					() -> verify(securityContext, times(1)).getAuthentication(),
+					() -> verify(authentication, times(1)).getPrincipal(),
+					() -> verify(userRepository, times(1)).findByUsername(username));
+		}
+
+		@Test
+		@DisplayName("when load logged in user when isn`t logged")
+		public void when_load_logged_in_user_when_isn_not_logged_should_return_user() {
+
+			String username = "user not exists";
+
+			Class<UsernameNotFoundException> expectedException = UsernameNotFoundException.class;
+
+			when(userRepository.findByUsername(username)).thenThrow(expectedException);
+
+			assertAll(
+					() -> assertThrows(expectedException, () -> userService.loadUserByUsername(username),
+							() -> "should throw UsernameNotFoundException, but nothing was thrown"),
+					() -> verify(userRepository, times(1)).findByUsername(username));
+		}
+
+		@Test
 		@DisplayName("when load user details by username doesn`t find user")
 		public void when_load_user_details_by_username_does_not_find_user_should_throw_UsernameNotFoundException() {
 
 			String username = "user";
 
 			Class<UsernameNotFoundException> expectedException = UsernameNotFoundException.class;
-			
+
 			when(userRepository.findByUsername(username)).thenThrow(expectedException);
 
 			assertAll(
