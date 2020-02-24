@@ -1,13 +1,14 @@
 document.addEventListener('DOMContentLoaded', () => {
   const mangaCards = document.querySelectorAll('.manga_card__face');
+  const mangaCardsRating = document.querySelectorAll('.manga_card_rating');
   const starSrc = '/images/icons/star.png';
   const whiteStarSrc = '/images/icons/white-star.png';
   let stars = [];
   mangaCards.forEach(mangaCard =>
     mangaCard.addEventListener('mouseover', getStars)
   );
-  mangaCards.forEach(mangaCard =>
-    mangaCard.addEventListener('mouseleave', cancelRating)
+  mangaCardsRating.forEach(mangaCardRating =>
+    mangaCardRating.addEventListener('mouseleave', cancelRating)
   );
 
   function getStars() {
