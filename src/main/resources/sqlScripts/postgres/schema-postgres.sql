@@ -97,3 +97,17 @@ CREATE TABLE world_of_manga.manga_rating (
         ON DELETE NO ACTION ON UPDATE NO ACTION,
 	    CONSTRAINT "CHK_MANGA_RATING_MAX_VALUE" CHECK ("rating" <= 5)
 );
+
+DROP TABLE IF EXISTS world_of_manga.favourite_manga CASCADE;
+
+CREATE TABLE world_of_manga.favourite_manga (
+    "manga_id" SERIAL,
+    "user_id" SERIAL,
+    PRIMARY KEY ("manga_id" , "user_id"),
+    CONSTRAINT "FK_FAVOURITE_MANGA_USER" FOREIGN KEY ("manga_id")
+        REFERENCES world_of_manga.manga ("manga_id")
+        ON DELETE NO ACTION ON UPDATE NO ACTION,
+    CONSTRAINT "FK_FAVOURITE_USER_MANGA" FOREIGN KEY ("user_id")
+        REFERENCES world_of_manga.user ("user_id")
+        ON DELETE NO ACTION ON UPDATE NO ACTION
+);
