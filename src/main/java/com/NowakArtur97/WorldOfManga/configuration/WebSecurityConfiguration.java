@@ -65,10 +65,12 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 
 		http.authorizeRequests()
-				.antMatchers("/admin/**").hasRole("ADMIN")
+				.antMatchers("/admin/**", "/h2/**").hasRole("ADMIN")
 				.antMatchers("/auth/**").hasAnyRole("USER", "ADMIN")
 				.antMatchers("/user/**").anonymous()
 				.antMatchers("/").permitAll()
+				.and().csrf().ignoringAntMatchers("/h2/**")
+				.and().headers().frameOptions().sameOrigin()
 			.and()
 				.exceptionHandling().accessDeniedHandler(userAccessDeniedHandler)
 			.and()
