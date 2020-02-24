@@ -130,4 +130,23 @@ public class UserServiceImpl implements UserService {
 
 		return mangaRating;
 	}
+
+	@Override
+	@Transactional
+	public Manga addOrRemoveFromFavourites(Long mangaId) throws MangaNotFoundException {
+
+		Manga manga = mangaService.findById(mangaId);
+
+		User user = loadLoggedInUsername();
+
+		if (user.getFavouriteMangas().contains(manga)) {
+
+			user.removeMangaFromFavourites(manga);
+		} else {
+
+			user.addMangaToFavourites(manga);
+		}
+
+		return manga;
+	}
 }

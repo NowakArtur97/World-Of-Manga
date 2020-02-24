@@ -11,7 +11,9 @@
                 </div> 
             </div>
             <div class="manga_card__stats">
-                <div class="manga_card__likes"> <image class="manga_card__icon"th:src="@{'/images/icons/heart.png'}"></image>
+                <div class="manga_card__likes">
+                    <span th:text="${#sets.size(manga.userWithMangaInFavourites)}"></span>
+                    <image class="manga_card__icon"th:src="@{'/images/icons/heart.png'}"></image>
                 </div>
                 <div class="manga_card_rating"><span th:text="${manga.rating}"></span>
                     <image class="manga_card__icon" th:src="@{'/images/icons/star.png'}"></image>
@@ -27,11 +29,11 @@
             </div>
             <div class="manga_card__stats">
                 <div class="manga_card__likes"><span>
-                        <image class="manga_card__icon manga_card__icon--big manga_card__icon--heart" th:src="@{'/images/icons/white-heart.png'}"></image>
-                    </span>
+                    <a th:href="@{'/auth/addOrRemoveFromFavourites/' + ${manga.id}}"><image class="manga_card__icon manga_card__icon--big manga_card__icon--heart" th:src="@{'/images/icons/white-heart.png'}"></image>
+                    </span></a>
                 </div>
                 <div class="manga_card_rating"><span>
-                        <a th:href="@{'/auth/rateManga?id=' + ${manga.id}} + '&rating=' + 1" ><image class="manga_card__icon manga_card__icon--big manga_card__icon--star" th:src="@{'/images/icons/white-star.png'}" data-star="1"></image></a>
+                        <a th:href="@{'/auth/rateManga?id=' + ${manga.id}} + '&rating=' + 1" ><image class="manga_card__icon manga_card__icon--big manga_card__icon--star" th:src="@{'/images/icons/white-star.png'}" data-star="1"></image></image>
                         <a th:href="@{'/auth/rateManga?id=' + ${manga.id}} + '&rating=' + 2"><image class="manga_card__icon manga_card__icon--big manga_card__icon--star" th:src="@{'/images/icons/white-star.png'}" data-star="2"></image></a>
                         <a th:href="@{'/auth/rateManga?id=' + ${manga.id}} + '&rating=' + 3"><image class="manga_card__icon manga_card__icon--big manga_card__icon--star" th:src="@{'/images/icons/white-star.png'}" data-star="3"></image></a>
                         <a th:href="@{'/auth/rateManga?id=' + ${manga.id}} + '&rating=' + 4" ><image class="manga_card__icon manga_card__icon--big manga_card__icon--star" th:src="@{'/images/icons/white-star.png'}" data-star="4"></image></a>

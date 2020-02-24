@@ -67,6 +67,8 @@ public class Manga {
 	private final Set<MangaRating> mangasRatings = new HashSet<>();
 
 	@ManyToMany(mappedBy = "favouriteMangas")
+	@ToString.Exclude
+	@EqualsAndHashCode.Exclude
 	private final Set<User> userWithMangaInFavourites = new HashSet<>();
 	
 	@PostLoad
