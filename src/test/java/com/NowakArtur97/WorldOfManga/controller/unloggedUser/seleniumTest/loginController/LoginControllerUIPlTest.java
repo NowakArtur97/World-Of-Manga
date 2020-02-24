@@ -34,7 +34,7 @@ public class LoginControllerUIPlTest extends LoginControllerUITest {
 
 		loginPage.fillMandatoryLoginFields(username, password);
 
-		assertAll(
+		assertAll(() -> assertTrue(loginPage.isUserOnLoginPage(), () -> "should show login page"),
 				() -> assertTrue(loginPage.getFormBoxText().contains(badCredentialsMessage),
 						() -> "should show bad credentails message"),
 				() -> assertFalse(userService.isUsernameAlreadyInUse(username),
@@ -52,7 +52,7 @@ public class LoginControllerUIPlTest extends LoginControllerUITest {
 
 		loginPage.fillMandatoryLoginFields(username, password);
 
-		assertAll(
+		assertAll(() -> assertFalse(loginPage.isUserOnLoginPage(), () -> "shouldn`t show login page"),
 				() -> assertTrue(userService.isUsernameAlreadyInUse(username),
 						() -> "user with given username should exist: " + username),
 				() -> assertTrue(mainPage.getHeaderText().contains(userLoggedInMangaListOption.toUpperCase()),
@@ -74,7 +74,7 @@ public class LoginControllerUIPlTest extends LoginControllerUITest {
 
 		loginPage.fillMandatoryLoginFields(username, password);
 
-		assertAll(
+		assertAll(() -> assertFalse(loginPage.isUserOnLoginPage(), () -> "shouldn`t show login page"),
 				() -> assertTrue(userService.isUsernameAlreadyInUse(username),
 						() -> "user with given username should exist: " + username),
 				() -> assertTrue(mainPage.getHeaderText().contains(userLoggedInMangaListOption.toUpperCase()),

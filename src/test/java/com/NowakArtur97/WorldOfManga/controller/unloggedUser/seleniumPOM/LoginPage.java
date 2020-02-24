@@ -66,4 +66,9 @@ public class LoginPage extends SeleniumPageObjectModel {
 
 		clickSubmitLoginButton();
 	}
+
+	public boolean isUserOnLoginPage() {
+
+		return webDriver.getCurrentUrl().contains(RESOURCE_PATH);
+	}
 }

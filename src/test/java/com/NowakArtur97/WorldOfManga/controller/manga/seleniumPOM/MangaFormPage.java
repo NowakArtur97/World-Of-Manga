@@ -166,4 +166,9 @@ public class MangaFormPage extends SeleniumPageObjectModel {
 
 		clickSubmitMangaFormButton();
 	}
+	
+	public boolean isUserOnMangaFormPage() {
+
+		return webDriver.getCurrentUrl().contains(RESOURCE_PATH);
+	}
 }

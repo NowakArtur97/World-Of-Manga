@@ -45,7 +45,8 @@ public class MangaControllerUIEnTest extends MangaControllerUITest {
 		mangaFormPage.fillMandatoryMangaFormFields(englishTitle, "English description", polishTitle,
 				"Polish description", selectAuthor, addImage);
 
-		assertAll(() -> assertTrue(mangaFormPage.countFailureMessages() == 0, () -> "shouldn`t have errors"),
+		assertAll(() -> assertTrue(mangaFormPage.isUserOnMangaFormPage(), () -> "should show manga form page"),
+				() -> assertTrue(mangaFormPage.countFailureMessages() == 0, () -> "shouldn`t have errors"),
 				() -> assertTrue(mangaTranslationService.isTitleAlreadyInUse(englishTitle),
 						() -> "should save manga translation in database"),
 				() -> assertTrue(mangaTranslationService.isTitleAlreadyInUse(polishTitle),
@@ -69,7 +70,8 @@ public class MangaControllerUIEnTest extends MangaControllerUITest {
 		mangaFormPage.fillMandatoryMangaFormFields(blankField, blankField, blankField, blankField, selectAuthor,
 				addImage);
 
-		assertAll(() -> assertTrue(mangaFormPage.countFailureMessages() == 6, () -> "should have six errors"),
+		assertAll(() -> assertTrue(mangaFormPage.isUserOnMangaFormPage(), () -> "should show manga form page"),
+				() -> assertTrue(mangaFormPage.countFailureMessages() == 6, () -> "should have six errors"),
 				() -> assertTrue(mangaFormPage.getFormBoxText().contains(mangaTranslationDescriptionNotBlankMessage),
 						() -> "should show title is a required field message twice"),
 				() -> assertTrue(mangaFormPage.getFormBoxText().contains(mangaTranslationTitleNotBlankMessage),
@@ -102,17 +104,21 @@ public class MangaControllerUIEnTest extends MangaControllerUITest {
 
 		mangaFormPage.clickAddOrUpdateMangaLinkButton();
 
-		mangaFormPage.fillMandatoryMangaFormFields(longTitleText, longDescriptionText, longTitleText, longDescriptionText, selectAuthor, addImage);
+		mangaFormPage.fillMandatoryMangaFormFields(longTitleText, longDescriptionText, longTitleText,
+				longDescriptionText, selectAuthor, addImage);
 
-		assertAll(() -> assertTrue(mangaFormPage.countFailureMessages() == 4, () -> "should have four errors"),
+		assertAll(() -> assertTrue(mangaFormPage.isUserOnMangaFormPage(), () -> "should show manga form page"),
+				() -> assertTrue(mangaFormPage.countFailureMessages() == 4, () -> "should have four errors"),
 				() -> assertTrue(mangaFormPage.getFormBoxText().contains(mangaTranslationTitleSizeMessage),
 						() -> "should show title is too long message twice"),
 				() -> assertTrue(mangaFormPage.getFormBoxText().contains(mangaTranslationDescriptionSizeMessage),
 						() -> "should show description is too long message twice"),
-				() -> assertEquals(longTitleText, mangaFormPage.getEnTitle(), () -> "should show incorrect english title"),
+				() -> assertEquals(longTitleText, mangaFormPage.getEnTitle(),
+						() -> "should show incorrect english title"),
 				() -> assertEquals(longDescriptionText, mangaFormPage.getEnDescription(),
 						() -> "should show incorrect english description"),
-				() -> assertEquals(longTitleText, mangaFormPage.getPlTitle(), () -> "should show incorrect polish title"),
+				() -> assertEquals(longTitleText, mangaFormPage.getPlTitle(),
+						() -> "should show incorrect polish title"),
 				() -> assertEquals(longDescriptionText, mangaFormPage.getPlDescription(),
 						() -> "should show incorrect polish description"),
 				() -> assertTrue(mangaFormPage.isFirstAuthorCheckboxSelected(), () -> "should author be selected"));

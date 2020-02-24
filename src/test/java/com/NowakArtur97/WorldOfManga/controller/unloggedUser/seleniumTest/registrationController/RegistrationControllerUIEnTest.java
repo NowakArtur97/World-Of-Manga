@@ -36,7 +36,8 @@ public class RegistrationControllerUIEnTest extends RegistrationControllerUITest
 
 		registrationPage.fillMandatoryRegistrationFields(username, "password", "password", email, areTermsAccepted);
 
-		assertAll(() -> assertTrue(registrationPage.countFailureMessages() == 1, () -> "should have error"),
+		assertAll(() -> assertTrue(registrationPage.isUserOnRegistrationPage(), () -> "should show registration page"),
+				() -> assertTrue(registrationPage.countFailureMessages() == 1, () -> "should have error"),
 				() -> assertTrue(registrationPage.getFormBoxText().contains(usernameInUseMessage),
 						() -> "should show username is already in use message"),
 				() -> assertEquals(username, registrationPage.getUsername(), () -> "should show incorrect username"),
@@ -56,7 +57,8 @@ public class RegistrationControllerUIEnTest extends RegistrationControllerUITest
 
 		registrationPage.fillMandatoryRegistrationFields(username, "password", "password", email, areTermsAccepted);
 
-		assertAll(() -> assertTrue(registrationPage.countFailureMessages() == 1, () -> "should have error"),
+		assertAll(() -> assertTrue(registrationPage.isUserOnRegistrationPage(), () -> "should show registration page"),
+				() -> assertTrue(registrationPage.countFailureMessages() == 1, () -> "should have error"),
 				() -> assertTrue(registrationPage.getFormBoxText().contains(emailInUseMessage),
 						() -> "should show email is already in use message"),
 				() -> assertEquals(username, registrationPage.getUsername(), () -> "should show username"),
@@ -76,7 +78,8 @@ public class RegistrationControllerUIEnTest extends RegistrationControllerUITest
 
 		registrationPage.fillMandatoryRegistrationFields(username, "password", "password1", email, areTermsAccepted);
 
-		assertAll(() -> assertTrue(registrationPage.countFailureMessages() == 4, () -> "should have three errors"),
+		assertAll(() -> assertTrue(registrationPage.isUserOnRegistrationPage(), () -> "should show registration page"),
+				() -> assertTrue(registrationPage.countFailureMessages() == 4, () -> "should have three errors"),
 				() -> assertTrue(registrationPage.getFormBoxText().contains(usernameNotBlankMessage),
 						() -> "should show username is a required field message"),
 				() -> assertTrue(registrationPage.getFormBoxText().contains(passwordMatchingFieldsMessage),
@@ -102,7 +105,8 @@ public class RegistrationControllerUIEnTest extends RegistrationControllerUITest
 
 		registrationPage.fillMandatoryRegistrationFields(username, "", "password", email, areTermsAccepted);
 
-		assertAll(() -> assertTrue(registrationPage.countFailureMessages() == 4, () -> "should have four errors"),
+		assertAll(() -> assertTrue(registrationPage.isUserOnRegistrationPage(), () -> "should show registration page"),
+				() -> assertTrue(registrationPage.countFailureMessages() == 4, () -> "should have four errors"),
 				() -> assertTrue(registrationPage.getFormBoxText().contains(usernameSizeMessage),
 						() -> "should show username size exceed message"),
 				() -> assertTrue(registrationPage.getFormBoxText().contains(passwordMatchingFieldsMessage),
@@ -133,7 +137,8 @@ public class RegistrationControllerUIEnTest extends RegistrationControllerUITest
 		registrationPage.fillAllRegistrationFields(username, email, password, matchingPassword, firstName, lastName,
 				areTermsAccepted);
 
-		assertAll(() -> assertTrue(registrationPage.countFailureMessages() == 6, () -> "should have six errors"),
+		assertAll(() -> assertTrue(registrationPage.isUserOnRegistrationPage(), () -> "should show registration page"),
+				() -> assertTrue(registrationPage.countFailureMessages() == 6, () -> "should have six errors"),
 				() -> assertTrue(registrationPage.getFormBoxText().contains(usernameNotBlankMessage),
 						() -> "should show username is a required field message"),
 				() -> assertTrue(registrationPage.getFormBoxText().contains(passwordFieldsNotBlankMessage),
@@ -163,7 +168,8 @@ public class RegistrationControllerUIEnTest extends RegistrationControllerUITest
 		registrationPage.fillAllRegistrationFields(username, "password", "password", "user123@email.com", "firstName",
 				"lastName", true);
 
-		assertAll(() -> assertTrue(userService.isUsernameAlreadyInUse(username), () -> "should save user in database"),
+		assertAll(() -> assertTrue(registrationPage.isUserOnRegistrationPage(), () -> "should show registration page"),
+				() -> assertTrue(userService.isUsernameAlreadyInUse(username), () -> "should save user in database"),
 				() -> assertTrue(registrationPage.getFormBoxText().contains(afterRegistrationMessage),
 						() -> "should show success registration message"));
 	}

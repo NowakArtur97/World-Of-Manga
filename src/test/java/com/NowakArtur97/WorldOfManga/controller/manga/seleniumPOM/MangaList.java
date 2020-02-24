@@ -16,6 +16,8 @@ public class MangaList extends SeleniumPageObjectModel {
 
 	private static final String MANGA_LIST_CLASS = "manga_list";
 	private static final String MANGA_CARD_CLASS = "manga_card";
+	private static final String MANGA_STAR_CLASS = "manga_card__icon--star";
+	private static final String MANGA_RATING_CLASS = "manga_card_rating";
 	private static final String MANGA_LIST_LINK = "//a[@href='/']";
 
 	@FindBy(className = MANGA_LIST_CLASS)
@@ -24,6 +26,12 @@ public class MangaList extends SeleniumPageObjectModel {
 	@FindBy(className = MANGA_CARD_CLASS)
 	private List<WebElement> mangaCards;
 
+	@FindBy(className = MANGA_STAR_CLASS)
+	private List<WebElement> mangaStars;
+	
+	@FindBy(className = MANGA_RATING_CLASS)
+	private WebElement mangaRating;
+	
 	@FindBy(xpath = MANGA_LIST_LINK)
 	private WebElement mangaListLink;
 
@@ -56,5 +64,20 @@ public class MangaList extends SeleniumPageObjectModel {
 
 		JavascriptExecutor executor = (JavascriptExecutor) webDriver;
 		executor.executeScript("arguments[0].click();", mangaListLink);
+	}
+
+	public void chooseFirstManga() {
+
+		mangaCards.get(0).click();
+	}
+
+	public void rateManga(int rating) {
+
+		mangaStars.get(rating - 1).click();
+	}
+	
+	public String getFirstMangaRating() {
+		
+		return mangaRating.getText();
 	}
 }

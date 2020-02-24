@@ -12,16 +12,14 @@ import org.junit.jupiter.api.condition.OS;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.context.TestPropertySource;
 
 import com.NowakArtur97.WorldOfManga.testUtil.enums.LanguageVersion;
 import com.NowakArtur97.WorldOfManga.testUtil.extension.ScreenshotWatcher;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @ExtendWith(ScreenshotWatcher.class)
-@TestPropertySource({ "classpath:/validation/messages_en.properties", "classpath:/pageContent/messages_en.properties" })
-@DisplayName("Manga List UI En Tests")
-@Tag("MangaListUIEn_Tests")
+@DisplayName("Manga List UI Pl Tests")
+@Tag("MangaListUIPl_Tests")
 @DirtiesContext
 @DisabledOnOs(OS.LINUX)
 public class MangaListUIPlTest extends MangaListUITest {

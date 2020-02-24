@@ -166,4 +166,9 @@ public class RegistrationPage extends SeleniumPageObjectModel {
 
 		fillMandatoryRegistrationFields(username, password, matchingPassword, email, areTermsConfirmed);
 	}
+	
+	public boolean isUserOnRegistrationPage() {
+
+		return webDriver.getCurrentUrl().contains(RESOURCE_PATH);
+	}
 }
