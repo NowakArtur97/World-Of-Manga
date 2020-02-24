@@ -1,24 +1,37 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const stars = document.querySelectorAll('.manga_card__icon--star');
-  stars.forEach(star => star.addEventListener('mouseover', rateManga));
-  stars.forEach(star => star.addEventListener('mouseleave', cancelRating));
+  const mangaCards = document.querySelectorAll('.manga_card__face');
+  const starSrc = '/images/icons/star.png';
+  const whiteStarSrc = '/images/icons/white-star.png';
+  let stars = [];
+  mangaCards.forEach(mangaCard =>
+    mangaCard.addEventListener('mouseover', getStars)
+  );
+  mangaCards.forEach(mangaCard =>
+    mangaCard.addEventListener('mouseleave', cancelRating)
+  );
+
+  function getStars() {
+    const mangaCard = this;
+    stars = mangaCard.querySelectorAll('.manga_card__icon--star');
+    stars.forEach(star => star.addEventListener('mouseover', rateManga));
+  }
 
   function rateManga() {
     const star = this;
     const starId = star.dataset.star;
     stars.forEach(star => {
       if (star.dataset.star <= starId) {
-        star.src = '/images/icons/star.png';
+        star.src = starSrc;
       } else {
-        star.src = '/images/icons/white-star.png';
+        star.src = whiteStarSrc;
       }
     });
   }
 
   function cancelRating() {
     for (star of stars) {
-      if ((star.src = '/images/icons/star.png')) {
-        star.src = '/images/icons/white-star.png';
+      if ((star.src = starSrc)) {
+        star.src = whiteStarSrc;
       } else {
         return;
       }
