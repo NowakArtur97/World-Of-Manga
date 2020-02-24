@@ -86,4 +86,20 @@ public class User {
 
 		return mangaRating;
 	}
+
+	public Manga addMangaToFavourites(Manga manga) {
+
+		this.getFavouriteMangas().add(manga);
+		manga.getUserWithMangaInFavourites().add(this);
+
+		return manga;
+	}
+
+	public Manga removeMangaFromFavourites(Manga manga) {
+
+		this.getFavouriteMangas().remove(manga);
+		manga.getUserWithMangaInFavourites().remove(this);
+
+		return manga;
+	}
 }
