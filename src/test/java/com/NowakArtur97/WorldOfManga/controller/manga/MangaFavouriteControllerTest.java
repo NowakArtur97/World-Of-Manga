@@ -1,4 +1,4 @@
-package com.NowakArtur97.WorldOfManga.controller.mangaRating;
+package com.NowakArtur97.WorldOfManga.controller.manga;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.mockito.Mockito.times;
@@ -19,17 +19,18 @@ import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilde
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import com.NowakArtur97.WorldOfManga.controller.manga.MangaFavouriteController;
 import com.NowakArtur97.WorldOfManga.service.api.UserService;
 
 @ExtendWith(MockitoExtension.class)
-@DisplayName("Manga Rating Controller Tests")
-@Tag("MangaRatingController_Tests")
-public class MangaRatingControllerTest {
+@DisplayName("Manga Favourite Controller Tests")
+@Tag("MangaFavouriteController_Tests")
+public class MangaFavouriteControllerTest {
 
 	private MockMvc mockMvc;
 
 	@InjectMocks
-	private MangaRatingController mangaRatingController;
+	private MangaFavouriteController mangaFavouriteController;
 
 	@Mock
 	private UserService userService;
@@ -37,21 +38,20 @@ public class MangaRatingControllerTest {
 	@BeforeEach
 	public void setUp() {
 
-		mockMvc = MockMvcBuilders.standaloneSetup(mangaRatingController).build();
+		mockMvc = MockMvcBuilders.standaloneSetup(mangaFavouriteController).build();
 	}
 
 	@Test
-	@DisplayName("when rate manga")
-	public void when_rate_manga_should_rate_manga_and_redirect_to_last_page() {
+	@DisplayName("when add or remove manga from favourites")
+	public void when_add_or_remove_manga_from_favourites_should_redirect_to_last_page() {
 
 		Long mangaId = 1L;
-		int rating = 5;
 
-		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.get("/auth/rateManga")
-				.param("id", mangaId.toString()).param("rating", String.valueOf(rating)).header("Referer", "/");
+		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders
+				.get("/auth/addOrRemoveFromFavourites/{id}", mangaId).header("Referer", "/");
 
 		assertAll(
 				() -> mockMvc.perform(mockRequest).andExpect(status().is3xxRedirection()).andExpect(redirectedUrl("/")),
-				() -> verify(userService, times(1)).rateManga(mangaId, rating));
+				() -> verify(userService, times(1)).addOrRemoveFromFavourites(mangaId));
 	}
 }

@@ -1,4 +1,4 @@
-package com.NowakArtur97.WorldOfManga.controller.mangaFavourites;
+package com.NowakArtur97.WorldOfManga.controller.manga;
 
 import javax.servlet.http.HttpServletRequest;
 

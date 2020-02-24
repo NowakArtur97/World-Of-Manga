@@ -1,4 +1,4 @@
-package com.NowakArtur97.WorldOfManga.controller.mangaRating.seleniumTest;
+package com.NowakArtur97.WorldOfManga.controller.manga.seleniumTest.mangaRating;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -18,17 +18,17 @@ import com.NowakArtur97.WorldOfManga.testUtil.extension.ScreenshotWatcher;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @ExtendWith(ScreenshotWatcher.class)
-@DisplayName("Manga Rating UI En Tests")
-@Tag("MangaRatingUIEn_Tests")
+@DisplayName("Manga Rating UI Pl Tests")
+@Tag("MangaRatingUIPl_Tests")
 @DirtiesContext
 @DisabledOnOs(OS.LINUX)
-public class MangaRatingUIEnTest extends MangaRatingUITest {
+public class MangaRatingUIPlTest extends MangaRatingUITest {
 
 	@Test
 	@DisplayName("when rate manga")
 	public void when_rate_manga_should_show_updated_rating() {
 
-		loginPage.loadLoginView(LanguageVersion.ENG);
+		loginPage.loadLoginView(LanguageVersion.PL);
 
 		loginPage.fillMandatoryLoginFields("user", "user");
 
@@ -48,7 +48,7 @@ public class MangaRatingUIEnTest extends MangaRatingUITest {
 	@DisplayName("when rate manga second time")
 	public void when_rate_second_time_manga_should_show_updated_rating() {
 
-		loginPage.loadLoginView(LanguageVersion.ENG);
+		loginPage.loadLoginView(LanguageVersion.PL);
 
 		loginPage.fillMandatoryLoginFields("user", "user");
 
@@ -77,7 +77,7 @@ public class MangaRatingUIEnTest extends MangaRatingUITest {
 	@DisplayName("when user not logged rating manga")
 	public void when_user_not_logged_rating_manga_should_show_login_form() {
 
-		mangaList.loadMangaList(LanguageVersion.ENG);
+		mangaList.loadMangaList(LanguageVersion.PL);
 
 		mangaList.chooseFirstManga();
 
