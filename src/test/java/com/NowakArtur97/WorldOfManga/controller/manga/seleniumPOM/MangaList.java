@@ -18,6 +18,8 @@ public class MangaList extends SeleniumPageObjectModel {
 	private static final String MANGA_CARD_CLASS = "manga_card";
 	private static final String MANGA_STAR_CLASS = "manga_card__icon--star";
 	private static final String MANGA_RATING_CLASS = "manga_card_rating";
+	private static final String MANGA_FAVOURITE_COUNTER_CLASS = "manga_card__likes";
+	private static final String MANGA_FAVOURITE_CLASS = "manga_card__icon--heart";
 	private static final String MANGA_LIST_LINK = "//a[@href='/']";
 
 	@FindBy(className = MANGA_LIST_CLASS)
@@ -28,10 +30,16 @@ public class MangaList extends SeleniumPageObjectModel {
 
 	@FindBy(className = MANGA_STAR_CLASS)
 	private List<WebElement> mangaStars;
-	
+
 	@FindBy(className = MANGA_RATING_CLASS)
 	private WebElement mangaRating;
-	
+
+	@FindBy(className = MANGA_FAVOURITE_CLASS)
+	private List<WebElement> mangaFavouriteLink;
+
+	@FindBy(className = MANGA_FAVOURITE_COUNTER_CLASS)
+	private WebElement mangaFavouritesCounter;
+
 	@FindBy(xpath = MANGA_LIST_LINK)
 	private WebElement mangaListLink;
 
@@ -71,13 +79,23 @@ public class MangaList extends SeleniumPageObjectModel {
 		mangaCards.get(0).click();
 	}
 
-	public void rateManga(int rating) {
+	public void rateFirstManga(int rating) {
 
 		mangaStars.get(rating - 1).click();
 	}
-	
+
 	public String getFirstMangaRating() {
-		
+
 		return mangaRating.getText();
+	}
+
+	public void addOrRemoveFirstMangaFromFavourite() {
+
+		mangaFavouriteLink.get(0).click();
+	}
+
+	public String getFirstMangaFavouritesCounter() {
+
+		return mangaFavouritesCounter.getText();
 	}
 }

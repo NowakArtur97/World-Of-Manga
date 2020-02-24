@@ -1,7 +1,7 @@
-package com.NowakArtur97.WorldOfManga.controller.manga.seleniumTest.mangaRating;
+package com.NowakArtur97.WorldOfManga.controller.manga.seleniumTest.mangaFavourite;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.DisplayName;
@@ -18,15 +18,15 @@ import com.NowakArtur97.WorldOfManga.testUtil.extension.ScreenshotWatcher;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @ExtendWith(ScreenshotWatcher.class)
-@DisplayName("Manga Rating UI Pl Tests")
-@Tag("MangaRatingUIPl_Tests")
+@DisplayName("Manga Favourite UI Pl Tests")
+@Tag("MangaFavouriteUIPl_Tests")
 @DirtiesContext
 @DisabledOnOs(OS.LINUX)
-public class MangaRatingUIPlTest extends MangaRatingUITest {
+public class MangaFavouriteUIPlTest extends MangaFavouriteUITest {
 
 	@Test
-	@DisplayName("when rate manga")
-	public void when_rate_manga_should_show_updated_rating() {
+	@DisplayName("when add manga for the first time")
+	public void when_add_manga_for_the_first_time_should_add_manga_to_favourites() {
 
 		loginPage.loadLoginView(LanguageVersion.PL);
 
@@ -34,17 +34,15 @@ public class MangaRatingUIPlTest extends MangaRatingUITest {
 
 		mangaList.chooseFirstManga();
 
-		int mangaRating = 5;
+		mangaList.addOrRemoveFirstMangaFromFavourite();
 
-		mangaList.rateFirstManga(mangaRating);
-
-		assertAll(() -> assertTrue(mangaList.getFirstMangaRating().contains(String.valueOf(mangaRating)),
-				() -> "should show manga rating"));
+		assertAll(() -> assertEquals(String.valueOf(1), mangaList.getFirstMangaFavouritesCounter(),
+				() -> "should show manga with one heart"));
 	}
 
 	@Test
-	@DisplayName("when rate manga second time")
-	public void when_rate_second_time_manga_should_show_updated_rating() {
+	@DisplayName("when remove manga from favourites")
+	public void when_remove_manga_from_favourites_should_remove_manga_from_favourites() {
 
 		loginPage.loadLoginView(LanguageVersion.PL);
 
@@ -52,21 +50,12 @@ public class MangaRatingUIPlTest extends MangaRatingUITest {
 
 		mangaList.chooseFirstManga();
 
-		int firstMangaRating = 5;
+		mangaList.addOrRemoveFirstMangaFromFavourite();
 
-		mangaList.rateFirstManga(firstMangaRating);
+		mangaList.addOrRemoveFirstMangaFromFavourite();
 
-		mangaList.chooseFirstManga();
-
-		int secondMangaRating = 4;
-
-		mangaList.rateFirstManga(secondMangaRating);
-
-		assertAll(
-				() -> assertFalse(mangaList.getFirstMangaRating().contains(String.valueOf(firstMangaRating)),
-						() -> "shouldn`t show old manga rating"),
-				() -> assertTrue(mangaList.getFirstMangaRating().contains(String.valueOf(secondMangaRating)),
-						() -> "should show updated manga rating"));
+		assertAll(() -> assertEquals(String.valueOf(0), mangaList.getFirstMangaFavouritesCounter(),
+				() -> "should show manga with zero hearts"));
 	}
 
 	@Test
@@ -77,9 +66,7 @@ public class MangaRatingUIPlTest extends MangaRatingUITest {
 
 		mangaList.chooseFirstManga();
 
-		int mangaRating = 5;
-
-		mangaList.rateFirstManga(mangaRating);
+		mangaList.addOrRemoveFirstMangaFromFavourite();
 
 		assertAll(() -> assertTrue(loginPage.isUserOnLoginPage(), () -> "should show login page"));
 	}
