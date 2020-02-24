@@ -67,6 +67,11 @@ public class User {
 	@EqualsAndHashCode.Exclude
 	private final Set<MangaRating> mangasRatings = new HashSet<>();
 
+	@ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST,
+			CascadeType.REFRESH })
+	@JoinTable(name = "favourite_manga", schema = "world_of_manga", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "manga_id"))
+	private final Set<Manga> favouriteMangas = new HashSet<>();
+
 	public void addRole(Role role) {
 
 		this.getRoles().add(role);
