@@ -111,3 +111,18 @@ CREATE TABLE world_of_manga.favourite_manga (
         REFERENCES world_of_manga.user (user_id)
         ON DELETE NO ACTION ON UPDATE NO ACTION
 );
+
+DROP TABLE IF EXISTS world_of_manga.manga_list;
+
+CREATE TABLE world_of_manga.manga_list (
+    manga_id INT(11) AUTO_INCREMENT NOT NULL,
+    user_id INT(11) AUTO_INCREMENT NOT NULL,
+    status VARCHAR(20),
+    PRIMARY KEY (manga_id, user_id),
+    CONSTRAINT "FK_LIST_MANGA_USER" FOREIGN KEY (manga_id)
+        REFERENCES world_of_manga.manga (manga_id)
+        ON DELETE NO ACTION ON UPDATE NO ACTION,
+    CONSTRAINT "FK_LIST_USER_MANGA" FOREIGN KEY (user_id)
+        REFERENCES world_of_manga.user (user_id)
+        ON DELETE NO ACTION ON UPDATE NO ACTION
+);
