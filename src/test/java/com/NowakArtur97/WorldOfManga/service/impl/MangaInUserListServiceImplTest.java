@@ -86,7 +86,7 @@ public class MangaInUserListServiceImplTest {
 
 	@Test
 	@DisplayName("when find not existing manga in user list by user and manga")
-	public void whne_find_not_existing_manga_ins_user_list_by_user_and_manga_should_return_new_manga_in_list()
+	public void whne_find_not_existing_manga_ins_user_list_by_user_and_manga_should_return_empty_optional()
 			throws IOException {
 
 		MangaTranslation mangaTranslationEnExpected = MangaTranslation.builder().title("English title")
@@ -113,7 +113,7 @@ public class MangaInUserListServiceImplTest {
 				mangaExpected);
 		assertAll(
 				() -> assertTrue(mangaInUserListActual.isEmpty(),
-						() -> "should return empty optional, but was: " + mangaInUserListActual),
+						() -> "should return empty Optional, but was: " + mangaInUserListActual),
 				() -> verify(mangaInUserListRepository, times(1)).findByUserAndManga(userExpected, mangaExpected));
 	}
 }

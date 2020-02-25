@@ -107,6 +107,22 @@ public class UserServiceImplTest {
 		}
 
 		@Test
+		@DisplayName("when find not existsing user by username")
+		public void when_find_not_existing_user_by_username_should_return_empty_optional() {
+
+			String username = "user";
+
+			when(userRepository.findByUsername(username)).thenReturn(Optional.empty());
+
+			Optional<User> userActual = userService.findByUsername(username);
+
+			assertAll(
+					() -> assertTrue(userActual.isEmpty(),
+							() -> "should return empty Optional, but was: " + userActual),
+					() -> verify(userRepository, times(1)).findByUsername(username));
+		}
+
+		@Test
 		@DisplayName("when username is already in use")
 		public void when_username_is_already_in_use_should_return_true() {
 
