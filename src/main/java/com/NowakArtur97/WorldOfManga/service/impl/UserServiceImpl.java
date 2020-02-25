@@ -15,12 +15,15 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.NowakArtur97.WorldOfManga.enums.MangaInUserListStatus;
 import com.NowakArtur97.WorldOfManga.exception.MangaNotFoundException;
 import com.NowakArtur97.WorldOfManga.model.Manga;
+import com.NowakArtur97.WorldOfManga.model.MangaInUserList;
 import com.NowakArtur97.WorldOfManga.model.MangaRating;
 import com.NowakArtur97.WorldOfManga.model.Role;
 import com.NowakArtur97.WorldOfManga.model.User;
 import com.NowakArtur97.WorldOfManga.repository.UserRepository;
+import com.NowakArtur97.WorldOfManga.service.api.MangaInUserListService;
 import com.NowakArtur97.WorldOfManga.service.api.MangaRatingService;
 import com.NowakArtur97.WorldOfManga.service.api.MangaService;
 import com.NowakArtur97.WorldOfManga.service.api.UserService;
@@ -36,6 +39,8 @@ public class UserServiceImpl implements UserService {
 	private final MangaService mangaService;
 
 	private final MangaRatingService mangaRatingService;
+
+	private final MangaInUserListService mangaInUserListService;
 
 	@Override
 	public Optional<User> findByUsername(String username) {
@@ -148,5 +153,31 @@ public class UserServiceImpl implements UserService {
 		}
 
 		return manga;
+	}
+
+	@Override
+	@Transactional
+	public MangaInUserList addToList(Long mangaId, int status) throws MangaNotFoundException {
+
+		Manga manga = mangaService.findById(mangaId);
+
+		User user = loadLoggedInUsername();
+
+		MangaInUserListStatus mangaStatus = MangaInUserListStatus.values()[status];
+
+		Optional<MangaInUserList> mangaInListOptional = mangaInUserListService.findByUserAndManga(user, manga);
+
+		MangaInUserList mangaInUserList = null;
+
+		if (mangaInListOptional.isPresent()) {
+
+			mangaInUserList = mangaInListOptional.get();
+			mangaInUserList.setStatus(mangaStatus);
+		} else {
+
+			user.addMangaToList(manga, mangaStatus);
+		}
+
+		return mangaInUserList;
 	}
 }

@@ -16,6 +16,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.NowakArtur97.WorldOfManga.enums.MangaInUserListStatus;
+
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -67,6 +69,11 @@ public class User {
 	@EqualsAndHashCode.Exclude
 	private final Set<MangaRating> mangasRatings = new HashSet<>();
 
+	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+	@ToString.Exclude
+	@EqualsAndHashCode.Exclude
+	private final Set<MangaInUserList> mangaList = new HashSet<>();
+
 	@ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST,
 			CascadeType.REFRESH })
 	@JoinTable(name = "favourite_manga", schema = "world_of_manga", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "manga_id"))
@@ -103,5 +110,15 @@ public class User {
 		manga.getUserWithMangaInFavourites().remove(this);
 
 		return manga;
+	}
+
+	public MangaInUserList addMangaToList(Manga manga, MangaInUserListStatus status) {
+
+		MangaInUserList mangaInList = new MangaInUserList(manga, this, status);
+
+		this.getMangaList().add(mangaInList);
+		manga.getUsersWithMangaInList().add(mangaInList);
+
+		return mangaInList;
 	}
 }

@@ -70,7 +70,12 @@ public class Manga {
 	@ToString.Exclude
 	@EqualsAndHashCode.Exclude
 	private final Set<User> userWithMangaInFavourites = new HashSet<>();
-	
+
+	@OneToMany(mappedBy = "manga", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+	@ToString.Exclude
+	@EqualsAndHashCode.Exclude
+	private final Set<MangaInUserList> usersWithMangaInList = new HashSet<>();
+
 	@PostLoad
 	public void countRating() {
 
