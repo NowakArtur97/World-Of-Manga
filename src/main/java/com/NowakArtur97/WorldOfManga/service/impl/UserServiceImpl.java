@@ -175,7 +175,7 @@ public class UserServiceImpl implements UserService {
 			mangaInUserList.setStatus(mangaStatus);
 		} else {
 
-			user.addMangaToList(manga, mangaStatus);
+			mangaInUserList = user.addMangaToList(manga, mangaStatus);
 		}
 
 		return mangaInUserList;
