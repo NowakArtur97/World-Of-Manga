@@ -79,8 +79,17 @@
   padding-bottom: 10px;
 }
 
+.manga_card__list-options {
+  height: 60px;
+  display: flex;
+  flex: 1 0 10px;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
 .manga_card__icon {
-  width: 15px;
+  width: 18px;
   height: 100%;
 }
 
