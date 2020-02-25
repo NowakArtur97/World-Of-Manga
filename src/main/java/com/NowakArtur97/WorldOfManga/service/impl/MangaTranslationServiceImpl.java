@@ -55,5 +55,5 @@ public class MangaTranslationServiceImpl implements MangaTranslationService {
 		mangaTranslations.add(mangaTranslationPl);
 
 		return mangaTranslations;
-	};
+	}
 }
