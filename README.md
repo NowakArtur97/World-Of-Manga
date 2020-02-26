@@ -49,6 +49,7 @@ Available to users with "User" or "Admin" role:
 - Rate manga
 - Add manga to favorites
 - Add manga to list based on status
+- Browse manga by status
  
 Available to users with only "Admin" role:
 - Add new author
@@ -56,7 +57,6 @@ Available to users with only "Admin" role:
 
 ## To Do
 - Editing and deleting manga and authors
-- Browsing user's manga list by status
 
 ## Status
 Project is: in progess
