@@ -12,7 +12,9 @@ import static org.mockito.Mockito.when;
 import java.io.IOException;
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -478,7 +480,7 @@ public class UserServiceImplTest {
 			MangaInUserListStatus statusExpected = MangaInUserListStatus.CURRENTLY_READING;
 
 			Optional<MangaInUserList> mangaInUserListExpected = Optional.empty();
-			
+
 			SecurityContextHolder.setContext(securityContext);
 			when(mangaService.findById(mangaId)).thenReturn(mangaExpected);
 			when(mangaInUserListService.findByUserAndManga(userExpected, mangaExpected))
@@ -562,6 +564,100 @@ public class UserServiceImplTest {
 									+ ", but was: " + mangaInUserListActual.getStatus()),
 					() -> verify(mangaService, times(1)).findById(mangaId),
 					() -> verify(mangaInUserListService, times(1)).findByUserAndManga(userExpected, mangaExpected),
+					() -> verify(userRepository, times(1)).findByUsername(username),
+					() -> verify(securityContext, times(1)).getAuthentication(),
+					() -> verify(authentication, times(1)).getPrincipal());
+		}
+
+		@Test
+		@DisplayName("when get users manga list by status")
+		public void when_get_users_manga_list_by_status_should_return_specific_manga_list()
+				throws IOException, MangaNotFoundException {
+
+			MangaTranslation mangaTranslationEnExpected = MangaTranslation.builder().title("English title")
+					.description("English description").build();
+			MangaTranslation mangaTranslationPlExpected = MangaTranslation.builder().title("Polish title")
+					.description("Polish description").build();
+
+			Author authorExpected = new Author("FirsName LastName");
+
+			MockMultipartFile image = new MockMultipartFile("image.jpg", "file bytes".getBytes());
+
+			Manga mangaExpected = new Manga();
+			mangaExpected.addAuthor(authorExpected);
+			mangaExpected.addTranslation(mangaTranslationEnExpected);
+			mangaExpected.addTranslation(mangaTranslationPlExpected);
+			mangaExpected.setImage(image.getBytes());
+
+			MangaTranslation mangaTranslationEnExpected2 = MangaTranslation.builder().title("English title")
+					.description("English description").build();
+			MangaTranslation mangaTranslationPlExpected2 = MangaTranslation.builder().title("Polish title")
+					.description("Polish description").build();
+
+			Author authorExpected2 = new Author("FirsName LastName");
+
+			MockMultipartFile image2 = new MockMultipartFile("image2.jpg", "file bytes".getBytes());
+
+			Manga mangaExpected2 = new Manga();
+			mangaExpected2.addAuthor(authorExpected2);
+			mangaExpected2.addTranslation(mangaTranslationEnExpected2);
+			mangaExpected2.addTranslation(mangaTranslationPlExpected2);
+			mangaExpected2.setImage(image2.getBytes());
+
+			Set<Manga> mangaListExpected = new HashSet<>();
+			mangaListExpected.add(mangaExpected);
+			mangaListExpected.add(mangaExpected2);
+
+			String username = "principal";
+
+			User userExpected = User.builder().username(username).firstName("first name").lastName("last name")
+					.password("user").email("user@email.com").isEnabled(true).build();
+
+			MangaInUserListStatus statusExpected = MangaInUserListStatus.CURRENTLY_READING;
+			MangaInUserListStatus statusNotExpected2 = MangaInUserListStatus.COMPLETED;
+
+			userExpected.addMangaToList(mangaExpected, statusExpected);
+			userExpected.addMangaToList(mangaExpected2, statusNotExpected2);
+
+			int statusIntExpected = 0;
+
+			SecurityContextHolder.setContext(securityContext);
+			when(securityContext.getAuthentication()).thenReturn(authentication);
+			when(authentication.getPrincipal()).thenReturn(principal);
+			when(userRepository.findByUsername(username)).thenReturn(Optional.of(userExpected));
+
+			Set<Manga> mangaListActual = userService.getUsersMangaListByStatus(statusIntExpected);
+
+			assertAll(
+					() -> assertEquals(1, mangaListActual.size(),
+							() -> "should return manga list with one item, but was: " + mangaListActual.size()),
+					() -> verify(userRepository, times(1)).findByUsername(username),
+					() -> verify(securityContext, times(1)).getAuthentication(),
+					() -> verify(authentication, times(1)).getPrincipal());
+		}
+
+		@Test
+		@DisplayName("when get users manga list by status when user have empty list")
+		public void when_get_users_manga_list_by_status_when_user_have_empty_list_should_return_empty_list()
+				throws IOException, MangaNotFoundException {
+
+			String username = "principal";
+
+			User userExpected = User.builder().username(username).firstName("first name").lastName("last name")
+					.password("user").email("user@email.com").isEnabled(true).build();
+
+			int statusIntExpected = 0;
+
+			SecurityContextHolder.setContext(securityContext);
+			when(securityContext.getAuthentication()).thenReturn(authentication);
+			when(authentication.getPrincipal()).thenReturn(principal);
+			when(userRepository.findByUsername(username)).thenReturn(Optional.of(userExpected));
+
+			Set<Manga> mangaListActual = userService.getUsersMangaListByStatus(statusIntExpected);
+
+			assertAll(
+					() -> assertTrue(mangaListActual.isEmpty(),
+							() -> "should return empty manga list, but was: " + mangaListActual.size()),
 					() -> verify(userRepository, times(1)).findByUsername(username),
 					() -> verify(securityContext, times(1)).getAuthentication(),
 					() -> verify(authentication, times(1)).getPrincipal());

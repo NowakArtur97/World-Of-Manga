@@ -45,7 +45,7 @@ public class MangaInUserListController {
 
 		Locale locale = cookieLocaleResolver.resolveLocale(request);
 
-		Set<Manga> mangaList = userService.getUsersMangaByStatus(status);
+		Set<Manga> mangaList = userService.getUsersMangaListByStatus(status);
 
 		theModel.addAttribute("mangas", mangaList);
 

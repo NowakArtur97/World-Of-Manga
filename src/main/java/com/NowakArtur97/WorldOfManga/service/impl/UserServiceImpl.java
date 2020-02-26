@@ -184,7 +184,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public Set<Manga> getUsersMangaByStatus(int status) {
+	public Set<Manga> getUsersMangaListByStatus(int status) {
 
 		Set<Manga> mangaList = new HashSet<>();
 

@@ -105,11 +105,11 @@ public class MangaInUserListControllerTest {
 		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.get("/auth/sortMangaList/{id}", status)
 				.locale(locale).flashAttr("mangas", mangasExpected).flashAttr("locale", locale).header("Referer", "/");
 
-		when(userService.getUsersMangaByStatus(status)).thenReturn(mangasExpected);
+		when(userService.getUsersMangaListByStatus(status)).thenReturn(mangasExpected);
 
 		assertAll(
 				() -> mockMvc.perform(mockRequest).andExpect(status().isOk()).andExpect(view().name("views/manga-list"))
 						.andExpect(model().attribute("mangas", mangasExpected)),
-				() -> verify(userService, times(1)).getUsersMangaByStatus(status));
+				() -> verify(userService, times(1)).getUsersMangaListByStatus(status));
 	}
 }

@@ -28,7 +28,7 @@ public interface UserService extends UserDetailsService {
 
 	MangaInUserList addToList(Long mangaId, int status) throws MangaNotFoundException;
 	
-	Set<Manga> getUsersMangaByStatus(int status);
+	Set<Manga> getUsersMangaListByStatus(int status);
 	
 	User loadLoggedInUsername() throws UsernameNotFoundException;
 }
