@@ -48,6 +48,8 @@ public class MangaFavouriteUIEnTest extends MangaFavouriteUITest {
 		mangaList.chooseFirstManga();
 
 		mangaList.addOrRemoveFirstMangaFromFavourite();
+		
+		mangaList.chooseFirstManga();
 
 		mangaList.addOrRemoveFirstMangaFromFavourite();
 

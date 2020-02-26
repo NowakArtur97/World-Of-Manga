@@ -21,7 +21,7 @@ public class MangaInUserListController {
 	private final UserService userService;
 
 	@GetMapping(path = "/addToList")
-	public String rateManga(HttpServletRequest request, @RequestParam("id") Long mangaId,
+	public String addToList(HttpServletRequest request, @RequestParam("id") Long mangaId,
 			@RequestParam("status") int status) throws MangaNotFoundException {
 
 		userService.addToList(mangaId, status);

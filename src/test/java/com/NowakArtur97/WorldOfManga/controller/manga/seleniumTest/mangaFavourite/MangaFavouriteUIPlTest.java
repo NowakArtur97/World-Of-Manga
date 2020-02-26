@@ -49,6 +49,8 @@ public class MangaFavouriteUIPlTest extends MangaFavouriteUITest {
 
 		mangaList.addOrRemoveFirstMangaFromFavourite();
 
+		mangaList.chooseFirstManga();
+		
 		mangaList.addOrRemoveFirstMangaFromFavourite();
 
 		assertAll(() -> assertEquals(String.valueOf(0), mangaList.getFirstMangaFavouritesCounter(),
