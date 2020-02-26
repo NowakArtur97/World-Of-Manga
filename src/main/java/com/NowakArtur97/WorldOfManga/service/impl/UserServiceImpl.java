@@ -2,8 +2,10 @@ package com.NowakArtur97.WorldOfManga.service.impl;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
@@ -179,5 +181,46 @@ public class UserServiceImpl implements UserService {
 		}
 
 		return mangaInUserList;
+	}
+
+	@Override
+	public Set<Manga> getUsersMangaByStatus(int status) {
+
+		Set<Manga> mangaList = new HashSet<>();
+
+		User user = loadLoggedInUsername();
+
+		if (status >= MangaInUserListStatus.values().length) {
+
+			if (status == 5) {
+
+				mangaList = user.getFavouriteMangas();
+			} else {
+
+				mangaList = user.getMangasRatings().stream().map(MangaRating::getManga).collect(Collectors.toSet());
+			}
+		} else {
+
+			mangaList = getListByStatus(status, user);
+		}
+
+		return mangaList;
+	}
+
+	private Set<Manga> getListByStatus(int statusId, User user) {
+
+		MangaInUserListStatus status = MangaInUserListStatus.values()[statusId];
+
+		Set<Manga> mangaList = new HashSet<>();
+
+		mangaList = mapToMangaSet(status, user);
+
+		return mangaList;
+	}
+
+	private Set<Manga> mapToMangaSet(MangaInUserListStatus status, User user) {
+
+		return user.getMangaList().stream().filter(manga -> manga.getStatus().equals(status))
+				.collect(Collectors.toSet()).stream().map(MangaInUserList::getManga).collect(Collectors.toSet());
 	}
 }

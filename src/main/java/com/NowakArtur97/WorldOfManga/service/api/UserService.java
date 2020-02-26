@@ -1,6 +1,7 @@
 package com.NowakArtur97.WorldOfManga.service.api;
 
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -26,6 +27,8 @@ public interface UserService extends UserDetailsService {
 	Manga addOrRemoveFromFavourites(Long mangaId) throws MangaNotFoundException;
 
 	MangaInUserList addToList(Long mangaId, int status) throws MangaNotFoundException;
+	
+	Set<Manga> getUsersMangaByStatus(int status);
 	
 	User loadLoggedInUsername() throws UsernameNotFoundException;
 }
