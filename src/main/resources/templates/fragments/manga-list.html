@@ -26,15 +26,15 @@
                     th:if="${#strings.equals(translation.language.locale, locale)}" th:text="${translation.description}"></span>
             </div>
             <div class="manga_card__list-options">
-                 <a th:href="@{'/auth/addToList?id=' + ${manga.id}} + '&status=' + 0"><image class="manga_card__icon manga_card__icon--big" th:src="@{'/images/icons/reading.png'}" title="Currently Reading"></image>
+                 <a th:href="@{'/auth/addToList?id=' + ${manga.id}} + '&status=' + 0"><image class="manga_card__icon manga_card__icon--big manga_card__icon--status" th:src="@{'/images/icons/reading.png'}" title="Currently Reading"></image>
                     </span></a>
-                 <a th:href="@{'/auth/addToList?id=' + ${manga.id}} + '&status=' + 1"><image class="manga_card__icon manga_card__icon--big" th:src="@{'/images/icons/completed.png'}" title="Completed"></image>
+                 <a th:href="@{'/auth/addToList?id=' + ${manga.id}} + '&status=' + 1"><image class="manga_card__icon manga_card__icon--big manga_card__icon--status" th:src="@{'/images/icons/completed.png'}" title="Completed"></image>
                     </span></a>
-                 <a th:href="@{'/auth/addToList?id=' + ${manga.id}} + '&status=' + 2"><image class="manga_card__icon manga_card__icon--big" th:src="@{'/images/icons/plan-to-read.png'}" title="Plan to Read"></image>
+                 <a th:href="@{'/auth/addToList?id=' + ${manga.id}} + '&status=' + 2"><image class="manga_card__icon manga_card__icon--big manga_card__icon--status" th:src="@{'/images/icons/plan-to-read.png'}" title="Plan to Read"></image>
                     </span></a>
-                 <a th:href="@{'/auth/addToList?id=' + ${manga.id}} + '&status=' + 3"><image class="manga_card__icon manga_card__icon--big" th:src="@{'/images/icons/on-hold.png'}" title="On Hold"></image>
+                 <a th:href="@{'/auth/addToList?id=' + ${manga.id}} + '&status=' + 3"><image class="manga_card__icon manga_card__icon--big manga_card__icon--status" th:src="@{'/images/icons/on-hold.png'}" title="On Hold"></image>
                     </span></a>
-                 <a th:href="@{'/auth/addToList?id=' + ${manga.id}} + '&status=' + 4"><image class="manga_card__icon manga_card__icon--big" th:src="@{'/images/icons/dropped.png'}" title="Dropped"></image>
+                 <a th:href="@{'/auth/addToList?id=' + ${manga.id}} + '&status=' + 4"><image class="manga_card__icon manga_card__icon--big manga_card__icon--status" th:src="@{'/images/icons/dropped.png'}" title="Dropped"></image>
                     </span></a>
             </div>
             <div class="manga_card__stats">

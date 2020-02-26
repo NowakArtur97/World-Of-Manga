@@ -20,6 +20,7 @@ public class MangaList extends SeleniumPageObjectModel {
 	private static final String MANGA_RATING_CLASS = "manga_card_rating";
 	private static final String MANGA_FAVOURITE_COUNTER_CLASS = "manga_card__likes";
 	private static final String MANGA_FAVOURITE_CLASS = "manga_card__icon--heart";
+	private static final String MANGA_STATUS_CLASS = "manga_card__icon--status";
 	private static final String MANGA_LIST_LINK = "//a[@href='/']";
 
 	@FindBy(className = MANGA_LIST_CLASS)
@@ -40,6 +41,9 @@ public class MangaList extends SeleniumPageObjectModel {
 	@FindBy(className = MANGA_FAVOURITE_COUNTER_CLASS)
 	private WebElement mangaFavouritesCounter;
 
+	@FindBy(className = MANGA_STATUS_CLASS)
+	private List<WebElement> mangaStatuses;
+	
 	@FindBy(xpath = MANGA_LIST_LINK)
 	private WebElement mangaListLink;
 
@@ -97,5 +101,10 @@ public class MangaList extends SeleniumPageObjectModel {
 	public String getFirstMangaFavouritesCounter() {
 
 		return mangaFavouritesCounter.getText();
+	}
+
+	public void addFirstMangaToList(int mangaStatus) {
+
+		mangaStatuses.get(mangaStatus).click();
 	}
 }
