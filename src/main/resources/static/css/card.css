@@ -51,6 +51,9 @@
 
 .manga_card__title {
   font-size: 1.4rem;
+  display: block;
+  word-wrap: break-word;
+  width: 250px;
 }
 
 .manga_card__description {
@@ -71,6 +74,7 @@
 }
 
 .manga_card__stats {
+  padding: 5px;
   height: 30px;
   display: flex;
   align-items: center;

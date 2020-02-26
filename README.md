@@ -10,7 +10,7 @@
 * [Screenshots](#screenshots)
 
 ## General info
-An application for manga fans to help manage their list of read titles.An application for manga fans to help manage their list of read titles.
+An application for manga fans to help manage their list of read titles. An application for manga fans to help manage their list of read titles.
 
 ## Demo
 The application demo is available on the Heroku platform: https://world-of-manga.herokuapp.com/
