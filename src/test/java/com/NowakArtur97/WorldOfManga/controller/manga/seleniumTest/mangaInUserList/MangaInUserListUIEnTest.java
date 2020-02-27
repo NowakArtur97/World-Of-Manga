@@ -1,6 +1,7 @@
 package com.NowakArtur97.WorldOfManga.controller.manga.seleniumTest.mangaInUserList;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.DisplayName;
@@ -19,6 +20,141 @@ import com.NowakArtur97.WorldOfManga.testUtil.extension.ScreenshotWatcher;
 @Tag("MangaInUserListUIEn_Tests")
 @DirtiesContext
 public class MangaInUserListUIEnTest extends MangaInUserListUITest {
+
+	@Test
+	@DisplayName("when add to currently reading list")
+	public void when_add_to_currently_reading_list_should_add_to_list() {
+
+		loginPage.loadLoginView(LanguageVersion.ENG);
+
+		loginPage.fillMandatoryLoginFields("user", "user");
+
+		mangaList.loadMangaList(LanguageVersion.ENG);
+
+		mangaList.chooseFirstManga();
+
+		int mangaStatus = 0;
+
+		mangaList.addFirstMangaToList(mangaStatus);
+
+		mangaList.clickMangaUserListLink();
+
+		mangaList.choseCurrentlyReadingManga();
+
+		assertAll(
+				() -> assertTrue(mangaList.getLastMangaCardText().contains("Tokyo Ghoul"),
+						() -> "should show new manga in currently reading list"),
+				() -> assertTrue(mangaList.countMangaCards() >= 1, () -> "should show at least one manga"),
+				() -> assertNotNull(mangaList.getMangaListText(), () -> "should load manga list fragment text"));
+	}
+
+	@Test
+	@DisplayName("when add to completed list")
+	public void when_add_to_completed_list_should_add_to_list() {
+
+		loginPage.loadLoginView(LanguageVersion.ENG);
+
+		loginPage.fillMandatoryLoginFields("user", "user");
+
+		mangaList.loadMangaList(LanguageVersion.ENG);
+
+		mangaList.chooseFirstManga();
+
+		int mangaStatus = 1;
+
+		mangaList.addFirstMangaToList(mangaStatus);
+
+		mangaList.clickMangaUserListLink();
+
+		mangaList.choseCompletedManga();
+
+		assertAll(
+				() -> assertTrue(mangaList.getLastMangaCardText().contains("Tokyo Ghoul"),
+						() -> "should show new manga in completed list"),
+				() -> assertTrue(mangaList.countMangaCards() >= 1, () -> "should show at least one manga"),
+				() -> assertNotNull(mangaList.getMangaListText(), () -> "should load manga list fragment text"));
+	}
+
+	@Test
+	@DisplayName("when add to plan to read list")
+	public void when_add_to_plan_to_read_list_should_add_to_list() {
+
+		loginPage.loadLoginView(LanguageVersion.ENG);
+
+		loginPage.fillMandatoryLoginFields("user", "user");
+
+		mangaList.loadMangaList(LanguageVersion.ENG);
+
+		mangaList.chooseFirstManga();
+
+		int mangaStatus = 2;
+
+		mangaList.addFirstMangaToList(mangaStatus);
+
+		mangaList.clickMangaUserListLink();
+
+		mangaList.chosePlanToReadManga();
+
+		assertAll(
+				() -> assertTrue(mangaList.getLastMangaCardText().contains("Tokyo Ghoul"),
+						() -> "should show new manga in plan to read list"),
+				() -> assertTrue(mangaList.countMangaCards() >= 1, () -> "should show at least one manga"),
+				() -> assertNotNull(mangaList.getMangaListText(), () -> "should load manga list fragment text"));
+	}
+
+	@Test
+	@DisplayName("when add to on hold list")
+	public void when_add_to_on_hold_list_should_add_to_list() {
+
+		loginPage.loadLoginView(LanguageVersion.ENG);
+
+		loginPage.fillMandatoryLoginFields("user", "user");
+
+		mangaList.loadMangaList(LanguageVersion.ENG);
+
+		mangaList.chooseFirstManga();
+
+		int mangaStatus = 3;
+
+		mangaList.addFirstMangaToList(mangaStatus);
+
+		mangaList.clickMangaUserListLink();
+
+		mangaList.choseOnHoldManga();
+
+		assertAll(
+				() -> assertTrue(mangaList.getLastMangaCardText().contains("Tokyo Ghoul"),
+						() -> "should show new manga in on hold list"),
+				() -> assertTrue(mangaList.countMangaCards() >= 1, () -> "should show at least one manga"),
+				() -> assertNotNull(mangaList.getMangaListText(), () -> "should load manga list fragment text"));
+	}
+
+	@Test
+	@DisplayName("when add to dropped list")
+	public void when_add_to_dropped_list_should_add_to_list() {
+
+		loginPage.loadLoginView(LanguageVersion.ENG);
+
+		loginPage.fillMandatoryLoginFields("user", "user");
+
+		mangaList.loadMangaList(LanguageVersion.ENG);
+
+		mangaList.chooseFirstManga();
+
+		int mangaStatus = 4;
+
+		mangaList.addFirstMangaToList(mangaStatus);
+
+		mangaList.clickMangaUserListLink();
+
+		mangaList.choseDroppedManga();
+
+		assertAll(
+				() -> assertTrue(mangaList.getLastMangaCardText().contains("Tokyo Ghoul"),
+						() -> "should show new manga in dropped list"),
+				() -> assertTrue(mangaList.countMangaCards() >= 1, () -> "should show at least one manga"),
+				() -> assertNotNull(mangaList.getMangaListText(), () -> "should load manga list fragment text"));
+	}
 
 	@Test
 	@DisplayName("when user not logged adding manga to list")

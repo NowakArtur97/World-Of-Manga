@@ -2,13 +2,13 @@ package com.NowakArtur97.WorldOfManga.controller.manga.seleniumTest.mangaFavouri
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.condition.DisabledOnOs;
-import org.junit.jupiter.api.condition.OS;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
@@ -21,7 +21,6 @@ import com.NowakArtur97.WorldOfManga.testUtil.extension.ScreenshotWatcher;
 @DisplayName("Manga Favourite UI En Tests")
 @Tag("MangaFavouriteUIEn_Tests")
 @DirtiesContext
-@DisabledOnOs(OS.LINUX)
 public class MangaFavouriteUIEnTest extends MangaFavouriteUITest {
 
 	@Test
@@ -41,6 +40,29 @@ public class MangaFavouriteUIEnTest extends MangaFavouriteUITest {
 	}
 
 	@Test
+	@DisplayName("when add manga for the first time")
+	public void when_add_manga_for_the_first_time_should_show_manga_in_favourites() {
+
+		loginPage.loadLoginView(LanguageVersion.ENG);
+
+		loginPage.fillMandatoryLoginFields("user", "user");
+
+		mangaList.chooseFirstManga();
+
+		mangaList.addOrRemoveFirstMangaFromFavourite();
+
+		mangaList.clickMangaUserListLink();
+
+		mangaList.choseFavouritesManga();
+
+		assertAll(
+				() -> assertTrue(mangaList.getLastMangaCardText().contains("Tokyo Ghoul"),
+						() -> "should show new manga in favourites"),
+				() -> assertTrue(mangaList.countMangaCards() >= 1, () -> "should show at least one manga"),
+				() -> assertNotNull(mangaList.getMangaListText(), () -> "should load manga list fragment text"));
+	}
+
+	@Test
 	@DisplayName("when remove manga from favourites")
 	public void when_remove_manga_from_favourites_should_remove_manga_from_favourites() {
 
@@ -51,13 +73,40 @@ public class MangaFavouriteUIEnTest extends MangaFavouriteUITest {
 		mangaList.chooseFirstManga();
 
 		mangaList.addOrRemoveFirstMangaFromFavourite();
-		
+
 		mangaList.chooseFirstManga();
 
 		mangaList.addOrRemoveFirstMangaFromFavourite();
 
 		assertAll(() -> assertEquals(String.valueOf(0), mangaList.getFirstMangaFavouritesCounter(),
 				() -> "should show manga with zero hearts"));
+	}
+
+	@Test
+	@DisplayName("when remove manga from favourites")
+	public void when_remove_manga_from_favourites_should_not_show_manga_in_list() {
+
+		loginPage.loadLoginView(LanguageVersion.ENG);
+
+		loginPage.fillMandatoryLoginFields("user", "user");
+
+		mangaList.chooseFirstManga();
+
+		mangaList.addOrRemoveFirstMangaFromFavourite();
+
+		mangaList.chooseFirstManga();
+
+		mangaList.addOrRemoveFirstMangaFromFavourite();
+
+		mangaList.clickMangaUserListLink();
+
+		mangaList.choseFavouritesManga();
+
+		assertAll(
+				() -> assertFalse(mangaList.getLastMangaCardText().contains("Tokyo Ghoul"),
+						() -> "should not show manga in favourites"),
+				() -> assertEquals(0, mangaList.countMangaCards(), () -> "should not show any manga"),
+				() -> assertNotNull(mangaList.getMangaListText(), () -> "should load manga list fragment text"));
 	}
 
 	@Test

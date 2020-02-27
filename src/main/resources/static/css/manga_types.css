@@ -7,17 +7,21 @@
   margin: 3rem;
 }
 
-.manga_list_types_type {
+.manga_list_types__type {
   width: 90px;
   height: 100%;
   transition: 0.3s ease;
 }
 
-.manga_list_types_type:hover {
+.manga_list_types__type:hover {
   transform: scale(2);
 }
 
 .manga_list_types_type--selected {
   width: 180px;
   height: 100%;
+}
+
+.manga_list_types_type--selected:hover {
+  transform: none;
 }

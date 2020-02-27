@@ -7,8 +7,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.condition.DisabledOnOs;
-import org.junit.jupiter.api.condition.OS;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
@@ -21,7 +19,6 @@ import com.NowakArtur97.WorldOfManga.testUtil.extension.ScreenshotWatcher;
 @DisplayName("Manga Rating UI En Tests")
 @Tag("MangaRatingUIEn_Tests")
 @DirtiesContext
-@DisabledOnOs(OS.LINUX)
 public class MangaRatingUIEnTest extends MangaRatingUITest {
 
 	@Test
@@ -40,6 +37,28 @@ public class MangaRatingUIEnTest extends MangaRatingUITest {
 
 		assertAll(() -> assertTrue(mangaList.getFirstMangaRating().contains(String.valueOf(mangaRating)),
 				() -> "should show manga rating"));
+	}
+
+	@Test
+	@DisplayName("when rate manga")
+	public void when_rate_manga_should_show_rating_on_user_manga_list() {
+
+		loginPage.loadLoginView(LanguageVersion.ENG);
+
+		loginPage.fillMandatoryLoginFields("user", "user");
+
+		mangaList.chooseFirstManga();
+
+		int mangaRating = 5;
+
+		mangaList.rateFirstManga(mangaRating);
+
+		mangaList.clickMangaUserListLink();
+
+		mangaList.choseRatedManga();
+
+		assertAll(() -> assertTrue(mangaList.getFirstMangaRating().contains(String.valueOf(mangaRating)),
+				() -> "should show manga rating on manga list"));
 	}
 
 	@Test

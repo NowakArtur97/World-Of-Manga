@@ -21,7 +21,9 @@ public class MangaList extends SeleniumPageObjectModel {
 	private static final String MANGA_FAVOURITE_COUNTER_CLASS = "manga_card__likes";
 	private static final String MANGA_FAVOURITE_CLASS = "manga_card__icon--heart";
 	private static final String MANGA_STATUS_CLASS = "manga_card__icon--status";
+	private static final String MANGA_LIST_TYPE_CLASS = "manga_list_types__type";
 	private static final String MANGA_LIST_LINK = "//a[@href='/']";
+	private static final String MANGA_WORLD_LINK = "//a[@href='/auth/sortMangaList/5']";
 
 	@FindBy(className = MANGA_LIST_CLASS)
 	private WebElement mangaList;
@@ -43,9 +45,15 @@ public class MangaList extends SeleniumPageObjectModel {
 
 	@FindBy(className = MANGA_STATUS_CLASS)
 	private List<WebElement> mangaStatuses;
-	
+
+	@FindBy(className = MANGA_LIST_TYPE_CLASS)
+	private List<WebElement> mangaListType;
+
 	@FindBy(xpath = MANGA_LIST_LINK)
 	private WebElement mangaListLink;
+
+	@FindBy(xpath = MANGA_WORLD_LINK)
+	private WebElement mangaUserListLink;
 
 	public MangaList(WebDriver webDriver) {
 
@@ -69,13 +77,22 @@ public class MangaList extends SeleniumPageObjectModel {
 
 	public String getLastMangaCardText() {
 
-		return mangaCards.get(mangaCards.size() - 1).getText();
+		if (mangaCards.size() > 0) {
+			return mangaCards.get(mangaCards.size() - 1).getText();
+		} else {
+			return "";
+		}
 	}
 
-	public void clickMangaListButton() {
+	public void clickMangaListLink() {
+
+		mangaListLink.click();
+	}
+
+	public void clickMangaUserListLink() {
 
 		JavascriptExecutor executor = (JavascriptExecutor) webDriver;
-		executor.executeScript("arguments[0].click();", mangaListLink);
+		executor.executeScript("arguments[0].click();", mangaUserListLink);
 	}
 
 	public void chooseFirstManga() {
@@ -85,7 +102,8 @@ public class MangaList extends SeleniumPageObjectModel {
 
 	public void rateFirstManga(int rating) {
 
-		mangaStars.get(rating - 1).click();
+		JavascriptExecutor executor = (JavascriptExecutor) webDriver;
+		executor.executeScript("arguments[0].click();", mangaStars.get(rating - 1));
 	}
 
 	public String getFirstMangaRating() {
@@ -95,7 +113,8 @@ public class MangaList extends SeleniumPageObjectModel {
 
 	public void addOrRemoveFirstMangaFromFavourite() {
 
-		mangaFavouriteLink.get(0).click();
+		JavascriptExecutor executor = (JavascriptExecutor) webDriver;
+		executor.executeScript("arguments[0].click();", mangaFavouriteLink.get(0));
 	}
 
 	public String getFirstMangaFavouritesCounter() {
@@ -106,5 +125,47 @@ public class MangaList extends SeleniumPageObjectModel {
 	public void addFirstMangaToList(int mangaStatus) {
 
 		mangaStatuses.get(mangaStatus).click();
+	}
+
+	public void choseFavouritesManga() {
+
+		JavascriptExecutor executor = (JavascriptExecutor) webDriver;
+		executor.executeScript("arguments[0].click();", mangaListType.get(0));
+	}
+
+	public void choseRatedManga() {
+
+		JavascriptExecutor executor = (JavascriptExecutor) webDriver;
+		executor.executeScript("arguments[0].click();", mangaListType.get(1));
+	}
+
+	public void choseCurrentlyReadingManga() {
+
+		JavascriptExecutor executor = (JavascriptExecutor) webDriver;
+		executor.executeScript("arguments[0].click();", mangaListType.get(2));
+	}
+
+	public void choseCompletedManga() {
+
+		JavascriptExecutor executor = (JavascriptExecutor) webDriver;
+		executor.executeScript("arguments[0].click();", mangaListType.get(3));
+	}
+
+	public void chosePlanToReadManga() {
+
+		JavascriptExecutor executor = (JavascriptExecutor) webDriver;
+		executor.executeScript("arguments[0].click();", mangaListType.get(4));
+	}
+
+	public void choseOnHoldManga() {
+
+		JavascriptExecutor executor = (JavascriptExecutor) webDriver;
+		executor.executeScript("arguments[0].click();", mangaListType.get(5));
+	}
+
+	public void choseDroppedManga() {
+
+		JavascriptExecutor executor = (JavascriptExecutor) webDriver;
+		executor.executeScript("arguments[0].click();", mangaListType.get(6));
 	}
 }

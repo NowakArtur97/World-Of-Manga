@@ -42,7 +42,7 @@ public class MangaListUIEnTest extends MangaListUITest {
 		mangaFormPage.fillMandatoryMangaFormFields(englishTitle, "English description", polishTitle,
 				"Polish description", selectAuthor, addImage);
 
-		mangaList.clickMangaListButton();
+		mangaList.clickMangaListLink();
 
 		assertAll(
 				() -> assertTrue(mangaList.getLastMangaCardText().contains(englishTitle),

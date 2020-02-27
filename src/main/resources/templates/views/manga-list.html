@@ -13,25 +13,25 @@
     <div layout:fragment="content">
         <div class="manga_list_types">
             <a th:href="@{'/auth/sortMangaList/' + 5}">
-                <image th:classappend="${#strings.contains(#httpServletRequest.requestURI, '5')} ? manga_list_types_type--selected : manga_list_types_type" th:src="@{'/images/icons/heart.png'}" title="Favourites">
+                <image class="manga_list_types__type" th:classappend="${#strings.contains(#httpServletRequest.requestURI, '5')} ? manga_list_types_type--selected : ''" th:src="@{'/images/icons/heart.png'}" title="Favourites">
             </a>
             <a th:href="@{'/auth/sortMangaList/' + 6}">
-                <image th:classappend="${#strings.contains(#httpServletRequest.requestURI, '6')} ? manga_list_types_type--selected : manga_list_types_type" th:src="@{'/images/icons/star.png'}" title="Rated">
+                <image class="manga_list_types__type" th:classappend="${#strings.contains(#httpServletRequest.requestURI, '6')} ? manga_list_types_type--selected : ''" th:src="@{'/images/icons/star.png'}" title="Rated">
             </a>
             <a th:href="@{'/auth/sortMangaList/' + 0}">
-                <image th:classappend="${#strings.contains(#httpServletRequest.requestURI, '0')} ? manga_list_types_type--selected : manga_list_types_type" th:src="@{'/images/icons/reading.png'}" title="Currently Reading">
+                <image class="manga_list_types__type" th:classappend="${#strings.contains(#httpServletRequest.requestURI, '0')} ? manga_list_types_type--selected : ''" th:src="@{'/images/icons/reading.png'}" title="Currently Reading">
             </a>
             <a th:href="@{'/auth/sortMangaList/' + 1}">
-                <image th:classappend="${#strings.contains(#httpServletRequest.requestURI, '1')} ? manga_list_types_type--selected : manga_list_types_type" th:src="@{'/images/icons/completed.png'}" title="Completed">
+                <image class="manga_list_types__type" th:classappend="${#strings.contains(#httpServletRequest.requestURI, '1')} ? manga_list_types_type--selected : ''" th:src="@{'/images/icons/completed.png'}" title="Completed">
             </a>
             <a th:href="@{'/auth/sortMangaList/' + 2}">
-                <image th:classappend="${#strings.contains(#httpServletRequest.requestURI, '2')} ? manga_list_types_type--selected : manga_list_types_type" th:src="@{'/images/icons/plan-to-read.png'}" title="Plan to Read">
+                <image class="manga_list_types__type" th:classappend="${#strings.contains(#httpServletRequest.requestURI, '2')} ? manga_list_types_type--selected : ''" th:src="@{'/images/icons/plan-to-read.png'}" title="Plan to Read">
             </a>
             <a th:href="@{'/auth/sortMangaList/' + 3}">
-                <image th:classappend="${#strings.contains(#httpServletRequest.requestURI, '3')} ? manga_list_types_type--selected : manga_list_types_type" th:src="@{'/images/icons/on-hold.png'}" title="On Hold">
+                <image class="manga_list_types__type" th:classappend="${#strings.contains(#httpServletRequest.requestURI, '3')} ? manga_list_types_type--selected : ''" th:src="@{'/images/icons/on-hold.png'}" title="On Hold">
             </a>
             <a th:href="@{'/auth/sortMangaList/' + 4}">
-                <image th:classappend="${#strings.contains(#httpServletRequest.requestURI, '4')} ? manga_list_types_type--selected : manga_list_types_type" th:src="@{'/images/icons/dropped.png'}" title="Dropped">
+                <image class="manga_list_types__type" th:classappend="${#strings.contains(#httpServletRequest.requestURI, '4')} ? manga_list_types_type--selected : ''" th:src="@{'/images/icons/dropped.png'}" title="Dropped">
             </a>
     </div>
 
