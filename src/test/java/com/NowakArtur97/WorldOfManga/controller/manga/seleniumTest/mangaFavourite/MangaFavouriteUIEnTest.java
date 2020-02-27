@@ -35,7 +35,7 @@ public class MangaFavouriteUIEnTest extends MangaFavouriteUITest {
 
 		mangaList.addOrRemoveFirstMangaFromFavourite();
 
-		assertAll(() -> assertEquals(String.valueOf(1), mangaList.getFirstMangaFavouritesCounter(),
+		assertAll(() -> assertTrue(mangaList.getFirstMangaFavouritesCounter().contains("1"),
 				() -> "should show manga with one heart"));
 	}
 
@@ -78,7 +78,7 @@ public class MangaFavouriteUIEnTest extends MangaFavouriteUITest {
 
 		mangaList.addOrRemoveFirstMangaFromFavourite();
 
-		assertAll(() -> assertEquals(String.valueOf(0), mangaList.getFirstMangaFavouritesCounter(),
+		assertAll(() -> assertTrue(mangaList.getFirstMangaFavouritesCounter().contains("0"),
 				() -> "should show manga with zero hearts"));
 	}
 
