@@ -13,7 +13,7 @@
             <div class="manga_card__stats">
                 <div class="manga_card__likes">
                     <span th:text="${#sets.size(manga.userWithMangaInFavourites)}"></span>
-                    <image class="manga_card__icon"th:src="@{'/images/icons/heart.png'}"></image>
+                    <image class="manga_card__icon" th:src="@{'/images/icons/heart.png'}"></image>
                 </div>
                 <div class="manga_card_rating"><span th:text="${manga.rating}"></span>
                     <image class="manga_card__icon" th:src="@{'/images/icons/star.png'}"></image>
@@ -27,22 +27,30 @@
             </div>
             <div class="manga_card__list-options">
                  <a th:href="@{'/auth/addToList?id=' + ${manga.id}} + '&status=' + 0"><image class="manga_card__icon manga_card__icon--big manga_card__icon--status" th:src="@{'/images/icons/reading.png'}" title="Currently Reading"></image>
-                    </span></a>
+                </a>
                  <a th:href="@{'/auth/addToList?id=' + ${manga.id}} + '&status=' + 1"><image class="manga_card__icon manga_card__icon--big manga_card__icon--status" th:src="@{'/images/icons/completed.png'}" title="Completed"></image>
-                    </span></a>
+                </a>
                  <a th:href="@{'/auth/addToList?id=' + ${manga.id}} + '&status=' + 2"><image class="manga_card__icon manga_card__icon--big manga_card__icon--status" th:src="@{'/images/icons/plan-to-read.png'}" title="Plan to Read"></image>
-                    </span></a>
+                </a>
                  <a th:href="@{'/auth/addToList?id=' + ${manga.id}} + '&status=' + 3"><image class="manga_card__icon manga_card__icon--big manga_card__icon--status" th:src="@{'/images/icons/on-hold.png'}" title="On Hold"></image>
-                    </span></a>
+                </a>
                  <a th:href="@{'/auth/addToList?id=' + ${manga.id}} + '&status=' + 4"><image class="manga_card__icon manga_card__icon--big manga_card__icon--status" th:src="@{'/images/icons/dropped.png'}" title="Dropped"></image>
-                    </span></a>
+                </a>
+                <a th:if="${#request.isUserInRole('ADMIN')}" th:href="@{'/admin/editManga/' + ${manga.id}}">
+                    <image class="manga_card__icon manga_card__icon--big manga_card__icon--admin" th:src="@{'/images/icons/edit.png'}"
+                        title="Edit"></image>
+                </a>
+                <a th:if="${#request.isUserInRole('ADMIN')}" th:href="@{'/admin/editManga/' + ${manga.id}}">
+                    <image class="manga_card__icon manga_card__icon--big manga_card__icon--admin" th:src="@{'/images/icons/delete.png'}"
+                        title="Delete"></image>
+                </a>
             </div>
             <div class="manga_card__stats">
-                <div class="manga_card__likes"><span>
+                <div class="manga_card__likes">
                     <a th:href="@{'/auth/addOrRemoveFromFavourites/' + ${manga.id}}"><image class="manga_card__icon manga_card__icon--big manga_card__icon--heart" th:src="@{'/images/icons/white-heart.png'}"></image>
-                    </span></a>
+                </a>
                 </div>
-                <div class="manga_card_rating"><span>
+                <div class="manga_card_rating">
                         <a th:href="@{'/auth/rateManga?id=' + ${manga.id}} + '&rating=' + 1" ><image class="manga_card__icon manga_card__icon--big manga_card__icon--star" th:src="@{'/images/icons/white-star.png'}" data-star="1"></image></a>
                         <a th:href="@{'/auth/rateManga?id=' + ${manga.id}} + '&rating=' + 2"><image class="manga_card__icon manga_card__icon--big manga_card__icon--star" th:src="@{'/images/icons/white-star.png'}" data-star="2"></image></a>
                         <a th:href="@{'/auth/rateManga?id=' + ${manga.id}} + '&rating=' + 3"><image class="manga_card__icon manga_card__icon--big manga_card__icon--star" th:src="@{'/images/icons/white-star.png'}" data-star="3"></image></a>
