@@ -7,6 +7,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.DisabledOnOs;
+import org.junit.jupiter.api.condition.OS;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
@@ -19,6 +21,7 @@ import com.NowakArtur97.WorldOfManga.testUtil.extension.ScreenshotWatcher;
 @DisplayName("Manga In User List UI En Tests")
 @Tag("MangaInUserListUIEn_Tests")
 @DirtiesContext
+@DisabledOnOs(OS.LINUX)
 public class MangaInUserListUIEnTest extends MangaInUserListUITest {
 
 	@Test
