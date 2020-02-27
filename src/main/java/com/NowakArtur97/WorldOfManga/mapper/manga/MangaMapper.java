@@ -9,4 +9,6 @@ import com.NowakArtur97.WorldOfManga.model.MangaTranslation;
 public interface MangaMapper {
 
 	Manga mapMangaDTOToManga(MangaDTO mangaDTO, Set<MangaTranslation> mangaTranslations);
+
+	MangaDTO mapMangaToDTO(Manga manga);
 }

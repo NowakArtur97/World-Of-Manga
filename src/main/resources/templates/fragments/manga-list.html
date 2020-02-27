@@ -40,7 +40,7 @@
                     <image class="manga_card__icon manga_card__icon--big manga_card__icon--admin" th:src="@{'/images/icons/edit.png'}"
                         title="Edit"></image>
                 </a>
-                <a th:if="${#request.isUserInRole('ADMIN')}" th:href="@{'/admin/editManga/' + ${manga.id}}">
+                <a th:if="${#request.isUserInRole('ADMIN')}" th:href="@{'/admin/deleteManga/' + ${manga.id}}">
                     <image class="manga_card__icon manga_card__icon--big manga_card__icon--admin" th:src="@{'/images/icons/delete.png'}"
                         title="Delete"></image>
                 </a>

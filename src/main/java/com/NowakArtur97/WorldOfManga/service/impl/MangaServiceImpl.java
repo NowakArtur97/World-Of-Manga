@@ -33,6 +33,16 @@ public class MangaServiceImpl implements MangaService {
 
 		return manga;
 	}
+
+	@Override
+	public MangaDTO getMangaDTOById(Long mangaId) throws MangaNotFoundException {
+
+		Manga manga = findById(mangaId);
+		
+		MangaDTO mangaDTO = mangaMapper.mapMangaToDTO(manga);
+
+		return mangaDTO;
+	}
 	
 	@Override
 	public Manga findById(Long id) throws MangaNotFoundException {

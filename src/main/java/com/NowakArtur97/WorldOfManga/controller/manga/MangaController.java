@@ -10,12 +10,14 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.NowakArtur97.WorldOfManga.dto.AuthorDTO;
 import com.NowakArtur97.WorldOfManga.dto.MangaDTO;
 import com.NowakArtur97.WorldOfManga.exception.LanguageNotFoundException;
+import com.NowakArtur97.WorldOfManga.exception.MangaNotFoundException;
 import com.NowakArtur97.WorldOfManga.model.MangaTranslation;
 import com.NowakArtur97.WorldOfManga.service.api.AuthorService;
 import com.NowakArtur97.WorldOfManga.service.api.MangaService;
@@ -47,6 +49,16 @@ public class MangaController {
 		return "views/manga-form";
 	}
 
+	@GetMapping(path = "/editManga/{id}")
+	public String showEditMangaPage(Model theModel, @PathVariable("id") Long mangaId) throws MangaNotFoundException {
+
+		MangaDTO mangaToEdit = mangaService.getMangaDTOById(mangaId);
+		theModel.addAttribute("mangaDTO", mangaToEdit);
+		theModel.addAttribute("authors", authorService.findAll());
+
+		return "views/manga-form";
+	}
+	
 	@PostMapping(path = "/addOrUpdateManga")
 	public String processAddMangaPage(Model theModel, @ModelAttribute("mangaDTO") @Valid MangaDTO mangaDTO,
 			BindingResult result) throws LanguageNotFoundException {
