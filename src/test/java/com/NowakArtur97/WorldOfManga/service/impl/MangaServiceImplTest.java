@@ -77,10 +77,10 @@ public class MangaServiceImplTest {
 		mangaExpected.addTranslation(mangaTranslationPlExpected);
 		mangaExpected.setImage(image.getBytes());
 
-		when(mangaMapper.mapMangaDTOToManga(mangaDTO, mangaTranslationsExpected)).thenReturn(mangaExpected);
+		when(mangaMapper.mapMangaDTOToManga(new Manga(), mangaDTO, mangaTranslationsExpected)).thenReturn(mangaExpected);
 
 		Manga mangaActual = mangaService.addOrUpdate(mangaDTO, mangaTranslationsExpected);
-
+		
 		assertAll(
 				() -> assertEquals(authorsExpected.size(), mangaActual.getAuthors().size(),
 						() -> "should contain one author: " + authorExpected + " but wasn`t"),
@@ -94,7 +94,7 @@ public class MangaServiceImplTest {
 						() -> "should contain en translation: " + mangaTranslationEnExpected + " but wasn`t"),
 				() -> assertNotNull(mangaActual.getImage(),
 						() -> "should save manga with image, but was: " + mangaActual.getImage()),
-				() -> verify(mangaMapper, times(1)).mapMangaDTOToManga(mangaDTO, mangaTranslationsExpected),
+				() -> verify(mangaMapper, times(1)).mapMangaDTOToManga(new Manga(), mangaDTO, mangaTranslationsExpected),
 				() -> verify(mangaRepository, times(1)).save(mangaActual));
 	}
 

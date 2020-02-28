@@ -27,7 +27,15 @@ public class MangaServiceImpl implements MangaService {
 	@Override
 	public Manga addOrUpdate(MangaDTO mangaDTO, Set<MangaTranslation> mangaTranslations) {
 
-		Manga manga = mangaMapper.mapMangaDTOToManga(mangaDTO, mangaTranslations);
+		Manga manga;
+
+		try {
+			manga = findById(mangaDTO.getId());
+		} catch (MangaNotFoundException e) {
+			manga = new Manga();
+		}
+
+		manga = mangaMapper.mapMangaDTOToManga(manga, mangaDTO, mangaTranslations);
 
 		mangaRepository.save(manga);
 
@@ -38,12 +46,12 @@ public class MangaServiceImpl implements MangaService {
 	public MangaDTO getMangaDTOById(Long mangaId) throws MangaNotFoundException {
 
 		Manga manga = findById(mangaId);
-		
+
 		MangaDTO mangaDTO = mangaMapper.mapMangaToDTO(manga);
 
 		return mangaDTO;
 	}
-	
+
 	@Override
 	public Manga findById(Long id) throws MangaNotFoundException {
 

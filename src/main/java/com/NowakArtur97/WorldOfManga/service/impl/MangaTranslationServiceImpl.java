@@ -44,11 +44,11 @@ public class MangaTranslationServiceImpl implements MangaTranslationService {
 		MangaTranslation mangaTranslationPl = mangaTranslationMapper
 				.mapMangaTranslationDTOToMangaTranslation(mangaDTO.getPlTranslation());
 
-		mangaTranslationRepository.save(mangaTranslationEn);
-		mangaTranslationRepository.save(mangaTranslationPl);
-
 		en.addTranslation(mangaTranslationEn);
 		pl.addTranslation(mangaTranslationPl);
+		
+		mangaTranslationRepository.save(mangaTranslationEn);
+		mangaTranslationRepository.save(mangaTranslationPl);
 
 		Set<MangaTranslation> mangaTranslations = new HashSet<>();
 		mangaTranslations.add(mangaTranslationEn);

@@ -1,6 +1,8 @@
 package com.NowakArtur97.WorldOfManga.model;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -19,13 +21,11 @@ import javax.persistence.Transient;
 
 import org.hibernate.annotations.Type;
 
-import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.ToString;
 
 @Entity
@@ -39,7 +39,6 @@ public class Manga {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "manga_id")
-	@Setter(value = AccessLevel.PRIVATE)
 	private Long id;
 
 	@Column(name = "image")
@@ -53,13 +52,12 @@ public class Manga {
 	@ManyToMany(mappedBy = "createdMangas")
 	@ToString.Exclude
 	@EqualsAndHashCode.Exclude
-	private final Set<Author> authors = new HashSet<>();;
+	private final Set<Author> authors = new HashSet<>();
 
-	@OneToMany(mappedBy = "manga", cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST,
-			CascadeType.REFRESH }, orphanRemoval = false, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "manga", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
 	@ToString.Exclude
 	@EqualsAndHashCode.Exclude
-	private final Set<MangaTranslation> translations = new HashSet<>();
+	private final List<MangaTranslation> translations = new ArrayList<>();
 
 	@OneToMany(mappedBy = "manga", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
 	@ToString.Exclude
@@ -84,13 +82,13 @@ public class Manga {
 
 	public void addTranslation(MangaTranslation mangaTranslation) {
 
-		translations.add(mangaTranslation);
+		this.translations.add(mangaTranslation);
 		mangaTranslation.setManga(this);
 	}
 
 	public void removeTranslation(MangaTranslation mangaTranslation) {
 
-		translations.remove(mangaTranslation);
+		this.getTranslations().remove(mangaTranslation);
 		mangaTranslation.setManga(null);
 	}
 

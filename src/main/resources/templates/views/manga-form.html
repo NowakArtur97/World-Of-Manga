@@ -14,6 +14,7 @@
 			<form th:action="@{/admin/addOrUpdateManga}" th:object="${mangaDTO}" method="POST"
 				enctype="multipart/form-data" class="form__box form__box--register" name="addOrUpdateMangaForm">
 				<h1 class="form__title" th:text="#{form.manga.title}"></h1>
+				<input class="form__input" type="number" name="id" th:field="*{id}" hidden>
 				<div class="form__group">
 					<label class="form__label" for="enTranslation" th:text="#{form.manga.enTranslation.title}"></label>
 					<p class="form__message form__message--failure" th:if="${#fields.hasErrors('enTranslation.title')}"

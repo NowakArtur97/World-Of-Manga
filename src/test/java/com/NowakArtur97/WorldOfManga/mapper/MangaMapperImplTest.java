@@ -50,7 +50,7 @@ public class MangaMapperImplTest {
 
 		mangaDTOExpected.setImage(mockMultipartFile);
 
-		Manga mangaActual = mangaMapperImpl.mapMangaDTOToManga(mangaDTOExpected, translationsExpected);
+		Manga mangaActual = mangaMapperImpl.mapMangaDTOToManga(new Manga(), mangaDTOExpected, translationsExpected);
 
 		assertAll(
 				() -> assertEquals(translationsExpected.size(), mangaActual.getTranslations().size(),

@@ -49,12 +49,10 @@ public class Author {
 	public void addManga(Manga manga) {
 		
 		this.getCreatedMangas().add(manga);
-		manga.getAuthors().add(this);
 	}
 	
 	public void removeManga(Manga manga) {
 		
 		this.getCreatedMangas().remove(manga);
-		manga.getAuthors().remove(this);
 	}
 }

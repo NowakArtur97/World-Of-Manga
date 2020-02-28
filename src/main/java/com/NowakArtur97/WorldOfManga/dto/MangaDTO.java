@@ -20,6 +20,8 @@ import lombok.NoArgsConstructor;
 @Builder
 public class MangaDTO {
 
+	private Long id;
+	
 	private MultipartFile image;
 
 	@NotEmpty(message = "{manga.authors.notEmpty}")

@@ -54,6 +54,7 @@ public class MangaController {
 
 		MangaDTO mangaToEdit = mangaService.getMangaDTOById(mangaId);
 		theModel.addAttribute("mangaDTO", mangaToEdit);
+		theModel.addAttribute("authorDTO", new AuthorDTO());
 		theModel.addAttribute("authors", authorService.findAll());
 
 		return "views/manga-form";
