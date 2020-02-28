@@ -18,6 +18,7 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
+
 public class MangaServiceImpl implements MangaService {
 
 	private final MangaRepository mangaRepository;
@@ -25,13 +26,18 @@ public class MangaServiceImpl implements MangaService {
 	private final MangaMapper mangaMapper;
 
 	@Override
-	public Manga addOrUpdate(MangaDTO mangaDTO, Set<MangaTranslation> mangaTranslations) {
+	public Manga addOrUpdate(MangaDTO mangaDTO, Set<MangaTranslation> mangaTranslations) throws MangaNotFoundException {
 
 		Manga manga;
 
-		try {
+		if (mangaDTO.getId() != null) {
 			manga = findById(mangaDTO.getId());
-		} catch (MangaNotFoundException e) {
+
+			manga.setId(mangaDTO.getId());
+			manga.removeAllAuthors();
+			manga.removeAllTranslations();
+
+		} else {
 			manga = new Manga();
 		}
 

@@ -2,6 +2,7 @@ package com.NowakArtur97.WorldOfManga.model;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -92,6 +93,16 @@ public class Manga {
 		mangaTranslation.setManga(null);
 	}
 
+	public void removeAllTranslations() {
+
+		for (Iterator<MangaTranslation> translationIterator = this.getTranslations().iterator(); translationIterator
+				.hasNext();) {
+			MangaTranslation translation = translationIterator.next();
+			translation.setManga(null);
+			translationIterator.remove();
+		}
+	}
+
 	public void addAuthor(Author author) {
 
 		this.getAuthors().add(author);
@@ -102,5 +113,14 @@ public class Manga {
 
 		this.getAuthors().remove(author);
 		author.getCreatedMangas().remove(this);
+	}
+
+	public void removeAllAuthors() {
+
+		for (Iterator<Author> authorIterator = this.getAuthors().iterator(); authorIterator.hasNext();) {
+			Author author = authorIterator.next();
+			author.removeManga(this);
+			authorIterator.remove();
+		}
 	}
 }

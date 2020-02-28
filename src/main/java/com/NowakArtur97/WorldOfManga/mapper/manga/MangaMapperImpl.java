@@ -1,7 +1,6 @@
 package com.NowakArtur97.WorldOfManga.mapper.manga;
 
 import java.io.IOException;
-import java.util.Iterator;
 import java.util.Set;
 
 import org.springframework.stereotype.Service;
@@ -15,13 +14,11 @@ import com.NowakArtur97.WorldOfManga.model.MangaTranslation;
 @Service
 public class MangaMapperImpl implements MangaMapper {
 
+	private final static Integer EN_TRANSLATION_INDEX = 0;
+	private final static Integer PL_TRANSLATION_INDEX = 1;
+
 	@Override
 	public Manga mapMangaDTOToManga(Manga manga, MangaDTO mangaDTO, Set<MangaTranslation> mangaTranslations) {
-
-		if (mangaDTO.getId() != null) {
-			manga.setId(mangaDTO.getId());
-			clearMangaPrevoiusData(manga);
-		}
 
 		mapMangaTranslations(manga, mangaTranslations);
 
@@ -35,16 +32,17 @@ public class MangaMapperImpl implements MangaMapper {
 	@Override
 	public MangaDTO mapMangaToDTO(Manga manga) {
 
-		MangaTranslationDTO enTranslation = MangaTranslationDTO.builder()
-				.title(manga.getTranslations().get(0).getTitle())
-				.description(manga.getTranslations().get(0).getDescription()).build();
+		MangaTranslation enTranslation = manga.getTranslations().get(EN_TRANSLATION_INDEX);
+		MangaTranslation plTranslation = manga.getTranslations().get(PL_TRANSLATION_INDEX);
 
-		MangaTranslationDTO plTranslation = MangaTranslationDTO.builder()
-				.title(manga.getTranslations().get(1).getTitle())
-				.description(manga.getTranslations().get(1).getDescription()).build();
+		MangaTranslationDTO enTranslationDTO = MangaTranslationDTO.builder().title(enTranslation.getTitle())
+				.description(enTranslation.getDescription()).build();
 
-		MangaDTO mangaDTO = MangaDTO.builder().id(manga.getId()).enTranslation(enTranslation)
-				.plTranslation(plTranslation).authors(manga.getAuthors()).build();
+		MangaTranslationDTO plTranslationDTO = MangaTranslationDTO.builder().title(plTranslation.getTitle())
+				.description(plTranslation.getDescription()).build();
+
+		MangaDTO mangaDTO = MangaDTO.builder().id(manga.getId()).enTranslation(enTranslationDTO)
+				.plTranslation(plTranslationDTO).authors(manga.getAuthors()).build();
 
 		return mangaDTO;
 	}
@@ -65,22 +63,6 @@ public class MangaMapperImpl implements MangaMapper {
 			manga.setImage(mangaDTO.getImage().getBytes());
 		} catch (IOException e) {
 			e.printStackTrace();
-		}
-	}
-
-	private void clearMangaPrevoiusData(Manga manga) {
-
-		for (Iterator<MangaTranslation> translationIterator = manga.getTranslations().iterator(); translationIterator
-				.hasNext();) {
-			MangaTranslation translation = translationIterator.next();
-			translation.setManga(null);
-			translationIterator.remove();
-		}
-
-		for (Iterator<Author> authorIterator = manga.getAuthors().iterator(); authorIterator.hasNext();) {
-			Author author = authorIterator.next();
-			author.removeManga(manga);
-			authorIterator.remove();
 		}
 	}
 }

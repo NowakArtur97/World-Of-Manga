@@ -49,7 +49,7 @@ public class MangaServiceImplTest {
 
 	@Test
 	@DisplayName("when add manga should save manga")
-	public void when_add_manga_should_save_manga() throws IOException {
+	public void when_add_manga_should_save_manga() throws IOException, MangaNotFoundException {
 
 		MangaDTO mangaDTO = new MangaDTO();
 

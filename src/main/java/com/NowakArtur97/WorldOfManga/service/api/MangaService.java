@@ -10,7 +10,7 @@ import com.NowakArtur97.WorldOfManga.model.MangaTranslation;
 
 public interface MangaService {
 
-	Manga addOrUpdate(MangaDTO mangaDTO, Set<MangaTranslation> mangaTranslations);
+	Manga addOrUpdate(MangaDTO mangaDTO, Set<MangaTranslation> mangaTranslations) throws MangaNotFoundException;
 
 	MangaDTO getMangaDTOById(Long mangaId) throws MangaNotFoundException;
 	

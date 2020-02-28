@@ -49,7 +49,7 @@ public class MangaController {
 		return "views/manga-form";
 	}
 
-	@GetMapping(path = "/editManga/{id}")
+	@GetMapping(path = "/addOrUpdateManga/{id}")
 	public String showEditMangaPage(Model theModel, @PathVariable("id") Long mangaId) throws MangaNotFoundException {
 
 		MangaDTO mangaToEdit = mangaService.getMangaDTOById(mangaId);
@@ -62,7 +62,7 @@ public class MangaController {
 	
 	@PostMapping(path = "/addOrUpdateManga")
 	public String processAddMangaPage(Model theModel, @ModelAttribute("mangaDTO") @Valid MangaDTO mangaDTO,
-			BindingResult result) throws LanguageNotFoundException {
+			BindingResult result) throws LanguageNotFoundException, MangaNotFoundException {
 
 		mangaValidator.validate(mangaDTO, result);
 

@@ -36,7 +36,7 @@
                 </a>
                  <a th:href="@{'/auth/addToList?id=' + ${manga.id}} + '&status=' + 4"><image class="manga_card__icon manga_card__icon--big manga_card__icon--status" th:src="@{'/images/icons/dropped.png'}" title="Dropped"></image>
                 </a>
-                <a th:if="${#request.isUserInRole('ADMIN')}" th:href="@{'/admin/editManga/' + ${manga.id}}">
+                <a th:if="${#request.isUserInRole('ADMIN')}" th:href="@{'/admin/addOrUpdateManga/' + ${manga.id}}">
                     <image class="manga_card__icon manga_card__icon--big manga_card__icon--admin" th:src="@{'/images/icons/edit.png'}"
                         title="Edit"></image>
                 </a>
