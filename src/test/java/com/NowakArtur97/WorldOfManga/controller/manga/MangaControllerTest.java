@@ -15,6 +15,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -39,6 +40,7 @@ import com.NowakArtur97.WorldOfManga.dto.MangaTranslationDTO;
 import com.NowakArtur97.WorldOfManga.exception.LanguageNotFoundException;
 import com.NowakArtur97.WorldOfManga.exception.MangaNotFoundException;
 import com.NowakArtur97.WorldOfManga.model.Author;
+import com.NowakArtur97.WorldOfManga.model.Manga;
 import com.NowakArtur97.WorldOfManga.model.MangaTranslation;
 import com.NowakArtur97.WorldOfManga.service.api.AuthorService;
 import com.NowakArtur97.WorldOfManga.service.api.MangaService;
@@ -122,7 +124,8 @@ public class MangaControllerTest {
 
 	@Test
 	@DisplayName("when add manga with correct data")
-	public void when_add_manga_with_correct_data_should_save_manga() throws LanguageNotFoundException {
+	public void when_add_manga_with_correct_data_should_save_manga()
+			throws LanguageNotFoundException, MangaNotFoundException, IOException {
 
 		MangaTranslationDTO mangaTranslationEnDTO = MangaTranslationDTO.builder().title("English title")
 				.description("English description").build();
@@ -132,24 +135,26 @@ public class MangaControllerTest {
 		MockMultipartFile image = new MockMultipartFile("image.jpg", "file bytes".getBytes());
 
 		Set<Author> authors = new HashSet<>();
-		Author author = new Author("FirstName LastName");
-		authors.add(author);
+		Author authorExpected = new Author("FirstName LastName");
+		authors.add(authorExpected);
 
 		MangaDTO mangaDTO = MangaDTO.builder().enTranslation(mangaTranslationEnDTO).plTranslation(mangaTranslationPlDTO)
 				.image(image).authors(authors).build();
 
-		MangaTranslation mangaTranslationEn = MangaTranslation.builder().title("English title")
+		MangaTranslation mangaTranslationEnExpected = MangaTranslation.builder().title("English title")
 				.description("English description").build();
-		MangaTranslation mangaTranslationPl = MangaTranslation.builder().title("Polish title")
+		MangaTranslation mangaTranslationPlExpected = MangaTranslation.builder().title("Polish title")
 				.description("Polish description").build();
-
-		Set<MangaTranslation> mangaTranslations = new HashSet<>();
-		mangaTranslations.add(mangaTranslationEn);
-		mangaTranslations.add(mangaTranslationPl);
 
 		mangaDTO.setAuthors(authors);
 
-		when(mangaTranslationService.addOrUpdate(mangaDTO)).thenReturn(mangaTranslations);
+		Manga mangaExpected = new Manga();
+		mangaExpected.addAuthor(authorExpected);
+		mangaExpected.addTranslation(mangaTranslationEnExpected);
+		mangaExpected.addTranslation(mangaTranslationPlExpected);
+		mangaExpected.setImage(image.getBytes());
+		
+		when(mangaTranslationService.addOrUpdate(mangaDTO)).thenReturn(mangaExpected);
 
 		assertAll(
 				() -> mockMvc
@@ -158,12 +163,12 @@ public class MangaControllerTest {
 						.andExpect(status().is3xxRedirection()).andExpect(model().hasNoErrors())
 						.andExpect(redirectedUrl("/admin/addOrUpdateManga")),
 				() -> verify(mangaTranslationService, times(1)).addOrUpdate(mangaDTO),
-				() -> verify(mangaService, times(1)).addOrUpdate(mangaDTO, mangaTranslations));
+				() -> verify(mangaService, times(1)).addOrUpdate(mangaDTO, mangaExpected));
 	}
 
 	@Test
-	@DisplayName("when add manga with blank fields and authors selected")
-	public void when_add_manga_with_blank_fields_and_authors_selected_should_show_manga_form() {
+	@DisplayName("when add or edit manga with blank fields and authors selected")
+	public void when_add_or_edit_manga_with_blank_fields_and_authors_selected_should_show_manga_form() {
 
 		String englishTitle = "";
 		String englishDescription = "";
@@ -214,8 +219,8 @@ public class MangaControllerTest {
 	}
 
 	@Test
-	@DisplayName("when add manga with long data and authors not selected")
-	public void when_add_manga_with_long_data_and_authors_not_selected_should_show_manga_form() {
+	@DisplayName("when add or edit manga with long data and authors not selected")
+	public void when_add_or_edit_manga_with_long_data_and_authors_not_selected_should_show_manga_form() {
 
 		String title = "asdfghjklpasdfghjklpasdfghjklpasdfghjklpasdfghjklp!@#$%";
 		String description = "asdfghjklpasdfghjklpasdfghjklpasdfghjklpasdfghjklp!@#$%".repeat(30);
