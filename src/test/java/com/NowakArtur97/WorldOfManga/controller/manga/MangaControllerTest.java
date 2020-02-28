@@ -37,6 +37,7 @@ import com.NowakArtur97.WorldOfManga.dto.AuthorDTO;
 import com.NowakArtur97.WorldOfManga.dto.MangaDTO;
 import com.NowakArtur97.WorldOfManga.dto.MangaTranslationDTO;
 import com.NowakArtur97.WorldOfManga.exception.LanguageNotFoundException;
+import com.NowakArtur97.WorldOfManga.exception.MangaNotFoundException;
 import com.NowakArtur97.WorldOfManga.model.Author;
 import com.NowakArtur97.WorldOfManga.model.MangaTranslation;
 import com.NowakArtur97.WorldOfManga.service.api.AuthorService;
@@ -73,8 +74,8 @@ public class MangaControllerTest {
 	}
 
 	@Test
-	@DisplayName("when load add or update manga page")
-	public void when_load_add_or_update_manga_page_should_show_manga_form() {
+	@DisplayName("when load add manga page")
+	public void when_load_add_manga_page_should_show_manga_form() {
 
 		List<Author> authors = new ArrayList<>();
 		authors.add(new Author("FirstName LastName"));
@@ -85,6 +86,38 @@ public class MangaControllerTest {
 				.andExpect(view().name("views/manga-form")).andExpect(model().attribute("mangaDTO", new MangaDTO()))
 				.andExpect(model().attribute("authorDTO", new AuthorDTO()))
 				.andExpect(model().attribute("authors", authors)), () -> verify(authorService, times(1)).findAll());
+	}
+	
+	@Test
+	@DisplayName("when load edit manga page")
+	public void when_load_edit_manga_page_should_show_manga_form() throws MangaNotFoundException {
+
+		Long mangaId = 1L;
+		
+		MangaTranslationDTO mangaTranslationEnDTO = MangaTranslationDTO.builder().title("English title")
+				.description("English description").build();
+		MangaTranslationDTO mangaTranslationPlDTO = MangaTranslationDTO.builder().title("Polish title")
+				.description("Polish description").build();
+
+		MockMultipartFile image = new MockMultipartFile("image.jpg", "file bytes".getBytes());
+
+		Set<Author> authors = new HashSet<>();
+		Author author = new Author("FirstName LastName");
+		authors.add(author);
+
+		MangaDTO mangaDTO = MangaDTO.builder().id(mangaId).enTranslation(mangaTranslationEnDTO).plTranslation(mangaTranslationPlDTO)
+				.image(image).authors(authors).build();
+		
+		List<Author> authorsDB = new ArrayList<>();
+		authors.add(author);
+
+		when(authorService.findAll()).thenReturn(authorsDB);
+		when(mangaService.getMangaDTOById(mangaId)).thenReturn(mangaDTO);
+
+		assertAll(() -> mockMvc.perform(get("/admin/addOrUpdateManga/{id}", mangaId)).andExpect(status().isOk())
+				.andExpect(view().name("views/manga-form")).andExpect(model().attribute("mangaDTO", mangaDTO))
+				.andExpect(model().attribute("authorDTO", new AuthorDTO()))
+				.andExpect(model().attribute("authors", authorsDB)), () -> verify(authorService, times(1)).findAll());
 	}
 
 	@Test
