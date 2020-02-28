@@ -53,10 +53,11 @@ Available to users with "User" or "Admin" role:
  
 Available to users with only "Admin" role:
 - Add new author
-- Add new manga
+- Add new and edit manga
 
 ## To Do
-- Editing and deleting manga and authors
+- Deleting manga
+- Editing and deleting authors
 
 ## Status
 Project is: in progess
