@@ -14,13 +14,8 @@ import com.NowakArtur97.WorldOfManga.model.MangaTranslation;
 @Service
 public class MangaMapperImpl implements MangaMapper {
 
-	private final static Integer EN_TRANSLATION_INDEX = 0;
-	private final static Integer PL_TRANSLATION_INDEX = 1;
-
 	@Override
-	public Manga mapMangaDTOToManga(Manga manga, MangaDTO mangaDTO, Set<MangaTranslation> mangaTranslations) {
-
-		mapMangaTranslations(manga, mangaTranslations);
+	public Manga mapMangaDTOToManga(Manga manga, MangaDTO mangaDTO) {
 
 		mapAuthors(manga, mangaDTO.getAuthors());
 
@@ -32,8 +27,8 @@ public class MangaMapperImpl implements MangaMapper {
 	@Override
 	public MangaDTO mapMangaToDTO(Manga manga) {
 
-		MangaTranslation enTranslation = manga.getTranslations().get(EN_TRANSLATION_INDEX);
-		MangaTranslation plTranslation = manga.getTranslations().get(PL_TRANSLATION_INDEX);
+		MangaTranslation enTranslation = manga.getTranslations().get(Manga.EN_TRANSLATION_INDEX);
+		MangaTranslation plTranslation = manga.getTranslations().get(Manga.PL_TRANSLATION_INDEX);
 
 		MangaTranslationDTO enTranslationDTO = MangaTranslationDTO.builder().title(enTranslation.getTitle())
 				.description(enTranslation.getDescription()).build();
@@ -45,11 +40,6 @@ public class MangaMapperImpl implements MangaMapper {
 				.plTranslation(plTranslationDTO).authors(manga.getAuthors()).build();
 
 		return mangaDTO;
-	}
-
-	private void mapMangaTranslations(Manga manga, Set<MangaTranslation> mangaTranslations) {
-
-		mangaTranslations.stream().forEach(translation -> manga.addTranslation(translation));
 	}
 
 	private void mapAuthors(Manga manga, Set<Author> authors) {

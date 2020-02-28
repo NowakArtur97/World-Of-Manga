@@ -37,6 +37,9 @@ import lombok.ToString;
 @Builder
 public class Manga {
 
+	public final static Integer EN_TRANSLATION_INDEX = 0;
+	public final static Integer PL_TRANSLATION_INDEX = 1;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "manga_id")

@@ -1,7 +1,5 @@
 package com.NowakArtur97.WorldOfManga.controller.manga;
 
-import java.util.Set;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +16,7 @@ import com.NowakArtur97.WorldOfManga.dto.AuthorDTO;
 import com.NowakArtur97.WorldOfManga.dto.MangaDTO;
 import com.NowakArtur97.WorldOfManga.exception.LanguageNotFoundException;
 import com.NowakArtur97.WorldOfManga.exception.MangaNotFoundException;
-import com.NowakArtur97.WorldOfManga.model.MangaTranslation;
+import com.NowakArtur97.WorldOfManga.model.Manga;
 import com.NowakArtur97.WorldOfManga.service.api.AuthorService;
 import com.NowakArtur97.WorldOfManga.service.api.MangaService;
 import com.NowakArtur97.WorldOfManga.service.api.MangaTranslationService;
@@ -59,7 +57,7 @@ public class MangaController {
 
 		return "views/manga-form";
 	}
-	
+
 	@PostMapping(path = "/addOrUpdateManga")
 	public String processAddMangaPage(Model theModel, @ModelAttribute("mangaDTO") @Valid MangaDTO mangaDTO,
 			BindingResult result) throws LanguageNotFoundException, MangaNotFoundException {
@@ -75,9 +73,9 @@ public class MangaController {
 			return "views/manga-form";
 		}
 
-		Set<MangaTranslation> mangaTranslations = mangaTranslationService.addOrUpdate(mangaDTO);
+		Manga manga = mangaTranslationService.addOrUpdate(mangaDTO);
 
-		mangaService.addOrUpdate(mangaDTO, mangaTranslations);
+		mangaService.addOrUpdate(mangaDTO, manga);
 
 		return "redirect:/admin/addOrUpdateManga";
 	}

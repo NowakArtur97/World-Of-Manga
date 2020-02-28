@@ -1,7 +1,6 @@
 package com.NowakArtur97.WorldOfManga.service.impl;
 
 import java.util.List;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,7 +9,6 @@ import com.NowakArtur97.WorldOfManga.dto.MangaDTO;
 import com.NowakArtur97.WorldOfManga.exception.MangaNotFoundException;
 import com.NowakArtur97.WorldOfManga.mapper.manga.MangaMapper;
 import com.NowakArtur97.WorldOfManga.model.Manga;
-import com.NowakArtur97.WorldOfManga.model.MangaTranslation;
 import com.NowakArtur97.WorldOfManga.repository.MangaRepository;
 import com.NowakArtur97.WorldOfManga.service.api.MangaService;
 
@@ -26,22 +24,15 @@ public class MangaServiceImpl implements MangaService {
 	private final MangaMapper mangaMapper;
 
 	@Override
-	public Manga addOrUpdate(MangaDTO mangaDTO, Set<MangaTranslation> mangaTranslations) throws MangaNotFoundException {
-
-		Manga manga;
+	public Manga addOrUpdate(MangaDTO mangaDTO, Manga manga) throws MangaNotFoundException {
 
 		if (mangaDTO.getId() != null) {
-			manga = findById(mangaDTO.getId());
 
 			manga.setId(mangaDTO.getId());
 			manga.removeAllAuthors();
-			manga.removeAllTranslations();
+		} 
 
-		} else {
-			manga = new Manga();
-		}
-
-		manga = mangaMapper.mapMangaDTOToManga(manga, mangaDTO, mangaTranslations);
+		manga = mangaMapper.mapMangaDTOToManga(manga, mangaDTO);
 
 		mangaRepository.save(manga);
 
