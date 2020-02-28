@@ -40,24 +40,23 @@ public class MangaMapperImplTest {
 
 		MangaDTO mangaDTOExpected = new MangaDTO();
 
-		Set<MangaTranslation> translationsExpected = new HashSet<>();
-		translationsExpected.add(mangaEnTranslationExpected);
-		translationsExpected.add(mangaPlTranslationExpected);
-
 		Set<Author> authorsExpected = new HashSet<>();
 		authorsExpected.add(authorExpected);
 		mangaDTOExpected.setAuthors(authorsExpected);
 
 		mangaDTOExpected.setImage(mockMultipartFile);
 
-		Manga mangaActual = mangaMapperImpl.mapMangaDTOToManga(new Manga(), mangaDTOExpected, translationsExpected);
+		Manga mangaExpected = new Manga();
+		mangaExpected.addTranslation(mangaEnTranslationExpected);
+		mangaExpected.addTranslation(mangaPlTranslationExpected);
+
+		Manga mangaActual = mangaMapperImpl.mapMangaDTOToManga(mangaExpected, mangaDTOExpected);
 
 		assertAll(
-				() -> assertEquals(translationsExpected.size(), mangaActual.getTranslations().size(),
-						() -> "should return manga with two translation, but was: "
-								+ mangaActual.getTranslations().size()),
+				() -> assertEquals(mangaExpected.getTranslations().size(), mangaActual.getTranslations().size(),
+						() -> "should return manga with two translation, but was: " + mangaActual.getTranslations()),
 				() -> assertEquals(authorsExpected.size(), mangaActual.getAuthors().size(),
-						() -> "should return manga with one author, but was: " + mangaActual.getAuthors().size()),
+						() -> "should return manga with one author, but was: " + mangaActual.getAuthors()),
 				() -> assertNotNull(mangaActual.getImage(),
 						() -> "should return manga with image, but was: " + mangaActual.getImage()));
 	}
