@@ -8,9 +8,6 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -22,11 +19,14 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import com.NowakArtur97.WorldOfManga.dto.MangaDTO;
 import com.NowakArtur97.WorldOfManga.dto.MangaTranslationDTO;
 import com.NowakArtur97.WorldOfManga.exception.LanguageNotFoundException;
+import com.NowakArtur97.WorldOfManga.exception.MangaNotFoundException;
 import com.NowakArtur97.WorldOfManga.mapper.mangaTranslation.MangaTranslationMapper;
 import com.NowakArtur97.WorldOfManga.model.Language;
+import com.NowakArtur97.WorldOfManga.model.Manga;
 import com.NowakArtur97.WorldOfManga.model.MangaTranslation;
 import com.NowakArtur97.WorldOfManga.repository.MangaTranslationRepository;
 import com.NowakArtur97.WorldOfManga.service.api.LanguageService;
+import com.NowakArtur97.WorldOfManga.service.api.MangaService;
 
 @ExtendWith(MockitoExtension.class)
 @DisplayName("Manga Translation Service Impl Tests")
@@ -44,6 +44,9 @@ public class MangaTranslationServiceImplTest {
 
 	@Mock
 	private LanguageService languageService;
+
+	@Mock
+	private MangaService mangaService;
 
 	@Test
 	@DisplayName("when title is already in use")
@@ -79,7 +82,8 @@ public class MangaTranslationServiceImplTest {
 
 	@Test
 	@DisplayName("when add manga translations")
-	public void when_add_manga_translations() throws LanguageNotFoundException {
+	public void when_add_manga_translations_should_save_new_translations()
+			throws LanguageNotFoundException, MangaNotFoundException {
 
 		MangaTranslationDTO mangaTranslationEnDTO = MangaTranslationDTO.builder().title("English title")
 				.description("English description").build();
@@ -97,9 +101,9 @@ public class MangaTranslationServiceImplTest {
 		MangaTranslation mangaTranslationPlExpected = MangaTranslation.builder().title("Polish title")
 				.description("Polish description").build();
 
-		Set<MangaTranslation> mangaTranslationsExpected = new HashSet<>();
-		mangaTranslationsExpected.add(mangaTranslationEnExpected);
-		mangaTranslationsExpected.add(mangaTranslationPlExpected);
+		Manga mangaExpected = new Manga();
+		mangaExpected.addTranslation(mangaTranslationEnExpected);
+		mangaExpected.addTranslation(mangaTranslationPlExpected);
 
 		when(languageService.findByLocale("en")).thenReturn(en);
 		when(languageService.findByLocale("pl")).thenReturn(pl);
@@ -108,19 +112,70 @@ public class MangaTranslationServiceImplTest {
 		when(mangaTranslationMapper.mapMangaTranslationDTOToMangaTranslation(mangaDTO.getPlTranslation()))
 				.thenReturn(mangaTranslationPlExpected);
 
-		Set<MangaTranslation> mangaTranslationsActual = mangaTranslationService.addOrUpdate(mangaDTO);
+		Manga mangaActual = mangaTranslationService.addOrUpdate(mangaDTO);
 
 		assertAll(
-				() -> assertEquals(mangaTranslationsExpected.size(), mangaTranslationsActual.size(),
-						() -> "should return two translations: " + mangaTranslationsExpected + " but was: "
-								+ mangaTranslationsActual.size()),
+				() -> assertEquals(2, mangaActual.getTranslations().size(),
+						() -> "should manga have two translations, but was: " + mangaActual.getTranslations().size()),
+				() -> assertTrue(mangaActual.getTranslations().contains(mangaTranslationEnExpected),
+						() -> "should manga contain english translation: " + mangaTranslationEnExpected + ", but was: "
+								+ mangaActual.getTranslations()),
+				() -> assertTrue(mangaActual.getTranslations().contains(mangaTranslationEnExpected),
+						() -> "should manga contain polish translation: " + mangaTranslationPlExpected + ", but was: "
+								+ mangaActual.getTranslations()),
 				() -> verify(languageService, times(1)).findByLocale("en"),
 				() -> verify(languageService, times(1)).findByLocale("pl"),
 				() -> verify(mangaTranslationMapper, times(1))
 						.mapMangaTranslationDTOToMangaTranslation(mangaDTO.getEnTranslation()),
 				() -> verify(mangaTranslationMapper, times(1))
-						.mapMangaTranslationDTOToMangaTranslation(mangaDTO.getPlTranslation()),
-				() -> verify(mangaTranslationRepository, times(1)).save(mangaTranslationEnExpected),
-				() -> verify(mangaTranslationRepository, times(1)).save(mangaTranslationPlExpected));
+						.mapMangaTranslationDTOToMangaTranslation(mangaDTO.getPlTranslation()));
+	}
+
+	@Test
+	@DisplayName("when edit manga translations")
+	public void when_edit_manga_translations_should_edit_translations()
+			throws LanguageNotFoundException, MangaNotFoundException {
+
+		MangaTranslationDTO mangaTranslationEnDTO = MangaTranslationDTO.builder().title("English title")
+				.description("English description").build();
+		MangaTranslationDTO mangaTranslationPlDTO = MangaTranslationDTO.builder().title("Polish title")
+				.description("Polish description").build();
+
+		Long mangaId = 1L;
+
+		MangaDTO mangaDTO = MangaDTO.builder().id(1L).enTranslation(mangaTranslationEnDTO)
+				.plTranslation(mangaTranslationPlDTO).build();
+
+		MangaTranslation mangaTranslationEnExpected = MangaTranslation.builder().title("English title")
+				.description("English description").build();
+		MangaTranslation mangaTranslationPlExpected = MangaTranslation.builder().title("Polish title")
+				.description("Polish description").build();
+
+		Manga mangaExpected = new Manga();
+		mangaExpected.setId(mangaId);
+		mangaExpected.addTranslation(mangaTranslationEnExpected);
+		mangaExpected.addTranslation(mangaTranslationPlExpected);
+
+		when(mangaTranslationMapper.mapMangaTranslationDTOToMangaTranslation(mangaDTO.getEnTranslation()))
+				.thenReturn(mangaTranslationEnExpected);
+		when(mangaTranslationMapper.mapMangaTranslationDTOToMangaTranslation(mangaDTO.getPlTranslation()))
+				.thenReturn(mangaTranslationPlExpected);
+		when(mangaService.findById(mangaId)).thenReturn(mangaExpected);
+
+		Manga mangaActual = mangaTranslationService.addOrUpdate(mangaDTO);
+
+		assertAll(
+				() -> assertEquals(2, mangaActual.getTranslations().size(),
+						() -> "should manga have two translations, but was: " + mangaActual.getTranslations().size()),
+				() -> assertTrue(mangaActual.getTranslations().contains(mangaTranslationEnExpected),
+						() -> "should manga contain english translation: " + mangaTranslationEnExpected + ", but was: "
+								+ mangaActual.getTranslations()),
+				() -> assertTrue(mangaActual.getTranslations().contains(mangaTranslationEnExpected),
+						() -> "should manga contain polish translation: " + mangaTranslationPlExpected + ", but was: "
+								+ mangaActual.getTranslations()),
+				() -> verify(mangaTranslationMapper, times(1))
+						.mapMangaTranslationDTOToMangaTranslation(mangaDTO.getEnTranslation()),
+				() -> verify(mangaTranslationMapper, times(1))
+						.mapMangaTranslationDTOToMangaTranslation(mangaDTO.getPlTranslation()));
 	}
 }
