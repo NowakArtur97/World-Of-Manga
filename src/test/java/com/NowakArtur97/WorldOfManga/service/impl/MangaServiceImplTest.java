@@ -2,6 +2,7 @@ package com.NowakArtur97.WorldOfManga.service.impl;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -31,7 +32,9 @@ import com.NowakArtur97.WorldOfManga.mapper.manga.MangaMapper;
 import com.NowakArtur97.WorldOfManga.model.Author;
 import com.NowakArtur97.WorldOfManga.model.Manga;
 import com.NowakArtur97.WorldOfManga.model.MangaTranslation;
+import com.NowakArtur97.WorldOfManga.model.User;
 import com.NowakArtur97.WorldOfManga.repository.MangaRepository;
+import com.NowakArtur97.WorldOfManga.service.api.UserService;
 
 @ExtendWith(MockitoExtension.class)
 @DisplayName("Manga Service Impl Test Tests")
@@ -46,6 +49,9 @@ public class MangaServiceImplTest {
 
 	@Mock
 	private MangaMapper mangaMapper;
+
+	@Mock
+	private UserService userService;
 
 	@Test
 	@DisplayName("when add manga should save manga")
@@ -133,7 +139,7 @@ public class MangaServiceImplTest {
 		mangaAfterMapperExpected.addTranslation(mangaTranslationEnExpected);
 		mangaAfterMapperExpected.addTranslation(mangaTranslationPlExpected);
 		mangaAfterMapperExpected.setImage(image.getBytes());
-		
+
 		when(mangaMapper.mapMangaDTOToManga(mangaExpected, mangaDTO)).thenReturn(mangaAfterMapperExpected);
 
 		Manga mangaActual = mangaService.addOrUpdate(mangaDTO, mangaExpected);
@@ -156,6 +162,96 @@ public class MangaServiceImplTest {
 						() -> "should save manga with image, but was: " + mangaActual.getImage()),
 				() -> verify(mangaMapper, times(1)).mapMangaDTOToManga(mangaExpected, mangaDTO),
 				() -> verify(mangaRepository, times(1)).save(mangaActual));
+	}
+
+	@Test
+	@DisplayName("when add manga to favourites for the first time")
+	public void when_add_manga_to_favourites_for_first_time_should_add_manga_to_favourites()
+			throws MangaNotFoundException, IOException {
+
+		Long mangaId = 1L;
+
+		MangaTranslation mangaTranslationEnExpected = MangaTranslation.builder().title("English title")
+				.description("English description").build();
+		MangaTranslation mangaTranslationPlExpected = MangaTranslation.builder().title("Polish title")
+				.description("Polish description").build();
+
+		Author authorExpected = new Author("FirsName LastName");
+
+		MockMultipartFile image = new MockMultipartFile("image.jpg", "file bytes".getBytes());
+
+		Manga mangaExpected = new Manga();
+		mangaExpected.addAuthor(authorExpected);
+		mangaExpected.addTranslation(mangaTranslationEnExpected);
+		mangaExpected.addTranslation(mangaTranslationPlExpected);
+		mangaExpected.setImage(image.getBytes());
+
+		String username = "principal";
+
+		User userExpected = User.builder().username(username).firstName("first name").lastName("last name")
+				.password("user").email("user@email.com").isEnabled(true).build();
+
+		when(mangaRepository.findById(mangaId)).thenReturn(Optional.of(mangaExpected));
+		when(userService.loadLoggedInUsername()).thenReturn(userExpected);
+
+		Manga mangaActual = mangaService.addOrRemoveFromFavourites(mangaId);
+
+		assertAll(
+				() -> assertEquals(mangaExpected, mangaActual,
+						() -> "should return added to list manga: " + mangaExpected + ", but was: " + mangaActual),
+				() -> assertTrue(userExpected.getFavouriteMangas().contains(mangaActual),
+						() -> "should manga be in users favourites but wasn`t: " + userExpected.getFavouriteMangas()),
+				() -> assertTrue(mangaActual.getUserWithMangaInFavourites().contains(userExpected),
+						() -> "should user be one of the people with the manga in favorites but wasn`t: "
+								+ userExpected.getFavouriteMangas()),
+				() -> verify(mangaRepository, times(1)).findById(mangaId),
+				() -> verify(userService, times(1)).loadLoggedInUsername());
+	}
+
+	@Test
+	@DisplayName("when remove manga from favourites")
+	public void when_remove_manga_from_favourites_should_remove_manga_from_favourites()
+			throws MangaNotFoundException, IOException {
+
+		Long mangaId = 1L;
+
+		MangaTranslation mangaTranslationEnExpected = MangaTranslation.builder().title("English title")
+				.description("English description").build();
+		MangaTranslation mangaTranslationPlExpected = MangaTranslation.builder().title("Polish title")
+				.description("Polish description").build();
+
+		Author authorExpected = new Author("FirsName LastName");
+
+		MockMultipartFile image = new MockMultipartFile("image.jpg", "file bytes".getBytes());
+
+		Manga mangaExpected = new Manga();
+		mangaExpected.addAuthor(authorExpected);
+		mangaExpected.addTranslation(mangaTranslationEnExpected);
+		mangaExpected.addTranslation(mangaTranslationPlExpected);
+		mangaExpected.setImage(image.getBytes());
+
+		String username = "principal";
+
+		User userExpected = User.builder().username(username).firstName("first name").lastName("last name")
+				.password("user").email("user@email.com").isEnabled(true).build();
+
+		userExpected.addMangaToFavourites(mangaExpected);
+
+		when(mangaRepository.findById(mangaId)).thenReturn(Optional.of(mangaExpected));
+		when(userService.loadLoggedInUsername()).thenReturn(userExpected);
+
+		Manga mangaActual = mangaService.addOrRemoveFromFavourites(mangaId);
+
+		assertAll(
+				() -> assertEquals(mangaExpected, mangaActual,
+						() -> "should return remove from list manga: " + mangaExpected + ", but was: " + mangaActual),
+				() -> assertFalse(userExpected.getFavouriteMangas().contains(mangaActual),
+						() -> "shouldn`t manga be in users favourites but was: " + userExpected.getFavouriteMangas()),
+				() -> assertFalse(mangaActual.getUserWithMangaInFavourites().contains(userExpected),
+						() -> "shouldn`t  user be one of the people with the manga in favorites but was: "
+								+ userExpected.getFavouriteMangas()),
+				() -> verify(mangaRepository, times(1)).findById(mangaId),
+				() -> verify(userService, times(1)).loadLoggedInUsername());
 	}
 
 	@Test

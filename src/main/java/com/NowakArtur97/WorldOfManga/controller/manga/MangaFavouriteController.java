@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.NowakArtur97.WorldOfManga.exception.MangaNotFoundException;
-import com.NowakArtur97.WorldOfManga.service.api.UserService;
+import com.NowakArtur97.WorldOfManga.service.api.MangaService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -18,13 +18,13 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class MangaFavouriteController {
 
-	private final UserService userService;
+	private final MangaService mangaService;
 
 	@GetMapping(path = "/addOrRemoveFromFavourites/{id}")
 	public String addOrRemoveFromFavourites(HttpServletRequest request, @PathVariable("id") Long mangaId)
 			throws MangaNotFoundException {
 
-		userService.addOrRemoveFromFavourites(mangaId);
+		mangaService.addOrRemoveFromFavourites(mangaId);
 
 		String referer = request.getHeader("Referer");
 

@@ -19,8 +19,7 @@ import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilde
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import com.NowakArtur97.WorldOfManga.controller.manga.MangaFavouriteController;
-import com.NowakArtur97.WorldOfManga.service.api.UserService;
+import com.NowakArtur97.WorldOfManga.service.api.MangaService;
 
 @ExtendWith(MockitoExtension.class)
 @DisplayName("Manga Favourite Controller Tests")
@@ -33,7 +32,7 @@ public class MangaFavouriteControllerTest {
 	private MangaFavouriteController mangaFavouriteController;
 
 	@Mock
-	private UserService userService;
+	private MangaService mangaService;
 
 	@BeforeEach
 	public void setUp() {
@@ -52,6 +51,6 @@ public class MangaFavouriteControllerTest {
 
 		assertAll(
 				() -> mockMvc.perform(mockRequest).andExpect(status().is3xxRedirection()).andExpect(redirectedUrl("/")),
-				() -> verify(userService, times(1)).addOrRemoveFromFavourites(mangaId));
+				() -> verify(mangaService, times(1)).addOrRemoveFromFavourites(mangaId));
 	}
 }
