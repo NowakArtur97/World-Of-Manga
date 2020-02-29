@@ -40,6 +40,16 @@ public class MangaServiceImpl implements MangaService {
 	}
 
 	@Override
+	public Manga deleteManga(Long mangaId) throws MangaNotFoundException {
+		
+		Manga manga = findById(mangaId);
+
+		mangaRepository.delete(manga);
+		
+		return manga;
+	}
+	
+	@Override
 	public MangaDTO getMangaDTOById(Long mangaId) throws MangaNotFoundException {
 
 		Manga manga = findById(mangaId);

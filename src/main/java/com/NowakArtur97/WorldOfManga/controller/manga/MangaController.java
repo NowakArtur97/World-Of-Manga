@@ -1,5 +1,6 @@
 package com.NowakArtur97.WorldOfManga.controller.manga;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -78,5 +79,16 @@ public class MangaController {
 		mangaService.addOrUpdate(mangaDTO, manga);
 
 		return "redirect:/admin/addOrUpdateManga";
+	}
+
+	@GetMapping(path = "/deleteManga/{id}")
+	public String deleteMangaManga(HttpServletRequest request, @PathVariable("id") Long mangaId)
+			throws MangaNotFoundException {
+
+		mangaService.deleteManga(mangaId);
+
+		String referer = request.getHeader("Referer");
+
+		return "redirect:" + referer;
 	}
 }

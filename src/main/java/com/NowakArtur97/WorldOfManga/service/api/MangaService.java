@@ -11,8 +11,10 @@ public interface MangaService {
 	Manga addOrUpdate(MangaDTO mangaDTO, Manga manga) throws MangaNotFoundException;
 
 	MangaDTO getMangaDTOById(Long mangaId) throws MangaNotFoundException;
-	
+
 	List<Manga> findAll();
 
 	Manga findById(Long id) throws MangaNotFoundException;
+
+	Manga deleteManga(Long mangaId) throws MangaNotFoundException;
 }
