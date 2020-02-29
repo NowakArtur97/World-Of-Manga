@@ -16,7 +16,7 @@ import org.springframework.web.servlet.LocaleResolver;
 
 import com.NowakArtur97.WorldOfManga.exception.MangaNotFoundException;
 import com.NowakArtur97.WorldOfManga.model.Manga;
-import com.NowakArtur97.WorldOfManga.service.api.UserService;
+import com.NowakArtur97.WorldOfManga.service.api.MangaInUserListService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -25,7 +25,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class MangaInUserListController {
 
-	private final UserService userService;
+	private final MangaInUserListService mangaInUserListService;
 
 	private final LocaleResolver cookieLocaleResolver;
 
@@ -33,7 +33,7 @@ public class MangaInUserListController {
 	public String addToList(HttpServletRequest request, @RequestParam("id") Long mangaId,
 			@RequestParam("status") int status) throws MangaNotFoundException {
 
-		userService.addToList(mangaId, status);
+		mangaInUserListService.addToList(mangaId, status);
 
 		String referer = request.getHeader("Referer");
 
@@ -45,7 +45,7 @@ public class MangaInUserListController {
 
 		Locale locale = cookieLocaleResolver.resolveLocale(request);
 
-		Set<Manga> mangaList = userService.getUsersMangaListByStatus(status);
+		Set<Manga> mangaList = mangaInUserListService.getUsersMangaListByStatus(status);
 
 		theModel.addAttribute("mangas", mangaList);
 

@@ -32,7 +32,7 @@ import org.springframework.web.servlet.LocaleResolver;
 import com.NowakArtur97.WorldOfManga.model.Author;
 import com.NowakArtur97.WorldOfManga.model.Manga;
 import com.NowakArtur97.WorldOfManga.model.MangaTranslation;
-import com.NowakArtur97.WorldOfManga.service.api.UserService;
+import com.NowakArtur97.WorldOfManga.service.api.MangaInUserListService;
 
 @ExtendWith(MockitoExtension.class)
 @DisplayName("Manga In User List Controller Tests")
@@ -45,7 +45,7 @@ public class MangaInUserListControllerTest {
 	private MangaInUserListController mangaInUserListController;
 
 	@Mock
-	private UserService userService;
+	private MangaInUserListService mangaInUserListService;
 
 	@Mock
 	private LocaleResolver cookieLocaleResolver;
@@ -68,7 +68,7 @@ public class MangaInUserListControllerTest {
 
 		assertAll(
 				() -> mockMvc.perform(mockRequest).andExpect(status().is3xxRedirection()).andExpect(redirectedUrl("/")),
-				() -> verify(userService, times(1)).addToList(mangaId, status));
+				() -> verify(mangaInUserListService, times(1)).addToList(mangaId, status));
 	}
 
 	@Test
@@ -105,11 +105,11 @@ public class MangaInUserListControllerTest {
 		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.get("/auth/sortMangaList/{id}", status)
 				.locale(locale).flashAttr("mangas", mangasExpected).flashAttr("locale", locale).header("Referer", "/");
 
-		when(userService.getUsersMangaListByStatus(status)).thenReturn(mangasExpected);
+		when(mangaInUserListService.getUsersMangaListByStatus(status)).thenReturn(mangasExpected);
 
 		assertAll(
 				() -> mockMvc.perform(mockRequest).andExpect(status().isOk()).andExpect(view().name("views/manga-list"))
 						.andExpect(model().attribute("mangas", mangasExpected)),
-				() -> verify(userService, times(1)).getUsersMangaListByStatus(status));
+				() -> verify(mangaInUserListService, times(1)).getUsersMangaListByStatus(status));
 	}
 }
