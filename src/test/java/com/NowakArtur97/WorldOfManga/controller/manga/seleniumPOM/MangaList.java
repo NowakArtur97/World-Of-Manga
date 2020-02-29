@@ -2,7 +2,6 @@ package com.NowakArtur97.WorldOfManga.controller.manga.seleniumPOM;
 
 import java.util.List;
 
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -21,6 +20,7 @@ public class MangaList extends SeleniumPageObjectModel {
 	private static final String MANGA_FAVOURITE_COUNTER_CLASS = "manga_card__likes";
 	private static final String MANGA_FAVOURITE_CLASS = "manga_card__icon--heart";
 	private static final String MANGA_STATUS_CLASS = "manga_card__icon--status";
+	private static final String MANGA_ADMIN_CLASS = "manga_card__icon--admin";
 	private static final String MANGA_LIST_TYPE_CLASS = "manga_list_types__type";
 	private static final String MANGA_LIST_LINK = "//a[@href='/']";
 	private static final String MANGA_WORLD_LINK = "//a[@href='/auth/sortMangaList/5']";
@@ -45,6 +45,9 @@ public class MangaList extends SeleniumPageObjectModel {
 
 	@FindBy(className = MANGA_STATUS_CLASS)
 	private List<WebElement> mangaStatuses;
+
+	@FindBy(className = MANGA_ADMIN_CLASS)
+	private List<WebElement> adminOptions;
 
 	@FindBy(className = MANGA_LIST_TYPE_CLASS)
 	private List<WebElement> mangaListType;
@@ -91,8 +94,7 @@ public class MangaList extends SeleniumPageObjectModel {
 
 	public void clickMangaUserListLink() {
 
-		JavascriptExecutor executor = (JavascriptExecutor) webDriver;
-		executor.executeScript("arguments[0].click();", mangaUserListLink);
+		useJavaScriptToClickElement(mangaUserListLink);
 	}
 
 	public void chooseFirstManga() {
@@ -102,8 +104,7 @@ public class MangaList extends SeleniumPageObjectModel {
 
 	public void rateFirstManga(int rating) {
 
-		JavascriptExecutor executor = (JavascriptExecutor) webDriver;
-		executor.executeScript("arguments[0].click();", mangaStars.get(rating - 1));
+		useJavaScriptToClickElement(mangaStars.get(rating - 1));
 	}
 
 	public String getFirstMangaRating() {
@@ -113,8 +114,7 @@ public class MangaList extends SeleniumPageObjectModel {
 
 	public void addOrRemoveFirstMangaFromFavourite() {
 
-		JavascriptExecutor executor = (JavascriptExecutor) webDriver;
-		executor.executeScript("arguments[0].click();", mangaFavouriteLink.get(0));
+		useJavaScriptToClickElement(mangaFavouriteLink.get(0));
 	}
 
 	public String getFirstMangaFavouritesCounter() {
@@ -129,43 +129,46 @@ public class MangaList extends SeleniumPageObjectModel {
 
 	public void choseFavouritesManga() {
 
-		JavascriptExecutor executor = (JavascriptExecutor) webDriver;
-		executor.executeScript("arguments[0].click();", mangaListType.get(0));
+		useJavaScriptToClickElement(mangaListType.get(0));
 	}
 
 	public void choseRatedManga() {
 
-		JavascriptExecutor executor = (JavascriptExecutor) webDriver;
-		executor.executeScript("arguments[0].click();", mangaListType.get(1));
+		useJavaScriptToClickElement(mangaListType.get(1));
 	}
 
 	public void choseCurrentlyReadingManga() {
 
-		JavascriptExecutor executor = (JavascriptExecutor) webDriver;
-		executor.executeScript("arguments[0].click();", mangaListType.get(2));
+		useJavaScriptToClickElement(mangaListType.get(2));
 	}
 
 	public void choseCompletedManga() {
 
-		JavascriptExecutor executor = (JavascriptExecutor) webDriver;
-		executor.executeScript("arguments[0].click();", mangaListType.get(3));
+		useJavaScriptToClickElement(mangaListType.get(3));
 	}
 
 	public void chosePlanToReadManga() {
 
-		JavascriptExecutor executor = (JavascriptExecutor) webDriver;
-		executor.executeScript("arguments[0].click();", mangaListType.get(4));
+		useJavaScriptToClickElement(mangaListType.get(4));
 	}
 
 	public void choseOnHoldManga() {
 
-		JavascriptExecutor executor = (JavascriptExecutor) webDriver;
-		executor.executeScript("arguments[0].click();", mangaListType.get(5));
+		useJavaScriptToClickElement(mangaListType.get(5));
 	}
 
 	public void choseDroppedManga() {
 
-		JavascriptExecutor executor = (JavascriptExecutor) webDriver;
-		executor.executeScript("arguments[0].click();", mangaListType.get(6));
+		useJavaScriptToClickElement(mangaListType.get(6));
+	}
+
+	public void editManga() {
+
+		useJavaScriptToClickElement(adminOptions.get(0));
+	}
+
+	public void deleteManga() {
+
+		useJavaScriptToClickElement(adminOptions.get(1));
 	}
 }

@@ -45,11 +45,40 @@ public class MangaControllerUIPlTest extends MangaControllerUITest {
 		mangaFormPage.fillMandatoryMangaFormFields(englishTitle, "English description", polishTitle,
 				"Polish description", selectAuthor, addImage);
 
-		assertAll(() -> assertTrue(mangaFormPage.isUserOnMangaFormPage(), () -> "should show manga form page"),				() -> assertTrue(mangaFormPage.countFailureMessages() == 0, () -> "shouldn`t have errors"),
+		assertAll(() -> assertTrue(mangaFormPage.isUserOnMangaFormPage(), () -> "should show manga form page"),
+				() -> assertTrue(mangaFormPage.countFailureMessages() == 0, () -> "shouldn`t have errors"),
 				() -> assertTrue(mangaTranslationService.isTitleAlreadyInUse(englishTitle),
-						() -> "should save manga translation in database"),
+						() -> "should save english manga translation in database"),
 				() -> assertTrue(mangaTranslationService.isTitleAlreadyInUse(polishTitle),
-						() -> "should save manga translation in database"));
+						() -> "should save polish manga translation in database"));
+	}
+
+	@Test
+	@DisplayName("when correct editing creation with all fields")
+	public void when_correct_manga_editing_with_all_fields_should_add_manga() {
+
+		String englishTitle = "English title";
+		String polishTitle = "Polish title";
+		boolean selectAuthor = true;
+		boolean addImage = true;
+
+		loginPage.loadLoginView(LanguageVersion.PL);
+
+		loginPage.fillMandatoryLoginFields("admin", "admin");
+
+		mangaList.chooseFirstManga();
+
+		mangaList.editManga();
+
+		mangaFormPage.fillMandatoryMangaFormFields(englishTitle, "English description", polishTitle,
+				"Polish description", selectAuthor, addImage);
+
+		assertAll(() -> assertTrue(mangaFormPage.isUserOnMangaFormPage(), () -> "should show manga form page"),
+				() -> assertTrue(mangaFormPage.countFailureMessages() == 0, () -> "shouldn`t have errors"),
+				() -> assertTrue(mangaTranslationService.isTitleAlreadyInUse(englishTitle),
+						() -> "should update english manga translation in database"),
+				() -> assertTrue(mangaTranslationService.isTitleAlreadyInUse(polishTitle),
+						() -> "should update polish manga translation in database"));
 	}
 
 	@Test

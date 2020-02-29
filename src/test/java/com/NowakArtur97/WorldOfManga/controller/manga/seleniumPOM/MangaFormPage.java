@@ -2,7 +2,6 @@ package com.NowakArtur97.WorldOfManga.controller.manga.seleniumPOM;
 
 import java.util.List;
 
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -76,6 +75,7 @@ public class MangaFormPage extends SeleniumPageObjectModel {
 
 	public void setEnTitle(String enTitle) {
 
+		titleEnInput.clear();
 		titleEnInput.sendKeys(enTitle);
 	}
 
@@ -86,17 +86,8 @@ public class MangaFormPage extends SeleniumPageObjectModel {
 
 	public void setEnDescription(String enDescription) {
 
+		descriptionEnInput.clear();
 		descriptionEnInput.sendKeys(enDescription);
-	}
-
-	public void clickFirstAuthorCheckbox() {
-
-		authorsCheckboxes.get(0).click();
-	}
-
-	public boolean isFirstAuthorCheckboxSelected() {
-
-		return authorsCheckboxes.get(0).isSelected();
 	}
 
 	public String getPlTitle() {
@@ -106,6 +97,7 @@ public class MangaFormPage extends SeleniumPageObjectModel {
 
 	public void setPlTitle(String plTitle) {
 
+		titlePlInput.clear();
 		titlePlInput.sendKeys(plTitle);
 	}
 
@@ -116,12 +108,23 @@ public class MangaFormPage extends SeleniumPageObjectModel {
 
 	public void setPlDescription(String plDescription) {
 
+		descriptionPlInput.clear();
 		descriptionPlInput.sendKeys(plDescription);
 	}
 
 	public void addImage() {
 
 		imageInput.sendKeys(projectPath + EXAMPLE_IMAGE_PATH);
+	}
+
+	public void clickAuthorCheckbox(int index) {
+
+		authorsCheckboxes.get(index).click();
+	}
+
+	public boolean isFirstAuthorCheckboxSelected() {
+
+		return authorsCheckboxes.get(0).isSelected();
 	}
 
 	public void clickSubmitMangaFormButton() {
@@ -131,8 +134,7 @@ public class MangaFormPage extends SeleniumPageObjectModel {
 
 	public void clickAddOrUpdateMangaLinkButton() {
 
-		JavascriptExecutor executor = (JavascriptExecutor) webDriver;
-		executor.executeScript("arguments[0].click();", addOrUpdateMangaLink);
+		useJavaScriptToClickElement(addOrUpdateMangaLink);
 	}
 
 	public String getFormBoxText() {
@@ -157,7 +159,7 @@ public class MangaFormPage extends SeleniumPageObjectModel {
 		setPlDescription(plDescription);
 
 		if (selectAuthor) {
-			clickFirstAuthorCheckbox();
+			clickAuthorCheckbox(1);
 		}
 
 		if (addImage) {
@@ -166,7 +168,7 @@ public class MangaFormPage extends SeleniumPageObjectModel {
 
 		clickSubmitMangaFormButton();
 	}
-	
+
 	public boolean isUserOnMangaFormPage() {
 
 		return webDriver.getCurrentUrl().contains(RESOURCE_PATH);

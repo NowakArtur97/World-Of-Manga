@@ -2,7 +2,6 @@ package com.NowakArtur97.WorldOfManga.controller.author.seleniumPOM;
 
 import java.util.List;
 
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -72,8 +71,7 @@ public class AuthorFormPage extends SeleniumPageObjectModel {
 
 	public void clickAddOrUpdateAuthorLinkButton() {
 
-		JavascriptExecutor executor = (JavascriptExecutor) webDriver;
-		executor.executeScript("arguments[0].click();", addOrUpdateAuthorLink);
+		useJavaScriptToClickElement(addOrUpdateAuthorLink);
 	}
 
 	public void fillMandatoryAuthorFormFields(String fullName) {
