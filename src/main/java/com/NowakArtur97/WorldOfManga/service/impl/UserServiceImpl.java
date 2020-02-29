@@ -26,7 +26,6 @@ import com.NowakArtur97.WorldOfManga.model.Role;
 import com.NowakArtur97.WorldOfManga.model.User;
 import com.NowakArtur97.WorldOfManga.repository.UserRepository;
 import com.NowakArtur97.WorldOfManga.service.api.MangaInUserListService;
-import com.NowakArtur97.WorldOfManga.service.api.MangaRatingService;
 import com.NowakArtur97.WorldOfManga.service.api.MangaService;
 import com.NowakArtur97.WorldOfManga.service.api.UserService;
 
@@ -39,8 +38,6 @@ public class UserServiceImpl implements UserService {
 	private final UserRepository userRepository;
 
 	private final MangaService mangaService;
-
-	private final MangaRatingService mangaRatingService;
 
 	private final MangaInUserListService mangaInUserListService;
 
@@ -115,27 +112,6 @@ public class UserServiceImpl implements UserService {
 				.orElseThrow(() -> new UsernameNotFoundException("Invalid username or password"));
 
 		return loggedInUser;
-	}
-
-	@Override
-	@Transactional
-	public MangaRating rateManga(Long mangaId, int rating) throws MangaNotFoundException {
-
-		Manga manga = mangaService.findById(mangaId);
-
-		User user = loadLoggedInUsername();
-
-		MangaRating mangaRating = mangaRatingService.findByUserAndManga(user, manga);
-
-		if (mangaRating.getRating() == 0) {
-
-			mangaRating = user.addMangaRating(manga, rating);
-		} else {
-
-			mangaRating.setRating(rating);
-		}
-
-		return mangaRating;
 	}
 
 	@Override

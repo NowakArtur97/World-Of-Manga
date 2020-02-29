@@ -9,7 +9,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import com.NowakArtur97.WorldOfManga.exception.MangaNotFoundException;
 import com.NowakArtur97.WorldOfManga.model.Manga;
 import com.NowakArtur97.WorldOfManga.model.MangaInUserList;
-import com.NowakArtur97.WorldOfManga.model.MangaRating;
 import com.NowakArtur97.WorldOfManga.model.User;
 
 public interface UserService extends UserDetailsService {
@@ -22,13 +21,11 @@ public interface UserService extends UserDetailsService {
 
 	User save(User user);
 
-	MangaRating rateManga(Long mangaId, int rating) throws MangaNotFoundException;
-
 	Manga addOrRemoveFromFavourites(Long mangaId) throws MangaNotFoundException;
 
 	MangaInUserList addToList(Long mangaId, int status) throws MangaNotFoundException;
-	
+
 	Set<Manga> getUsersMangaListByStatus(int status);
-	
+
 	User loadLoggedInUsername() throws UsernameNotFoundException;
 }

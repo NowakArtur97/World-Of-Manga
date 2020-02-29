@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.NowakArtur97.WorldOfManga.exception.MangaNotFoundException;
-import com.NowakArtur97.WorldOfManga.service.api.UserService;
+import com.NowakArtur97.WorldOfManga.service.api.MangaRatingService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -18,13 +18,13 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class MangaRatingController {
 
-	private final UserService userService;
+	private final MangaRatingService mangaRatingService;
 
 	@GetMapping(path = "/rateManga")
 	public String rateManga(HttpServletRequest request, @RequestParam("id") Long mangaId,
 			@RequestParam("rating") int rating) throws MangaNotFoundException {
 
-		userService.rateManga(mangaId, rating);
+		mangaRatingService.rateManga(mangaId, rating);
 
 		String referer = request.getHeader("Referer");
 
