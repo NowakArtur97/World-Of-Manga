@@ -88,6 +88,30 @@ public class DatabaseSchedular {
 		URL godOfHighschoolURL = new URL("https://f01.mrcdn.info/file/mrportal/h/2/l/9/SK.akyO9XmO.png");
 		String godOfHighschoolAuthor = "Park Yong-je";
 
+		String narutoTitle = "Naruto";
+		String narutoDescriptionEn = "Before Naruto's birth, a great demon fox had attacked the Hidden Leaf Village. A man known as the 4th Hokage sealed the demon inside the newly born Naruto, causing him to unknowingly grow up detested by his fellow villagers. Despite his lack of talent in many areas of ninjutsu, Naruto strives for only one goal: to gain the title of Hokage, the strongest ninja in his village. Desiring the respect he never received, Naruto works towards his dream with fellow friends Sasuke and Sakura and mentor Kakashi as they go through many trials and battles that come with being a ninja.";
+		String narutoDescriptionPl = "Naruto to młody, hałaśliwy i nierozgarnięty ninja z Wioski Ukrytego Liścia. Jego największym marzeniem jest zostanie Hokage, jednak każdy w wiosce naśmiewa się z niego i mówi mu, że nie da rady. Naruto jednak nie poddaje się i stawia czoła wszystkim przeszkodom na swojej drodze, czym udowadnia innym, że się co do niego grubo mylili. Z czasem, ze słabego dzieciaka, którego każdy uważał za nic więcej jak potwora i nieudacznika, Naruto staje się silnym i odważnym shinobi, który ze wszystkich sił broni wioski i swoich przyjaciół, narażając przy tym własne życie.";
+		URL narutoURL = new URL("https://img.mrcdn.info/file/mrportal/j/3/8/3/nE.ffeWKPZd.jpg");
+		String narutoAuthor = "Masashi Kishimoto";
+
+		String blueExorcistTitle = "Blue Exorcist";
+		String blueExorcistDescriptionEn = "Ao no Exorcist follows Rin Okumura who appears to be an ordinary, somewhat troublesome teenager—that is until one day he is ambushed by demons. His world turns upside down when he discovers that he is in fact the very son of Satan and that his demon father wishes for him to return so they can conquer Assiah together. Not wanting to join the king of Gehenna, Rin decides to begin training to become an exorcist so that he can fight to defend Assiah alongside his brother Yukio";
+		String blueExorcistDescriptionPl = "Yukio i Rin Okumura prowadzą spokojne życie, ucząc się i dorastając pod okiem przybranego ojca, będącego równocześnie kapłanem. Rin to chłopak żywiołowy, wesoły i bardzo sprawny fizycznie, przy czym niezbyt rozgarnięty, zaś Yukio - jego zupełne przeciwieństwo. Chłopcy nie znają swoich prawdziwych rodziców, jednak nie stanowi to dla nich większego problemu - przynajmniej do dnia, w którym Rin dowiaduje się, że ich biologicznym ojcem jest sam władca Piekła, w anime zwanego Gehenną. Łatwo się domyślić, że ten fakt wprowadzi do życia bliźniaków ogromne zmiany i przysporzy nie lada kłopotów.";
+		URL blueExorcistURL = new URL("https://f01.mrcdn.info/file/mrportal/i/3/v/l/A3.cXilx5W-.jpg");
+		String blueExorcistAuthor = "Katou Kazue";
+
+		String berserkTitle = "Berserk";
+		String berserkDescriptionEn = "Gattsu, known as the Black Swordsman, seeks sanctuary from the demonic forces that persue himself and his woman, and also vengeance against the man who branded him as an unholy sacrifice. Aided only by his titanic strength, skill and sword, Gattsu must struggle against his bleak destiny, all the while fighting with a rage that might strip him of his humanity. Berserk is a dark and brooding story of outrageous swordplay and ominous fate, in the theme of Shakespeare's MacBeth.";
+		String berserkDescriptionPl = "Guts, były najemnik znany obecnie jako \"Czarny Szermierz\", poszukuje zemsty. Pomimo traumatycznego dzieciństwa, z czasem udaje mu się odnaleźć kogoś wartego szacunku oraz, na pozór, godnego zaufania. Pewnego dnia fałszywy kompan odbiera Guts'owi wszystko co było dla niego ważne na rzecz swoich własnych, egoistycznych pragnień. Naznaczony symbolem ofiary, Guts zostaje skazany na wieczną ucieczkę przed nieustannie ścigającymi go demonicznymi stworami. Uzbrojony w gigantyczny miecz i potworną siłę wyrusza na usłane trudnościami poszukiwanie zemsty. Dopóki nie zabije tego kto odarł go - i jego ukochaną - z ich człowieczeństwa, nie pozwoli się powstrzymać nawet samej śmierci.";
+		URL berserkURL = new URL("https://f01.mrcdn.info/file/mrportal/i/4/f/c/90.3RYbZH0e.jpg");
+		String berserkAuthor = "Kentarou Miura";
+
+		String blackCloverTitle = "Black Clover";
+		String blackCloverDescriptionEn = "Aster and Yuno were abandoned together at the same church, and have been inseparable since. As children, they promised that they would compete against each other to see who would become the next sorcerous emperor. However, as they grew up, some differences between them became plain. Yuno was a genius with magic, with amazing power and control, while Aster could not use magic at all, and tried to make up for his lack by training physically. When they received their grimoires at age 15, Yuno got a spectacular book with a four-leaf-clover (most people receive a three-leaf-clover), while Aster received nothing at all. However, when Yuno was threatened, the truth about Aster's power was revealed he received a five-leaf-clover grimoire, a 'black clover' book of anti-magic. Now the two friends are heading out in the world, both seeking the same goal!";
+		String blackCloverDescriptionPl = "W świecie gdzie magia była wszystkim, urodził się chłopiec o imieniu Asta, niezdolny używać jakiejkolwiek magii. Z tego powodu został porzucony w biednym kościele. By udowodnić swoją wartość oraz dotrzymać obietnicę złożoną przyjacielowi chce zostać Magicznym Imperatorem.";
+		URL blackCloverURL = new URL("https://f01.mrcdn.info/file/mrportal/i/6/m/2/nY.g6rCBDzH.jpg");
+		String blackCloverAuthor = "Yūki Tabata";
+
 //		String Title = "";
 //		String DescriptionEn = "";
 //		String DescriptionPl = "";
@@ -108,6 +132,13 @@ public class DatabaseSchedular {
 				fireForceAuthor);
 		saveManga(godOfHighschoolTitle, godOfHighschoolDescriptionEn, godOfHighschoolTitle,
 				godOfHighschoolDescriptionPl, godOfHighschoolURL, godOfHighschoolAuthor);
+		saveManga(narutoTitle, narutoDescriptionEn, narutoTitle, narutoDescriptionPl, narutoURL, narutoAuthor);
+		saveManga(blueExorcistTitle, blueExorcistDescriptionEn, blueExorcistTitle, blueExorcistDescriptionPl,
+				blueExorcistURL, blueExorcistAuthor);
+		saveManga(berserkTitle, berserkDescriptionEn, berserkTitle, berserkDescriptionPl, berserkURL, berserkAuthor);
+		saveManga(blackCloverTitle, blackCloverDescriptionEn, blackCloverTitle, blackCloverDescriptionPl,
+				blackCloverURL, blackCloverAuthor);
+//		saveManga(Title, DescriptionEn, Title, DescriptionPl, URL, Author);
 	}
 
 	private void saveManga(String titleEn, String descriptionEn, String titlePl, String descriptionPl, URL imageURL,
