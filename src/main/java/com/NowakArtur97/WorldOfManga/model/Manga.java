@@ -116,4 +116,45 @@ public class Manga {
 			authorIterator.remove();
 		}
 	}
+
+	public void removeFromAllUsersFavourites() {
+
+		for (Iterator<User> userIterator = this.getUserWithMangaInFavourites().iterator(); userIterator.hasNext();) {
+			User user = userIterator.next();
+			user.removeMangaFromFavourites(this);
+			userIterator.remove();
+		}
+	}
+
+	public void removeFromAllUsersLists() {
+
+		for (Iterator<MangaInUserList> userIterator = this.getUsersWithMangaInList().iterator(); userIterator
+				.hasNext();) {
+			MangaInUserList mangaInList = userIterator.next();
+			mangaInList.setManga(null);
+			mangaInList.setUser(null);
+			userIterator.remove();
+		}
+	}
+
+	public void removeAllRatings() {
+
+		for (Iterator<MangaRating> ratingIterator = this.getMangasRatings().iterator(); ratingIterator.hasNext();) {
+			MangaRating mangaRating = ratingIterator.next();
+			mangaRating.setManga(null);
+			mangaRating.setUser(null);
+			ratingIterator.remove();
+		}
+	}
+
+	public void deleteAllRelations() {
+
+		this.removeFromAllUsersFavourites();
+
+		this.removeFromAllUsersLists();
+
+		this.removeAllRatings();
+
+		this.removeAllAuthors();
+	}
 }
