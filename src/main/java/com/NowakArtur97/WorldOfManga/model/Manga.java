@@ -121,7 +121,7 @@ public class Manga {
 
 		for (Iterator<User> userIterator = this.getUserWithMangaInFavourites().iterator(); userIterator.hasNext();) {
 			User user = userIterator.next();
-			user.removeMangaFromFavourites(this);
+			user.getFavouriteMangas().remove(this);
 			userIterator.remove();
 		}
 	}

@@ -108,6 +108,8 @@ public class User {
 
 		this.getFavouriteMangas().remove(manga);
 
+		manga.getUserWithMangaInFavourites().remove(this);
+		
 		return manga;
 	}
 

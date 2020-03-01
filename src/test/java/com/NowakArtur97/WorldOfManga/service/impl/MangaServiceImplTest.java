@@ -186,9 +186,7 @@ public class MangaServiceImplTest {
 		mangaExpected.addTranslation(mangaTranslationPlExpected);
 		mangaExpected.setImage(image.getBytes());
 
-		String username = "principal";
-
-		User userExpected = User.builder().username(username).firstName("first name").lastName("last name")
+		User userExpected = User.builder().username("user").firstName("first name").lastName("last name")
 				.password("user").email("user@email.com").isEnabled(true).build();
 
 		when(mangaRepository.findById(mangaId)).thenReturn(Optional.of(mangaExpected));
@@ -230,9 +228,7 @@ public class MangaServiceImplTest {
 		mangaExpected.addTranslation(mangaTranslationPlExpected);
 		mangaExpected.setImage(image.getBytes());
 
-		String username = "principal";
-
-		User userExpected = User.builder().username(username).firstName("first name").lastName("last name")
+		User userExpected = User.builder().username("user").firstName("first name").lastName("last name")
 				.password("user").email("user@email.com").isEnabled(true).build();
 
 		userExpected.addMangaToFavourites(mangaExpected);
@@ -244,12 +240,12 @@ public class MangaServiceImplTest {
 
 		assertAll(
 				() -> assertEquals(mangaExpected, mangaActual,
-						() -> "should return remove from list manga: " + mangaExpected + ", but was: " + mangaActual),
+						() -> "should return deleted manga from list manga: " + mangaExpected + ", but was: " + mangaActual),
 				() -> assertFalse(userExpected.getFavouriteMangas().contains(mangaActual),
 						() -> "shouldn`t manga be in users favourites but was: " + userExpected.getFavouriteMangas()),
 				() -> assertFalse(mangaActual.getUserWithMangaInFavourites().contains(userExpected),
 						() -> "shouldn`t  user be one of the people with the manga in favorites but was: "
-								+ userExpected.getFavouriteMangas()),
+								+ mangaActual.getUserWithMangaInFavourites()),
 				() -> verify(mangaRepository, times(1)).findById(mangaId),
 				() -> verify(userService, times(1)).loadLoggedInUsername());
 	}
