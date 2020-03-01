@@ -82,7 +82,7 @@ public class MangaController {
 	}
 
 	@GetMapping(path = "/deleteManga/{id}")
-	public String deleteMangaManga(HttpServletRequest request, @PathVariable("id") Long mangaId)
+	public String deleteManga(HttpServletRequest request, @PathVariable("id") Long mangaId)
 			throws MangaNotFoundException {
 
 		mangaService.deleteManga(mangaId);

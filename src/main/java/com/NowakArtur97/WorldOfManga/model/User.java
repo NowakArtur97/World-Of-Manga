@@ -74,7 +74,7 @@ public class User {
 	@EqualsAndHashCode.Exclude
 	private final Set<MangaInUserList> mangaList = new HashSet<>();
 
-	@ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST,
+	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST,
 			CascadeType.REFRESH })
 	@JoinTable(name = "favourite_manga", schema = "world_of_manga", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "manga_id"))
 	@ToString.Exclude
@@ -107,7 +107,6 @@ public class User {
 	public Manga removeMangaFromFavourites(Manga manga) {
 
 		this.getFavouriteMangas().remove(manga);
-		manga.getUserWithMangaInFavourites().remove(this);
 
 		return manga;
 	}
@@ -120,5 +119,13 @@ public class User {
 		manga.getUsersWithMangaInList().add(mangaInList);
 
 		return mangaInList;
+	}
+
+	public MangaInUserList removeMangaFromList(MangaInUserList manga) {
+
+		this.getMangaList().remove(manga);
+		manga.setUser(null);
+
+		return manga;
 	}
 }

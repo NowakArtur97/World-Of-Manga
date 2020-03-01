@@ -1,5 +1,6 @@
 package com.NowakArtur97.WorldOfManga.service.impl;
 
+import java.util.Iterator;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -11,6 +12,8 @@ import com.NowakArtur97.WorldOfManga.dto.MangaDTO;
 import com.NowakArtur97.WorldOfManga.exception.MangaNotFoundException;
 import com.NowakArtur97.WorldOfManga.mapper.manga.MangaMapper;
 import com.NowakArtur97.WorldOfManga.model.Manga;
+import com.NowakArtur97.WorldOfManga.model.MangaInUserList;
+import com.NowakArtur97.WorldOfManga.model.MangaRating;
 import com.NowakArtur97.WorldOfManga.model.User;
 import com.NowakArtur97.WorldOfManga.repository.MangaRepository;
 import com.NowakArtur97.WorldOfManga.service.api.MangaService;
@@ -49,6 +52,29 @@ public class MangaServiceImpl implements MangaService {
 	public Manga deleteManga(Long mangaId) throws MangaNotFoundException {
 
 		Manga manga = findById(mangaId);
+
+		for (Iterator<User> userIterator = manga.getUserWithMangaInFavourites().iterator(); userIterator.hasNext();) {
+			User user = userIterator.next();
+			user.removeMangaFromFavourites(manga);
+			userIterator.remove();
+		}
+
+		for (Iterator<MangaInUserList> userIterator = manga.getUsersWithMangaInList().iterator(); userIterator
+				.hasNext();) {
+			MangaInUserList mangaInList = userIterator.next();
+			mangaInList.setManga(null);
+			mangaInList.setUser(null);
+			userIterator.remove();
+		}
+
+		for (Iterator<MangaRating> ratingIterator = manga.getMangasRatings().iterator(); ratingIterator.hasNext();) {
+			MangaRating mangaRating = ratingIterator.next();
+			mangaRating.setManga(null);
+			mangaRating.setUser(null);
+			ratingIterator.remove();
+		}
+
+		manga.removeAllAuthors();
 
 		mangaRepository.delete(manga);
 

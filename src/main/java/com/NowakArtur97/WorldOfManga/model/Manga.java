@@ -96,16 +96,6 @@ public class Manga {
 		mangaTranslation.setManga(null);
 	}
 
-	public void removeAllTranslations() {
-
-		for (Iterator<MangaTranslation> translationIterator = this.getTranslations().iterator(); translationIterator
-				.hasNext();) {
-			MangaTranslation translation = translationIterator.next();
-			translation.setManga(null);
-			translationIterator.remove();
-		}
-	}
-
 	public void addAuthor(Author author) {
 
 		this.getAuthors().add(author);
