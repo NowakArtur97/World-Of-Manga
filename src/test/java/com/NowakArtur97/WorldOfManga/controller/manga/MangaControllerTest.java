@@ -32,6 +32,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import com.NowakArtur97.WorldOfManga.dto.AuthorDTO;
@@ -89,13 +91,13 @@ public class MangaControllerTest {
 				.andExpect(model().attribute("authorDTO", new AuthorDTO()))
 				.andExpect(model().attribute("authors", authors)), () -> verify(authorService, times(1)).findAll());
 	}
-	
+
 	@Test
 	@DisplayName("when load edit manga page")
 	public void when_load_edit_manga_page_should_show_manga_form() throws MangaNotFoundException {
 
 		Long mangaId = 1L;
-		
+
 		MangaTranslationDTO mangaTranslationEnDTO = MangaTranslationDTO.builder().title("English title")
 				.description("English description").build();
 		MangaTranslationDTO mangaTranslationPlDTO = MangaTranslationDTO.builder().title("Polish title")
@@ -107,19 +109,21 @@ public class MangaControllerTest {
 		Author author = new Author("FirstName LastName");
 		authors.add(author);
 
-		MangaDTO mangaDTO = MangaDTO.builder().id(mangaId).enTranslation(mangaTranslationEnDTO).plTranslation(mangaTranslationPlDTO)
-				.image(image).authors(authors).build();
-		
+		MangaDTO mangaDTO = MangaDTO.builder().id(mangaId).enTranslation(mangaTranslationEnDTO)
+				.plTranslation(mangaTranslationPlDTO).image(image).authors(authors).build();
+
 		List<Author> authorsDB = new ArrayList<>();
 		authors.add(author);
 
 		when(authorService.findAll()).thenReturn(authorsDB);
 		when(mangaService.getMangaDTOById(mangaId)).thenReturn(mangaDTO);
 
-		assertAll(() -> mockMvc.perform(get("/admin/addOrUpdateManga/{id}", mangaId)).andExpect(status().isOk())
-				.andExpect(view().name("views/manga-form")).andExpect(model().attribute("mangaDTO", mangaDTO))
-				.andExpect(model().attribute("authorDTO", new AuthorDTO()))
-				.andExpect(model().attribute("authors", authorsDB)), () -> verify(authorService, times(1)).findAll());
+		assertAll(
+				() -> mockMvc.perform(get("/admin/addOrUpdateManga/{id}", mangaId)).andExpect(status().isOk())
+						.andExpect(view().name("views/manga-form")).andExpect(model().attribute("mangaDTO", mangaDTO))
+						.andExpect(model().attribute("authorDTO", new AuthorDTO()))
+						.andExpect(model().attribute("authors", authorsDB)),
+				() -> verify(authorService, times(1)).findAll());
 	}
 
 	@Test
@@ -153,7 +157,7 @@ public class MangaControllerTest {
 		mangaExpected.addTranslation(mangaTranslationEnExpected);
 		mangaExpected.addTranslation(mangaTranslationPlExpected);
 		mangaExpected.setImage(image.getBytes());
-		
+
 		when(mangaTranslationService.addOrUpdate(mangaDTO)).thenReturn(mangaExpected);
 
 		assertAll(
@@ -270,5 +274,19 @@ public class MangaControllerTest {
 								hasProperty("plTranslation", hasProperty("description", is(polishDescription))))),
 				() -> verify(mangaTranslationService, never()).addOrUpdate(mangaDTO),
 				() -> verify(authorService, times(1)).findAll());
+	}
+
+	@Test
+	@DisplayName("when delete manga")
+	public void when_delete_manga_should_delete_manga_and_redirect() {
+
+		Long mangaId = 1L;
+
+		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.get("/admin/deleteManga/{id}", mangaId)
+				.header("Referer", "/");
+
+		assertAll(
+				() -> mockMvc.perform(mockRequest).andExpect(status().is3xxRedirection()).andExpect(redirectedUrl("/")),
+				() -> verify(mangaService, times(1)).deleteManga(mangaId));
 	}
 }
