@@ -27,10 +27,13 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.mock.web.MockMultipartFile;
 
 import com.NowakArtur97.WorldOfManga.dto.MangaDTO;
+import com.NowakArtur97.WorldOfManga.enums.MangaInUserListStatus;
 import com.NowakArtur97.WorldOfManga.exception.MangaNotFoundException;
 import com.NowakArtur97.WorldOfManga.mapper.manga.MangaMapper;
 import com.NowakArtur97.WorldOfManga.model.Author;
 import com.NowakArtur97.WorldOfManga.model.Manga;
+import com.NowakArtur97.WorldOfManga.model.MangaInUserList;
+import com.NowakArtur97.WorldOfManga.model.MangaRating;
 import com.NowakArtur97.WorldOfManga.model.MangaTranslation;
 import com.NowakArtur97.WorldOfManga.model.User;
 import com.NowakArtur97.WorldOfManga.repository.MangaRepository;
@@ -54,7 +57,7 @@ public class MangaServiceImplTest {
 	private UserService userService;
 
 	@Test
-	@DisplayName("when add manga should save manga")
+	@DisplayName("when add manga")
 	public void when_add_manga_should_save_manga() throws IOException, MangaNotFoundException {
 
 		MangaDTO mangaDTO = new MangaDTO();
@@ -104,7 +107,7 @@ public class MangaServiceImplTest {
 	}
 
 	@Test
-	@DisplayName("when edit manga should update manga")
+	@DisplayName("when edit manga")
 	public void when_edit_manga_should_update_manga() throws IOException, MangaNotFoundException {
 
 		Long mangaId = 1L;
@@ -162,6 +165,72 @@ public class MangaServiceImplTest {
 						() -> "should save manga with image, but was: " + mangaActual.getImage()),
 				() -> verify(mangaMapper, times(1)).mapMangaDTOToManga(mangaExpected, mangaDTO),
 				() -> verify(mangaRepository, times(1)).save(mangaActual));
+	}
+
+	@Test
+	@DisplayName("when delete manga")
+	public void when_delete_manga_should_remove_manga() throws IOException, MangaNotFoundException {
+
+		MangaTranslation mangaTranslationEnExpected = MangaTranslation.builder().title("English title")
+				.description("English description").build();
+		MangaTranslation mangaTranslationPlExpected = MangaTranslation.builder().title("Polish title")
+				.description("Polish description").build();
+
+		Set<Author> authorsExpected = new HashSet<>();
+		Author authorExpected = new Author("FirsName LastName");
+		authorsExpected.add(authorExpected);
+
+		MockMultipartFile image = new MockMultipartFile("image.jpg", "file bytes".getBytes());
+
+		Manga mangaExpected = new Manga();
+		mangaExpected.addAuthor(authorExpected);
+		mangaExpected.addTranslation(mangaTranslationEnExpected);
+		mangaExpected.addTranslation(mangaTranslationPlExpected);
+		mangaExpected.setImage(image.getBytes());
+
+		User userExpected = User.builder().username("username").firstName("first name").lastName("last name")
+				.password("user").email("user@email.com").isEnabled(true).build();
+
+		int ratingExpected = 5;
+
+		MangaRating mangaRatingExpected = MangaRating.builder().manga(mangaExpected).user(userExpected)
+				.rating(ratingExpected).build();
+		mangaExpected.getMangasRatings().add(mangaRatingExpected);
+
+		userExpected.addMangaToFavourites(mangaExpected);
+
+		MangaInUserList mangaInListExpected = MangaInUserList.builder().manga(mangaExpected).user(userExpected)
+				.status(MangaInUserListStatus.COMPLETED).build();
+		mangaExpected.getUsersWithMangaInList().add(mangaInListExpected);
+
+		Long mangaId = 1L;
+
+		when(mangaRepository.findById(mangaId)).thenReturn(Optional.of(mangaExpected));
+
+		Manga mangaActual = mangaService.deleteManga(mangaId);
+
+		assertAll(
+				() -> assertTrue(mangaActual.getAuthors().isEmpty(),
+						() -> "shouldn`t manga have authors, but was: " + mangaActual.getAuthors()),
+				() -> assertFalse(mangaActual.getAuthors().contains(authorExpected),
+						() -> "shouldn`t contain author, but was: " + mangaActual.getAuthors()),
+				() -> assertTrue(mangaActual.getMangasRatings().isEmpty(),
+						() -> "shouldn`t manga have ratings, but was: " + mangaActual.getMangasRatings()),
+				() -> assertFalse(mangaActual.getMangasRatings().contains(mangaRatingExpected),
+						() -> "shouldn`t contain rating, but was: " + mangaActual.getMangasRatings()),
+				() -> assertTrue(mangaActual.getUsersWithMangaInList().isEmpty(),
+						() -> "shouldn`t manga have users with manga in their lists, but was: "
+								+ mangaActual.getUsersWithMangaInList()),
+				() -> assertFalse(mangaActual.getUsersWithMangaInList().contains(mangaInListExpected),
+						() -> "shouldn`t any user have manga in list, but was: "
+								+ mangaActual.getUsersWithMangaInList()),
+				() -> assertTrue(mangaActual.getUserWithMangaInFavourites().isEmpty(),
+						() -> "shouldn`t manga have users with manga in their favourites, but was: "
+								+ mangaActual.getUserWithMangaInFavourites()),
+				() -> assertFalse(mangaActual.getUserWithMangaInFavourites().contains(userExpected),
+						() -> "shouldn`t manga have users with manga in their favourites, but was: "
+								+ mangaActual.getUserWithMangaInFavourites()),
+				() -> verify(mangaRepository, times(1)).findById(mangaId));
 	}
 
 	@Test
@@ -240,7 +309,8 @@ public class MangaServiceImplTest {
 
 		assertAll(
 				() -> assertEquals(mangaExpected, mangaActual,
-						() -> "should return deleted manga from list manga: " + mangaExpected + ", but was: " + mangaActual),
+						() -> "should return deleted manga from list manga: " + mangaExpected + ", but was: "
+								+ mangaActual),
 				() -> assertFalse(userExpected.getFavouriteMangas().contains(mangaActual),
 						() -> "shouldn`t manga be in users favourites but was: " + userExpected.getFavouriteMangas()),
 				() -> assertFalse(mangaActual.getUserWithMangaInFavourites().contains(userExpected),
