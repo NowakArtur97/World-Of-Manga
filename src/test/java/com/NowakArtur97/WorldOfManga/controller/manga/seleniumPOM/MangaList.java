@@ -97,14 +97,24 @@ public class MangaList extends SeleniumPageObjectModel {
 		useJavaScriptToClickElement(mangaUserListLink);
 	}
 
-	public void chooseFirstManga() {
+	public void chooseManga(int mangaIndex) {
 
-		mangaCards.get(0).click();
+		mangaCards.get(mangaIndex).click();
+	}
+
+	public void chooseLastManga() {
+
+		mangaCards.get(mangaCards.size() - 1).click();
 	}
 
 	public void rateFirstManga(int rating) {
 
 		useJavaScriptToClickElement(mangaStars.get(rating - 1));
+	}
+	
+	public void rateLastManga(int rating) {
+		
+		useJavaScriptToClickElement(mangaStars.get((mangaStars.size() - 5) + rating - 1));
 	}
 
 	public String getFirstMangaRating() {
@@ -112,9 +122,14 @@ public class MangaList extends SeleniumPageObjectModel {
 		return mangaRating.getText();
 	}
 
-	public void addOrRemoveFirstMangaFromFavourite() {
+	public void addOrRemoveFirstMangaFromFavourites() {
 
 		useJavaScriptToClickElement(mangaFavouriteLink.get(0));
+	}
+
+	public void addOrRemoveLastMangaFromFavourites() {
+
+		useJavaScriptToClickElement(mangaFavouriteLink.get(mangaFavouriteLink.size() - 1));
 	}
 
 	public String getFirstMangaFavouritesCounter() {
@@ -123,8 +138,12 @@ public class MangaList extends SeleniumPageObjectModel {
 	}
 
 	public void addFirstMangaToList(int mangaStatus) {
-
+		
 		mangaStatuses.get(mangaStatus).click();
+	}
+	public void addLastMangaToList(int mangaStatus) {
+		
+		mangaStatuses.get((mangaStatuses.size() - 5) + mangaStatus).click();
 	}
 
 	public void choseFavouritesManga() {
@@ -162,13 +181,13 @@ public class MangaList extends SeleniumPageObjectModel {
 		useJavaScriptToClickElement(mangaListType.get(6));
 	}
 
-	public void editManga() {
+	public void editFirstManga() {
 
 		useJavaScriptToClickElement(adminOptions.get(0));
 	}
 
-	public void deleteManga() {
+	public void deleteLastManga() {
 
-		useJavaScriptToClickElement(adminOptions.get(1));
+		useJavaScriptToClickElement(adminOptions.get(adminOptions.size() - 1));
 	}
 }

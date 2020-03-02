@@ -32,7 +32,7 @@ public class MangaRatingUIEnTest extends MangaRatingUITest {
 
 		loginPage.fillMandatoryLoginFields("user", "user");
 
-		mangaList.chooseFirstManga();
+		mangaList.chooseManga(0);;
 
 		int mangaRating = 5;
 
@@ -50,7 +50,7 @@ public class MangaRatingUIEnTest extends MangaRatingUITest {
 
 		loginPage.fillMandatoryLoginFields("user", "user");
 
-		mangaList.chooseFirstManga();
+		mangaList.chooseManga(0);;
 
 		int mangaRating = 5;
 
@@ -72,13 +72,13 @@ public class MangaRatingUIEnTest extends MangaRatingUITest {
 
 		loginPage.fillMandatoryLoginFields("user", "user");
 
-		mangaList.chooseFirstManga();
+		mangaList.chooseManga(0);;
 
 		int firstMangaRating = 5;
 
 		mangaList.rateFirstManga(firstMangaRating);
 
-		mangaList.chooseFirstManga();
+		mangaList.chooseManga(0);;
 
 		int secondMangaRating = 4;
 
@@ -97,7 +97,7 @@ public class MangaRatingUIEnTest extends MangaRatingUITest {
 
 		mangaList.loadMangaList(LanguageVersion.ENG);
 
-		mangaList.chooseFirstManga();
+		mangaList.chooseManga(0);;
 
 		int mangaRating = 5;
 

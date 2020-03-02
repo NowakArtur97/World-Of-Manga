@@ -51,7 +51,7 @@ public class MangaControllerUITest extends SeleniumUITest {
 		loginPage = new LoginPage(webDriver);
 
 		mangaFormPage = new MangaFormPage(webDriver);
-		
+
 		mangaList = new MangaList(webDriver);
 	}
 }

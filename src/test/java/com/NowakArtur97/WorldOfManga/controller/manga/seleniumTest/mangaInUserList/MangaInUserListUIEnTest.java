@@ -34,7 +34,7 @@ public class MangaInUserListUIEnTest extends MangaInUserListUITest {
 
 		mangaList.loadMangaList(LanguageVersion.ENG);
 
-		mangaList.chooseFirstManga();
+		mangaList.chooseManga(0);
 
 		int mangaStatus = 0;
 
@@ -61,7 +61,7 @@ public class MangaInUserListUIEnTest extends MangaInUserListUITest {
 
 		mangaList.loadMangaList(LanguageVersion.ENG);
 
-		mangaList.chooseFirstManga();
+		mangaList.chooseManga(0);
 
 		int mangaStatus = 1;
 
@@ -88,7 +88,7 @@ public class MangaInUserListUIEnTest extends MangaInUserListUITest {
 
 		mangaList.loadMangaList(LanguageVersion.ENG);
 
-		mangaList.chooseFirstManga();
+		mangaList.chooseManga(0);
 
 		int mangaStatus = 2;
 
@@ -115,7 +115,7 @@ public class MangaInUserListUIEnTest extends MangaInUserListUITest {
 
 		mangaList.loadMangaList(LanguageVersion.ENG);
 
-		mangaList.chooseFirstManga();
+		mangaList.chooseManga(0);
 
 		int mangaStatus = 3;
 
@@ -142,7 +142,7 @@ public class MangaInUserListUIEnTest extends MangaInUserListUITest {
 
 		mangaList.loadMangaList(LanguageVersion.ENG);
 
-		mangaList.chooseFirstManga();
+		mangaList.chooseManga(0);
 
 		int mangaStatus = 4;
 
@@ -165,7 +165,7 @@ public class MangaInUserListUIEnTest extends MangaInUserListUITest {
 
 		mangaList.loadMangaList(LanguageVersion.ENG);
 
-		mangaList.chooseFirstManga();
+		mangaList.chooseManga(0);
 
 		int mangaStatus = 0;
 

@@ -126,6 +126,11 @@ public class MangaFormPage extends SeleniumPageObjectModel {
 
 		return authorsCheckboxes.get(0).isSelected();
 	}
+	
+	public boolean isSecodnAuthorCheckboxSelected() {
+
+		return authorsCheckboxes.get(1).isSelected();
+	}
 
 	public void clickSubmitMangaFormButton() {
 

@@ -34,9 +34,9 @@ public class MangaFavouriteUIEnTest extends MangaFavouriteUITest {
 
 		loginPage.fillMandatoryLoginFields("user", "user");
 
-		mangaList.chooseFirstManga();
+		mangaList.chooseManga(0);
 
-		mangaList.addOrRemoveFirstMangaFromFavourite();
+		mangaList.addOrRemoveFirstMangaFromFavourites();
 
 		assertAll(() -> assertTrue(mangaList.getFirstMangaFavouritesCounter().contains("1"),
 				() -> "should show manga with one heart, but was: " + mangaList.getFirstMangaFavouritesCounter()));
@@ -50,9 +50,9 @@ public class MangaFavouriteUIEnTest extends MangaFavouriteUITest {
 
 		loginPage.fillMandatoryLoginFields("user", "user");
 
-		mangaList.chooseFirstManga();
+		mangaList.chooseManga(0);
 
-		mangaList.addOrRemoveFirstMangaFromFavourite();
+		mangaList.addOrRemoveFirstMangaFromFavourites();
 
 		mangaList.clickMangaUserListLink();
 
@@ -73,13 +73,13 @@ public class MangaFavouriteUIEnTest extends MangaFavouriteUITest {
 
 		loginPage.fillMandatoryLoginFields("user", "user");
 
-		mangaList.chooseFirstManga();
+		mangaList.chooseManga(0);
 
-		mangaList.addOrRemoveFirstMangaFromFavourite();
+		mangaList.addOrRemoveFirstMangaFromFavourites();
 
-		mangaList.chooseFirstManga();
+		mangaList.chooseManga(0);
 
-		mangaList.addOrRemoveFirstMangaFromFavourite();
+		mangaList.addOrRemoveFirstMangaFromFavourites();
 
 		assertAll(() -> assertTrue(mangaList.getFirstMangaFavouritesCounter().contains("0"),
 				() -> "should show manga with zero hearts, but was: " + mangaList.getFirstMangaFavouritesCounter()));
@@ -93,13 +93,13 @@ public class MangaFavouriteUIEnTest extends MangaFavouriteUITest {
 
 		loginPage.fillMandatoryLoginFields("user", "user");
 
-		mangaList.chooseFirstManga();
+		mangaList.chooseManga(0);
 
-		mangaList.addOrRemoveFirstMangaFromFavourite();
+		mangaList.addOrRemoveFirstMangaFromFavourites();
 
-		mangaList.chooseFirstManga();
+		mangaList.chooseManga(0);
 
-		mangaList.addOrRemoveFirstMangaFromFavourite();
+		mangaList.addOrRemoveFirstMangaFromFavourites();
 
 		mangaList.clickMangaUserListLink();
 
@@ -118,9 +118,9 @@ public class MangaFavouriteUIEnTest extends MangaFavouriteUITest {
 
 		mangaList.loadMangaList(LanguageVersion.ENG);
 
-		mangaList.chooseFirstManga();
+		mangaList.chooseManga(0);
 
-		mangaList.addOrRemoveFirstMangaFromFavourite();
+		mangaList.addOrRemoveFirstMangaFromFavourites();
 
 		assertAll(() -> assertTrue(loginPage.isUserOnLoginPage(), () -> "should show login page"));
 	}

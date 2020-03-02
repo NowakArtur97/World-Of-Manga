@@ -54,11 +54,11 @@ public class MangaControllerUIPlTest extends MangaControllerUITest {
 	}
 
 	@Test
-	@DisplayName("when correct editing creation with all fields")
+	@DisplayName("when correct manga editing with all fields")
 	public void when_correct_manga_editing_with_all_fields_should_add_manga() {
 
-		String englishTitle = "English title";
-		String polishTitle = "Polish title";
+		String englishTitle = "Some english title";
+		String polishTitle = "Some polish title";
 		boolean selectAuthor = true;
 		boolean addImage = true;
 
@@ -66,9 +66,9 @@ public class MangaControllerUIPlTest extends MangaControllerUITest {
 
 		loginPage.fillMandatoryLoginFields("admin", "admin");
 
-		mangaList.chooseFirstManga();
+		mangaList.chooseManga(0);
 
-		mangaList.editManga();
+		mangaList.editFirstManga();
 
 		mangaFormPage.fillMandatoryMangaFormFields(englishTitle, "English description", polishTitle,
 				"Polish description", selectAuthor, addImage);
@@ -79,6 +79,100 @@ public class MangaControllerUIPlTest extends MangaControllerUITest {
 						() -> "should update english manga translation in database"),
 				() -> assertTrue(mangaTranslationService.isTitleAlreadyInUse(polishTitle),
 						() -> "should update polish manga translation in database"));
+	}
+
+	@Test
+	@DisplayName("when manga deleting")
+	public void when_bmanga_deleting_should_remove_manga() {
+
+		loginPage.loadLoginView(LanguageVersion.PL);
+
+		loginPage.fillMandatoryLoginFields("admin", "admin");
+
+		int mangasQuantityBefore = mangaList.countMangaCards();
+
+		mangaList.chooseLastManga();
+
+		mangaList.deleteLastManga();
+
+		int mangasQuantityAfter = mangaList.countMangaCards();
+
+		assertAll(() -> assertTrue((mangasQuantityAfter == mangasQuantityBefore - 1),
+				() -> "should show one less manga"));
+	}
+
+	@Test
+	@DisplayName("when manga deleting - ratings")
+	public void when_manga_deleting_should_not_show_manga_in_rated_manga_list() {
+
+		loginPage.loadLoginView(LanguageVersion.PL);
+
+		loginPage.fillMandatoryLoginFields("admin", "admin");
+
+		mangaList.chooseLastManga();
+
+		int mangaRating = 5;
+
+		mangaList.rateLastManga(mangaRating);
+
+		mangaList.chooseLastManga();
+
+		mangaList.deleteLastManga();
+
+		mangaList.clickMangaUserListLink();
+
+		mangaList.choseRatedManga();
+
+		assertAll(
+				() -> assertEquals(0, mangaList.countMangaCards(), () -> "shouldn`t show manga rating on manga list"));
+	}
+
+	@Test
+	@DisplayName("when manga deleting - favourites")
+	public void when_manga_deleting_should_not_show_manga_in_favourites() {
+
+		loginPage.loadLoginView(LanguageVersion.PL);
+
+		loginPage.fillMandatoryLoginFields("admin", "admin");
+
+		mangaList.chooseLastManga();
+
+		mangaList.addOrRemoveLastMangaFromFavourites();
+
+		mangaList.chooseLastManga();
+
+		mangaList.deleteLastManga();
+
+		mangaList.clickMangaUserListLink();
+
+		mangaList.choseFavouritesManga();
+
+		assertAll(() -> assertEquals(0, mangaList.countMangaCards(), () -> "shouldn`t show manga on favourites"));
+	}
+
+	@Test
+	@DisplayName("when manga deleting - statuses")
+	public void when_manga_deleting_should_not_show_manga_in_users_manga_list() {
+
+		loginPage.loadLoginView(LanguageVersion.PL);
+
+		loginPage.fillMandatoryLoginFields("admin", "admin");
+
+		mangaList.chooseLastManga();
+
+		int mangaStatus = 0;
+
+		mangaList.addLastMangaToList(mangaStatus);
+
+		mangaList.chooseLastManga();
+
+		mangaList.deleteLastManga();
+
+		mangaList.clickMangaUserListLink();
+
+		mangaList.choseCurrentlyReadingManga();
+
+		assertAll(() -> assertEquals(0, mangaList.countMangaCards(), () -> "shouldn`t show manga on list"));
 	}
 
 	@Test
@@ -149,6 +243,6 @@ public class MangaControllerUIPlTest extends MangaControllerUITest {
 						() -> "should show incorrect polish title"),
 				() -> assertEquals(longDescriptionText, mangaFormPage.getPlDescription(),
 						() -> "should show incorrect polish description"),
-				() -> assertTrue(mangaFormPage.isFirstAuthorCheckboxSelected(), () -> "should author be selected"));
+				() -> assertTrue(mangaFormPage.isSecodnAuthorCheckboxSelected(), () -> "should author be selected"));
 	}
 }
