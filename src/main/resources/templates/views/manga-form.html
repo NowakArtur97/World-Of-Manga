@@ -51,8 +51,8 @@
 						name="plTranslation.description"
 						th:field="*{plTranslation.description}">
 				</div>
-				<div class="form__group form__group--show">
-					<label class="form__label" for="authors"
+				<div class="form__group">
+					<label class="form__label form__label--show" for="authors"
 						th:text="#{form.manga.authors}"></label>
 					<p class="form__message form__message--failure"
 						th:if="${#fields.hasErrors('authors')}" th:errors="*{authors}"></p>
@@ -64,8 +64,8 @@
 						</span>
 					</div>
 				</div>
-				<div class="form__group form__group--show">
-					<label class="form__label" for="genres"
+				<div class="form__group">
+					<label class="form__label form__label--show" for="genres"
 						th:text="#{form.manga.genres}"></label>
 					<p class="form__message form__message--failure"
 						th:if="${#fields.hasErrors('genres')}" th:errors="*{genres}"></p>

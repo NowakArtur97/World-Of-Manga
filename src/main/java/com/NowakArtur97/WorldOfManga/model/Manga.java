@@ -119,6 +119,15 @@ public class Manga {
 		genreExpected.getMangaWithGenre().add(this);
 	}
 
+	public void removeAllGenres() {
+
+		for (Iterator<MangaGenre> genreIterator = this.getGenres().iterator(); genreIterator.hasNext();) {
+			MangaGenre genre = genreIterator.next();
+			genre.removeManga(this);
+			genreIterator.remove();
+		}		
+	}
+	
 	public void removeAllAuthors() {
 
 		for (Iterator<Author> authorIterator = this.getAuthors().iterator(); authorIterator.hasNext();) {
@@ -167,5 +176,7 @@ public class Manga {
 		this.removeAllRatings();
 
 		this.removeAllAuthors();
+		
+		this.removeAllGenres();
 	}
 }

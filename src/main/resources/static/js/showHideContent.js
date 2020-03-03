@@ -1,10 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const hiddenContent = document.querySelectorAll('.form__group--show');
+  const hiddenContent = document.querySelectorAll('.form__label--show');
 
   hiddenContent.forEach(content => content.addEventListener('click', hideShow));
 
   function hideShow() {
-    const group = this.querySelector('.form__group--flex');
+    const group = this.parentNode.querySelector('.form__group--flex');
     console.log(group.style.display);
 
     if (group.style.display === 'none' || group.style.display === '') {

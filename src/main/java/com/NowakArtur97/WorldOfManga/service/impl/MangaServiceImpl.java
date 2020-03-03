@@ -36,6 +36,7 @@ public class MangaServiceImpl implements MangaService {
 
 			manga.setId(mangaDTO.getId());
 			manga.removeAllAuthors();
+			manga.removeAllGenres();
 		}
 
 		manga = mangaMapper.mapMangaDTOToManga(manga, mangaDTO);

@@ -49,4 +49,9 @@ public class MangaGenre {
 	@ToString.Exclude
 	@EqualsAndHashCode.Exclude
 	private final Set<Manga> mangaWithGenre = new HashSet<>();
+
+	public void removeManga(Manga manga) {
+
+		this.getMangaWithGenre().remove(manga);
+	}
 }
