@@ -121,7 +121,7 @@ public class MangaControllerUIEnTest extends MangaControllerUITest {
 
 		mangaList.clickMangaUserListLink();
 
-		mangaList.choseRatedManga();
+		mangaList.chooseRatedManga();
 
 		assertAll(
 				() -> assertEquals(0, mangaList.countMangaCards(), () -> "shouldn`t show manga rating on manga list"));
@@ -145,7 +145,7 @@ public class MangaControllerUIEnTest extends MangaControllerUITest {
 
 		mangaList.clickMangaUserListLink();
 
-		mangaList.choseFavouritesManga();
+		mangaList.chooseFavouritesManga();
 
 		assertAll(() -> assertEquals(0, mangaList.countMangaCards(), () -> "shouldn`t show manga on favourites"));
 	}
@@ -170,7 +170,7 @@ public class MangaControllerUIEnTest extends MangaControllerUITest {
 		
 		mangaList.clickMangaUserListLink();
 
-		mangaList.choseCurrentlyReadingManga();
+		mangaList.chooseCurrentlyReadingManga();
 
 		assertAll(() -> assertEquals(0, mangaList.countMangaCards(), () -> "shouldn`t show manga on list"));
 	}

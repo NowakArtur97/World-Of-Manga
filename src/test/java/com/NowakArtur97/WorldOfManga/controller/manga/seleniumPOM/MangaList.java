@@ -146,37 +146,37 @@ public class MangaList extends SeleniumPageObjectModel {
 		mangaStatuses.get((mangaStatuses.size() - 5) + mangaStatus).click();
 	}
 
-	public void choseFavouritesManga() {
+	public void chooseFavouritesManga() {
 
 		useJavaScriptToClickElement(mangaListType.get(0));
 	}
 
-	public void choseRatedManga() {
+	public void chooseRatedManga() {
 
 		useJavaScriptToClickElement(mangaListType.get(1));
 	}
 
-	public void choseCurrentlyReadingManga() {
+	public void chooseCurrentlyReadingManga() {
 
 		useJavaScriptToClickElement(mangaListType.get(2));
 	}
 
-	public void choseCompletedManga() {
+	public void chooseCompletedManga() {
 
 		useJavaScriptToClickElement(mangaListType.get(3));
 	}
 
-	public void chosePlanToReadManga() {
+	public void choosePlanToReadManga() {
 
 		useJavaScriptToClickElement(mangaListType.get(4));
 	}
 
-	public void choseOnHoldManga() {
+	public void chooseOnHoldManga() {
 
 		useJavaScriptToClickElement(mangaListType.get(5));
 	}
 
-	public void choseDroppedManga() {
+	public void chooseDroppedManga() {
 
 		useJavaScriptToClickElement(mangaListType.get(6));
 	}

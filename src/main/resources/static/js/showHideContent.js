@@ -9,7 +9,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (group.style.display === 'none' || group.style.display === '') {
       group.style.display = 'flex';
-      group.style.flexDirection = 'column';
+      group.style.flexDirection = 'row';
+      group.style.flexWrap = 'wrap';
+      group.style.justifyContent = 'center';
     } else {
       group.style.display = 'none';
     }

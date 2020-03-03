@@ -19,6 +19,7 @@ import com.NowakArtur97.WorldOfManga.exception.LanguageNotFoundException;
 import com.NowakArtur97.WorldOfManga.exception.MangaNotFoundException;
 import com.NowakArtur97.WorldOfManga.model.Manga;
 import com.NowakArtur97.WorldOfManga.service.api.AuthorService;
+import com.NowakArtur97.WorldOfManga.service.api.MangaGenreService;
 import com.NowakArtur97.WorldOfManga.service.api.MangaService;
 import com.NowakArtur97.WorldOfManga.service.api.MangaTranslationService;
 import com.NowakArtur97.WorldOfManga.validation.manga.MangaValidator;
@@ -34,6 +35,8 @@ public class MangaController {
 
 	private final MangaTranslationService mangaTranslationService;
 
+	private final MangaGenreService mangaGenreService;
+
 	private final MangaValidator mangaValidator;
 
 	private final AuthorService authorService;
@@ -44,6 +47,7 @@ public class MangaController {
 		theModel.addAttribute("mangaDTO", new MangaDTO());
 		theModel.addAttribute("authorDTO", new AuthorDTO());
 		theModel.addAttribute("authors", authorService.findAll());
+		theModel.addAttribute("genres", mangaGenreService.findAll());
 
 		return "views/manga-form";
 	}
@@ -55,6 +59,7 @@ public class MangaController {
 		theModel.addAttribute("mangaDTO", mangaToEdit);
 		theModel.addAttribute("authorDTO", new AuthorDTO());
 		theModel.addAttribute("authors", authorService.findAll());
+		theModel.addAttribute("genres", mangaGenreService.findAll());
 
 		return "views/manga-form";
 	}
@@ -70,6 +75,7 @@ public class MangaController {
 			theModel.addAttribute("authorDTO", new AuthorDTO());
 			theModel.addAttribute("mangaDTO", mangaDTO);
 			theModel.addAttribute("authors", authorService.findAll());
+			theModel.addAttribute("genres", mangaGenreService.findAll());
 
 			return "views/manga-form";
 		}

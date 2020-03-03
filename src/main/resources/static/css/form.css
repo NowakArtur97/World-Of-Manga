@@ -88,3 +88,7 @@
 .form__group--flex {
   display: none;
 }
+
+.form__group--flex ~ * {
+  flex: 1;
+}

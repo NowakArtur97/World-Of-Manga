@@ -58,7 +58,7 @@ public class MangaRatingUIEnTest extends MangaRatingUITest {
 
 		mangaList.clickMangaUserListLink();
 
-		mangaList.choseRatedManga();
+		mangaList.chooseRatedManga();
 
 		assertAll(() -> assertTrue(mangaList.getFirstMangaRating().contains(String.valueOf(mangaRating)),
 				() -> "should show manga rating on manga list"));

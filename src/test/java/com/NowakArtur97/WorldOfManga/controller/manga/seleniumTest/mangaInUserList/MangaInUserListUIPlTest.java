@@ -42,7 +42,7 @@ public class MangaInUserListUIPlTest extends MangaInUserListUITest {
 
 		mangaList.clickMangaUserListLink();
 
-		mangaList.choseCurrentlyReadingManga();
+		mangaList.chooseCurrentlyReadingManga();
 
 		assertAll(
 				() -> assertTrue(mangaList.getLastMangaCardText().contains("Tokyo Ghoul"),
@@ -69,7 +69,7 @@ public class MangaInUserListUIPlTest extends MangaInUserListUITest {
 
 		mangaList.clickMangaUserListLink();
 
-		mangaList.choseCompletedManga();
+		mangaList.chooseCompletedManga();
 
 		assertAll(
 				() -> assertTrue(mangaList.getLastMangaCardText().contains("Tokyo Ghoul"),
@@ -96,7 +96,7 @@ public class MangaInUserListUIPlTest extends MangaInUserListUITest {
 
 		mangaList.clickMangaUserListLink();
 
-		mangaList.chosePlanToReadManga();
+		mangaList.choosePlanToReadManga();
 
 		assertAll(
 				() -> assertTrue(mangaList.getLastMangaCardText().contains("Tokyo Ghoul"),
@@ -123,7 +123,7 @@ public class MangaInUserListUIPlTest extends MangaInUserListUITest {
 
 		mangaList.clickMangaUserListLink();
 
-		mangaList.choseOnHoldManga();
+		mangaList.chooseOnHoldManga();
 
 		assertAll(
 				() -> assertTrue(mangaList.getLastMangaCardText().contains("Tokyo Ghoul"),
@@ -150,7 +150,7 @@ public class MangaInUserListUIPlTest extends MangaInUserListUITest {
 
 		mangaList.clickMangaUserListLink();
 
-		mangaList.choseDroppedManga();
+		mangaList.chooseDroppedManga();
 
 		assertAll(
 				() -> assertTrue(mangaList.getLastMangaCardText().contains("Tokyo Ghoul"),

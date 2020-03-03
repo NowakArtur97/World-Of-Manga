@@ -56,7 +56,7 @@ public class MangaFavouriteUIPlTest extends MangaFavouriteUITest {
 
 		mangaList.clickMangaUserListLink();
 
-		mangaList.choseFavouritesManga();
+		mangaList.chooseFavouritesManga();
 
 		assertAll(
 				() -> assertTrue(mangaList.getLastMangaCardText().contains("Tokyo Ghoul"),
@@ -103,7 +103,7 @@ public class MangaFavouriteUIPlTest extends MangaFavouriteUITest {
 
 		mangaList.clickMangaUserListLink();
 
-		mangaList.choseFavouritesManga();
+		mangaList.chooseFavouritesManga();
 
 		assertAll(
 				() -> assertFalse(mangaList.getLastMangaCardText().contains("Tokyo Ghoul"),
