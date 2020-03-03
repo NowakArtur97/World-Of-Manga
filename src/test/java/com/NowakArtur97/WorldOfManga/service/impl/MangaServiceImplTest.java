@@ -361,11 +361,13 @@ public class MangaServiceImplTest {
 
 		List<Manga> mangasActual = mangaService.findAll();
 
-		assertAll(() -> assertEquals(mangasExpected.size(), mangasActual.size(), "should return list with all authors"),
+		assertAll(
+				() -> assertEquals(mangasExpected.size(), mangasActual.size(),
+						"should return list with all authors, but was: " + mangasActual),
 				() -> assertTrue(mangasActual.contains(mangaExpected),
-						() -> "should contain author, but was: " + mangasActual.contains(mangaExpected)),
+						() -> "should contain author, but was: " + mangasActual),
 				() -> assertTrue(mangasActual.contains(mangaExpected2),
-						() -> "should contain author, but was: " + mangasActual.contains(mangaExpected2)),
+						() -> "should contain author, but was: " + mangasActual),
 				() -> verify(mangaRepository, times(1)).findAll());
 	}
 
@@ -396,10 +398,11 @@ public class MangaServiceImplTest {
 
 		assertAll(
 				() -> assertEquals(mangaExpected.getTranslations(), mangaActual.getTranslations(),
-						"should return manga with translations"),
+						"should return manga with translations, but was: " + mangaActual.getTranslations()),
 				() -> assertEquals(mangaExpected.getAuthors(), mangaActual.getAuthors(),
-						"should return manga with authors"),
-				() -> assertEquals(mangaExpected.getImage(), mangaActual.getImage(), "should return manga with image"),
+						"should return manga with authors, but was: " + mangaActual.getAuthors()),
+				() -> assertEquals(mangaExpected.getImage(), mangaActual.getImage(),
+						"should return manga with image, but was: " + mangaActual.getImage()),
 				() -> verify(mangaRepository, times(1)).findById(id));
 	}
 
