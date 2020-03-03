@@ -126,3 +126,24 @@ CREATE TABLE world_of_manga.manga_list (
         REFERENCES world_of_manga.user ("user_id")
         ON DELETE NO ACTION ON UPDATE NO ACTION
 );
+
+DROP TABLE IF EXISTS world_of_manga.genre CASCADE;
+
+CREATE TABLE world_of_manga.genre (
+    "genre_id" SERIAL PRIMARY KEY,
+	"genre" VARCHAR(50) NOT NULL UNIQUE
+);
+
+DROP TABLE IF EXISTS world_of_manga.manga_genre CASCADE;
+
+CREATE TABLE world_of_manga.manga_genre (
+    "manga_id" SERIAL,
+    "genre_id" SERIAL,
+    PRIMARY KEY ("manga_id" , "genre_id"),
+    CONSTRAINT "FK_MANGA_GENRE" FOREIGN KEY ("manga_id")
+        REFERENCES world_of_manga.manga ("manga_id")
+        ON DELETE NO ACTION ON UPDATE NO ACTION,
+    CONSTRAINT "FK_GENRE_MANGA" FOREIGN KEY ("genre_id")
+        REFERENCES world_of_manga.genre ("genre_id")
+        ON DELETE NO ACTION ON UPDATE NO ACTION
+);
