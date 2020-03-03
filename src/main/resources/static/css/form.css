@@ -84,3 +84,7 @@
 .form__message--failure {
   color: #f02525;
 }
+
+.form__group--flex {
+  display: none;
+}

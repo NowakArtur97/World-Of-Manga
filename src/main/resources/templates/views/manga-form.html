@@ -51,16 +51,18 @@
 						name="plTranslation.description"
 						th:field="*{plTranslation.description}">
 				</div>
-				<div class="form__group">
+				<div class="form__group form__group--show">
 					<label class="form__label" for="authors"
 						th:text="#{form.manga.authors}"></label>
 					<p class="form__message form__message--failure"
 						th:if="${#fields.hasErrors('authors')}" th:errors="*{authors}"></p>
-					<span class="form__span" th:each="author : ${authors}"> <input
-						class="form__checkbox" type="checkbox" name="authors"
-						th:field="*{authors}" th:value="${author.id}"
-						th:text="${author.fullName}">
-					</span>
+					<div class="form__group--flex">
+						<span class="form__span" th:each="author : ${authors}"> <input
+							class="form__checkbox" type="checkbox" name="authors"
+							th:field="*{authors}" th:value="${author.id}"
+							th:text="${author.fullName}">
+						</span>
+					</div>
 				</div>
 				<div class="form__group">
 					<label class="form__label" for="image"
@@ -96,6 +98,5 @@
 			</form>
 		</div>
 	</div>
-</body>
 </body>
 </html>
