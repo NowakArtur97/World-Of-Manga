@@ -53,11 +53,6 @@ public class Manga {
 	@Transient
 	private Double rating;
 
-	@ManyToMany(mappedBy = "createdMangas")
-	@ToString.Exclude
-	@EqualsAndHashCode.Exclude
-	private final Set<Author> authors = new HashSet<>();
-
 	@OneToMany(mappedBy = "manga", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
 	@ToString.Exclude
 	@EqualsAndHashCode.Exclude
@@ -68,15 +63,25 @@ public class Manga {
 	@EqualsAndHashCode.Exclude
 	private final Set<MangaRating> mangasRatings = new HashSet<>();
 
-	@ManyToMany(mappedBy = "favouriteMangas")
-	@ToString.Exclude
-	@EqualsAndHashCode.Exclude
-	private final Set<User> userWithMangaInFavourites = new HashSet<>();
-
 	@OneToMany(mappedBy = "manga", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
 	@ToString.Exclude
 	@EqualsAndHashCode.Exclude
 	private final Set<MangaInUserList> usersWithMangaInList = new HashSet<>();
+
+	@ManyToMany(mappedBy = "createdMangas")
+	@ToString.Exclude
+	@EqualsAndHashCode.Exclude
+	private final Set<Author> authors = new HashSet<>();
+
+	@ManyToMany(mappedBy = "mangaWithGenre")
+	@ToString.Exclude
+	@EqualsAndHashCode.Exclude
+	private final Set<MangaGenre> genres = new HashSet<>();
+
+	@ManyToMany(mappedBy = "favouriteMangas")
+	@ToString.Exclude
+	@EqualsAndHashCode.Exclude
+	private final Set<User> userWithMangaInFavourites = new HashSet<>();
 
 	@PostLoad
 	public void countRating() {
