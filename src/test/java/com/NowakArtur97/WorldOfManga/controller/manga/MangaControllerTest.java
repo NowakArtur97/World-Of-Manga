@@ -43,8 +43,10 @@ import com.NowakArtur97.WorldOfManga.exception.LanguageNotFoundException;
 import com.NowakArtur97.WorldOfManga.exception.MangaNotFoundException;
 import com.NowakArtur97.WorldOfManga.model.Author;
 import com.NowakArtur97.WorldOfManga.model.Manga;
+import com.NowakArtur97.WorldOfManga.model.MangaGenre;
 import com.NowakArtur97.WorldOfManga.model.MangaTranslation;
 import com.NowakArtur97.WorldOfManga.service.api.AuthorService;
+import com.NowakArtur97.WorldOfManga.service.api.MangaGenreService;
 import com.NowakArtur97.WorldOfManga.service.api.MangaService;
 import com.NowakArtur97.WorldOfManga.service.api.MangaTranslationService;
 import com.NowakArtur97.WorldOfManga.validation.manga.MangaValidator;
@@ -71,6 +73,9 @@ public class MangaControllerTest {
 	@Mock
 	private AuthorService authorService;
 
+	@Mock
+	private MangaGenreService mangaGenreService;
+
 	@BeforeEach
 	public void setUp() {
 
@@ -84,12 +89,17 @@ public class MangaControllerTest {
 		List<Author> authors = new ArrayList<>();
 		authors.add(new Author("FirstName LastName"));
 
+		List<MangaGenre> genres = new ArrayList<>();
+		genres.add(new MangaGenre("genre"));
+
 		when(authorService.findAll()).thenReturn(authors);
+		when(mangaGenreService.findAll()).thenReturn(genres);
 
 		assertAll(() -> mockMvc.perform(get("/admin/addOrUpdateManga")).andExpect(status().isOk())
 				.andExpect(view().name("views/manga-form")).andExpect(model().attribute("mangaDTO", new MangaDTO()))
 				.andExpect(model().attribute("authorDTO", new AuthorDTO()))
-				.andExpect(model().attribute("authors", authors)), () -> verify(authorService, times(1)).findAll());
+				.andExpect(model().attribute("authors", authors)).andExpect(model().attribute("genres", genres)),
+				() -> verify(authorService, times(1)).findAll(), () -> verify(mangaGenreService, times(1)).findAll());
 	}
 
 	@Test
@@ -109,21 +119,27 @@ public class MangaControllerTest {
 		Author author = new Author("FirstName LastName");
 		authors.add(author);
 
+		Set<MangaGenre> genres = new HashSet<>();
+		genres.add(new MangaGenre("genre"));
+
 		MangaDTO mangaDTO = MangaDTO.builder().id(mangaId).enTranslation(mangaTranslationEnDTO)
-				.plTranslation(mangaTranslationPlDTO).image(image).authors(authors).build();
+				.plTranslation(mangaTranslationPlDTO).image(image).authors(authors).genres(genres).build();
 
 		List<Author> authorsDB = new ArrayList<>();
 		authors.add(author);
 
+		List<MangaGenre> genresDB = new ArrayList<>();
+		genresDB.add(new MangaGenre("genre"));
+
 		when(authorService.findAll()).thenReturn(authorsDB);
+		when(mangaGenreService.findAll()).thenReturn(genresDB);
 		when(mangaService.getMangaDTOById(mangaId)).thenReturn(mangaDTO);
 
-		assertAll(
-				() -> mockMvc.perform(get("/admin/addOrUpdateManga/{id}", mangaId)).andExpect(status().isOk())
-						.andExpect(view().name("views/manga-form")).andExpect(model().attribute("mangaDTO", mangaDTO))
-						.andExpect(model().attribute("authorDTO", new AuthorDTO()))
-						.andExpect(model().attribute("authors", authorsDB)),
-				() -> verify(authorService, times(1)).findAll());
+		assertAll(() -> mockMvc.perform(get("/admin/addOrUpdateManga/{id}", mangaId)).andExpect(status().isOk())
+				.andExpect(view().name("views/manga-form")).andExpect(model().attribute("mangaDTO", mangaDTO))
+				.andExpect(model().attribute("authorDTO", new AuthorDTO()))
+				.andExpect(model().attribute("authors", authorsDB)).andExpect(model().attribute("genres", genresDB)),
+				() -> verify(authorService, times(1)).findAll(), () -> verify(mangaGenreService, times(1)).findAll());
 	}
 
 	@Test
@@ -142,8 +158,12 @@ public class MangaControllerTest {
 		Author authorExpected = new Author("FirstName LastName");
 		authors.add(authorExpected);
 
+		Set<MangaGenre> genres = new HashSet<>();
+		MangaGenre genreExpected = new MangaGenre("genre");
+		genres.add(genreExpected);
+
 		MangaDTO mangaDTO = MangaDTO.builder().enTranslation(mangaTranslationEnDTO).plTranslation(mangaTranslationPlDTO)
-				.image(image).authors(authors).build();
+				.image(image).authors(authors).genres(genres).build();
 
 		MangaTranslation mangaTranslationEnExpected = MangaTranslation.builder().title("English title")
 				.description("English description").build();
@@ -157,6 +177,7 @@ public class MangaControllerTest {
 		mangaExpected.addTranslation(mangaTranslationEnExpected);
 		mangaExpected.addTranslation(mangaTranslationPlExpected);
 		mangaExpected.setImage(image.getBytes());
+		mangaExpected.addGenre(genreExpected);
 
 		when(mangaTranslationService.addOrUpdate(mangaDTO)).thenReturn(mangaExpected);
 
@@ -184,10 +205,17 @@ public class MangaControllerTest {
 		List<Author> authors = new ArrayList<>();
 		authors.add(new Author("FirstName LastName"));
 
+		List<MangaGenre> genres = new ArrayList<>();
+		genres.add(new MangaGenre("genre"));
+
 		when(authorService.findAll()).thenReturn(authors);
+		when(mangaGenreService.findAll()).thenReturn(genres);
 
 		Set<Author> mangaAuthors = new HashSet<>();
 		mangaAuthors.add(new Author("FirstName LastName"));
+
+		Set<MangaGenre> mangaGenres = new HashSet<>();
+		mangaGenres.add(new MangaGenre("genre"));
 
 		MangaTranslationDTO mangaTranslationEnDTO = MangaTranslationDTO.builder().title(englishTitle)
 				.description(englishDescription).build();
@@ -195,7 +223,7 @@ public class MangaControllerTest {
 				.description(polishDescription).build();
 
 		MangaDTO mangaDTO = MangaDTO.builder().enTranslation(mangaTranslationEnDTO).plTranslation(mangaTranslationPlDTO)
-				.image(image).authors(mangaAuthors).build();
+				.image(image).authors(mangaAuthors).genres(mangaGenres).build();
 
 		assertAll(
 				() -> mockMvc
@@ -204,7 +232,7 @@ public class MangaControllerTest {
 						.andExpect(status().isOk()).andExpect(forwardedUrl("views/manga-form"))
 						.andExpect(model().attribute("mangaDTO", mangaDTO))
 						.andExpect(model().attribute("authorDTO", new AuthorDTO()))
-						.andExpect(model().attribute("authors", authors))
+						.andExpect(model().attribute("authors", authors)).andExpect(model().attribute("genres", genres))
 						.andExpect(model().attributeHasFieldErrors("mangaDTO", "enTranslation.title"))
 						.andExpect(model().attributeHasFieldErrors("mangaDTO", "enTranslation.description"))
 						.andExpect(model().attributeHasFieldErrors("mangaDTO", "plTranslation.title"))
@@ -217,9 +245,10 @@ public class MangaControllerTest {
 								hasProperty("plTranslation", hasProperty("title", is(polishTitle)))))
 						.andExpect(model().attribute("mangaDTO",
 								hasProperty("plTranslation", hasProperty("description", is(polishDescription)))))
-						.andExpect(model().attribute("mangaDTO", hasProperty("authors", is(mangaAuthors)))),
+						.andExpect(model().attribute("mangaDTO", hasProperty("authors", is(mangaAuthors))))
+						.andExpect(model().attribute("mangaDTO", hasProperty("genres", is(mangaGenres)))),
 				() -> verify(mangaTranslationService, never()).addOrUpdate(mangaDTO),
-				() -> verify(authorService, times(1)).findAll());
+				() -> verify(authorService, times(1)).findAll(), () -> verify(mangaGenreService, times(1)).findAll());
 	}
 
 	@Test
@@ -238,9 +267,15 @@ public class MangaControllerTest {
 		List<Author> authors = new ArrayList<>();
 		authors.add(new Author("FirstName LastName"));
 
+		List<MangaGenre> genres = new ArrayList<>();
+		genres.add(new MangaGenre("genre"));
+
 		when(authorService.findAll()).thenReturn(authors);
+		when(mangaGenreService.findAll()).thenReturn(genres);
 
 		Set<Author> mangaAuthors = new HashSet<>();
+
+		Set<MangaGenre> mangaGenres = new HashSet<>();
 
 		MangaTranslationDTO mangaTranslationEnDTO = MangaTranslationDTO.builder().title(englishTitle)
 				.description(englishDescription).build();
@@ -248,7 +283,7 @@ public class MangaControllerTest {
 				.description(polishDescription).build();
 
 		MangaDTO mangaDTO = MangaDTO.builder().enTranslation(mangaTranslationEnDTO).plTranslation(mangaTranslationPlDTO)
-				.image(image).authors(mangaAuthors).build();
+				.image(image).authors(mangaAuthors).genres(mangaGenres).build();
 
 		assertAll(
 				() -> mockMvc
@@ -257,13 +292,15 @@ public class MangaControllerTest {
 						.andExpect(status().isOk()).andExpect(forwardedUrl("views/manga-form"))
 						.andExpect(model().attribute("mangaDTO", mangaDTO))
 						.andExpect(model().attribute("authorDTO", new AuthorDTO()))
-						.andExpect(model().attribute("authors", authors))
+						.andExpect(model().attribute("authors", authors)).andExpect(model().attribute("genres", genres))
 						.andExpect(model().attributeHasFieldErrors("mangaDTO", "authors"))
+						.andExpect(model().attributeHasFieldErrors("mangaDTO", "genres"))
 						.andExpect(model().attributeHasFieldErrors("mangaDTO", "enTranslation.title"))
 						.andExpect(model().attributeHasFieldErrors("mangaDTO", "enTranslation.description"))
 						.andExpect(model().attributeHasFieldErrors("mangaDTO", "plTranslation.title"))
 						.andExpect(model().attributeHasFieldErrors("mangaDTO", "plTranslation.description"))
 						.andExpect(model().attribute("mangaDTO", hasProperty("authors", is(mangaAuthors))))
+						.andExpect(model().attribute("mangaDTO", hasProperty("genres", is(mangaGenres))))
 						.andExpect(model().attribute("mangaDTO",
 								hasProperty("enTranslation", hasProperty("title", is(englishTitle)))))
 						.andExpect(model().attribute("mangaDTO",
@@ -273,7 +310,7 @@ public class MangaControllerTest {
 						.andExpect(model().attribute("mangaDTO",
 								hasProperty("plTranslation", hasProperty("description", is(polishDescription))))),
 				() -> verify(mangaTranslationService, never()).addOrUpdate(mangaDTO),
-				() -> verify(authorService, times(1)).findAll());
+				() -> verify(authorService, times(1)).findAll(), () -> verify(mangaGenreService, times(1)).findAll());
 	}
 
 	@Test

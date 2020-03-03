@@ -113,6 +113,12 @@ public class Manga {
 		author.getCreatedMangas().remove(this);
 	}
 
+	public void addGenre(MangaGenre genreExpected) {
+
+		this.getGenres().add(genreExpected);
+		genreExpected.getMangaWithGenre().add(this);
+	}
+
 	public void removeAllAuthors() {
 
 		for (Iterator<Author> authorIterator = this.getAuthors().iterator(); authorIterator.hasNext();) {
