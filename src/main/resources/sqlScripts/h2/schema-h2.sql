@@ -1,4 +1,4 @@
-DROP SCHEMA IF EXISTS world_of_manga;
+DROP SCHEMA IF EXISTS world_of_manga CASCADE;
 
 CREATE SCHEMA world_of_manga;
 
