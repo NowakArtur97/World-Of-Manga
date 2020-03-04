@@ -11,12 +11,15 @@ import org.springframework.stereotype.Component;
 
 import com.NowakArtur97.WorldOfManga.converter.ImageToByteConverter;
 import com.NowakArtur97.WorldOfManga.exception.LanguageNotFoundException;
+import com.NowakArtur97.WorldOfManga.exception.MangaGenreNotFoundException;
 import com.NowakArtur97.WorldOfManga.model.Author;
 import com.NowakArtur97.WorldOfManga.model.Language;
 import com.NowakArtur97.WorldOfManga.model.Manga;
+import com.NowakArtur97.WorldOfManga.model.MangaGenre;
 import com.NowakArtur97.WorldOfManga.model.MangaTranslation;
-import com.NowakArtur97.WorldOfManga.service.api.AuthorService;
+import com.NowakArtur97.WorldOfManga.repository.MangaRepository;
 import com.NowakArtur97.WorldOfManga.service.api.LanguageService;
+import com.NowakArtur97.WorldOfManga.service.api.MangaGenreService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -26,18 +29,56 @@ public class DatabaseSchedular {
 
 	private final ImageToByteConverter imageToByteConverterImpl;
 
-	private final AuthorService authorService;
-
 	private final LanguageService languageService;
+
+	private final MangaGenreService mangaGenreService;
+
+	private final MangaRepository mangaRepo;
 
 	private static Language en;
 	private static Language pl;
 
+	private static MangaGenre action;
+	private static MangaGenre adventure;
+	private static MangaGenre comedy;
+	private static MangaGenre demons;
+	private static MangaGenre drama;
+	private static MangaGenre fantasy;
+	private static MangaGenre magic;
+	private static MangaGenre martialArts;
+	private static MangaGenre mature;
+	private static MangaGenre schoolLife;
+	private static MangaGenre shounen;
+	private static MangaGenre supernatural;
+	private static MangaGenre superPower;
+	private static MangaGenre sliceOfLife;
+	private static MangaGenre psychological;
+	private static MangaGenre romance;
+	private static MangaGenre horror;
+
 	@EventListener(ApplicationReadyEvent.class)
-	public void onStartup() throws LanguageNotFoundException, MalformedURLException {
+	public void onStartup() throws LanguageNotFoundException, MalformedURLException, MangaGenreNotFoundException {
 
 		en = languageService.findByLocale("en");
 		pl = languageService.findByLocale("pl");
+
+		action = mangaGenreService.findByGenre("Action");
+		adventure = mangaGenreService.findByGenre("Adventure");
+		comedy = mangaGenreService.findByGenre("Comedy");
+		drama = mangaGenreService.findByGenre("Drama");
+		demons = mangaGenreService.findByGenre("Demons");
+		fantasy = mangaGenreService.findByGenre("Fantasy");
+		magic = mangaGenreService.findByGenre("Magic");
+		martialArts = mangaGenreService.findByGenre("Martial Arts");
+		mature = mangaGenreService.findByGenre("Mature");
+		schoolLife = mangaGenreService.findByGenre("School Life");
+		shounen = mangaGenreService.findByGenre("Shounen");
+		sliceOfLife = mangaGenreService.findByGenre("Slice of Life");
+		supernatural = mangaGenreService.findByGenre("Supernatural");
+		superPower = mangaGenreService.findByGenre("Super Power");
+		psychological = mangaGenreService.findByGenre("Psychological");
+		romance = mangaGenreService.findByGenre("Romance");
+		horror = mangaGenreService.findByGenre("Horror");
 
 		String tokyoGhoulTitle = "Tokyo Ghoul";
 		String tokyoGhoulDescriptionEn = "Ghouls live among us, the same as normal people in every way—except their craving for human flesh.\r\n"
@@ -119,30 +160,35 @@ public class DatabaseSchedular {
 //		String Author = "";
 
 		saveManga(tokyoGhoulTitle, tokyoGhoulDescriptionEn, tokyoGhoulTitle, tokyoGhoulDescriptionPl, tokyoGhoulURL,
-				tokyoGhoulAuthor);
+				tokyoGhoulAuthor, action, supernatural, horror);
 		saveManga(soloLevelingTitle, soloLevelingDescriptionEn, soloLevelingTitle, soloLevelingDescriptionPl,
-				soloLevelingURL, soloLevelingAuthor);
+				soloLevelingURL, soloLevelingAuthor, action, adventure, fantasy);
 		saveManga(beastarsTitle, beastarsDescriptionEn, beastarsTitle, beastarsDescriptionPl, beastarsURL,
-				beastarsAuthor);
+				beastarsAuthor, sliceOfLife, drama, psychological);
 		saveManga(myHeroAcademiaTitle, myHeroAcademiaDescriptionEn, myHeroAcademiaTitle, myHeroAcademiaDescriptionPl,
-				myHeroAcademiaURL, myHeroAcademiaAuthor);
-		saveManga(komiTitle, komiDescriptionEn, komiTitle, komiDescriptionPl, komiURL, komiAuthor);
-		saveManga(irumaTitle, irumaDescriptionEn, irumaTitle, irumaDescriptionPl, irumaURL, irumaAuthor);
+				myHeroAcademiaURL, myHeroAcademiaAuthor, superPower, comedy, action);
+		saveManga(komiTitle, komiDescriptionEn, komiTitle, komiDescriptionPl, komiURL, komiAuthor, schoolLife, romance,
+				comedy);
+		saveManga(irumaTitle, irumaDescriptionEn, irumaTitle, irumaDescriptionPl, irumaURL, irumaAuthor, demons,
+				schoolLife, comedy);
 		saveManga(fireForceTitle, fireForceDescriptionEn, fireForceTitle, fireForceDescriptionPl, fireForceURL,
-				fireForceAuthor);
+				fireForceAuthor, action, supernatural);
 		saveManga(godOfHighschoolTitle, godOfHighschoolDescriptionEn, godOfHighschoolTitle,
-				godOfHighschoolDescriptionPl, godOfHighschoolURL, godOfHighschoolAuthor);
-		saveManga(narutoTitle, narutoDescriptionEn, narutoTitle, narutoDescriptionPl, narutoURL, narutoAuthor);
+				godOfHighschoolDescriptionPl, godOfHighschoolURL, godOfHighschoolAuthor, fantasy, adventure,
+				martialArts);
+		saveManga(narutoTitle, narutoDescriptionEn, narutoTitle, narutoDescriptionPl, narutoURL, narutoAuthor, fantasy,
+				adventure, action);
 		saveManga(blueExorcistTitle, blueExorcistDescriptionEn, blueExorcistTitle, blueExorcistDescriptionPl,
-				blueExorcistURL, blueExorcistAuthor);
-		saveManga(berserkTitle, berserkDescriptionEn, berserkTitle, berserkDescriptionPl, berserkURL, berserkAuthor);
+				blueExorcistURL, blueExorcistAuthor, demons, action, supernatural);
+		saveManga(berserkTitle, berserkDescriptionEn, berserkTitle, berserkDescriptionPl, berserkURL, berserkAuthor,
+				mature, fantasy, adventure);
 		saveManga(blackCloverTitle, blackCloverDescriptionEn, blackCloverTitle, blackCloverDescriptionPl,
-				blackCloverURL, blackCloverAuthor);
+				blackCloverURL, blackCloverAuthor, magic, shounen, action);
 //		saveManga(Title, DescriptionEn, Title, DescriptionPl, URL, Author);
 	}
 
 	private void saveManga(String titleEn, String descriptionEn, String titlePl, String descriptionPl, URL imageURL,
-			String authorFullName) throws LanguageNotFoundException {
+			String authorFullName, MangaGenre... genres) throws LanguageNotFoundException {
 
 		MangaTranslation mangaTranslationEn = MangaTranslation.builder().title(titleEn).description(descriptionEn)
 				.language(en).build();
@@ -161,8 +207,13 @@ public class DatabaseSchedular {
 		manga.addTranslation(mangaTranslationEn);
 		manga.addTranslation(mangaTranslationPl);
 
+		for (MangaGenre genre : genres) {
+			manga.addGenre(genre);
+		}
+
 		Author author = new Author(authorFullName);
-		author.addManga(manga);
-		authorService.save(author);
+		manga.addAuthor(author);
+
+		mangaRepo.save(manga);
 	}
 }

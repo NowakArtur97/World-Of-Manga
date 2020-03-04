@@ -13,6 +13,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
@@ -68,12 +70,14 @@ public class Manga {
 	@EqualsAndHashCode.Exclude
 	private final Set<MangaInUserList> usersWithMangaInList = new HashSet<>();
 
-	@ManyToMany(mappedBy = "createdMangas")
+	@ManyToMany(cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH })
+	@JoinTable(name = "manga_author", schema = "world_of_manga", joinColumns = @JoinColumn(name = "manga_id"), inverseJoinColumns = @JoinColumn(name = "author_id"))
 	@ToString.Exclude
 	@EqualsAndHashCode.Exclude
 	private final Set<Author> authors = new HashSet<>();
 
-	@ManyToMany(mappedBy = "mangaWithGenre")
+	@ManyToMany(cascade = { CascadeType.MERGE, CascadeType.REFRESH })
+	@JoinTable(name = "manga_genre", schema = "world_of_manga", joinColumns = @JoinColumn(name = "manga_id"), inverseJoinColumns = @JoinColumn(name = "genre_id"))
 	@ToString.Exclude
 	@EqualsAndHashCode.Exclude
 	private final Set<MangaGenre> genres = new HashSet<>();
@@ -91,7 +95,7 @@ public class Manga {
 
 	public void addTranslation(MangaTranslation mangaTranslation) {
 
-		this.translations.add(mangaTranslation);
+		this.getTranslations().add(mangaTranslation);
 		mangaTranslation.setManga(this);
 	}
 
@@ -125,9 +129,9 @@ public class Manga {
 			MangaGenre genre = genreIterator.next();
 			genre.removeManga(this);
 			genreIterator.remove();
-		}		
+		}
 	}
-	
+
 	public void removeAllAuthors() {
 
 		for (Iterator<Author> authorIterator = this.getAuthors().iterator(); authorIterator.hasNext();) {
@@ -176,7 +180,7 @@ public class Manga {
 		this.removeAllRatings();
 
 		this.removeAllAuthors();
-		
+
 		this.removeAllGenres();
 	}
 }
