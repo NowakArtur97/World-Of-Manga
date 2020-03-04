@@ -46,7 +46,7 @@
 }
 
 .manga_card__info {
-  height: 60px;
+  height: 81px;
 }
 
 .manga_card__title {
@@ -69,8 +69,17 @@
   display: none;
 }
 
-.manga_card__author {
+.manga_card__author,
+.manga_card__genre {
   font-size: 0.9rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.manga_card__span {
+  display: inline-block;
+  width: 100%;
 }
 
 .manga_card__stats {
@@ -84,7 +93,7 @@
 }
 
 .manga_card__list-options {
-  height: 60px;
+  height: 81px;
   display: flex;
   flex: 1 0 10px;
   flex-wrap: wrap;

@@ -9,7 +9,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (group.style.display === 'none' || group.style.display === '') {
       group.style.display = 'flex';
-      group.style.flexDirection = 'row';
       group.style.flexWrap = 'wrap';
       group.style.justifyContent = 'center';
     } else {
