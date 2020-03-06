@@ -23,6 +23,8 @@ public class MangaFormPage extends SeleniumPageObjectModel {
 	private static final String DESCRIPTION_PL = "plTranslation.description";
 	private static final String IMAGE = "image";
 	private static final String AUTHORS = "authors";
+	private static final String GENRES = "genres";
+	private static final String FORM_GROUP_SHOW_CLASS = "form__label--show";
 	private static final String FORM_MESSAGE_FAILURE_CLASS = "form__message--failure";
 	private static final String FORM_BOX_NAME = "addOrUpdateMangaForm";
 	private static final String SUBMIT_MANGA = "addOrUpdateMangaSubmitBtn";
@@ -45,6 +47,12 @@ public class MangaFormPage extends SeleniumPageObjectModel {
 
 	@FindBy(name = AUTHORS)
 	private List<WebElement> authorsCheckboxes;
+
+	@FindBy(name = GENRES)
+	private List<WebElement> genresCheckboxes;
+
+	@FindBy(className = FORM_GROUP_SHOW_CLASS)
+	private List<WebElement> groupHiddenOptions;
 
 	@FindBy(className = FORM_MESSAGE_FAILURE_CLASS)
 	private List<WebElement> failrueMessages;
@@ -122,14 +130,39 @@ public class MangaFormPage extends SeleniumPageObjectModel {
 		authorsCheckboxes.get(index).click();
 	}
 
+	public void showAuthors() {
+		
+		groupHiddenOptions.get(0).click();
+	}
+	
 	public boolean isFirstAuthorCheckboxSelected() {
 
 		return authorsCheckboxes.get(0).isSelected();
 	}
-	
+
 	public boolean isSecodnAuthorCheckboxSelected() {
 
 		return authorsCheckboxes.get(1).isSelected();
+	}
+
+	public void clickGenreCheckbox(int index) {
+		
+		genresCheckboxes.get(index).click();
+	}
+
+	public void showGenres() {
+		
+		groupHiddenOptions.get(1).click();
+	}
+	
+	public boolean isFirstGenreCheckboxSelected() {
+
+		return genresCheckboxes.get(0).isSelected();
+	}
+
+	public boolean isSecondGenreCheckboxSelected() {
+
+		return genresCheckboxes.get(1).isSelected();
 	}
 
 	public void clickSubmitMangaFormButton() {
@@ -153,7 +186,7 @@ public class MangaFormPage extends SeleniumPageObjectModel {
 	}
 
 	public void fillMandatoryMangaFormFields(String enTitle, String enDescription, String plTitle, String plDescription,
-			boolean selectAuthor, boolean addImage) {
+			boolean selectAuthor, boolean selectGenres, boolean addImage) {
 
 		setEnTitle(enTitle);
 
@@ -164,9 +197,19 @@ public class MangaFormPage extends SeleniumPageObjectModel {
 		setPlDescription(plDescription);
 
 		if (selectAuthor) {
+			
+			showAuthors();
+			
 			clickAuthorCheckbox(1);
 		}
 
+		if (selectGenres) {
+			
+			showGenres();
+			
+			clickGenreCheckbox(1);
+		}
+		
 		if (addImage) {
 			addImage();
 		}

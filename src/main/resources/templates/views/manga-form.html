@@ -71,7 +71,7 @@
 						th:if="${#fields.hasErrors('genres')}" th:errors="*{genres}"></p>
 					<div class="form__group--flex">
 						<span class="form__span" th:each="genre : ${genres}"> <input
-							class="form__checkbox" type="checkbox" name="authors"
+							class="form__checkbox" type="checkbox" name="genres"
 							th:field="*{genres}" th:value="${genre.id}"
 							th:text="${genre.genre}">
 						</span>
