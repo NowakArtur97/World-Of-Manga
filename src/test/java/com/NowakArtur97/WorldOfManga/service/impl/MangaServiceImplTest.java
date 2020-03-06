@@ -32,6 +32,7 @@ import com.NowakArtur97.WorldOfManga.exception.MangaNotFoundException;
 import com.NowakArtur97.WorldOfManga.mapper.manga.MangaMapper;
 import com.NowakArtur97.WorldOfManga.model.Author;
 import com.NowakArtur97.WorldOfManga.model.Manga;
+import com.NowakArtur97.WorldOfManga.model.MangaGenre;
 import com.NowakArtur97.WorldOfManga.model.MangaInUserList;
 import com.NowakArtur97.WorldOfManga.model.MangaRating;
 import com.NowakArtur97.WorldOfManga.model.MangaTranslation;
@@ -71,13 +72,19 @@ public class MangaServiceImplTest {
 		Author authorExpected = new Author("FirsName LastName");
 		authorsExpected.add(authorExpected);
 
+		Set<MangaGenre> genresExpected = new HashSet<>();
+		MangaGenre genreExpected = new MangaGenre("genre");
+		genresExpected.add(genreExpected);
+		
 		mangaDTO.setAuthors(authorsExpected);
-
+		mangaDTO.setGenres(genresExpected);
+		
 		MockMultipartFile image = new MockMultipartFile("image.jpg", "file bytes".getBytes());
 		mangaDTO.setImage(image);
 
 		Manga mangaExpected = new Manga();
 		mangaExpected.addAuthor(authorExpected);
+		mangaExpected.addGenre(genreExpected);
 		mangaExpected.addTranslation(mangaTranslationEnExpected);
 		mangaExpected.addTranslation(mangaTranslationPlExpected);
 		mangaExpected.setImage(image.getBytes());
@@ -89,7 +96,10 @@ public class MangaServiceImplTest {
 		assertAll(
 				() -> assertEquals(authorsExpected.size(), mangaActual.getAuthors().size(),
 						() -> "should contain one author: " + authorExpected + " but was: "
-								+ mangaActual.getAuthors().size()),
+								+ mangaActual.getAuthors()),
+				() -> assertEquals(genresExpected.size(), mangaActual.getGenres().size(),
+						() -> "should contain one genre: " + genreExpected + " but was: "
+								+ mangaActual.getGenres()),
 				() -> assertTrue(mangaActual.getAuthors().contains(authorExpected),
 						() -> "should contain author: " + authorExpected + " but was: " + mangaActual.getAuthors()),
 				() -> assertEquals(2, mangaActual.getTranslations().size(),
@@ -123,15 +133,21 @@ public class MangaServiceImplTest {
 		Author authorExpected = new Author("FirsName LastName");
 		authorsExpected.add(authorExpected);
 
+		Set<MangaGenre> genresExpected = new HashSet<>();
+		MangaGenre genreExpected = new MangaGenre("genre");
+		genresExpected.add(genreExpected);
+		
 		MangaDTO mangaDTO = new MangaDTO();
 
 		mangaDTO.setId(mangaId);
 		mangaDTO.setImage(image);
 		mangaDTO.setAuthors(authorsExpected);
+		mangaDTO.setGenres(genresExpected);
 
 		Manga mangaExpected = new Manga();
 		mangaExpected.setId(mangaId);
 		mangaExpected.addAuthor(authorExpected);
+		mangaExpected.addGenre(genreExpected);
 		mangaExpected.addTranslation(mangaTranslationEnExpected);
 		mangaExpected.addTranslation(mangaTranslationPlExpected);
 		mangaExpected.setImage(image.getBytes());
@@ -142,7 +158,8 @@ public class MangaServiceImplTest {
 		mangaAfterMapperExpected.addTranslation(mangaTranslationEnExpected);
 		mangaAfterMapperExpected.addTranslation(mangaTranslationPlExpected);
 		mangaAfterMapperExpected.setImage(image.getBytes());
-
+		mangaAfterMapperExpected.addGenre(genreExpected);
+		
 		when(mangaMapper.mapMangaDTOToManga(mangaExpected, mangaDTO)).thenReturn(mangaAfterMapperExpected);
 
 		Manga mangaActual = mangaService.addOrUpdate(mangaDTO, mangaExpected);
@@ -150,9 +167,14 @@ public class MangaServiceImplTest {
 		assertAll(
 				() -> assertEquals(1, mangaActual.getAuthors().size(),
 						() -> "should contain one author: " + authorExpected + " but was: "
-								+ mangaActual.getAuthors().size()),
+								+ mangaActual.getAuthors()),
 				() -> assertTrue(mangaActual.getAuthors().contains(authorExpected),
 						() -> "should contain author: " + authorExpected + " but was: " + mangaActual.getAuthors()),
+				() -> assertEquals(1, mangaActual.getGenres().size(),
+						() -> "should contain one genre: " + genreExpected + " but was: "
+								+ mangaActual.getGenres()),
+				() -> assertTrue(mangaActual.getGenres().contains(genreExpected),
+						() -> "should contain genre: " + genreExpected + " but was: " + mangaActual.getGenres()),
 				() -> assertEquals(2, mangaActual.getTranslations().size(),
 						() -> "should contain both translations, but was: " + mangaActual.getTranslations()),
 				() -> assertTrue(mangaActual.getTranslations().contains(mangaTranslationEnExpected),
@@ -180,10 +202,15 @@ public class MangaServiceImplTest {
 		Author authorExpected = new Author("FirsName LastName");
 		authorsExpected.add(authorExpected);
 
+		Set<MangaGenre> genresExpected = new HashSet<>();
+		MangaGenre genreExpected = new MangaGenre("genre");
+		genresExpected.add(genreExpected);
+		
 		MockMultipartFile image = new MockMultipartFile("image.jpg", "file bytes".getBytes());
 
 		Manga mangaExpected = new Manga();
 		mangaExpected.addAuthor(authorExpected);
+		mangaExpected.addGenre(genreExpected);
 		mangaExpected.addTranslation(mangaTranslationEnExpected);
 		mangaExpected.addTranslation(mangaTranslationPlExpected);
 		mangaExpected.setImage(image.getBytes());
@@ -218,6 +245,10 @@ public class MangaServiceImplTest {
 						() -> "shouldn`t manga have ratings, but was: " + mangaActual.getMangasRatings()),
 				() -> assertFalse(mangaActual.getMangasRatings().contains(mangaRatingExpected),
 						() -> "shouldn`t contain rating, but was: " + mangaActual.getMangasRatings()),
+				() -> assertTrue(mangaActual.getGenres().isEmpty(),
+						() -> "shouldn`t manga have genres, but was: " + mangaActual.getGenres()),
+				() -> assertFalse(mangaActual.getGenres().contains(genreExpected),
+						() -> "shouldn`t contain genre, but was: " + mangaActual.getGenres()),
 				() -> assertTrue(mangaActual.getUsersWithMangaInList().isEmpty(),
 						() -> "shouldn`t manga have users with manga in their lists, but was: "
 								+ mangaActual.getUsersWithMangaInList()),
@@ -245,6 +276,8 @@ public class MangaServiceImplTest {
 		MangaTranslation mangaTranslationPlExpected = MangaTranslation.builder().title("Polish title")
 				.description("Polish description").build();
 
+		MangaGenre genreExpected = new MangaGenre("genre");
+		
 		Author authorExpected = new Author("FirsName LastName");
 
 		MockMultipartFile image = new MockMultipartFile("image.jpg", "file bytes".getBytes());
@@ -254,6 +287,7 @@ public class MangaServiceImplTest {
 		mangaExpected.addTranslation(mangaTranslationEnExpected);
 		mangaExpected.addTranslation(mangaTranslationPlExpected);
 		mangaExpected.setImage(image.getBytes());
+		mangaExpected.addGenre(genreExpected);
 
 		User userExpected = User.builder().username("user").firstName("first name").lastName("last name")
 				.password("user").email("user@email.com").isEnabled(true).build();
@@ -289,6 +323,8 @@ public class MangaServiceImplTest {
 
 		Author authorExpected = new Author("FirsName LastName");
 
+		MangaGenre genreExpected = new MangaGenre("genre");
+		
 		MockMultipartFile image = new MockMultipartFile("image.jpg", "file bytes".getBytes());
 
 		Manga mangaExpected = new Manga();
@@ -296,7 +332,8 @@ public class MangaServiceImplTest {
 		mangaExpected.addTranslation(mangaTranslationEnExpected);
 		mangaExpected.addTranslation(mangaTranslationPlExpected);
 		mangaExpected.setImage(image.getBytes());
-
+		mangaExpected.addGenre(genreExpected);
+		
 		User userExpected = User.builder().username("user").firstName("first name").lastName("last name")
 				.password("user").email("user@email.com").isEnabled(true).build();
 
@@ -334,21 +371,24 @@ public class MangaServiceImplTest {
 		MangaTranslation mangaTranslationPlExpected2 = MangaTranslation.builder().title("Polish title 2")
 				.description("Polish description").build();
 
-		Set<Author> authorsExpected = new HashSet<>();
 		Author authorExpected = new Author("FirsName LastName");
-		authorsExpected.add(authorExpected);
 
+		MangaGenre genreExpected = new MangaGenre("genre");
+		MangaGenre genreExpected2 = new MangaGenre("genre 2");
+		
 		MockMultipartFile image = new MockMultipartFile("image.jpg", "file bytes".getBytes());
 		MockMultipartFile image2 = new MockMultipartFile("image.jpg", "file bytes".getBytes());
 
 		Manga mangaExpected = new Manga();
 		mangaExpected.addAuthor(authorExpected);
+		mangaExpected.addGenre(genreExpected);
 		mangaExpected.addTranslation(mangaTranslationEnExpected);
 		mangaExpected.addTranslation(mangaTranslationPlExpected);
 		mangaExpected.setImage(image.getBytes());
 
 		Manga mangaExpected2 = new Manga();
 		mangaExpected.addAuthor(authorExpected);
+		mangaExpected.addGenre(genreExpected2);
 		mangaExpected.addTranslation(mangaTranslationEnExpected2);
 		mangaExpected.addTranslation(mangaTranslationPlExpected2);
 		mangaExpected.setImage(image2.getBytes());
@@ -382,6 +422,8 @@ public class MangaServiceImplTest {
 
 		Author authorExpected = new Author("FirsName LastName");
 
+		MangaGenre genreExpected = new MangaGenre("genre");
+		
 		MockMultipartFile image = new MockMultipartFile("image.jpg", "file bytes".getBytes());
 
 		Manga mangaExpected = new Manga();
@@ -389,6 +431,7 @@ public class MangaServiceImplTest {
 		mangaExpected.addTranslation(mangaTranslationEnExpected);
 		mangaExpected.addTranslation(mangaTranslationPlExpected);
 		mangaExpected.setImage(image.getBytes());
+		mangaExpected.addGenre(genreExpected);
 
 		Long id = 1L;
 
@@ -399,6 +442,8 @@ public class MangaServiceImplTest {
 		assertAll(
 				() -> assertEquals(mangaExpected.getTranslations(), mangaActual.getTranslations(),
 						"should return manga with translations, but was: " + mangaActual.getTranslations()),
+				() -> assertEquals(mangaExpected.getGenres(), mangaActual.getGenres(),
+						"should return manga with genres, but was: " + mangaActual.getGenres()),
 				() -> assertEquals(mangaExpected.getAuthors(), mangaActual.getAuthors(),
 						"should return manga with authors, but was: " + mangaActual.getAuthors()),
 				() -> assertEquals(mangaExpected.getImage(), mangaActual.getImage(),
