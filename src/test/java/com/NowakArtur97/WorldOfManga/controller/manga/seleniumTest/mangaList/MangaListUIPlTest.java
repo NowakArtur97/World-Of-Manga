@@ -26,11 +26,14 @@ public class MangaListUIPlTest extends MangaListUITest {
 
 	@Test
 	@DisplayName("when added new manga")
-	public void when_added_new_manga_should_show_manga_on_manga_list() {
+	public void when_added_new_manga_should_show_manga_title_on_manga_list() {
 
 		String englishTitle = "English title";
 		String polishTitle = "Polish title";
+		String englishDescription = "English description";
+		String polishDescription = "Polish description";
 		boolean selectAuthor = true;
+		boolean selectGenre = true;
 		boolean addImage = true;
 
 		loginPage.loadLoginView(LanguageVersion.PL);
@@ -39,14 +42,47 @@ public class MangaListUIPlTest extends MangaListUITest {
 
 		mangaFormPage.clickAddOrUpdateMangaLinkButton();
 
-		mangaFormPage.fillMandatoryMangaFormFields(englishTitle, "English description", polishTitle,
-				"Polish description", selectAuthor, addImage);
+		mangaFormPage.fillMandatoryMangaFormFields(englishTitle, englishDescription, polishTitle, polishDescription,
+				selectAuthor, selectGenre, addImage);
 
 		mangaList.clickMangaListLink();
 
 		assertAll(
-				() -> assertTrue(mangaList.getLastMangaCardText().contains(englishTitle),
-						() -> "should show new manga with english title"),
+				() -> assertTrue(mangaList.getLastMangaCardText().contains(polishTitle),
+						() -> "should show new manga with polish title, but was: " + mangaList.getLastMangaCardText()),
+				() -> assertTrue(mangaList.countMangaCards() >= 1, () -> "should show at least one manga"),
+				() -> assertNotNull(mangaList.getMangaListText(), () -> "should load manga list fragment text"));
+	}
+
+	@Test
+	@DisplayName("when added new manga")
+	public void when_added_new_manga_should_show_manga_description_on_manga_list() {
+
+		String englishTitle = "English title";
+		String polishTitle = "Polish title";
+		String englishDescription = "English description";
+		String polishDescription = "Polish description";
+		boolean selectAuthor = true;
+		boolean selectGenre = true;
+		boolean addImage = true;
+
+		loginPage.loadLoginView(LanguageVersion.PL);
+
+		loginPage.fillMandatoryLoginFields("admin", "admin");
+
+		mangaFormPage.clickAddOrUpdateMangaLinkButton();
+
+		mangaFormPage.fillMandatoryMangaFormFields(englishTitle, englishDescription, polishTitle, polishDescription,
+				selectAuthor, selectGenre, addImage);
+
+		mangaList.clickMangaListLink();
+
+		mangaList.chooseLastManga();
+
+		assertAll(
+				() -> assertTrue(mangaList.getLastMangaCardText().contains(polishDescription),
+						() -> "should show new manga with polish description, but was: "
+								+ mangaList.getLastMangaCardText()),
 				() -> assertTrue(mangaList.countMangaCards() >= 1, () -> "should show at least one manga"),
 				() -> assertNotNull(mangaList.getMangaListText(), () -> "should load manga list fragment text"));
 	}
