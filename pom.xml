@@ -152,12 +152,12 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-neo4j</artifactId>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.neo4j/neo4j-jdbc-driver -->
+		<!-- https://mvnrepository.com/artifact/org.neo4j/neo4j-ogm-bolt-driver -->
 		<dependency>
 			<groupId>org.neo4j</groupId>
-			<artifactId>neo4j-jdbc-driver</artifactId>
-			<version>3.4.0</version>
+			<artifactId>neo4j-ogm-bolt-driver</artifactId>
 		</dependency>
+
 		<!-- https://mvnrepository.com/artifact/org.neo4j/neo4j-ogm -->
 		<dependency>
 			<groupId>org.neo4j</groupId>
