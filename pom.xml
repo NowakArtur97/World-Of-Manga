@@ -158,7 +158,13 @@
 			<artifactId>neo4j-jdbc-driver</artifactId>
 			<version>3.4.0</version>
 		</dependency>
-
+		<!-- https://mvnrepository.com/artifact/org.neo4j/neo4j-ogm -->
+		<dependency>
+			<groupId>org.neo4j</groupId>
+			<artifactId>neo4j-ogm</artifactId>
+			<version>3.2.9</version>
+			<type>pom</type>
+		</dependency>
 
 	</dependencies>
 
