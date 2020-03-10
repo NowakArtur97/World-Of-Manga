@@ -19,6 +19,7 @@ import com.NowakArtur97.WorldOfManga.repository.UserRepository;
 import com.NowakArtur97.WorldOfManga.service.api.UserService;
 
 import lombok.RequiredArgsConstructor;
+import net.bytebuddy.implementation.bind.MethodDelegationBinder.ParameterBinding.Anonymous;
 
 @Service
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
@@ -97,5 +98,13 @@ public class UserServiceImpl implements UserService {
 				.orElseThrow(() -> new UsernameNotFoundException("Invalid username or password"));
 
 		return loggedInUser;
+	}
+
+	@Override
+	public boolean isUserLoggedIn() {
+
+		return SecurityContextHolder.getContext().getAuthentication() != null
+				&& SecurityContextHolder.getContext().getAuthentication().isAuthenticated()
+				&& !(SecurityContextHolder.getContext().getAuthentication() instanceof Anonymous);
 	}
 }

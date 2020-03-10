@@ -18,4 +18,6 @@ public interface UserService extends UserDetailsService {
 	User save(User user);
 
 	User loadLoggedInUsername() throws UsernameNotFoundException;
+
+	boolean isUserLoggedIn();
 }
