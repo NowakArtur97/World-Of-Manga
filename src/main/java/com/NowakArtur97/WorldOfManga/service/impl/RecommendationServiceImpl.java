@@ -49,7 +49,7 @@ public class RecommendationServiceImpl implements RecommendationService {
 
 		} else {
 
-			recommendations = allManga.stream().sorted(SORT_MANGA_BY_LIKES).limit(5).collect(Collectors.toList());
+			recommendations = allManga.stream().sorted(SORT_MANGA_BY_LIKES).limit(10).collect(Collectors.toList());
 		}
 
 		return recommendations;

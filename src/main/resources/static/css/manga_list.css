@@ -1,0 +1,31 @@
+.manga_list {
+  display: flex;
+  flex: 1 0 10px;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.manga_slider {
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  background-color: darkgrey;
+  border: 4px black solid;
+  transition: all 0.2s;
+  transform: scale(1);
+  padding-right: 3rem;
+}
+
+.manga_slider--active {
+  cursor: grabbing;
+  transform: scale(1.05);
+}
+
+.manga_slider__header {
+  font-weight: bold;
+  font-size: 2rem;
+  color: white;
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+}
