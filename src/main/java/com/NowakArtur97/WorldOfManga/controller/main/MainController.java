@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.LocaleResolver;
 
 import com.NowakArtur97.WorldOfManga.service.api.MangaService;
+import com.NowakArtur97.WorldOfManga.service.api.RecommendationService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -21,6 +22,8 @@ import lombok.RequiredArgsConstructor;
 public class MainController {
 
 	private final MangaService mangaService;
+	
+	private final RecommendationService recommendationService;
 
 	private final LocaleResolver cookieLocaleResolver;
 
@@ -30,6 +33,7 @@ public class MainController {
 		Locale locale = cookieLocaleResolver.resolveLocale(request);
 
 		theModel.addAttribute("mangas", mangaService.findAll());
+		theModel.addAttribute("recommendations", recommendationService.recommendManga());
 
 		if (locale != null) {
 			theModel.addAttribute("locale", locale.getLanguage());

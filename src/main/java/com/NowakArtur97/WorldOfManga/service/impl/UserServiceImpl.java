@@ -6,6 +6,7 @@ import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -19,7 +20,6 @@ import com.NowakArtur97.WorldOfManga.repository.UserRepository;
 import com.NowakArtur97.WorldOfManga.service.api.UserService;
 
 import lombok.RequiredArgsConstructor;
-import net.bytebuddy.implementation.bind.MethodDelegationBinder.ParameterBinding.Anonymous;
 
 @Service
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
@@ -103,8 +103,8 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public boolean isUserLoggedIn() {
 
-		return SecurityContextHolder.getContext().getAuthentication() != null
-				&& SecurityContextHolder.getContext().getAuthentication().isAuthenticated()
-				&& !(SecurityContextHolder.getContext().getAuthentication() instanceof Anonymous);
+		final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+		return null != authentication && !("anonymousUser").equals(authentication.getName());
 	}
 }
