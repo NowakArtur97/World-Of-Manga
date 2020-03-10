@@ -4,12 +4,12 @@
     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{fragments/main-layout}">
 
 <head>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/form.css}" />
     <title>World Of Manga</title>
 </head>
 
 <body class="page">
     <div layout:fragment="content">
+        <div th:replace="fragments/manga-slider:: manga-slider"></div>
         <div th:replace="fragments/manga-list:: manga-list"></div>
     </div>
 </body>
