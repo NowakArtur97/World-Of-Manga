@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import com.NowakArtur97.WorldOfManga.model.Manga;
 import com.NowakArtur97.WorldOfManga.model.MangaGenre;
+import com.NowakArtur97.WorldOfManga.model.MangaRating;
 import com.NowakArtur97.WorldOfManga.model.User;
 import com.NowakArtur97.WorldOfManga.service.api.MangaService;
 import com.NowakArtur97.WorldOfManga.service.api.RecommendationService;
@@ -41,22 +42,18 @@ public class RecommendationServiceImpl implements RecommendationService {
 
 			MangaGenre mostLikedGenre = findUsersInterests(user);
 
+			recommendations = recommendations.stream().filter(
+					manga -> !user.getMangasRatings().stream().anyMatch(rating -> rating.getManga().equals(manga))
+							&& !user.getFavouriteMangas().contains(manga))
+					.collect(Collectors.toList());
+
 			if (mostLikedGenre != null) {
-				recommendations = allManga.stream().filter(manga -> manga.getGenres().contains(mostLikedGenre)
-						&& !user.getFavouriteMangas().contains(manga)
-						&& !user.getMangasRatings().stream().anyMatch(rating -> rating.getManga().equals(manga)))
+
+				recommendations = recommendations.stream().filter(manga -> manga.getGenres().contains(mostLikedGenre))
 						.collect(Collectors.toList());
-			} else {
-				recommendations = allManga.stream().filter(
-						manga -> !user.getMangasRatings().stream().anyMatch(rating -> rating.getManga().equals(manga)))
-						.sorted(SORT_MANGA_BY_LIKES).limit(10).collect(Collectors.toList());
 			}
-		} else {
-
-			recommendations = allManga.stream().sorted(SORT_MANGA_BY_LIKES).limit(10).collect(Collectors.toList());
 		}
-
-		return recommendations;
+		return recommendations.stream().sorted(SORT_MANGA_BY_LIKES).limit(10).collect(Collectors.toList());
 	}
 
 	Comparator<Manga> SORT_MANGA_BY_LIKES = new Comparator<Manga>() {
@@ -66,17 +63,24 @@ public class RecommendationServiceImpl implements RecommendationService {
 
 			return manga2.getUserWithMangaInFavourites().size() - manga1.getUserWithMangaInFavourites().size();
 		}
-
 	};
 
 	private MangaGenre findUsersInterests(User user) {
 
 		Set<Manga> usersFavourites = user.getFavouriteMangas();
+		Set<MangaRating> usersRatedList = user.getMangasRatings();
 
 		Map<MangaGenre, Integer> genreGroups = new HashMap<>();
 
 		for (Manga manga : usersFavourites) {
 			for (MangaGenre genre : manga.getGenres()) {
+				Integer occurrence = genreGroups.get(genre);
+				genreGroups.put(genre, occurrence == null ? 1 : occurrence + 1);
+			}
+		}
+
+		for (MangaRating rating : usersRatedList) {
+			for (MangaGenre genre : rating.getManga().getGenres()) {
 				Integer occurrence = genreGroups.get(genre);
 				genreGroups.put(genre, occurrence == null ? 1 : occurrence + 1);
 			}
