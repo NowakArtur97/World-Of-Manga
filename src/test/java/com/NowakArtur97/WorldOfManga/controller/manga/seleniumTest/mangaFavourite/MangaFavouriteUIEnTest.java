@@ -27,7 +27,7 @@ import com.NowakArtur97.WorldOfManga.testUtil.extension.ScreenshotWatcher;
 public class MangaFavouriteUIEnTest extends MangaFavouriteUITest {
 
 	@Test
-	@DisplayName("when add manga for the first time")
+	@DisplayName("when add manga for the first time - likes")
 	public void when_add_manga_for_the_first_time_should_add_manga_to_favourites() {
 
 		loginPage.loadLoginView(LanguageVersion.ENG);
@@ -36,14 +36,14 @@ public class MangaFavouriteUIEnTest extends MangaFavouriteUITest {
 
 		mangaList.chooseManga(0);
 
-		mangaList.addOrRemoveFirstMangaFromFavourites();
+		mangaList.addOrRemoveLastMangaFromFavourites();
 
-		assertAll(() -> assertTrue(mangaList.getFirstMangaFavouritesCounter().contains("1"),
-				() -> "should show manga with one heart, but was: " + mangaList.getFirstMangaFavouritesCounter()));
+		assertAll(() -> assertTrue(mangaList.getLastMangaFavouritesCounter().contains("1"),
+				() -> "should show manga with one heart, but was: " + mangaList.getLastMangaFavouritesCounter()));
 	}
 
 	@Test
-	@DisplayName("when add manga for the first time")
+	@DisplayName("when add manga for the first time - favourites")
 	public void when_add_manga_for_the_first_time_should_show_manga_in_favourites() {
 
 		loginPage.loadLoginView(LanguageVersion.ENG);
@@ -52,21 +52,21 @@ public class MangaFavouriteUIEnTest extends MangaFavouriteUITest {
 
 		mangaList.chooseManga(0);
 
-		mangaList.addOrRemoveFirstMangaFromFavourites();
+		mangaList.addOrRemoveLastMangaFromFavourites();
 
 		mangaList.clickMangaUserListLink();
 
 		mangaList.chooseFavouritesManga();
 
 		assertAll(
-				() -> assertTrue(mangaList.getLastMangaCardText().contains("Tokyo Ghoul"),
+				() -> assertTrue(mangaList.getLastMangaCardText().contains("Black Clover"),
 						() -> "should show new manga in favourites"),
 				() -> assertTrue(mangaList.countMangaCards() >= 1, () -> "should show at least one manga"),
 				() -> assertNotNull(mangaList.getMangaListText(), () -> "should load manga list fragment text"));
 	}
 
 	@Test
-	@DisplayName("when remove manga from favourites")
+	@DisplayName("when remove manga from favourites - likes")
 	public void when_remove_manga_from_favourites_should_remove_manga_from_favourites() {
 
 		loginPage.loadLoginView(LanguageVersion.ENG);
@@ -75,18 +75,18 @@ public class MangaFavouriteUIEnTest extends MangaFavouriteUITest {
 
 		mangaList.chooseManga(0);
 
-		mangaList.addOrRemoveFirstMangaFromFavourites();
+		mangaList.addOrRemoveLastMangaFromFavourites();
 
 		mangaList.chooseManga(0);
 
-		mangaList.addOrRemoveFirstMangaFromFavourites();
+		mangaList.addOrRemoveLastMangaFromFavourites();
 
-		assertAll(() -> assertTrue(mangaList.getFirstMangaFavouritesCounter().contains("0"),
-				() -> "should show manga with zero hearts, but was: " + mangaList.getFirstMangaFavouritesCounter()));
+		assertAll(() -> assertTrue(mangaList.getLastMangaFavouritesCounter().contains("0"),
+				() -> "should show manga with zero hearts, but was: " + mangaList.getLastMangaFavouritesCounter()));
 	}
 
 	@Test
-	@DisplayName("when remove manga from favourites")
+	@DisplayName("when remove manga from favourites - favourites")
 	public void when_remove_manga_from_favourites_should_not_show_manga_in_list() {
 
 		loginPage.loadLoginView(LanguageVersion.ENG);

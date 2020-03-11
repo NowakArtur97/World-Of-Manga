@@ -25,7 +25,7 @@ import com.NowakArtur97.WorldOfManga.testUtil.extension.ScreenshotWatcher;
 public class MangaListUIEnTest extends MangaListUITest {
 
 	@Test
-	@DisplayName("when added new manga")
+	@DisplayName("when added new manga - title")
 	public void when_added_new_manga_should_show_manga_title_on_manga_list() {
 
 		String englishTitle = "English title";
@@ -55,7 +55,7 @@ public class MangaListUIEnTest extends MangaListUITest {
 	}
 
 	@Test
-	@DisplayName("when added new manga")
+	@DisplayName("when added new manga - description")
 	public void when_added_new_manga_should_show_manga_description_on_manga_list() {
 
 		String englishTitle = "English title";
