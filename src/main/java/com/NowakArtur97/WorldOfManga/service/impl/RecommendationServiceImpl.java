@@ -29,6 +29,15 @@ public class RecommendationServiceImpl implements RecommendationService {
 
 	private final UserService userService;
 
+	private final Comparator<Manga> SORT_BY_LIKES = new Comparator<Manga>() {
+
+		@Override
+		public int compare(Manga manga1, Manga manga2) {
+
+			return manga2.getUserWithMangaInFavourites().size() - manga1.getUserWithMangaInFavourites().size();
+		}
+	};
+
 	@Override
 	public List<Manga> recommendManga() {
 
@@ -38,32 +47,27 @@ public class RecommendationServiceImpl implements RecommendationService {
 
 		if (userService.isUserLoggedIn()) {
 
-			User user = userService.loadLoggedInUsername();
-
-			MangaGenre mostLikedGenre = findUsersInterests(user);
-
-			recommendations = recommendations.stream().filter(
-					manga -> !user.getMangasRatings().stream().anyMatch(rating -> rating.getManga().equals(manga))
-							&& !user.getFavouriteMangas().contains(manga))
-					.collect(Collectors.toList());
-
-			if (mostLikedGenre != null) {
-
-				recommendations = recommendations.stream().filter(manga -> manga.getGenres().contains(mostLikedGenre))
-						.collect(Collectors.toList());
-			}
+			recommendations = recommendMangaForLoggedInUser(recommendations);
 		}
-		return recommendations.stream().sorted(SORT_MANGA_BY_LIKES).limit(10).collect(Collectors.toList());
+
+		return recommendations.stream().sorted(SORT_BY_LIKES).limit(10).collect(Collectors.toList());
 	}
 
-	Comparator<Manga> SORT_MANGA_BY_LIKES = new Comparator<Manga>() {
+	private List<Manga> recommendMangaForLoggedInUser(List<Manga> recommendations) {
 
-		@Override
-		public int compare(Manga manga1, Manga manga2) {
+		User user = userService.loadLoggedInUsername();
 
-			return manga2.getUserWithMangaInFavourites().size() - manga1.getUserWithMangaInFavourites().size();
+		MangaGenre mostLikedGenre = findUsersInterests(user);
+
+		recommendations = removeMangaThatIsAlreadyInUserList(recommendations, user);
+
+		if (mostLikedGenre != null) {
+
+			recommendations = recommendMangaByGenre(recommendations, mostLikedGenre);
 		}
-	};
+
+		return recommendations;
+	}
 
 	private MangaGenre findUsersInterests(User user) {
 
@@ -73,18 +77,41 @@ public class RecommendationServiceImpl implements RecommendationService {
 		Map<MangaGenre, Integer> genreGroups = new HashMap<>();
 
 		for (Manga manga : usersFavourites) {
-			for (MangaGenre genre : manga.getGenres()) {
-				Integer occurrence = genreGroups.get(genre);
-				genreGroups.put(genre, occurrence == null ? 1 : occurrence + 1);
-			}
+			groupMangaByGenre(genreGroups, manga.getGenres());
 		}
 
 		for (MangaRating rating : usersRatedList) {
-			for (MangaGenre genre : rating.getManga().getGenres()) {
-				Integer occurrence = genreGroups.get(genre);
-				genreGroups.put(genre, occurrence == null ? 1 : occurrence + 1);
-			}
+			groupMangaByGenre(genreGroups, rating.getManga().getGenres());
 		}
+
+		Entry<MangaGenre, Integer> mostOccurrences = findMostCommonGenre(genreGroups);
+
+		return mostOccurrences != null ? mostOccurrences.getKey() : null;
+	}
+
+	private List<Manga> removeMangaThatIsAlreadyInUserList(List<Manga> recommendations, User user) {
+
+		return recommendations.stream()
+				.filter(manga -> !user.getMangasRatings().stream().anyMatch(rating -> rating.getManga().equals(manga))
+						&& !user.getFavouriteMangas().contains(manga))
+				.collect(Collectors.toList());
+	}
+
+	private List<Manga> recommendMangaByGenre(List<Manga> recommendations, MangaGenre mostLikedGenre) {
+
+		return recommendations.stream().filter(manga -> manga.getGenres().contains(mostLikedGenre))
+				.collect(Collectors.toList());
+	}
+
+	private void groupMangaByGenre(Map<MangaGenre, Integer> genreGroups, Set<MangaGenre> genres) {
+
+		for (MangaGenre genre : genres) {
+			Integer occurrence = genreGroups.get(genre);
+			genreGroups.put(genre, occurrence == null ? 1 : occurrence + 1);
+		}
+	}
+
+	private Entry<MangaGenre, Integer> findMostCommonGenre(Map<MangaGenre, Integer> genreGroups) {
 
 		Entry<MangaGenre, Integer> mostOccurrences = null;
 
@@ -94,6 +121,6 @@ public class RecommendationServiceImpl implements RecommendationService {
 			}
 		}
 
-		return mostOccurrences != null ? mostOccurrences.getKey() : null;
+		return mostOccurrences;
 	}
 }
