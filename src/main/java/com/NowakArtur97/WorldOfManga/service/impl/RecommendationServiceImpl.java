@@ -25,6 +25,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class RecommendationServiceImpl implements RecommendationService {
 
+	private final int numberOfRecommendedManga = 10;
+
 	private final MangaService mangaService;
 
 	private final UserService userService;
@@ -47,13 +49,14 @@ public class RecommendationServiceImpl implements RecommendationService {
 
 		if (userService.isUserLoggedIn()) {
 
-			recommendations = recommendMangaForLoggedInUser(recommendations);
+			recommendations = recommendMangaForLoggedInUser(recommendations, allManga);
 		}
 
-		return recommendations.stream().sorted(SORT_BY_LIKES).limit(10).collect(Collectors.toList());
+		return recommendations.stream().sorted(SORT_BY_LIKES).limit(numberOfRecommendedManga)
+				.collect(Collectors.toList());
 	}
 
-	private List<Manga> recommendMangaForLoggedInUser(List<Manga> recommendations) {
+	private List<Manga> recommendMangaForLoggedInUser(List<Manga> recommendations, List<Manga> allManga) {
 
 		User user = userService.loadLoggedInUsername();
 
@@ -64,6 +67,11 @@ public class RecommendationServiceImpl implements RecommendationService {
 		if (mostLikedGenre != null) {
 
 			recommendations = recommendMangaByGenre(recommendations, mostLikedGenre);
+		}
+
+		if (recommendations.size() < numberOfRecommendedManga) {
+
+			recommendations = findMoreRecommendations(user, recommendations, allManga);
 		}
 
 		return recommendations;
@@ -91,9 +99,8 @@ public class RecommendationServiceImpl implements RecommendationService {
 
 	private List<Manga> removeMangaThatIsAlreadyInUserList(List<Manga> recommendations, User user) {
 
-		return recommendations.stream()
-				.filter(manga -> !user.getMangasRatings().stream().anyMatch(rating -> rating.getManga().equals(manga))
-						&& !user.getFavouriteMangas().contains(manga))
+		return recommendations.stream().filter(
+				manga -> !isMangaAlreadyRatedByUser(user, manga) && !isMangaAlreadyInUsersFavourites(user, manga))
 				.collect(Collectors.toList());
 	}
 
@@ -122,5 +129,30 @@ public class RecommendationServiceImpl implements RecommendationService {
 		}
 
 		return mostOccurrences;
+	}
+
+	private List<Manga> findMoreRecommendations(User user, List<Manga> recommendations, List<Manga> allManga) {
+
+		int howManyToFind = numberOfRecommendedManga - recommendations.size();
+
+		recommendations.addAll(allManga.stream()
+				.filter(manga -> !isMangaAlreadyRatedByUser(user, manga)
+						&& !isMangaAlreadyInUsersFavourites(user, manga)
+						&& !isMangaAlreadyRecommended(recommendations, manga))
+				.limit(howManyToFind).sorted(SORT_BY_LIKES).collect(Collectors.toList()));
+
+		return recommendations;
+	}
+
+	private boolean isMangaAlreadyRecommended(List<Manga> recommendations, Manga manga) {
+		return recommendations.contains(manga);
+	}
+
+	private boolean isMangaAlreadyInUsersFavourites(User user, Manga manga) {
+		return user.getFavouriteMangas().contains(manga);
+	}
+
+	private boolean isMangaAlreadyRatedByUser(User user, Manga manga) {
+		return user.getMangasRatings().stream().anyMatch(rating -> rating.getManga().equals(manga));
 	}
 }

@@ -39,11 +39,14 @@ To log in as a admin please provide:
 - CircleCI
 
 ## Features
+Available for all users:
+- Select language (available options are: English and Polish)
+- Recomendations
+- View all added manga with genres
+
 Available for unlogged users:
 - Login
 - Register
-- View all added manga
-- Select language (available options are: English and Polish)
 
 Available to users with "User" or "Admin" role:
 - Rate manga
@@ -57,8 +60,6 @@ Available to users with only "Admin" role:
 
 ## To Do
 - Editing and deleting authors
-- Manga genres
-- Recomendations
 
 ## Status
 Project is: in progess
