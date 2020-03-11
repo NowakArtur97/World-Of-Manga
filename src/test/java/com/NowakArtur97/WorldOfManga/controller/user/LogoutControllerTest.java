@@ -1,7 +1,7 @@
 package com.NowakArtur97.WorldOfManga.controller.user;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -12,7 +12,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.mock.web.MockHttpSession;
 import org.springframework.test.web.servlet.MockMvc;
@@ -29,12 +28,12 @@ public class LogoutControllerTest {
 
 	private MockMvc mockMvc;
 
-	@InjectMocks
 	private LogoutController logoutController;
 
 	@BeforeEach
 	public void setUp() {
 
+		logoutController = new LogoutController();
 		mockMvc = MockMvcBuilders.standaloneSetup(logoutController).build();
 	}
 

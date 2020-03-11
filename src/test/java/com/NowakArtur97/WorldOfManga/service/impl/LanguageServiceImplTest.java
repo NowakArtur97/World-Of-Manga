@@ -9,11 +9,11 @@ import static org.mockito.Mockito.when;
 
 import java.util.Optional;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
@@ -26,11 +26,16 @@ import com.NowakArtur97.WorldOfManga.repository.LanguageRepository;
 @Tag("LanguageServiceImpl_Tests")
 public class LanguageServiceImplTest {
 
-	@InjectMocks
 	private LanguageServiceImpl languageService;
 
 	@Mock
 	private LanguageRepository languageRepository;
+
+	@BeforeEach
+	void setUp() {
+
+		languageService = new LanguageServiceImpl(languageRepository);
+	}
 
 	@Test
 	@DisplayName("when find by locale")

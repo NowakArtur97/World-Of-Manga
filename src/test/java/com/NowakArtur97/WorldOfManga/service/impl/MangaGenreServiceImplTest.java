@@ -12,11 +12,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
@@ -29,11 +29,16 @@ import com.NowakArtur97.WorldOfManga.repository.MangaGenreRepository;
 @Tag("MangaGenreServiceImpl_Tests")
 public class MangaGenreServiceImplTest {
 
-	@InjectMocks
 	private MangaGenreServiceImpl mangaGenreService;
 
 	@Mock
 	private MangaGenreRepository mangaGenreRepository;
+
+	@BeforeEach
+	void setUp() {
+
+		mangaGenreService = new MangaGenreServiceImpl(mangaGenreRepository);
+	}
 
 	@Test
 	@DisplayName("when find all")

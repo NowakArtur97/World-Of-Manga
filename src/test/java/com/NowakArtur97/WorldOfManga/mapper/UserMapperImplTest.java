@@ -6,11 +6,11 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
@@ -25,11 +25,16 @@ import com.NowakArtur97.WorldOfManga.model.User;
 @Tag("UserMapperImpl_Tests")
 public class UserMapperImplTest {
 
-	@InjectMocks
 	private UserMapperImpl userMapper;
 
 	@Mock
 	private ModelMapper modelMapper;
+
+	@BeforeEach
+	public void setUp() {
+
+		userMapper = new UserMapperImpl(modelMapper);
+	}
 
 	@Test
 	@DisplayName("when map user dto to entity")

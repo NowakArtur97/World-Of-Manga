@@ -11,7 +11,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.test.web.servlet.MockMvc;
@@ -28,7 +27,6 @@ public class MangaRatingControllerTest {
 
 	private MockMvc mockMvc;
 
-	@InjectMocks
 	private MangaRatingController mangaRatingController;
 
 	@Mock
@@ -37,6 +35,7 @@ public class MangaRatingControllerTest {
 	@BeforeEach
 	public void setUp() {
 
+		mangaRatingController = new MangaRatingController(mangaRatingService);
 		mockMvc = MockMvcBuilders.standaloneSetup(mangaRatingController).build();
 	}
 

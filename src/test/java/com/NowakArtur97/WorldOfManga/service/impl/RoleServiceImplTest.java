@@ -9,11 +9,11 @@ import static org.mockito.Mockito.when;
 
 import java.util.Optional;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
@@ -26,11 +26,16 @@ import com.NowakArtur97.WorldOfManga.repository.RoleRepository;
 @Tag("RoleServiceImpl_Tests")
 public class RoleServiceImplTest {
 
-	@InjectMocks
 	private RoleServiceImpl roleService;
 
 	@Mock
 	private RoleRepository roleRepository;
+
+	@BeforeEach
+	void setUp() {
+
+		roleService = new RoleServiceImpl(roleRepository);
+	}
 
 	@Test
 	@DisplayName("when find by name")

@@ -12,11 +12,11 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.mock.web.MockMultipartFile;
@@ -37,7 +37,6 @@ import com.NowakArtur97.WorldOfManga.service.api.UserService;
 @Tag("MangaInUserListServiceImpl_Tests")
 public class MangaInUserListServiceImplTest {
 
-	@InjectMocks
 	private MangaInUserListServiceImpl mangaInUserListService;
 
 	@Mock
@@ -48,6 +47,12 @@ public class MangaInUserListServiceImplTest {
 
 	@Mock
 	private MangaService mangaService;
+
+	@BeforeEach
+	void setUp() {
+
+		mangaInUserListService = new MangaInUserListServiceImpl(mangaInUserListRepository, mangaService, userService);
+	}
 
 	@Test
 	@DisplayName("when find existing manga in user list by user and manga")
@@ -122,7 +127,7 @@ public class MangaInUserListServiceImplTest {
 
 		Optional<MangaInUserList> mangaInUserListActual = mangaInUserListService.findByUserAndManga(userExpected,
 				mangaExpected);
-		
+
 		assertAll(
 				() -> assertTrue(mangaInUserListActual.isEmpty(),
 						() -> "should return empty Optional, but was: " + mangaInUserListActual),

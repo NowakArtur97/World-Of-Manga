@@ -10,7 +10,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -22,12 +21,12 @@ public class LoginControllerTest {
 
 	private MockMvc mockMvc;
 
-	@InjectMocks
 	private LoginController loginController;
 
 	@BeforeEach
 	public void setUp() {
 
+		loginController = new LoginController();
 		mockMvc = MockMvcBuilders.standaloneSetup(loginController).build();
 	}
 

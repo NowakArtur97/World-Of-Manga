@@ -13,12 +13,12 @@ import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Optional;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.core.Authentication;
@@ -36,7 +36,6 @@ import com.NowakArtur97.WorldOfManga.repository.UserRepository;
 @Tag("UserServiceImpl_Tests")
 public class UserServiceImplTest {
 
-	@InjectMocks
 	private UserServiceImpl userService;
 
 	@Mock
@@ -50,6 +49,12 @@ public class UserServiceImplTest {
 
 	@Mock
 	private Principal principal;
+
+	@BeforeEach
+	void setUp() {
+
+		userService = new UserServiceImpl(userRepository);
+	}
 
 	@Nested
 	@DisplayName("User Service Integration Tests")

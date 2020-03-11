@@ -10,11 +10,11 @@ import static org.mockito.Mockito.when;
 import java.io.IOException;
 import java.util.Optional;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.mock.web.MockMultipartFile;
@@ -34,7 +34,6 @@ import com.NowakArtur97.WorldOfManga.service.api.UserService;
 @Tag("MangaRatingServiceImpl_Tests")
 public class MangaRatingServiceImplTest {
 
-	@InjectMocks
 	private MangaRatingServiceImpl mangaRatingService;
 
 	@Mock
@@ -45,6 +44,12 @@ public class MangaRatingServiceImplTest {
 
 	@Mock
 	private UserService userService;
+
+	@BeforeEach
+	void setUp() {
+
+		mangaRatingService = new MangaRatingServiceImpl(mangaRatingRepository, mangaService, userService);
+	}
 
 	@Test
 	@DisplayName("when rate manga for first time")

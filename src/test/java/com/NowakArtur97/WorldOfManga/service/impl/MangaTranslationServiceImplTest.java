@@ -8,11 +8,11 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
@@ -33,7 +33,6 @@ import com.NowakArtur97.WorldOfManga.service.api.MangaService;
 @Tag("MangaTranslationServiceImpl_Tests")
 public class MangaTranslationServiceImplTest {
 
-	@InjectMocks
 	private MangaTranslationServiceImpl mangaTranslationService;
 
 	@Mock
@@ -47,6 +46,13 @@ public class MangaTranslationServiceImplTest {
 
 	@Mock
 	private MangaService mangaService;
+
+	@BeforeEach
+	void setUp() {
+
+		mangaTranslationService = new MangaTranslationServiceImpl(mangaTranslationRepository, mangaTranslationMapper,
+				languageService, mangaService);
+	}
 
 	@Test
 	@DisplayName("when title is already in use")

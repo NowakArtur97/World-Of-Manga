@@ -19,7 +19,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.mock.web.MockMultipartFile;
@@ -41,7 +40,6 @@ public class MangaInUserListControllerTest {
 
 	private MockMvc mockMvc;
 
-	@InjectMocks
 	private MangaInUserListController mangaInUserListController;
 
 	@Mock
@@ -53,6 +51,7 @@ public class MangaInUserListControllerTest {
 	@BeforeEach
 	public void setUp() {
 
+		mangaInUserListController = new MangaInUserListController(mangaInUserListService, cookieLocaleResolver);
 		mockMvc = MockMvcBuilders.standaloneSetup(mangaInUserListController).build();
 	}
 

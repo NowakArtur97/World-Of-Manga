@@ -6,11 +6,11 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
@@ -24,11 +24,16 @@ import com.NowakArtur97.WorldOfManga.model.MangaTranslation;
 @Tag("MangaTranslationMapperImpl_Tests")
 public class MangaTranslationMapperImplTest {
 
-	@InjectMocks
 	private MangaTranslationMapperImpl mangaTranslationMapper;
 
 	@Mock
 	private ModelMapper modelMapper;
+
+	@BeforeEach
+	public void setUp() {
+
+		mangaTranslationMapper = new MangaTranslationMapperImpl(modelMapper);
+	}
 
 	@Test
 	@DisplayName("when map manga translation dto to entity")

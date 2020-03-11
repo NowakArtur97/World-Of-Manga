@@ -3,12 +3,11 @@ package com.NowakArtur97.WorldOfManga.mapper;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import com.NowakArtur97.WorldOfManga.dto.AuthorDTO;
 import com.NowakArtur97.WorldOfManga.dto.MangaTranslationDTO;
@@ -18,13 +17,17 @@ import com.NowakArtur97.WorldOfManga.model.Author;
 import com.NowakArtur97.WorldOfManga.model.MangaTranslation;
 import com.NowakArtur97.WorldOfManga.model.User;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @DisplayName("Model Mapper Tests")
 @Tag("ModelMapper_Tests")
 public class ModelMapperTest {
 
-	@Autowired
 	private ModelMapper modelMapper;
+
+	@BeforeEach
+	public void setUp() {
+
+		modelMapper = new ModelMapper();
+	}
 
 	@Test
 	@DisplayName("when map user dto to entity")
@@ -100,9 +103,8 @@ public class ModelMapperTest {
 
 		AuthorDTO authorActual = modelMapper.map(authorDTOExpected, AuthorDTO.class);
 
-		assertAll(
-				() -> assertEquals(authorExpected.getFullName(), authorActual.getFullName(),
-						() -> "should return author with full name: " + authorExpected.getFullName() + ", but was: "
-								+ authorActual.getFullName()));
+		assertAll(() -> assertEquals(authorExpected.getFullName(), authorActual.getFullName(),
+				() -> "should return author with full name: " + authorExpected.getFullName() + ", but was: "
+						+ authorActual.getFullName()));
 	}
 }

@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -23,7 +24,13 @@ import com.NowakArtur97.WorldOfManga.model.MangaTranslation;
 @Tag("MangaMapperIml_Test")
 public class MangaMapperImplTest {
 
-	private MangaMapperImpl mangaMapperImpl = new MangaMapperImpl();
+	private MangaMapperImpl mangaMapperImpl;
+
+	@BeforeEach
+	public void setUp() {
+
+		mangaMapperImpl = new MangaMapperImpl();
+	}
 
 	@Test
 	@DisplayName("when map manga dto to entity")

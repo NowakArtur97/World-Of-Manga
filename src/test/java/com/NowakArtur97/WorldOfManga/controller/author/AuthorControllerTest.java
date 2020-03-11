@@ -23,7 +23,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.MediaType;
@@ -43,7 +42,6 @@ public class AuthorControllerTest {
 
 	private MockMvc mockMvc;
 
-	@InjectMocks
 	private AuthorController authorController;
 
 	@Mock
@@ -55,6 +53,7 @@ public class AuthorControllerTest {
 	@BeforeEach
 	public void setUp() {
 
+		authorController = new AuthorController(authorService, authorValidator);
 		mockMvc = MockMvcBuilders.standaloneSetup(authorController).build();
 	}
 
@@ -64,14 +63,13 @@ public class AuthorControllerTest {
 
 		List<Author> authors = new ArrayList<>();
 		authors.add(new Author("FirstName LastName"));
-		
+
 		when(authorService.findAll()).thenReturn(authors);
-		
+
 		assertAll(() -> mockMvc.perform(get("/admin/addOrUpdateAuthor")).andExpect(status().isOk())
 				.andExpect(view().name("views/manga-form")).andExpect(model().attribute("mangaDTO", new MangaDTO()))
 				.andExpect(model().attribute("authorDTO", new AuthorDTO()))
-				.andExpect(model().attribute("authors", authors)),
-				() -> verify(authorService, times(1)).findAll());
+				.andExpect(model().attribute("authors", authors)), () -> verify(authorService, times(1)).findAll());
 	}
 
 	@Test

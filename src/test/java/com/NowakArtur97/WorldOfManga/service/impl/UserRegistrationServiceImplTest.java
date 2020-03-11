@@ -6,11 +6,11 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -29,7 +29,6 @@ import com.NowakArtur97.WorldOfManga.service.api.UserService;
 @Tag("UserRegistrationServiceImpl_Tests")
 public class UserRegistrationServiceImplTest {
 
-	@InjectMocks
 	private UserRegistrationServiceImpl userRegistrationService;
 
 	@Mock
@@ -43,6 +42,13 @@ public class UserRegistrationServiceImplTest {
 
 	@Mock
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+	@BeforeEach
+	void setUp() {
+
+		userRegistrationService = new UserRegistrationServiceImpl(roleService, userMapper, userService,
+				bCryptPasswordEncoder);
+	}
 
 	@Test
 	@DisplayName("when register user")

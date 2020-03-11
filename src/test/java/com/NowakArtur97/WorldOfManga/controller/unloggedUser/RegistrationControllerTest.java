@@ -18,7 +18,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.MediaType;
@@ -37,7 +36,6 @@ public class RegistrationControllerTest {
 
 	private MockMvc mockMvc;
 
-	@InjectMocks
 	private RegistrationController registrationController;
 
 	@Mock
@@ -49,6 +47,7 @@ public class RegistrationControllerTest {
 	@BeforeEach
 	public void setUp() {
 
+		registrationController = new RegistrationController(userRegistrationService, userRegistrationValidator);
 		mockMvc = MockMvcBuilders.standaloneSetup(registrationController).build();
 	}
 

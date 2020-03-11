@@ -43,7 +43,7 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
 		String hashedPassword = bCryptPasswordEncoder.encode(userToRegister.getPassword());
 		userToRegister.setPassword(hashedPassword);
 
-		userToRegister = userService.save(userToRegister);
+		userService.save(userToRegister);
 
 		return userToRegister;
 	}

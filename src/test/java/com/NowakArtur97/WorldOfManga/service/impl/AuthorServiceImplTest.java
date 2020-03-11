@@ -11,11 +11,11 @@ import static org.mockito.Mockito.when;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
@@ -29,7 +29,6 @@ import com.NowakArtur97.WorldOfManga.repository.AuthorRepository;
 @Tag("AuthorServiceImpl_Tests")
 public class AuthorServiceImplTest {
 
-	@InjectMocks
 	private AuthorServiceImpl authorService;
 
 	@Mock
@@ -37,6 +36,12 @@ public class AuthorServiceImplTest {
 
 	@Mock
 	private AuthorMapper authorMapper;
+
+	@BeforeEach
+	void setUp() {
+
+		authorService = new AuthorServiceImpl(authorRepository, authorMapper);
+	}
 
 	@Test
 	@DisplayName("when full name is already in database")
@@ -104,18 +109,18 @@ public class AuthorServiceImplTest {
 		String fullName = "Firstname LastName";
 
 		Author authorExpected = new Author(fullName);
-		
+
 		when(authorRepository.save(authorExpected)).thenReturn(authorExpected);
 
 		Author authorActual = authorService.save(authorExpected);
-		
+
 		assertAll(
 				() -> assertEquals(authorExpected.getFullName(), authorActual.getFullName(),
 						() -> "should return author with full name: " + authorExpected.getFullName() + ", but was: "
 								+ authorActual.getFullName()),
 				() -> verify(authorRepository, times(1)).save(authorActual));
 	}
-	
+
 	@Test
 	@DisplayName("when find all")
 	public void when_find_all_should_return_list_of_authors() {
