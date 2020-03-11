@@ -21,7 +21,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.mock.web.MockHttpServletRequest;
@@ -36,6 +35,7 @@ import com.NowakArtur97.WorldOfManga.model.Author;
 import com.NowakArtur97.WorldOfManga.model.Manga;
 import com.NowakArtur97.WorldOfManga.model.MangaTranslation;
 import com.NowakArtur97.WorldOfManga.service.api.MangaService;
+import com.NowakArtur97.WorldOfManga.service.api.RecommendationService;
 
 @ExtendWith(MockitoExtension.class)
 @DisplayName("Main Controller Tests")
@@ -44,11 +44,13 @@ public class MainControllerTest {
 
 	private MockMvc mockMvc;
 
-	@InjectMocks
 	private MainController mainController;
 
 	@Mock
 	private MangaService mangaService;
+
+	@Mock
+	private RecommendationService recommendationService;
 
 	@Mock
 	private LocaleResolver cookieLocaleResolver;
@@ -56,6 +58,7 @@ public class MainControllerTest {
 	@BeforeEach
 	public void setUp() {
 
+		mainController = new MainController(mangaService, recommendationService, cookieLocaleResolver);
 		mockMvc = MockMvcBuilders.standaloneSetup(mainController).build();
 	}
 
@@ -88,12 +91,14 @@ public class MainControllerTest {
 		mangas.add(mangaExpected);
 
 		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.get("/").locale(locale)
-				.flashAttr("mangas", mangas).flashAttr("locale", locale);
+				.flashAttr("mangas", mangas).flashAttr("recommendations", mangas).flashAttr("locale", locale);
 
 		when(mangaService.findAll()).thenReturn(mangas);
-		
+		when(recommendationService.recommendManga()).thenReturn(mangas);
+
 		assertAll(() -> mockMvc.perform(mockRequest).andExpect(status().isOk()).andExpect(view().name("views/main"))
-				.andExpect(model().attribute("mangas", mangas)));
+				.andExpect(model().attribute("mangas", mangas))
+				.andExpect(model().attribute("recommendations", mangas)));
 	}
 
 	@Test
@@ -104,11 +109,12 @@ public class MainControllerTest {
 
 		MockHttpServletRequest mockRequest = this.mockMvc.perform(MockMvcRequestBuilders.get("/").locale(locale))
 				.andReturn().getRequest();
-		
+
 		assertAll(
 				() -> assertEquals(locale, mockRequest.getLocale(),
 						() -> "should load locale: " + locale + ", but was: " + mockRequest.getLocale()),
 				() -> verify(mangaService, times(1)).findAll(),
+				() -> verify(recommendationService, times(1)).recommendManga(),
 				() -> verify(cookieLocaleResolver, times(1)).resolveLocale(mockRequest));
 	}
 }
