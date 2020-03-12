@@ -144,12 +144,8 @@ DROP TABLE IF EXISTS `genre`;
 
 CREATE TABLE `genre` (
     `genre_id` INT(11) NOT NULL AUTO_INCREMENT,
-    `language_id` INT(11),
     `genre` VARCHAR(50) NOT NULL,
     PRIMARY KEY (`genre_id`),
-    CONSTRAINT `FK_LANGUAGE_GENRE` FOREIGN KEY (`language_id`)
-        REFERENCES `language` (`language_id`)
-        ON DELETE NO ACTION ON UPDATE NO ACTION,
     UNIQUE `GENRE_UNIQUE` (`genre`)
 )  ENGINE=INNODB AUTO_INCREMENT=1 DEFAULT CHARSET=UTF8MB4;
 
@@ -158,11 +154,25 @@ DROP TABLE IF EXISTS `manga_genre`;
 CREATE TABLE `manga_genre` (
     `manga_id` INT(11) NOT NULL,
     `genre_id` INT(11) NOT NULL,
-    PRIMARY KEY (`manga_id` , `genre_id`),
+    PRIMARY KEY (`manga_id`, `genre_id`),
     CONSTRAINT `FK_MANGA_GENRE` FOREIGN KEY (`manga_id`)
         REFERENCES `manga` (`manga_id`)
         ON DELETE NO ACTION ON UPDATE NO ACTION,
     CONSTRAINT `FK_GENRE_MANGA` FOREIGN KEY (`genre_id`)
         REFERENCES `genre` (`genre_id`)
+        ON DELETE NO ACTION ON UPDATE NO ACTION
+)  ENGINE=INNODB AUTO_INCREMENT=1 DEFAULT CHARSET=UTF8MB4;
+
+DROP TABLE IF EXISTS `genre_language`;
+
+CREATE TABLE `genre_language` (
+    `genre_id` INT(11) NOT NULL,
+    `language_id` INT(11) NOT NULL,
+    PRIMARY KEY (`genre_id`, `language_id`),
+    CONSTRAINT `FK_GENRE_LANGUAGE` FOREIGN KEY (`genre_id`)
+        REFERENCES `genre` (`genre_id`)
+        ON DELETE NO ACTION ON UPDATE NO ACTION,
+    CONSTRAINT `FK_LANGUAGE_GENRE` FOREIGN KEY (`language_id`)
+        REFERENCES `language` (`language_id`)
         ON DELETE NO ACTION ON UPDATE NO ACTION
 )  ENGINE=INNODB AUTO_INCREMENT=1 DEFAULT CHARSET=UTF8MB4;
