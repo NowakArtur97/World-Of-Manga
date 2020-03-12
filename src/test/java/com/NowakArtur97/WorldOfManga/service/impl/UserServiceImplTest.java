@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -212,6 +213,52 @@ public class UserServiceImplTest {
 							() -> "should return user which is enabled: " + userExpected.isEnabled() + ", but was: "
 									+ userActual.isEnabled()),
 					() -> verify(userRepository, times(1)).save(userExpected));
+		}
+
+		@Test
+		@DisplayName("when user is loged in")
+		public void when_user_is_logged_id_should_return_true() {
+
+			when(securityContext.getAuthentication()).thenReturn(authentication);
+
+			SecurityContextHolder.setContext(securityContext);
+
+			boolean isUserLoggedInActual = userService.isUserLoggedIn();
+
+			assertAll(() -> assertTrue(isUserLoggedInActual, () -> "should user be logged in but wasn`t"),
+					() -> verify(securityContext, times(1)).getAuthentication(),
+					() -> verify(authentication, times(1)).getName());
+		}
+
+		@Test
+		@DisplayName("when user is not loged in - anonymousUser")
+		public void when_user_is_not_logged_in_should_return_false() {
+
+			when(securityContext.getAuthentication()).thenReturn(authentication);
+			when(authentication.getName()).thenReturn("anonymousUser");
+
+			SecurityContextHolder.setContext(securityContext);
+
+			boolean isUserLoggedInActual = userService.isUserLoggedIn();
+
+			assertAll(() -> assertFalse(isUserLoggedInActual, () -> "should user be logged in but wasn`t"),
+					() -> verify(securityContext, times(1)).getAuthentication(),
+					() -> verify(authentication, times(1)).getName());
+		}
+		
+		@Test
+		@DisplayName("when user is not loged in - null")
+		public void when_user_is_not_logged_in_and_authentication_is_null_should_return_false() {
+
+			when(securityContext.getAuthentication()).thenReturn(null);
+
+			SecurityContextHolder.setContext(securityContext);
+
+			boolean isUserLoggedInActual = userService.isUserLoggedIn();
+
+			assertAll(() -> assertFalse(isUserLoggedInActual, () -> "should user be logged in but wasn`t"),
+					() -> verify(securityContext, times(1)).getAuthentication(),
+					() -> verify(authentication, never()).getName());
 		}
 	}
 

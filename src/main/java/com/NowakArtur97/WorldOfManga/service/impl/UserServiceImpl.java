@@ -103,7 +103,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public boolean isUserLoggedIn() {
 
-		final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
 		return null != authentication && !("anonymousUser").equals(authentication.getName());
 	}
