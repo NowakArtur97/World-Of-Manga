@@ -388,11 +388,11 @@ public class MangaServiceImplTest {
 		mangaExpected.setImage(image.getBytes());
 
 		Manga mangaExpected2 = new Manga();
-		mangaExpected.addAuthor(authorExpected);
-		mangaExpected.addGenre(genreExpected2);
-		mangaExpected.addTranslation(mangaTranslationEnExpected2);
-		mangaExpected.addTranslation(mangaTranslationPlExpected2);
-		mangaExpected.setImage(image2.getBytes());
+		mangaExpected2.addAuthor(authorExpected);
+		mangaExpected2.addGenre(genreExpected2);
+		mangaExpected2.addTranslation(mangaTranslationEnExpected2);
+		mangaExpected2.addTranslation(mangaTranslationPlExpected2);
+		mangaExpected2.setImage(image2.getBytes());
 
 		List<Manga> mangasExpected = new ArrayList<>();
 		mangasExpected.add(mangaExpected);
