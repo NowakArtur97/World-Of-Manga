@@ -144,8 +144,12 @@ DROP TABLE IF EXISTS `genre`;
 
 CREATE TABLE `genre` (
     `genre_id` INT(11) NOT NULL AUTO_INCREMENT,
+    `language_id` INT(11),
     `genre` VARCHAR(50) NOT NULL,
     PRIMARY KEY (`genre_id`),
+    CONSTRAINT `FK_LANGUAGE_GENRE` FOREIGN KEY (`language_id`)
+        REFERENCES `language` (`language_id`)
+        ON DELETE NO ACTION ON UPDATE NO ACTION,
     UNIQUE `GENRE_UNIQUE` (`genre`)
 )  ENGINE=INNODB AUTO_INCREMENT=1 DEFAULT CHARSET=UTF8MB4;
 
