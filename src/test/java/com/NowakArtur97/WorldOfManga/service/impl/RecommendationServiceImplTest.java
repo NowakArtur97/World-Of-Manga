@@ -71,8 +71,8 @@ public class RecommendationServiceImplTest {
 		MockMultipartFile image = new MockMultipartFile("image.jpg", "file bytes".getBytes());
 		MockMultipartFile image2 = new MockMultipartFile("image2.jpg", "file bytes".getBytes());
 
-		MangaGenre genreExpected = new MangaGenre("genre");
-		MangaGenre genreExpected2 = new MangaGenre("genre 2");
+		MangaGenre genreExpected = new MangaGenre("genre en", "genre pl");
+		MangaGenre genreExpected2 = new MangaGenre("genre en 2", "genre pl 2");
 
 		Manga mangaExpected = new Manga();
 		mangaExpected.setImage(image.getBytes());
@@ -143,8 +143,8 @@ public class RecommendationServiceImplTest {
 		MockMultipartFile image = new MockMultipartFile("image.jpg", "file bytes".getBytes());
 		MockMultipartFile image2 = new MockMultipartFile("image2.jpg", "file bytes".getBytes());
 
-		MangaGenre genreExpected = new MangaGenre("genre");
-		MangaGenre genreExpected2 = new MangaGenre("genre 2");
+		MangaGenre genreExpected = new MangaGenre("genre en", "genre pl");
+		MangaGenre genreExpected2 = new MangaGenre("genre en 2", "genre pl 2");
 
 		Manga mangaExpected = new Manga();
 		mangaExpected.setImage(image.getBytes());
@@ -212,8 +212,8 @@ public class RecommendationServiceImplTest {
 		MockMultipartFile image = new MockMultipartFile("image.jpg", "file bytes".getBytes());
 		MockMultipartFile image2 = new MockMultipartFile("image2.jpg", "file bytes".getBytes());
 
-		MangaGenre genreExpected = new MangaGenre("genre");
-		MangaGenre genreExpected2 = new MangaGenre("genre 2");
+		MangaGenre genreExpected = new MangaGenre("genre en", "genre pl");
+		MangaGenre genreExpected2 = new MangaGenre("genre en 2", "genre pl 2");
 
 		Manga mangaExpected = new Manga();
 		mangaExpected.setImage(image.getBytes());
@@ -283,8 +283,8 @@ public class RecommendationServiceImplTest {
 		MockMultipartFile image = new MockMultipartFile("image.jpg", "file bytes".getBytes());
 		MockMultipartFile image2 = new MockMultipartFile("image2.jpg", "file bytes".getBytes());
 
-		MangaGenre genreExpected = new MangaGenre("genre");
-		MangaGenre genreExpected2 = new MangaGenre("genre 2");
+		MangaGenre genreExpected = new MangaGenre("genre en", "genre pl");
+		MangaGenre genreExpected2 = new MangaGenre("genre en 2", "genre pl 2");
 
 		Manga mangaExpected = new Manga();
 		mangaExpected.setImage(image.getBytes());

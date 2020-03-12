@@ -50,7 +50,7 @@ public class MangaValidationTest {
 		authors.add(new Author("FirsName LastName"));
 
 		Set<MangaGenre> genres = new HashSet<>();
-		genres.add(new MangaGenre("genre"));
+		genres.add(new MangaGenre("genre en", "genre pl"));
 
 		MangaDTO mangaDTO = MangaDTO.builder().enTranslation(mangaTranslationEnDTO).plTranslation(mangaTranslationPlDTO)
 				.authors(authors).genres(genres).build();
@@ -74,7 +74,7 @@ public class MangaValidationTest {
 		Set<Author> authors = new HashSet<>();
 
 		Set<MangaGenre> genres = new HashSet<>();
-		genres.add(new MangaGenre("genre"));
+		genres.add(new MangaGenre("genre en", "genre pl"));
 
 		MangaDTO mangaDTO = MangaDTO.builder().enTranslation(mangaTranslationEnDTO).plTranslation(mangaTranslationPlDTO)
 				.authors(authors).genres(genres).build();

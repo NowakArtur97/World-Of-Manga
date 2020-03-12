@@ -78,7 +78,7 @@ public class MangaServiceImplTest {
 		authorsExpected.add(authorExpected);
 
 		Set<MangaGenre> genresExpected = new HashSet<>();
-		MangaGenre genreExpected = new MangaGenre("genre");
+		MangaGenre genreExpected = new MangaGenre("genre en", "genre pl");
 		genresExpected.add(genreExpected);
 
 		mangaDTO.setAuthors(authorsExpected);
@@ -137,7 +137,7 @@ public class MangaServiceImplTest {
 		authorsExpected.add(authorExpected);
 
 		Set<MangaGenre> genresExpected = new HashSet<>();
-		MangaGenre genreExpected = new MangaGenre("genre");
+		MangaGenre genreExpected = new MangaGenre("genre en", "genre pl");
 		genresExpected.add(genreExpected);
 
 		MangaDTO mangaDTO = new MangaDTO();
@@ -204,7 +204,7 @@ public class MangaServiceImplTest {
 		authorsExpected.add(authorExpected);
 
 		Set<MangaGenre> genresExpected = new HashSet<>();
-		MangaGenre genreExpected = new MangaGenre("genre");
+		MangaGenre genreExpected = new MangaGenre("genre en", "genre pl");
 		genresExpected.add(genreExpected);
 
 		MockMultipartFile image = new MockMultipartFile("image.jpg", "file bytes".getBytes());
@@ -277,7 +277,7 @@ public class MangaServiceImplTest {
 		MangaTranslation mangaTranslationPlExpected = MangaTranslation.builder().title("Polish title")
 				.description("Polish description").build();
 
-		MangaGenre genreExpected = new MangaGenre("genre");
+		MangaGenre genreExpected = new MangaGenre("genre en", "genre pl");
 
 		Author authorExpected = new Author("FirsName LastName");
 
@@ -324,7 +324,7 @@ public class MangaServiceImplTest {
 
 		Author authorExpected = new Author("FirsName LastName");
 
-		MangaGenre genreExpected = new MangaGenre("genre");
+		MangaGenre genreExpected = new MangaGenre("genre en", "genre pl");
 
 		MockMultipartFile image = new MockMultipartFile("image.jpg", "file bytes".getBytes());
 
@@ -374,8 +374,8 @@ public class MangaServiceImplTest {
 
 		Author authorExpected = new Author("FirsName LastName");
 
-		MangaGenre genreExpected = new MangaGenre("genre");
-		MangaGenre genreExpected2 = new MangaGenre("genre 2");
+		MangaGenre genreExpected = new MangaGenre("genre en", "genre pl");
+		MangaGenre genreExpected2 = new MangaGenre("genre en 2", "genre pl 2");
 
 		MockMultipartFile image = new MockMultipartFile("image.jpg", "file bytes".getBytes());
 		MockMultipartFile image2 = new MockMultipartFile("image.jpg", "file bytes".getBytes());
@@ -423,7 +423,7 @@ public class MangaServiceImplTest {
 
 		Author authorExpected = new Author("FirsName LastName");
 
-		MangaGenre genreExpected = new MangaGenre("genre");
+		MangaGenre genreExpected = new MangaGenre("genre en", "genre pl");
 
 		MockMultipartFile image = new MockMultipartFile("image.jpg", "file bytes".getBytes());
 

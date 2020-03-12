@@ -131,11 +131,8 @@ DROP TABLE IF EXISTS world_of_manga.genre CASCADE;
 
 CREATE TABLE world_of_manga.genre (
     "genre_id" SERIAL PRIMARY KEY,
-    "language_id" INT,
-	"genre" VARCHAR(50) NOT NULL UNIQUE,
-	CONSTRAINT "FK_LANGUAGE_GENRE" FOREIGN KEY ("language_id")
-        REFERENCES world_of_manga.language ("language_id")
-        ON DELETE NO ACTION ON UPDATE NO ACTION
+   	"en_translation" VARCHAR(50) NOT NULL UNIQUE,
+	"pl_translation" VARCHAR(50) NOT NULL UNIQUE
 );
 
 DROP TABLE IF EXISTS world_of_manga.manga_genre CASCADE;

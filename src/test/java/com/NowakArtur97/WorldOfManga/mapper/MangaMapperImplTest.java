@@ -46,8 +46,8 @@ public class MangaMapperImplTest {
 
 		MockMultipartFile mockMultipartFile = new MockMultipartFile("manga.jpg", "file bytes".getBytes());
 
-		MangaGenre mangaGenreExpected = new MangaGenre("genre");
-		MangaGenre mangaGenreExpected2 = new MangaGenre("genre2");
+		MangaGenre mangaGenreExpected = new MangaGenre("genre en", "genre pl");
+		MangaGenre mangaGenreExpected2 = new MangaGenre("genre en 2", "genre pl 2");
 
 		MangaDTO mangaDTOExpected = new MangaDTO();
 
@@ -98,8 +98,8 @@ public class MangaMapperImplTest {
 
 		Author authorExpected = new Author("FirtName LastName");
 
-		MangaGenre mangaGenreExpected = new MangaGenre("genre");
-		MangaGenre mangaGenreExpected2 = new MangaGenre("genre2");
+		MangaGenre mangaGenreExpected = new MangaGenre("genre en", "genre pl");
+		MangaGenre mangaGenreExpected2 = new MangaGenre("genre en 2", "genre pl 2");
 
 		Manga mangaExpected = new Manga();
 

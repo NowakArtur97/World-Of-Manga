@@ -10,8 +10,11 @@
                 <div class="manga_card__author" >
                     <span class="manga_card__span" th:each="author : ${manga.authors}" th:text="${author.fullName}"></span>
                 </div> 
-                <div class="manga_card__genre" >
-                    <span class="manga_card__span" th:each="genre : ${manga.genres}" th:text="${genre.genre}"></span>
+                <div class="manga_card__genre" th:if="${#strings.equals('en', locale)}">
+                    <span class="manga_card__span" th:each="genre : ${manga.genres}"  th:text="${genre.englishTranslation}"></span>
+                </div>
+                <div class="manga_card__genre" th:if="${#strings.equals('pl', locale)}">
+                    <span class="manga_card__span" th:each="genre : ${manga.genres}"  th:text="${genre.polishTranslation}"></span>
                 </div>
             </div>
             <div class="manga_card__stats">

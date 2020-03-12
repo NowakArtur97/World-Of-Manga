@@ -9,9 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.AccessLevel;
@@ -37,19 +35,18 @@ public class MangaGenre {
 	@Setter(value = AccessLevel.PRIVATE)
 	private Long id;
 
-	@Column(name = "genre")
-	private String genre;
+	@Column(name = "en_translation")
+	private String englishTranslation;
 
-	public MangaGenre(String genre) {
-		this.genre = genre;
+	@Column(name = "pl_translation")
+	private String polishTranslation;
+
+	public MangaGenre(String englishTranslation, String polishTranslation) {
+
+		this.englishTranslation = englishTranslation;
+		this.polishTranslation = polishTranslation;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "language_id")
-	@ToString.Exclude
-	@EqualsAndHashCode.Exclude
-	private Language language;
-	
 	@ManyToMany(mappedBy = "genres", fetch = FetchType.EAGER)
 	@ToString.Exclude
 	@EqualsAndHashCode.Exclude

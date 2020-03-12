@@ -39,10 +39,6 @@ public class Language {
 
 	@OneToMany(mappedBy = "language", cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST,
 			CascadeType.REFRESH }, orphanRemoval = false, fetch = FetchType.LAZY)
-	private final Set<MangaGenre> genres = new HashSet<>();
-	
-	@OneToMany(mappedBy = "language", cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST,
-			CascadeType.REFRESH }, orphanRemoval = false, fetch = FetchType.LAZY)
 	private final Set<MangaTranslation> mangaTranslations = new HashSet<>();
 
 	public void addTranslation(MangaTranslation mangaTranslation) {

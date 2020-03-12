@@ -19,10 +19,10 @@ public class MangaGenreServiceImpl implements MangaGenreService {
 	private final MangaGenreRepository mangaGenreRepository;
 
 	@Override
-	public MangaGenre findByGenre(String genre) throws MangaGenreNotFoundException {
+	public MangaGenre findByEnglishTranslation(String englishTranslation) throws MangaGenreNotFoundException {
 
-		return mangaGenreRepository.findByGenre(genre)
-				.orElseThrow(() -> new MangaGenreNotFoundException("Manga genre: " + genre + " not found"));
+		return mangaGenreRepository.findByEnglishTranslation(englishTranslation).orElseThrow(
+				() -> new MangaGenreNotFoundException("Manga genre: " + englishTranslation + " not found"));
 	}
 
 	@Override

@@ -90,7 +90,7 @@ public class MangaControllerTest {
 		authors.add(new Author("FirstName LastName"));
 
 		List<MangaGenre> genres = new ArrayList<>();
-		genres.add(new MangaGenre("genre"));
+		genres.add(new MangaGenre("genre en", "genre pl"));
 
 		when(authorService.findAll()).thenReturn(authors);
 		when(mangaGenreService.findAll()).thenReturn(genres);
@@ -120,7 +120,7 @@ public class MangaControllerTest {
 		authors.add(author);
 
 		Set<MangaGenre> genres = new HashSet<>();
-		genres.add(new MangaGenre("genre"));
+		genres.add(new MangaGenre("genre en", "genre pl"));
 
 		MangaDTO mangaDTO = MangaDTO.builder().id(mangaId).enTranslation(mangaTranslationEnDTO)
 				.plTranslation(mangaTranslationPlDTO).image(image).authors(authors).genres(genres).build();
@@ -129,7 +129,7 @@ public class MangaControllerTest {
 		authors.add(author);
 
 		List<MangaGenre> genresDB = new ArrayList<>();
-		genresDB.add(new MangaGenre("genre"));
+		genresDB.add(new MangaGenre("genre en", "genre pl"));
 
 		when(authorService.findAll()).thenReturn(authorsDB);
 		when(mangaGenreService.findAll()).thenReturn(genresDB);
@@ -159,7 +159,7 @@ public class MangaControllerTest {
 		authors.add(authorExpected);
 
 		Set<MangaGenre> genres = new HashSet<>();
-		MangaGenre genreExpected = new MangaGenre("genre");
+		MangaGenre genreExpected = new MangaGenre("genre en", "genre pl");
 		genres.add(genreExpected);
 
 		MangaDTO mangaDTO = MangaDTO.builder().enTranslation(mangaTranslationEnDTO).plTranslation(mangaTranslationPlDTO)
@@ -206,7 +206,7 @@ public class MangaControllerTest {
 		authors.add(new Author("FirstName LastName"));
 
 		List<MangaGenre> genres = new ArrayList<>();
-		genres.add(new MangaGenre("genre"));
+		genres.add(new MangaGenre("genre en", "genre pl"));
 
 		when(authorService.findAll()).thenReturn(authors);
 		when(mangaGenreService.findAll()).thenReturn(genres);
@@ -215,7 +215,7 @@ public class MangaControllerTest {
 		mangaAuthors.add(new Author("FirstName LastName"));
 
 		Set<MangaGenre> mangaGenres = new HashSet<>();
-		mangaGenres.add(new MangaGenre("genre"));
+		mangaGenres.add(new MangaGenre("genre en", "genre pl"));
 
 		MangaTranslationDTO mangaTranslationEnDTO = MangaTranslationDTO.builder().title(englishTitle)
 				.description(englishDescription).build();
@@ -268,7 +268,7 @@ public class MangaControllerTest {
 		authors.add(new Author("FirstName LastName"));
 
 		List<MangaGenre> genres = new ArrayList<>();
-		genres.add(new MangaGenre("genre"));
+		genres.add(new MangaGenre("genre en", "genre pl"));
 
 		when(authorService.findAll()).thenReturn(authors);
 		when(mangaGenreService.findAll()).thenReturn(genres);

@@ -8,5 +8,5 @@ import com.NowakArtur97.WorldOfManga.model.MangaGenre;
 
 public interface MangaGenreRepository extends JpaRepository<MangaGenre, Long> {
 
-	Optional<MangaGenre> findByGenre(String genre);
+	Optional<MangaGenre> findByEnglishTranslation(String englishTranslation);
 }

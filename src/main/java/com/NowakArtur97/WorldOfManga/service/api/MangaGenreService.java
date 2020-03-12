@@ -7,7 +7,7 @@ import com.NowakArtur97.WorldOfManga.model.MangaGenre;
 
 public interface MangaGenreService {
 
-	MangaGenre findByGenre(String genre) throws MangaGenreNotFoundException;
+	MangaGenre findByEnglishTranslation(String englishTranslation) throws MangaGenreNotFoundException;
 	
 	List<MangaGenre> findAll();
 }
