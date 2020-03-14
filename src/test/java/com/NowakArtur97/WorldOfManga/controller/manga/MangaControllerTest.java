@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -34,6 +35,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.servlet.LocaleResolver;
 
 import com.NowakArtur97.WorldOfManga.dto.AuthorDTO;
 import com.NowakArtur97.WorldOfManga.dto.MangaDTO;
@@ -74,11 +76,14 @@ public class MangaControllerTest {
 	@Mock
 	private MangaGenreService mangaGenreService;
 
+	@Mock
+	private LocaleResolver cookieLocaleResolver;
+
 	@BeforeEach
 	public void setUp() {
 
 		mangaController = new MangaController(mangaService, mangaTranslationService, mangaGenreService, mangaValidator,
-				authorService);
+				authorService, cookieLocaleResolver);
 		mockMvc = MockMvcBuilders.standaloneSetup(mangaController).build();
 	}
 
@@ -92,13 +97,18 @@ public class MangaControllerTest {
 		List<MangaGenre> genres = new ArrayList<>();
 		genres.add(new MangaGenre("genre en", "genre pl"));
 
+		Locale locale = new Locale("en");
+
 		when(authorService.findAll()).thenReturn(authors);
 		when(mangaGenreService.findAll()).thenReturn(genres);
 
-		assertAll(() -> mockMvc.perform(get("/admin/addOrUpdateManga")).andExpect(status().isOk())
-				.andExpect(view().name("views/manga-form")).andExpect(model().attribute("mangaDTO", new MangaDTO()))
-				.andExpect(model().attribute("authorDTO", new AuthorDTO()))
-				.andExpect(model().attribute("authors", authors)).andExpect(model().attribute("genres", genres)),
+		assertAll(
+				() -> mockMvc.perform(get("/admin/addOrUpdateManga").flashAttr("locale", locale))
+						.andExpect(status().isOk()).andExpect(view().name("views/manga-form"))
+						.andExpect(model().attribute("mangaDTO", new MangaDTO()))
+						.andExpect(model().attribute("authorDTO", new AuthorDTO()))
+						.andExpect(model().attribute("locale", locale)).andExpect(model().attribute("authors", authors))
+						.andExpect(model().attribute("genres", genres)),
 				() -> verify(authorService, times(1)).findAll(), () -> verify(mangaGenreService, times(1)).findAll());
 	}
 
@@ -131,15 +141,19 @@ public class MangaControllerTest {
 		List<MangaGenre> genresDB = new ArrayList<>();
 		genresDB.add(new MangaGenre("genre en", "genre pl"));
 
+		Locale locale = new Locale("en");
+
 		when(authorService.findAll()).thenReturn(authorsDB);
 		when(mangaGenreService.findAll()).thenReturn(genresDB);
 		when(mangaService.getMangaDTOById(mangaId)).thenReturn(mangaDTO);
 
-		assertAll(() -> mockMvc.perform(get("/admin/addOrUpdateManga/{id}", mangaId)).andExpect(status().isOk())
-				.andExpect(view().name("views/manga-form")).andExpect(model().attribute("mangaDTO", mangaDTO))
+		assertAll(() -> mockMvc.perform(get("/admin/addOrUpdateManga/{id}", mangaId).flashAttr("locale", locale))
+				.andExpect(status().isOk()).andExpect(view().name("views/manga-form"))
+				.andExpect(model().attribute("mangaDTO", mangaDTO))
 				.andExpect(model().attribute("authorDTO", new AuthorDTO()))
-				.andExpect(model().attribute("authors", authorsDB)).andExpect(model().attribute("genres", genresDB)),
-				() -> verify(authorService, times(1)).findAll(), () -> verify(mangaGenreService, times(1)).findAll());
+				.andExpect(model().attribute("authors", authorsDB)).andExpect(model().attribute("genres", genresDB))
+				.andExpect(model().attribute("locale", locale)), () -> verify(authorService, times(1)).findAll(),
+				() -> verify(mangaGenreService, times(1)).findAll());
 	}
 
 	@Test
@@ -179,14 +193,16 @@ public class MangaControllerTest {
 		mangaExpected.setImage(image.getBytes());
 		mangaExpected.addGenre(genreExpected);
 
+		Locale locale = new Locale("en");
+
 		when(mangaTranslationService.addOrUpdate(mangaDTO)).thenReturn(mangaExpected);
 
 		assertAll(
 				() -> mockMvc
 						.perform(post("/admin/addOrUpdateManga").contentType(MediaType.APPLICATION_FORM_URLENCODED)
-								.flashAttr("mangaDTO", mangaDTO))
+								.flashAttr("mangaDTO", mangaDTO).flashAttr("locale", locale))
 						.andExpect(status().is3xxRedirection()).andExpect(model().hasNoErrors())
-						.andExpect(redirectedUrl("/admin/addOrUpdateManga")),
+						.andExpect(redirectedUrl("/admin/addOrUpdateManga?locale=" + locale.getLanguage())),
 				() -> verify(mangaTranslationService, times(1)).addOrUpdate(mangaDTO),
 				() -> verify(mangaService, times(1)).addOrUpdate(mangaDTO, mangaExpected));
 	}
@@ -225,14 +241,17 @@ public class MangaControllerTest {
 		MangaDTO mangaDTO = MangaDTO.builder().enTranslation(mangaTranslationEnDTO).plTranslation(mangaTranslationPlDTO)
 				.image(image).authors(mangaAuthors).genres(mangaGenres).build();
 
+		Locale locale = new Locale("en");
+
 		assertAll(
 				() -> mockMvc
 						.perform(post("/admin/addOrUpdateManga").contentType(MediaType.APPLICATION_FORM_URLENCODED)
-								.flashAttr("mangaDTO", mangaDTO))
+								.flashAttr("mangaDTO", mangaDTO).flashAttr("locale", locale))
 						.andExpect(status().isOk()).andExpect(forwardedUrl("views/manga-form"))
 						.andExpect(model().attribute("mangaDTO", mangaDTO))
 						.andExpect(model().attribute("authorDTO", new AuthorDTO()))
 						.andExpect(model().attribute("authors", authors)).andExpect(model().attribute("genres", genres))
+						.andExpect(model().attribute("locale", locale))
 						.andExpect(model().attributeHasFieldErrors("mangaDTO", "enTranslation.title"))
 						.andExpect(model().attributeHasFieldErrors("mangaDTO", "enTranslation.description"))
 						.andExpect(model().attributeHasFieldErrors("mangaDTO", "plTranslation.title"))
@@ -285,14 +304,17 @@ public class MangaControllerTest {
 		MangaDTO mangaDTO = MangaDTO.builder().enTranslation(mangaTranslationEnDTO).plTranslation(mangaTranslationPlDTO)
 				.image(image).authors(mangaAuthors).genres(mangaGenres).build();
 
+		Locale locale = new Locale("en");
+
 		assertAll(
 				() -> mockMvc
 						.perform(post("/admin/addOrUpdateManga").contentType(MediaType.APPLICATION_FORM_URLENCODED)
-								.flashAttr("mangaDTO", mangaDTO))
+								.flashAttr("mangaDTO", mangaDTO).flashAttr("locale", locale))
 						.andExpect(status().isOk()).andExpect(forwardedUrl("views/manga-form"))
 						.andExpect(model().attribute("mangaDTO", mangaDTO))
 						.andExpect(model().attribute("authorDTO", new AuthorDTO()))
 						.andExpect(model().attribute("authors", authors)).andExpect(model().attribute("genres", genres))
+						.andExpect(model().attribute("locale", locale))
 						.andExpect(model().attributeHasFieldErrors("mangaDTO", "authors"))
 						.andExpect(model().attributeHasFieldErrors("mangaDTO", "genres"))
 						.andExpect(model().attributeHasFieldErrors("mangaDTO", "enTranslation.title"))
