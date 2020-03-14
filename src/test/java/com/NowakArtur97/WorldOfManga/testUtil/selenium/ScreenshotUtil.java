@@ -13,11 +13,11 @@ import ru.yandex.qatools.ashot.shooting.ShootingStrategies;
 
 public class ScreenshotUtil {
 
-	private final static String projectPath = System.getProperty("user.dir");
+	private final static String PROJECT_PATH = System.getProperty("user.dir");
 
-	private final String screenshotPath = "\\src\\test\\resources\\screenshots\\";
+	private final static String SCREENSHOT_PATH = "\\src\\test\\resources\\screenshots\\";
 
-	private final String screenshotFormat = "jpg";
+	private final static String SCREENSHOT_FORMAT = "jpg";
 
 	private final static String DOT = ".";
 
@@ -28,12 +28,12 @@ public class ScreenshotUtil {
 					.takeScreenshot(webDriver);
 
 			try {
-				ImageIO.write(screenshot.getImage(), screenshotFormat,
-						new File(projectPath + screenshotPath + screenshotName + DOT + screenshotFormat));
+				ImageIO.write(screenshot.getImage(), SCREENSHOT_FORMAT,
+						new File(PROJECT_PATH + SCREENSHOT_PATH + screenshotName + DOT + SCREENSHOT_FORMAT));
 			} catch (IOException e) {
-				System.out.println("Can`t take screenshot on path: " + projectPath + screenshotPath);
+				System.out.println("Can`t take screenshot on path: " + PROJECT_PATH + SCREENSHOT_PATH);
 			}
-			
+
 			webDriver.close();
 		}
 	}
