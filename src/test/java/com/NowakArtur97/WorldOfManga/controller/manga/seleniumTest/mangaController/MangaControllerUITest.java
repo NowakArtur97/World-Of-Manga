@@ -32,7 +32,7 @@ public class MangaControllerUITest extends SeleniumUITest {
 
 	@Value("${manga.authors.notEmpty}")
 	protected String mangaAuthorsRequiredMessage;
-	
+
 	@Value("${manga.genres.notEmpty}")
 	protected String mangaGenresRequiredMessage;
 

@@ -67,7 +67,7 @@ public class MangaInUserListControllerTest {
 
 		assertAll(
 				() -> mockMvc.perform(mockRequest).andExpect(status().is3xxRedirection()).andExpect(redirectedUrl("/")),
-				() -> verify(mangaInUserListService, times(1)).addToList(mangaId, status));
+				() -> verify(mangaInUserListService, times(1)).addOrRemoveFromList(mangaId, status));
 	}
 
 	@Test

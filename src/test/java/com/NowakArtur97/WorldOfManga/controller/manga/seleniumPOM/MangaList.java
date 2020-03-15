@@ -125,6 +125,11 @@ public class MangaList extends SeleniumPageObjectModel {
 		return mangaRating.get(INDEX_FOR_SKIPPING_RECOMMENDATIONS_RATINGS_OR_FAVOURITES).getText();
 	}
 
+	public String getFirstMangaRatingOnMangaList() {
+
+		return mangaRating.get(0).getText();
+	}
+	
 	public void addOrRemoveFirstMangaFromFavourites() {
 
 		useJavaScriptToClickElement(mangaFavouriteLink.get(INDEX_FOR_SKIPPING_RECOMMENDATIONS_RATINGS_OR_FAVOURITES));
@@ -140,7 +145,7 @@ public class MangaList extends SeleniumPageObjectModel {
 		return mangaFavouritesCounter.get(mangaFavouritesCounter.size() - 2).getText();
 	}
 
-	public void addFirstMangaToList(int mangaStatus) {
+	public void addOrRemoveFirstMangaFromList(int mangaStatus) {
 
 		mangaStatuses.get(INDEX_FOR_SKIPPING_RECOMMENDATIONS_STATUSES + mangaStatus).click();
 	}

@@ -12,7 +12,7 @@ public interface MangaInUserListService {
 
 	Optional<MangaInUserList> findByUserAndManga(User user, Manga manga);
 
-	MangaInUserList addToList(Long mangaId, int status) throws MangaNotFoundException;
+	MangaInUserList addOrRemoveFromList(Long mangaId, int status) throws MangaNotFoundException;
 
 	Set<Manga> getUsersMangaListByStatus(int status);
 }

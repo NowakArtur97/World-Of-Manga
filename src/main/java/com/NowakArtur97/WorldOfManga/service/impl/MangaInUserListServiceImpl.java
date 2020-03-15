@@ -41,7 +41,7 @@ public class MangaInUserListServiceImpl implements MangaInUserListService {
 
 	@Override
 	@Transactional
-	public MangaInUserList addToList(Long mangaId, int status) throws MangaNotFoundException {
+	public MangaInUserList addOrRemoveFromList(Long mangaId, int status) throws MangaNotFoundException {
 
 		Manga manga = mangaService.findById(mangaId);
 
@@ -56,7 +56,14 @@ public class MangaInUserListServiceImpl implements MangaInUserListService {
 		if (mangaInListOptional.isPresent()) {
 
 			mangaInUserList = mangaInListOptional.get();
-			mangaInUserList.setStatus(mangaStatus);
+
+			if (mangaStatus.equals(mangaInUserList.getStatus())) {
+
+				user.removeMangaFromList(mangaInUserList);
+			} else {
+
+				mangaInUserList.setStatus(mangaStatus);
+			}
 		} else {
 
 			mangaInUserList = user.addMangaToList(manga, mangaStatus);

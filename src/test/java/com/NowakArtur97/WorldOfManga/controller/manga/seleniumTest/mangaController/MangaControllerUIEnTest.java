@@ -13,6 +13,7 @@ import org.junit.jupiter.api.condition.OS;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.annotation.DirtiesContext.ClassMode;
 import org.springframework.test.context.TestPropertySource;
 
 import com.NowakArtur97.WorldOfManga.testUtil.enums.LanguageVersion;
@@ -22,8 +23,8 @@ import com.NowakArtur97.WorldOfManga.testUtil.extension.ScreenshotWatcher;
 @ExtendWith(ScreenshotWatcher.class)
 @TestPropertySource({ "classpath:/validation/messages_en.properties", "classpath:/pageContent/messages_en.properties" })
 @DisplayName("Manga Controller UI En Tests")
-@Tag("MangaControllerUIEn_Tests")
-@DirtiesContext
+@Tag("MangaControllerUlEn_Tests")
+@DirtiesContext(classMode = ClassMode.BEFORE_EACH_TEST_METHOD)
 @DisabledOnOs(OS.LINUX)
 public class MangaControllerUIEnTest extends MangaControllerUITest {
 
@@ -37,7 +38,7 @@ public class MangaControllerUIEnTest extends MangaControllerUITest {
 		boolean selectGenre = true;
 		boolean addImage = true;
 
-		loginPage.loadLoginView(LanguageVersion.ENG);
+		loginPage.loadLoginView(LanguageVersion.PL);
 
 		loginPage.fillMandatoryLoginFields("admin", "admin");
 
@@ -55,7 +56,7 @@ public class MangaControllerUIEnTest extends MangaControllerUITest {
 	}
 
 	@Test
-	@DisplayName("when correct manga editing with all fields")
+	@DisplayName("when correct manga creation with all fields")
 	public void when_correct_manga_editing_with_all_fields_should_add_manga() {
 
 		String englishTitle = "Some english title";
@@ -64,7 +65,7 @@ public class MangaControllerUIEnTest extends MangaControllerUITest {
 		boolean selectGenre = true;
 		boolean addImage = true;
 
-		loginPage.loadLoginView(LanguageVersion.ENG);
+		loginPage.loadLoginView(LanguageVersion.PL);
 
 		loginPage.fillMandatoryLoginFields("admin", "admin");
 
@@ -85,9 +86,9 @@ public class MangaControllerUIEnTest extends MangaControllerUITest {
 
 	@Test
 	@DisplayName("when manga deleting")
-	public void when_bmanga_deleting_should_remove_manga() {
+	public void when_manga_deleting_should_remove_manga() {
 
-		loginPage.loadLoginView(LanguageVersion.ENG);
+		loginPage.loadLoginView(LanguageVersion.PL);
 
 		loginPage.fillMandatoryLoginFields("admin", "admin");
 
@@ -107,7 +108,7 @@ public class MangaControllerUIEnTest extends MangaControllerUITest {
 	@DisplayName("when manga deleting - ratings")
 	public void when_manga_deleting_should_not_show_manga_in_rated_manga_list() {
 
-		loginPage.loadLoginView(LanguageVersion.ENG);
+		loginPage.loadLoginView(LanguageVersion.PL);
 
 		loginPage.fillMandatoryLoginFields("admin", "admin");
 
@@ -133,7 +134,7 @@ public class MangaControllerUIEnTest extends MangaControllerUITest {
 	@DisplayName("when manga deleting - favourites")
 	public void when_manga_deleting_should_not_show_manga_in_favourites() {
 
-		loginPage.loadLoginView(LanguageVersion.ENG);
+		loginPage.loadLoginView(LanguageVersion.PL);
 
 		loginPage.fillMandatoryLoginFields("admin", "admin");
 
@@ -156,7 +157,7 @@ public class MangaControllerUIEnTest extends MangaControllerUITest {
 	@DisplayName("when manga deleting - statuses")
 	public void when_manga_deleting_should_not_show_manga_in_users_manga_list() {
 
-		loginPage.loadLoginView(LanguageVersion.ENG);
+		loginPage.loadLoginView(LanguageVersion.PL);
 
 		loginPage.fillMandatoryLoginFields("admin", "admin");
 
@@ -186,7 +187,7 @@ public class MangaControllerUIEnTest extends MangaControllerUITest {
 		boolean selectGenre = false;
 		boolean addImage = false;
 
-		loginPage.loadLoginView(LanguageVersion.ENG);
+		loginPage.loadLoginView(LanguageVersion.PL);
 
 		loginPage.fillMandatoryLoginFields("admin", "admin");
 
@@ -227,7 +228,7 @@ public class MangaControllerUIEnTest extends MangaControllerUITest {
 		boolean selectGenre = true;
 		boolean addImage = true;
 
-		loginPage.loadLoginView(LanguageVersion.ENG);
+		loginPage.loadLoginView(LanguageVersion.PL);
 
 		loginPage.fillMandatoryLoginFields("admin", "admin");
 

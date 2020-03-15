@@ -2,6 +2,7 @@ package com.NowakArtur97.WorldOfManga.service.impl;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -168,7 +169,7 @@ public class MangaInUserListServiceImplTest {
 		when(userService.loadLoggedInUsername()).thenReturn(userExpected);
 		when(mangaService.findById(mangaId)).thenReturn(mangaExpected);
 
-		MangaInUserList mangaInUserListActual = mangaInUserListService.addToList(mangaId, statusIntExpected);
+		MangaInUserList mangaInUserListActual = mangaInUserListService.addOrRemoveFromList(mangaId, statusIntExpected);
 
 		assertAll(
 				() -> assertEquals(mangaExpected, mangaInUserListActual.getManga(),
@@ -185,9 +186,8 @@ public class MangaInUserListServiceImplTest {
 	}
 
 	@Test
-	@DisplayName("when add manga to list for another time")
-	public void when_add_manga_to_list_for_another_time_should_update_status()
-			throws IOException, MangaNotFoundException {
+	@DisplayName("when change manga status")
+	public void when_add_change_manga_status_should_update_status() throws IOException, MangaNotFoundException {
 
 		Long mangaId = 1L;
 
@@ -221,7 +221,7 @@ public class MangaInUserListServiceImplTest {
 		when(mangaService.findById(mangaId)).thenReturn(mangaExpected);
 		when(userService.loadLoggedInUsername()).thenReturn(userExpected);
 
-		MangaInUserList mangaInUserListActual = mangaInUserListService.addToList(mangaId, statusIntExpected);
+		MangaInUserList mangaInUserListActual = mangaInUserListService.addOrRemoveFromList(mangaId, statusIntExpected);
 
 		assertAll(
 				() -> assertEquals(mangaInUserListExpected.getManga(), mangaInUserListActual.getManga(),
@@ -233,6 +233,66 @@ public class MangaInUserListServiceImplTest {
 				() -> assertEquals(mangaInUserListExpected.getStatus(), mangaInUserListActual.getStatus(),
 						() -> "should return manga in user list with status: " + mangaInUserListExpected.getStatus()
 								+ ", but was: " + mangaInUserListActual.getStatus()),
+				() -> assertTrue(userExpected.getMangaList().contains(mangaInUserListActual),
+						() -> "should not manga be in user list, but was: " + userExpected.getMangaList()),
+				() -> verify(mangaService, times(1)).findById(mangaId),
+				() -> verify(userService, times(1)).loadLoggedInUsername());
+	}
+
+	@Test
+	@DisplayName("when remove manga from list")
+	public void when_remove_manga_from_list_should_remove_from_list() throws IOException, MangaNotFoundException {
+
+		Long mangaId = 1L;
+
+		MangaTranslation mangaTranslationEnExpected = MangaTranslation.builder().title("English title")
+				.description("English description").build();
+		MangaTranslation mangaTranslationPlExpected = MangaTranslation.builder().title("Polish title")
+				.description("Polish description").build();
+
+		Author authorExpected = new Author("FirsName LastName");
+
+		MockMultipartFile image = new MockMultipartFile("image.jpg", "file bytes".getBytes());
+
+		Manga mangaExpected = new Manga();
+		mangaExpected.addAuthor(authorExpected);
+		mangaExpected.addTranslation(mangaTranslationEnExpected);
+		mangaExpected.addTranslation(mangaTranslationPlExpected);
+		mangaExpected.setImage(image.getBytes());
+
+		String username = "principal";
+
+		User userExpected = User.builder().username(username).firstName("first name").lastName("last name")
+				.password("user").email("user@email.com").isEnabled(true).build();
+
+		int statusIntExpected = 0;
+
+		MangaInUserListStatus statusExpected = MangaInUserListStatus.CURRENTLY_READING;
+
+		MangaInUserList mangaInUserListExpected = MangaInUserList.builder().manga(mangaExpected).user(userExpected)
+				.status(statusExpected).build();
+
+		userExpected.getMangaList().add(mangaInUserListExpected);
+
+		when(mangaService.findById(mangaId)).thenReturn(mangaExpected);
+		when(userService.loadLoggedInUsername()).thenReturn(userExpected);
+		when(mangaInUserListRepository.findByUserAndManga(userExpected, mangaExpected))
+				.thenReturn(Optional.of(mangaInUserListExpected));
+
+		MangaInUserList mangaInUserListActual = mangaInUserListService.addOrRemoveFromList(mangaId, statusIntExpected);
+
+		assertAll(
+				() -> assertEquals(mangaInUserListExpected.getManga(), mangaInUserListActual.getManga(),
+						() -> "should return manga in user list with manga: " + mangaInUserListExpected.getManga()
+								+ ", but was: " + mangaInUserListActual.getManga()),
+				() -> assertEquals(mangaInUserListExpected.getUser(), mangaInUserListActual.getUser(),
+						() -> "should return manga in user list with user: " + mangaInUserListExpected.getUser()
+								+ ", but was: " + mangaInUserListActual.getUser()),
+				() -> assertEquals(mangaInUserListExpected.getStatus(), mangaInUserListActual.getStatus(),
+						() -> "should return manga in user list with status: " + mangaInUserListExpected.getStatus()
+								+ ", but was: " + mangaInUserListActual.getStatus()),
+				() -> assertFalse(userExpected.getMangaList().contains(mangaInUserListActual),
+						() -> "should not manga be in user list, but was: " + userExpected.getMangaList()),
 				() -> verify(mangaService, times(1)).findById(mangaId),
 				() -> verify(userService, times(1)).loadLoggedInUsername());
 	}

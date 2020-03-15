@@ -1,4 +1,4 @@
-package com.NowakArtur97.WorldOfManga.controller.manga.seleniumTest.mangaFavourite;
+package com.NowakArtur97.WorldOfManga.controller.manga.seleniumTest;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -6,31 +6,50 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.DisabledOnOs;
 import org.junit.jupiter.api.condition.OS;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.EnumSource;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.annotation.DirtiesContext.ClassMode;
 
+import com.NowakArtur97.WorldOfManga.controller.manga.seleniumPOM.MangaList;
+import com.NowakArtur97.WorldOfManga.controller.unloggedUser.seleniumPOM.LoginPage;
 import com.NowakArtur97.WorldOfManga.testUtil.enums.LanguageVersion;
 import com.NowakArtur97.WorldOfManga.testUtil.extension.ScreenshotWatcher;
+import com.NowakArtur97.WorldOfManga.testUtil.selenium.SeleniumUITest;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @ExtendWith(ScreenshotWatcher.class)
-@DisplayName("Manga Favourite UI Pl Tests")
-@Tag("MangaFavouriteUIPl_Tests")
-@DirtiesContext
+@DisplayName("Manga Favourite UI Tests")
+@Tag("MangaFavouriteUI_Tests")
+@DirtiesContext(classMode = ClassMode.BEFORE_EACH_TEST_METHOD)
 @DisabledOnOs(OS.LINUX)
-public class MangaFavouriteUIPlTest extends MangaFavouriteUITest {
+public class MangaFavouriteUITest extends SeleniumUITest {
 
-	@Test
+	private MangaList mangaList;
+
+	private LoginPage loginPage;
+
+	@BeforeEach
+	public void setupPOM() {
+
+		mangaList = new MangaList(webDriver);
+
+		loginPage = new LoginPage(webDriver);
+	}
+
+	@ParameterizedTest(name = "{index}: Language Version: {0}")
+	@EnumSource(LanguageVersion.class)
 	@DisplayName("when add manga for the first time - likes")
-	public void when_add_manga_for_the_first_time_should_add_manga_to_favourites() {
+	public void when_add_manga_for_the_first_time_should_add_manga_to_favourites(LanguageVersion languageVersion) {
 
-		loginPage.loadLoginView(LanguageVersion.PL);
+		loginPage.loadLoginView(languageVersion);
 
 		loginPage.fillMandatoryLoginFields("user", "user");
 
@@ -42,11 +61,12 @@ public class MangaFavouriteUIPlTest extends MangaFavouriteUITest {
 				() -> "should show manga with one heart, but was: " + mangaList.getLastMangaFavouritesCounter()));
 	}
 
-	@Test
+	@ParameterizedTest(name = "{index}: Language Version: {0}")
+	@EnumSource(LanguageVersion.class)
 	@DisplayName("when add manga for the first time - favourites")
-	public void when_add_manga_for_the_first_time_should_show_manga_in_favourites() {
+	public void when_add_manga_for_the_first_time_should_show_manga_in_favourites(LanguageVersion languageVersion) {
 
-		loginPage.loadLoginView(LanguageVersion.PL);
+		loginPage.loadLoginView(languageVersion);
 
 		loginPage.fillMandatoryLoginFields("user", "user");
 
@@ -65,11 +85,12 @@ public class MangaFavouriteUIPlTest extends MangaFavouriteUITest {
 				() -> assertNotNull(mangaList.getMangaListText(), () -> "should load manga list fragment text"));
 	}
 
-	@Test
+	@ParameterizedTest(name = "{index}: Language Version: {0}")
+	@EnumSource(LanguageVersion.class)
 	@DisplayName("when remove manga from favourites - likes")
-	public void when_remove_manga_from_favourites_should_remove_manga_from_favourites() {
+	public void when_remove_manga_from_favourites_should_remove_manga_from_favourites(LanguageVersion languageVersion) {
 
-		loginPage.loadLoginView(LanguageVersion.PL);
+		loginPage.loadLoginView(languageVersion);
 
 		loginPage.fillMandatoryLoginFields("user", "user");
 
@@ -85,11 +106,12 @@ public class MangaFavouriteUIPlTest extends MangaFavouriteUITest {
 				() -> "should show manga with zero hearts, but was: " + mangaList.getLastMangaFavouritesCounter()));
 	}
 
-	@Test
+	@ParameterizedTest(name = "{index}: Language Version: {0}")
+	@EnumSource(LanguageVersion.class)
 	@DisplayName("when remove manga from favourites - favourites")
-	public void when_remove_manga_from_favourites_should_not_show_manga_in_list() {
+	public void when_remove_manga_from_favourites_should_not_show_manga_in_list(LanguageVersion languageVersion) {
 
-		loginPage.loadLoginView(LanguageVersion.PL);
+		loginPage.loadLoginView(languageVersion);
 
 		loginPage.fillMandatoryLoginFields("user", "user");
 
@@ -112,11 +134,12 @@ public class MangaFavouriteUIPlTest extends MangaFavouriteUITest {
 				() -> assertNotNull(mangaList.getMangaListText(), () -> "should load manga list fragment text"));
 	}
 
-	@Test
+	@ParameterizedTest(name = "{index}: Language Version: {0}")
+	@EnumSource(LanguageVersion.class)
 	@DisplayName("when user not logged rating manga")
-	public void when_user_not_logged_rating_manga_should_show_login_form() {
+	public void when_user_not_logged_rating_manga_should_show_login_form(LanguageVersion languageVersion) {
 
-		mangaList.loadMangaList(LanguageVersion.PL);
+		mangaList.loadMangaList(languageVersion);
 
 		mangaList.chooseManga(0);
 

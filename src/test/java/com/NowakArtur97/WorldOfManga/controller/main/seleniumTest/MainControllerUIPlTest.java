@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.annotation.DirtiesContext.ClassMode;
 import org.springframework.test.context.TestPropertySource;
 
 import com.NowakArtur97.WorldOfManga.testUtil.enums.LanguageVersion;
@@ -20,7 +21,7 @@ import com.NowakArtur97.WorldOfManga.testUtil.extension.ScreenshotWatcher;
 @TestPropertySource("classpath:/pageContent/messages_pl.properties")
 @DisplayName("Main Controller UI Pl Tests")
 @Tag("MainControllerUIPl_Tests")
-@DirtiesContext
+@DirtiesContext(classMode = ClassMode.BEFORE_EACH_TEST_METHOD)
 public class MainControllerUIPlTest extends MainControllerUITest {
 
 	@Test

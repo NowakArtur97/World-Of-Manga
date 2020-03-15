@@ -22,7 +22,7 @@ public class ScreenshotWatcher implements TestWatcher {
 
 			WebDriver webDriver = SeleniumUITest.getWebDriver();
 
-			screenshotUtil.takeScreenshot(webDriver, context.getDisplayName());
+			screenshotUtil.takeScreenshot(webDriver, context.getRequiredTestMethod().getName());
 		}
 	}
 }

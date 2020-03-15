@@ -33,7 +33,7 @@ public class MangaInUserListController {
 	public String addToList(HttpServletRequest request, @RequestParam("id") Long mangaId,
 			@RequestParam("status") int status) throws MangaNotFoundException {
 
-		mangaInUserListService.addToList(mangaId, status);
+		mangaInUserListService.addOrRemoveFromList(mangaId, status);
 
 		String referer = request.getHeader("Referer");
 

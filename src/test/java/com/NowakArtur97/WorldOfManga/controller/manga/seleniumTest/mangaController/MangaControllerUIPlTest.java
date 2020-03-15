@@ -13,6 +13,7 @@ import org.junit.jupiter.api.condition.OS;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.annotation.DirtiesContext.ClassMode;
 import org.springframework.test.context.TestPropertySource;
 
 import com.NowakArtur97.WorldOfManga.testUtil.enums.LanguageVersion;
@@ -20,10 +21,10 @@ import com.NowakArtur97.WorldOfManga.testUtil.extension.ScreenshotWatcher;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @ExtendWith(ScreenshotWatcher.class)
-@TestPropertySource({ "classpath:/validation/messages_pl.properties", "classpath:/pageContent/messages_pl.properties" })
+@TestPropertySource({ "classpath:/validation/messages_en.properties", "classpath:/pageContent/messages_en.properties" })
 @DisplayName("Manga Controller UI Pl Tests")
 @Tag("MangaControllerUIPl_Tests")
-@DirtiesContext
+@DirtiesContext(classMode = ClassMode.BEFORE_EACH_TEST_METHOD)
 @DisabledOnOs(OS.LINUX)
 public class MangaControllerUIPlTest extends MangaControllerUITest {
 
@@ -55,7 +56,7 @@ public class MangaControllerUIPlTest extends MangaControllerUITest {
 	}
 
 	@Test
-	@DisplayName("when correct manga editing with all fields")
+	@DisplayName("when correct manga creation with all fields")
 	public void when_correct_manga_editing_with_all_fields_should_add_manga() {
 
 		String englishTitle = "Some english title";
@@ -85,7 +86,7 @@ public class MangaControllerUIPlTest extends MangaControllerUITest {
 
 	@Test
 	@DisplayName("when manga deleting")
-	public void when_bmanga_deleting_should_remove_manga() {
+	public void when_manga_deleting_should_remove_manga() {
 
 		loginPage.loadLoginView(LanguageVersion.PL);
 
