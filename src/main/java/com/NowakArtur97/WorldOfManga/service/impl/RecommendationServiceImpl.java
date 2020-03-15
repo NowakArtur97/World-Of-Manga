@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import com.NowakArtur97.WorldOfManga.model.Manga;
 import com.NowakArtur97.WorldOfManga.model.MangaGenre;
+import com.NowakArtur97.WorldOfManga.model.MangaInUserList;
 import com.NowakArtur97.WorldOfManga.model.MangaRating;
 import com.NowakArtur97.WorldOfManga.model.User;
 import com.NowakArtur97.WorldOfManga.service.api.MangaService;
@@ -81,6 +82,7 @@ public class RecommendationServiceImpl implements RecommendationService {
 
 		Set<Manga> usersFavourites = user.getFavouriteMangas();
 		Set<MangaRating> usersRatedList = user.getMangasRatings();
+		Set<MangaInUserList> usersMangaList = user.getMangaList();
 
 		Map<MangaGenre, Integer> genreGroups = new HashMap<>();
 
@@ -92,6 +94,10 @@ public class RecommendationServiceImpl implements RecommendationService {
 			groupMangaByGenre(genreGroups, rating.getManga().getGenres());
 		}
 
+		for (MangaInUserList mangaInList : usersMangaList) {
+			groupMangaByGenre(genreGroups, mangaInList.getManga().getGenres());
+		}
+
 		Entry<MangaGenre, Integer> mostOccurrences = findMostCommonGenre(genreGroups);
 
 		return mostOccurrences != null ? mostOccurrences.getKey() : null;
@@ -99,8 +105,10 @@ public class RecommendationServiceImpl implements RecommendationService {
 
 	private List<Manga> removeMangaThatIsAlreadyInUserList(List<Manga> recommendations, User user) {
 
-		return recommendations.stream().filter(
-				manga -> !isMangaAlreadyRatedByUser(user, manga) && !isMangaAlreadyInUsersFavourites(user, manga))
+		return recommendations.stream()
+				.filter(manga -> !isMangaAlreadyRatedByUser(user, manga)
+						&& !isMangaAlreadyInUsersFavourites(user, manga)
+						&& !isMangaAlreadyInUsersMangaList(user, manga))
 				.collect(Collectors.toList());
 	}
 
@@ -137,7 +145,7 @@ public class RecommendationServiceImpl implements RecommendationService {
 
 		recommendations.addAll(allManga.stream()
 				.filter(manga -> !isMangaAlreadyRatedByUser(user, manga)
-						&& !isMangaAlreadyInUsersFavourites(user, manga)
+						&& !isMangaAlreadyInUsersFavourites(user, manga) && !isMangaAlreadyInUsersMangaList(user, manga)
 						&& !isMangaAlreadyRecommended(recommendations, manga))
 				.limit(howManyToFind).sorted(SORT_BY_LIKES).collect(Collectors.toList()));
 
@@ -154,5 +162,9 @@ public class RecommendationServiceImpl implements RecommendationService {
 
 	private boolean isMangaAlreadyRatedByUser(User user, Manga manga) {
 		return user.getMangasRatings().stream().anyMatch(rating -> rating.getManga().equals(manga));
+	}
+
+	private boolean isMangaAlreadyInUsersMangaList(User user, Manga manga) {
+		return user.getMangaList().stream().anyMatch(mangaInList -> mangaInList.getManga().equals(manga));
 	}
 }
