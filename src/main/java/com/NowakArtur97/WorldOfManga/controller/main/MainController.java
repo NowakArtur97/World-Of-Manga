@@ -1,6 +1,7 @@
 package com.NowakArtur97.WorldOfManga.controller.main;
 
 import java.util.Locale;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -11,8 +12,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.LocaleResolver;
 
+import com.NowakArtur97.WorldOfManga.model.User;
 import com.NowakArtur97.WorldOfManga.service.api.MangaService;
 import com.NowakArtur97.WorldOfManga.service.api.RecommendationService;
+import com.NowakArtur97.WorldOfManga.service.api.UserService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -22,8 +25,10 @@ import lombok.RequiredArgsConstructor;
 public class MainController {
 
 	private final MangaService mangaService;
-	
+
 	private final RecommendationService recommendationService;
+
+	private final UserService userService;
 
 	private final LocaleResolver cookieLocaleResolver;
 
@@ -34,6 +39,15 @@ public class MainController {
 
 		theModel.addAttribute("mangas", mangaService.findAll());
 		theModel.addAttribute("recommendations", recommendationService.recommendManga());
+
+		if (userService.isUserLoggedIn()) {
+
+			User user = userService.loadLoggedInUsername();
+
+			theModel.addAttribute("usersFavourites", user.getFavouriteMangas());
+			theModel.addAttribute("usersRatings",
+					user.getMangasRatings().stream().map(rating -> rating.getManga()).collect(Collectors.toSet()));
+		}
 
 		if (locale != null) {
 			theModel.addAttribute("locale", locale.getLanguage());

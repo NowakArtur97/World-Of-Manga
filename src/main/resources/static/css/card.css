@@ -26,8 +26,16 @@
 }
 
 .manga_card__container {
+  position: relative;
   height: 350px;
   width: 250px;
+}
+
+.manga_card__user_likes {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
 }
 
 .manga_card__image {
@@ -98,7 +106,7 @@
 }
 
 .manga_card__icon--big {
-  width: 25px;
+  width: 30px;
   height: 100%;
   transition: 0.3s ease;
 }

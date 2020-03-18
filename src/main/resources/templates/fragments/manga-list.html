@@ -2,6 +2,12 @@
     <div class="manga_card" th:each="manga : ${mangas}">
         <div class="manga_card__face manga_card__face--info">
             <div class="manga_card__container">
+                <div th:if="${usersFavourites!=null}" class="manga_card__user_likes">
+                    <image th:if="${#sets.contains(usersFavourites, manga)}" class="manga_card__icon manga_card__icon--big manga_card__icon--top"
+                        th:src="@{'/images/icons/heart.png'}"></image>
+                    <image th:if="${#sets.contains(usersRatings, manga)}"  class="manga_card__icon manga_card__icon--big manga_card__icon--top"
+                        th:src="@{'/images/icons/star.png'}">
+                </div>
                 <img class="manga_card__image" th:src="@{'/manga/getImage/' + ${manga.id}}">
             </div>
             <div class="manga_card__info">
