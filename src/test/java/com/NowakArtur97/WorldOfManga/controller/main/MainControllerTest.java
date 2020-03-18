@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
@@ -15,6 +16,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -26,7 +28,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.servlet.LocaleResolver;
@@ -34,8 +35,10 @@ import org.springframework.web.servlet.LocaleResolver;
 import com.NowakArtur97.WorldOfManga.model.Author;
 import com.NowakArtur97.WorldOfManga.model.Manga;
 import com.NowakArtur97.WorldOfManga.model.MangaTranslation;
+import com.NowakArtur97.WorldOfManga.model.User;
 import com.NowakArtur97.WorldOfManga.service.api.MangaService;
 import com.NowakArtur97.WorldOfManga.service.api.RecommendationService;
+import com.NowakArtur97.WorldOfManga.service.api.UserService;
 
 @ExtendWith(MockitoExtension.class)
 @DisplayName("Main Controller Tests")
@@ -50,6 +53,9 @@ public class MainControllerTest {
 	private MangaService mangaService;
 
 	@Mock
+	private UserService userService;
+
+	@Mock
 	private RecommendationService recommendationService;
 
 	@Mock
@@ -58,13 +64,13 @@ public class MainControllerTest {
 	@BeforeEach
 	public void setUp() {
 
-		mainController = new MainController(mangaService, recommendationService, cookieLocaleResolver);
+		mainController = new MainController(mangaService, recommendationService, userService, cookieLocaleResolver);
 		mockMvc = MockMvcBuilders.standaloneSetup(mainController).build();
 	}
 
 	@Test
-	@DisplayName("when load main page")
-	public void when_load_main_page_should_show_main_page() throws IOException {
+	@DisplayName("when load main page as not logged user")
+	public void when_load_main_page_as_not_logged_user_should_show_main_page() throws IOException {
 
 		MangaTranslation mangaTranslationEnExpected = MangaTranslation.builder().title("English title")
 				.description("English description").build();
@@ -79,7 +85,41 @@ public class MainControllerTest {
 
 		MockMultipartFile image = new MockMultipartFile("image.jpg", "file bytes".getBytes());
 
-		Locale locale = new Locale("en");
+		Manga mangaExpected = new Manga();
+		mangaExpected.addAuthor(authorExpected);
+		mangaExpected.addTranslation(mangaTranslationEnExpected);
+		mangaExpected.addTranslation(mangaTranslationPlExpected);
+		mangaExpected.setImage(image.getBytes());
+
+		List<Manga> mangas = new ArrayList<>();
+		mangas.add(mangaExpected);
+
+		when(mangaService.findAll()).thenReturn(mangas);
+		when(recommendationService.recommendManga()).thenReturn(mangas);
+		when(userService.isUserLoggedIn()).thenReturn(false);
+
+		assertAll(() -> mockMvc.perform(get("/")).andExpect(status().isOk()).andExpect(view().name("views/main"))
+				.andExpect(model().attribute("mangas", mangas)).andExpect(model().attribute("recommendations", mangas))
+				.andExpect(model().attributeDoesNotExist("usersFavourites"))
+				.andExpect(model().attributeDoesNotExist("usersRating")));
+	}
+
+	@Test
+	@DisplayName("when load main page as logged user")
+	public void when_load_main_page_as_logged_user_should_show_main_page() throws IOException {
+
+		MangaTranslation mangaTranslationEnExpected = MangaTranslation.builder().title("English title")
+				.description("English description").build();
+		MangaTranslation mangaTranslationPlExpected = MangaTranslation.builder().title("Polish title")
+				.description("Polish description").build();
+
+		Set<MangaTranslation> mangaTranslationsExpected = new HashSet<>();
+		mangaTranslationsExpected.add(mangaTranslationEnExpected);
+		mangaTranslationsExpected.add(mangaTranslationPlExpected);
+
+		Author authorExpected = new Author("FirsName LastName");
+
+		MockMultipartFile image = new MockMultipartFile("image.jpg", "file bytes".getBytes());
 
 		Manga mangaExpected = new Manga();
 		mangaExpected.addAuthor(authorExpected);
@@ -90,15 +130,24 @@ public class MainControllerTest {
 		List<Manga> mangas = new ArrayList<>();
 		mangas.add(mangaExpected);
 
-		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.get("/").locale(locale)
-				.flashAttr("mangas", mangas).flashAttr("recommendations", mangas).flashAttr("locale", locale);
+		User userExpected = User.builder().username("username").password("password").email("user@email.com")
+				.isEnabled(true).build();
+
+		userExpected.addMangaRating(mangaExpected, 4);
+		userExpected.addMangaToFavourites(mangaExpected);
+
+		Set<Manga> usersRatings = userExpected.getMangasRatings().stream().map(rating -> rating.getManga())
+				.collect(Collectors.toSet());
 
 		when(mangaService.findAll()).thenReturn(mangas);
 		when(recommendationService.recommendManga()).thenReturn(mangas);
+		when(userService.isUserLoggedIn()).thenReturn(true);
+		when(userService.loadLoggedInUsername()).thenReturn(userExpected);
 
-		assertAll(() -> mockMvc.perform(mockRequest).andExpect(status().isOk()).andExpect(view().name("views/main"))
-				.andExpect(model().attribute("mangas", mangas))
-				.andExpect(model().attribute("recommendations", mangas)));
+		assertAll(() -> mockMvc.perform(get("/")).andExpect(status().isOk()).andExpect(view().name("views/main"))
+				.andExpect(model().attribute("mangas", mangas)).andExpect(model().attribute("recommendations", mangas))
+				.andExpect(model().attribute("usersFavourites", userExpected.getFavouriteMangas()))
+				.andExpect(model().attribute("usersRatings", usersRatings)));
 	}
 
 	@Test
