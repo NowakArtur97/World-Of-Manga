@@ -28,7 +28,7 @@ public class MainControllerUIPlTest extends MainControllerUITest {
 	public void when_load_main_page_should_load_all_page_content() {
 
 		mainPage.loadMainView(LanguageVersion.PL);
-
+				
 		assertAll(() -> assertTrue(mainPage.getHeaderText().contains(headerLogo), () -> "should load header logo"),
 				() -> assertTrue(mainPage.getHeaderText().contains(headerRegistrationOption.toUpperCase()),
 						() -> "should load header sing up option"),
