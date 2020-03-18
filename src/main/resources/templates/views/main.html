@@ -14,8 +14,9 @@
 
 <body class="page">
     <div layout:fragment="content">
-        <div th:replace="fragments/manga-slider:: manga-slider"></div>
-        <div th:replace="fragments/manga-list:: manga-list"></div>
+        <div th:include="fragments/manga-list:: manga-list(mangas=${recommendations})" class="manga_list manga_slider">
+        </div>
+        <div th:include="fragments/manga-list:: manga-list(mangas=${mangas})" class="manga_list"></div>
     </div>
 </body>
 

@@ -1,4 +1,4 @@
-<div th:fragment="manga-list" class="manga_list">
+<div th:fragment="manga-list (mangas)">
     <div class="manga_card" th:each="manga : ${mangas}">
         <div class="manga_card__face manga_card__face--info">
             <div class="manga_card__container">
