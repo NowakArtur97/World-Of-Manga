@@ -20,6 +20,7 @@ import com.NowakArtur97.WorldOfManga.service.api.RecommendationService;
 import com.NowakArtur97.WorldOfManga.service.api.UserService;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @RequestMapping(path = "/")
@@ -43,7 +44,7 @@ public class MainController {
 		if (locale != null) {
 			theModel.addAttribute("locale", locale.getLanguage());
 		}
-
+	
 		theModel.addAttribute("mangas", mangaService.findAllDividedIntoPages(pageable));
 		theModel.addAttribute("recommendations", recommendationService.recommendManga());
 

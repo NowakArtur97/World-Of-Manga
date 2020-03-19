@@ -10,7 +10,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 
@@ -21,6 +23,11 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
@@ -52,7 +59,8 @@ public class MangaInUserListControllerTest {
 	public void setUp() {
 
 		mangaInUserListController = new MangaInUserListController(mangaInUserListService, cookieLocaleResolver);
-		mockMvc = MockMvcBuilders.standaloneSetup(mangaInUserListController).build();
+		mockMvc = MockMvcBuilders.standaloneSetup(mangaInUserListController)
+				.setCustomArgumentResolvers(new PageableHandlerMethodArgumentResolver()).build();
 	}
 
 	@Test
@@ -99,16 +107,24 @@ public class MangaInUserListControllerTest {
 		Set<Manga> mangasExpected = new HashSet<>();
 		mangasExpected.add(mangaExpected);
 
+		List<Manga> mangasListExpected = new ArrayList<>(mangasExpected);
+		Pageable pageable = PageRequest.of(0, 12);
+		int start = (int) PageRequest.of(0, 12).getOffset();
+		int end = (start + pageable.getPageSize()) > mangasListExpected.size() ? mangasListExpected.size()
+				: (start + pageable.getPageSize());
+		Page<Manga> mangaPages = new PageImpl<Manga>(mangasListExpected.subList(start, end), pageable,
+				mangasListExpected.size());
+
 		int status = 0;
 
 		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.get("/auth/sortMangaList/{id}", status)
-				.locale(locale).flashAttr("mangas", mangasExpected).flashAttr("locale", locale).header("Referer", "/");
+				.locale(locale).flashAttr("locale", locale).header("Referer", "/");
 
 		when(mangaInUserListService.getUsersMangaListByStatus(status)).thenReturn(mangasExpected);
 
 		assertAll(
 				() -> mockMvc.perform(mockRequest).andExpect(status().isOk()).andExpect(view().name("views/manga-list"))
-						.andExpect(model().attribute("mangas", mangasExpected)),
+						.andExpect(model().attribute("mangas", mangaPages)),
 				() -> verify(mangaInUserListService, times(1)).getUsersMangaListByStatus(status));
 	}
 }
