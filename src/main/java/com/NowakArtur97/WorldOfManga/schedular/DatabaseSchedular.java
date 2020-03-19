@@ -44,9 +44,11 @@ public class DatabaseSchedular {
 	private static MangaGenre demons;
 	private static MangaGenre drama;
 	private static MangaGenre fantasy;
+	private static MangaGenre historical;
 	private static MangaGenre magic;
 	private static MangaGenre martialArts;
 	private static MangaGenre mature;
+	private static MangaGenre military;
 	private static MangaGenre schoolLife;
 	private static MangaGenre shounen;
 	private static MangaGenre supernatural;
@@ -68,9 +70,11 @@ public class DatabaseSchedular {
 		drama = mangaGenreService.findByEnglishTranslation("Drama");
 		demons = mangaGenreService.findByEnglishTranslation("Demons");
 		fantasy = mangaGenreService.findByEnglishTranslation("Fantasy");
+		historical = mangaGenreService.findByEnglishTranslation("Historical");
 		magic = mangaGenreService.findByEnglishTranslation("Magic");
 		martialArts = mangaGenreService.findByEnglishTranslation("Martial Arts");
 		mature = mangaGenreService.findByEnglishTranslation("Mature");
+		military = mangaGenreService.findByEnglishTranslation("Military");
 		schoolLife = mangaGenreService.findByEnglishTranslation("School Life");
 		shounen = mangaGenreService.findByEnglishTranslation("Shounen");
 		sliceOfLife = mangaGenreService.findByEnglishTranslation("Slice of Life");
@@ -153,6 +157,30 @@ public class DatabaseSchedular {
 		URL blackCloverURL = new URL("https://f01.mrcdn.info/file/mrportal/i/6/m/2/nY.g6rCBDzH.jpg");
 		String blackCloverAuthor = "Yūki Tabata";
 
+		String magiTitle = "Magi: The Labyrinth of Magic";
+		String magiDescriptionEn = "In a world similar to that of Scheherezade's tales, a mysterious young boy named Aladdin drifts from place to place with his djinn Ugo. Ugo lives inside a golden recorder, and Aladdin is on the hunt for his true container \"The Djinn's Metal Vessel\". One day he encounters Alibaba, a poor lad determined to enter one of the mysterious Dungeons that popped up a decade ago in order to make his fortune. Thus the the two begin their adventure in a Persia that never was.";
+		String magiDescriptionPl = "Aladyn jest chłopcem, który większość życia spędził zamknięty w czterech ścianach. Jego najlepszym przyjacielem jest dżin nazywający się Ugo. Pewnego dnia bohater dowiaduje się, iż jest magiem \"Magi\", którego przeznaczeniem jest wybranie właściwego króla, za którym podąży prawą ścieżką rządząc państwem. Podczas poszukiwań władcy bohater spotyka innych bohaterów Baśni tysiąca i jednej nocy takich jak, Alibaba czy Sinbad.";
+		URL magiURL = new URL("https://f01.mrcdn.info/file/mrportal/i/6/9/k/P1.aSsZnm3R.jpg");
+		String magiAuthor = "Shinobu Ohtaka";
+
+		String kingdomTitle = "Kingdom";
+		String kingdomDescriptionEn = "Millions of years have passed since the times of legends, when the worlds of man and gods were still the same. In these times it was the desires of man that moved the world. It is the era of the 500 year war - The Warring States period (403-222 BC in Chinese history). Kingdom is the story of a young boy named Shin who grew into a great general and all the trials and bloodshed that lead him there.";
+		String kingdomDescriptionPl = "W Epoce Walczących Królestw w położonym na terenie Chin państwie Qin żyją sieroty – porywczy Shin i roztropny Hyou. Ich wspólnym marzeniem jest zdobycie tytułu „największego na świecie wodza”. Los daje Hyou możliwość pracy w pałacu, jednak chłopak po krótkim czasie powraca do wioski ciężko ranny i na łożu śmierci prosi Shina o wypełnienie pewnego obowiązku. Ma on odnaleźć Ei Seia i ochronić go przed spiskującym bratem. Chłopiec okazuje się łudząco podobnym do Hyou młodym cesarzem Qin…";
+		URL kingdomURL = new URL("https://f01.mrcdn.info/file/mrportal/h/9/5/a/ym.dQBrd2H7.png");
+		String kingdomAuthor = "Yasuhisa Hara";
+
+		String vinlandSagaTitle = "Vinland Saga";
+		String vinlandSagaDescriptionEn = "As a child, Thorfinn sat at the feet of the great Leif Ericson and thrilled to wild tales of a land far to the west. But his youthful fantasies were shattered by a mercenary raid. Raised by the Vikings who murdered his family, Thorfinn became a terrifying warrior, forever seeking to kill the band’s leader, Askeladd, and avenge his father. Sustaining Thorfinn through his ordeal are his pride in his family and his dreams of a fertile westward land, a land without war or slavery… the land Leif called Vinland.";
+		String vinlandSagaDescriptionPl = "Przez tysiąc lat wikingowie dorobili się dość dużej renomy jako jedni z najbardziej brutalnych i silnych wojowników. Thorfinn, syn jednego z najlepszych wikińskich wojów, postanawia poświęcić swe dziecięce lata na morderczy trening, który ma przybliżyć młodego wojownika do jego celu, którego nie może porzucić i którego pożąda najbardziej na świecie. Jego cel sprawia, że musi wyruszyć w podróż. Robi to wszystko, by odszukać pewną osobę i… pozbawić ją głowy za zamordowanie jego ojca.";
+		URL vinlandSagaURL = new URL("https://f01.mrcdn.info/file/mrportal/i/5/9/j/l2.aU-J-f2g.jpg");
+		String vinlandSagaAuthor = "Makoto Yukimura";
+
+		String silentVoiceTitle = "A Silent Voice";
+		String silentVoiceDescriptionEn = "Shouya Ishida, a boy always looking for ways to beat boredom, ends up looking for it in the wrong place. Weirded out by his new classmate, a deaf transfer student named Shouko Nishimiya, he deems her as the target of his ostracizing and bullying. Day after day, Shouya picks on Shouko, unaware of the effects of his thoughtless actions. He finally understands the pain he has inflicted on her when one day, his bullying culminates in her leaving the school, and his classmates begin to shun and harass him every chance they get instead. Determined to right his wrongs, five years later, Shouya, now a third year high school loner, meets Shouko again. Thus begins the story of a young man's path to redemption.";
+		String silentVoiceDescriptionPl = "Shoya Ishida nade wszystko ceni przygody i dobrą zabawę. Jest energiczny i wszędzie go pełno. Kiedy więc w klasie pojawia się nowa koleżanka – niesłysząca Shoko Nishimiya – która już od pierwszych dni działa mu na nerwy nieprzystosowaniem i ślamazarnością, Shoya okazuje jej swoją niechęć. Nie tylko sam zaczyna uprzykrzać Nishimiyi życie, ale też zachęca do tego resztę klasy. Pewnego dnia posuwa się jednak za daleko, w efekcie czego dziewczyna zmienia szkołę, on zaś staje się obiektem przemocy i traci przyjaciół. Mija sześć lat. W tym czasie Shoya wielokrotnie zastanawiał się nad swoim karygodnym zachowaniem w stosunku do głuchej koleżanki. Czy będzie potrafił spojrzeć jej prosto w oczy, kiedy los ponownie skrzyżuje ich ścieżki?";
+		URL silentVoiceURL = new URL("https://f01.mrcdn.info/file/mrportal/i/5/f/f/i4.e_aEgSh1.jpg");
+		String silentVoiceAuthor = "Yoshitoki Oima";
+
 //		String Title = "";
 //		String DescriptionEn = "";
 //		String DescriptionPl = "";
@@ -184,6 +212,14 @@ public class DatabaseSchedular {
 				mature, fantasy, adventure);
 		saveManga(blackCloverTitle, blackCloverDescriptionEn, blackCloverTitle, blackCloverDescriptionPl,
 				blackCloverURL, blackCloverAuthor, magic, shounen, action);
+		saveManga(magiTitle, magiDescriptionEn, magiTitle, magiDescriptionPl, magiURL, magiAuthor, fantasy, adventure,
+				action);
+		saveManga(kingdomTitle, kingdomDescriptionEn, kingdomTitle, kingdomDescriptionPl, kingdomURL, kingdomAuthor,
+				historical, military, action);
+		saveManga(vinlandSagaTitle, vinlandSagaDescriptionEn, vinlandSagaTitle, vinlandSagaDescriptionPl,
+				vinlandSagaURL, vinlandSagaAuthor, historical, drama, action);
+		saveManga(silentVoiceTitle, silentVoiceDescriptionEn, silentVoiceTitle, silentVoiceDescriptionPl,
+				silentVoiceURL, silentVoiceAuthor, sliceOfLife, drama);
 //		saveManga(Title, DescriptionEn, Title, DescriptionPl, URL, Author);
 	}
 
