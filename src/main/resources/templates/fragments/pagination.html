@@ -1,0 +1,14 @@
+<div th:fragment="pagination">
+    <span th:if="${mangas.hasPrevious()}">
+        <a th:href="@{/(page=${mangas.number-1},size=${mangas.size})}" th:text="#{pagination.previous}"></a>
+    </span>
+    <div th:each="i : ${#numbers.sequence(0, mangas.totalPages-1)}">
+        <span th:if="${mangas.number == i}">[[${i}+1]]</span>
+        <span th:unless="${mangas.number==i}">
+            <a th:href="@{/(page=${i},size=${mangas.size})}">[[${i}+1]]</a>
+        </span>
+    </div>
+    <span th:if="${mangas.hasNext()}">
+        <a th:href="@{/(page=${mangas.number+1},size=${mangas.size})}" th:text="#{pagination.next}"></a>
+    </span>
+</div>
