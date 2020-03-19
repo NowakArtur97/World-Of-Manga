@@ -2,6 +2,7 @@ package com.NowakArtur97.WorldOfManga.controller.main;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -25,6 +26,10 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.web.servlet.MockMvc;
@@ -65,7 +70,8 @@ public class MainControllerTest {
 	public void setUp() {
 
 		mainController = new MainController(mangaService, recommendationService, userService, cookieLocaleResolver);
-		mockMvc = MockMvcBuilders.standaloneSetup(mainController).build();
+		mockMvc = MockMvcBuilders.standaloneSetup(mainController)
+				.setCustomArgumentResolvers(new PageableHandlerMethodArgumentResolver()).build();
 	}
 
 	@Test
@@ -94,14 +100,21 @@ public class MainControllerTest {
 		List<Manga> mangas = new ArrayList<>();
 		mangas.add(mangaExpected);
 
-		when(mangaService.findAll()).thenReturn(mangas);
+		Page<Manga> pageMangas = new PageImpl<Manga>(mangas);
+
+		when(mangaService.findAllDividedIntoPages(PageRequest.of(0, 12))).thenReturn(pageMangas);
 		when(recommendationService.recommendManga()).thenReturn(mangas);
 		when(userService.isUserLoggedIn()).thenReturn(false);
 
-		assertAll(() -> mockMvc.perform(get("/")).andExpect(status().isOk()).andExpect(view().name("views/main"))
-				.andExpect(model().attribute("mangas", mangas)).andExpect(model().attribute("recommendations", mangas))
-				.andExpect(model().attributeDoesNotExist("usersFavourites"))
-				.andExpect(model().attributeDoesNotExist("usersRating")));
+		assertAll(
+				() -> mockMvc.perform(get("/")).andExpect(status().isOk()).andExpect(view().name("views/main"))
+						.andExpect(model().attribute("mangas", pageMangas))
+						.andExpect(model().attribute("recommendations", mangas))
+						.andExpect(model().attributeDoesNotExist("usersFavourites"))
+						.andExpect(model().attributeDoesNotExist("usersRating")),
+				() -> verify(recommendationService, times(1)).recommendManga(),
+				() -> verify(userService, times(1)).isUserLoggedIn(),
+				() -> verify(userService, never()).loadLoggedInUsername());
 	}
 
 	@Test
@@ -139,15 +152,23 @@ public class MainControllerTest {
 		Set<Manga> usersRatings = userExpected.getMangasRatings().stream().map(rating -> rating.getManga())
 				.collect(Collectors.toSet());
 
-		when(mangaService.findAll()).thenReturn(mangas);
+		Page<Manga> pageMangas = new PageImpl<Manga>(mangas);
+
+		when(mangaService.findAllDividedIntoPages(PageRequest.of(0, 12))).thenReturn(pageMangas);
 		when(recommendationService.recommendManga()).thenReturn(mangas);
 		when(userService.isUserLoggedIn()).thenReturn(true);
 		when(userService.loadLoggedInUsername()).thenReturn(userExpected);
 
-		assertAll(() -> mockMvc.perform(get("/")).andExpect(status().isOk()).andExpect(view().name("views/main"))
-				.andExpect(model().attribute("mangas", mangas)).andExpect(model().attribute("recommendations", mangas))
-				.andExpect(model().attribute("usersFavourites", userExpected.getFavouriteMangas()))
-				.andExpect(model().attribute("usersRatings", usersRatings)));
+		assertAll(
+				() -> mockMvc.perform(get("/")).andExpect(status().isOk()).andExpect(view().name("views/main"))
+						.andExpect(model().attribute("mangas", pageMangas))
+						.andExpect(model().attribute("recommendations", mangas))
+						.andExpect(model().attribute("usersFavourites", userExpected.getFavouriteMangas()))
+						.andExpect(model().attribute("usersRatings", usersRatings)),
+				() -> verify(mangaService, times(1)).findAllDividedIntoPages(PageRequest.of(0, 12)),
+				() -> verify(recommendationService, times(1)).recommendManga(),
+				() -> verify(userService, times(1)).isUserLoggedIn(),
+				() -> verify(userService, times(1)).loadLoggedInUsername());
 	}
 
 	@Test
@@ -162,7 +183,7 @@ public class MainControllerTest {
 		assertAll(
 				() -> assertEquals(locale, mockRequest.getLocale(),
 						() -> "should load locale: " + locale + ", but was: " + mockRequest.getLocale()),
-				() -> verify(mangaService, times(1)).findAll(),
+				() -> verify(mangaService, times(1)).findAllDividedIntoPages(PageRequest.of(0, 12)),
 				() -> verify(recommendationService, times(1)).recommendManga(),
 				() -> verify(cookieLocaleResolver, times(1)).resolveLocale(mockRequest));
 	}
