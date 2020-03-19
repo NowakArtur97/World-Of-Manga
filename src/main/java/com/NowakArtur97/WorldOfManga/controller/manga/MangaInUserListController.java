@@ -1,11 +1,17 @@
 package com.NowakArtur97.WorldOfManga.controller.manga;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,18 +47,33 @@ public class MangaInUserListController {
 	}
 
 	@GetMapping(path = "/sortMangaList/{status}")
-	public String sortMangaList(Model theModel, HttpServletRequest request, @PathVariable("status") int status) {
+	public String sortMangaList(Model theModel, HttpServletRequest request, @PathVariable("status") int status,
+			@PageableDefault(size = 12) Pageable pageable) {
 
 		Locale locale = cookieLocaleResolver.resolveLocale(request);
 
 		Set<Manga> mangaList = mangaInUserListService.getUsersMangaListByStatus(status);
 
-		theModel.addAttribute("mangas", mangaList);
+		List<Manga> mangas = new ArrayList<>(mangaList);
+
+		Page<Manga> mangaPages = convertListToPage(pageable, mangas);
+
+		theModel.addAttribute("mangas", mangaPages);
 
 		if (locale != null) {
 			theModel.addAttribute("locale", locale.getLanguage());
 		}
 
 		return "views/manga-list";
+	}
+
+	private Page<Manga> convertListToPage(Pageable pageable, List<Manga> mangas) {
+
+		int start = (int) pageable.getOffset();
+		int end = (start + pageable.getPageSize()) > mangas.size() ? mangas.size() : (start + pageable.getPageSize());
+
+		Page<Manga> mangaPages = new PageImpl<Manga>(mangas.subList(start, end), pageable, mangas.size());
+
+		return mangaPages;
 	}
 }
