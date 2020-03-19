@@ -37,7 +37,7 @@ public class MainController {
 	private final LocaleResolver cookieLocaleResolver;
 
 	@GetMapping
-	public String showMainPage(Model theModel, HttpServletRequest request, @PageableDefault(size = 12) Pageable pageable) {
+	public String showMainPage(Model theModel, HttpServletRequest request, @PageableDefault(size = 2) Pageable pageable) {
 
 		Locale locale = cookieLocaleResolver.resolveLocale(request);
 

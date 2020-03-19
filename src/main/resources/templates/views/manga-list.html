@@ -10,8 +10,10 @@
     <meta name="description" content="Manga list management website">
     <meta name="keywords" content="manga, manhwa, webtoon, manhua, list, recommendations">
     <meta name="author" content="Artur Nowak">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/page.css}" />
-    <link rel="stylesheet" type="text/css" th:href="@{/css/manga_types.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/card.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/manga_list.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/page.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/manga_types.css}">
 </head>
 
 <body class="page">
@@ -40,7 +42,7 @@
             </a>
     </div>
 
-    <div th:replace="fragments/manga-list:: manga-list"></div>
+        <div th:include="fragments/manga-list:: manga-list(mangas=${mangas})" class="manga_list"></div>
   </div>
 </body>
 
