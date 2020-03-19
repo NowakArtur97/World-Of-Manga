@@ -5,6 +5,8 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.NowakArtur97.WorldOfManga.dto.MangaDTO;
@@ -98,5 +100,11 @@ public class MangaServiceImpl implements MangaService {
 	public List<Manga> findAll() {
 
 		return mangaRepository.findAll();
+	}
+
+	@Override
+	public Page<Manga> findAllDividedIntoPages(Pageable pageable) {
+
+		return mangaRepository.findAll(pageable);
 	}
 }
