@@ -10,11 +10,11 @@
 * [Screenshots](#screenshots)
 
 ## General info
-An application for manga fans to help manage their list of read titles. An application for manga fans to help manage their list of read titles.
+An application for manga fans to help manage their list of read titles.
 
 ## Demo
 The application demo is available on the Heroku platform: https://world-of-manga.herokuapp.com/
-It may take a while for the application to start.
+It may take a while for the application to start. If the page loads without a manga list, please refresh the page after a while.
 
 To log in as a user please provide:
 - Username: user
@@ -25,6 +25,7 @@ To log in as a admin please provide:
 - Password: admin
 
 ## Built With 
+- Java 11
 - Spring (Boot, MVC, Security, Data JPA) - 2.2.3
 - Thymeleaf
 - Lombok - 1.18.10

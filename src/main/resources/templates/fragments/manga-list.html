@@ -1,4 +1,5 @@
-<div th:fragment="manga-list (mangas)">
+<div th:fragment="manga-list (mangas, showSlider)">
+    <header th:if="${showSlider}" class="manga_slider__header" th:text="#{slider.recommendations}"></header>
     <div class="manga_card" th:each="manga : ${mangas}">
         <div class="manga_card__face manga_card__face--info">
             <div class="manga_card__container">

@@ -12,10 +12,10 @@
 
 <body class="page">
     <div layout:fragment="content">
-        <div th:include="fragments/manga-list:: manga-list(mangas=${recommendations})" class="manga_list manga_slider">
+        <div th:include="fragments/manga-list:: manga-list(mangas=${recommendations}, showSlider=true)" class="manga_list manga_slider">
         </div>
 
-        <div th:include="fragments/manga-list:: manga-list(mangas=${mangas})" class="manga_list"></div>
+        <div th:include="fragments/manga-list:: manga-list(mangas=${mangas}, showSlider=false)" class="manga_list"></div>
 
         <div th:if="${mangas.getTotalPages() gt 1}" th:include="fragments/pagination:: pagination" class="pagination">
         </div>
