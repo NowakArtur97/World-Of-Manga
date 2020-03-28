@@ -21,10 +21,10 @@ import org.springframework.validation.Errors;
 
 import com.NowakArtur97.WorldOfManga.dto.AuthorDTO;
 import com.NowakArtur97.WorldOfManga.service.api.AuthorService;
-import com.NowakArtur97.WorldOfManga.testUtil.generator.ReplaceUnderscoresGenerator;
+import com.NowakArtur97.WorldOfManga.testUtil.generator.NameWithSpacesGenerator;
 
 @ExtendWith(MockitoExtension.class)
-@DisplayNameGeneration(ReplaceUnderscoresGenerator.class)
+@DisplayNameGeneration(NameWithSpacesGenerator.class)
 @Tag("AuthorValidator_Tests")
 public class AuthorValidatorTest {
 

@@ -22,10 +22,10 @@ import org.springframework.validation.Errors;
 import com.NowakArtur97.WorldOfManga.dto.UserDTO;
 import com.NowakArtur97.WorldOfManga.dto.UserPasswordDTO;
 import com.NowakArtur97.WorldOfManga.service.api.UserService;
-import com.NowakArtur97.WorldOfManga.testUtil.generator.ReplaceUnderscoresGenerator;
+import com.NowakArtur97.WorldOfManga.testUtil.generator.NameWithSpacesGenerator;
 
 @ExtendWith(MockitoExtension.class)
-@DisplayNameGeneration(ReplaceUnderscoresGenerator.class)
+@DisplayNameGeneration(NameWithSpacesGenerator.class)
 @Tag("UserRegistrationValidator_Tests")
 public class UserRegistrationValidatorTest {
 

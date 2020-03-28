@@ -23,10 +23,10 @@ import com.NowakArtur97.WorldOfManga.model.Author;
 import com.NowakArtur97.WorldOfManga.model.Manga;
 import com.NowakArtur97.WorldOfManga.model.MangaTranslation;
 import com.NowakArtur97.WorldOfManga.service.api.MangaService;
-import com.NowakArtur97.WorldOfManga.testUtil.generator.ReplaceUnderscoresGenerator;
+import com.NowakArtur97.WorldOfManga.testUtil.generator.NameWithSpacesGenerator;
 
 @ExtendWith(MockitoExtension.class)
-@DisplayNameGeneration(ReplaceUnderscoresGenerator.class)
+@DisplayNameGeneration(NameWithSpacesGenerator.class)
 @Tag("MangaDetailsController_Tests")
 public class MangaDetailsControllerTest {
 

@@ -27,10 +27,10 @@ import com.NowakArtur97.WorldOfManga.model.MangaTranslation;
 import com.NowakArtur97.WorldOfManga.repository.MangaTranslationRepository;
 import com.NowakArtur97.WorldOfManga.service.api.LanguageService;
 import com.NowakArtur97.WorldOfManga.service.api.MangaService;
-import com.NowakArtur97.WorldOfManga.testUtil.generator.ReplaceUnderscoresGenerator;
+import com.NowakArtur97.WorldOfManga.testUtil.generator.NameWithSpacesGenerator;
 
 @ExtendWith(MockitoExtension.class)
-@DisplayNameGeneration(ReplaceUnderscoresGenerator.class)
+@DisplayNameGeneration(NameWithSpacesGenerator.class)
 @Tag("MangaTranslationServiceImpl_Tests")
 public class MangaTranslationServiceImplTest {
 

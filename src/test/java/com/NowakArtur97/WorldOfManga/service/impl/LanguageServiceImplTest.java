@@ -20,10 +20,10 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import com.NowakArtur97.WorldOfManga.exception.LanguageNotFoundException;
 import com.NowakArtur97.WorldOfManga.model.Language;
 import com.NowakArtur97.WorldOfManga.repository.LanguageRepository;
-import com.NowakArtur97.WorldOfManga.testUtil.generator.ReplaceUnderscoresGenerator;
+import com.NowakArtur97.WorldOfManga.testUtil.generator.NameWithSpacesGenerator;
 
 @ExtendWith(MockitoExtension.class)
-@DisplayNameGeneration(ReplaceUnderscoresGenerator.class)
+@DisplayNameGeneration(NameWithSpacesGenerator.class)
 @Tag("LanguageServiceImpl_Tests")
 public class LanguageServiceImplTest {
 
