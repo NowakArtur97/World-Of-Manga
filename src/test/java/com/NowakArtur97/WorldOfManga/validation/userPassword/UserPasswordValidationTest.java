@@ -13,13 +13,14 @@ import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import com.NowakArtur97.WorldOfManga.dto.UserPasswordDTO;
+import com.NowakArtur97.WorldOfManga.testUtil.generator.ReplaceUnderscoresGenerator;
 
-@DisplayName("User Password Validation Tests")
+@DisplayNameGeneration(ReplaceUnderscoresGenerator.class)
 @Tag("UserPasswordValidation_Tests")
 public class UserPasswordValidationTest {
 
@@ -33,7 +34,6 @@ public class UserPasswordValidationTest {
 	}
 
 	@Test
-	@DisplayName("when user`s password is correct")
 	public void when_users_password_is_correct_should_not_have_violations() {
 
 		String password = "password";
@@ -47,7 +47,6 @@ public class UserPasswordValidationTest {
 	}
 
 	@Test
-	@DisplayName("when user`s password is null")
 	public void when_users_password_is_null_should_have_violations() {
 
 		String password = null;
@@ -62,7 +61,6 @@ public class UserPasswordValidationTest {
 	}
 
 	@Test
-	@DisplayName("when user`s password is empty")
 	public void when_users_password_is_empty_should_have_violations() {
 
 		UserPasswordDTO userPasswordDTO = UserPasswordDTO.builder().password("").matchingPassword("").build();
@@ -74,7 +72,6 @@ public class UserPasswordValidationTest {
 	}
 
 	@Test
-	@DisplayName("when user`s password is blank")
 	public void when_users_password_is_blank_should_have_violations() {
 
 		UserPasswordDTO userPasswordDTO = UserPasswordDTO.builder().password("   ").matchingPassword("   ").build();

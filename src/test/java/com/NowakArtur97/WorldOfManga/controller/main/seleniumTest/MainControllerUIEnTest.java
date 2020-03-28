@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -14,17 +14,17 @@ import org.springframework.test.context.TestPropertySource;
 
 import com.NowakArtur97.WorldOfManga.testUtil.enums.LanguageVersion;
 import com.NowakArtur97.WorldOfManga.testUtil.extension.ScreenshotWatcher;
+import com.NowakArtur97.WorldOfManga.testUtil.generator.ReplaceUnderscoresGenerator;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @ExtendWith(ScreenshotWatcher.class)
 @TestPropertySource("classpath:/pageContent/messages_en.properties")
-@DisplayName("Main Controller UI En Tests")
+@DisplayNameGeneration(ReplaceUnderscoresGenerator.class)
 @Tag("MainControllerUIEn_Tests")
 @DirtiesContext
 public class MainControllerUIEnTest extends MainControllerUITest {
 
 	@Test
-	@DisplayName("when load main page")
 	public void when_load_main_page_should_load_all_page_content() {
 
 		mainPage.loadMainView(LanguageVersion.ENG);

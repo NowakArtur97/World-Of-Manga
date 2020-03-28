@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -23,9 +23,10 @@ import com.NowakArtur97.WorldOfManga.dto.AuthorDTO;
 import com.NowakArtur97.WorldOfManga.mapper.author.AuthorMapper;
 import com.NowakArtur97.WorldOfManga.model.Author;
 import com.NowakArtur97.WorldOfManga.repository.AuthorRepository;
+import com.NowakArtur97.WorldOfManga.testUtil.generator.ReplaceUnderscoresGenerator;
 
 @ExtendWith(MockitoExtension.class)
-@DisplayName("Author Service Impl Tests")
+@DisplayNameGeneration(ReplaceUnderscoresGenerator.class)
 @Tag("AuthorServiceImpl_Tests")
 public class AuthorServiceImplTest {
 
@@ -44,7 +45,6 @@ public class AuthorServiceImplTest {
 	}
 
 	@Test
-	@DisplayName("when full name is already in database")
 	public void when_full_name_is_already_in_database_should_return_true() {
 
 		boolean isAuthorAlreadyInDatabase = true;
@@ -62,7 +62,6 @@ public class AuthorServiceImplTest {
 	}
 
 	@Test
-	@DisplayName("when full name isn`t already in database")
 	public void when_full_name_is_not_already_in_database_should_return_true() {
 
 		boolean isAuthorAlreadyInDatabase = false;
@@ -80,7 +79,6 @@ public class AuthorServiceImplTest {
 	}
 
 	@Test
-	@DisplayName("when add author should save author")
 	public void when_add_author_should_save_author() {
 
 		String fullName = "Firstname LastName";
@@ -103,7 +101,6 @@ public class AuthorServiceImplTest {
 	}
 
 	@Test
-	@DisplayName("when save author should save author")
 	public void when_save_author_should_save_author() {
 
 		String fullName = "Firstname LastName";
@@ -122,7 +119,6 @@ public class AuthorServiceImplTest {
 	}
 
 	@Test
-	@DisplayName("when find all")
 	public void when_find_all_should_return_list_of_authors() {
 
 		List<Author> authorsExpected = new ArrayList<>();

@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -33,10 +33,11 @@ import com.NowakArtur97.WorldOfManga.dto.AuthorDTO;
 import com.NowakArtur97.WorldOfManga.dto.MangaDTO;
 import com.NowakArtur97.WorldOfManga.model.Author;
 import com.NowakArtur97.WorldOfManga.service.api.AuthorService;
+import com.NowakArtur97.WorldOfManga.testUtil.generator.ReplaceUnderscoresGenerator;
 import com.NowakArtur97.WorldOfManga.validation.author.AuthorValidator;
 
 @ExtendWith(MockitoExtension.class)
-@DisplayName("Author Controller Tests")
+@DisplayNameGeneration(ReplaceUnderscoresGenerator.class)
 @Tag("AuthorController_Tests")
 public class AuthorControllerTest {
 
@@ -58,7 +59,6 @@ public class AuthorControllerTest {
 	}
 
 	@Test
-	@DisplayName("when load add or update author page")
 	public void when_load_add_or_update_author_page_should_show_author_form() {
 
 		List<Author> authors = new ArrayList<>();
@@ -73,7 +73,6 @@ public class AuthorControllerTest {
 	}
 
 	@Test
-	@DisplayName("when add author with correct data")
 	public void when_add_author_with_correct_data_should_save_author() {
 
 		String fullName = "Firstname LastName";
@@ -90,7 +89,6 @@ public class AuthorControllerTest {
 	}
 
 	@Test
-	@DisplayName("when add author with incorrect data")
 	public void when_add_author_with_incorrect_data_should_show_author_form() {
 
 		String fullName = "";

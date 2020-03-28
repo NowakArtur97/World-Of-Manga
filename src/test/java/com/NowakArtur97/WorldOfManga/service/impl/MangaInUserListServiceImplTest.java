@@ -14,7 +14,7 @@ import java.util.Optional;
 import java.util.Set;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -32,9 +32,10 @@ import com.NowakArtur97.WorldOfManga.model.User;
 import com.NowakArtur97.WorldOfManga.repository.MangaInUserListRepository;
 import com.NowakArtur97.WorldOfManga.service.api.MangaService;
 import com.NowakArtur97.WorldOfManga.service.api.UserService;
+import com.NowakArtur97.WorldOfManga.testUtil.generator.ReplaceUnderscoresGenerator;
 
 @ExtendWith(MockitoExtension.class)
-@DisplayName("Manga In User List Service Impl Tests")
+@DisplayNameGeneration(ReplaceUnderscoresGenerator.class)
 @Tag("MangaInUserListServiceImpl_Tests")
 public class MangaInUserListServiceImplTest {
 
@@ -56,7 +57,6 @@ public class MangaInUserListServiceImplTest {
 	}
 
 	@Test
-	@DisplayName("when find existing manga in user list by user and manga")
 	public void whne_find_existing_manga_ins_user_list_by_user_and_manga_should_return_entity() throws IOException {
 
 		MangaTranslation mangaTranslationEnExpected = MangaTranslation.builder().title("English title")
@@ -102,7 +102,6 @@ public class MangaInUserListServiceImplTest {
 	}
 
 	@Test
-	@DisplayName("when find not existing manga in user list by user and manga")
 	public void whne_find_not_existing_manga_ins_user_list_by_user_and_manga_should_return_empty_optional()
 			throws IOException {
 
@@ -136,7 +135,6 @@ public class MangaInUserListServiceImplTest {
 	}
 
 	@Test
-	@DisplayName("when add manga to list for first time")
 	public void when_add_manga_to_list_for_first_time_should_add_manga_to_list()
 			throws IOException, MangaNotFoundException {
 
@@ -186,7 +184,6 @@ public class MangaInUserListServiceImplTest {
 	}
 
 	@Test
-	@DisplayName("when change manga status")
 	public void when_add_change_manga_status_should_update_status() throws IOException, MangaNotFoundException {
 
 		Long mangaId = 1L;
@@ -240,7 +237,6 @@ public class MangaInUserListServiceImplTest {
 	}
 
 	@Test
-	@DisplayName("when remove manga from list")
 	public void when_remove_manga_from_list_should_remove_from_list() throws IOException, MangaNotFoundException {
 
 		Long mangaId = 1L;
@@ -298,7 +294,6 @@ public class MangaInUserListServiceImplTest {
 	}
 
 	@Test
-	@DisplayName("when get users manga list by status")
 	public void when_get_users_manga_list_by_status_should_return_specific_manga_list()
 			throws IOException, MangaNotFoundException {
 
@@ -360,7 +355,6 @@ public class MangaInUserListServiceImplTest {
 	}
 
 	@Test
-	@DisplayName("when get users manga list by status when user have empty list")
 	public void when_get_users_manga_list_by_status_when_user_have_empty_list_should_return_empty_list()
 			throws IOException, MangaNotFoundException {
 

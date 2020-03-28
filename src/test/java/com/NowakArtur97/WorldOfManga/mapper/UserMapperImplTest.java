@@ -7,7 +7,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -19,9 +19,10 @@ import com.NowakArtur97.WorldOfManga.dto.UserDTO;
 import com.NowakArtur97.WorldOfManga.dto.UserPasswordDTO;
 import com.NowakArtur97.WorldOfManga.mapper.user.UserMapperImpl;
 import com.NowakArtur97.WorldOfManga.model.User;
+import com.NowakArtur97.WorldOfManga.testUtil.generator.ReplaceUnderscoresGenerator;
 
 @ExtendWith(MockitoExtension.class)
-@DisplayName("User Mapper Impl Tests")
+@DisplayNameGeneration(ReplaceUnderscoresGenerator.class)
 @Tag("UserMapperImpl_Tests")
 public class UserMapperImplTest {
 
@@ -37,7 +38,6 @@ public class UserMapperImplTest {
 	}
 
 	@Test
-	@DisplayName("when map user dto to entity")
 	public void when_map_user_dto_should_return_user_entity() {
 
 		UserDTO userDTOExpected = UserDTO.builder().username("username").firstName("first name").lastName("last name")

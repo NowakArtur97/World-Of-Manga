@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -15,17 +15,17 @@ import org.springframework.test.context.TestPropertySource;
 
 import com.NowakArtur97.WorldOfManga.testUtil.enums.LanguageVersion;
 import com.NowakArtur97.WorldOfManga.testUtil.extension.ScreenshotWatcher;
+import com.NowakArtur97.WorldOfManga.testUtil.generator.ReplaceUnderscoresGenerator;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @ExtendWith(ScreenshotWatcher.class)
 @TestPropertySource({ "classpath:/validation/messages_pl.properties", "classpath:/pageContent/messages_pl.properties" })
-@DisplayName("Registration Controller UI Pl Tests")
+@DisplayNameGeneration(ReplaceUnderscoresGenerator.class)
 @Tag("RegistrationControllerUIPl_Tests")
 @DirtiesContext
 public class RegistrationControllerUIPlTest extends RegistrationControllerUITest {
 
 	@Test
-	@DisplayName("when username is already in use")
 	public void when_username_is_already_in_use_should_have_error() {
 
 		String username = "user";
@@ -46,7 +46,6 @@ public class RegistrationControllerUIPlTest extends RegistrationControllerUITest
 	}
 
 	@Test
-	@DisplayName("when email is already in use")
 	public void when_email_is_already_in_use_should_have_error() {
 
 		String username = "username";
@@ -67,7 +66,6 @@ public class RegistrationControllerUIPlTest extends RegistrationControllerUITest
 	}
 
 	@Test
-	@DisplayName("when incorrect registration with mandatory fields")
 	public void when_incorrect_registration_with_mandatory_fields_should_have_errors() {
 
 		String username = "";
@@ -94,7 +92,6 @@ public class RegistrationControllerUIPlTest extends RegistrationControllerUITest
 	}
 
 	@Test
-	@DisplayName("when incorrect registration fields size with mandatory fields")
 	public void when_incorrect_registration_fields_size_with_mandatory_fields_should_have_errors() {
 
 		String username = "asdfghjklpasdfghjklpasdfghjklpasdfghjklpasdfghjklp";
@@ -121,7 +118,6 @@ public class RegistrationControllerUIPlTest extends RegistrationControllerUITest
 	}
 
 	@Test
-	@DisplayName("when incorrect registration with all fields")
 	public void when_incorrect_registration_with_all_fields_should_have_errors() {
 
 		String username = "";
@@ -158,7 +154,6 @@ public class RegistrationControllerUIPlTest extends RegistrationControllerUITest
 	}
 
 	@Test
-	@DisplayName("when correct registration with all fields")
 	public void when_correct_registration_with_all_fields_should_register_user() {
 
 		String username = "user name 123";

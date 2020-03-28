@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.DisabledOnOs;
@@ -18,18 +18,18 @@ import org.springframework.test.context.TestPropertySource;
 
 import com.NowakArtur97.WorldOfManga.testUtil.enums.LanguageVersion;
 import com.NowakArtur97.WorldOfManga.testUtil.extension.ScreenshotWatcher;
+import com.NowakArtur97.WorldOfManga.testUtil.generator.ReplaceUnderscoresGenerator;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @ExtendWith(ScreenshotWatcher.class)
 @TestPropertySource({ "classpath:/validation/messages_en.properties", "classpath:/pageContent/messages_en.properties" })
-@DisplayName("Manga Controller UI Pl Tests")
+@DisplayNameGeneration(ReplaceUnderscoresGenerator.class)
 @Tag("MangaControllerUIPl_Tests")
 @DirtiesContext(classMode = ClassMode.BEFORE_EACH_TEST_METHOD)
 @DisabledOnOs(OS.LINUX)
 public class MangaControllerUIPlTest extends MangaControllerUITest {
 
 	@Test
-	@DisplayName("when correct manga creation with all fields")
 	public void when_correct_manga_creation_with_all_fields_should_add_manga() {
 
 		String englishTitle = "English title";
@@ -56,7 +56,6 @@ public class MangaControllerUIPlTest extends MangaControllerUITest {
 	}
 
 	@Test
-	@DisplayName("when correct manga creation with all fields")
 	public void when_correct_manga_editing_with_all_fields_should_add_manga() {
 
 		String englishTitle = "Some english title";
@@ -85,7 +84,6 @@ public class MangaControllerUIPlTest extends MangaControllerUITest {
 	}
 
 	@Test
-	@DisplayName("when manga deleting")
 	public void when_manga_deleting_should_remove_manga() {
 
 		loginPage.loadLoginView(LanguageVersion.PL);
@@ -105,7 +103,6 @@ public class MangaControllerUIPlTest extends MangaControllerUITest {
 	}
 
 	@Test
-	@DisplayName("when manga deleting - ratings")
 	public void when_manga_deleting_should_not_show_manga_in_rated_manga_list() {
 
 		loginPage.loadLoginView(LanguageVersion.PL);
@@ -131,7 +128,6 @@ public class MangaControllerUIPlTest extends MangaControllerUITest {
 	}
 
 	@Test
-	@DisplayName("when manga deleting - favourites")
 	public void when_manga_deleting_should_not_show_manga_in_favourites() {
 
 		loginPage.loadLoginView(LanguageVersion.PL);
@@ -154,7 +150,6 @@ public class MangaControllerUIPlTest extends MangaControllerUITest {
 	}
 
 	@Test
-	@DisplayName("when manga deleting - statuses")
 	public void when_manga_deleting_should_not_show_manga_in_users_manga_list() {
 
 		loginPage.loadLoginView(LanguageVersion.PL);
@@ -179,7 +174,6 @@ public class MangaControllerUIPlTest extends MangaControllerUITest {
 	}
 
 	@Test
-	@DisplayName("when incorrect manga creation with all blank fields and not selected author, image adn genre")
 	public void when_incorrect_manga_creation_with_all_blank_fields_and_not_selected_author_image_and_genre_should_have_errors() {
 
 		String blankField = "";
@@ -219,7 +213,6 @@ public class MangaControllerUIPlTest extends MangaControllerUITest {
 	}
 
 	@Test
-	@DisplayName("when incorrect manga creation with too long field sizes and selected author and image")
 	public void when_incorrect_manga_creation_with_too_long_field_sizes_and_selected_author_and_image_should_have_errors() {
 
 		String longTitleText = "asdfghjklpasdfghjklpasdfghjklpasdfghjklpasdfghjklp!@#$%";

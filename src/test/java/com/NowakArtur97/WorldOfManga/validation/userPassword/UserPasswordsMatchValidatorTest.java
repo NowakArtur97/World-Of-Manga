@@ -13,13 +13,14 @@ import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import com.NowakArtur97.WorldOfManga.dto.UserPasswordDTO;
+import com.NowakArtur97.WorldOfManga.testUtil.generator.ReplaceUnderscoresGenerator;
 
-@DisplayName("User Passwords Match Validator Tests")
+@DisplayNameGeneration(ReplaceUnderscoresGenerator.class)
 @Tag("UserPasswordsMatchValidator_Tests")
 public class UserPasswordsMatchValidatorTest {
 
@@ -33,7 +34,6 @@ public class UserPasswordsMatchValidatorTest {
 	}
 
 	@Test
-	@DisplayName("when validating correct password shouldn`t have violations")
 	public void when_validating_correct_password_should_not_have_violations() {
 
 		String password = "password1";
@@ -43,11 +43,11 @@ public class UserPasswordsMatchValidatorTest {
 
 		Set<ConstraintViolation<UserPasswordDTO>> violations = validator.validate(userPasswordDTO);
 
-		assertAll(() -> assertTrue(violations.isEmpty(), () -> "shouldn`t have violations, but have: " + violations.size()));
+		assertAll(() -> assertTrue(violations.isEmpty(),
+				() -> "shouldn`t have violations, but have: " + violations.size()));
 	}
 
 	@Test
-	@DisplayName("when validating not matching passwords should have violations")
 	public void when_validating_not_matching_passwords_should_have_violations() {
 
 		String password1 = "password1";

@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -23,9 +23,10 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import com.NowakArtur97.WorldOfManga.exception.MangaGenreNotFoundException;
 import com.NowakArtur97.WorldOfManga.model.MangaGenre;
 import com.NowakArtur97.WorldOfManga.repository.MangaGenreRepository;
+import com.NowakArtur97.WorldOfManga.testUtil.generator.ReplaceUnderscoresGenerator;
 
 @ExtendWith(MockitoExtension.class)
-@DisplayName("Manga Genre Service Impl Test Tests")
+@DisplayNameGeneration(ReplaceUnderscoresGenerator.class)
 @Tag("MangaGenreServiceImpl_Tests")
 public class MangaGenreServiceImplTest {
 
@@ -41,7 +42,6 @@ public class MangaGenreServiceImplTest {
 	}
 
 	@Test
-	@DisplayName("when find all")
 	public void when_find_all_should_return_list_of_mangas() {
 
 		MangaGenre mangaGenreExpected1 = new MangaGenre("genre  en", "genre pl");
@@ -66,7 +66,6 @@ public class MangaGenreServiceImplTest {
 	}
 
 	@Test
-	@DisplayName("when find existing by genre")
 	public void when_find_existing_by_genre_should_return_genre() throws MangaGenreNotFoundException {
 
 		String genreEn = "genre en";
@@ -80,16 +79,17 @@ public class MangaGenreServiceImplTest {
 
 		assertAll(
 				() -> assertEquals(mangaGenreExpected.getEnglishTranslation(), mangaGenreActual.getEnglishTranslation(),
-						"should return magna genre with english translation: " + mangaGenreExpected.getEnglishTranslation() + ", but was: "
+						"should return magna genre with english translation: "
+								+ mangaGenreExpected.getEnglishTranslation() + ", but was: "
 								+ mangaGenreActual.getEnglishTranslation()),
 				() -> assertEquals(mangaGenreExpected.getPolishTranslation(), mangaGenreActual.getPolishTranslation(),
-						"should return magna genre with polish translation: " + mangaGenreExpected.getPolishTranslation() + ", but was: "
+						"should return magna genre with polish translation: "
+								+ mangaGenreExpected.getPolishTranslation() + ", but was: "
 								+ mangaGenreActual.getPolishTranslation()),
 				() -> verify(mangaGenreRepository, times(1)).findByEnglishTranslation(genreEn));
 	}
 
 	@Test
-	@DisplayName("when find not existing by genre")
 	public void when_find_not_existing_by_genre_should_return_genre() throws MangaGenreNotFoundException {
 
 		String genre = "not existing genre";

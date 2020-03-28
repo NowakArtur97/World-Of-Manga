@@ -13,15 +13,16 @@ import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import com.NowakArtur97.WorldOfManga.dto.UserDTO;
 import com.NowakArtur97.WorldOfManga.dto.UserPasswordDTO;
+import com.NowakArtur97.WorldOfManga.testUtil.generator.ReplaceUnderscoresGenerator;
 
-@DisplayName("User Validation Tests")
+@DisplayNameGeneration(ReplaceUnderscoresGenerator.class)
 @Tag("UserPassword_Tests")
 public class UserValidationTest {
 
@@ -35,7 +36,6 @@ public class UserValidationTest {
 	}
 
 	@Test
-	@DisplayName("when user is correct")
 	public void when_user_is_correct_should_not_have_violations() {
 
 		UserDTO userDTO = UserDTO.builder().username("username").firstName("first name").lastName("last name")
@@ -49,11 +49,9 @@ public class UserValidationTest {
 	}
 
 	@Nested
-	@DisplayName("Username Validation Tests")
 	class UsernameValidationTest {
 
 		@Test
-		@DisplayName("when username is null")
 		public void when_username_is_null_should_have_violations() {
 
 			String username = null;
@@ -71,7 +69,6 @@ public class UserValidationTest {
 		}
 
 		@Test
-		@DisplayName("when username is empty")
 		public void when_username_is_empty_should_have_violations() {
 
 			String username = "";
@@ -89,7 +86,6 @@ public class UserValidationTest {
 		}
 
 		@Test
-		@DisplayName("when username is blank")
 		public void when_username_is_blank_should_have_violations() {
 
 			String username = "    ";
@@ -107,7 +103,6 @@ public class UserValidationTest {
 		}
 
 		@Test
-		@DisplayName("when username is too long")
 		public void when_username_is_too_long_should_have_violations() {
 
 			String username = "abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij";
@@ -126,11 +121,9 @@ public class UserValidationTest {
 	}
 
 	@Nested
-	@DisplayName("Email Validation Tests")
 	class EmailValidationTest {
 
 		@Test
-		@DisplayName("when email is null")
 		public void when_email_is_null_should_have_violations() {
 
 			String email = null;
@@ -148,7 +141,6 @@ public class UserValidationTest {
 		}
 
 		@Test
-		@DisplayName("when email is empty")
 		public void when_email_is_empty_should_have_violations() {
 
 			String email = "";
@@ -166,7 +158,6 @@ public class UserValidationTest {
 		}
 
 		@Test
-		@DisplayName("when email is blank")
 		public void when_email_is_blank_should_have_violations() {
 
 			String email = "    ";
@@ -184,7 +175,6 @@ public class UserValidationTest {
 		}
 
 		@Test
-		@DisplayName("when email is too long")
 		public void when_email_is_too_long_should_have_violations() {
 
 			String email = "abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij@email.com";
@@ -202,7 +192,6 @@ public class UserValidationTest {
 		}
 
 		@Test
-		@DisplayName("when email has incorrect format")
 		public void when_email_has_incorrect_format_should_have_violations() {
 
 			String email = "email,";
@@ -221,7 +210,6 @@ public class UserValidationTest {
 	}
 
 	@Test
-	@DisplayName("when firstname is too long")
 	public void when_firstname_is_too_long_should_have_violations() {
 
 		String firstname = "abcdefghijabcdefghijabcdefghijabcdefghijabcdefghij";
@@ -237,7 +225,6 @@ public class UserValidationTest {
 	}
 
 	@Test
-	@DisplayName("when lastname is too long")
 	public void when_lastname_is_too_long_should_have_violations() {
 
 		String lastname = "abcdefghijabcdefghijabcdefghijabcdefghijabcdefghij";
@@ -253,7 +240,6 @@ public class UserValidationTest {
 	}
 
 	@Test
-	@DisplayName("when terms are not accepted")
 	public void when_terms_are_not_accepted_should_have_violations() {
 
 		UserDTO userDTO = UserDTO.builder().username("username").firstName("first name").lastName("last name")

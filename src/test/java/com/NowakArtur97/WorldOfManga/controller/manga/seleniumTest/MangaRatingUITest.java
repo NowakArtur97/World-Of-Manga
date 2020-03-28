@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.condition.DisabledOnOs;
 import org.junit.jupiter.api.condition.OS;
@@ -19,11 +19,12 @@ import com.NowakArtur97.WorldOfManga.controller.manga.seleniumPOM.MangaList;
 import com.NowakArtur97.WorldOfManga.controller.unloggedUser.seleniumPOM.LoginPage;
 import com.NowakArtur97.WorldOfManga.testUtil.enums.LanguageVersion;
 import com.NowakArtur97.WorldOfManga.testUtil.extension.ScreenshotWatcher;
+import com.NowakArtur97.WorldOfManga.testUtil.generator.ReplaceUnderscoresGenerator;
 import com.NowakArtur97.WorldOfManga.testUtil.selenium.SeleniumUITest;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @ExtendWith(ScreenshotWatcher.class)
-@DisplayName("Manga Rating UI Tests")
+@DisplayNameGeneration(ReplaceUnderscoresGenerator.class)
 @Tag("MangaRatingUI_Tests")
 @DirtiesContext
 @DisabledOnOs(OS.LINUX)
@@ -43,7 +44,6 @@ public class MangaRatingUITest extends SeleniumUITest {
 
 	@ParameterizedTest(name = "{index}: Language Version: {0}")
 	@EnumSource(LanguageVersion.class)
-	@DisplayName("when rate manga - update rating")
 	public void when_rate_manga_should_show_updated_rating(LanguageVersion languageVersion) {
 
 		loginPage.loadLoginView(languageVersion);
@@ -62,7 +62,6 @@ public class MangaRatingUITest extends SeleniumUITest {
 
 	@ParameterizedTest(name = "{index}: Language Version: {0}")
 	@EnumSource(LanguageVersion.class)
-	@DisplayName("when rate manga - manga list")
 	public void when_rate_manga_should_show_rating_on_user_manga_list(LanguageVersion languageVersion) {
 
 		loginPage.loadLoginView(languageVersion);
@@ -85,7 +84,6 @@ public class MangaRatingUITest extends SeleniumUITest {
 
 	@ParameterizedTest(name = "{index}: Language Version: {0}")
 	@EnumSource(LanguageVersion.class)
-	@DisplayName("when rate manga second time")
 	public void when_rate_second_time_manga_should_show_updated_rating(LanguageVersion languageVersion) {
 
 		loginPage.loadLoginView(languageVersion);
@@ -113,7 +111,6 @@ public class MangaRatingUITest extends SeleniumUITest {
 
 	@ParameterizedTest(name = "{index}: Language Version: {0}")
 	@EnumSource(LanguageVersion.class)
-	@DisplayName("when user not logged rating manga")
 	public void when_user_not_logged_rating_manga_should_show_login_form(LanguageVersion languageVersion) {
 
 		mangaList.loadMangaList(languageVersion);

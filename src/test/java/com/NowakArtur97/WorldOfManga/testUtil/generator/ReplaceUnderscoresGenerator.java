@@ -4,7 +4,7 @@ import java.lang.reflect.Method;
 
 import org.junit.jupiter.api.DisplayNameGenerator.ReplaceUnderscores;
 
-public class ReplaceUnderscoreGenerator extends ReplaceUnderscores {
+public class ReplaceUnderscoresGenerator extends ReplaceUnderscores {
 
 	private final String wordEndingTestName = "should";
 

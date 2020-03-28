@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -28,9 +28,10 @@ import com.NowakArtur97.WorldOfManga.model.User;
 import com.NowakArtur97.WorldOfManga.repository.MangaRatingRepository;
 import com.NowakArtur97.WorldOfManga.service.api.MangaService;
 import com.NowakArtur97.WorldOfManga.service.api.UserService;
+import com.NowakArtur97.WorldOfManga.testUtil.generator.ReplaceUnderscoresGenerator;
 
 @ExtendWith(MockitoExtension.class)
-@DisplayName("Manga Rating Service Impl Tests")
+@DisplayNameGeneration(ReplaceUnderscoresGenerator.class)
 @Tag("MangaRatingServiceImpl_Tests")
 public class MangaRatingServiceImplTest {
 
@@ -52,7 +53,6 @@ public class MangaRatingServiceImplTest {
 	}
 
 	@Test
-	@DisplayName("when rate manga for first time")
 	public void when_rate_manga_for_first_time_should_update_rating() throws IOException, MangaNotFoundException {
 
 		Long mangaId = 1L;
@@ -101,7 +101,6 @@ public class MangaRatingServiceImplTest {
 	}
 
 	@Test
-	@DisplayName("when rate manga for another time")
 	public void when_rate_manga_for_another_time_should_update_rating() throws IOException, MangaNotFoundException {
 
 		Long mangaId = 1L;
@@ -151,7 +150,6 @@ public class MangaRatingServiceImplTest {
 	}
 
 	@Test
-	@DisplayName("when find existing manga rating by user and manga")
 	public void whne_find_existing_manga_rating_by_user_and_manga_should_return_entity() throws IOException {
 
 		MangaTranslation mangaTranslationEnExpected = MangaTranslation.builder().title("English title")
@@ -196,7 +194,6 @@ public class MangaRatingServiceImplTest {
 	}
 
 	@Test
-	@DisplayName("when find not existing manga rating by user and manga")
 	public void whne_find_not_existing_manga_rating_by_user_and_manga_should_return_new_manga_rating()
 			throws IOException {
 

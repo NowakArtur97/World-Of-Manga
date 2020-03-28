@@ -8,7 +8,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import javax.servlet.http.Cookie;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -20,9 +20,10 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import com.NowakArtur97.WorldOfManga.model.User;
+import com.NowakArtur97.WorldOfManga.testUtil.generator.ReplaceUnderscoresGenerator;
 
 @ExtendWith(MockitoExtension.class)
-@DisplayName("Logout Controller Tests")
+@DisplayNameGeneration(ReplaceUnderscoresGenerator.class)
 @Tag("LogoutController_Tests")
 public class LogoutControllerTest {
 
@@ -38,7 +39,6 @@ public class LogoutControllerTest {
 	}
 
 	@Test
-	@DisplayName("when sign out user")
 	public void when_sign_out_user_should_invalidate_session() {
 
 		MockHttpSession mockSession = new MockHttpSession();

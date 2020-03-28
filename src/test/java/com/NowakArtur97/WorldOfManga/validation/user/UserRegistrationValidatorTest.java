@@ -1,8 +1,15 @@
 package com.NowakArtur97.WorldOfManga.validation.user;
 
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -12,20 +19,13 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.Errors;
 
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertAll;
 import com.NowakArtur97.WorldOfManga.dto.UserDTO;
 import com.NowakArtur97.WorldOfManga.dto.UserPasswordDTO;
 import com.NowakArtur97.WorldOfManga.service.api.UserService;
+import com.NowakArtur97.WorldOfManga.testUtil.generator.ReplaceUnderscoresGenerator;
 
 @ExtendWith(MockitoExtension.class)
-@DisplayName("User Registration Validator Tests")
+@DisplayNameGeneration(ReplaceUnderscoresGenerator.class)
 @Tag("UserRegistrationValidator_Tests")
 public class UserRegistrationValidatorTest {
 
@@ -36,7 +36,6 @@ public class UserRegistrationValidatorTest {
 	private UserService userService;
 
 	@Test
-	@DisplayName("when validate correct user dto")
 	public void when_validate_correct_user_dto_should_not_have_errors() {
 
 		String username = "username";
@@ -64,7 +63,6 @@ public class UserRegistrationValidatorTest {
 	}
 
 	@Test
-	@DisplayName("when validate correct username but email is already in use")
 	public void when_validate_correct_username_but_email_is_already_in_use_should_have_errors() {
 
 		String username = "username";
@@ -92,7 +90,6 @@ public class UserRegistrationValidatorTest {
 	}
 
 	@Test
-	@DisplayName("when validate correct email but username is already in use")
 	public void when_validate_correct_email_but_username_is_already_in_use_should_have_errors() {
 
 		String username = "username";
@@ -120,7 +117,6 @@ public class UserRegistrationValidatorTest {
 	}
 
 	@Test
-	@DisplayName("when validate email and username already in use")
 	public void when_validate_email_and_username_already_in_use_should_have_errors() {
 
 		String username = "username";

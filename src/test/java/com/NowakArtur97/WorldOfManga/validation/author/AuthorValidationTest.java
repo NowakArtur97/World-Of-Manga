@@ -13,14 +13,15 @@ import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import com.NowakArtur97.WorldOfManga.dto.AuthorDTO;
+import com.NowakArtur97.WorldOfManga.testUtil.generator.ReplaceUnderscoresGenerator;
 
-@DisplayName("Author Validation Tests")
+@DisplayNameGeneration(ReplaceUnderscoresGenerator.class)
 @Tag("AuthorValidation_Tests")
 public class AuthorValidationTest {
 
@@ -34,7 +35,6 @@ public class AuthorValidationTest {
 	}
 
 	@Test
-	@DisplayName("when author is correct")
 	public void when_author_is_correct_should_not_have_violations() {
 
 		String fullName = "Firstname LastName";
@@ -48,11 +48,9 @@ public class AuthorValidationTest {
 	}
 
 	@Nested
-	@DisplayName("Full Name Validation Tests")
 	class FullNameValidationTest {
 
 		@Test
-		@DisplayName("when full name is null")
 		public void when_full_name_is_null_should_have_violations() {
 
 			String fullName = null;
@@ -65,9 +63,8 @@ public class AuthorValidationTest {
 					() -> assertEquals(1, violations.size(),
 							() -> "should have one violation, but have: " + violations.size()));
 		}
-		
+
 		@Test
-		@DisplayName("when full name is empty")
 		public void when_full_name_is_empty_should_have_violations() {
 
 			String fullName = "";
@@ -80,9 +77,8 @@ public class AuthorValidationTest {
 					() -> assertEquals(1, violations.size(),
 							() -> "should have one violation, but have: " + violations.size()));
 		}
-		
+
 		@Test
-		@DisplayName("when full name is blank")
 		public void when_full_name_is_blank_should_have_violations() {
 
 			String fullName = "			";

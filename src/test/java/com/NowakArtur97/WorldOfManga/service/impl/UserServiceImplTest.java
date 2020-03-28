@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -31,9 +31,10 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import com.NowakArtur97.WorldOfManga.model.User;
 import com.NowakArtur97.WorldOfManga.repository.UserRepository;
+import com.NowakArtur97.WorldOfManga.testUtil.generator.ReplaceUnderscoresGenerator;
 
 @ExtendWith(MockitoExtension.class)
-@DisplayName("User Service Impl Tests")
+@DisplayNameGeneration(ReplaceUnderscoresGenerator.class)
 @Tag("UserServiceImpl_Tests")
 public class UserServiceImplTest {
 
@@ -58,12 +59,10 @@ public class UserServiceImplTest {
 	}
 
 	@Nested
-	@DisplayName("User Service Integration Tests")
 	@Tag("UserServiceIntegration_Tests")
 	class UserServiceIntegrationTest {
 
 		@Test
-		@DisplayName("when find by username")
 		public void when_find_by_username_should_return_user_by_username() {
 
 			String username = "user";
@@ -98,7 +97,6 @@ public class UserServiceImplTest {
 		}
 
 		@Test
-		@DisplayName("when find not existsing user by username")
 		public void when_find_not_existing_user_by_username_should_return_empty_optional() {
 
 			String username = "user";
@@ -114,7 +112,6 @@ public class UserServiceImplTest {
 		}
 
 		@Test
-		@DisplayName("when username is already in use")
 		public void when_username_is_already_in_use_should_return_true() {
 
 			boolean isUsernameInUse = true;
@@ -132,7 +129,6 @@ public class UserServiceImplTest {
 		}
 
 		@Test
-		@DisplayName("when username isn`t in use")
 		public void when_username_is_not_in_use_should_return_false() {
 
 			boolean isUsernameInUse = false;
@@ -150,7 +146,6 @@ public class UserServiceImplTest {
 		}
 
 		@Test
-		@DisplayName("when email is already in use")
 		public void when_email_is_already_in_use_should_return_true() {
 
 			boolean isEmailInUse = true;
@@ -166,7 +161,6 @@ public class UserServiceImplTest {
 		}
 
 		@Test
-		@DisplayName("when email isn`t in use")
 		public void when_email_is_not_in_use_should_return_false() {
 
 			boolean isEmailInUse = false;
@@ -183,7 +177,6 @@ public class UserServiceImplTest {
 		}
 
 		@Test
-		@DisplayName("when save user")
 		public void when_save_user_should_save_and_return_user() {
 
 			User userExpected = User.builder().username("username").firstName("first name").lastName("last name")
@@ -216,7 +209,6 @@ public class UserServiceImplTest {
 		}
 
 		@Test
-		@DisplayName("when user is loged in")
 		public void when_user_is_logged_id_should_return_true() {
 
 			when(securityContext.getAuthentication()).thenReturn(authentication);
@@ -231,7 +223,6 @@ public class UserServiceImplTest {
 		}
 
 		@Test
-		@DisplayName("when user is not loged in - anonymousUser")
 		public void when_user_is_not_logged_in_should_return_false() {
 
 			when(securityContext.getAuthentication()).thenReturn(authentication);
@@ -245,9 +236,8 @@ public class UserServiceImplTest {
 					() -> verify(securityContext, times(1)).getAuthentication(),
 					() -> verify(authentication, times(1)).getName());
 		}
-		
+
 		@Test
-		@DisplayName("when user is not loged in - null")
 		public void when_user_is_not_logged_in_and_authentication_is_null_should_return_false() {
 
 			when(securityContext.getAuthentication()).thenReturn(null);
@@ -263,12 +253,10 @@ public class UserServiceImplTest {
 	}
 
 	@Nested
-	@DisplayName("User Details Integration Tests")
 	@Tag("UserDetailsIntegration_Tests")
 	class UserDetailsIntegrationTest {
 
 		@Test
-		@DisplayName("when load user details by username")
 		public void when_load_user_details_by_username_should_return_user_details() {
 
 			String username = "user";
@@ -305,7 +293,6 @@ public class UserServiceImplTest {
 		}
 
 		@Test
-		@DisplayName("when load logged in user")
 		public void when_load_logged_in_user_should_return_user() {
 
 			String username = "principal";
@@ -346,7 +333,6 @@ public class UserServiceImplTest {
 		}
 
 		@Test
-		@DisplayName("when load logged in user when isn`t logged")
 		public void when_load_logged_in_user_when_isn_not_logged_should_return_user() {
 
 			String username = "user not exists";
@@ -362,7 +348,6 @@ public class UserServiceImplTest {
 		}
 
 		@Test
-		@DisplayName("when load user details by username doesn`t find user")
 		public void when_load_user_details_by_username_does_not_find_user_should_throw_UsernameNotFoundException() {
 
 			String username = "user";

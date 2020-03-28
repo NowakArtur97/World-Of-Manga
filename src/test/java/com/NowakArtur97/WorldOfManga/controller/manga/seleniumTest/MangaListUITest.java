@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.condition.DisabledOnOs;
 import org.junit.jupiter.api.condition.OS;
@@ -21,11 +21,12 @@ import com.NowakArtur97.WorldOfManga.controller.manga.seleniumPOM.MangaList;
 import com.NowakArtur97.WorldOfManga.controller.unloggedUser.seleniumPOM.LoginPage;
 import com.NowakArtur97.WorldOfManga.testUtil.enums.LanguageVersion;
 import com.NowakArtur97.WorldOfManga.testUtil.extension.ScreenshotWatcher;
+import com.NowakArtur97.WorldOfManga.testUtil.generator.ReplaceUnderscoresGenerator;
 import com.NowakArtur97.WorldOfManga.testUtil.selenium.SeleniumUITest;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @ExtendWith(ScreenshotWatcher.class)
-@DisplayName("Manga List UI Tests")
+@DisplayNameGeneration(ReplaceUnderscoresGenerator.class)
 @Tag("MangaListUI_Tests")
 @DirtiesContext(classMode = ClassMode.BEFORE_EACH_TEST_METHOD)
 @DisabledOnOs(OS.LINUX)
@@ -49,7 +50,6 @@ public class MangaListUITest extends SeleniumUITest {
 
 	@ParameterizedTest(name = "{index}: Language Version: {0}")
 	@EnumSource(LanguageVersion.class)
-	@DisplayName("when added new manga - title")
 	public void when_added_new_manga_should_show_manga_title_on_manga_list(LanguageVersion languageVersion) {
 
 		String englishTitle = "English title";
@@ -83,7 +83,6 @@ public class MangaListUITest extends SeleniumUITest {
 
 	@ParameterizedTest(name = "{index}: Language Version: {0}")
 	@EnumSource(LanguageVersion.class)
-	@DisplayName("when added new manga - description")
 	public void when_added_new_manga_should_show_manga_description_on_manga_list(LanguageVersion languageVersion) {
 
 		String englishTitle = "English title";

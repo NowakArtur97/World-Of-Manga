@@ -7,7 +7,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -18,9 +18,10 @@ import org.modelmapper.ModelMapper;
 import com.NowakArtur97.WorldOfManga.dto.MangaTranslationDTO;
 import com.NowakArtur97.WorldOfManga.mapper.mangaTranslation.MangaTranslationMapperImpl;
 import com.NowakArtur97.WorldOfManga.model.MangaTranslation;
+import com.NowakArtur97.WorldOfManga.testUtil.generator.ReplaceUnderscoresGenerator;
 
 @ExtendWith(MockitoExtension.class)
-@DisplayName("Manga Translation Mapper Impl Tests")
+@DisplayNameGeneration(ReplaceUnderscoresGenerator.class)
 @Tag("MangaTranslationMapperImpl_Tests")
 public class MangaTranslationMapperImplTest {
 
@@ -36,7 +37,6 @@ public class MangaTranslationMapperImplTest {
 	}
 
 	@Test
-	@DisplayName("when map manga translation dto to entity")
 	public void when_map_manga_translation_dto_to_entity_should_return_manga_translation_entity() {
 
 		String title = "Manga title";

@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -26,9 +26,10 @@ import com.NowakArtur97.WorldOfManga.model.MangaTranslation;
 import com.NowakArtur97.WorldOfManga.model.User;
 import com.NowakArtur97.WorldOfManga.service.api.MangaService;
 import com.NowakArtur97.WorldOfManga.service.api.UserService;
+import com.NowakArtur97.WorldOfManga.testUtil.generator.ReplaceUnderscoresGenerator;
 
 @ExtendWith(MockitoExtension.class)
-@DisplayName("Recommendation Service Impl Tests")
+@DisplayNameGeneration(ReplaceUnderscoresGenerator.class)
 @Tag("RecommendationServiceImpl_Tests")
 public class RecommendationServiceImplTest {
 
@@ -47,7 +48,6 @@ public class RecommendationServiceImplTest {
 	}
 
 	@Test
-	@DisplayName("when recommend manga for not logged in user")
 	public void when_recommend_manga_for_not_logged_in_user_should_return_most_popular_manga() throws IOException {
 
 		User userExpected = User.builder().username("user").firstName("first name").lastName("last name")
@@ -118,7 +118,6 @@ public class RecommendationServiceImplTest {
 	}
 
 	@Test
-	@DisplayName("when recommend manga for logged in user - favourite")
 	public void when_recommend_manga_for_logged_in_user_with_manga_in_favourites_should_return_unknown_manga()
 			throws IOException {
 
@@ -187,7 +186,6 @@ public class RecommendationServiceImplTest {
 	}
 
 	@Test
-	@DisplayName("when recommend manga for logged in user - rating")
 	public void when_recommend_manga_for_logged_in_user_with_manga_rated_should_return_unknown_manga()
 			throws IOException {
 
@@ -258,7 +256,6 @@ public class RecommendationServiceImplTest {
 	}
 
 	@Test
-	@DisplayName("when recommend manga for logged in user - manga in user list")
 	public void when_recommend_manga_for_logged_in_user_with_manga_in_list_should_return_unknown_manga()
 			throws IOException {
 
@@ -329,7 +326,6 @@ public class RecommendationServiceImplTest {
 	}
 
 	@Test
-	@DisplayName("when recommend manga for logged in user with all the manga already known")
 	public void when_recommend_manga_for_logged_in_user_with_all_the_manga_already_known_should_return_empty_list()
 			throws IOException {
 

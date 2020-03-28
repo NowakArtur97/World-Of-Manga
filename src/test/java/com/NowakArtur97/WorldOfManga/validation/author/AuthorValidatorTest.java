@@ -9,7 +9,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -21,9 +21,10 @@ import org.springframework.validation.Errors;
 
 import com.NowakArtur97.WorldOfManga.dto.AuthorDTO;
 import com.NowakArtur97.WorldOfManga.service.api.AuthorService;
+import com.NowakArtur97.WorldOfManga.testUtil.generator.ReplaceUnderscoresGenerator;
 
 @ExtendWith(MockitoExtension.class)
-@DisplayName("Author Validator Tests")
+@DisplayNameGeneration(ReplaceUnderscoresGenerator.class)
 @Tag("AuthorValidator_Tests")
 public class AuthorValidatorTest {
 
@@ -34,7 +35,6 @@ public class AuthorValidatorTest {
 	private AuthorService authorService;
 
 	@Test
-	@DisplayName("when validate correct author dto")
 	public void when_validate_correct_author_dto_should_not_have_errors() {
 
 		String fullName = "Firstname LastName";
@@ -54,7 +54,6 @@ public class AuthorValidatorTest {
 	}
 
 	@Test
-	@DisplayName("when validate correct author dto but author is alreadysaved")
 	public void when_validate_correct_author_dto_but_author_is_already_saved_should_have_errors() {
 
 		String fullName = "Firstname LastName";

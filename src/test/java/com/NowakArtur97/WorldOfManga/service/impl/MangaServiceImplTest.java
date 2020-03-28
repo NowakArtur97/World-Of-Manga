@@ -18,7 +18,7 @@ import java.util.Optional;
 import java.util.Set;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -39,9 +39,10 @@ import com.NowakArtur97.WorldOfManga.model.MangaTranslation;
 import com.NowakArtur97.WorldOfManga.model.User;
 import com.NowakArtur97.WorldOfManga.repository.MangaRepository;
 import com.NowakArtur97.WorldOfManga.service.api.UserService;
+import com.NowakArtur97.WorldOfManga.testUtil.generator.ReplaceUnderscoresGenerator;
 
 @ExtendWith(MockitoExtension.class)
-@DisplayName("Manga Service Impl Test Tests")
+@DisplayNameGeneration(ReplaceUnderscoresGenerator.class)
 @Tag("MangaServiceImpl_Tests")
 public class MangaServiceImplTest {
 
@@ -63,7 +64,6 @@ public class MangaServiceImplTest {
 	}
 
 	@Test
-	@DisplayName("when add manga")
 	public void when_add_manga_should_save_manga() throws IOException, MangaNotFoundException {
 
 		MangaDTO mangaDTO = new MangaDTO();
@@ -120,7 +120,6 @@ public class MangaServiceImplTest {
 	}
 
 	@Test
-	@DisplayName("when edit manga")
 	public void when_edit_manga_should_update_manga() throws IOException, MangaNotFoundException {
 
 		Long mangaId = 1L;
@@ -191,7 +190,6 @@ public class MangaServiceImplTest {
 	}
 
 	@Test
-	@DisplayName("when delete manga")
 	public void when_delete_manga_should_remove_manga() throws IOException, MangaNotFoundException {
 
 		MangaTranslation mangaTranslationEnExpected = MangaTranslation.builder().title("English title")
@@ -266,7 +264,6 @@ public class MangaServiceImplTest {
 	}
 
 	@Test
-	@DisplayName("when add manga to favourites for the first time")
 	public void when_add_manga_to_favourites_for_first_time_should_add_manga_to_favourites()
 			throws MangaNotFoundException, IOException {
 
@@ -311,7 +308,6 @@ public class MangaServiceImplTest {
 	}
 
 	@Test
-	@DisplayName("when remove manga from favourites")
 	public void when_remove_manga_from_favourites_should_remove_manga_from_favourites()
 			throws MangaNotFoundException, IOException {
 
@@ -359,7 +355,6 @@ public class MangaServiceImplTest {
 	}
 
 	@Test
-	@DisplayName("when find all")
 	public void when_find_all_should_return_list_of_mangas() throws IOException {
 
 		MangaTranslation mangaTranslationEnExpected = MangaTranslation.builder().title("English title")
@@ -413,7 +408,6 @@ public class MangaServiceImplTest {
 	}
 
 	@Test
-	@DisplayName("when find by id found manga")
 	public void when_find_by_id_found_manga_should_return_manga_with_id() throws IOException, MangaNotFoundException {
 
 		MangaTranslation mangaTranslationEnExpected = MangaTranslation.builder().title("English title")
@@ -453,7 +447,6 @@ public class MangaServiceImplTest {
 	}
 
 	@Test
-	@DisplayName("when find by id but cannot find manga")
 	public void when_find_by_id_bu_cannot_find_manga_should_return_manga_with_id() throws IOException {
 
 		Long id = 0L;

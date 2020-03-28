@@ -17,7 +17,7 @@ import java.util.Locale;
 import java.util.Set;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -39,9 +39,10 @@ import com.NowakArtur97.WorldOfManga.model.Author;
 import com.NowakArtur97.WorldOfManga.model.Manga;
 import com.NowakArtur97.WorldOfManga.model.MangaTranslation;
 import com.NowakArtur97.WorldOfManga.service.api.MangaInUserListService;
+import com.NowakArtur97.WorldOfManga.testUtil.generator.ReplaceUnderscoresGenerator;
 
 @ExtendWith(MockitoExtension.class)
-@DisplayName("Manga In User List Controller Tests")
+@DisplayNameGeneration(ReplaceUnderscoresGenerator.class)
 @Tag("MangaInUserListController_Tests")
 public class MangaInUserListControllerTest {
 
@@ -64,7 +65,6 @@ public class MangaInUserListControllerTest {
 	}
 
 	@Test
-	@DisplayName("when add manga to list")
 	public void when_add_to_list_manga_should_ad_manga_to_list_and_redirect_to_last_page() {
 
 		Long mangaId = 1L;
@@ -79,7 +79,6 @@ public class MangaInUserListControllerTest {
 	}
 
 	@Test
-	@DisplayName("when load manga list by status")
 	public void when_load_manga_list_by_status_should_show_specific_manga_and_redirect_to_last_page()
 			throws IOException {
 

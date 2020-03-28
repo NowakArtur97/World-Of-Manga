@@ -10,7 +10,7 @@ import static org.mockito.Mockito.when;
 import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -20,9 +20,10 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import com.NowakArtur97.WorldOfManga.exception.RoleNotFoundException;
 import com.NowakArtur97.WorldOfManga.model.Role;
 import com.NowakArtur97.WorldOfManga.repository.RoleRepository;
+import com.NowakArtur97.WorldOfManga.testUtil.generator.ReplaceUnderscoresGenerator;
 
 @ExtendWith(MockitoExtension.class)
-@DisplayName("Role Service Impl Tests")
+@DisplayNameGeneration(ReplaceUnderscoresGenerator.class)
 @Tag("RoleServiceImpl_Tests")
 public class RoleServiceImplTest {
 
@@ -38,7 +39,6 @@ public class RoleServiceImplTest {
 	}
 
 	@Test
-	@DisplayName("when find by name")
 	public void when_find_by_name_should_return_role_by_name() throws RoleNotFoundException {
 
 		String roleName = "ROLE_USER";
@@ -55,7 +55,6 @@ public class RoleServiceImplTest {
 	}
 
 	@Test
-	@DisplayName("when role not found")
 	public void when_role_not_found_should_throw_exception() {
 
 		String roleName = "UNKNOWN_ROLE";

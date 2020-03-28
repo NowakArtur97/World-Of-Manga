@@ -8,7 +8,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.springframework.mock.web.MockMultipartFile;
@@ -19,8 +19,9 @@ import com.NowakArtur97.WorldOfManga.model.Author;
 import com.NowakArtur97.WorldOfManga.model.Manga;
 import com.NowakArtur97.WorldOfManga.model.MangaGenre;
 import com.NowakArtur97.WorldOfManga.model.MangaTranslation;
+import com.NowakArtur97.WorldOfManga.testUtil.generator.ReplaceUnderscoresGenerator;
 
-@DisplayName("Manga Mapper Impl Tests")
+@DisplayNameGeneration(ReplaceUnderscoresGenerator.class)
 @Tag("MangaMapperIml_Test")
 public class MangaMapperImplTest {
 
@@ -33,7 +34,6 @@ public class MangaMapperImplTest {
 	}
 
 	@Test
-	@DisplayName("when map manga dto to entity")
 	public void when_map_manga_dto_to_entity_should_return_manga_entity() {
 
 		MangaTranslation mangaEnTranslationExpected = MangaTranslation.builder().title("English title")
@@ -82,7 +82,6 @@ public class MangaMapperImplTest {
 	}
 
 	@Test
-	@DisplayName("when map manga entity to dto")
 	public void when_map_manga_entity_to_dto_should_return_manga_dto() {
 
 		String enTitle = "English title";

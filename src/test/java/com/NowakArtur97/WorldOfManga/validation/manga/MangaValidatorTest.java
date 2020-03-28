@@ -9,7 +9,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -23,9 +23,10 @@ import org.springframework.validation.Errors;
 import com.NowakArtur97.WorldOfManga.dto.MangaDTO;
 import com.NowakArtur97.WorldOfManga.dto.MangaTranslationDTO;
 import com.NowakArtur97.WorldOfManga.service.api.MangaTranslationService;
+import com.NowakArtur97.WorldOfManga.testUtil.generator.ReplaceUnderscoresGenerator;
 
 @ExtendWith(MockitoExtension.class)
-@DisplayName("Manga Validator Tests")
+@DisplayNameGeneration(ReplaceUnderscoresGenerator.class)
 @Tag("MangaValidator_Tests")
 public class MangaValidatorTest {
 
@@ -36,7 +37,6 @@ public class MangaValidatorTest {
 	private MangaTranslationService mangaTranslationService;
 
 	@Test
-	@DisplayName("when validate correct manga translation dto")
 	public void when_validate_correct_manga_translation_dto_should_not_have_errors() {
 
 		String title = "Correct title";
@@ -67,7 +67,6 @@ public class MangaValidatorTest {
 	}
 
 	@Test
-	@DisplayName("when validate correct manga translation dto but title in both languages is already in use")
 	public void when_validate_correct_manga_translation_but_title_in_both_languages_is_already_in_use_should_have_errors() {
 
 		String title = "Title in use";
@@ -101,7 +100,6 @@ public class MangaValidatorTest {
 	}
 
 	@Test
-	@DisplayName("when validate correct manga translation dto but title in english is already in use")
 	public void when_validate_correct_manga_translation_but_title_in_english_is_already_in_use_should_have_errors() {
 
 		String title = "Title in use";
@@ -136,7 +134,6 @@ public class MangaValidatorTest {
 	}
 
 	@Test
-	@DisplayName("when validate correct manga translation dto but title in polish is already in use")
 	public void when_validate_correct_manga_translation_but_title_in_polish_is_already_in_use_should_have_errors() {
 
 		String title = "Title in use";
@@ -170,7 +167,6 @@ public class MangaValidatorTest {
 	}
 
 	@Test
-	@DisplayName("when validate empty image in manga dto")
 	public void when_validate_empty_image_in_manga_dto_should_have_errors() {
 
 		String title = "Correct title";

@@ -9,7 +9,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -27,9 +27,10 @@ import com.NowakArtur97.WorldOfManga.model.MangaTranslation;
 import com.NowakArtur97.WorldOfManga.repository.MangaTranslationRepository;
 import com.NowakArtur97.WorldOfManga.service.api.LanguageService;
 import com.NowakArtur97.WorldOfManga.service.api.MangaService;
+import com.NowakArtur97.WorldOfManga.testUtil.generator.ReplaceUnderscoresGenerator;
 
 @ExtendWith(MockitoExtension.class)
-@DisplayName("Manga Translation Service Impl Tests")
+@DisplayNameGeneration(ReplaceUnderscoresGenerator.class)
 @Tag("MangaTranslationServiceImpl_Tests")
 public class MangaTranslationServiceImplTest {
 
@@ -55,7 +56,6 @@ public class MangaTranslationServiceImplTest {
 	}
 
 	@Test
-	@DisplayName("when title is already in use")
 	public void when_title_is_already_in_use_should_return_true() {
 
 		boolean isTitleInUse = true;
@@ -71,7 +71,6 @@ public class MangaTranslationServiceImplTest {
 	}
 
 	@Test
-	@DisplayName("when title isn`t in use")
 	public void when_title_is_not_in_use_should_return_false() {
 
 		boolean isTitleInUse = false;
@@ -87,7 +86,6 @@ public class MangaTranslationServiceImplTest {
 	}
 
 	@Test
-	@DisplayName("when add manga translations")
 	public void when_add_manga_translations_should_save_new_translations()
 			throws LanguageNotFoundException, MangaNotFoundException {
 
@@ -138,7 +136,6 @@ public class MangaTranslationServiceImplTest {
 	}
 
 	@Test
-	@DisplayName("when edit manga translations")
 	public void when_edit_manga_translations_should_edit_translations()
 			throws LanguageNotFoundException, MangaNotFoundException {
 

@@ -14,7 +14,7 @@ import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
@@ -22,8 +22,9 @@ import com.NowakArtur97.WorldOfManga.dto.MangaDTO;
 import com.NowakArtur97.WorldOfManga.dto.MangaTranslationDTO;
 import com.NowakArtur97.WorldOfManga.model.Author;
 import com.NowakArtur97.WorldOfManga.model.MangaGenre;
+import com.NowakArtur97.WorldOfManga.testUtil.generator.ReplaceUnderscoresGenerator;
 
-@DisplayName("Manga Validation Tests")
+@DisplayNameGeneration(ReplaceUnderscoresGenerator.class)
 @Tag("MangaValidation_Tests")
 public class MangaValidationTest {
 
@@ -37,7 +38,6 @@ public class MangaValidationTest {
 	}
 
 	@Test
-	@DisplayName("when manga is correct")
 	public void when_manga_is_correct_should_not_have_violations() {
 
 		MangaTranslationDTO mangaTranslationEnDTO = MangaTranslationDTO.builder().title("English title")
@@ -62,7 +62,6 @@ public class MangaValidationTest {
 	}
 
 	@Test
-	@DisplayName("when manga authors are empty")
 	public void when_manga_authors_are_empty_should_have_violations() {
 
 		MangaTranslationDTO mangaTranslationEnDTO = MangaTranslationDTO.builder().title("English title")
@@ -86,7 +85,6 @@ public class MangaValidationTest {
 	}
 
 	@Test
-	@DisplayName("when manga genres are empty")
 	public void when_manga_genres_are_empty_should_have_violations() {
 
 		MangaTranslationDTO mangaTranslationEnDTO = MangaTranslationDTO.builder().title("English title")

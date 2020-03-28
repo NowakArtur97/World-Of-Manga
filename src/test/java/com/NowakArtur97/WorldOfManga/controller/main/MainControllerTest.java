@@ -20,7 +20,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -44,9 +44,10 @@ import com.NowakArtur97.WorldOfManga.model.User;
 import com.NowakArtur97.WorldOfManga.service.api.MangaService;
 import com.NowakArtur97.WorldOfManga.service.api.RecommendationService;
 import com.NowakArtur97.WorldOfManga.service.api.UserService;
+import com.NowakArtur97.WorldOfManga.testUtil.generator.ReplaceUnderscoresGenerator;
 
 @ExtendWith(MockitoExtension.class)
-@DisplayName("Main Controller Tests")
+@DisplayNameGeneration(ReplaceUnderscoresGenerator.class)
 @Tag("MainController_Tests")
 public class MainControllerTest {
 
@@ -75,7 +76,6 @@ public class MainControllerTest {
 	}
 
 	@Test
-	@DisplayName("when load main page as not logged user")
 	public void when_load_main_page_as_not_logged_user_should_show_main_page() throws IOException {
 
 		MangaTranslation mangaTranslationEnExpected = MangaTranslation.builder().title("English title")
@@ -118,7 +118,6 @@ public class MainControllerTest {
 	}
 
 	@Test
-	@DisplayName("when load main page as logged user")
 	public void when_load_main_page_as_logged_user_should_show_main_page() throws IOException {
 
 		MangaTranslation mangaTranslationEnExpected = MangaTranslation.builder().title("English title")
@@ -172,7 +171,6 @@ public class MainControllerTest {
 	}
 
 	@Test
-	@DisplayName("when load main page with locale")
 	public void when_load_main_page_with_locale_should_load_locale() throws Exception {
 
 		Locale locale = new Locale("en");

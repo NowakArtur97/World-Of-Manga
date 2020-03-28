@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -14,17 +14,17 @@ import org.springframework.test.context.TestPropertySource;
 
 import com.NowakArtur97.WorldOfManga.testUtil.enums.LanguageVersion;
 import com.NowakArtur97.WorldOfManga.testUtil.extension.ScreenshotWatcher;
+import com.NowakArtur97.WorldOfManga.testUtil.generator.ReplaceUnderscoresGenerator;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @ExtendWith(ScreenshotWatcher.class)
 @TestPropertySource("classpath:/pageContent/messages_en.properties")
-@DisplayName("Registration Controller UI En Tests")
+@DisplayNameGeneration(ReplaceUnderscoresGenerator.class)
 @Tag("RegistrationControllerUIEn_Tests")
 @DirtiesContext
 public class LoginControllerUIEnTest extends LoginControllerUITest {
 
 	@Test
-	@DisplayName("when login with bad credentials")
 	public void when_login_with_bad_credentials_should_show_bad_credentials_message() {
 
 		String username = "resu";
@@ -42,7 +42,6 @@ public class LoginControllerUIEnTest extends LoginControllerUITest {
 	}
 
 	@Test
-	@DisplayName("when correct user login with user role")
 	public void when_correct_user_login_with_user_role_should_sing_in_user() {
 
 		String username = "user";
@@ -64,7 +63,6 @@ public class LoginControllerUIEnTest extends LoginControllerUITest {
 	}
 
 	@Test
-	@DisplayName("when correct user login with admin role")
 	public void when_correct_user_login_with_admin_role_should_sing_in_admin() {
 
 		String username = "admin";

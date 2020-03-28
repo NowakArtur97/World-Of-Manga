@@ -14,7 +14,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -27,10 +27,11 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import com.NowakArtur97.WorldOfManga.dto.UserDTO;
 import com.NowakArtur97.WorldOfManga.dto.UserPasswordDTO;
 import com.NowakArtur97.WorldOfManga.service.api.UserRegistrationService;
+import com.NowakArtur97.WorldOfManga.testUtil.generator.ReplaceUnderscoresGenerator;
 import com.NowakArtur97.WorldOfManga.validation.user.UserRegistrationValidator;
 
 @ExtendWith(MockitoExtension.class)
-@DisplayName("Registration Controller Tests")
+@DisplayNameGeneration(ReplaceUnderscoresGenerator.class)
 @Tag("RegistrationController_Tests")
 public class RegistrationControllerTest {
 
@@ -52,7 +53,6 @@ public class RegistrationControllerTest {
 	}
 
 	@Test
-	@DisplayName("when load registration page")
 	public void when_load_registration_page_should_show_registration_page() {
 
 		assertAll(() -> mockMvc.perform(get("/user/register")).andExpect(status().isOk())
@@ -61,7 +61,6 @@ public class RegistrationControllerTest {
 	}
 
 	@Test
-	@DisplayName("when process registration with correct data")
 	public void when_process_registration_with_correct_data_should_show_login_page_with_message() {
 
 		UserDTO userDTO = UserDTO.builder().username("username").firstName("first name").lastName("last name")
@@ -78,7 +77,6 @@ public class RegistrationControllerTest {
 	}
 
 	@Test
-	@DisplayName("when process registration with incorrect data")
 	public void when_process_registration_with_incorrect_data_should_show_registration_page() {
 
 		String username = "";

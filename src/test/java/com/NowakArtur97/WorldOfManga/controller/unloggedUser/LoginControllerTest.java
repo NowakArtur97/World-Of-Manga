@@ -6,7 +6,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -14,8 +14,10 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import com.NowakArtur97.WorldOfManga.testUtil.generator.ReplaceUnderscoresGenerator;
+
 @ExtendWith(MockitoExtension.class)
-@DisplayName("Login Controller Tests")
+@DisplayNameGeneration(ReplaceUnderscoresGenerator.class)
 @Tag("LoginController_Tests")
 public class LoginControllerTest {
 
@@ -31,7 +33,6 @@ public class LoginControllerTest {
 	}
 
 	@Test
-	@DisplayName("when load login page")
 	public void when_load_login_page_should_show_login_page() {
 
 		assertAll(() -> mockMvc.perform(get("/user/login")).andExpect(status().isOk())

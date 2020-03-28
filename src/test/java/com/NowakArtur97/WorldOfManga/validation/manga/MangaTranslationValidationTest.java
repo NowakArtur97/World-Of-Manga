@@ -13,14 +13,15 @@ import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import com.NowakArtur97.WorldOfManga.dto.MangaTranslationDTO;
+import com.NowakArtur97.WorldOfManga.testUtil.generator.ReplaceUnderscoresGenerator;
 
-@DisplayName("Manga Translation Validation Tests")
+@DisplayNameGeneration(ReplaceUnderscoresGenerator.class)
 @Tag("MangaTranslationValidation_Tests")
 public class MangaTranslationValidationTest {
 
@@ -34,7 +35,6 @@ public class MangaTranslationValidationTest {
 	}
 
 	@Test
-	@DisplayName("when manga translation is correct")
 	public void when_manga_translation_is_correct_should_not_have_violations() {
 
 		MangaTranslationDTO mangaTranslationDTO = MangaTranslationDTO.builder().title("Title")
@@ -47,7 +47,6 @@ public class MangaTranslationValidationTest {
 	}
 
 	@Test
-	@DisplayName("when manga translation is incorrect")
 	public void when_manga_translation_is_incorrect_should_have_violations() {
 
 		MangaTranslationDTO mangaTranslationDTO = MangaTranslationDTO.builder().title(null).description(null).build();
@@ -59,11 +58,9 @@ public class MangaTranslationValidationTest {
 	}
 
 	@Nested
-	@DisplayName("Title Validation Tests")
 	class TitleValidationTest {
 
 		@Test
-		@DisplayName("when title is null")
 		public void when_title_is_null_should_have_violations() {
 
 			String title = null;
@@ -79,7 +76,6 @@ public class MangaTranslationValidationTest {
 		}
 
 		@Test
-		@DisplayName("when title is empty")
 		public void when_title_is_empty_should_have_violations() {
 
 			String title = "";
@@ -95,7 +91,6 @@ public class MangaTranslationValidationTest {
 		}
 
 		@Test
-		@DisplayName("when title is blank")
 		public void when_title_is_blank_should_have_violations() {
 
 			String title = "     ";
@@ -111,7 +106,6 @@ public class MangaTranslationValidationTest {
 		}
 
 		@Test
-		@DisplayName("when title is too long")
 		public void when_title_is_too_long_should_have_violations() {
 
 			String title = "asdfghjklpasdfghjklpasdfghjklpasdfghjklpasdfghjklp!@#$%";
@@ -128,11 +122,9 @@ public class MangaTranslationValidationTest {
 	}
 
 	@Nested
-	@DisplayName("Description Validation Tests")
 	class DescriptionValidationTest {
 
 		@Test
-		@DisplayName("when description is null")
 		public void when_description_is_null_should_have_violations() {
 
 			String description = null;
@@ -148,7 +140,6 @@ public class MangaTranslationValidationTest {
 		}
 
 		@Test
-		@DisplayName("when description is empty")
 		public void when_description_is_empty_should_have_violations() {
 
 			String description = "";
@@ -164,7 +155,6 @@ public class MangaTranslationValidationTest {
 		}
 
 		@Test
-		@DisplayName("when description is blank")
 		public void when_description_is_blank_should_have_violations() {
 
 			String description = "     ";
@@ -180,7 +170,6 @@ public class MangaTranslationValidationTest {
 		}
 
 		@Test
-		@DisplayName("when description is too long")
 		public void when_description_is_too_long_should_have_violations() {
 
 			String description = "asdfghjklpasdfghjklpasdfghjklpasdfghjklpasdfghjklp!@#$%".repeat(30);

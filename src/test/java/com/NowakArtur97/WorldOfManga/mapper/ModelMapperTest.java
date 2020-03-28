@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.modelmapper.ModelMapper;
@@ -16,8 +16,9 @@ import com.NowakArtur97.WorldOfManga.dto.UserPasswordDTO;
 import com.NowakArtur97.WorldOfManga.model.Author;
 import com.NowakArtur97.WorldOfManga.model.MangaTranslation;
 import com.NowakArtur97.WorldOfManga.model.User;
+import com.NowakArtur97.WorldOfManga.testUtil.generator.ReplaceUnderscoresGenerator;
 
-@DisplayName("Model Mapper Tests")
+@DisplayNameGeneration(ReplaceUnderscoresGenerator.class)
 @Tag("ModelMapper_Tests")
 public class ModelMapperTest {
 
@@ -30,7 +31,6 @@ public class ModelMapperTest {
 	}
 
 	@Test
-	@DisplayName("when map user dto to entity")
 	public void when_map_user_dto_to_entity_should_return_entity() {
 
 		String username = "username";
@@ -67,7 +67,6 @@ public class ModelMapperTest {
 	}
 
 	@Test
-	@DisplayName("when map manga translation dto to entity")
 	public void when_map_manga_translation_dto_to_entity_should_return_entity() {
 
 		String title = "Manga title";
@@ -92,7 +91,6 @@ public class ModelMapperTest {
 	}
 
 	@Test
-	@DisplayName("when map author dto to entity")
 	public void when_map_author_dto_to_entity_should_return_entity() {
 
 		String fullName = "Firstname Lastname";

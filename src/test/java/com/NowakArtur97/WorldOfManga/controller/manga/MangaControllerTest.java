@@ -23,7 +23,7 @@ import java.util.Locale;
 import java.util.Set;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -50,10 +50,11 @@ import com.NowakArtur97.WorldOfManga.service.api.AuthorService;
 import com.NowakArtur97.WorldOfManga.service.api.MangaGenreService;
 import com.NowakArtur97.WorldOfManga.service.api.MangaService;
 import com.NowakArtur97.WorldOfManga.service.api.MangaTranslationService;
+import com.NowakArtur97.WorldOfManga.testUtil.generator.ReplaceUnderscoresGenerator;
 import com.NowakArtur97.WorldOfManga.validation.manga.MangaValidator;
 
 @ExtendWith(MockitoExtension.class)
-@DisplayName("Manga Controller Tests")
+@DisplayNameGeneration(ReplaceUnderscoresGenerator.class)
 @Tag("MangaController_Tests")
 public class MangaControllerTest {
 
@@ -88,7 +89,6 @@ public class MangaControllerTest {
 	}
 
 	@Test
-	@DisplayName("when load add manga page")
 	public void when_load_add_manga_page_should_show_manga_form() {
 
 		List<Author> authors = new ArrayList<>();
@@ -113,7 +113,6 @@ public class MangaControllerTest {
 	}
 
 	@Test
-	@DisplayName("when load edit manga page")
 	public void when_load_edit_manga_page_should_show_manga_form() throws MangaNotFoundException {
 
 		Long mangaId = 1L;
@@ -157,7 +156,6 @@ public class MangaControllerTest {
 	}
 
 	@Test
-	@DisplayName("when add manga with correct data")
 	public void when_add_manga_with_correct_data_should_save_manga()
 			throws LanguageNotFoundException, MangaNotFoundException, IOException {
 
@@ -208,7 +206,6 @@ public class MangaControllerTest {
 	}
 
 	@Test
-	@DisplayName("when add or edit manga with blank fields and authors selected")
 	public void when_add_or_edit_manga_with_blank_fields_and_authors_selected_should_show_manga_form() {
 
 		String englishTitle = "";
@@ -271,7 +268,6 @@ public class MangaControllerTest {
 	}
 
 	@Test
-	@DisplayName("when add or edit manga with long data and authors not selected")
 	public void when_add_or_edit_manga_with_long_data_and_authors_not_selected_should_show_manga_form() {
 
 		String title = "asdfghjklpasdfghjklpasdfghjklpasdfghjklpasdfghjklp!@#$%";
@@ -336,7 +332,6 @@ public class MangaControllerTest {
 	}
 
 	@Test
-	@DisplayName("when delete manga")
 	public void when_delete_manga_should_delete_manga_and_redirect() {
 
 		Long mangaId = 1L;

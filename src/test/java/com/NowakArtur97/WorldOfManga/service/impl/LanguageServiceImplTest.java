@@ -10,7 +10,7 @@ import static org.mockito.Mockito.when;
 import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -20,9 +20,10 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import com.NowakArtur97.WorldOfManga.exception.LanguageNotFoundException;
 import com.NowakArtur97.WorldOfManga.model.Language;
 import com.NowakArtur97.WorldOfManga.repository.LanguageRepository;
+import com.NowakArtur97.WorldOfManga.testUtil.generator.ReplaceUnderscoresGenerator;
 
 @ExtendWith(MockitoExtension.class)
-@DisplayName("Language Service Impl Tests")
+@DisplayNameGeneration(ReplaceUnderscoresGenerator.class)
 @Tag("LanguageServiceImpl_Tests")
 public class LanguageServiceImplTest {
 
@@ -38,7 +39,6 @@ public class LanguageServiceImplTest {
 	}
 
 	@Test
-	@DisplayName("when find by locale")
 	public void when_find_by_locale_should_return_language_by_locale() throws LanguageNotFoundException {
 
 		String locale = "en";
@@ -57,7 +57,6 @@ public class LanguageServiceImplTest {
 	}
 
 	@Test
-	@DisplayName("when locale not found")
 	public void when_locale_not_found_should_throw_exception() {
 
 		String locale = "unknown locale";
