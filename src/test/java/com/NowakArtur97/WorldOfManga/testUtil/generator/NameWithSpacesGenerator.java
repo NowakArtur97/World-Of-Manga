@@ -23,32 +23,43 @@ public class ReplaceUnderscoresGenerator extends ReplaceUnderscores {
 	}
 
 	@Override
+	public String generateDisplayNameForNestedClass(Class<?> nestedClass) {
+
+		String nestedClassMethodName = nestedClass.getSimpleName();
+
+		String displayName = addSpacesBetweenWords(nestedClassMethodName);
+
+		return displayName;
+	}
+
+	@Override
 	public String generateDisplayNameForMethod(Class<?> testClass, Method testMethod) {
 
 		String testMethodName = testMethod.getName();
 
 		int indexOfShouldWord = testMethodName.indexOf(wordEndingTestName);
 
-		String displayName = testMethodName.substring(0, indexOfShouldWord - 1).replace(signReplacedInMethodName, signReplacingInMethodName);
+		String displayName = testMethodName.substring(0, indexOfShouldWord - 1).replace(signReplacedInMethodName,
+				signReplacingInMethodName);
 
 		return displayName;
 	}
 
-	private String addSpacesBetweenWords(String classMethodName) {
+	private String addSpacesBetweenWords(String className) {
 
-		int wordLength = classMethodName.length();
+		int wordLength = className.length();
 
 		StringBuilder result = new StringBuilder();
-		result.append(classMethodName.charAt(0));
+		result.append(className.charAt(0));
 
 		for (int i = 1; i < wordLength; i++) {
 
-			if (Character.isUpperCase(classMethodName.charAt(i))) {
+			if (Character.isUpperCase(className.charAt(i))) {
 
 				result.append(' ');
 			}
 
-			result.append(classMethodName.charAt(i));
+			result.append(className.charAt(i));
 		}
 
 		return result.toString();
