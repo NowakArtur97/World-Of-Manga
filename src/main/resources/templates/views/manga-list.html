@@ -43,7 +43,7 @@
             </a>
     </div>
 
-        <div th:include="fragments/manga-list:: manga-list(mangas=${mangas})" class="manga_list"></div>
+        <div th:include="fragments/manga-list:: manga-list(mangas=${mangas}, showSlider=false)" class="manga_list"></div>
 
         <div th:if="${mangas.getTotalPages() gt 1}" th:include="fragments/pagination:: pagination" class="pagination"></div>
   </div>
