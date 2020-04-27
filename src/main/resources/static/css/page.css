@@ -1,9 +1,18 @@
-.page {
+*,
+*::before,
+*::after {
   margin: 0;
   padding: 0;
-  background-size: cover;
-  font-family: sans-serif;
   box-sizing: border-box;
+}
+
+html {
+  font-family: sans-serif;
+}
+
+.page {
+  height: 90vh;
+  background-size: cover;
 }
 
 .page--login {

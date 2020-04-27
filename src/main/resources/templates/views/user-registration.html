@@ -9,12 +9,13 @@
 </head>
 
 <body class="page page--register">
-    <div layout:fragment="content" class="form page__form">
-        <form th:action="@{/user/register}" th:object="${userDTO}" method="POST" class="form__box form__box--register">
-            <h1 class="form__title" th:text="#{form.register.title}"></h1>
-            <div class="form__group">
-                <label class="form__label" for="username" th:text="#{form.register.username}"></label>
-                <p class="form__message form__message--failure" th:if="${#fields.hasErrors('username')}" th:errors="*{username}" ></p>
+    <div layout:fragment="content">
+        <div class="form_container">
+            <form th:action="@{/user/register}" th:object="${userDTO}" method="POST" class="form__box">
+                <h1 class="form__title" th:text="#{form.register.title}"></h1>
+                <div class="form__group">
+                    <label class="form__label" for="username" th:text="#{form.register.username}"></label>
+                    <p class="form__message form__message--failure" th:if="${#fields.hasErrors('username')}" th:errors="*{username}" ></p>
                 <input class="form__input" type="text" name="username" th:field="*{username}">
             </div>
             <div class="form__group">
@@ -52,6 +53,7 @@
                 <button class="form__submit" type="submit" th:text="#{form.register.submit}"></button>
             </div>
         </form>
+    </div>
     </div>
 </body>
 </html>
