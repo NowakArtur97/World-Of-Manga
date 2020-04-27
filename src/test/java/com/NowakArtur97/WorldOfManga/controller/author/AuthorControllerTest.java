@@ -3,9 +3,10 @@ package com.NowakArtur97.WorldOfManga.controller.author;
 import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.assertAll;
-import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoInteractions;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -28,6 +29,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.validation.BindingResult;
 
 import com.NowakArtur97.WorldOfManga.dto.AuthorDTO;
 import com.NowakArtur97.WorldOfManga.dto.MangaDTO;
@@ -39,7 +41,7 @@ import com.NowakArtur97.WorldOfManga.validation.author.AuthorValidator;
 @ExtendWith(MockitoExtension.class)
 @DisplayNameGeneration(NameWithSpacesGenerator.class)
 @Tag("AuthorController_Tests")
-public class AuthorControllerTest {
+class AuthorControllerTest {
 
 	private MockMvc mockMvc;
 
@@ -51,15 +53,18 @@ public class AuthorControllerTest {
 	@Mock
 	private AuthorValidator authorValidator;
 
+	@Mock
+	private BindingResult result;
+
 	@BeforeEach
-	public void setUp() {
+	private void setUp() {
 
 		authorController = new AuthorController(authorService, authorValidator);
 		mockMvc = MockMvcBuilders.standaloneSetup(authorController).build();
 	}
 
 	@Test
-	public void when_load_add_or_update_author_page_should_show_author_form() {
+	void when_load_add_or_update_author_page_should_show_author_form() {
 
 		List<Author> authors = new ArrayList<>();
 		authors.add(new Author("FirstName LastName"));
@@ -69,11 +74,12 @@ public class AuthorControllerTest {
 		assertAll(() -> mockMvc.perform(get("/admin/addOrUpdateAuthor")).andExpect(status().isOk())
 				.andExpect(view().name("views/manga-form")).andExpect(model().attribute("mangaDTO", new MangaDTO()))
 				.andExpect(model().attribute("authorDTO", new AuthorDTO()))
-				.andExpect(model().attribute("authors", authors)), () -> verify(authorService, times(1)).findAll());
+				.andExpect(model().attribute("authors", authors)), () -> verify(authorService, times(1)).findAll(),
+				() -> verifyNoMoreInteractions(authorService), () -> verifyNoInteractions(authorValidator));
 	}
 
 	@Test
-	public void when_add_author_with_correct_data_should_save_author() {
+	void when_add_author_with_correct_data_should_save_author() {
 
 		String fullName = "Firstname LastName";
 
@@ -85,11 +91,12 @@ public class AuthorControllerTest {
 								.flashAttr("authorDTO", authorDTO))
 						.andExpect(status().is3xxRedirection()).andExpect(redirectedUrl("/admin/addOrUpdateAuthor"))
 						.andExpect(model().hasNoErrors()),
-				() -> verify(authorService, times(1)).addOrUpdate(authorDTO));
+				() -> verify(authorService, times(1)).addOrUpdate(authorDTO),
+				() -> verifyNoMoreInteractions(authorService));
 	}
 
 	@Test
-	public void when_add_author_with_incorrect_data_should_show_author_form() {
+	void when_add_author_with_incorrect_data_should_show_author_form() {
 
 		String fullName = "";
 
@@ -104,6 +111,6 @@ public class AuthorControllerTest {
 						.andExpect(model().attribute("mangaDTO", new MangaDTO()))
 						.andExpect(model().attributeHasFieldErrors("authorDTO", "fullName"))
 						.andExpect(model().attribute("authorDTO", hasProperty("fullName", is(fullName)))),
-				() -> verify(authorService, never()).addOrUpdate(authorDTO));
+				() -> verify(authorService, times(1)).findAll(), () -> verifyNoMoreInteractions(authorService));
 	}
 }
