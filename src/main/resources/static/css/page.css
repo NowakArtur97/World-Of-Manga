@@ -11,8 +11,13 @@ html {
 }
 
 .page {
-  height: 90vh;
   background-size: cover;
+
+  height: calc(100vh - 80px);
+}
+
+.page > div {
+  height: 100%;
 }
 
 .page--login {

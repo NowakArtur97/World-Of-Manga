@@ -9,28 +9,34 @@
 </head>
 
 <body class="page page--login">
-    <div layout:fragment="content" class="form page__form">
-        <form th:action="@{/authenticateTheUser}" method="POST" class="form__box">
-            <h1 class="form__title" th:text="#{form.login.title}"></h1>
-            <p class="form__message form__message--success" th:if="${afterRegistration}"
-                th:text="#{form.login.afterRegistration}"></p>
-            <p class="form__message form__message--success" th:if="${param.logout}" th:text="#{form.login.logout}"></p>
-            <p class="form__message form__message--failure" th:if="${param.badCredentials}"
-                th:text="#{form.login.badCredentials}"></p>
-            <p class="form__message form__message--failure" th:if="${param.accountDisabled}"
-                th:text="#{form.login.accountDisabled}"></p>
-            <div class="form__group">
-                <label class="form__label" for="username" th:text="#{form.login.username}"></label>
-                <input class="form__input" type="text" name="username">
+    <div layout:fragment="content">
+        <div class="form_container">
+            <div class="form page__form">
+                <form th:action="@{/authenticateTheUser}" method="POST" class="form__box">
+                    <h1 class="form__title" th:text="#{form.login.title}"></h1>
+                    <p class="form__message form__message--success" th:if="${afterRegistration}"
+                        th:text="#{form.login.afterRegistration}"></p>
+                    <p class="form__message form__message--success" th:if="${param.logout}"
+                        th:text="#{form.login.logout}">
+                    </p>
+                    <p class="form__message form__message--failure" th:if="${param.badCredentials}"
+                        th:text="#{form.login.badCredentials}"></p>
+                    <p class="form__message form__message--failure" th:if="${param.accountDisabled}"
+                        th:text="#{form.login.accountDisabled}"></p>
+                    <div class="form__group">
+                        <label class="form__label" for="username" th:text="#{form.login.username}"></label>
+                        <input class="form__input" type="text" name="username">
+                    </div>
+                    <div class="form__group">
+                        <label class="form__label" for="password" th:text="#{form.login.password}"></label>
+                        <input class="form__input" type="password" name="password">
+                    </div>
+                    <div class="form__group">
+                        <button class="form__submit" type="submit" th:text="#{form.login.submit}"></button>
+                    </div>
+                </form>
             </div>
-            <div class="form__group">
-                <label class="form__label" for="password" th:text="#{form.login.password}"></label>
-                <input class="form__input" type="password" name="password">
-            </div>
-            <div class="form__group">
-                <button class="form__submit" type="submit" th:text="#{form.login.submit}"></button>
-            </div>
-        </form>
+        </div>
     </div>
 </body>
 

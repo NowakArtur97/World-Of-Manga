@@ -59,7 +59,7 @@
 .header__link--item,
 .header__language_select {
   border: solid;
-  text-transform: uppercase;
+  text-transform: capitalize;
   transition: background-color 0.5s linear, color 0.5s linear;
 }
 

@@ -4,7 +4,7 @@
   justify-content: space-evenly;
   align-items: center;
 
-  height: 90vh;
+  height: 100%;
 }
 
 .form {
@@ -13,7 +13,7 @@
   justify-content: center;
   align-items: center;
 
-  height: 100%;
+  margin: 30px auto;
 }
 
 .form__box {
