@@ -46,6 +46,11 @@
   font-size: 14px;
 }
 
+.form__input--larger {
+  height: 7em;
+  resize: none;
+}
+
 .form__input--image {
   border: none;
   margin: 0 auto;
@@ -74,11 +79,11 @@
 }
 
 .form__message--success {
-  color: #06d44b;
+  color: #1dc555;
 }
 
 .form__message--failure {
-  color: #c51b1b;
+  color: #e72d2d;
 }
 
 .form__group--flex {
@@ -87,4 +92,8 @@
 
 .form__group--flex ~ * {
   flex: 1;
+}
+
+.form__span {
+  margin: 3px 3px 3px;
 }

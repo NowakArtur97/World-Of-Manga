@@ -30,9 +30,9 @@
 					<p class="form__message form__message--failure"
 						th:if="${#fields.hasErrors('enTranslation.description')}"
 						th:errors="*{enTranslation.description}"></p>
-					<input class="form__input" type="text"
+					<textarea class="form__input form__input--larger " type="text"
 						name="enTranslation.description"
-						th:field="*{enTranslation.description}">
+						th:field="*{enTranslation.description}"></textarea>
 				</div>
 				<div class="form__group">
 					<label class="form__label" for="plTranslation"
@@ -49,9 +49,9 @@
 					<p class="form__message form__message--failure"
 						th:if="${#fields.hasErrors('plTranslation.description')}"
 						th:errors="*{plTranslation.description}"></p>
-					<input class="form__input" type="text"
+					<textarea class="form__input form__input--larger" type="text"
 						name="plTranslation.description"
-						th:field="*{plTranslation.description}">
+						th:field="*{plTranslation.description}"></textarea>
 				</div>
 				<div class="form__group">
 					<label class="form__label form__label--show" for="authors"

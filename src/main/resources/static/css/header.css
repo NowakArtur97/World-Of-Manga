@@ -16,14 +16,13 @@
 
   height: 100%;
   width: 100%;
+  padding: 0 30px;
 
   color: #fff;
 }
 
 .header__logo {
   flex-basis: 30%;
-
-  margin-left: 20px;
 
   font-size: 22px;
   font-weight: bold;
@@ -43,7 +42,7 @@
   justify-content: center;
   align-items: center;
 
-  margin-right: 20px;
+  margin-right: 25px;
 }
 
 .header__link {
