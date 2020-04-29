@@ -1,8 +1,8 @@
 .manga_card {
-  margin: 1.5rem;
+  margin: 1.5em;
   background: black;
   color: white;
-  box-shadow: 0.3rem 0.3rem 1rem rgba(0, 0, 0, 0.9);
+  box-shadow: 0.3em 0.3em 1em rgba(0, 0, 0, 0.9);
   text-align: center;
   transition: 0.5s ease;
   cursor: pointer;
@@ -22,7 +22,7 @@
 
 .manga_card:hover {
   transform: scale(1.1);
-  box-shadow: 0.3rem 0.3rem 1rem rgba(0, 0, 0, 0.5);
+  box-shadow: 0.3em 0.3eem 1eem rgba(0, 0, 0, 0.5);
 }
 
 .manga_card__container {
@@ -49,14 +49,14 @@
 }
 
 .manga_card__title {
-  font-size: 1.4rem;
+  font-size: 1.4em;
   display: block;
   word-wrap: break-word;
   width: 250px;
 }
 
 .manga_card__description {
-  font-size: 0.9rem;
+  font-size: 0.9em;
   text-align: center;
   display: block;
   height: 100%;
@@ -70,7 +70,7 @@
 
 .manga_card__author,
 .manga_card__genre {
-  font-size: 0.9rem;
+  font-size: 0.9em;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -79,6 +79,7 @@
 .manga_card__span {
   display: inline-block;
   width: 100%;
+  margin-right: 2px;
 }
 
 .manga_card__stats {
