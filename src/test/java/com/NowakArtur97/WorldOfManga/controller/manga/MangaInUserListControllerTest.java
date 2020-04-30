@@ -17,7 +17,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayNameGeneration;
@@ -135,8 +134,8 @@ class MangaInUserListControllerTest {
 		userExpected.addMangaRating(mangaExpected, 4);
 		userExpected.addMangaToFavourites(mangaExpected);
 
-		Set<Manga> usersRatings = userExpected.getMangasRatings().stream().map(rating -> rating.getManga())
-				.collect(Collectors.toSet());
+		Set<Manga> usersRatingsExpected = Set.of(mangaExpected);
+		List<Manga> usersFavouritesExpected = List.of(mangaExpected);
 
 		when(mangaInUserListService.getUsersMangaListByStatus(status)).thenReturn(mangasExpected);
 		when(userService.loadLoggedInUsername()).thenReturn(userExpected);
@@ -144,8 +143,8 @@ class MangaInUserListControllerTest {
 		assertAll(
 				() -> mockMvc.perform(mockRequest).andExpect(status().isOk()).andExpect(view().name("views/manga-list"))
 						.andExpect(model().attribute("mangas", mangaPages))
-						.andExpect(model().attribute("usersFavourites", userExpected.getFavouriteMangas()))
-						.andExpect(model().attribute("usersRatings", usersRatings)),
+						.andExpect(model().attribute("usersFavourites", usersFavouritesExpected))
+						.andExpect(model().attribute("usersRatings", usersRatingsExpected)),
 				() -> verify(mangaInUserListService, times(1)).getUsersMangaListByStatus(status),
 				() -> verifyNoMoreInteractions(mangaInUserListService),
 				() -> verify(userService, times(1)).loadLoggedInUsername(),
