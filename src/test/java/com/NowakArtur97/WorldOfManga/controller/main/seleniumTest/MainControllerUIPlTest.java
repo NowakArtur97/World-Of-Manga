@@ -22,21 +22,29 @@ import com.NowakArtur97.WorldOfManga.testUtil.generator.NameWithSpacesGenerator;
 @DisplayNameGeneration(NameWithSpacesGenerator.class)
 @Tag("MainControllerUIPl_Tests")
 @DirtiesContext
-public class MainControllerUIPlTest extends MainControllerUITest {
+class MainControllerUIPlTest extends MainControllerUITest {
 
 	@Test
-	public void when_load_main_page_should_load_all_page_content() {
+	void when_load_main_page_should_load_all_page_content() {
 
 		mainPage.loadMainView(LanguageVersion.PL);
-
-		assertAll(() -> assertTrue(mainPage.getHeaderText().contains(headerLogo), () -> "should load header logo"),
-				() -> assertTrue(mainPage.getHeaderText().contains(headerRegistrationOption.toUpperCase()),
-						() -> "should load header sing up option"),
-				() -> assertTrue(mainPage.getHeaderText().contains(headerLoginOption.toUpperCase()),
-						() -> "should load header sign in option"),
-				() -> assertTrue(mainPage.getHeaderText().contains(headerLanguageOption.toUpperCase()),
-						() -> "should load header language option"),
-				() -> assertNotNull(mainPage.getFooterText(), () -> "should load footer fragment text"),
-				() -> assertNotNull(mainPage.getMainPageText(), () -> "should load main fragment text"));
+		
+		assertAll(
+				() -> assertTrue(mainPage.getHeaderTextInLowerCase().contains(headerLogo.toLowerCase()),
+						() -> "should load header logo: " + headerLogo.toLowerCase() + ", but was: "
+								+ mainPage.getHeaderTextInLowerCase()),
+				() -> assertTrue(mainPage.getHeaderTextInLowerCase().contains(headerRegistrationOption.toLowerCase()),
+						() -> "should load header sing up option: " + headerRegistrationOption.toLowerCase()
+								+ ", but was: " + mainPage.getHeaderTextInLowerCase()),
+				() -> assertTrue(mainPage.getHeaderTextInLowerCase().contains(headerLoginOption.toLowerCase()),
+						() -> "should load header sign in option: " + headerLoginOption.toLowerCase() + ", but was: "
+								+ mainPage.getHeaderTextInLowerCase()),
+				() -> assertTrue(mainPage.getHeaderTextInLowerCase().contains(headerLanguageOption.toLowerCase()),
+						() -> "should load header language option: " + headerLanguageOption.toLowerCase()
+								+ ", but was: " + mainPage.getHeaderTextInLowerCase()),
+				() -> assertNotNull(mainPage.getFooterText(),
+						() -> "should load footer fragment text, but wasn`t found"),
+				() -> assertNotNull(mainPage.getMainPageText(),
+						() -> "should load main fragment text, but wasn`t found"));
 	}
 }
