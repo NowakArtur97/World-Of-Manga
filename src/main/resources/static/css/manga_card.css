@@ -1,3 +1,8 @@
+:root {
+  --firt_part_height: 100px;
+  --second_part_height: 40px;
+}
+
 .manga_card {
   margin: 1.5em;
   background: black;
@@ -22,7 +27,7 @@
 
 .manga_card:hover {
   transform: scale(1.1);
-  box-shadow: 0.3em 0.3eem 1eem rgba(0, 0, 0, 0.5);
+  box-shadow: 0.3em 0.3em 1em rgba(0, 0, 0, 0.5);
 }
 
 .manga_card__container {
@@ -45,7 +50,14 @@
 }
 
 .manga_card__info {
-  height: 81px;
+  height: var(--firt_part_height);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: space-between;
+
+  padding: 3px;
 }
 
 .manga_card__title {
@@ -70,30 +82,34 @@
 
 .manga_card__author,
 .manga_card__genre {
-  font-size: 0.9em;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+
+  margin: 3px 4px;
+
+  font-size: 0.9em;
 }
 
 .manga_card__span {
   display: inline-block;
-  width: 100%;
-  margin-right: 2px;
+
+  flex-basis: 33%;
+  flex-grow: 1;
 }
 
 .manga_card__stats {
   padding: 5px;
-  height: 30px;
+  height: var(--second_part_height);
   display: flex;
   align-items: center;
   justify-content: space-evenly;
-  text-transform: uppercase;
   padding-bottom: 10px;
 }
 
 .manga_card__list-options {
-  height: 81px;
+  height: var(--firt_part_height);
   display: flex;
   flex: 1 0 10px;
   flex-wrap: wrap;
@@ -109,9 +125,9 @@
 .manga_card__icon--big {
   width: 30px;
   height: 100%;
-  transition: 0.3s ease;
+  transition: transform 0.3s ease;
 }
 
 .manga_card__icon--big:hover {
-  transform: scale(2);
+  transform: scale(1.6);
 }
