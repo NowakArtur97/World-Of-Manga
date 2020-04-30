@@ -52,14 +52,14 @@
   color: #fff;
   cursor: pointer;
 
-  transition: background-color 0.5s linear, color 0.5s linear;
+  transition: background-color 0.2s linear, color 0.2s linear;
 }
 
 .header__link--item,
 .header__language_select {
   border: solid;
   text-transform: capitalize;
-  transition: background-color 0.5s linear, color 0.5s linear;
+  transition: background-color 0.2s linear, color 0.2s linear;
 }
 
 .header__link:hover,
