@@ -30,21 +30,18 @@ class MainControllerUIEnTest extends MainControllerUITest {
 		mainPage.loadMainView(LanguageVersion.ENG);
 
 		assertAll(
-				() -> assertTrue(mainPage.getHeaderTextInLowerCase().contains(headerLogo.toLowerCase()),
-						() -> "should load header logo: " + headerLogo.toLowerCase() + ", but was: "
-								+ mainPage.getHeaderTextInLowerCase()),
-				() -> assertTrue(mainPage.getHeaderTextInLowerCase().contains(headerRegistrationOption.toLowerCase()),
-						() -> "should load header sing up option: " + headerRegistrationOption.toLowerCase()
-								+ ", but was: " + mainPage.getHeaderTextInLowerCase()),
-				() -> assertTrue(mainPage.getHeaderTextInLowerCase().contains(headerLoginOption.toLowerCase()),
-						() -> "should load header sign in option: " + headerLoginOption.toLowerCase() + ", but was: "
-								+ mainPage.getHeaderTextInLowerCase()),
-				() -> assertTrue(mainPage.getHeaderTextInLowerCase().contains(headerLanguageOption.toLowerCase()),
-						() -> "should load header language option: " + headerLanguageOption.toLowerCase()
-								+ ", but was: " + mainPage.getHeaderTextInLowerCase()),
-				() -> assertNotNull(mainPage.getFooterText(),
-						() -> "should load footer fragment text, but wasn`t found"),
-				() -> assertNotNull(mainPage.getMainPageText(),
-						() -> "should load main fragment text, but wasn`t found"));
+				() -> assertTrue(mainPage.getHeaderText().contains(headerLogo),
+						() -> "should load header logo: " + headerLogo + ", but was: " + mainPage.getHeaderText()),
+				() -> assertTrue(mainPage.getHeaderText().contains(headerRegistrationOption),
+						() -> "should load header sing up option: " + headerRegistrationOption + ", but was: "
+								+ mainPage.getHeaderText()),
+				() -> assertTrue(mainPage.getHeaderText().contains(headerLoginOption),
+						() -> "should load header sign in option: " + headerLoginOption + ", but was: "
+								+ mainPage.getHeaderText()),
+				() -> assertTrue(mainPage.getHeaderText().contains(headerLanguageOption),
+						() -> "should load header language option: " + headerLanguageOption + ", but was: "
+								+ mainPage.getHeaderText()),
+				() -> assertNotNull(mainPage.getFooterText(), () -> "should load footer fragment text"),
+				() -> assertNotNull(mainPage.getMainPageText(), () -> "should load main fragment text"));
 	}
 }

@@ -22,10 +22,10 @@ import com.NowakArtur97.WorldOfManga.testUtil.generator.NameWithSpacesGenerator;
 @DisplayNameGeneration(NameWithSpacesGenerator.class)
 @Tag("LogoutControllerUIPl_Tests")
 @DirtiesContext
-public class LogoutControllerUIPlTest extends LogoutControllerUITest {
+class LogoutControllerUIPlTest extends LogoutControllerUITest {
 
 	@Test
-	public void when_correct_logout_should_sing_out_user() {
+	void when_correct_logout_should_sing_out_user() {
 
 		String username = "user";
 		String password = "user";
@@ -37,13 +37,17 @@ public class LogoutControllerUIPlTest extends LogoutControllerUITest {
 		logoutPage.signOut();
 
 		assertAll(
-				() -> assertFalse(mainPage.getHeaderText().contains(userLoggedInMangaListOption.toUpperCase()),
-						() -> "should not show manga list option"),
-				() -> assertFalse(mainPage.getHeaderText().contains(userLoggedInSignOutOption.toUpperCase()),
-						() -> "should not show sign out option"),
-				() -> assertTrue(mainPage.getHeaderText().contains(headerRegistrationOption.toUpperCase()),
-						() -> "should show manga list option"),
-				() -> assertTrue(mainPage.getHeaderText().contains(headerLoginOption.toUpperCase()),
-						() -> "should show sign out option"));
+				() -> assertFalse(mainPage.getHeaderText().contains(userLoggedInMangaListOption),
+						() -> "should not show manga list option: " + userLoggedInMangaListOption + ", but was: "
+								+ mainPage.getHeaderText()),
+				() -> assertFalse(mainPage.getHeaderText().contains(userLoggedInSignOutOption),
+						() -> "should not show sign out option: " + userLoggedInMangaListOption + ", but was: "
+								+ mainPage.getHeaderText()),
+				() -> assertTrue(mainPage.getHeaderText().contains(headerRegistrationOption),
+						() -> "should show manga list option: " + userLoggedInMangaListOption + ", but was: "
+								+ mainPage.getHeaderText()),
+				() -> assertTrue(mainPage.getHeaderText().contains(headerLoginOption),
+						() -> "should show sign out option: " + userLoggedInMangaListOption + ", but was: "
+								+ mainPage.getHeaderText()));
 	}
 }
