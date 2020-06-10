@@ -21,7 +21,6 @@ import com.NowakArtur97.WorldOfManga.service.api.RecommendationService;
 import com.NowakArtur97.WorldOfManga.service.api.UserService;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @RequestMapping(path = "/")

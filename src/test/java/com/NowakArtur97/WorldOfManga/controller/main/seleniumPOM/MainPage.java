@@ -34,9 +34,10 @@ public class MainPage extends SeleniumPageObjectModel {
 		super.connectTo(RESOURCE_PATH + ver.getLangUrl());
 	}
 
+
 	public String getHeaderText() {
 
-		return header.getText();
+		return header.getAttribute("textContent");
 	}
 
 	public String getFooterText() {

@@ -22,10 +22,10 @@ import com.NowakArtur97.WorldOfManga.testUtil.generator.NameWithSpacesGenerator;
 @DisplayNameGeneration(NameWithSpacesGenerator.class)
 @Tag("RegistrationControllerUIEn_Tests")
 @DirtiesContext
-public class LoginControllerUIEnTest extends LoginControllerUITest {
+class LoginControllerUIEnTest extends LoginControllerUITest {
 
 	@Test
-	public void when_login_with_bad_credentials_should_show_bad_credentials_message() {
+	void when_login_with_bad_credentials_should_show_bad_credentials_message() {
 
 		String username = "resu";
 		String password = "resu";
@@ -38,11 +38,11 @@ public class LoginControllerUIEnTest extends LoginControllerUITest {
 				() -> assertTrue(loginPage.getFormBoxText().contains(badCredentialsMessage),
 						() -> "should show bad credentails message"),
 				() -> assertFalse(userService.isUsernameAlreadyInUse(username),
-						() -> "user with given username shouldn`t exist: " + username));
+						() -> "user with username: + " + username + " shouldn`t exist"));
 	}
 
 	@Test
-	public void when_correct_user_login_with_user_role_should_sing_in_user() {
+	void when_correct_user_login_with_user_role_should_sing_in_user() {
 
 		String username = "user";
 		String password = "user";
@@ -54,16 +54,19 @@ public class LoginControllerUIEnTest extends LoginControllerUITest {
 		assertAll(() -> assertFalse(loginPage.isUserOnLoginPage(), () -> "shouldn`t show login page"),
 				() -> assertTrue(userService.isUsernameAlreadyInUse(username),
 						() -> "user with given username should exist: " + username),
-				() -> assertTrue(mainPage.getHeaderText().contains(userLoggedInMangaListOption.toUpperCase()),
-						() -> "should show manga list option"),
-				() -> assertTrue(mainPage.getHeaderText().contains(userLoggedInSignOutOption.toUpperCase()),
-						() -> "should show sign out option"),
-				() -> assertFalse(mainPage.getHeaderText().contains(adminAddMangaOption.toUpperCase()),
-						() -> "should show add manga option"));
+				() -> assertTrue(mainPage.getHeaderText().contains(userLoggedInMangaListOption),
+						() -> "should show manga list option: " + userLoggedInMangaListOption + ", but was: "
+								+ mainPage.getHeaderText()),
+				() -> assertTrue(mainPage.getHeaderText().contains(userLoggedInSignOutOption),
+						() -> "should show sign out option: " + userLoggedInSignOutOption + ", but was: "
+								+ mainPage.getHeaderText()),
+				() -> assertFalse(mainPage.getHeaderText().contains(adminAddMangaOption),
+						() -> "shouldn't show add manga option: " + adminAddMangaOption + ", but was: "
+								+ mainPage.getHeaderText()));
 	}
 
 	@Test
-	public void when_correct_user_login_with_admin_role_should_sing_in_admin() {
+	void when_correct_user_login_with_admin_role_should_sing_in_admin() {
 
 		String username = "admin";
 		String password = "admin";
@@ -75,11 +78,14 @@ public class LoginControllerUIEnTest extends LoginControllerUITest {
 		assertAll(() -> assertFalse(loginPage.isUserOnLoginPage(), () -> "shouldn`t show login page"),
 				() -> assertTrue(userService.isUsernameAlreadyInUse(username),
 						() -> "user with given username should exist: " + username),
-				() -> assertTrue(mainPage.getHeaderText().contains(userLoggedInMangaListOption.toUpperCase()),
-						() -> "should show manga list option"),
-				() -> assertTrue(mainPage.getHeaderText().contains(userLoggedInSignOutOption.toUpperCase()),
-						() -> "should show sign out option"),
-				() -> assertTrue(mainPage.getHeaderText().contains(adminAddMangaOption.toUpperCase()),
-						() -> "should show add manga option"));
+				() -> assertTrue(mainPage.getHeaderText().contains(userLoggedInMangaListOption),
+						() -> "should show manga list option: " + userLoggedInMangaListOption + ", but was: "
+								+ mainPage.getHeaderText()),
+				() -> assertTrue(mainPage.getHeaderText().contains(userLoggedInSignOutOption),
+						() -> "should show sign out option: " + userLoggedInSignOutOption + ", but was: "
+								+ mainPage.getHeaderText()),
+				() -> assertTrue(mainPage.getHeaderText().contains(adminAddMangaOption),
+						() -> "should show add manga option: " + adminAddMangaOption + ", but was: "
+								+ mainPage.getHeaderText()));
 	}
 }

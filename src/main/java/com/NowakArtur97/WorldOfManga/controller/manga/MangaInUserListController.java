@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -22,7 +23,9 @@ import org.springframework.web.servlet.LocaleResolver;
 
 import com.NowakArtur97.WorldOfManga.exception.MangaNotFoundException;
 import com.NowakArtur97.WorldOfManga.model.Manga;
+import com.NowakArtur97.WorldOfManga.model.User;
 import com.NowakArtur97.WorldOfManga.service.api.MangaInUserListService;
+import com.NowakArtur97.WorldOfManga.service.api.UserService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -34,6 +37,8 @@ public class MangaInUserListController {
 	private final MangaInUserListService mangaInUserListService;
 
 	private final LocaleResolver cookieLocaleResolver;
+
+	private final UserService userService;
 
 	@GetMapping(path = "/addToList")
 	public String addToList(HttpServletRequest request, @RequestParam("id") Long mangaId,
@@ -63,6 +68,12 @@ public class MangaInUserListController {
 		if (locale != null) {
 			theModel.addAttribute("locale", locale.getLanguage());
 		}
+
+		User user = userService.loadLoggedInUsername();
+
+		theModel.addAttribute("usersFavourites", user.getFavouriteMangas().stream().collect(Collectors.toList()));
+		theModel.addAttribute("usersRatings",
+				user.getMangasRatings().stream().map(rating -> rating.getManga()).collect(Collectors.toSet()));
 
 		return "views/manga-list";
 	}

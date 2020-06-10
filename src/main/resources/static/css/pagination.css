@@ -18,6 +18,7 @@
   font-size: 1.3rem;
   text-decoration: none;
   background-color: black;
+  transition: color 0.2s linear, background-color 0.2s linear;
 }
 
 .pagination__link:hover {

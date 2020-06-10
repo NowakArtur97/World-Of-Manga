@@ -3,6 +3,8 @@ package com.NowakArtur97.WorldOfManga.controller.manga;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoInteractions;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
@@ -38,13 +40,15 @@ import org.springframework.web.servlet.LocaleResolver;
 import com.NowakArtur97.WorldOfManga.model.Author;
 import com.NowakArtur97.WorldOfManga.model.Manga;
 import com.NowakArtur97.WorldOfManga.model.MangaTranslation;
+import com.NowakArtur97.WorldOfManga.model.User;
 import com.NowakArtur97.WorldOfManga.service.api.MangaInUserListService;
+import com.NowakArtur97.WorldOfManga.service.api.UserService;
 import com.NowakArtur97.WorldOfManga.testUtil.generator.NameWithSpacesGenerator;
 
 @ExtendWith(MockitoExtension.class)
 @DisplayNameGeneration(NameWithSpacesGenerator.class)
 @Tag("MangaInUserListController_Tests")
-public class MangaInUserListControllerTest {
+class MangaInUserListControllerTest {
 
 	private MockMvc mockMvc;
 
@@ -56,16 +60,21 @@ public class MangaInUserListControllerTest {
 	@Mock
 	private LocaleResolver cookieLocaleResolver;
 
-	@BeforeEach
-	public void setUp() {
+	@Mock
+	private UserService userService;
 
-		mangaInUserListController = new MangaInUserListController(mangaInUserListService, cookieLocaleResolver);
+	@BeforeEach
+	private void setUp() {
+
+		mangaInUserListController = new MangaInUserListController(mangaInUserListService, cookieLocaleResolver,
+				userService);
+
 		mockMvc = MockMvcBuilders.standaloneSetup(mangaInUserListController)
 				.setCustomArgumentResolvers(new PageableHandlerMethodArgumentResolver()).build();
 	}
 
 	@Test
-	public void when_add_to_list_manga_should_ad_manga_to_list_and_redirect_to_last_page() {
+	void when_add_to_list_manga_should_ad_manga_to_list_and_redirect_to_last_page() {
 
 		Long mangaId = 1L;
 		int status = 0;
@@ -75,12 +84,12 @@ public class MangaInUserListControllerTest {
 
 		assertAll(
 				() -> mockMvc.perform(mockRequest).andExpect(status().is3xxRedirection()).andExpect(redirectedUrl("/")),
-				() -> verify(mangaInUserListService, times(1)).addOrRemoveFromList(mangaId, status));
+				() -> verify(mangaInUserListService, times(1)).addOrRemoveFromList(mangaId, status),
+				() -> verifyNoMoreInteractions(mangaInUserListService), () -> verifyNoInteractions(userService));
 	}
 
 	@Test
-	public void when_load_manga_list_by_status_should_show_specific_manga_and_redirect_to_last_page()
-			throws IOException {
+	void when_load_manga_list_by_status_should_show_specific_manga_and_redirect_to_last_page() throws IOException {
 
 		MangaTranslation mangaTranslationEnExpected = MangaTranslation.builder().title("English title")
 				.description("English description").build();
@@ -119,11 +128,26 @@ public class MangaInUserListControllerTest {
 		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.get("/auth/sortMangaList/{id}", status)
 				.locale(locale).flashAttr("locale", locale).header("Referer", "/");
 
+		User userExpected = User.builder().username("username").password("password").email("user@email.com")
+				.isEnabled(true).build();
+
+		userExpected.addMangaRating(mangaExpected, 4);
+		userExpected.addMangaToFavourites(mangaExpected);
+
+		Set<Manga> usersRatingsExpected = Set.of(mangaExpected);
+		List<Manga> usersFavouritesExpected = List.of(mangaExpected);
+
 		when(mangaInUserListService.getUsersMangaListByStatus(status)).thenReturn(mangasExpected);
+		when(userService.loadLoggedInUsername()).thenReturn(userExpected);
 
 		assertAll(
 				() -> mockMvc.perform(mockRequest).andExpect(status().isOk()).andExpect(view().name("views/manga-list"))
-						.andExpect(model().attribute("mangas", mangaPages)),
-				() -> verify(mangaInUserListService, times(1)).getUsersMangaListByStatus(status));
+						.andExpect(model().attribute("mangas", mangaPages))
+						.andExpect(model().attribute("usersFavourites", usersFavouritesExpected))
+						.andExpect(model().attribute("usersRatings", usersRatingsExpected)),
+				() -> verify(mangaInUserListService, times(1)).getUsersMangaListByStatus(status),
+				() -> verifyNoMoreInteractions(mangaInUserListService),
+				() -> verify(userService, times(1)).loadLoggedInUsername(),
+				() -> verifyNoMoreInteractions(userService));
 	}
 }

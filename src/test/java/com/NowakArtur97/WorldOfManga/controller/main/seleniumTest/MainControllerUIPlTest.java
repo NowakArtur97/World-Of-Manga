@@ -22,20 +22,28 @@ import com.NowakArtur97.WorldOfManga.testUtil.generator.NameWithSpacesGenerator;
 @DisplayNameGeneration(NameWithSpacesGenerator.class)
 @Tag("MainControllerUIPl_Tests")
 @DirtiesContext
-public class MainControllerUIPlTest extends MainControllerUITest {
+class MainControllerUIPlTest extends MainControllerUITest {
 
 	@Test
-	public void when_load_main_page_should_load_all_page_content() {
+	void when_load_main_page_should_load_all_page_content() {
 
 		mainPage.loadMainView(LanguageVersion.PL);
 
-		assertAll(() -> assertTrue(mainPage.getHeaderText().contains(headerLogo), () -> "should load header logo"),
-				() -> assertTrue(mainPage.getHeaderText().contains(headerRegistrationOption.toUpperCase()),
-						() -> "should load header sing up option"),
-				() -> assertTrue(mainPage.getHeaderText().contains(headerLoginOption.toUpperCase()),
-						() -> "should load header sign in option"),
-				() -> assertTrue(mainPage.getHeaderText().contains(headerLanguageOption.toUpperCase()),
-						() -> "should load header language option"),
+		System.out.println(mainPage.getHeaderText());
+		System.out.println(headerRegistrationOption);
+
+		assertAll(
+				() -> assertTrue(mainPage.getHeaderText().contains(headerLogo),
+						() -> "should load header logo: " + headerLogo + ", but was: " + mainPage.getHeaderText()),
+				() -> assertTrue(mainPage.getHeaderText().contains(headerRegistrationOption),
+						() -> "should load header sing up option: " + headerRegistrationOption + ", but was: "
+								+ mainPage.getHeaderText()),
+				() -> assertTrue(mainPage.getHeaderText().contains(headerLoginOption),
+						() -> "should load header sign in option: " + headerLoginOption + ", but was: "
+								+ mainPage.getHeaderText()),
+				() -> assertTrue(mainPage.getHeaderText().contains(headerLanguageOption),
+						() -> "should load header language option: " + headerLanguageOption + ", but was: "
+								+ mainPage.getHeaderText()),
 				() -> assertNotNull(mainPage.getFooterText(), () -> "should load footer fragment text"),
 				() -> assertNotNull(mainPage.getMainPageText(), () -> "should load main fragment text"));
 	}

@@ -10,14 +10,16 @@
 
 <body class="page page--register">
 	<div layout:fragment="content">
-		<div class="form form--first_form page__form">
-			<form th:action="@{/admin/addOrUpdateManga}" th:object="${mangaDTO}" method="POST"
-				enctype="multipart/form-data" class="form__box form__box--register" name="addOrUpdateMangaForm">
-				<h1 class="form__title" th:text="#{form.manga.title}"></h1>
-				<input class="form__input" type="number" name="id" th:field="*{id}" hidden>
-				<div class="form__group">
-					<label class="form__label" for="enTranslation" th:text="#{form.manga.enTranslation.title}"></label>
-					<p class="form__message form__message--failure" th:if="${#fields.hasErrors('enTranslation.title')}"
+		<div class="form_container">
+			<div class="form page__form">
+				<form th:action="@{/admin/addOrUpdateManga}" th:object="${mangaDTO}" method="POST"
+					enctype="multipart/form-data" class="form__box form__box--register" name="addOrUpdateMangaForm">
+					<h1 class="form__title" th:text="#{form.manga.title}"></h1>
+					<input class="form__input" type="number" name="id" th:field="*{id}" hidden>
+					<div class="form__group">
+						<label class="form__label" for="enTranslation"
+							th:text="#{form.manga.enTranslation.title}"></label>
+						<p class="form__message form__message--failure" th:if="${#fields.hasErrors('enTranslation.title')}"
 						th:errors="*{enTranslation.title}"></p>
 					<input class="form__input" type="text" name="enTranslation.title"
 						th:field="*{enTranslation.title}">
@@ -28,9 +30,9 @@
 					<p class="form__message form__message--failure"
 						th:if="${#fields.hasErrors('enTranslation.description')}"
 						th:errors="*{enTranslation.description}"></p>
-					<input class="form__input" type="text"
+					<textarea class="form__input form__input--larger " type="text"
 						name="enTranslation.description"
-						th:field="*{enTranslation.description}">
+						th:field="*{enTranslation.description}"></textarea>
 				</div>
 				<div class="form__group">
 					<label class="form__label" for="plTranslation"
@@ -47,9 +49,9 @@
 					<p class="form__message form__message--failure"
 						th:if="${#fields.hasErrors('plTranslation.description')}"
 						th:errors="*{plTranslation.description}"></p>
-					<input class="form__input" type="text"
+					<textarea class="form__input form__input--larger" type="text"
 						name="plTranslation.description"
-						th:field="*{plTranslation.description}">
+						th:field="*{plTranslation.description}"></textarea>
 				</div>
 				<div class="form__group">
 					<label class="form__label form__label--show" for="authors"
@@ -98,7 +100,7 @@
 				</div>
 			</form>
 		</div>
-		<div class="form form--second_form  page__form">
+		<div class="form page__form">
 			<form th:action="@{/admin/addOrUpdateAuthor}"
 				th:object="${authorDTO}" method="POST"
 				class="form__box form__box--register" name="addOrUpdateAuthorForm">
@@ -117,6 +119,7 @@
 				</div>
 			</form>
 		</div>
+	</div>
 	</div>
 </body>
 </html>

@@ -1,9 +1,23 @@
-.page {
+*,
+*::before,
+*::after {
   margin: 0;
   padding: 0;
-  background-size: cover;
-  font-family: sans-serif;
   box-sizing: border-box;
+}
+
+html {
+  font-family: sans-serif;
+}
+
+.page {
+  background-size: cover;
+
+  height: calc(100vh - 80px);
+}
+
+.page > div {
+  height: 100%;
 }
 
 .page--login {
