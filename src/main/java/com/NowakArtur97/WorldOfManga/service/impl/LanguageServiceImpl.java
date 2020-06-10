@@ -19,9 +19,7 @@ public class LanguageServiceImpl implements LanguageService {
 	@Override
 	public Language findByLocale(String locale) throws LanguageNotFoundException {
 
-		Language language = languageRepository.findByLocale(locale)
+		return languageRepository.findByLocale(locale)
 				.orElseThrow(() -> new LanguageNotFoundException("Language with locale: " + locale + " not found"));
-
-		return language;
 	}
 }

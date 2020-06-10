@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.NowakArtur97.WorldOfManga.model.MangaRating;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -53,7 +54,7 @@ public class MainController {
 			loadUserData(theModel);
 		}
 
-		return "views/main";
+		return "main";
 	}
 
 	private void loadUserData(Model theModel) {
@@ -62,6 +63,6 @@ public class MainController {
 
 		theModel.addAttribute("usersFavourites", user.getFavouriteMangas());
 		theModel.addAttribute("usersRatings",
-				user.getMangasRatings().stream().map(rating -> rating.getManga()).collect(Collectors.toSet()));
+				user.getMangasRatings().stream().map(MangaRating::getManga).collect(Collectors.toSet()));
 	}
 }

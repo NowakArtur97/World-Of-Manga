@@ -18,8 +18,6 @@ public class MangaTranslationMapperImpl implements MangaTranslationMapper {
 	@Override
 	public MangaTranslation mapMangaTranslationDTOToMangaTranslation(MangaTranslationDTO mangaTranslationDTO) {
 
-		MangaTranslation mangaTranslation = modelMapper.map(mangaTranslationDTO, MangaTranslation.class);
-
-		return mangaTranslation;
+		return modelMapper.map(mangaTranslationDTO, MangaTranslation.class);
 	}
 }

@@ -40,7 +40,7 @@ public class AuthorController {
 
 	@PostMapping(path = "/addOrUpdateAuthor")
 	public String processAddAuthorPage(Model theModel, @ModelAttribute("authorDTO") @Valid AuthorDTO authorDTO,
-			BindingResult result) throws LanguageNotFoundException {
+			BindingResult result) {
 
 		authorValidator.validate(authorDTO, result);
 

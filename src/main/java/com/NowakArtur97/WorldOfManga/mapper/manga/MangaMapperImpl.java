@@ -1,16 +1,15 @@
 package com.NowakArtur97.WorldOfManga.mapper.manga;
 
-import java.io.IOException;
-import java.util.Set;
-
-import org.springframework.stereotype.Service;
-
 import com.NowakArtur97.WorldOfManga.dto.MangaDTO;
 import com.NowakArtur97.WorldOfManga.dto.MangaTranslationDTO;
 import com.NowakArtur97.WorldOfManga.model.Author;
 import com.NowakArtur97.WorldOfManga.model.Manga;
 import com.NowakArtur97.WorldOfManga.model.MangaGenre;
 import com.NowakArtur97.WorldOfManga.model.MangaTranslation;
+import org.springframework.stereotype.Service;
+
+import java.io.IOException;
+import java.util.Set;
 
 @Service
 public class MangaMapperImpl implements MangaMapper {
@@ -39,20 +38,18 @@ public class MangaMapperImpl implements MangaMapper {
 		MangaTranslationDTO plTranslationDTO = MangaTranslationDTO.builder().title(plTranslation.getTitle())
 				.description(plTranslation.getDescription()).build();
 
-		MangaDTO mangaDTO = MangaDTO.builder().id(manga.getId()).enTranslation(enTranslationDTO)
+		return MangaDTO.builder().id(manga.getId()).enTranslation(enTranslationDTO)
 				.plTranslation(plTranslationDTO).authors(manga.getAuthors()).genres(manga.getGenres()).build();
-
-		return mangaDTO;
 	}
 
 	private void mapAuthors(Manga manga, Set<Author> authors) {
 
-		authors.stream().forEach(author -> manga.addAuthor(author));
+		authors.stream().forEach(manga::addAuthor);
 	}
 
 	private void mapGenres(Manga manga, Set<MangaGenre> genres) {
 
-		genres.stream().forEach(genre -> manga.addGenre(genre));
+		genres.stream().forEach(manga::addGenre);
 	}
 
 	private void mapMultipartFileToBlob(Manga manga, MangaDTO mangaDTO) {

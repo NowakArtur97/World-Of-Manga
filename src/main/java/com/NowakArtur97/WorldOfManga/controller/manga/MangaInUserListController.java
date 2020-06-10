@@ -72,8 +72,6 @@ public class MangaInUserListController {
 		int start = (int) pageable.getOffset();
 		int end = (start + pageable.getPageSize()) > mangas.size() ? mangas.size() : (start + pageable.getPageSize());
 
-		Page<Manga> mangaPages = new PageImpl<Manga>(mangas.subList(start, end), pageable, mangas.size());
-
-		return mangaPages;
+		return new PageImpl<>(mangas.subList(start, end), pageable, mangas.size());
 	}
 }

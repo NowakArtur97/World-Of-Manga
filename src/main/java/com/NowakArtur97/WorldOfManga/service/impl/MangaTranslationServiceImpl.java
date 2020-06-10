@@ -52,13 +52,13 @@ public class MangaTranslationServiceImpl implements MangaTranslationService {
 
 		} else {
 
-			manga = addTranslation(mangaDTO, mangaTranslationEn, mangaTranslationPl);
+			manga = addTranslation(mangaTranslationEn, mangaTranslationPl);
 		}
 
 		return manga;
 	}
 
-	private Manga addTranslation(MangaDTO mangaDTO, MangaTranslation mangaTranslationEn,
+	private Manga addTranslation(MangaTranslation mangaTranslationEn,
 			MangaTranslation mangaTranslationPl) throws LanguageNotFoundException {
 
 		Language en = languageService.findByLocale("en");

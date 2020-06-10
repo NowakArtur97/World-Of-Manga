@@ -1,10 +1,10 @@
 package com.NowakArtur97.WorldOfManga.service.impl;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Optional;
-import java.util.Set;
-
+import com.NowakArtur97.WorldOfManga.model.Role;
+import com.NowakArtur97.WorldOfManga.model.User;
+import com.NowakArtur97.WorldOfManga.repository.UserRepository;
+import com.NowakArtur97.WorldOfManga.service.api.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -14,12 +14,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.NowakArtur97.WorldOfManga.model.Role;
-import com.NowakArtur97.WorldOfManga.model.User;
-import com.NowakArtur97.WorldOfManga.repository.UserRepository;
-import com.NowakArtur97.WorldOfManga.service.api.UserService;
-
-import lombok.RequiredArgsConstructor;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Optional;
+import java.util.Set;
 
 @Service
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
@@ -94,10 +92,8 @@ public class UserServiceImpl implements UserService {
 			username = principal.toString();
 		}
 
-		User loggedInUser = findByUsername(username)
+		return findByUsername(username)
 				.orElseThrow(() -> new UsernameNotFoundException("Invalid username or password"));
-
-		return loggedInUser;
 	}
 
 	@Override

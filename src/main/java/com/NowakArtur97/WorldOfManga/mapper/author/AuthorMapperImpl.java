@@ -18,8 +18,6 @@ public class AuthorMapperImpl implements AuthorMapper {
 	@Override
 	public Author mapAuthorDTOToAuthor(AuthorDTO authorDTO) {
 
-		Author author = modelMapper.map(authorDTO, Author.class);
-
-		return author;
+		return modelMapper.map(authorDTO, Author.class);
 	}
 }

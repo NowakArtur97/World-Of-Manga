@@ -88,7 +88,7 @@ public class DatabaseSchedular {
 		String tokyoGhoulDescriptionEn = "Ghouls live among us, the same as normal people in every way—except their craving for human flesh.\r\n"
 				+ "Ken Kaneki is an ordinary college student until a violent encounter turns him into the first half-human half-ghoul hybrid. Trapped between two worlds, he must survive Ghoul turf wars, learn more about Ghoul society and master his new powers. ";
 		String tokyoGhoulDescriptionPl = "To tu skrywa się źródło \"rozpaczy\". Wtapiają się w tłum, polują na ludzi i pożerają zwłoki. Nazywa się je \"ghulami\". Losy młodzieńca, który przez przypadek styka się z taką istotą, zmieniają się całkowicie. Jego życie już nigdy nie będzie takie jak dawniej...";
-		URL tokyoGhoulURL = new URL("https://f01.mrcdn.info/file/mrportal/i/4/d/k/sC.cPf-4DqC.png");
+		URL tokyoGhoulURL = new URL("https://animecraft.pl/images/produkty_allegro/8851224219/aukcja_1_8851224219.jpg");
 		String tokyoGhoulAuthor = "Sui Ishida";
 
 		String soloLevelingTitle = "Solo Leveling";
@@ -106,7 +106,7 @@ public class DatabaseSchedular {
 		String myHeroAcademiaTitle = "My Hero Academia";
 		String myHeroAcademiaDescriptionEn = "One day, a four-year-old boy came to a sudden realization: the world is not fair. Eighty percent of the world's population wield special abilities, known as \"quirks,\" which have given many the power to make their childhood dreams of becoming a superhero a reality. Unfortunately, Izuku Midoriya was one of the few born without a quirk, suffering from discrimination because of it. Yet, he refuses to give up on his dream of becoming a hero; determined to do the impossible, Izuku sets his sights on the elite hero training academy, UA High. However, everything changes after a chance meeting with the number one hero and Izuku's idol, All Might. Discovering that his dream is not a dead end, the powerless boy undergoes special training, working harder than ever before. Eventually, this leads to him inheriting All Might's power, and with his newfound abilities, gets into his school of choice, beginning his grueling journey to become the successor of the best hero on the planet.";
 		String myHeroAcademiaDescriptionPl = "W niedalekiej przyszłości w ludziach obudziły się nadnaturalne zdolności. Od tej pory u kolejnych pokoleń moc pojawiała się częściej i była silniejsza. W tym momencie już ponad 80% populacji posiada swój własny dar. Z reguły ukazuje się on w okolicach czwartego roku życia. Izuku Midoriya jest wyjątkiem w tym świecie - choć ma już 14 lat, to nie posiada żadnych zdolności specjalnych. Co więcej, lekarze stwierdzili, że takowe się w nim nigdy nie przebudzą. Nadal jednak marzy on o zostaniu bohaterem. Pewnego dnia zostaje zaatakowany przez potwora i w ostatniej chwili ratuje go jego idol, najsilniejszy z bohaterów, zwany \"All Might\". Czy to spotkanie odmieni życie naszego młodego protagonisty? Czy uda mu się spełnić jego największe marzenie pomimo przeszkód stojących mu na drodze?";
-		URL myHeroAcademiaURL = new URL("https://f01.mrcdn.info/file/mrportal/i/3/u/k/5q.8KFpDoE2.png");
+		URL myHeroAcademiaURL = new URL("https://4.bp.blogspot.com/-gxw19jKOiOA/VtXeXdeIN7I/AAAAAAAAEqg/C-R9u6dzU5o/s1600/Boku-no-Hero-Academia-manga.jpg");
 		String myHeroAcademiaAuthor = "Kouhei Horikoshi";
 
 		String komiTitle = "Komi Can't Communicate";
@@ -130,7 +130,7 @@ public class DatabaseSchedular {
 		String godOfHighschoolTitle = "The God of High School";
 		String godOfHighschoolDescriptionEn = "It all began as a fighting tournament to seek out for the best fighter among all high school students in Korea. Mori Jin, a Taekwondo specialist and a high school student, soon learns that there is something much greater beneath the stage of the tournament.";
 		String godOfHighschoolDescriptionPl = "Mori Jin trenuje sztuki walki przez całe swoje życie pod okiem przybranego \"dziadka\". Uczy się stylu koreańskich sztuk walki o nazwie Tae Kwon Do. Jednak jego styl w Tae Kwon Do jest nieco niekonwencjonalny. Decyduje się wziąć udział w konkursie o nazwie God of High School (GOH) po otrzymaniu osobistego zaproszenia. Konkurs ma na celu znalezienie najlepszego stylu i najlepszego zawodnika w sztuce walki. Największą nagrodą dla zwycięzcy ukończenia szkoły sztuk walki jest 1 milion dolarów i życzenie. ";
-		URL godOfHighschoolURL = new URL("https://f01.mrcdn.info/file/mrportal/h/2/l/9/SK.akyO9XmO.png");
+		URL godOfHighschoolURL = new URL("https://static1.squarespace.com/static/5dcf079f4af04c560a38c395/5dcf172d7705ce3eb62c2584/5e989e1c7bffa75893a774e5/1587061339924/The-God-of-High-School-Key-Visual.jpg");
 		String godOfHighschoolAuthor = "Park Yong-je";
 
 		String narutoTitle = "Naruto";
@@ -166,7 +166,7 @@ public class DatabaseSchedular {
 		String kingdomTitle = "Kingdom";
 		String kingdomDescriptionEn = "Millions of years have passed since the times of legends, when the worlds of man and gods were still the same. In these times it was the desires of man that moved the world. It is the era of the 500 year war - The Warring States period (403-222 BC in Chinese history). Kingdom is the story of a young boy named Shin who grew into a great general and all the trials and bloodshed that lead him there.";
 		String kingdomDescriptionPl = "W Epoce Walczących Królestw w położonym na terenie Chin państwie Qin żyją sieroty – porywczy Shin i roztropny Hyou. Ich wspólnym marzeniem jest zdobycie tytułu „największego na świecie wodza”. Los daje Hyou możliwość pracy w pałacu, jednak chłopak po krótkim czasie powraca do wioski ciężko ranny i na łożu śmierci prosi Shina o wypełnienie pewnego obowiązku. Ma on odnaleźć Ei Seia i ochronić go przed spiskującym bratem. Chłopiec okazuje się łudząco podobnym do Hyou młodym cesarzem Qin…";
-		URL kingdomURL = new URL("https://f01.mrcdn.info/file/mrportal/h/9/5/a/ym.dQBrd2H7.png");
+		URL kingdomURL = new URL("http://phoenix-scans.pl//uploads/manga/kingdom/cover/cover_250x350.jpg");
 		String kingdomAuthor = "Yasuhisa Hara";
 
 		String vinlandSagaTitle = "Vinland Saga";

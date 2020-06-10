@@ -17,10 +17,8 @@ public class UserMapperImpl implements UserMapper {
 	
 	@Override
 	public User mapUserDTOToUser(UserDTO userDTO) {
-		
-		User user = modelMapper.map(userDTO, User.class);
-		
-		return user;
+
+		return modelMapper.map(userDTO, User.class);
 	}
 
 }

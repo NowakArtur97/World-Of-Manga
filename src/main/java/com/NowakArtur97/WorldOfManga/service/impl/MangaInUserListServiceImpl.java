@@ -1,15 +1,5 @@
 package com.NowakArtur97.WorldOfManga.service.impl;
 
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
-import java.util.stream.Collectors;
-
-import javax.transaction.Transactional;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.NowakArtur97.WorldOfManga.enums.MangaInUserListStatus;
 import com.NowakArtur97.WorldOfManga.exception.MangaNotFoundException;
 import com.NowakArtur97.WorldOfManga.model.Manga;
@@ -20,8 +10,14 @@ import com.NowakArtur97.WorldOfManga.repository.MangaInUserListRepository;
 import com.NowakArtur97.WorldOfManga.service.api.MangaInUserListService;
 import com.NowakArtur97.WorldOfManga.service.api.MangaService;
 import com.NowakArtur97.WorldOfManga.service.api.UserService;
-
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
+import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
@@ -51,7 +47,7 @@ public class MangaInUserListServiceImpl implements MangaInUserListService {
 
 		Optional<MangaInUserList> mangaInListOptional = findByUserAndManga(user, manga);
 
-		MangaInUserList mangaInUserList = null;
+		MangaInUserList mangaInUserList;
 
 		if (mangaInListOptional.isPresent()) {
 
@@ -75,7 +71,7 @@ public class MangaInUserListServiceImpl implements MangaInUserListService {
 	@Override
 	public Set<Manga> getUsersMangaListByStatus(int status) {
 
-		Set<Manga> mangaList = new HashSet<>();
+		Set<Manga> mangaList;
 
 		User user = userService.loadLoggedInUsername();
 
@@ -100,11 +96,7 @@ public class MangaInUserListServiceImpl implements MangaInUserListService {
 
 		MangaInUserListStatus status = MangaInUserListStatus.values()[statusId];
 
-		Set<Manga> mangaList = new HashSet<>();
-
-		mangaList = mapToMangaSet(status, user);
-
-		return mangaList;
+		return mapToMangaSet(status, user);
 	}
 
 	private Set<Manga> mapToMangaSet(MangaInUserListStatus status, User user) {

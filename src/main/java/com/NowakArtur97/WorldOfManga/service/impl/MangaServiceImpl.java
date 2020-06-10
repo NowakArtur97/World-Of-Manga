@@ -1,14 +1,5 @@
 package com.NowakArtur97.WorldOfManga.service.impl;
 
-import java.util.List;
-
-import javax.transaction.Transactional;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Service;
-
 import com.NowakArtur97.WorldOfManga.dto.MangaDTO;
 import com.NowakArtur97.WorldOfManga.exception.MangaNotFoundException;
 import com.NowakArtur97.WorldOfManga.mapper.manga.MangaMapper;
@@ -17,8 +8,14 @@ import com.NowakArtur97.WorldOfManga.model.User;
 import com.NowakArtur97.WorldOfManga.repository.MangaRepository;
 import com.NowakArtur97.WorldOfManga.service.api.MangaService;
 import com.NowakArtur97.WorldOfManga.service.api.UserService;
-
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
@@ -84,9 +81,7 @@ public class MangaServiceImpl implements MangaService {
 
 		Manga manga = findById(mangaId);
 
-		MangaDTO mangaDTO = mangaMapper.mapMangaToDTO(manga);
-
-		return mangaDTO;
+		return mangaMapper.mapMangaToDTO(manga);
 	}
 
 	@Override

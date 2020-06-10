@@ -1,26 +1,16 @@
 package com.NowakArtur97.WorldOfManga.service.impl;
 
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-import java.util.stream.Collectors;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import com.NowakArtur97.WorldOfManga.model.Manga;
-import com.NowakArtur97.WorldOfManga.model.MangaGenre;
-import com.NowakArtur97.WorldOfManga.model.MangaInUserList;
-import com.NowakArtur97.WorldOfManga.model.MangaRating;
-import com.NowakArtur97.WorldOfManga.model.User;
+import com.NowakArtur97.WorldOfManga.model.*;
 import com.NowakArtur97.WorldOfManga.service.api.MangaService;
 import com.NowakArtur97.WorldOfManga.service.api.RecommendationService;
 import com.NowakArtur97.WorldOfManga.service.api.UserService;
-
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.*;
+import java.util.Map.Entry;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
@@ -32,14 +22,7 @@ public class RecommendationServiceImpl implements RecommendationService {
 
 	private final UserService userService;
 
-	private final Comparator<Manga> SORT_BY_LIKES = new Comparator<Manga>() {
-
-		@Override
-		public int compare(Manga manga1, Manga manga2) {
-
-			return manga2.getUserWithMangaInFavourites().size() - manga1.getUserWithMangaInFavourites().size();
-		}
-	};
+	private final Comparator<Manga> SORT_BY_LIKES = (manga1, manga2) -> manga2.getUserWithMangaInFavourites().size() - manga1.getUserWithMangaInFavourites().size();
 
 	@Override
 	public List<Manga> recommendManga() {
