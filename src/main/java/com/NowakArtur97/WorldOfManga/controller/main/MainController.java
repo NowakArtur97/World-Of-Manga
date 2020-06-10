@@ -53,7 +53,7 @@ public class MainController {
 			loadUserData(theModel);
 		}
 
-		return "main";
+		return "views/main";
 	}
 
 	private void loadUserData(Model theModel) {
