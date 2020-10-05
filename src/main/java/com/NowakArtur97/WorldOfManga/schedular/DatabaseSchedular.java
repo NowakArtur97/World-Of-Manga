@@ -58,7 +58,7 @@ public class DatabaseSchedular {
 	private static MangaGenre romance;
 	private static MangaGenre horror;
 
-	@EventListener(ApplicationReadyEvent.class)
+//	@EventListener(ApplicationReadyEvent.class)
 	public void onStartup() throws LanguageNotFoundException, MalformedURLException, MangaGenreNotFoundException {
 
 		en = languageService.findByLocale("en");

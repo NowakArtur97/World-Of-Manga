@@ -17,66 +17,69 @@ import com.NowakArtur97.WorldOfManga.service.api.UserService;
 
 @Configuration
 @EnableWebSecurity
-public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
+class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-	private final UserService userService;
-	
-	private final LoginAuthenticationSuccessHandler loginAuthenticationSuccessHandler;
+    private final UserService userService;
 
-	private final LoginAuthenticationFailureHandler loginAuthenticationFailureHandler;
-	
-	private final UserAccessDeniedHandler userAccessDeniedHandler;
-	
-	@Autowired
-	public WebSecurityConfiguration(UserService userService, LoginAuthenticationSuccessHandler loginAuthenticationSuccessHandler, 
-			LoginAuthenticationFailureHandler loginAuthenticationFailureHandler, UserAccessDeniedHandler userAccessDeniedHandler) {
-		this.userService = userService;
-		this.loginAuthenticationSuccessHandler = loginAuthenticationSuccessHandler;
-		this.loginAuthenticationFailureHandler = loginAuthenticationFailureHandler;
-		this.userAccessDeniedHandler = userAccessDeniedHandler;
-	}
+    private final LoginAuthenticationSuccessHandler loginAuthenticationSuccessHandler;
 
-	@Bean
-	public DaoAuthenticationProvider daoAuthenticationProvider() {
+    private final LoginAuthenticationFailureHandler loginAuthenticationFailureHandler;
 
-		DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
+    private final UserAccessDeniedHandler userAccessDeniedHandler;
 
-		daoAuthenticationProvider.setUserDetailsService(userService);
-		daoAuthenticationProvider.setPasswordEncoder(bCryptPasswordEncoder());
+    @Autowired
+    WebSecurityConfiguration(UserService userService, LoginAuthenticationSuccessHandler loginAuthenticationSuccessHandler,
+                             LoginAuthenticationFailureHandler loginAuthenticationFailureHandler, UserAccessDeniedHandler userAccessDeniedHandler) {
+        this.userService = userService;
+        this.loginAuthenticationSuccessHandler = loginAuthenticationSuccessHandler;
+        this.loginAuthenticationFailureHandler = loginAuthenticationFailureHandler;
+        this.userAccessDeniedHandler = userAccessDeniedHandler;
+    }
 
-		return daoAuthenticationProvider;
-	}
+    @Bean
+    DaoAuthenticationProvider daoAuthenticationProvider() {
 
-	@Bean
-	public BCryptPasswordEncoder bCryptPasswordEncoder() {
+        DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
 
-		return new BCryptPasswordEncoder();
-	}
+        daoAuthenticationProvider.setUserDetailsService(userService);
+        daoAuthenticationProvider.setPasswordEncoder(bCryptPasswordEncoder());
 
-	@Override
-	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        return daoAuthenticationProvider;
+    }
 
-		auth.authenticationProvider(daoAuthenticationProvider());
-	}
+    @Bean
+    BCryptPasswordEncoder bCryptPasswordEncoder() {
 
-	@Override
-	protected void configure(HttpSecurity http) throws Exception {
+        return new BCryptPasswordEncoder();
+    }
 
-		http.authorizeRequests()
-				.antMatchers("/admin/**", "/h2/**").hasRole("ADMIN")
-				.antMatchers("/auth/**").hasAnyRole("USER", "ADMIN")
-				.antMatchers("/user/**").anonymous()
-				.antMatchers("/").permitAll()
-				.and().csrf().ignoringAntMatchers("/h2/**")
-				.and().headers().frameOptions().sameOrigin()
-			.and()
-				.exceptionHandling().accessDeniedHandler(userAccessDeniedHandler)
-			.and()
-				.formLogin().loginPage("/user/login").loginProcessingUrl("/authenticateTheUser")
-				.successHandler(loginAuthenticationSuccessHandler)
-				.failureHandler(loginAuthenticationFailureHandler).permitAll(false)
-			.and()
-				.logout().logoutUrl("/auth/logout").logoutSuccessUrl("/user/login?logout=true").permitAll(false);
-	}
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+
+        auth.authenticationProvider(daoAuthenticationProvider());
+    }
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+
+        http.authorizeRequests()
+                .antMatchers("/admin/**", "/h2/**")
+                .hasRole("ADMIN")
+                .antMatchers("/auth/**")
+                .hasAnyRole("USER", "ADMIN")
+                .antMatchers("/user/**")
+                .anonymous()
+                .antMatchers("/").permitAll()
+                .and().csrf().ignoringAntMatchers("/h2/**")
+                .and().headers().frameOptions().sameOrigin()
+                .and()
+                .exceptionHandling().accessDeniedHandler(userAccessDeniedHandler)
+                .and()
+                .formLogin().loginPage("/user/login").loginProcessingUrl("/authenticateTheUser")
+                .successHandler(loginAuthenticationSuccessHandler)
+                .failureHandler(loginAuthenticationFailureHandler).permitAll(false)
+                .and()
+                .logout().logoutUrl("/auth/logout").logoutSuccessUrl("/user/login?logout=true").permitAll(false);
+    }
 
 }

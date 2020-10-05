@@ -11,29 +11,29 @@ import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 
 @Configuration
-public class InternationalizationConfiguration implements WebMvcConfigurer {
+class InternationalizationConfiguration implements WebMvcConfigurer {
 
-	@Bean
-	public LocaleResolver localeResolver() {
+    @Bean
+    LocaleResolver localeResolver() {
 
-		CookieLocaleResolver cookieLocaleResolver = new CookieLocaleResolver();
-		cookieLocaleResolver.setDefaultLocale(Locale.US);
+        CookieLocaleResolver cookieLocaleResolver = new CookieLocaleResolver();
+        cookieLocaleResolver.setDefaultLocale(Locale.US);
 
-		return cookieLocaleResolver;
-	}
+        return cookieLocaleResolver;
+    }
 
-	@Bean
-	public LocaleChangeInterceptor localeChangeInterceptor() {
+    @Bean
+    LocaleChangeInterceptor localeChangeInterceptor() {
 
-		LocaleChangeInterceptor localeChangeInterceptor = new LocaleChangeInterceptor();
-		localeChangeInterceptor.setParamName("lang");
+        LocaleChangeInterceptor localeChangeInterceptor = new LocaleChangeInterceptor();
+        localeChangeInterceptor.setParamName("lang");
 
-		return localeChangeInterceptor;
-	}
+        return localeChangeInterceptor;
+    }
 
-	@Override
-	public void addInterceptors(InterceptorRegistry registry) {
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
 
-		registry.addInterceptor(localeChangeInterceptor());
-	}
+        registry.addInterceptor(localeChangeInterceptor());
+    }
 }

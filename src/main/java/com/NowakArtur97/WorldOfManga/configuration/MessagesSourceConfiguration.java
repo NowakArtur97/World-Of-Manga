@@ -7,24 +7,24 @@ import org.springframework.context.support.ReloadableResourceBundleMessageSource
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
 @Configuration
-public class MessagesSourceConfiguration {
+class MessagesSourceConfiguration {
 
-	@Bean
-	public MessageSource messageSource() {
+    @Bean
+    MessageSource messageSource() {
 
-		ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
-		messageSource.setBasenames("classpath:/validation/messages", "classpath:/pageContent/messages");
-		messageSource.setDefaultEncoding("UTF-8");
+        ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
+        messageSource.setBasenames("classpath:/validation/messages", "classpath:/pageContent/messages");
+        messageSource.setDefaultEncoding("UTF-8");
 
-		return messageSource;
-	}
+        return messageSource;
+    }
 
-	@Bean
-	public LocalValidatorFactoryBean validatorFactoryBean(MessageSource messageSource) {
+    @Bean
+    LocalValidatorFactoryBean validatorFactoryBean(MessageSource messageSource) {
 
-		LocalValidatorFactoryBean validatorFactoryBean = new LocalValidatorFactoryBean();
-		validatorFactoryBean.setValidationMessageSource(messageSource);
+        LocalValidatorFactoryBean validatorFactoryBean = new LocalValidatorFactoryBean();
+        validatorFactoryBean.setValidationMessageSource(messageSource);
 
-		return validatorFactoryBean;
-	}
+        return validatorFactoryBean;
+    }
 }
