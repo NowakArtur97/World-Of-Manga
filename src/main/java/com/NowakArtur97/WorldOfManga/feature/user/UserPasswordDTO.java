@@ -1,6 +1,5 @@
 package com.NowakArtur97.WorldOfManga.feature.user;
 
-import com.NowakArtur97.WorldOfManga.validation.userPassword.UserPasswordsMatch;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

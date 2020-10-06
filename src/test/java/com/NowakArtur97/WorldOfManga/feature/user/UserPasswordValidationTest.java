@@ -1,6 +1,5 @@
 package com.NowakArtur97.WorldOfManga.feature.user;
 
-import com.NowakArtur97.WorldOfManga.feature.user.UserPasswordDTO;
 import com.NowakArtur97.WorldOfManga.testUtil.generator.NameWithSpacesGenerator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayNameGeneration;
@@ -17,19 +16,19 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @DisplayNameGeneration(NameWithSpacesGenerator.class)
 @Tag("UserPasswordValidation_Tests")
-public class UserPasswordValidationTest {
+class UserPasswordValidationTest {
 
     private Validator validator;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
 
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         validator = factory.getValidator();
     }
 
     @Test
-    public void when_users_password_is_correct_should_not_have_violations() {
+    void when_users_password_is_correct_should_not_have_violations() {
 
         String password = "password";
 
@@ -42,7 +41,7 @@ public class UserPasswordValidationTest {
     }
 
     @Test
-    public void when_users_password_is_null_should_have_violations() {
+    void when_users_password_is_null_should_have_violations() {
 
         String password = null;
 
@@ -56,7 +55,7 @@ public class UserPasswordValidationTest {
     }
 
     @Test
-    public void when_users_password_is_empty_should_have_violations() {
+    void when_users_password_is_empty_should_have_violations() {
 
         UserPasswordDTO userPasswordDTO = UserPasswordDTO.builder().password("").matchingPassword("").build();
 
@@ -67,7 +66,7 @@ public class UserPasswordValidationTest {
     }
 
     @Test
-    public void when_users_password_is_blank_should_have_violations() {
+    void when_users_password_is_blank_should_have_violations() {
 
         UserPasswordDTO userPasswordDTO = UserPasswordDTO.builder().password("   ").matchingPassword("   ").build();
 

@@ -1,11 +1,11 @@
 package com.NowakArtur97.WorldOfManga.controller.manga;
 
 import com.NowakArtur97.WorldOfManga.feature.author.Author;
+import com.NowakArtur97.WorldOfManga.feature.user.User;
+import com.NowakArtur97.WorldOfManga.feature.user.UserService;
 import com.NowakArtur97.WorldOfManga.model.Manga;
 import com.NowakArtur97.WorldOfManga.model.MangaTranslation;
-import com.NowakArtur97.WorldOfManga.feature.user.User;
 import com.NowakArtur97.WorldOfManga.service.MangaInUserListService;
-import com.NowakArtur97.WorldOfManga.feature.user.UserService;
 import com.NowakArtur97.WorldOfManga.testUtil.generator.NameWithSpacesGenerator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayNameGeneration;

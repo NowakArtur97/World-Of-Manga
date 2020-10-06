@@ -1,9 +1,6 @@
 package com.NowakArtur97.WorldOfManga.feature.user;
 
-import com.NowakArtur97.WorldOfManga.feature.user.UserDTO;
-import com.NowakArtur97.WorldOfManga.feature.user.UserPasswordDTO;
 import com.NowakArtur97.WorldOfManga.exception.RoleNotFoundException;
-import com.NowakArtur97.WorldOfManga.feature.user.*;
 import com.NowakArtur97.WorldOfManga.testUtil.generator.NameWithSpacesGenerator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayNameGeneration;
@@ -21,7 +18,7 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 @DisplayNameGeneration(NameWithSpacesGenerator.class)
 @Tag("UserRegistrationService_Tests")
-public class UserRegistrationServiceTest {
+class UserRegistrationServiceTest {
 
     private UserRegistrationService userRegistrationService;
 
@@ -45,7 +42,7 @@ public class UserRegistrationServiceTest {
     }
 
     @Test
-    public void when_register_user_should_reigster_user() throws RoleNotFoundException {
+    void when_register_user_should_reigster_user() throws RoleNotFoundException {
 
         String password = "user";
 

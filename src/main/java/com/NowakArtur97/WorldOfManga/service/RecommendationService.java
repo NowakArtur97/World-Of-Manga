@@ -2,7 +2,10 @@ package com.NowakArtur97.WorldOfManga.service;
 
 import com.NowakArtur97.WorldOfManga.feature.user.User;
 import com.NowakArtur97.WorldOfManga.feature.user.UserService;
-import com.NowakArtur97.WorldOfManga.model.*;
+import com.NowakArtur97.WorldOfManga.model.Manga;
+import com.NowakArtur97.WorldOfManga.model.MangaGenre;
+import com.NowakArtur97.WorldOfManga.model.MangaInUserList;
+import com.NowakArtur97.WorldOfManga.model.MangaRating;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

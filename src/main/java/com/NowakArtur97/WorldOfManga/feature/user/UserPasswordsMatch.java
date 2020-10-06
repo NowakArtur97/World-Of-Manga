@@ -1,4 +1,4 @@
-package com.NowakArtur97.WorldOfManga.validation.userPassword;
+package com.NowakArtur97.WorldOfManga.feature.user;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;

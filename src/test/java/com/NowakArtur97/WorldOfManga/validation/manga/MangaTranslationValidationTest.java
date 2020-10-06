@@ -1,25 +1,16 @@
 package com.NowakArtur97.WorldOfManga.validation.manga;
 
-import static org.junit.jupiter.api.Assertions.assertAll;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import java.util.Set;
+import com.NowakArtur97.WorldOfManga.dto.MangaTranslationDTO;
+import com.NowakArtur97.WorldOfManga.testUtil.generator.NameWithSpacesGenerator;
+import org.junit.jupiter.api.*;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
+import java.util.Set;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayNameGeneration;
-import org.junit.jupiter.api.Nested;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
-
-import com.NowakArtur97.WorldOfManga.dto.MangaTranslationDTO;
-import com.NowakArtur97.WorldOfManga.testUtil.generator.NameWithSpacesGenerator;
+import static org.junit.jupiter.api.Assertions.*;
 
 @DisplayNameGeneration(NameWithSpacesGenerator.class)
 @Tag("MangaTranslationValidation_Tests")

@@ -1,10 +1,9 @@
 package com.NowakArtur97.WorldOfManga.controller.main.seleniumTest;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.springframework.beans.factory.annotation.Value;
-
 import com.NowakArtur97.WorldOfManga.controller.main.seleniumPOM.MainPage;
 import com.NowakArtur97.WorldOfManga.testUtil.selenium.SeleniumUITest;
+import org.junit.jupiter.api.BeforeEach;
+import org.springframework.beans.factory.annotation.Value;
 
 public class MainControllerUITest extends SeleniumUITest {
 

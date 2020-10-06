@@ -1,37 +1,12 @@
 package com.NowakArtur97.WorldOfManga.model;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.Lob;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
-import javax.persistence.PostLoad;
-import javax.persistence.Table;
-import javax.persistence.Transient;
-
 import com.NowakArtur97.WorldOfManga.feature.author.Author;
 import com.NowakArtur97.WorldOfManga.feature.user.User;
+import lombok.*;
 import org.hibernate.annotations.Type;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import javax.persistence.*;
+import java.util.*;
 
 @Entity
 @Table(name = "manga", schema = "world_of_manga")

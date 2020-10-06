@@ -1,9 +1,6 @@
 package com.NowakArtur97.WorldOfManga.feature.user;
 
 import com.NowakArtur97.WorldOfManga.exception.RoleNotFoundException;
-import com.NowakArtur97.WorldOfManga.feature.user.Role;
-import com.NowakArtur97.WorldOfManga.feature.user.RoleRepository;
-import com.NowakArtur97.WorldOfManga.feature.user.RoleService;
 import com.NowakArtur97.WorldOfManga.testUtil.generator.NameWithSpacesGenerator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayNameGeneration;
@@ -21,7 +18,7 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 @DisplayNameGeneration(NameWithSpacesGenerator.class)
 @Tag("RoleService_Tests")
-public class RoleServiceTest {
+class RoleServiceTest {
 
     private RoleService roleService;
 
@@ -35,7 +32,7 @@ public class RoleServiceTest {
     }
 
     @Test
-    public void when_find_by_name_should_return_role_by_name() throws RoleNotFoundException {
+    void when_find_by_name_should_return_role_by_name() throws RoleNotFoundException {
 
         String roleName = "ROLE_USER";
 
@@ -51,7 +48,7 @@ public class RoleServiceTest {
     }
 
     @Test
-    public void when_role_not_found_should_throw_exception() {
+    void when_role_not_found_should_throw_exception() {
 
         String roleName = "UNKNOWN_ROLE";
 

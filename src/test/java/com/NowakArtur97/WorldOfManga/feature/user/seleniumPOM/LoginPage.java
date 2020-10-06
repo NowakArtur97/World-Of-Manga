@@ -1,15 +1,14 @@
 package com.NowakArtur97.WorldOfManga.feature.user.seleniumPOM;
 
+import com.NowakArtur97.WorldOfManga.testUtil.enums.LanguageVersion;
+import com.NowakArtur97.WorldOfManga.testUtil.selenium.SeleniumPageObjectModel;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import com.NowakArtur97.WorldOfManga.testUtil.enums.LanguageVersion;
-import com.NowakArtur97.WorldOfManga.testUtil.selenium.SeleniumPageObjectModel;
-
 public class LoginPage extends SeleniumPageObjectModel {
 
-    public static final String RESOURCE_PATH = "/user/login";
+    private static final String RESOURCE_PATH = "/user/login";
 
     private static final String FORM_BOX_CLASS = "form__box";
     private static final String USERNAME = "username";
@@ -38,17 +37,17 @@ public class LoginPage extends SeleniumPageObjectModel {
         super.connectTo(RESOURCE_PATH + ver.getLangUrl());
     }
 
-    public void setUsername(String username) {
+    void setUsername(String username) {
 
         usernameInput.sendKeys(username);
     }
 
-    public void setPassword(String password) {
+    void setPassword(String password) {
 
         passwordInput.sendKeys(password);
     }
 
-    public void clickSubmitLoginButton() {
+    private void clickSubmitLoginButton() {
 
         submitButton.click();
     }

@@ -10,7 +10,7 @@ import java.util.List;
 
 public class AuthorFormPage extends SeleniumPageObjectModel {
 
-    public static final String RESOURCE_PATH = "/admin/addOrUpdateAuthor";
+    private static final String RESOURCE_PATH = "/admin/addOrUpdateAuthor";
 
     private static final String FULL_NAME = "fullName";
     private static final String FORM_MESSAGE_FAILURE_CLASS = "form__message--failure";
@@ -43,7 +43,7 @@ public class AuthorFormPage extends SeleniumPageObjectModel {
         super.connectTo(RESOURCE_PATH + ver.getLangUrl());
     }
 
-    public void clickSubmitAuthorFormButton() {
+    private void clickSubmitAuthorFormButton() {
 
         submitButton.click();
     }

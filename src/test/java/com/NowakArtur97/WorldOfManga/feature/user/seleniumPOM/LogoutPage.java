@@ -1,10 +1,9 @@
 package com.NowakArtur97.WorldOfManga.feature.user.seleniumPOM;
 
+import com.NowakArtur97.WorldOfManga.testUtil.selenium.SeleniumPageObjectModel;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-
-import com.NowakArtur97.WorldOfManga.testUtil.selenium.SeleniumPageObjectModel;
 
 public class LogoutPage extends SeleniumPageObjectModel {
 

@@ -2,13 +2,9 @@ package com.NowakArtur97.WorldOfManga.exception;
 
 public class MangaGenreNotFoundException extends Exception {
 
-	private static final long serialVersionUID = -4183126948952949615L;
+    private static final long serialVersionUID = -4183126948952949615L;
 
-	public MangaGenreNotFoundException() {
-		super();
-	}
-
-	public MangaGenreNotFoundException(String message) {
-		super(message);
-	}
+    public MangaGenreNotFoundException(String message) {
+        super(message);
+    }
 }

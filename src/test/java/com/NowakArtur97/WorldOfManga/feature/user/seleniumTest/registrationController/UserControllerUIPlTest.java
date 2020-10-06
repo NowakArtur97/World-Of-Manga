@@ -1,10 +1,8 @@
 package com.NowakArtur97.WorldOfManga.feature.user.seleniumTest.registrationController;
 
-import static org.junit.jupiter.api.Assertions.assertAll;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
+import com.NowakArtur97.WorldOfManga.testUtil.enums.LanguageVersion;
+import com.NowakArtur97.WorldOfManga.testUtil.extension.ScreenshotWatcher;
+import com.NowakArtur97.WorldOfManga.testUtil.generator.NameWithSpacesGenerator;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -13,9 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.TestPropertySource;
 
-import com.NowakArtur97.WorldOfManga.testUtil.enums.LanguageVersion;
-import com.NowakArtur97.WorldOfManga.testUtil.extension.ScreenshotWatcher;
-import com.NowakArtur97.WorldOfManga.testUtil.generator.NameWithSpacesGenerator;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @ExtendWith(ScreenshotWatcher.class)
@@ -23,10 +19,10 @@ import com.NowakArtur97.WorldOfManga.testUtil.generator.NameWithSpacesGenerator;
 @DisplayNameGeneration(NameWithSpacesGenerator.class)
 @Tag("RegistrationControllerUIPl_Tests")
 @DirtiesContext
-public class UserControllerUIPlTest extends UserControllerUITest {
+class UserControllerUIPlTest extends UserControllerUITest {
 
     @Test
-    public void when_username_is_already_in_use_should_have_error() {
+    void when_username_is_already_in_use_should_have_error() {
 
         String username = "user";
         String email = "email@email.com";
@@ -46,7 +42,7 @@ public class UserControllerUIPlTest extends UserControllerUITest {
     }
 
     @Test
-    public void when_email_is_already_in_use_should_have_error() {
+    void when_email_is_already_in_use_should_have_error() {
 
         String username = "username";
         String email = "user@email.com";
@@ -66,7 +62,7 @@ public class UserControllerUIPlTest extends UserControllerUITest {
     }
 
     @Test
-    public void when_incorrect_registration_with_mandatory_fields_should_have_errors() {
+    void when_incorrect_registration_with_mandatory_fields_should_have_errors() {
 
         String username = "";
         String email = "";
@@ -92,7 +88,7 @@ public class UserControllerUIPlTest extends UserControllerUITest {
     }
 
     @Test
-    public void when_incorrect_registration_fields_size_with_mandatory_fields_should_have_errors() {
+    void when_incorrect_registration_fields_size_with_mandatory_fields_should_have_errors() {
 
         String username = "asdfghjklpasdfghjklpasdfghjklpasdfghjklpasdfghjklp";
         String email = "email,";
@@ -118,7 +114,7 @@ public class UserControllerUIPlTest extends UserControllerUITest {
     }
 
     @Test
-    public void when_incorrect_registration_with_all_fields_should_have_errors() {
+    void when_incorrect_registration_with_all_fields_should_have_errors() {
 
         String username = "";
         String email = "";
@@ -154,7 +150,7 @@ public class UserControllerUIPlTest extends UserControllerUITest {
     }
 
     @Test
-    public void when_correct_registration_with_all_fields_should_register_user() {
+    void when_correct_registration_with_all_fields_should_register_user() {
 
         String username = "user name 123";
 

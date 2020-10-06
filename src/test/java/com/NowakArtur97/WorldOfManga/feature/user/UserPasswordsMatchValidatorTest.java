@@ -1,6 +1,5 @@
 package com.NowakArtur97.WorldOfManga.feature.user;
 
-import com.NowakArtur97.WorldOfManga.feature.user.UserPasswordDTO;
 import com.NowakArtur97.WorldOfManga.testUtil.generator.NameWithSpacesGenerator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayNameGeneration;
@@ -17,19 +16,19 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @DisplayNameGeneration(NameWithSpacesGenerator.class)
 @Tag("UserPasswordsMatchValidator_Tests")
-public class UserPasswordsMatchValidatorTest {
+class UserPasswordsMatchValidatorTest {
 
     private Validator validator;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
 
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         validator = factory.getValidator();
     }
 
     @Test
-    public void when_validating_correct_password_should_not_have_violations() {
+    void when_validating_correct_password_should_not_have_violations() {
 
         String password = "password1";
 
@@ -43,7 +42,7 @@ public class UserPasswordsMatchValidatorTest {
     }
 
     @Test
-    public void when_validating_not_matching_passwords_should_have_violations() {
+    void when_validating_not_matching_passwords_should_have_violations() {
 
         String password1 = "password1";
         String password2 = "1drowssap";

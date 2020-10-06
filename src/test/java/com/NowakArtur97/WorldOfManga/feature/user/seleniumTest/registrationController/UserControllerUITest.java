@@ -1,7 +1,7 @@
 package com.NowakArtur97.WorldOfManga.feature.user.seleniumTest.registrationController;
 
-import com.NowakArtur97.WorldOfManga.feature.user.seleniumPOM.RegistrationPage;
 import com.NowakArtur97.WorldOfManga.feature.user.UserService;
+import com.NowakArtur97.WorldOfManga.feature.user.seleniumPOM.RegistrationPage;
 import com.NowakArtur97.WorldOfManga.testUtil.selenium.SeleniumUITest;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,45 +10,45 @@ import org.springframework.beans.factory.annotation.Value;
 public class UserControllerUITest extends SeleniumUITest {
 
     @Value("${user.username.notBlank}")
-    protected String usernameNotBlankMessage;
+    String usernameNotBlankMessage;
 
     @Value("${user.username.size}")
-    protected String usernameSizeMessage;
+    String usernameSizeMessage;
 
     @Value("${user.username.inUse}")
-    protected String usernameInUseMessage;
+    String usernameInUseMessage;
 
     @Value("${user.email.notBlank}")
-    protected String emailNotBlankMessage;
+    String emailNotBlankMessage;
 
     @Value("${user.email.inUse}")
-    protected String emailInUseMessage;
+    String emailInUseMessage;
 
     @Value("${user.email.size}")
     protected String emailSizeMessage;
 
     @Value("${user.email.emailFormat}")
-    protected String emailFormatMessage;
+    String emailFormatMessage;
 
     @Value("${user.firstName.size}")
-    protected String firstNameSizeMessage;
+    String firstNameSizeMessage;
 
     @Value("${user.lastName.size}")
-    protected String lastNameSizeMessage;
+    String lastNameSizeMessage;
 
     @Value("${user.areTermsAccepted.assertTrue}")
-    protected String usernameTermsMessage;
+    String usernameTermsMessage;
 
     @Value("${userPassword.password.matchingFields}")
-    protected String passwordMatchingFieldsMessage;
+    String passwordMatchingFieldsMessage;
 
     @Value("${userPassword.password.notBlank}")
-    protected String passwordFieldsNotBlankMessage;
+    String passwordFieldsNotBlankMessage;
 
     @Value("${form.login.afterRegistration}")
-    protected String afterRegistrationMessage;
+    String afterRegistrationMessage;
 
-    protected RegistrationPage registrationPage;
+    RegistrationPage registrationPage;
 
     @Autowired
     protected UserService userService;

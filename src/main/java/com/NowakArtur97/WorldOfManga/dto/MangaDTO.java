@@ -1,19 +1,16 @@
 package com.NowakArtur97.WorldOfManga.dto;
 
-import java.util.Set;
-
-import javax.validation.Valid;
-import javax.validation.constraints.NotEmpty;
-
-import org.springframework.web.multipart.MultipartFile;
-
 import com.NowakArtur97.WorldOfManga.feature.author.Author;
 import com.NowakArtur97.WorldOfManga.model.MangaGenre;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor

@@ -1,10 +1,5 @@
 package com.NowakArtur97.WorldOfManga.feature.author;
 
-import com.NowakArtur97.WorldOfManga.feature.author.AuthorDTO;
-import com.NowakArtur97.WorldOfManga.feature.author.Author;
-import com.NowakArtur97.WorldOfManga.feature.author.AuthorMapper;
-import com.NowakArtur97.WorldOfManga.feature.author.AuthorRepository;
-import com.NowakArtur97.WorldOfManga.feature.author.AuthorService;
 import com.NowakArtur97.WorldOfManga.testUtil.generator.NameWithSpacesGenerator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayNameGeneration;
@@ -23,7 +18,7 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 @DisplayNameGeneration(NameWithSpacesGenerator.class)
 @Tag("AuthorService_Tests")
-public class AuthorServiceTest {
+class AuthorServiceTest {
 
     private AuthorService authorService;
 
@@ -40,7 +35,7 @@ public class AuthorServiceTest {
     }
 
     @Test
-    public void when_full_name_is_already_in_database_should_return_true() {
+    void when_full_name_is_already_in_database_should_return_true() {
 
         boolean isAuthorAlreadyInDatabase = true;
 
@@ -57,7 +52,7 @@ public class AuthorServiceTest {
     }
 
     @Test
-    public void when_full_name_is_not_already_in_database_should_return_true() {
+    void when_full_name_is_not_already_in_database_should_return_true() {
 
         boolean isAuthorAlreadyInDatabase = false;
 
@@ -74,7 +69,7 @@ public class AuthorServiceTest {
     }
 
     @Test
-    public void when_add_author_should_save_author() {
+    void when_add_author_should_save_author() {
 
         String fullName = "Firstname LastName";
 
@@ -96,7 +91,7 @@ public class AuthorServiceTest {
     }
 
     @Test
-    public void when_save_author_should_save_author() {
+    void when_save_author_should_save_author() {
 
         String fullName = "Firstname LastName";
 
@@ -114,7 +109,7 @@ public class AuthorServiceTest {
     }
 
     @Test
-    public void when_find_all_should_return_list_of_authors() {
+    void when_find_all_should_return_list_of_authors() {
 
         List<Author> authorsExpected = new ArrayList<>();
         Author authorExpected = new Author("FirstName LastName");

@@ -1,12 +1,12 @@
 package com.NowakArtur97.WorldOfManga.converter;
 
+import org.apache.commons.io.output.ByteArrayOutputStream;
+import org.springframework.stereotype.Component;
+
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
-
-import org.apache.commons.io.output.ByteArrayOutputStream;
-import org.springframework.stereotype.Component;
 
 @Component
 public class ImageToByteConverterImpl implements ImageToByteConverter {

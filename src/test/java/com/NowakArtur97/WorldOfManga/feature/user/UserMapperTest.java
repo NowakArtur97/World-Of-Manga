@@ -1,9 +1,5 @@
 package com.NowakArtur97.WorldOfManga.feature.user;
 
-import com.NowakArtur97.WorldOfManga.feature.user.UserDTO;
-import com.NowakArtur97.WorldOfManga.feature.user.UserPasswordDTO;
-import com.NowakArtur97.WorldOfManga.feature.user.UserMapper;
-import com.NowakArtur97.WorldOfManga.feature.user.User;
 import com.NowakArtur97.WorldOfManga.testUtil.generator.NameWithSpacesGenerator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayNameGeneration;
@@ -21,7 +17,7 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 @DisplayNameGeneration(NameWithSpacesGenerator.class)
 @Tag("UserMapperImpl_Tests")
-public class UserMapperTest {
+class UserMapperTest {
 
     private UserMapper userMapper;
 
@@ -29,13 +25,13 @@ public class UserMapperTest {
     private ModelMapper modelMapper;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
 
         userMapper = new UserMapper(modelMapper);
     }
 
     @Test
-    public void when_map_user_dto_should_return_user_entity() {
+    void when_map_user_dto_should_return_user_entity() {
 
         UserDTO userDTOExpected = UserDTO.builder().username("username").firstName("first name").lastName("last name")
                 .userPasswordDTO(UserPasswordDTO.builder().password("password1").matchingPassword("password1").build())

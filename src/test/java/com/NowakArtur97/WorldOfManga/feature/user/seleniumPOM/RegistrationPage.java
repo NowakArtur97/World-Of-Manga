@@ -10,7 +10,7 @@ import java.util.List;
 
 public class RegistrationPage extends SeleniumPageObjectModel {
 
-    public static final String RESOURCE_PATH = "/user/register";
+    private static final String RESOURCE_PATH = "/user/register";
 
     private static final String USERNAME = "username";
     private static final String FIRSTNAME = "firstName";
@@ -113,7 +113,7 @@ public class RegistrationPage extends SeleniumPageObjectModel {
         emailInput.sendKeys(email);
     }
 
-    public void setConfirmTerms() {
+    private void setConfirmTerms() {
 
         terms.click();
     }
@@ -123,7 +123,7 @@ public class RegistrationPage extends SeleniumPageObjectModel {
         return terms.isSelected();
     }
 
-    public void clickSubmitRegistrationButton() {
+    private void clickSubmitRegistrationButton() {
 
         submitButton.click();
     }

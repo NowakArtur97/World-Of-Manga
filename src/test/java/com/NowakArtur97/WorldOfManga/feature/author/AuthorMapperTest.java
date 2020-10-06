@@ -17,7 +17,7 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 @DisplayNameGeneration(NameWithSpacesGenerator.class)
 @Tag("AuthorMapper_Tests")
-public class AuthorMapperTest {
+class AuthorMapperTest {
 
     private AuthorMapper authorMapper;
 
@@ -25,13 +25,13 @@ public class AuthorMapperTest {
     private ModelMapper modelMapper;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
 
         authorMapper = new AuthorMapper(modelMapper);
     }
 
     @Test
-    public void when_map_authorr_dto_should_return_author_entity() {
+    void when_map_author_dto_should_return_author_entity() {
 
         String fullName = "Firstname LastName";
 

@@ -1,9 +1,5 @@
 package com.NowakArtur97.WorldOfManga.feature.user;
 
-import com.NowakArtur97.WorldOfManga.feature.user.UserDTO;
-import com.NowakArtur97.WorldOfManga.feature.user.UserPasswordDTO;
-import com.NowakArtur97.WorldOfManga.feature.user.UserRegistrationValidator;
-import com.NowakArtur97.WorldOfManga.feature.user.UserService;
 import com.NowakArtur97.WorldOfManga.testUtil.generator.NameWithSpacesGenerator;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.Tag;
@@ -21,7 +17,7 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 @DisplayNameGeneration(NameWithSpacesGenerator.class)
 @Tag("UserRegistrationValidator_Tests")
-public class UserRegistrationValidatorTest {
+class UserRegistrationValidatorTest {
 
     @InjectMocks
     private UserRegistrationValidator userRegistrationValidator;
@@ -30,7 +26,7 @@ public class UserRegistrationValidatorTest {
     private UserService userService;
 
     @Test
-    public void when_validate_correct_user_dto_should_not_have_errors() {
+    void when_validate_correct_user_dto_should_not_have_errors() {
 
         String username = "username";
 
@@ -57,7 +53,7 @@ public class UserRegistrationValidatorTest {
     }
 
     @Test
-    public void when_validate_correct_username_but_email_is_already_in_use_should_have_errors() {
+    void when_validate_correct_username_but_email_is_already_in_use_should_have_errors() {
 
         String username = "username";
 
@@ -84,7 +80,7 @@ public class UserRegistrationValidatorTest {
     }
 
     @Test
-    public void when_validate_correct_email_but_username_is_already_in_use_should_have_errors() {
+    void when_validate_correct_email_but_username_is_already_in_use_should_have_errors() {
 
         String username = "username";
 
@@ -111,7 +107,7 @@ public class UserRegistrationValidatorTest {
     }
 
     @Test
-    public void when_validate_email_and_username_already_in_use_should_have_errors() {
+    void when_validate_email_and_username_already_in_use_should_have_errors() {
 
         String username = "username";
 

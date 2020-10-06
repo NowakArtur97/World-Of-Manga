@@ -1,6 +1,5 @@
 package com.NowakArtur97.WorldOfManga.feature.author;
 
-import com.NowakArtur97.WorldOfManga.feature.author.AuthorDTO;
 import com.NowakArtur97.WorldOfManga.testUtil.generator.NameWithSpacesGenerator;
 import org.junit.jupiter.api.*;
 
@@ -14,19 +13,19 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @DisplayNameGeneration(NameWithSpacesGenerator.class)
 @Tag("AuthorValidation_Tests")
-public class AuthorValidationTest {
+class AuthorValidationTest {
 
     private Validator validator;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
 
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         validator = factory.getValidator();
     }
 
     @Test
-    public void when_author_is_correct_should_not_have_violations() {
+    void when_author_is_correct_should_not_have_violations() {
 
         String fullName = "Firstname LastName";
 
@@ -42,7 +41,7 @@ public class AuthorValidationTest {
     class FullNameValidationTest {
 
         @Test
-        public void when_full_name_is_null_should_have_violations() {
+        void when_full_name_is_null_should_have_violations() {
 
             String fullName = null;
 
@@ -56,7 +55,7 @@ public class AuthorValidationTest {
         }
 
         @Test
-        public void when_full_name_is_empty_should_have_violations() {
+        void when_full_name_is_empty_should_have_violations() {
 
             String fullName = "";
 
@@ -70,7 +69,7 @@ public class AuthorValidationTest {
         }
 
         @Test
-        public void when_full_name_is_blank_should_have_violations() {
+        void when_full_name_is_blank_should_have_violations() {
 
             String fullName = "			";
 

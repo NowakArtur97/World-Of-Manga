@@ -1,8 +1,5 @@
 package com.NowakArtur97.WorldOfManga.feature.author;
 
-import com.NowakArtur97.WorldOfManga.feature.author.AuthorDTO;
-import com.NowakArtur97.WorldOfManga.feature.author.AuthorValidator;
-import com.NowakArtur97.WorldOfManga.feature.author.AuthorService;
 import com.NowakArtur97.WorldOfManga.testUtil.generator.NameWithSpacesGenerator;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.Tag;
@@ -20,7 +17,7 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 @DisplayNameGeneration(NameWithSpacesGenerator.class)
 @Tag("AuthorValidator_Tests")
-public class AuthorValidatorTest {
+class AuthorValidatorTest {
 
     @InjectMocks
     private AuthorValidator authorValidator;
@@ -29,7 +26,7 @@ public class AuthorValidatorTest {
     private AuthorService authorService;
 
     @Test
-    public void when_validate_correct_author_dto_should_not_have_errors() {
+    void when_validate_correct_author_dto_should_not_have_errors() {
 
         String fullName = "Firstname LastName";
 
@@ -48,7 +45,7 @@ public class AuthorValidatorTest {
     }
 
     @Test
-    public void when_validate_correct_author_dto_but_author_is_already_saved_should_have_errors() {
+    void when_validate_correct_author_dto_but_author_is_already_saved_should_have_errors() {
 
         String fullName = "Firstname LastName";
 

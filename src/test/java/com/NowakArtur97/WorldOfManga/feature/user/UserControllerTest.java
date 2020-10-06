@@ -29,7 +29,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ExtendWith(MockitoExtension.class)
 @DisplayNameGeneration(NameWithSpacesGenerator.class)
 @Tag("RegistrationController_Tests")
-public class UserControllerTest {
+class UserControllerTest {
 
     private MockMvc mockMvc;
 
@@ -42,21 +42,21 @@ public class UserControllerTest {
     private UserRegistrationValidator userRegistrationValidator;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
 
         userController = new UserController(userRegistrationService, userRegistrationValidator);
         mockMvc = MockMvcBuilders.standaloneSetup(userController).build();
     }
 
     @Test
-    public void when_load_login_page_should_show_login_page() {
+    void when_load_login_page_should_show_login_page() {
 
         assertAll(() -> mockMvc.perform(get("/user/login")).andExpect(status().isOk())
                 .andExpect(view().name("views/user-login")));
     }
 
     @Test
-    public void when_load_registration_page_should_show_registration_page() {
+    void when_load_registration_page_should_show_registration_page() {
 
         assertAll(() -> mockMvc.perform(get("/user/register")).andExpect(status().isOk())
                 .andExpect(view().name("views/user-registration"))
@@ -64,7 +64,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void when_process_registration_with_correct_data_should_show_login_page_with_message() {
+    void when_process_registration_with_correct_data_should_show_login_page_with_message() {
 
         UserDTO userDTO = UserDTO.builder().username("username").firstName("first name").lastName("last name")
                 .userPasswordDTO(UserPasswordDTO.builder().password("password1").matchingPassword("password1").build())
@@ -80,7 +80,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void when_process_registration_with_incorrect_data_should_show_registration_page() {
+    void when_process_registration_with_incorrect_data_should_show_registration_page() {
 
         String username = "";
         String email = "useremail,";
@@ -115,7 +115,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void when_sign_out_user_should_invalidate_session() {
+    void when_sign_out_user_should_invalidate_session() {
 
         MockHttpSession mockSession = new MockHttpSession();
 

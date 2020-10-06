@@ -1,10 +1,11 @@
 package com.NowakArtur97.WorldOfManga.controller.manga.seleniumTest;
 
-import static org.junit.jupiter.api.Assertions.assertAll;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
+import com.NowakArtur97.WorldOfManga.controller.manga.seleniumPOM.MangaList;
+import com.NowakArtur97.WorldOfManga.feature.user.seleniumPOM.LoginPage;
+import com.NowakArtur97.WorldOfManga.testUtil.enums.LanguageVersion;
+import com.NowakArtur97.WorldOfManga.testUtil.extension.ScreenshotWatcher;
+import com.NowakArtur97.WorldOfManga.testUtil.generator.NameWithSpacesGenerator;
+import com.NowakArtur97.WorldOfManga.testUtil.selenium.SeleniumUITest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.Tag;
@@ -17,12 +18,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.annotation.DirtiesContext.ClassMode;
 
-import com.NowakArtur97.WorldOfManga.controller.manga.seleniumPOM.MangaList;
-import com.NowakArtur97.WorldOfManga.feature.user.seleniumPOM.LoginPage;
-import com.NowakArtur97.WorldOfManga.testUtil.enums.LanguageVersion;
-import com.NowakArtur97.WorldOfManga.testUtil.extension.ScreenshotWatcher;
-import com.NowakArtur97.WorldOfManga.testUtil.generator.NameWithSpacesGenerator;
-import com.NowakArtur97.WorldOfManga.testUtil.selenium.SeleniumUITest;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @ExtendWith(ScreenshotWatcher.class)

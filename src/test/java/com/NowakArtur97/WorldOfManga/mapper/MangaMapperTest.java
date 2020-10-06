@@ -1,8 +1,8 @@
 package com.NowakArtur97.WorldOfManga.mapper;
 
 import com.NowakArtur97.WorldOfManga.dto.MangaDTO;
-import com.NowakArtur97.WorldOfManga.mapper.manga.MangaMapper;
 import com.NowakArtur97.WorldOfManga.feature.author.Author;
+import com.NowakArtur97.WorldOfManga.mapper.manga.MangaMapper;
 import com.NowakArtur97.WorldOfManga.model.Manga;
 import com.NowakArtur97.WorldOfManga.model.MangaGenre;
 import com.NowakArtur97.WorldOfManga.model.MangaTranslation;

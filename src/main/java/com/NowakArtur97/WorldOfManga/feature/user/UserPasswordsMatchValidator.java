@@ -1,4 +1,4 @@
-package com.NowakArtur97.WorldOfManga.validation.userPassword;
+package com.NowakArtur97.WorldOfManga.feature.user;
 
 import org.springframework.beans.BeanWrapperImpl;
 

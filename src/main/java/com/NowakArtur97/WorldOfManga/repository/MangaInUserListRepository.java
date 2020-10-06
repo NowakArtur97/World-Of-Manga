@@ -1,12 +1,11 @@
 package com.NowakArtur97.WorldOfManga.repository;
 
-import java.util.Optional;
-
-import org.springframework.data.jpa.repository.JpaRepository;
-
+import com.NowakArtur97.WorldOfManga.feature.user.User;
 import com.NowakArtur97.WorldOfManga.model.Manga;
 import com.NowakArtur97.WorldOfManga.model.MangaInUserList;
-import com.NowakArtur97.WorldOfManga.feature.user.User;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.Optional;
 
 public interface MangaInUserListRepository extends JpaRepository<MangaInUserList, Long> {
 

@@ -1,10 +1,10 @@
 package com.NowakArtur97.WorldOfManga.controller.manga;
 
 import com.NowakArtur97.WorldOfManga.exception.MangaNotFoundException;
-import com.NowakArtur97.WorldOfManga.model.Manga;
 import com.NowakArtur97.WorldOfManga.feature.user.User;
-import com.NowakArtur97.WorldOfManga.service.MangaInUserListService;
 import com.NowakArtur97.WorldOfManga.feature.user.UserService;
+import com.NowakArtur97.WorldOfManga.model.Manga;
+import com.NowakArtur97.WorldOfManga.service.MangaInUserListService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;

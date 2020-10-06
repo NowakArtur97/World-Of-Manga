@@ -1,16 +1,12 @@
 package com.NowakArtur97.WorldOfManga.service;
 
-import static org.junit.jupiter.api.Assertions.assertAll;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.Mockito.when;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
+import com.NowakArtur97.WorldOfManga.enums.MangaInUserListStatus;
+import com.NowakArtur97.WorldOfManga.feature.user.User;
 import com.NowakArtur97.WorldOfManga.feature.user.UserService;
+import com.NowakArtur97.WorldOfManga.model.Manga;
+import com.NowakArtur97.WorldOfManga.model.MangaGenre;
+import com.NowakArtur97.WorldOfManga.model.MangaTranslation;
+import com.NowakArtur97.WorldOfManga.testUtil.generator.NameWithSpacesGenerator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.Tag;
@@ -20,12 +16,12 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.mock.web.MockMultipartFile;
 
-import com.NowakArtur97.WorldOfManga.enums.MangaInUserListStatus;
-import com.NowakArtur97.WorldOfManga.model.Manga;
-import com.NowakArtur97.WorldOfManga.model.MangaGenre;
-import com.NowakArtur97.WorldOfManga.model.MangaTranslation;
-import com.NowakArtur97.WorldOfManga.feature.user.User;
-import com.NowakArtur97.WorldOfManga.testUtil.generator.NameWithSpacesGenerator;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 @DisplayNameGeneration(NameWithSpacesGenerator.class)

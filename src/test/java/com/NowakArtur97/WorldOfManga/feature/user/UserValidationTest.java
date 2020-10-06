@@ -1,7 +1,5 @@
 package com.NowakArtur97.WorldOfManga.feature.user;
 
-import com.NowakArtur97.WorldOfManga.feature.user.UserDTO;
-import com.NowakArtur97.WorldOfManga.feature.user.UserPasswordDTO;
 import com.NowakArtur97.WorldOfManga.testUtil.generator.NameWithSpacesGenerator;
 import org.junit.jupiter.api.*;
 
@@ -15,19 +13,19 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @DisplayNameGeneration(NameWithSpacesGenerator.class)
 @Tag("UserPassword_Tests")
-public class UserValidationTest {
+class UserValidationTest {
 
     private Validator validator;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
 
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         validator = factory.getValidator();
     }
 
     @Test
-    public void when_user_is_correct_should_not_have_violations() {
+    void when_user_is_correct_should_not_have_violations() {
 
         UserDTO userDTO = UserDTO.builder().username("username").firstName("first name").lastName("last name")
                 .userPasswordDTO(UserPasswordDTO.builder().password("password1").matchingPassword("password1").build())
@@ -43,7 +41,7 @@ public class UserValidationTest {
     class UsernameValidationTest {
 
         @Test
-        public void when_username_is_null_should_have_violations() {
+        void when_username_is_null_should_have_violations() {
 
             String username = null;
 
@@ -60,7 +58,7 @@ public class UserValidationTest {
         }
 
         @Test
-        public void when_username_is_empty_should_have_violations() {
+        void when_username_is_empty_should_have_violations() {
 
             String username = "";
 
@@ -77,7 +75,7 @@ public class UserValidationTest {
         }
 
         @Test
-        public void when_username_is_blank_should_have_violations() {
+        void when_username_is_blank_should_have_violations() {
 
             String username = "    ";
 
@@ -94,7 +92,7 @@ public class UserValidationTest {
         }
 
         @Test
-        public void when_username_is_too_long_should_have_violations() {
+        void when_username_is_too_long_should_have_violations() {
 
             String username = "abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij";
 
@@ -115,7 +113,7 @@ public class UserValidationTest {
     class EmailValidationTest {
 
         @Test
-        public void when_email_is_null_should_have_violations() {
+        void when_email_is_null_should_have_violations() {
 
             String email = null;
 
@@ -132,7 +130,7 @@ public class UserValidationTest {
         }
 
         @Test
-        public void when_email_is_empty_should_have_violations() {
+        void when_email_is_empty_should_have_violations() {
 
             String email = "";
 
@@ -149,7 +147,7 @@ public class UserValidationTest {
         }
 
         @Test
-        public void when_email_is_blank_should_have_violations() {
+        void when_email_is_blank_should_have_violations() {
 
             String email = "    ";
 
@@ -166,7 +164,7 @@ public class UserValidationTest {
         }
 
         @Test
-        public void when_email_is_too_long_should_have_violations() {
+        void when_email_is_too_long_should_have_violations() {
 
             String email = "abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij@email.com";
 
@@ -183,7 +181,7 @@ public class UserValidationTest {
         }
 
         @Test
-        public void when_email_has_incorrect_format_should_have_violations() {
+        void when_email_has_incorrect_format_should_have_violations() {
 
             String email = "email,";
 
@@ -201,7 +199,7 @@ public class UserValidationTest {
     }
 
     @Test
-    public void when_firstname_is_too_long_should_have_violations() {
+    void when_firstname_is_too_long_should_have_violations() {
 
         String firstname = "abcdefghijabcdefghijabcdefghijabcdefghijabcdefghij";
 
@@ -216,7 +214,7 @@ public class UserValidationTest {
     }
 
     @Test
-    public void when_lastname_is_too_long_should_have_violations() {
+    void when_lastname_is_too_long_should_have_violations() {
 
         String lastname = "abcdefghijabcdefghijabcdefghijabcdefghijabcdefghij";
 
@@ -231,7 +229,7 @@ public class UserValidationTest {
     }
 
     @Test
-    public void when_terms_are_not_accepted_should_have_violations() {
+    void when_terms_are_not_accepted_should_have_violations() {
 
         UserDTO userDTO = UserDTO.builder().username("username").firstName("first name").lastName("last name")
                 .userPasswordDTO(UserPasswordDTO.builder().password("password1").matchingPassword("password1").build())

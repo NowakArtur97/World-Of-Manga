@@ -1,8 +1,5 @@
 package com.NowakArtur97.WorldOfManga.feature.user;
 
-import com.NowakArtur97.WorldOfManga.feature.user.User;
-import com.NowakArtur97.WorldOfManga.feature.user.UserRepository;
-import com.NowakArtur97.WorldOfManga.feature.user.UserService;
 import com.NowakArtur97.WorldOfManga.testUtil.generator.NameWithSpacesGenerator;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -25,7 +22,7 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 @DisplayNameGeneration(NameWithSpacesGenerator.class)
 @Tag("UserService_Tests")
-public class UserServiceTest {
+class UserServiceTest {
 
     private UserService userService;
 
@@ -52,7 +49,7 @@ public class UserServiceTest {
     class UserServiceIntegrationTest {
 
         @Test
-        public void when_find_by_username_should_return_user_by_username() {
+        void when_find_by_username_should_return_user_by_username() {
 
             String username = "user";
 
@@ -86,7 +83,7 @@ public class UserServiceTest {
         }
 
         @Test
-        public void when_find_not_existing_user_by_username_should_return_empty_optional() {
+        void when_find_not_existing_user_by_username_should_return_empty_optional() {
 
             String username = "user";
 
@@ -101,7 +98,7 @@ public class UserServiceTest {
         }
 
         @Test
-        public void when_username_is_already_in_use_should_return_true() {
+        void when_username_is_already_in_use_should_return_true() {
 
             boolean isUsernameInUse = true;
 
@@ -118,7 +115,7 @@ public class UserServiceTest {
         }
 
         @Test
-        public void when_username_is_not_in_use_should_return_false() {
+        void when_username_is_not_in_use_should_return_false() {
 
             boolean isUsernameInUse = false;
 
@@ -135,7 +132,7 @@ public class UserServiceTest {
         }
 
         @Test
-        public void when_email_is_already_in_use_should_return_true() {
+        void when_email_is_already_in_use_should_return_true() {
 
             boolean isEmailInUse = true;
 
@@ -150,7 +147,7 @@ public class UserServiceTest {
         }
 
         @Test
-        public void when_email_is_not_in_use_should_return_false() {
+        void when_email_is_not_in_use_should_return_false() {
 
             boolean isEmailInUse = false;
 
@@ -166,7 +163,7 @@ public class UserServiceTest {
         }
 
         @Test
-        public void when_save_user_should_save_and_return_user() {
+        void when_save_user_should_save_and_return_user() {
 
             User userExpected = User.builder().username("username").firstName("first name").lastName("last name")
                     .password("password1").email("user@email.com").isEnabled(true).build();
@@ -198,7 +195,7 @@ public class UserServiceTest {
         }
 
         @Test
-        public void when_user_is_logged_id_should_return_true() {
+        void when_user_is_logged_id_should_return_true() {
 
             when(securityContext.getAuthentication()).thenReturn(authentication);
 
@@ -212,7 +209,7 @@ public class UserServiceTest {
         }
 
         @Test
-        public void when_user_is_not_logged_in_should_return_false() {
+        void when_user_is_not_logged_in_should_return_false() {
 
             when(securityContext.getAuthentication()).thenReturn(authentication);
             when(authentication.getName()).thenReturn("anonymousUser");
@@ -227,7 +224,7 @@ public class UserServiceTest {
         }
 
         @Test
-        public void when_user_is_not_logged_in_and_authentication_is_null_should_return_false() {
+        void when_user_is_not_logged_in_and_authentication_is_null_should_return_false() {
 
             when(securityContext.getAuthentication()).thenReturn(null);
 
@@ -246,7 +243,7 @@ public class UserServiceTest {
     class UserDetailsIntegrationTest {
 
         @Test
-        public void when_load_user_details_by_username_should_return_user_details() {
+        void when_load_user_details_by_username_should_return_user_details() {
 
             String username = "user";
 
@@ -282,7 +279,7 @@ public class UserServiceTest {
         }
 
         @Test
-        public void when_load_logged_in_user_should_return_user() {
+        void when_load_logged_in_user_should_return_user() {
 
             String username = "principal";
 
@@ -322,7 +319,7 @@ public class UserServiceTest {
         }
 
         @Test
-        public void when_load_logged_in_user_when_isn_not_logged_should_return_user() {
+        void when_load_logged_in_user_when_isn_not_logged_should_return_user() {
 
             String username = "user not exists";
 
@@ -337,7 +334,7 @@ public class UserServiceTest {
         }
 
         @Test
-        public void when_load_user_details_by_username_does_not_find_user_should_throw_UsernameNotFoundException() {
+        void when_load_user_details_by_username_does_not_find_user_should_throw_UsernameNotFoundException() {
 
             String username = "user";
 

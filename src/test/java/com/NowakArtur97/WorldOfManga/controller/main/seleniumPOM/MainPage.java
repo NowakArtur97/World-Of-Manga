@@ -1,11 +1,10 @@
 package com.NowakArtur97.WorldOfManga.controller.main.seleniumPOM;
 
+import com.NowakArtur97.WorldOfManga.testUtil.enums.LanguageVersion;
+import com.NowakArtur97.WorldOfManga.testUtil.selenium.SeleniumPageObjectModel;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-
-import com.NowakArtur97.WorldOfManga.testUtil.enums.LanguageVersion;
-import com.NowakArtur97.WorldOfManga.testUtil.selenium.SeleniumPageObjectModel;
 
 public class MainPage extends SeleniumPageObjectModel {
 
