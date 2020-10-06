@@ -1,8 +1,6 @@
 package com.NowakArtur97.WorldOfManga.feature.author;
 
-import com.NowakArtur97.WorldOfManga.dto.AuthorDTO;
 import com.NowakArtur97.WorldOfManga.dto.MangaDTO;
-import com.NowakArtur97.WorldOfManga.service.AuthorService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,14 +15,14 @@ import javax.validation.Valid;
 @Controller
 @RequestMapping(path = "/admin")
 @RequiredArgsConstructor
-public class AuthorController {
+class AuthorController {
 
     private final AuthorService authorService;
 
     private final AuthorValidator authorValidator;
 
     @GetMapping(path = "/addOrUpdateAuthor")
-    public String showAddMangaPage(Model theModel) {
+    String showAddMangaPage(Model theModel) {
 
         theModel.addAttribute("mangaDTO", new MangaDTO());
         theModel.addAttribute("authorDTO", new AuthorDTO());
@@ -34,8 +32,8 @@ public class AuthorController {
     }
 
     @PostMapping(path = "/addOrUpdateAuthor")
-    public String processAddAuthorPage(Model theModel, @ModelAttribute("authorDTO") @Valid AuthorDTO authorDTO,
-                                       BindingResult result) {
+    String processAddAuthorPage(Model theModel, @ModelAttribute("authorDTO") @Valid AuthorDTO authorDTO,
+                                BindingResult result) {
 
         authorValidator.validate(authorDTO, result);
 

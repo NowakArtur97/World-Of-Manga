@@ -1,7 +1,5 @@
 package com.NowakArtur97.WorldOfManga.feature.author;
 
-import com.NowakArtur97.WorldOfManga.dto.AuthorDTO;
-import com.NowakArtur97.WorldOfManga.service.AuthorService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
@@ -9,7 +7,7 @@ import org.springframework.validation.Validator;
 
 @Component
 @RequiredArgsConstructor
-public class AuthorValidator implements Validator {
+class AuthorValidator implements Validator {
 
     private final AuthorService authorService;
 

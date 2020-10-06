@@ -1,6 +1,6 @@
-package com.NowakArtur97.WorldOfManga.validation.author;
+package com.NowakArtur97.WorldOfManga.feature.author;
 
-import com.NowakArtur97.WorldOfManga.dto.AuthorDTO;
+import com.NowakArtur97.WorldOfManga.feature.author.AuthorDTO;
 import com.NowakArtur97.WorldOfManga.testUtil.generator.NameWithSpacesGenerator;
 import org.junit.jupiter.api.*;
 

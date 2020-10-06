@@ -1,11 +1,11 @@
-package com.NowakArtur97.WorldOfManga.dto;
-
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+package com.NowakArtur97.WorldOfManga.feature.author;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 @Data
 @NoArgsConstructor

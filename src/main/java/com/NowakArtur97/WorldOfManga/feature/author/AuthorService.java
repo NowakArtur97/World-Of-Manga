@@ -1,9 +1,5 @@
-package com.NowakArtur97.WorldOfManga.service;
+package com.NowakArtur97.WorldOfManga.feature.author;
 
-import com.NowakArtur97.WorldOfManga.dto.AuthorDTO;
-import com.NowakArtur97.WorldOfManga.feature.author.Author;
-import com.NowakArtur97.WorldOfManga.feature.author.AuthorMapper;
-import com.NowakArtur97.WorldOfManga.feature.author.AuthorRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

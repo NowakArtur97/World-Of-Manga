@@ -1,6 +1,6 @@
 package com.NowakArtur97.WorldOfManga.controller.manga;
 
-import com.NowakArtur97.WorldOfManga.dto.AuthorDTO;
+import com.NowakArtur97.WorldOfManga.feature.author.AuthorDTO;
 import com.NowakArtur97.WorldOfManga.dto.MangaDTO;
 import com.NowakArtur97.WorldOfManga.dto.MangaTranslationDTO;
 import com.NowakArtur97.WorldOfManga.exception.LanguageNotFoundException;
@@ -9,7 +9,7 @@ import com.NowakArtur97.WorldOfManga.feature.author.Author;
 import com.NowakArtur97.WorldOfManga.model.Manga;
 import com.NowakArtur97.WorldOfManga.model.MangaGenre;
 import com.NowakArtur97.WorldOfManga.model.MangaTranslation;
-import com.NowakArtur97.WorldOfManga.service.AuthorService;
+import com.NowakArtur97.WorldOfManga.feature.author.AuthorService;
 import com.NowakArtur97.WorldOfManga.service.MangaGenreService;
 import com.NowakArtur97.WorldOfManga.service.MangaService;
 import com.NowakArtur97.WorldOfManga.service.MangaTranslationService;
