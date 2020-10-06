@@ -2,7 +2,7 @@ package com.NowakArtur97.WorldOfManga.controller.manga.seleniumTest.mangaControl
 
 import com.NowakArtur97.WorldOfManga.controller.manga.seleniumPOM.MangaFormPage;
 import com.NowakArtur97.WorldOfManga.controller.manga.seleniumPOM.MangaList;
-import com.NowakArtur97.WorldOfManga.controller.unloggedUser.seleniumPOM.LoginPage;
+import com.NowakArtur97.WorldOfManga.feature.user.seleniumPOM.LoginPage;
 import com.NowakArtur97.WorldOfManga.service.MangaTranslationService;
 import com.NowakArtur97.WorldOfManga.testUtil.selenium.SeleniumUITest;
 import org.junit.jupiter.api.BeforeEach;

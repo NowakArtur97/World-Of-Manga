@@ -1,7 +1,7 @@
 package com.NowakArtur97.WorldOfManga.controller.manga.seleniumTest;
 
 import com.NowakArtur97.WorldOfManga.controller.manga.seleniumPOM.MangaList;
-import com.NowakArtur97.WorldOfManga.controller.unloggedUser.seleniumPOM.LoginPage;
+import com.NowakArtur97.WorldOfManga.feature.user.seleniumPOM.LoginPage;
 import com.NowakArtur97.WorldOfManga.testUtil.enums.LanguageVersion;
 import com.NowakArtur97.WorldOfManga.testUtil.extension.ScreenshotWatcher;
 import com.NowakArtur97.WorldOfManga.testUtil.generator.NameWithSpacesGenerator;

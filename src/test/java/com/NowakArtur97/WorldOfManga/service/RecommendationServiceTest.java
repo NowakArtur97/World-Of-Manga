@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.NowakArtur97.WorldOfManga.feature.user.UserService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.Tag;
@@ -23,7 +24,7 @@ import com.NowakArtur97.WorldOfManga.enums.MangaInUserListStatus;
 import com.NowakArtur97.WorldOfManga.model.Manga;
 import com.NowakArtur97.WorldOfManga.model.MangaGenre;
 import com.NowakArtur97.WorldOfManga.model.MangaTranslation;
-import com.NowakArtur97.WorldOfManga.model.User;
+import com.NowakArtur97.WorldOfManga.feature.user.User;
 import com.NowakArtur97.WorldOfManga.testUtil.generator.NameWithSpacesGenerator;
 
 @ExtendWith(MockitoExtension.class)

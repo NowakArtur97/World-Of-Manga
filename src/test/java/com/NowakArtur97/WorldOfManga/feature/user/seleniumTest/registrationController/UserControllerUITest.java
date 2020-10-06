@@ -1,0 +1,61 @@
+package com.NowakArtur97.WorldOfManga.feature.user.seleniumTest.registrationController;
+
+import com.NowakArtur97.WorldOfManga.feature.user.seleniumPOM.RegistrationPage;
+import com.NowakArtur97.WorldOfManga.feature.user.UserService;
+import com.NowakArtur97.WorldOfManga.testUtil.selenium.SeleniumUITest;
+import org.junit.jupiter.api.BeforeEach;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+
+public class UserControllerUITest extends SeleniumUITest {
+
+    @Value("${user.username.notBlank}")
+    protected String usernameNotBlankMessage;
+
+    @Value("${user.username.size}")
+    protected String usernameSizeMessage;
+
+    @Value("${user.username.inUse}")
+    protected String usernameInUseMessage;
+
+    @Value("${user.email.notBlank}")
+    protected String emailNotBlankMessage;
+
+    @Value("${user.email.inUse}")
+    protected String emailInUseMessage;
+
+    @Value("${user.email.size}")
+    protected String emailSizeMessage;
+
+    @Value("${user.email.emailFormat}")
+    protected String emailFormatMessage;
+
+    @Value("${user.firstName.size}")
+    protected String firstNameSizeMessage;
+
+    @Value("${user.lastName.size}")
+    protected String lastNameSizeMessage;
+
+    @Value("${user.areTermsAccepted.assertTrue}")
+    protected String usernameTermsMessage;
+
+    @Value("${userPassword.password.matchingFields}")
+    protected String passwordMatchingFieldsMessage;
+
+    @Value("${userPassword.password.notBlank}")
+    protected String passwordFieldsNotBlankMessage;
+
+    @Value("${form.login.afterRegistration}")
+    protected String afterRegistrationMessage;
+
+    protected RegistrationPage registrationPage;
+
+    @Autowired
+    protected UserService userService;
+
+    @BeforeEach
+    public void setupPOM() {
+
+        registrationPage = new RegistrationPage(webDriver);
+    }
+}

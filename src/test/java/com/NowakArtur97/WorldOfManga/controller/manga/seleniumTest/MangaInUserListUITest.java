@@ -18,7 +18,7 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.annotation.DirtiesContext.ClassMode;
 
 import com.NowakArtur97.WorldOfManga.controller.manga.seleniumPOM.MangaList;
-import com.NowakArtur97.WorldOfManga.controller.unloggedUser.seleniumPOM.LoginPage;
+import com.NowakArtur97.WorldOfManga.feature.user.seleniumPOM.LoginPage;
 import com.NowakArtur97.WorldOfManga.testUtil.enums.LanguageVersion;
 import com.NowakArtur97.WorldOfManga.testUtil.extension.ScreenshotWatcher;
 import com.NowakArtur97.WorldOfManga.testUtil.generator.NameWithSpacesGenerator;

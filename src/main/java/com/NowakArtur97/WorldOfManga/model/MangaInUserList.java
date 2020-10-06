@@ -12,6 +12,7 @@ import javax.persistence.Table;
 
 import com.NowakArtur97.WorldOfManga.enums.MangaInUserListStatus;
 
+import com.NowakArtur97.WorldOfManga.feature.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

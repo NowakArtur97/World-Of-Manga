@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.NowakArtur97.WorldOfManga.model.Manga;
 import com.NowakArtur97.WorldOfManga.model.MangaRating;
-import com.NowakArtur97.WorldOfManga.model.User;
+import com.NowakArtur97.WorldOfManga.feature.user.User;
 
 public interface MangaRatingRepository extends JpaRepository<MangaRating, Long> {
 

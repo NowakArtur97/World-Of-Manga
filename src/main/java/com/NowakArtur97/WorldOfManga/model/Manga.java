@@ -23,6 +23,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import com.NowakArtur97.WorldOfManga.feature.author.Author;
+import com.NowakArtur97.WorldOfManga.feature.user.User;
 import org.hibernate.annotations.Type;
 
 import lombok.AllArgsConstructor;

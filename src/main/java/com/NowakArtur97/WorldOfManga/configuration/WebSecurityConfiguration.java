@@ -3,7 +3,7 @@ package com.NowakArtur97.WorldOfManga.configuration;
 import com.NowakArtur97.WorldOfManga.handler.LoginAuthenticationFailureHandler;
 import com.NowakArtur97.WorldOfManga.handler.LoginAuthenticationSuccessHandler;
 import com.NowakArtur97.WorldOfManga.handler.UserAccessDeniedHandler;
-import com.NowakArtur97.WorldOfManga.service.UserService;
+import com.NowakArtur97.WorldOfManga.feature.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

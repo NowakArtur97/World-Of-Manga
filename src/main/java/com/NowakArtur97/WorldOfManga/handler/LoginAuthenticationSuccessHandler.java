@@ -1,7 +1,7 @@
 package com.NowakArtur97.WorldOfManga.handler;
 
-import com.NowakArtur97.WorldOfManga.model.User;
-import com.NowakArtur97.WorldOfManga.service.UserService;
+import com.NowakArtur97.WorldOfManga.feature.user.User;
+import com.NowakArtur97.WorldOfManga.feature.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;

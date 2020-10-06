@@ -4,6 +4,8 @@ import com.NowakArtur97.WorldOfManga.dto.MangaDTO;
 import com.NowakArtur97.WorldOfManga.enums.MangaInUserListStatus;
 import com.NowakArtur97.WorldOfManga.exception.MangaNotFoundException;
 import com.NowakArtur97.WorldOfManga.feature.author.Author;
+import com.NowakArtur97.WorldOfManga.feature.user.User;
+import com.NowakArtur97.WorldOfManga.feature.user.UserService;
 import com.NowakArtur97.WorldOfManga.mapper.manga.MangaMapper;
 import com.NowakArtur97.WorldOfManga.model.*;
 import com.NowakArtur97.WorldOfManga.repository.MangaRepository;

@@ -4,14 +4,15 @@ import com.NowakArtur97.WorldOfManga.converter.ImageToByteConverter;
 import com.NowakArtur97.WorldOfManga.exception.LanguageNotFoundException;
 import com.NowakArtur97.WorldOfManga.exception.MangaGenreNotFoundException;
 import com.NowakArtur97.WorldOfManga.feature.author.Author;
-import com.NowakArtur97.WorldOfManga.model.*;
+import com.NowakArtur97.WorldOfManga.model.Language;
+import com.NowakArtur97.WorldOfManga.model.Manga;
+import com.NowakArtur97.WorldOfManga.model.MangaGenre;
+import com.NowakArtur97.WorldOfManga.model.MangaTranslation;
 import com.NowakArtur97.WorldOfManga.repository.MangaRepository;
 import com.NowakArtur97.WorldOfManga.service.LanguageService;
 import com.NowakArtur97.WorldOfManga.service.MangaGenreService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.event.ApplicationReadyEvent;
-import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -53,7 +54,7 @@ public class OnApplicationStartupEventListener {
     private static MangaGenre romance;
     private static MangaGenre horror;
 
-    @EventListener(ApplicationReadyEvent.class)
+//    @EventListener(ApplicationReadyEvent.class)
     public void onStartup() throws LanguageNotFoundException, MalformedURLException, MangaGenreNotFoundException {
 
         en = languageService.findByLocale("en");

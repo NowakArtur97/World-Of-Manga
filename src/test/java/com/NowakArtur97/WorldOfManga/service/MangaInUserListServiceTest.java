@@ -3,6 +3,8 @@ package com.NowakArtur97.WorldOfManga.service;
 import com.NowakArtur97.WorldOfManga.enums.MangaInUserListStatus;
 import com.NowakArtur97.WorldOfManga.exception.MangaNotFoundException;
 import com.NowakArtur97.WorldOfManga.feature.author.Author;
+import com.NowakArtur97.WorldOfManga.feature.user.User;
+import com.NowakArtur97.WorldOfManga.feature.user.UserService;
 import com.NowakArtur97.WorldOfManga.model.*;
 import com.NowakArtur97.WorldOfManga.repository.MangaInUserListRepository;
 import com.NowakArtur97.WorldOfManga.testUtil.generator.NameWithSpacesGenerator;
