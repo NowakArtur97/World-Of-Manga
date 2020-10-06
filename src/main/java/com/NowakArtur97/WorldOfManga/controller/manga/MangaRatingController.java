@@ -1,32 +1,30 @@
 package com.NowakArtur97.WorldOfManga.controller.manga;
 
-import javax.servlet.http.HttpServletRequest;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import com.NowakArtur97.WorldOfManga.exception.MangaNotFoundException;
+import com.NowakArtur97.WorldOfManga.service.MangaRatingService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.NowakArtur97.WorldOfManga.exception.MangaNotFoundException;
-
-import lombok.RequiredArgsConstructor;
+import javax.servlet.http.HttpServletRequest;
 
 @Controller
 @RequestMapping(path = "/auth")
-@RequiredArgsConstructor(onConstructor = @__(@Autowired))
+@RequiredArgsConstructor
 public class MangaRatingController {
 
-	private final MangaRatingService mangaRatingService;
+    private final MangaRatingService mangaRatingService;
 
-	@GetMapping(path = "/rateManga")
-	public String rateManga(HttpServletRequest request, @RequestParam("id") Long mangaId,
-			@RequestParam("rating") int rating) throws MangaNotFoundException {
+    @GetMapping(path = "/rateManga")
+    public String rateManga(HttpServletRequest request, @RequestParam("id") Long mangaId,
+                            @RequestParam("rating") int rating) throws MangaNotFoundException {
 
-		mangaRatingService.rateManga(mangaId, rating);
+        mangaRatingService.rateManga(mangaId, rating);
 
-		String referer = request.getHeader("Referer");
+        String referer = request.getHeader("Referer");
 
-		return "redirect:" + referer;
-	}
+        return "redirect:" + referer;
+    }
 }

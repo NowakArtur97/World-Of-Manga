@@ -5,13 +5,12 @@ import com.NowakArtur97.WorldOfManga.mapper.author.AuthorMapper;
 import com.NowakArtur97.WorldOfManga.model.Author;
 import com.NowakArtur97.WorldOfManga.repository.AuthorRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor(onConstructor = @__(@Autowired))
+@RequiredArgsConstructor
 public class AuthorService {
 
     private final AuthorRepository authorRepository;

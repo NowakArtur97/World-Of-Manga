@@ -1,13 +1,8 @@
 package com.NowakArtur97.WorldOfManga.validation.userPassword;
 
-import java.lang.annotation.Documented;
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
-
 import javax.validation.Constraint;
 import javax.validation.Payload;
+import java.lang.annotation.*;
 
 @Documented
 @Constraint(validatedBy = UserPasswordsMatchValidator.class)
@@ -15,20 +10,20 @@ import javax.validation.Payload;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface UserPasswordsMatch {
 
-	String message() default "{userPassword.password.matchingFields}";
-	
-	Class<?>[] groups() default {};
+    String message() default "{userPassword.password.matchingFields}";
 
-	Class<? extends Payload>[] payload() default {};
+    Class<?>[] groups() default {};
 
-	String password();
+    Class<? extends Payload>[] payload() default {};
 
-	String matchingPassword();
+    String password();
 
-	@Documented
-	@Target(ElementType.TYPE)
-	@Retention(RetentionPolicy.RUNTIME)
-	@interface List {
-		UserPasswordsMatch[] value();
-	}
+    String matchingPassword();
+
+    @Documented
+    @Target(ElementType.TYPE)
+    @Retention(RetentionPolicy.RUNTIME)
+    @interface List {
+        UserPasswordsMatch[] value();
+    }
 }

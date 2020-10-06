@@ -11,10 +11,10 @@ import java.io.IOException;
 @Component
 public class UserAccessDeniedHandler implements AccessDeniedHandler {
 
-	@Override
-	public void handle(HttpServletRequest request, HttpServletResponse response,
-			AccessDeniedException accessDeniedException) throws IOException {
+    @Override
+    public void handle(HttpServletRequest request, HttpServletResponse response,
+                       AccessDeniedException accessDeniedException) throws IOException {
 
-		response.sendRedirect(request.getContextPath() + "/");
-	}
+        response.sendRedirect(request.getContextPath() + "/");
+    }
 }

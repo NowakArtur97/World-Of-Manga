@@ -1,6 +1,7 @@
 package com.NowakArtur97.WorldOfManga.handler;
 
 import com.NowakArtur97.WorldOfManga.model.User;
+import com.NowakArtur97.WorldOfManga.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
@@ -15,30 +16,30 @@ import java.util.Optional;
 @Component
 public class LoginAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
 
-	private final UserService userService;
+    private final UserService userService;
 
-	@Autowired
-	public LoginAuthenticationSuccessHandler(UserService userService) {
+    @Autowired
+    public LoginAuthenticationSuccessHandler(UserService userService) {
 
-		this.userService = userService;
-	}
+        this.userService = userService;
+    }
 
-	@Override
-	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
-			Authentication authentication) throws IOException {
+    @Override
+    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
+                                        Authentication authentication) throws IOException {
 
-		String username = authentication.getName();
+        String username = authentication.getName();
 
-		Optional<User> loggedUserOptional = userService.findByUsername(username);
+        Optional<User> loggedUserOptional = userService.findByUsername(username);
 
-		if (loggedUserOptional.isPresent()) {
+        if (loggedUserOptional.isPresent()) {
 
-			User loggedUser = loggedUserOptional.get();
+            User loggedUser = loggedUserOptional.get();
 
-			HttpSession session = request.getSession();
-			session.setAttribute("user", loggedUser);
-		}
+            HttpSession session = request.getSession();
+            session.setAttribute("user", loggedUser);
+        }
 
-		response.sendRedirect(request.getContextPath() + "/");
-	}
+        response.sendRedirect(request.getContextPath() + "/");
+    }
 }

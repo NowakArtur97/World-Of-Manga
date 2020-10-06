@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping(path = "/user")
 public class LoginController {
 
-	@GetMapping(path = "/login")
-	public String showLoginPage() {
-		
-		return "views/user-login";
-	}
+    @GetMapping(path = "/login")
+    public String showLoginPage() {
+
+        return "views/user-login";
+    }
 }

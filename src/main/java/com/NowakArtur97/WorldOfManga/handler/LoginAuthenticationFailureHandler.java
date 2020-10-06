@@ -13,16 +13,16 @@ import java.io.IOException;
 @Component
 public class LoginAuthenticationFailureHandler implements AuthenticationFailureHandler {
 
-	@Override
-	public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
-			AuthenticationException exception) throws IOException {
+    @Override
+    public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
+                                        AuthenticationException exception) throws IOException {
 
-		if (exception instanceof BadCredentialsException) {
-			response.sendRedirect(request.getContextPath() + "/user/login?badCredentials=true");
-		} else if (exception instanceof DisabledException) {
-			response.sendRedirect(request.getContextPath() + "/user/login?accountDisabled=true");
-		} else {
-			response.sendRedirect(request.getContextPath() + "/user/login");
-		}
-	}
+        if (exception instanceof BadCredentialsException) {
+            response.sendRedirect(request.getContextPath() + "/user/login?badCredentials=true");
+        } else if (exception instanceof DisabledException) {
+            response.sendRedirect(request.getContextPath() + "/user/login?accountDisabled=true");
+        } else {
+            response.sendRedirect(request.getContextPath() + "/user/login");
+        }
+    }
 }

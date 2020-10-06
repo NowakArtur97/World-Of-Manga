@@ -1,52 +1,50 @@
 package com.NowakArtur97.WorldOfManga.validation.manga;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import com.NowakArtur97.WorldOfManga.dto.MangaDTO;
+import com.NowakArtur97.WorldOfManga.dto.MangaTranslationDTO;
+import com.NowakArtur97.WorldOfManga.service.MangaTranslationService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
-import com.NowakArtur97.WorldOfManga.dto.MangaDTO;
-import com.NowakArtur97.WorldOfManga.dto.MangaTranslationDTO;
-
-import lombok.RequiredArgsConstructor;
-
 @Component
-@RequiredArgsConstructor(onConstructor = @__(@Autowired))
+@RequiredArgsConstructor
 public class MangaValidator implements Validator {
 
-	private final MangaTranslationService mangaTranslationService;
+    private final MangaTranslationService mangaTranslationService;
 
-	@Override
-	public boolean supports(Class<?> clazz) {
+    @Override
+    public boolean supports(Class<?> clazz) {
 
-		return MangaDTO.class.equals(clazz);
-	}
+        return MangaDTO.class.equals(clazz);
+    }
 
-	@Override
-	public void validate(Object target, Errors errors) {
+    @Override
+    public void validate(Object target, Errors errors) {
 
-		MangaDTO mangaDTO = (MangaDTO) target;
+        MangaDTO mangaDTO = (MangaDTO) target;
 
-		MangaTranslationDTO mangaTranslationDTOEn = mangaDTO.getEnTranslation();
-		MangaTranslationDTO mangaTranslationDTOPl = mangaDTO.getPlTranslation();
+        MangaTranslationDTO mangaTranslationDTOEn = mangaDTO.getEnTranslation();
+        MangaTranslationDTO mangaTranslationDTOPl = mangaDTO.getPlTranslation();
 
-		boolean isMangaNew = mangaDTO.getId() == null;
-		boolean isMangaEnTitleInUse = mangaTranslationService.isTitleAlreadyInUse(mangaTranslationDTOEn.getTitle());
-		boolean isMangaPlTitleInUse = mangaTranslationService.isTitleAlreadyInUse(mangaTranslationDTOPl.getTitle());
+        boolean isMangaNew = mangaDTO.getId() == null;
+        boolean isMangaEnTitleInUse = mangaTranslationService.isTitleAlreadyInUse(mangaTranslationDTOEn.getTitle());
+        boolean isMangaPlTitleInUse = mangaTranslationService.isTitleAlreadyInUse(mangaTranslationDTOPl.getTitle());
 
-		if (isMangaEnTitleInUse && isMangaNew) {
+        if (isMangaEnTitleInUse && isMangaNew) {
 
-			errors.rejectValue("enTranslation.title", "mangaTranslation.titleEn.inUse");
-		}
+            errors.rejectValue("enTranslation.title", "mangaTranslation.titleEn.inUse");
+        }
 
-		if (isMangaPlTitleInUse && isMangaNew) {
+        if (isMangaPlTitleInUse && isMangaNew) {
 
-			errors.rejectValue("plTranslation.title", "mangaTranslation.titlePl.inUse");
-		}
+            errors.rejectValue("plTranslation.title", "mangaTranslation.titlePl.inUse");
+        }
 
-		if (mangaDTO.getImage() == null || mangaDTO.getImage().isEmpty()) {
+        if (mangaDTO.getImage() == null || mangaDTO.getImage().isEmpty()) {
 
-			errors.rejectValue("image", "manga.image.notEmpty");
-		}
-	}
+            errors.rejectValue("image", "manga.image.notEmpty");
+        }
+    }
 }

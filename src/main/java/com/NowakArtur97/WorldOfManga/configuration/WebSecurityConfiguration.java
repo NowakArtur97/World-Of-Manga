@@ -1,5 +1,9 @@
 package com.NowakArtur97.WorldOfManga.configuration;
 
+import com.NowakArtur97.WorldOfManga.handler.LoginAuthenticationFailureHandler;
+import com.NowakArtur97.WorldOfManga.handler.LoginAuthenticationSuccessHandler;
+import com.NowakArtur97.WorldOfManga.handler.UserAccessDeniedHandler;
+import com.NowakArtur97.WorldOfManga.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -9,10 +13,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
-import com.NowakArtur97.WorldOfManga.handler.LoginAuthenticationFailureHandler;
-import com.NowakArtur97.WorldOfManga.handler.LoginAuthenticationSuccessHandler;
-import com.NowakArtur97.WorldOfManga.handler.UserAccessDeniedHandler;
 
 @Configuration
 @EnableWebSecurity
@@ -25,6 +25,7 @@ class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     private final LoginAuthenticationFailureHandler loginAuthenticationFailureHandler;
 
     private final UserAccessDeniedHandler userAccessDeniedHandler;
+
 
     @Autowired
     WebSecurityConfiguration(UserService userService, LoginAuthenticationSuccessHandler loginAuthenticationSuccessHandler,

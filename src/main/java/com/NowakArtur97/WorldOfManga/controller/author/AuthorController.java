@@ -1,8 +1,10 @@
 package com.NowakArtur97.WorldOfManga.controller.author;
 
-import javax.validation.Valid;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import com.NowakArtur97.WorldOfManga.dto.AuthorDTO;
+import com.NowakArtur97.WorldOfManga.dto.MangaDTO;
+import com.NowakArtur97.WorldOfManga.service.AuthorService;
+import com.NowakArtur97.WorldOfManga.validation.author.AuthorValidator;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -11,48 +13,44 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.NowakArtur97.WorldOfManga.dto.AuthorDTO;
-import com.NowakArtur97.WorldOfManga.dto.MangaDTO;
-import com.NowakArtur97.WorldOfManga.validation.author.AuthorValidator;
-
-import lombok.RequiredArgsConstructor;
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping(path = "/admin")
-@RequiredArgsConstructor(onConstructor = @__(@Autowired))
+@RequiredArgsConstructor
 public class AuthorController {
 
-	private final AuthorService authorService;
+    private final AuthorService authorService;
 
-	private final AuthorValidator authorValidator;
+    private final AuthorValidator authorValidator;
 
-	@GetMapping(path = "/addOrUpdateAuthor")
-	public String showAddMangaPage(Model theModel) {
+    @GetMapping(path = "/addOrUpdateAuthor")
+    public String showAddMangaPage(Model theModel) {
 
-		theModel.addAttribute("mangaDTO", new MangaDTO());
-		theModel.addAttribute("authorDTO", new AuthorDTO());
-		theModel.addAttribute("authors", authorService.findAll());
+        theModel.addAttribute("mangaDTO", new MangaDTO());
+        theModel.addAttribute("authorDTO", new AuthorDTO());
+        theModel.addAttribute("authors", authorService.findAll());
 
-		return "views/manga-form";
-	}
+        return "views/manga-form";
+    }
 
-	@PostMapping(path = "/addOrUpdateAuthor")
-	public String processAddAuthorPage(Model theModel, @ModelAttribute("authorDTO") @Valid AuthorDTO authorDTO,
-			BindingResult result) {
+    @PostMapping(path = "/addOrUpdateAuthor")
+    public String processAddAuthorPage(Model theModel, @ModelAttribute("authorDTO") @Valid AuthorDTO authorDTO,
+                                       BindingResult result) {
 
-		authorValidator.validate(authorDTO, result);
+        authorValidator.validate(authorDTO, result);
 
-		if (result.hasErrors()) {
+        if (result.hasErrors()) {
 
-			theModel.addAttribute("authorDTO", authorDTO);
-			theModel.addAttribute("mangaDTO", new MangaDTO());
-			theModel.addAttribute("authors", authorService.findAll());
+            theModel.addAttribute("authorDTO", authorDTO);
+            theModel.addAttribute("mangaDTO", new MangaDTO());
+            theModel.addAttribute("authors", authorService.findAll());
 
-			return "views/manga-form";
-		}
+            return "views/manga-form";
+        }
 
-		authorService.addOrUpdate(authorDTO);
+        authorService.addOrUpdate(authorDTO);
 
-		return "redirect:/admin/addOrUpdateAuthor";
-	}
+        return "redirect:/admin/addOrUpdateAuthor";
+    }
 }
