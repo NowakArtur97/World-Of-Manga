@@ -1,4 +1,4 @@
-package com.NowakArtur97.WorldOfManga.controller.author.seleniumTest;
+package com.NowakArtur97.WorldOfManga.feature.author.seleniumTest;
 
 import com.NowakArtur97.WorldOfManga.testUtil.enums.LanguageVersion;
 import com.NowakArtur97.WorldOfManga.testUtil.extension.ScreenshotWatcher;

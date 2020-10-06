@@ -1,4 +1,4 @@
-package com.NowakArtur97.WorldOfManga.model;
+package com.NowakArtur97.WorldOfManga.feature.author;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import com.NowakArtur97.WorldOfManga.model.Manga;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

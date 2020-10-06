@@ -1,6 +1,6 @@
 package com.NowakArtur97.WorldOfManga.controller.manga;
 
-import com.NowakArtur97.WorldOfManga.model.Author;
+import com.NowakArtur97.WorldOfManga.feature.author.Author;
 import com.NowakArtur97.WorldOfManga.model.Manga;
 import com.NowakArtur97.WorldOfManga.model.MangaTranslation;
 import com.NowakArtur97.WorldOfManga.service.MangaService;

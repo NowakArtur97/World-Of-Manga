@@ -1,9 +1,9 @@
 package com.NowakArtur97.WorldOfManga.service;
 
 import com.NowakArtur97.WorldOfManga.dto.AuthorDTO;
-import com.NowakArtur97.WorldOfManga.mapper.author.AuthorMapper;
-import com.NowakArtur97.WorldOfManga.model.Author;
-import com.NowakArtur97.WorldOfManga.repository.AuthorRepository;
+import com.NowakArtur97.WorldOfManga.feature.author.Author;
+import com.NowakArtur97.WorldOfManga.feature.author.AuthorMapper;
+import com.NowakArtur97.WorldOfManga.feature.author.AuthorRepository;
 import com.NowakArtur97.WorldOfManga.testUtil.generator.NameWithSpacesGenerator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayNameGeneration;

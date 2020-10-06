@@ -1,8 +1,8 @@
 package com.NowakArtur97.WorldOfManga.mapper;
 
 import com.NowakArtur97.WorldOfManga.dto.MangaDTO;
-import com.NowakArtur97.WorldOfManga.mapper.manga.MangaMapperImpl;
-import com.NowakArtur97.WorldOfManga.model.Author;
+import com.NowakArtur97.WorldOfManga.mapper.manga.MangaMapper;
+import com.NowakArtur97.WorldOfManga.feature.author.Author;
 import com.NowakArtur97.WorldOfManga.model.Manga;
 import com.NowakArtur97.WorldOfManga.model.MangaGenre;
 import com.NowakArtur97.WorldOfManga.model.MangaTranslation;
@@ -19,15 +19,15 @@ import java.util.Set;
 import static org.junit.jupiter.api.Assertions.*;
 
 @DisplayNameGeneration(NameWithSpacesGenerator.class)
-@Tag("MangaMapperIml_Test")
-public class MangaMapperImplTest {
+@Tag("MangaMapper_Test")
+public class MangaMapperTest {
 
-    private MangaMapperImpl mangaMapperImpl;
+    private MangaMapper mangaMapper;
 
     @BeforeEach
     public void setUp() {
 
-        mangaMapperImpl = new MangaMapperImpl();
+        mangaMapper = new MangaMapper();
     }
 
     @Test
@@ -65,7 +65,7 @@ public class MangaMapperImplTest {
         mangaExpected.addTranslation(mangaEnTranslationExpected);
         mangaExpected.addTranslation(mangaPlTranslationExpected);
 
-        Manga mangaActual = mangaMapperImpl.mapMangaDTOToManga(mangaExpected, mangaDTOExpected);
+        Manga mangaActual = mangaMapper.mapMangaDTOToManga(mangaExpected, mangaDTOExpected);
 
         assertAll(
                 () -> assertEquals(mangaExpected.getTranslations().size(), mangaActual.getTranslations().size(),
@@ -107,7 +107,7 @@ public class MangaMapperImplTest {
         mangaExpected.addGenre(mangaGenreExpected);
         mangaExpected.addGenre(mangaGenreExpected2);
 
-        MangaDTO mangaDTOActual = mangaMapperImpl.mapMangaToDTO(mangaExpected);
+        MangaDTO mangaDTOActual = mangaMapper.mapMangaToDTO(mangaExpected);
 
         assertAll(
                 () -> assertEquals(mangaExpected.getTranslations().get(Manga.EN_TRANSLATION_INDEX).getTitle(),

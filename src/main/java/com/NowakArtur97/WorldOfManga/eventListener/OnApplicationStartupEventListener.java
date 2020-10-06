@@ -3,6 +3,7 @@ package com.NowakArtur97.WorldOfManga.eventListener;
 import com.NowakArtur97.WorldOfManga.converter.ImageToByteConverter;
 import com.NowakArtur97.WorldOfManga.exception.LanguageNotFoundException;
 import com.NowakArtur97.WorldOfManga.exception.MangaGenreNotFoundException;
+import com.NowakArtur97.WorldOfManga.feature.author.Author;
 import com.NowakArtur97.WorldOfManga.model.*;
 import com.NowakArtur97.WorldOfManga.repository.MangaRepository;
 import com.NowakArtur97.WorldOfManga.service.LanguageService;

@@ -2,7 +2,7 @@ package com.NowakArtur97.WorldOfManga.validation.manga;
 
 import com.NowakArtur97.WorldOfManga.dto.MangaDTO;
 import com.NowakArtur97.WorldOfManga.dto.MangaTranslationDTO;
-import com.NowakArtur97.WorldOfManga.model.Author;
+import com.NowakArtur97.WorldOfManga.feature.author.Author;
 import com.NowakArtur97.WorldOfManga.model.MangaGenre;
 import com.NowakArtur97.WorldOfManga.testUtil.generator.NameWithSpacesGenerator;
 import org.junit.jupiter.api.BeforeEach;

@@ -1,4 +1,4 @@
-package com.NowakArtur97.WorldOfManga.controller.author.seleniumPOM;
+package com.NowakArtur97.WorldOfManga.feature.author.seleniumPOM;
 
 import com.NowakArtur97.WorldOfManga.testUtil.enums.LanguageVersion;
 import com.NowakArtur97.WorldOfManga.testUtil.selenium.SeleniumPageObjectModel;

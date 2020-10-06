@@ -5,7 +5,7 @@ import com.NowakArtur97.WorldOfManga.dto.MangaDTO;
 import com.NowakArtur97.WorldOfManga.dto.MangaTranslationDTO;
 import com.NowakArtur97.WorldOfManga.exception.LanguageNotFoundException;
 import com.NowakArtur97.WorldOfManga.exception.MangaNotFoundException;
-import com.NowakArtur97.WorldOfManga.model.Author;
+import com.NowakArtur97.WorldOfManga.feature.author.Author;
 import com.NowakArtur97.WorldOfManga.model.Manga;
 import com.NowakArtur97.WorldOfManga.model.MangaGenre;
 import com.NowakArtur97.WorldOfManga.model.MangaTranslation;

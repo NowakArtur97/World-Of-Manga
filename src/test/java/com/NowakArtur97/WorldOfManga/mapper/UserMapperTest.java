@@ -2,7 +2,7 @@ package com.NowakArtur97.WorldOfManga.mapper;
 
 import com.NowakArtur97.WorldOfManga.dto.UserDTO;
 import com.NowakArtur97.WorldOfManga.dto.UserPasswordDTO;
-import com.NowakArtur97.WorldOfManga.mapper.user.UserMapperImpl;
+import com.NowakArtur97.WorldOfManga.mapper.user.UserMapper;
 import com.NowakArtur97.WorldOfManga.model.User;
 import com.NowakArtur97.WorldOfManga.testUtil.generator.NameWithSpacesGenerator;
 import org.junit.jupiter.api.BeforeEach;
@@ -21,9 +21,9 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 @DisplayNameGeneration(NameWithSpacesGenerator.class)
 @Tag("UserMapperImpl_Tests")
-public class UserMapperImplTest {
+public class UserMapperTest {
 
-    private UserMapperImpl userMapper;
+    private UserMapper userMapper;
 
     @Mock
     private ModelMapper modelMapper;
@@ -31,7 +31,7 @@ public class UserMapperImplTest {
     @BeforeEach
     public void setUp() {
 
-        userMapper = new UserMapperImpl(modelMapper);
+        userMapper = new UserMapper(modelMapper);
     }
 
     @Test

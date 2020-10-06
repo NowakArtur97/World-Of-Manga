@@ -1,9 +1,8 @@
-package com.NowakArtur97.WorldOfManga.controller.author;
+package com.NowakArtur97.WorldOfManga.feature.author;
 
 import com.NowakArtur97.WorldOfManga.dto.AuthorDTO;
 import com.NowakArtur97.WorldOfManga.dto.MangaDTO;
 import com.NowakArtur97.WorldOfManga.service.AuthorService;
-import com.NowakArtur97.WorldOfManga.validation.author.AuthorValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

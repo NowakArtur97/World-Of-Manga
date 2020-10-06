@@ -1,8 +1,8 @@
 package com.NowakArtur97.WorldOfManga.mapper;
 
 import com.NowakArtur97.WorldOfManga.dto.AuthorDTO;
-import com.NowakArtur97.WorldOfManga.mapper.author.AuthorMapperImpl;
-import com.NowakArtur97.WorldOfManga.model.Author;
+import com.NowakArtur97.WorldOfManga.feature.author.Author;
+import com.NowakArtur97.WorldOfManga.feature.author.AuthorMapper;
 import com.NowakArtur97.WorldOfManga.testUtil.generator.NameWithSpacesGenerator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayNameGeneration;
@@ -19,10 +19,10 @@ import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 @DisplayNameGeneration(NameWithSpacesGenerator.class)
-@Tag("AuthorMapperImpl_Tests")
+@Tag("AuthorMapper_Tests")
 public class AuthorMapperImplTest {
 
-    private AuthorMapperImpl authorMapper;
+    private AuthorMapper authorMapper;
 
     @Mock
     private ModelMapper modelMapper;
@@ -30,7 +30,7 @@ public class AuthorMapperImplTest {
     @BeforeEach
     public void setUp() {
 
-        authorMapper = new AuthorMapperImpl(modelMapper);
+        authorMapper = new AuthorMapper(modelMapper);
     }
 
     @Test

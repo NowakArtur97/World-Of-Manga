@@ -1,6 +1,6 @@
-package com.NowakArtur97.WorldOfManga.controller.author.seleniumTest;
+package com.NowakArtur97.WorldOfManga.feature.author.seleniumTest;
 
-import com.NowakArtur97.WorldOfManga.controller.author.seleniumPOM.AuthorFormPage;
+import com.NowakArtur97.WorldOfManga.feature.author.seleniumPOM.AuthorFormPage;
 import com.NowakArtur97.WorldOfManga.controller.unloggedUser.seleniumPOM.LoginPage;
 import com.NowakArtur97.WorldOfManga.service.AuthorService;
 import com.NowakArtur97.WorldOfManga.testUtil.selenium.SeleniumUITest;

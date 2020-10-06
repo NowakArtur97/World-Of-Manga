@@ -1,7 +1,7 @@
 package com.NowakArtur97.WorldOfManga.mapper;
 
 import com.NowakArtur97.WorldOfManga.dto.MangaTranslationDTO;
-import com.NowakArtur97.WorldOfManga.mapper.mangaTranslation.MangaTranslationMapperImpl;
+import com.NowakArtur97.WorldOfManga.mapper.mangaTranslation.MangaTranslationMapper;
 import com.NowakArtur97.WorldOfManga.model.MangaTranslation;
 import com.NowakArtur97.WorldOfManga.testUtil.generator.NameWithSpacesGenerator;
 import org.junit.jupiter.api.BeforeEach;
@@ -19,10 +19,10 @@ import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 @DisplayNameGeneration(NameWithSpacesGenerator.class)
-@Tag("MangaTranslationMapperImpl_Tests")
-public class MangaTranslationMapperImplTest {
+@Tag("MangaTranslationMapper_Tests")
+public class MangaTranslationMapperTest {
 
-    private MangaTranslationMapperImpl mangaTranslationMapper;
+    private MangaTranslationMapper mangaTranslationMapper;
 
     @Mock
     private ModelMapper modelMapper;
@@ -30,7 +30,7 @@ public class MangaTranslationMapperImplTest {
     @BeforeEach
     public void setUp() {
 
-        mangaTranslationMapper = new MangaTranslationMapperImpl(modelMapper);
+        mangaTranslationMapper = new MangaTranslationMapper(modelMapper);
     }
 
     @Test
