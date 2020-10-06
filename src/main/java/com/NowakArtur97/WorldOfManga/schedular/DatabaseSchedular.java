@@ -5,8 +5,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.event.ApplicationReadyEvent;
-import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
 import com.NowakArtur97.WorldOfManga.converter.ImageToByteConverter;
@@ -18,8 +16,6 @@ import com.NowakArtur97.WorldOfManga.model.Manga;
 import com.NowakArtur97.WorldOfManga.model.MangaGenre;
 import com.NowakArtur97.WorldOfManga.model.MangaTranslation;
 import com.NowakArtur97.WorldOfManga.repository.MangaRepository;
-import com.NowakArtur97.WorldOfManga.service.api.LanguageService;
-import com.NowakArtur97.WorldOfManga.service.api.MangaGenreService;
 
 import lombok.RequiredArgsConstructor;
 

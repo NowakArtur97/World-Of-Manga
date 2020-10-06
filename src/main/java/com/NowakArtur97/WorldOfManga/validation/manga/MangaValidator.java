@@ -7,7 +7,6 @@ import org.springframework.validation.Validator;
 
 import com.NowakArtur97.WorldOfManga.dto.MangaDTO;
 import com.NowakArtur97.WorldOfManga.dto.MangaTranslationDTO;
-import com.NowakArtur97.WorldOfManga.service.api.MangaTranslationService;
 
 import lombok.RequiredArgsConstructor;
 

@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.NowakArtur97.WorldOfManga.dto.UserDTO;
 import com.NowakArtur97.WorldOfManga.exception.RoleNotFoundException;
-import com.NowakArtur97.WorldOfManga.service.api.UserRegistrationService;
 import com.NowakArtur97.WorldOfManga.validation.user.UserRegistrationValidator;
 
 import lombok.RequiredArgsConstructor;

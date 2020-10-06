@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import com.NowakArtur97.WorldOfManga.exception.MangaGenreNotFoundException;
 import com.NowakArtur97.WorldOfManga.model.MangaGenre;
 import com.NowakArtur97.WorldOfManga.repository.MangaGenreRepository;
-import com.NowakArtur97.WorldOfManga.service.api.MangaGenreService;
 
 import lombok.RequiredArgsConstructor;
 

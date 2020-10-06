@@ -9,7 +9,6 @@ import com.NowakArtur97.WorldOfManga.dto.AuthorDTO;
 import com.NowakArtur97.WorldOfManga.mapper.author.AuthorMapper;
 import com.NowakArtur97.WorldOfManga.model.Author;
 import com.NowakArtur97.WorldOfManga.repository.AuthorRepository;
-import com.NowakArtur97.WorldOfManga.service.api.AuthorService;
 
 import lombok.RequiredArgsConstructor;
 

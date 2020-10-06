@@ -11,9 +11,6 @@ import com.NowakArtur97.WorldOfManga.model.Language;
 import com.NowakArtur97.WorldOfManga.model.Manga;
 import com.NowakArtur97.WorldOfManga.model.MangaTranslation;
 import com.NowakArtur97.WorldOfManga.repository.MangaTranslationRepository;
-import com.NowakArtur97.WorldOfManga.service.api.LanguageService;
-import com.NowakArtur97.WorldOfManga.service.api.MangaService;
-import com.NowakArtur97.WorldOfManga.service.api.MangaTranslationService;
 
 import lombok.RequiredArgsConstructor;
 

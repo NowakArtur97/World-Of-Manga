@@ -21,10 +21,6 @@ import com.NowakArtur97.WorldOfManga.dto.MangaDTO;
 import com.NowakArtur97.WorldOfManga.exception.LanguageNotFoundException;
 import com.NowakArtur97.WorldOfManga.exception.MangaNotFoundException;
 import com.NowakArtur97.WorldOfManga.model.Manga;
-import com.NowakArtur97.WorldOfManga.service.api.AuthorService;
-import com.NowakArtur97.WorldOfManga.service.api.MangaGenreService;
-import com.NowakArtur97.WorldOfManga.service.api.MangaService;
-import com.NowakArtur97.WorldOfManga.service.api.MangaTranslationService;
 import com.NowakArtur97.WorldOfManga.validation.manga.MangaValidator;
 
 import lombok.RequiredArgsConstructor;

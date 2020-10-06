@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
 import com.NowakArtur97.WorldOfManga.controller.unloggedUser.seleniumPOM.RegistrationPage;
-import com.NowakArtur97.WorldOfManga.service.api.UserService;
 import com.NowakArtur97.WorldOfManga.testUtil.selenium.SeleniumUITest;
 
 public class RegistrationControllerUITest extends SeleniumUITest {

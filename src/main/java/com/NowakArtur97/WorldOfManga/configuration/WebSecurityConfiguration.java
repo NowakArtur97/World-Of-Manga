@@ -13,7 +13,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import com.NowakArtur97.WorldOfManga.handler.LoginAuthenticationFailureHandler;
 import com.NowakArtur97.WorldOfManga.handler.LoginAuthenticationSuccessHandler;
 import com.NowakArtur97.WorldOfManga.handler.UserAccessDeniedHandler;
-import com.NowakArtur97.WorldOfManga.service.api.UserService;
 
 @Configuration
 @EnableWebSecurity

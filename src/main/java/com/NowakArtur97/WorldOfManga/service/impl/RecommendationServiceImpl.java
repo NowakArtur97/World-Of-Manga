@@ -1,9 +1,6 @@
 package com.NowakArtur97.WorldOfManga.service.impl;
 
 import com.NowakArtur97.WorldOfManga.model.*;
-import com.NowakArtur97.WorldOfManga.service.api.MangaService;
-import com.NowakArtur97.WorldOfManga.service.api.RecommendationService;
-import com.NowakArtur97.WorldOfManga.service.api.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

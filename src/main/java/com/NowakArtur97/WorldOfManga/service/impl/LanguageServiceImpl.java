@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import com.NowakArtur97.WorldOfManga.exception.LanguageNotFoundException;
 import com.NowakArtur97.WorldOfManga.model.Language;
 import com.NowakArtur97.WorldOfManga.repository.LanguageRepository;
-import com.NowakArtur97.WorldOfManga.service.api.LanguageService;
 
 import lombok.RequiredArgsConstructor;
 

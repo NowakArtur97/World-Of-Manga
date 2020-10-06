@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import com.NowakArtur97.WorldOfManga.exception.RoleNotFoundException;
 import com.NowakArtur97.WorldOfManga.model.Role;
 import com.NowakArtur97.WorldOfManga.repository.RoleRepository;
-import com.NowakArtur97.WorldOfManga.service.api.RoleService;
 
 import lombok.RequiredArgsConstructor;
 

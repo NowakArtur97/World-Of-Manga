@@ -8,9 +8,6 @@ import com.NowakArtur97.WorldOfManga.dto.UserDTO;
 import com.NowakArtur97.WorldOfManga.exception.RoleNotFoundException;
 import com.NowakArtur97.WorldOfManga.mapper.user.UserMapper;
 import com.NowakArtur97.WorldOfManga.model.User;
-import com.NowakArtur97.WorldOfManga.service.api.RoleService;
-import com.NowakArtur97.WorldOfManga.service.api.UserRegistrationService;
-import com.NowakArtur97.WorldOfManga.service.api.UserService;
 
 @Service
 public class UserRegistrationServiceImpl implements UserRegistrationService {

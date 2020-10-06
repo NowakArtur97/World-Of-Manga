@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Value;
 import com.NowakArtur97.WorldOfManga.controller.manga.seleniumPOM.MangaFormPage;
 import com.NowakArtur97.WorldOfManga.controller.manga.seleniumPOM.MangaList;
 import com.NowakArtur97.WorldOfManga.controller.unloggedUser.seleniumPOM.LoginPage;
-import com.NowakArtur97.WorldOfManga.service.api.MangaTranslationService;
 import com.NowakArtur97.WorldOfManga.testUtil.selenium.SeleniumUITest;
 
 public class MangaControllerUITest extends SeleniumUITest {
