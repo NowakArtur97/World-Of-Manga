@@ -1,28 +1,27 @@
 package com.NowakArtur97.WorldOfManga.testUtil.extension;
 
-import java.util.Optional;
-
+import com.NowakArtur97.WorldOfManga.testUtil.selenium.ScreenshotUtil;
+import com.NowakArtur97.WorldOfManga.testUtil.selenium.SeleniumUITest;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.api.extension.TestWatcher;
 import org.openqa.selenium.WebDriver;
 
-import com.NowakArtur97.WorldOfManga.testUtil.selenium.ScreenshotUtil;
-import com.NowakArtur97.WorldOfManga.testUtil.selenium.SeleniumUITest;
+import java.util.Optional;
 
 public class ScreenshotWatcher implements TestWatcher {
 
-	private final ScreenshotUtil screenshotUtil = new ScreenshotUtil();
+    private final ScreenshotUtil screenshotUtil = new ScreenshotUtil();
 
-	@Override
-	public void testFailed(ExtensionContext context, Throwable cause) {
+    @Override
+    public void testFailed(ExtensionContext context, Throwable cause) {
 
-		Optional<Object> testInstance = context.getTestInstance();
+        Optional<Object> testInstance = context.getTestInstance();
 
-		if (testInstance.isPresent()) {
+        if (testInstance.isPresent()) {
 
-			WebDriver webDriver = SeleniumUITest.getWebDriver();
+            WebDriver webDriver = SeleniumUITest.getWebDriver();
 
-			screenshotUtil.takeScreenshot(webDriver, context.getRequiredTestMethod().getName());
-		}
-	}
+            screenshotUtil.takeScreenshot(webDriver, context.getRequiredTestMethod().getName());
+        }
+    }
 }

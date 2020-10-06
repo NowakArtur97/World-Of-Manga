@@ -1,9 +1,12 @@
 package com.NowakArtur97.WorldOfManga.controller.manga.seleniumTest;
 
-import static org.junit.jupiter.api.Assertions.assertAll;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
+import com.NowakArtur97.WorldOfManga.controller.manga.seleniumPOM.MangaFormPage;
+import com.NowakArtur97.WorldOfManga.controller.manga.seleniumPOM.MangaList;
+import com.NowakArtur97.WorldOfManga.controller.unloggedUser.seleniumPOM.LoginPage;
+import com.NowakArtur97.WorldOfManga.testUtil.enums.LanguageVersion;
+import com.NowakArtur97.WorldOfManga.testUtil.extension.ScreenshotWatcher;
+import com.NowakArtur97.WorldOfManga.testUtil.generator.NameWithSpacesGenerator;
+import com.NowakArtur97.WorldOfManga.testUtil.selenium.SeleniumUITest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.Tag;
@@ -16,13 +19,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.annotation.DirtiesContext.ClassMode;
 
-import com.NowakArtur97.WorldOfManga.controller.manga.seleniumPOM.MangaFormPage;
-import com.NowakArtur97.WorldOfManga.controller.manga.seleniumPOM.MangaList;
-import com.NowakArtur97.WorldOfManga.controller.unloggedUser.seleniumPOM.LoginPage;
-import com.NowakArtur97.WorldOfManga.testUtil.enums.LanguageVersion;
-import com.NowakArtur97.WorldOfManga.testUtil.extension.ScreenshotWatcher;
-import com.NowakArtur97.WorldOfManga.testUtil.generator.NameWithSpacesGenerator;
-import com.NowakArtur97.WorldOfManga.testUtil.selenium.SeleniumUITest;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @ExtendWith(ScreenshotWatcher.class)
@@ -32,87 +29,87 @@ import com.NowakArtur97.WorldOfManga.testUtil.selenium.SeleniumUITest;
 @DisabledOnOs(OS.LINUX)
 public class MangaListUITest extends SeleniumUITest {
 
-	private MangaList mangaList;
+    private MangaList mangaList;
 
-	private MangaFormPage mangaFormPage;
+    private MangaFormPage mangaFormPage;
 
-	private LoginPage loginPage;
+    private LoginPage loginPage;
 
-	@BeforeEach
-	public void setupPOM() {
+    @BeforeEach
+    public void setupPOM() {
 
-		mangaList = new MangaList(webDriver);
+        mangaList = new MangaList(webDriver);
 
-		loginPage = new LoginPage(webDriver);
+        loginPage = new LoginPage(webDriver);
 
-		mangaFormPage = new MangaFormPage(webDriver);
-	}
+        mangaFormPage = new MangaFormPage(webDriver);
+    }
 
-	@ParameterizedTest(name = "{index}: Language Version: {0}")
-	@EnumSource(LanguageVersion.class)
-	public void when_added_new_manga_should_show_manga_title_on_manga_list(LanguageVersion languageVersion) {
+    @ParameterizedTest(name = "{index}: Language Version: {0}")
+    @EnumSource(LanguageVersion.class)
+    public void when_added_new_manga_should_show_manga_title_on_manga_list(LanguageVersion languageVersion) {
 
-		String englishTitle = "English title";
-		String polishTitle = "Polish title";
-		String englishDescription = "English description";
-		String polishDescription = "Polish description";
-		boolean selectAuthor = true;
-		boolean selectGenre = true;
-		boolean addImage = true;
+        String englishTitle = "English title";
+        String polishTitle = "Polish title";
+        String englishDescription = "English description";
+        String polishDescription = "Polish description";
+        boolean selectAuthor = true;
+        boolean selectGenre = true;
+        boolean addImage = true;
 
-		loginPage.loadLoginView(languageVersion);
+        loginPage.loadLoginView(languageVersion);
 
-		loginPage.fillMandatoryLoginFields("admin", "admin");
+        loginPage.fillMandatoryLoginFields("admin", "admin");
 
-		mangaFormPage.clickAddOrUpdateMangaLinkButton();
+        mangaFormPage.clickAddOrUpdateMangaLinkButton();
 
-		mangaFormPage.fillMandatoryMangaFormFields(englishTitle, englishDescription, polishTitle, polishDescription,
-				selectAuthor, selectGenre, addImage);
+        mangaFormPage.fillMandatoryMangaFormFields(englishTitle, englishDescription, polishTitle, polishDescription,
+                selectAuthor, selectGenre, addImage);
 
-		mangaList.clickMangaListLink();
+        mangaList.clickMangaListLink();
 
-		String title = languageVersion.name().equals("ENG") ? englishTitle : polishTitle;
+        String title = languageVersion.name().equals("ENG") ? englishTitle : polishTitle;
 
-		assertAll(
-				() -> assertTrue(mangaList.getLastMangaCardText().contains(title),
-						() -> "should show new manga with title: " + title + ", but was: "
-								+ mangaList.getLastMangaCardText()),
-				() -> assertTrue(mangaList.countMangaCards() >= 1, () -> "should show at least one manga"),
-				() -> assertNotNull(mangaList.getMangaListText(), () -> "should load manga list fragment text"));
-	}
+        assertAll(
+                () -> assertTrue(mangaList.getLastMangaCardText().contains(title),
+                        () -> "should show new manga with title: " + title + ", but was: "
+                                + mangaList.getLastMangaCardText()),
+                () -> assertTrue(mangaList.countMangaCards() >= 1, () -> "should show at least one manga"),
+                () -> assertNotNull(mangaList.getMangaListText(), () -> "should load manga list fragment text"));
+    }
 
-	@ParameterizedTest(name = "{index}: Language Version: {0}")
-	@EnumSource(LanguageVersion.class)
-	public void when_added_new_manga_should_show_manga_description_on_manga_list(LanguageVersion languageVersion) {
+    @ParameterizedTest(name = "{index}: Language Version: {0}")
+    @EnumSource(LanguageVersion.class)
+    public void when_added_new_manga_should_show_manga_description_on_manga_list(LanguageVersion languageVersion) {
 
-		String englishTitle = "English title";
-		String polishTitle = "Polish title";
-		String englishDescription = "English description";
-		String polishDescription = "Polish description";
-		boolean selectAuthor = true;
-		boolean selectGenre = true;
-		boolean addImage = true;
+        String englishTitle = "English title";
+        String polishTitle = "Polish title";
+        String englishDescription = "English description";
+        String polishDescription = "Polish description";
+        boolean selectAuthor = true;
+        boolean selectGenre = true;
+        boolean addImage = true;
 
-		loginPage.loadLoginView(languageVersion);
+        loginPage.loadLoginView(languageVersion);
 
-		loginPage.fillMandatoryLoginFields("admin", "admin");
+        loginPage.fillMandatoryLoginFields("admin", "admin");
 
-		mangaFormPage.clickAddOrUpdateMangaLinkButton();
+        mangaFormPage.clickAddOrUpdateMangaLinkButton();
 
-		mangaFormPage.fillMandatoryMangaFormFields(englishTitle, englishDescription, polishTitle, polishDescription,
-				selectAuthor, selectGenre, addImage);
+        mangaFormPage.fillMandatoryMangaFormFields(englishTitle, englishDescription, polishTitle, polishDescription,
+                selectAuthor, selectGenre, addImage);
 
-		mangaList.clickMangaListLink();
+        mangaList.clickMangaListLink();
 
-		mangaList.chooseLastManga();
+        mangaList.chooseLastManga();
 
-		String description = languageVersion.name().equals("ENG") ? englishDescription : polishDescription;
+        String description = languageVersion.name().equals("ENG") ? englishDescription : polishDescription;
 
-		assertAll(
-				() -> assertTrue(mangaList.getLastMangaCardText().contains(description),
-						() -> "should show new manga with description: " + description + ", but was: "
-								+ mangaList.getLastMangaCardText()),
-				() -> assertTrue(mangaList.countMangaCards() >= 1, () -> "should show at least one manga"),
-				() -> assertNotNull(mangaList.getMangaListText(), () -> "should load manga list fragment text"));
-	}
+        assertAll(
+                () -> assertTrue(mangaList.getLastMangaCardText().contains(description),
+                        () -> "should show new manga with description: " + description + ", but was: "
+                                + mangaList.getLastMangaCardText()),
+                () -> assertTrue(mangaList.countMangaCards() >= 1, () -> "should show at least one manga"),
+                () -> assertNotNull(mangaList.getMangaListText(), () -> "should load manga list fragment text"));
+    }
 }

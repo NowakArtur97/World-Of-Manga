@@ -1,202 +1,201 @@
 package com.NowakArtur97.WorldOfManga.controller.manga.seleniumPOM;
 
-import java.util.List;
-
+import com.NowakArtur97.WorldOfManga.testUtil.enums.LanguageVersion;
+import com.NowakArtur97.WorldOfManga.testUtil.selenium.SeleniumPageObjectModel;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import com.NowakArtur97.WorldOfManga.testUtil.enums.LanguageVersion;
-import com.NowakArtur97.WorldOfManga.testUtil.selenium.SeleniumPageObjectModel;
+import java.util.List;
 
 public class MangaList extends SeleniumPageObjectModel {
 
-	public static final String RESOURCE_PATH = "/";
+    public static final String RESOURCE_PATH = "/";
 
-	private static final int INDEX_FOR_SKIPPING_RECOMMENDATIONS_STATUSES = 50;
-	private static final int INDEX_FOR_SKIPPING_RECOMMENDATIONS_RATINGS_OR_FAVOURITES = 20;
+    private static final int INDEX_FOR_SKIPPING_RECOMMENDATIONS_STATUSES = 50;
+    private static final int INDEX_FOR_SKIPPING_RECOMMENDATIONS_RATINGS_OR_FAVOURITES = 20;
 
-	private static final String MANGA_LIST_CLASS = "manga_list";
-	private static final String MANGA_CARD_CLASS = "manga_card";
-	private static final String MANGA_STAR_CLASS = "manga_card__icon--star";
-	private static final String MANGA_RATING_CLASS = "manga_card_rating";
-	private static final String MANGA_FAVOURITE_COUNTER_CLASS = "manga_card__likes";
-	private static final String MANGA_FAVOURITE_CLASS = "manga_card__icon--heart";
-	private static final String MANGA_STATUS_CLASS = "manga_card__icon--status";
-	private static final String MANGA_ADMIN_CLASS = "manga_card__icon--admin";
-	private static final String MANGA_LIST_TYPE_CLASS = "manga_list_types__type";
-	private static final String MANGA_LIST_LINK = "//a[@href='/']";
-	private static final String MANGA_WORLD_LINK = "//a[@href='/auth/sortMangaList/5']";
+    private static final String MANGA_LIST_CLASS = "manga_list";
+    private static final String MANGA_CARD_CLASS = "manga_card";
+    private static final String MANGA_STAR_CLASS = "manga_card__icon--star";
+    private static final String MANGA_RATING_CLASS = "manga_card_rating";
+    private static final String MANGA_FAVOURITE_COUNTER_CLASS = "manga_card__likes";
+    private static final String MANGA_FAVOURITE_CLASS = "manga_card__icon--heart";
+    private static final String MANGA_STATUS_CLASS = "manga_card__icon--status";
+    private static final String MANGA_ADMIN_CLASS = "manga_card__icon--admin";
+    private static final String MANGA_LIST_TYPE_CLASS = "manga_list_types__type";
+    private static final String MANGA_LIST_LINK = "//a[@href='/']";
+    private static final String MANGA_WORLD_LINK = "//a[@href='/auth/sortMangaList/5']";
 
-	@FindBy(className = MANGA_LIST_CLASS)
-	private WebElement mangaList;
+    @FindBy(className = MANGA_LIST_CLASS)
+    private WebElement mangaList;
 
-	@FindBy(className = MANGA_CARD_CLASS)
-	private List<WebElement> mangaCards;
+    @FindBy(className = MANGA_CARD_CLASS)
+    private List<WebElement> mangaCards;
 
-	@FindBy(className = MANGA_STAR_CLASS)
-	private List<WebElement> mangaStars;
+    @FindBy(className = MANGA_STAR_CLASS)
+    private List<WebElement> mangaStars;
 
-	@FindBy(className = MANGA_RATING_CLASS)
-	private List<WebElement> mangaRating;
+    @FindBy(className = MANGA_RATING_CLASS)
+    private List<WebElement> mangaRating;
 
-	@FindBy(className = MANGA_FAVOURITE_CLASS)
-	private List<WebElement> mangaFavouriteLink;
+    @FindBy(className = MANGA_FAVOURITE_CLASS)
+    private List<WebElement> mangaFavouriteLink;
 
-	@FindBy(className = MANGA_FAVOURITE_COUNTER_CLASS)
-	private List<WebElement> mangaFavouritesCounter;
+    @FindBy(className = MANGA_FAVOURITE_COUNTER_CLASS)
+    private List<WebElement> mangaFavouritesCounter;
 
-	@FindBy(className = MANGA_STATUS_CLASS)
-	private List<WebElement> mangaStatuses;
+    @FindBy(className = MANGA_STATUS_CLASS)
+    private List<WebElement> mangaStatuses;
 
-	@FindBy(className = MANGA_ADMIN_CLASS)
-	private List<WebElement> adminOptions;
+    @FindBy(className = MANGA_ADMIN_CLASS)
+    private List<WebElement> adminOptions;
 
-	@FindBy(className = MANGA_LIST_TYPE_CLASS)
-	private List<WebElement> mangaListType;
+    @FindBy(className = MANGA_LIST_TYPE_CLASS)
+    private List<WebElement> mangaListType;
 
-	@FindBy(xpath = MANGA_LIST_LINK)
-	private WebElement mangaListLink;
+    @FindBy(xpath = MANGA_LIST_LINK)
+    private WebElement mangaListLink;
 
-	@FindBy(xpath = MANGA_WORLD_LINK)
-	private WebElement mangaUserListLink;
+    @FindBy(xpath = MANGA_WORLD_LINK)
+    private WebElement mangaUserListLink;
 
-	public MangaList(WebDriver webDriver) {
+    public MangaList(WebDriver webDriver) {
 
-		super(webDriver);
-	}
+        super(webDriver);
+    }
 
-	public void loadMangaList(LanguageVersion ver) {
+    public void loadMangaList(LanguageVersion ver) {
 
-		super.connectTo(RESOURCE_PATH + ver.getLangUrl());
-	}
+        super.connectTo(RESOURCE_PATH + ver.getLangUrl());
+    }
 
-	public String getMangaListText() {
+    public String getMangaListText() {
 
-		return mangaList.getText();
-	}
+        return mangaList.getText();
+    }
 
-	public int countMangaCards() {
+    public int countMangaCards() {
 
-		return mangaCards.size();
-	}
+        return mangaCards.size();
+    }
 
-	public String getLastMangaCardText() {
+    public String getLastMangaCardText() {
 
-		if (mangaCards.size() > 0) {
-			return mangaCards.get(mangaCards.size() - 1).getText();
-		} else {
-			return "";
-		}
-	}
+        if (mangaCards.size() > 0) {
+            return mangaCards.get(mangaCards.size() - 1).getText();
+        } else {
+            return "";
+        }
+    }
 
-	public void clickMangaListLink() {
+    public void clickMangaListLink() {
 
-		mangaListLink.click();
-	}
+        mangaListLink.click();
+    }
 
-	public void clickMangaUserListLink() {
+    public void clickMangaUserListLink() {
 
-		useJavaScriptToClickElement(mangaUserListLink);
-	}
+        useJavaScriptToClickElement(mangaUserListLink);
+    }
 
-	public void chooseManga(int mangaIndex) {
+    public void chooseManga(int mangaIndex) {
 
-		mangaCards.get(mangaIndex + 10).click();
-	}
+        mangaCards.get(mangaIndex + 10).click();
+    }
 
-	public void chooseLastManga() {
+    public void chooseLastManga() {
 
-		mangaCards.get(mangaCards.size() - 1).click();
-	}
+        mangaCards.get(mangaCards.size() - 1).click();
+    }
 
-	public void rateFirstManga(int rating) {
+    public void rateFirstManga(int rating) {
 
-		useJavaScriptToClickElement(mangaStars.get(INDEX_FOR_SKIPPING_RECOMMENDATIONS_STATUSES + rating - 1));
-	}
+        useJavaScriptToClickElement(mangaStars.get(INDEX_FOR_SKIPPING_RECOMMENDATIONS_STATUSES + rating - 1));
+    }
 
-	public void rateLastManga(int rating) {
+    public void rateLastManga(int rating) {
 
-		useJavaScriptToClickElement(mangaStars.get((mangaStars.size() - 5) + rating - 1));
-	}
+        useJavaScriptToClickElement(mangaStars.get((mangaStars.size() - 5) + rating - 1));
+    }
 
-	public String getFirstMangaRating() {
+    public String getFirstMangaRating() {
 
-		return mangaRating.get(INDEX_FOR_SKIPPING_RECOMMENDATIONS_RATINGS_OR_FAVOURITES).getText();
-	}
+        return mangaRating.get(INDEX_FOR_SKIPPING_RECOMMENDATIONS_RATINGS_OR_FAVOURITES).getText();
+    }
 
-	public String getFirstMangaRatingOnMangaList() {
+    public String getFirstMangaRatingOnMangaList() {
 
-		return mangaRating.get(0).getText();
-	}
-	
-	public void addOrRemoveFirstMangaFromFavourites() {
+        return mangaRating.get(0).getText();
+    }
 
-		useJavaScriptToClickElement(mangaFavouriteLink.get(INDEX_FOR_SKIPPING_RECOMMENDATIONS_RATINGS_OR_FAVOURITES));
-	}
+    public void addOrRemoveFirstMangaFromFavourites() {
 
-	public void addOrRemoveLastMangaFromFavourites() {
+        useJavaScriptToClickElement(mangaFavouriteLink.get(INDEX_FOR_SKIPPING_RECOMMENDATIONS_RATINGS_OR_FAVOURITES));
+    }
 
-		useJavaScriptToClickElement(mangaFavouriteLink.get(mangaFavouriteLink.size() - 1));
-	}
+    public void addOrRemoveLastMangaFromFavourites() {
 
-	public String getLastMangaFavouritesCounter() {
+        useJavaScriptToClickElement(mangaFavouriteLink.get(mangaFavouriteLink.size() - 1));
+    }
 
-		return mangaFavouritesCounter.get(mangaFavouritesCounter.size() - 2).getText();
-	}
+    public String getLastMangaFavouritesCounter() {
 
-	public void addOrRemoveFirstMangaFromList(int mangaStatus) {
+        return mangaFavouritesCounter.get(mangaFavouritesCounter.size() - 2).getText();
+    }
 
-		mangaStatuses.get(INDEX_FOR_SKIPPING_RECOMMENDATIONS_STATUSES + mangaStatus).click();
-	}
+    public void addOrRemoveFirstMangaFromList(int mangaStatus) {
 
-	public void addLastMangaToList(int mangaStatus) {
+        mangaStatuses.get(INDEX_FOR_SKIPPING_RECOMMENDATIONS_STATUSES + mangaStatus).click();
+    }
 
-		mangaStatuses.get((mangaStatuses.size() - 5) + mangaStatus).click();
-	}
+    public void addLastMangaToList(int mangaStatus) {
 
-	public void chooseFavouritesManga() {
+        mangaStatuses.get((mangaStatuses.size() - 5) + mangaStatus).click();
+    }
 
-		useJavaScriptToClickElement(mangaListType.get(0));
-	}
+    public void chooseFavouritesManga() {
 
-	public void chooseRatedManga() {
+        useJavaScriptToClickElement(mangaListType.get(0));
+    }
 
-		useJavaScriptToClickElement(mangaListType.get(1));
-	}
+    public void chooseRatedManga() {
 
-	public void chooseCurrentlyReadingManga() {
+        useJavaScriptToClickElement(mangaListType.get(1));
+    }
 
-		useJavaScriptToClickElement(mangaListType.get(2));
-	}
+    public void chooseCurrentlyReadingManga() {
 
-	public void chooseCompletedManga() {
+        useJavaScriptToClickElement(mangaListType.get(2));
+    }
 
-		useJavaScriptToClickElement(mangaListType.get(3));
-	}
+    public void chooseCompletedManga() {
 
-	public void choosePlanToReadManga() {
+        useJavaScriptToClickElement(mangaListType.get(3));
+    }
 
-		useJavaScriptToClickElement(mangaListType.get(4));
-	}
+    public void choosePlanToReadManga() {
 
-	public void chooseOnHoldManga() {
+        useJavaScriptToClickElement(mangaListType.get(4));
+    }
 
-		useJavaScriptToClickElement(mangaListType.get(5));
-	}
+    public void chooseOnHoldManga() {
 
-	public void chooseDroppedManga() {
+        useJavaScriptToClickElement(mangaListType.get(5));
+    }
 
-		useJavaScriptToClickElement(mangaListType.get(6));
-	}
+    public void chooseDroppedManga() {
 
-	public void editFirstManga() {
+        useJavaScriptToClickElement(mangaListType.get(6));
+    }
 
-		useJavaScriptToClickElement(adminOptions.get(0));
-	}
+    public void editFirstManga() {
 
-	public void deleteLastManga() {
+        useJavaScriptToClickElement(adminOptions.get(0));
+    }
 
-		useJavaScriptToClickElement(adminOptions.get(adminOptions.size() - 1));
-	}
+    public void deleteLastManga() {
+
+        useJavaScriptToClickElement(adminOptions.get(adminOptions.size() - 1));
+    }
 }

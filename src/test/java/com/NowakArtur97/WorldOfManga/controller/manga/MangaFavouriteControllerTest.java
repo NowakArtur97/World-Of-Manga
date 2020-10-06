@@ -1,11 +1,7 @@
 package com.NowakArtur97.WorldOfManga.controller.manga;
 
-import static org.junit.jupiter.api.Assertions.assertAll;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
+import com.NowakArtur97.WorldOfManga.service.MangaService;
+import com.NowakArtur97.WorldOfManga.testUtil.generator.NameWithSpacesGenerator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.Tag;
@@ -18,37 +14,41 @@ import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilde
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import com.NowakArtur97.WorldOfManga.testUtil.generator.NameWithSpacesGenerator;
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(MockitoExtension.class)
 @DisplayNameGeneration(NameWithSpacesGenerator.class)
 @Tag("MangaFavouriteController_Tests")
 public class MangaFavouriteControllerTest {
 
-	private MockMvc mockMvc;
+    private MockMvc mockMvc;
 
-	private MangaFavouriteController mangaFavouriteController;
+    private MangaFavouriteController mangaFavouriteController;
 
-	@Mock
-	private MangaService mangaService;
+    @Mock
+    private MangaService mangaService;
 
-	@BeforeEach
-	public void setUp() {
+    @BeforeEach
+    public void setUp() {
 
-		mangaFavouriteController = new MangaFavouriteController(mangaService);
-		mockMvc = MockMvcBuilders.standaloneSetup(mangaFavouriteController).build();
-	}
+        mangaFavouriteController = new MangaFavouriteController(mangaService);
+        mockMvc = MockMvcBuilders.standaloneSetup(mangaFavouriteController).build();
+    }
 
-	@Test
-	public void when_add_or_remove_manga_from_favourites_should_redirect_to_last_page() {
+    @Test
+    public void when_add_or_remove_manga_from_favourites_should_redirect_to_last_page() {
 
-		Long mangaId = 1L;
+        Long mangaId = 1L;
 
-		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders
-				.get("/auth/addOrRemoveFromFavourites/{id}", mangaId).header("Referer", "/");
+        MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders
+                .get("/auth/addOrRemoveFromFavourites/{id}", mangaId).header("Referer", "/");
 
-		assertAll(
-				() -> mockMvc.perform(mockRequest).andExpect(status().is3xxRedirection()).andExpect(redirectedUrl("/")),
-				() -> verify(mangaService, times(1)).addOrRemoveFromFavourites(mangaId));
-	}
+        assertAll(
+                () -> mockMvc.perform(mockRequest).andExpect(status().is3xxRedirection()).andExpect(redirectedUrl("/")),
+                () -> verify(mangaService, times(1)).addOrRemoveFromFavourites(mangaId));
+    }
 }

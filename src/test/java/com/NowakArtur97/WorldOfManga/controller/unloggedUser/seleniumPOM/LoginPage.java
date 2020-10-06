@@ -9,66 +9,66 @@ import com.NowakArtur97.WorldOfManga.testUtil.selenium.SeleniumPageObjectModel;
 
 public class LoginPage extends SeleniumPageObjectModel {
 
-	public static final String RESOURCE_PATH = "/user/login";
+    public static final String RESOURCE_PATH = "/user/login";
 
-	private static final String FORM_BOX_CLASS = "form__box";
-	private static final String USERNAME = "username";
-	private static final String PASSWORD = "password";
-	private static final String SUBMIT_CLASS = "form__submit";
+    private static final String FORM_BOX_CLASS = "form__box";
+    private static final String USERNAME = "username";
+    private static final String PASSWORD = "password";
+    private static final String SUBMIT_CLASS = "form__submit";
 
-	@FindBy(name = USERNAME)
-	private WebElement usernameInput;
+    @FindBy(name = USERNAME)
+    private WebElement usernameInput;
 
-	@FindBy(name = PASSWORD)
-	private WebElement passwordInput;
+    @FindBy(name = PASSWORD)
+    private WebElement passwordInput;
 
-	@FindBy(className = SUBMIT_CLASS)
-	private WebElement submitButton;
+    @FindBy(className = SUBMIT_CLASS)
+    private WebElement submitButton;
 
-	@FindBy(className = FORM_BOX_CLASS)
-	private WebElement formBox;
+    @FindBy(className = FORM_BOX_CLASS)
+    private WebElement formBox;
 
-	public LoginPage(WebDriver webDriver) {
+    public LoginPage(WebDriver webDriver) {
 
-		super(webDriver);
-	}
+        super(webDriver);
+    }
 
-	public void loadLoginView(LanguageVersion ver) {
+    public void loadLoginView(LanguageVersion ver) {
 
-		super.connectTo(RESOURCE_PATH + ver.getLangUrl());
-	}
+        super.connectTo(RESOURCE_PATH + ver.getLangUrl());
+    }
 
-	public void setUsername(String username) {
+    public void setUsername(String username) {
 
-		usernameInput.sendKeys(username);
-	}
+        usernameInput.sendKeys(username);
+    }
 
-	public void setPassword(String password) {
+    public void setPassword(String password) {
 
-		passwordInput.sendKeys(password);
-	}
+        passwordInput.sendKeys(password);
+    }
 
-	public void clickSubmitLoginButton() {
+    public void clickSubmitLoginButton() {
 
-		submitButton.click();
-	}
+        submitButton.click();
+    }
 
-	public String getFormBoxText() {
+    public String getFormBoxText() {
 
-		return formBox.getText();
-	}
+        return formBox.getText();
+    }
 
-	public void fillMandatoryLoginFields(String username, String password) {
+    public void fillMandatoryLoginFields(String username, String password) {
 
-		setUsername(username);
+        setUsername(username);
 
-		setPassword(password);
+        setPassword(password);
 
-		clickSubmitLoginButton();
-	}
+        clickSubmitLoginButton();
+    }
 
-	public boolean isUserOnLoginPage() {
+    public boolean isUserOnLoginPage() {
 
-		return webDriver.getCurrentUrl().contains(RESOURCE_PATH);
-	}
+        return webDriver.getCurrentUrl().contains(RESOURCE_PATH);
+    }
 }

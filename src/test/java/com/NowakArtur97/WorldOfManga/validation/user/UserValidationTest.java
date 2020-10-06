@@ -1,254 +1,245 @@
 package com.NowakArtur97.WorldOfManga.validation.user;
 
-import static org.junit.jupiter.api.Assertions.assertAll;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import java.util.Set;
+import com.NowakArtur97.WorldOfManga.dto.UserDTO;
+import com.NowakArtur97.WorldOfManga.dto.UserPasswordDTO;
+import com.NowakArtur97.WorldOfManga.testUtil.generator.NameWithSpacesGenerator;
+import org.junit.jupiter.api.*;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
+import java.util.Set;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayNameGeneration;
-import org.junit.jupiter.api.Nested;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
-
-import com.NowakArtur97.WorldOfManga.dto.UserDTO;
-import com.NowakArtur97.WorldOfManga.dto.UserPasswordDTO;
-import com.NowakArtur97.WorldOfManga.testUtil.generator.NameWithSpacesGenerator;
+import static org.junit.jupiter.api.Assertions.*;
 
 @DisplayNameGeneration(NameWithSpacesGenerator.class)
 @Tag("UserPassword_Tests")
 public class UserValidationTest {
 
-	private Validator validator;
+    private Validator validator;
 
-	@BeforeEach
-	public void setUp() {
+    @BeforeEach
+    public void setUp() {
 
-		ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-		validator = factory.getValidator();
-	}
+        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        validator = factory.getValidator();
+    }
 
-	@Test
-	public void when_user_is_correct_should_not_have_violations() {
+    @Test
+    public void when_user_is_correct_should_not_have_violations() {
 
-		UserDTO userDTO = UserDTO.builder().username("username").firstName("first name").lastName("last name")
-				.userPasswordDTO(UserPasswordDTO.builder().password("password1").matchingPassword("password1").build())
-				.email("user@email.com").areTermsAccepted(true).build();
+        UserDTO userDTO = UserDTO.builder().username("username").firstName("first name").lastName("last name")
+                .userPasswordDTO(UserPasswordDTO.builder().password("password1").matchingPassword("password1").build())
+                .email("user@email.com").areTermsAccepted(true).build();
 
-		Set<ConstraintViolation<UserDTO>> violations = validator.validate(userDTO);
+        Set<ConstraintViolation<UserDTO>> violations = validator.validate(userDTO);
 
-		assertAll(() -> assertTrue(violations.isEmpty(),
-				() -> "shouldn`t have violations, but have: " + violations.size()));
-	}
+        assertAll(() -> assertTrue(violations.isEmpty(),
+                () -> "shouldn`t have violations, but have: " + violations.size()));
+    }
 
-	@Nested
-	class UsernameValidationTest {
+    @Nested
+    class UsernameValidationTest {
 
-		@Test
-		public void when_username_is_null_should_have_violations() {
+        @Test
+        public void when_username_is_null_should_have_violations() {
 
-			String username = null;
+            String username = null;
 
-			UserDTO userDTO = UserDTO.builder().username(username).firstName("first name").lastName("last name")
-					.userPasswordDTO(
-							UserPasswordDTO.builder().password("password1").matchingPassword("password1").build())
-					.email("user@email.com").areTermsAccepted(true).build();
+            UserDTO userDTO = UserDTO.builder().username(username).firstName("first name").lastName("last name")
+                    .userPasswordDTO(
+                            UserPasswordDTO.builder().password("password1").matchingPassword("password1").build())
+                    .email("user@email.com").areTermsAccepted(true).build();
 
-			Set<ConstraintViolation<UserDTO>> violations = validator.validate(userDTO);
+            Set<ConstraintViolation<UserDTO>> violations = validator.validate(userDTO);
 
-			assertAll(() -> assertFalse(violations.isEmpty(), () -> "should have violation, but: "),
-					() -> assertEquals(1, violations.size(),
-							() -> "should have one violation, but have: " + violations.size()));
-		}
+            assertAll(() -> assertFalse(violations.isEmpty(), () -> "should have violation, but: "),
+                    () -> assertEquals(1, violations.size(),
+                            () -> "should have one violation, but have: " + violations.size()));
+        }
 
-		@Test
-		public void when_username_is_empty_should_have_violations() {
+        @Test
+        public void when_username_is_empty_should_have_violations() {
 
-			String username = "";
+            String username = "";
 
-			UserDTO userDTO = UserDTO.builder().username(username).firstName("first name").lastName("last name")
-					.userPasswordDTO(
-							UserPasswordDTO.builder().password("password1").matchingPassword("password1").build())
-					.email("user@email.com").areTermsAccepted(true).build();
+            UserDTO userDTO = UserDTO.builder().username(username).firstName("first name").lastName("last name")
+                    .userPasswordDTO(
+                            UserPasswordDTO.builder().password("password1").matchingPassword("password1").build())
+                    .email("user@email.com").areTermsAccepted(true).build();
 
-			Set<ConstraintViolation<UserDTO>> violations = validator.validate(userDTO);
+            Set<ConstraintViolation<UserDTO>> violations = validator.validate(userDTO);
 
-			assertAll(() -> assertFalse(violations.isEmpty(), () -> "should have violation, but: "),
-					() -> assertEquals(1, violations.size(),
-							() -> "should have one violation, but have: " + violations.size()));
-		}
+            assertAll(() -> assertFalse(violations.isEmpty(), () -> "should have violation, but: "),
+                    () -> assertEquals(1, violations.size(),
+                            () -> "should have one violation, but have: " + violations.size()));
+        }
 
-		@Test
-		public void when_username_is_blank_should_have_violations() {
+        @Test
+        public void when_username_is_blank_should_have_violations() {
 
-			String username = "    ";
+            String username = "    ";
 
-			UserDTO userDTO = UserDTO.builder().username(username).firstName("first name").lastName("last name")
-					.userPasswordDTO(
-							UserPasswordDTO.builder().password("password1").matchingPassword("password1").build())
-					.email("user@email.com").areTermsAccepted(true).build();
+            UserDTO userDTO = UserDTO.builder().username(username).firstName("first name").lastName("last name")
+                    .userPasswordDTO(
+                            UserPasswordDTO.builder().password("password1").matchingPassword("password1").build())
+                    .email("user@email.com").areTermsAccepted(true).build();
 
-			Set<ConstraintViolation<UserDTO>> violations = validator.validate(userDTO);
+            Set<ConstraintViolation<UserDTO>> violations = validator.validate(userDTO);
 
-			assertAll(() -> assertFalse(violations.isEmpty(), () -> "should have violation, but: "),
-					() -> assertEquals(1, violations.size(),
-							() -> "should have one violation, but have: " + violations.size()));
-		}
+            assertAll(() -> assertFalse(violations.isEmpty(), () -> "should have violation, but: "),
+                    () -> assertEquals(1, violations.size(),
+                            () -> "should have one violation, but have: " + violations.size()));
+        }
 
-		@Test
-		public void when_username_is_too_long_should_have_violations() {
+        @Test
+        public void when_username_is_too_long_should_have_violations() {
 
-			String username = "abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij";
+            String username = "abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij";
 
-			UserDTO userDTO = UserDTO.builder().username(username).firstName("first name").lastName("last name")
-					.userPasswordDTO(
-							UserPasswordDTO.builder().password("password1").matchingPassword("password1").build())
-					.email("user@email.com").areTermsAccepted(true).build();
+            UserDTO userDTO = UserDTO.builder().username(username).firstName("first name").lastName("last name")
+                    .userPasswordDTO(
+                            UserPasswordDTO.builder().password("password1").matchingPassword("password1").build())
+                    .email("user@email.com").areTermsAccepted(true).build();
 
-			Set<ConstraintViolation<UserDTO>> violations = validator.validate(userDTO);
+            Set<ConstraintViolation<UserDTO>> violations = validator.validate(userDTO);
 
-			assertAll(() -> assertFalse(violations.isEmpty(), () -> "should have violations, but: "),
-					() -> assertEquals(1, violations.size(),
-							() -> "should have one violation, but have: " + violations.size()));
-		}
-	}
+            assertAll(() -> assertFalse(violations.isEmpty(), () -> "should have violations, but: "),
+                    () -> assertEquals(1, violations.size(),
+                            () -> "should have one violation, but have: " + violations.size()));
+        }
+    }
 
-	@Nested
-	class EmailValidationTest {
+    @Nested
+    class EmailValidationTest {
 
-		@Test
-		public void when_email_is_null_should_have_violations() {
+        @Test
+        public void when_email_is_null_should_have_violations() {
 
-			String email = null;
+            String email = null;
 
-			UserDTO userDTO = UserDTO.builder().username("username").firstName("first name").lastName("last name")
-					.userPasswordDTO(
-							UserPasswordDTO.builder().password("password1").matchingPassword("password1").build())
-					.email(email).areTermsAccepted(true).build();
+            UserDTO userDTO = UserDTO.builder().username("username").firstName("first name").lastName("last name")
+                    .userPasswordDTO(
+                            UserPasswordDTO.builder().password("password1").matchingPassword("password1").build())
+                    .email(email).areTermsAccepted(true).build();
 
-			Set<ConstraintViolation<UserDTO>> violations = validator.validate(userDTO);
+            Set<ConstraintViolation<UserDTO>> violations = validator.validate(userDTO);
 
-			assertAll(() -> assertFalse(violations.isEmpty(), () -> "should have violation, but: "),
-					() -> assertEquals(1, violations.size(),
-							() -> "should have one violation, but have: " + violations.size()));
-		}
+            assertAll(() -> assertFalse(violations.isEmpty(), () -> "should have violation, but: "),
+                    () -> assertEquals(1, violations.size(),
+                            () -> "should have one violation, but have: " + violations.size()));
+        }
 
-		@Test
-		public void when_email_is_empty_should_have_violations() {
+        @Test
+        public void when_email_is_empty_should_have_violations() {
 
-			String email = "";
+            String email = "";
 
-			UserDTO userDTO = UserDTO.builder().username("username").firstName("first name").lastName("last name")
-					.userPasswordDTO(
-							UserPasswordDTO.builder().password("password1").matchingPassword("password1").build())
-					.email(email).areTermsAccepted(true).build();
+            UserDTO userDTO = UserDTO.builder().username("username").firstName("first name").lastName("last name")
+                    .userPasswordDTO(
+                            UserPasswordDTO.builder().password("password1").matchingPassword("password1").build())
+                    .email(email).areTermsAccepted(true).build();
 
-			Set<ConstraintViolation<UserDTO>> violations = validator.validate(userDTO);
+            Set<ConstraintViolation<UserDTO>> violations = validator.validate(userDTO);
 
-			assertAll(() -> assertFalse(violations.isEmpty(), () -> "should have violation, but: "),
-					() -> assertEquals(1, violations.size(),
-							() -> "should have one violation, but have: " + violations.size()));
-		}
+            assertAll(() -> assertFalse(violations.isEmpty(), () -> "should have violation, but: "),
+                    () -> assertEquals(1, violations.size(),
+                            () -> "should have one violation, but have: " + violations.size()));
+        }
 
-		@Test
-		public void when_email_is_blank_should_have_violations() {
+        @Test
+        public void when_email_is_blank_should_have_violations() {
 
-			String email = "    ";
+            String email = "    ";
 
-			UserDTO userDTO = UserDTO.builder().username("username").firstName("first name").lastName("last name")
-					.userPasswordDTO(
-							UserPasswordDTO.builder().password("password1").matchingPassword("password1").build())
-					.email(email).areTermsAccepted(true).build();
+            UserDTO userDTO = UserDTO.builder().username("username").firstName("first name").lastName("last name")
+                    .userPasswordDTO(
+                            UserPasswordDTO.builder().password("password1").matchingPassword("password1").build())
+                    .email(email).areTermsAccepted(true).build();
 
-			Set<ConstraintViolation<UserDTO>> violations = validator.validate(userDTO);
+            Set<ConstraintViolation<UserDTO>> violations = validator.validate(userDTO);
 
-			assertAll(() -> assertFalse(violations.isEmpty(), () -> "should have violation, but: "),
-					() -> assertEquals(2, violations.size(),
-							() -> "should have two violations, but have: " + violations.size()));
-		}
+            assertAll(() -> assertFalse(violations.isEmpty(), () -> "should have violation, but: "),
+                    () -> assertEquals(2, violations.size(),
+                            () -> "should have two violations, but have: " + violations.size()));
+        }
 
-		@Test
-		public void when_email_is_too_long_should_have_violations() {
+        @Test
+        public void when_email_is_too_long_should_have_violations() {
 
-			String email = "abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij@email.com";
+            String email = "abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij@email.com";
 
-			UserDTO userDTO = UserDTO.builder().username("username").firstName("first name").lastName("last name")
-					.userPasswordDTO(
-							UserPasswordDTO.builder().password("password1").matchingPassword("password1").build())
-					.email(email).areTermsAccepted(true).build();
+            UserDTO userDTO = UserDTO.builder().username("username").firstName("first name").lastName("last name")
+                    .userPasswordDTO(
+                            UserPasswordDTO.builder().password("password1").matchingPassword("password1").build())
+                    .email(email).areTermsAccepted(true).build();
 
-			Set<ConstraintViolation<UserDTO>> violations = validator.validate(userDTO);
+            Set<ConstraintViolation<UserDTO>> violations = validator.validate(userDTO);
 
-			assertAll(() -> assertFalse(violations.isEmpty(), () -> "should have violations, but: "),
-					() -> assertEquals(2, violations.size(),
-							() -> "should have two violations, but have: " + violations.size()));
-		}
+            assertAll(() -> assertFalse(violations.isEmpty(), () -> "should have violations, but: "),
+                    () -> assertEquals(2, violations.size(),
+                            () -> "should have two violations, but have: " + violations.size()));
+        }
 
-		@Test
-		public void when_email_has_incorrect_format_should_have_violations() {
+        @Test
+        public void when_email_has_incorrect_format_should_have_violations() {
 
-			String email = "email,";
+            String email = "email,";
 
-			UserDTO userDTO = UserDTO.builder().username("username").firstName("first name").lastName("last name")
-					.userPasswordDTO(
-							UserPasswordDTO.builder().password("password1").matchingPassword("password1").build())
-					.email(email).areTermsAccepted(true).build();
+            UserDTO userDTO = UserDTO.builder().username("username").firstName("first name").lastName("last name")
+                    .userPasswordDTO(
+                            UserPasswordDTO.builder().password("password1").matchingPassword("password1").build())
+                    .email(email).areTermsAccepted(true).build();
 
-			Set<ConstraintViolation<UserDTO>> violations = validator.validate(userDTO);
+            Set<ConstraintViolation<UserDTO>> violations = validator.validate(userDTO);
 
-			assertAll(() -> assertFalse(violations.isEmpty(), () -> "should have violation, but: "),
-					() -> assertEquals(1, violations.size(),
-							() -> "should have one violation, but have: " + violations.size()));
-		}
-	}
+            assertAll(() -> assertFalse(violations.isEmpty(), () -> "should have violation, but: "),
+                    () -> assertEquals(1, violations.size(),
+                            () -> "should have one violation, but have: " + violations.size()));
+        }
+    }
 
-	@Test
-	public void when_firstname_is_too_long_should_have_violations() {
+    @Test
+    public void when_firstname_is_too_long_should_have_violations() {
 
-		String firstname = "abcdefghijabcdefghijabcdefghijabcdefghijabcdefghij";
+        String firstname = "abcdefghijabcdefghijabcdefghijabcdefghijabcdefghij";
 
-		UserDTO userDTO = UserDTO.builder().username("username").firstName(firstname).lastName("last name")
-				.userPasswordDTO(UserPasswordDTO.builder().password("password1").matchingPassword("password1").build())
-				.email("user@email.com").areTermsAccepted(true).build();
+        UserDTO userDTO = UserDTO.builder().username("username").firstName(firstname).lastName("last name")
+                .userPasswordDTO(UserPasswordDTO.builder().password("password1").matchingPassword("password1").build())
+                .email("user@email.com").areTermsAccepted(true).build();
 
-		Set<ConstraintViolation<UserDTO>> violations = validator.validate(userDTO);
+        Set<ConstraintViolation<UserDTO>> violations = validator.validate(userDTO);
 
-		assertAll(() -> assertFalse(violations.isEmpty(), () -> "should have violations, but: "), () -> assertEquals(1,
-				violations.size(), () -> "should have one violation, but have: " + violations.size()));
-	}
+        assertAll(() -> assertFalse(violations.isEmpty(), () -> "should have violations, but: "), () -> assertEquals(1,
+                violations.size(), () -> "should have one violation, but have: " + violations.size()));
+    }
 
-	@Test
-	public void when_lastname_is_too_long_should_have_violations() {
+    @Test
+    public void when_lastname_is_too_long_should_have_violations() {
 
-		String lastname = "abcdefghijabcdefghijabcdefghijabcdefghijabcdefghij";
+        String lastname = "abcdefghijabcdefghijabcdefghijabcdefghijabcdefghij";
 
-		UserDTO userDTO = UserDTO.builder().username("username").firstName("first name").lastName(lastname)
-				.userPasswordDTO(UserPasswordDTO.builder().password("password1").matchingPassword("password1").build())
-				.email("user@email.com").areTermsAccepted(true).build();
+        UserDTO userDTO = UserDTO.builder().username("username").firstName("first name").lastName(lastname)
+                .userPasswordDTO(UserPasswordDTO.builder().password("password1").matchingPassword("password1").build())
+                .email("user@email.com").areTermsAccepted(true).build();
 
-		Set<ConstraintViolation<UserDTO>> violations = validator.validate(userDTO);
+        Set<ConstraintViolation<UserDTO>> violations = validator.validate(userDTO);
 
-		assertAll(() -> assertFalse(violations.isEmpty(), () -> "should have violations, but: "), () -> assertEquals(1,
-				violations.size(), () -> "should have one violation, but have: " + violations.size()));
-	}
+        assertAll(() -> assertFalse(violations.isEmpty(), () -> "should have violations, but: "), () -> assertEquals(1,
+                violations.size(), () -> "should have one violation, but have: " + violations.size()));
+    }
 
-	@Test
-	public void when_terms_are_not_accepted_should_have_violations() {
+    @Test
+    public void when_terms_are_not_accepted_should_have_violations() {
 
-		UserDTO userDTO = UserDTO.builder().username("username").firstName("first name").lastName("last name")
-				.userPasswordDTO(UserPasswordDTO.builder().password("password1").matchingPassword("password1").build())
-				.email("user@email.com").areTermsAccepted(false).build();
+        UserDTO userDTO = UserDTO.builder().username("username").firstName("first name").lastName("last name")
+                .userPasswordDTO(UserPasswordDTO.builder().password("password1").matchingPassword("password1").build())
+                .email("user@email.com").areTermsAccepted(false).build();
 
-		Set<ConstraintViolation<UserDTO>> violations = validator.validate(userDTO);
+        Set<ConstraintViolation<UserDTO>> violations = validator.validate(userDTO);
 
-		assertAll(() -> assertFalse(violations.isEmpty(), () -> "should have violations, but: "), () -> assertEquals(1,
-				violations.size(), () -> "should have one violation, but have: " + violations.size()));
-	}
+        assertAll(() -> assertFalse(violations.isEmpty(), () -> "should have violations, but: "), () -> assertEquals(1,
+                violations.size(), () -> "should have one violation, but have: " + violations.size()));
+    }
 }

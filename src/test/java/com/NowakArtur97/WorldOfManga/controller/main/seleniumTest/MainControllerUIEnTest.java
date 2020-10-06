@@ -1,9 +1,8 @@
 package com.NowakArtur97.WorldOfManga.controller.main.seleniumTest;
 
-import static org.junit.jupiter.api.Assertions.assertAll;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
+import com.NowakArtur97.WorldOfManga.testUtil.enums.LanguageVersion;
+import com.NowakArtur97.WorldOfManga.testUtil.extension.ScreenshotWatcher;
+import com.NowakArtur97.WorldOfManga.testUtil.generator.NameWithSpacesGenerator;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -12,9 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.TestPropertySource;
 
-import com.NowakArtur97.WorldOfManga.testUtil.enums.LanguageVersion;
-import com.NowakArtur97.WorldOfManga.testUtil.extension.ScreenshotWatcher;
-import com.NowakArtur97.WorldOfManga.testUtil.generator.NameWithSpacesGenerator;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @ExtendWith(ScreenshotWatcher.class)
@@ -24,24 +21,24 @@ import com.NowakArtur97.WorldOfManga.testUtil.generator.NameWithSpacesGenerator;
 @DirtiesContext
 class MainControllerUIEnTest extends MainControllerUITest {
 
-	@Test
-	void when_load_main_page_should_load_all_page_content() {
+    @Test
+    void when_load_main_page_should_load_all_page_content() {
 
-		mainPage.loadMainView(LanguageVersion.ENG);
+        mainPage.loadMainView(LanguageVersion.ENG);
 
-		assertAll(
-				() -> assertTrue(mainPage.getHeaderText().contains(headerLogo),
-						() -> "should load header logo: " + headerLogo + ", but was: " + mainPage.getHeaderText()),
-				() -> assertTrue(mainPage.getHeaderText().contains(headerRegistrationOption),
-						() -> "should load header sing up option: " + headerRegistrationOption + ", but was: "
-								+ mainPage.getHeaderText()),
-				() -> assertTrue(mainPage.getHeaderText().contains(headerLoginOption),
-						() -> "should load header sign in option: " + headerLoginOption + ", but was: "
-								+ mainPage.getHeaderText()),
-				() -> assertTrue(mainPage.getHeaderText().contains(headerLanguageOption),
-						() -> "should load header language option: " + headerLanguageOption + ", but was: "
-								+ mainPage.getHeaderText()),
-				() -> assertNotNull(mainPage.getFooterText(), () -> "should load footer fragment text"),
-				() -> assertNotNull(mainPage.getMainPageText(), () -> "should load main fragment text"));
-	}
+        assertAll(
+                () -> assertTrue(mainPage.getHeaderText().contains(headerLogo),
+                        () -> "should load header logo: " + headerLogo + ", but was: " + mainPage.getHeaderText()),
+                () -> assertTrue(mainPage.getHeaderText().contains(headerRegistrationOption),
+                        () -> "should load header sing up option: " + headerRegistrationOption + ", but was: "
+                                + mainPage.getHeaderText()),
+                () -> assertTrue(mainPage.getHeaderText().contains(headerLoginOption),
+                        () -> "should load header sign in option: " + headerLoginOption + ", but was: "
+                                + mainPage.getHeaderText()),
+                () -> assertTrue(mainPage.getHeaderText().contains(headerLanguageOption),
+                        () -> "should load header language option: " + headerLanguageOption + ", but was: "
+                                + mainPage.getHeaderText()),
+                () -> assertNotNull(mainPage.getFooterText(), () -> "should load footer fragment text"),
+                () -> assertNotNull(mainPage.getMainPageText(), () -> "should load main fragment text"));
+    }
 }

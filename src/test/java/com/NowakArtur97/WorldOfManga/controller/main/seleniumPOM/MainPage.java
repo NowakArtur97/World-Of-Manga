@@ -9,44 +9,44 @@ import com.NowakArtur97.WorldOfManga.testUtil.selenium.SeleniumPageObjectModel;
 
 public class MainPage extends SeleniumPageObjectModel {
 
-	public static final String RESOURCE_PATH = "/";
+    public static final String RESOURCE_PATH = "/";
 
-	private static final String MAIN_PAGE_CLASS = "page";
-	private static final String HEADER_CLASS = "header";
-	private static final String FOOTER_CLASS = "footer";
+    private static final String MAIN_PAGE_CLASS = "page";
+    private static final String HEADER_CLASS = "header";
+    private static final String FOOTER_CLASS = "footer";
 
-	@FindBy(className = MAIN_PAGE_CLASS)
-	private WebElement mainPage;
+    @FindBy(className = MAIN_PAGE_CLASS)
+    private WebElement mainPage;
 
-	@FindBy(className = HEADER_CLASS)
-	private WebElement header;
+    @FindBy(className = HEADER_CLASS)
+    private WebElement header;
 
-	@FindBy(className = FOOTER_CLASS)
-	private WebElement footer;
+    @FindBy(className = FOOTER_CLASS)
+    private WebElement footer;
 
-	public MainPage(WebDriver webDriver) {
+    public MainPage(WebDriver webDriver) {
 
-		super(webDriver);
-	}
+        super(webDriver);
+    }
 
-	public void loadMainView(LanguageVersion ver) {
+    public void loadMainView(LanguageVersion ver) {
 
-		super.connectTo(RESOURCE_PATH + ver.getLangUrl());
-	}
+        super.connectTo(RESOURCE_PATH + ver.getLangUrl());
+    }
 
 
-	public String getHeaderText() {
+    public String getHeaderText() {
 
-		return header.getAttribute("textContent");
-	}
+        return header.getAttribute("textContent");
+    }
 
-	public String getFooterText() {
+    public String getFooterText() {
 
-		return footer.getText();
-	}
+        return footer.getText();
+    }
 
-	public String getMainPageText() {
+    public String getMainPageText() {
 
-		return mainPage.getText();
-	}
+        return mainPage.getText();
+    }
 }

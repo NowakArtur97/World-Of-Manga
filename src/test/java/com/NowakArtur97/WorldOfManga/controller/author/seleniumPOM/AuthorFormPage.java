@@ -1,83 +1,82 @@
 package com.NowakArtur97.WorldOfManga.controller.author.seleniumPOM;
 
-import java.util.List;
-
+import com.NowakArtur97.WorldOfManga.testUtil.enums.LanguageVersion;
+import com.NowakArtur97.WorldOfManga.testUtil.selenium.SeleniumPageObjectModel;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import com.NowakArtur97.WorldOfManga.testUtil.enums.LanguageVersion;
-import com.NowakArtur97.WorldOfManga.testUtil.selenium.SeleniumPageObjectModel;
+import java.util.List;
 
 public class AuthorFormPage extends SeleniumPageObjectModel {
 
-	public static final String RESOURCE_PATH = "/admin/addOrUpdateAuthor";
+    public static final String RESOURCE_PATH = "/admin/addOrUpdateAuthor";
 
-	private static final String FULL_NAME = "fullName";
-	private static final String FORM_MESSAGE_FAILURE_CLASS = "form__message--failure";
-	private static final String FORM_BOX_NAME = "addOrUpdateAuthorForm";
-	private static final String SUBMIT_AUTHOR = "addOrUpdateAuthorSubmitBtn";
-	private static final String ADD_OR_UPDATE_AUTHOR_LINK = "//a[@href='/admin/addOrUpdateManga']";
+    private static final String FULL_NAME = "fullName";
+    private static final String FORM_MESSAGE_FAILURE_CLASS = "form__message--failure";
+    private static final String FORM_BOX_NAME = "addOrUpdateAuthorForm";
+    private static final String SUBMIT_AUTHOR = "addOrUpdateAuthorSubmitBtn";
+    private static final String ADD_OR_UPDATE_AUTHOR_LINK = "//a[@href='/admin/addOrUpdateManga']";
 
-	@FindBy(name = FULL_NAME)
-	private WebElement fullNameInput;
+    @FindBy(name = FULL_NAME)
+    private WebElement fullNameInput;
 
-	@FindBy(className = FORM_MESSAGE_FAILURE_CLASS)
-	private List<WebElement> failrueMessages;
+    @FindBy(className = FORM_MESSAGE_FAILURE_CLASS)
+    private List<WebElement> failrueMessages;
 
-	@FindBy(name = FORM_BOX_NAME)
-	private WebElement formBox;
+    @FindBy(name = FORM_BOX_NAME)
+    private WebElement formBox;
 
-	@FindBy(name = SUBMIT_AUTHOR)
-	private WebElement submitButton;
+    @FindBy(name = SUBMIT_AUTHOR)
+    private WebElement submitButton;
 
-	@FindBy(xpath = ADD_OR_UPDATE_AUTHOR_LINK)
-	private WebElement addOrUpdateAuthorLink;
+    @FindBy(xpath = ADD_OR_UPDATE_AUTHOR_LINK)
+    private WebElement addOrUpdateAuthorLink;
 
-	public AuthorFormPage(WebDriver webDriver) {
+    public AuthorFormPage(WebDriver webDriver) {
 
-		super(webDriver);
-	}
+        super(webDriver);
+    }
 
-	public void loadAuthorForm(LanguageVersion ver) {
+    public void loadAuthorForm(LanguageVersion ver) {
 
-		super.connectTo(RESOURCE_PATH + ver.getLangUrl());
-	}
+        super.connectTo(RESOURCE_PATH + ver.getLangUrl());
+    }
 
-	public void clickSubmitAuthorFormButton() {
+    public void clickSubmitAuthorFormButton() {
 
-		submitButton.click();
-	}
+        submitButton.click();
+    }
 
-	public void setFullName(String fullName) {
+    public void setFullName(String fullName) {
 
-		fullNameInput.sendKeys(fullName);
-	}
+        fullNameInput.sendKeys(fullName);
+    }
 
-	public String getFullName() {
+    public String getFullName() {
 
-		return fullNameInput.getAttribute("value");
-	}
+        return fullNameInput.getAttribute("value");
+    }
 
-	public String getFormBoxText() {
+    public String getFormBoxText() {
 
-		return formBox.getText();
-	}
+        return formBox.getText();
+    }
 
-	public int countFailureMessages() {
+    public int countFailureMessages() {
 
-		return failrueMessages.size();
-	}
+        return failrueMessages.size();
+    }
 
-	public void clickAddOrUpdateAuthorLinkButton() {
+    public void clickAddOrUpdateAuthorLinkButton() {
 
-		useJavaScriptToClickElement(addOrUpdateAuthorLink);
-	}
+        useJavaScriptToClickElement(addOrUpdateAuthorLink);
+    }
 
-	public void fillMandatoryAuthorFormFields(String fullName) {
+    public void fillMandatoryAuthorFormFields(String fullName) {
 
-		setFullName(fullName);
+        setFullName(fullName);
 
-		clickSubmitAuthorFormButton();
-	}
+        clickSubmitAuthorFormButton();
+    }
 }

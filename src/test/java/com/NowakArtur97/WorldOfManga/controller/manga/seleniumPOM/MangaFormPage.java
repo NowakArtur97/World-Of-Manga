@@ -1,224 +1,223 @@
 package com.NowakArtur97.WorldOfManga.controller.manga.seleniumPOM;
 
-import java.util.List;
-
+import com.NowakArtur97.WorldOfManga.testUtil.enums.LanguageVersion;
+import com.NowakArtur97.WorldOfManga.testUtil.selenium.SeleniumPageObjectModel;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import com.NowakArtur97.WorldOfManga.testUtil.enums.LanguageVersion;
-import com.NowakArtur97.WorldOfManga.testUtil.selenium.SeleniumPageObjectModel;
+import java.util.List;
 
 public class MangaFormPage extends SeleniumPageObjectModel {
 
-	public static final String RESOURCE_PATH = "/admin/addOrUpdateManga";
+    public static final String RESOURCE_PATH = "/admin/addOrUpdateManga";
 
-	private final static String projectPath = System.getProperty("user.dir");
+    private final static String projectPath = System.getProperty("user.dir");
 
-	private final static String EXAMPLE_IMAGE_PATH = "\\src\\main\\resources\\static\\images\\backgrounds\\samurai.jpg";
+    private final static String EXAMPLE_IMAGE_PATH = "\\src\\main\\resources\\static\\images\\backgrounds\\samurai.jpg";
 
-	private static final String TITLE_EN = "enTranslation.title";
-	private static final String DESCRIPTION_EN = "enTranslation.description";
-	private static final String TITLE_PL = "plTranslation.title";
-	private static final String DESCRIPTION_PL = "plTranslation.description";
-	private static final String IMAGE = "image";
-	private static final String AUTHORS = "authors";
-	private static final String GENRES = "genres";
-	private static final String FORM_GROUP_SHOW_CLASS = "form__label--show";
-	private static final String FORM_MESSAGE_FAILURE_CLASS = "form__message--failure";
-	private static final String FORM_BOX_NAME = "addOrUpdateMangaForm";
-	private static final String SUBMIT_MANGA = "addOrUpdateMangaSubmitBtn";
-	private static final String ADD_OR_UPDATE_MANGA_LINK = "//a[@href='/admin/addOrUpdateManga']";
+    private static final String TITLE_EN = "enTranslation.title";
+    private static final String DESCRIPTION_EN = "enTranslation.description";
+    private static final String TITLE_PL = "plTranslation.title";
+    private static final String DESCRIPTION_PL = "plTranslation.description";
+    private static final String IMAGE = "image";
+    private static final String AUTHORS = "authors";
+    private static final String GENRES = "genres";
+    private static final String FORM_GROUP_SHOW_CLASS = "form__label--show";
+    private static final String FORM_MESSAGE_FAILURE_CLASS = "form__message--failure";
+    private static final String FORM_BOX_NAME = "addOrUpdateMangaForm";
+    private static final String SUBMIT_MANGA = "addOrUpdateMangaSubmitBtn";
+    private static final String ADD_OR_UPDATE_MANGA_LINK = "//a[@href='/admin/addOrUpdateManga']";
 
-	@FindBy(name = TITLE_EN)
-	private WebElement titleEnInput;
+    @FindBy(name = TITLE_EN)
+    private WebElement titleEnInput;
 
-	@FindBy(name = DESCRIPTION_EN)
-	private WebElement descriptionEnInput;
+    @FindBy(name = DESCRIPTION_EN)
+    private WebElement descriptionEnInput;
 
-	@FindBy(name = TITLE_PL)
-	private WebElement titlePlInput;
+    @FindBy(name = TITLE_PL)
+    private WebElement titlePlInput;
 
-	@FindBy(name = DESCRIPTION_PL)
-	private WebElement descriptionPlInput;
+    @FindBy(name = DESCRIPTION_PL)
+    private WebElement descriptionPlInput;
 
-	@FindBy(name = IMAGE)
-	private WebElement imageInput;
+    @FindBy(name = IMAGE)
+    private WebElement imageInput;
 
-	@FindBy(name = AUTHORS)
-	private List<WebElement> authorsCheckboxes;
+    @FindBy(name = AUTHORS)
+    private List<WebElement> authorsCheckboxes;
 
-	@FindBy(name = GENRES)
-	private List<WebElement> genresCheckboxes;
+    @FindBy(name = GENRES)
+    private List<WebElement> genresCheckboxes;
 
-	@FindBy(className = FORM_GROUP_SHOW_CLASS)
-	private List<WebElement> groupHiddenOptions;
+    @FindBy(className = FORM_GROUP_SHOW_CLASS)
+    private List<WebElement> groupHiddenOptions;
 
-	@FindBy(className = FORM_MESSAGE_FAILURE_CLASS)
-	private List<WebElement> failrueMessages;
+    @FindBy(className = FORM_MESSAGE_FAILURE_CLASS)
+    private List<WebElement> failrueMessages;
 
-	@FindBy(name = FORM_BOX_NAME)
-	private WebElement formBox;
+    @FindBy(name = FORM_BOX_NAME)
+    private WebElement formBox;
 
-	@FindBy(name = SUBMIT_MANGA)
-	private WebElement submitButton;
+    @FindBy(name = SUBMIT_MANGA)
+    private WebElement submitButton;
 
-	@FindBy(xpath = ADD_OR_UPDATE_MANGA_LINK)
-	private WebElement addOrUpdateMangaLink;
+    @FindBy(xpath = ADD_OR_UPDATE_MANGA_LINK)
+    private WebElement addOrUpdateMangaLink;
 
-	public MangaFormPage(WebDriver webDriver) {
+    public MangaFormPage(WebDriver webDriver) {
 
-		super(webDriver);
-	}
+        super(webDriver);
+    }
 
-	public void loadMangaForm(LanguageVersion ver) {
+    public void loadMangaForm(LanguageVersion ver) {
 
-		super.connectTo(RESOURCE_PATH + ver.getLangUrl());
-	}
+        super.connectTo(RESOURCE_PATH + ver.getLangUrl());
+    }
 
-	public String getEnTitle() {
+    public String getEnTitle() {
 
-		return titleEnInput.getAttribute("value");
-	}
+        return titleEnInput.getAttribute("value");
+    }
 
-	public void setEnTitle(String enTitle) {
+    public void setEnTitle(String enTitle) {
 
-		titleEnInput.clear();
-		titleEnInput.sendKeys(enTitle);
-	}
+        titleEnInput.clear();
+        titleEnInput.sendKeys(enTitle);
+    }
 
-	public String getEnDescription() {
+    public String getEnDescription() {
 
-		return descriptionEnInput.getAttribute("value");
-	}
+        return descriptionEnInput.getAttribute("value");
+    }
 
-	public void setEnDescription(String enDescription) {
+    public void setEnDescription(String enDescription) {
 
-		descriptionEnInput.clear();
-		descriptionEnInput.sendKeys(enDescription);
-	}
+        descriptionEnInput.clear();
+        descriptionEnInput.sendKeys(enDescription);
+    }
 
-	public String getPlTitle() {
+    public String getPlTitle() {
 
-		return titlePlInput.getAttribute("value");
-	}
+        return titlePlInput.getAttribute("value");
+    }
 
-	public void setPlTitle(String plTitle) {
+    public void setPlTitle(String plTitle) {
 
-		titlePlInput.clear();
-		titlePlInput.sendKeys(plTitle);
-	}
+        titlePlInput.clear();
+        titlePlInput.sendKeys(plTitle);
+    }
 
-	public String getPlDescription() {
+    public String getPlDescription() {
 
-		return descriptionPlInput.getAttribute("value");
-	}
+        return descriptionPlInput.getAttribute("value");
+    }
 
-	public void setPlDescription(String plDescription) {
+    public void setPlDescription(String plDescription) {
 
-		descriptionPlInput.clear();
-		descriptionPlInput.sendKeys(plDescription);
-	}
+        descriptionPlInput.clear();
+        descriptionPlInput.sendKeys(plDescription);
+    }
 
-	public void addImage() {
+    public void addImage() {
 
-		imageInput.sendKeys(projectPath + EXAMPLE_IMAGE_PATH);
-	}
+        imageInput.sendKeys(projectPath + EXAMPLE_IMAGE_PATH);
+    }
 
-	public void clickAuthorCheckbox(int index) {
+    public void clickAuthorCheckbox(int index) {
 
-		authorsCheckboxes.get(index).click();
-	}
+        authorsCheckboxes.get(index).click();
+    }
 
-	public void showAuthors() {
-		
-		groupHiddenOptions.get(0).click();
-	}
-	
-	public boolean isFirstAuthorCheckboxSelected() {
+    public void showAuthors() {
 
-		return authorsCheckboxes.get(0).isSelected();
-	}
+        groupHiddenOptions.get(0).click();
+    }
 
-	public boolean isSecodnAuthorCheckboxSelected() {
+    public boolean isFirstAuthorCheckboxSelected() {
 
-		return authorsCheckboxes.get(1).isSelected();
-	}
+        return authorsCheckboxes.get(0).isSelected();
+    }
 
-	public void clickGenreCheckbox(int index) {
-		
-		genresCheckboxes.get(index).click();
-	}
+    public boolean isSecodnAuthorCheckboxSelected() {
 
-	public void showGenres() {
-		
-		groupHiddenOptions.get(1).click();
-	}
-	
-	public boolean isFirstGenreCheckboxSelected() {
+        return authorsCheckboxes.get(1).isSelected();
+    }
 
-		return genresCheckboxes.get(0).isSelected();
-	}
+    public void clickGenreCheckbox(int index) {
 
-	public boolean isSecondGenreCheckboxSelected() {
+        genresCheckboxes.get(index).click();
+    }
 
-		return genresCheckboxes.get(1).isSelected();
-	}
+    public void showGenres() {
 
-	public void clickSubmitMangaFormButton() {
+        groupHiddenOptions.get(1).click();
+    }
 
-		submitButton.click();
-	}
+    public boolean isFirstGenreCheckboxSelected() {
 
-	public void clickAddOrUpdateMangaLinkButton() {
+        return genresCheckboxes.get(0).isSelected();
+    }
 
-		useJavaScriptToClickElement(addOrUpdateMangaLink);
-	}
+    public boolean isSecondGenreCheckboxSelected() {
 
-	public String getFormBoxText() {
+        return genresCheckboxes.get(1).isSelected();
+    }
 
-		return formBox.getText();
-	}
+    public void clickSubmitMangaFormButton() {
 
-	public int countFailureMessages() {
+        submitButton.click();
+    }
 
-		return failrueMessages.size();
-	}
+    public void clickAddOrUpdateMangaLinkButton() {
 
-	public void fillMandatoryMangaFormFields(String enTitle, String enDescription, String plTitle, String plDescription,
-			boolean selectAuthor, boolean selectGenres, boolean addImage) {
+        useJavaScriptToClickElement(addOrUpdateMangaLink);
+    }
 
-		setEnTitle(enTitle);
+    public String getFormBoxText() {
 
-		setEnDescription(enDescription);
+        return formBox.getText();
+    }
 
-		setPlTitle(plTitle);
+    public int countFailureMessages() {
 
-		setPlDescription(plDescription);
+        return failrueMessages.size();
+    }
 
-		if (selectAuthor) {
-			
-			showAuthors();
-			
-			clickAuthorCheckbox(1);
-		}
+    public void fillMandatoryMangaFormFields(String enTitle, String enDescription, String plTitle, String plDescription,
+                                             boolean selectAuthor, boolean selectGenres, boolean addImage) {
 
-		if (selectGenres) {
-			
-			showGenres();
-			
-			clickGenreCheckbox(1);
-		}
-		
-		if (addImage) {
-			addImage();
-		}
+        setEnTitle(enTitle);
 
-		clickSubmitMangaFormButton();
-	}
+        setEnDescription(enDescription);
 
-	public boolean isUserOnMangaFormPage() {
+        setPlTitle(plTitle);
 
-		return webDriver.getCurrentUrl().contains(RESOURCE_PATH);
-	}
+        setPlDescription(plDescription);
+
+        if (selectAuthor) {
+
+            showAuthors();
+
+            clickAuthorCheckbox(1);
+        }
+
+        if (selectGenres) {
+
+            showGenres();
+
+            clickGenreCheckbox(1);
+        }
+
+        if (addImage) {
+            addImage();
+        }
+
+        clickSubmitMangaFormButton();
+    }
+
+    public boolean isUserOnMangaFormPage() {
+
+        return webDriver.getCurrentUrl().contains(RESOURCE_PATH);
+    }
 }

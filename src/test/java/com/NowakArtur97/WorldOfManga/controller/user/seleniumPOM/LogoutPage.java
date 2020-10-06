@@ -8,18 +8,18 @@ import com.NowakArtur97.WorldOfManga.testUtil.selenium.SeleniumPageObjectModel;
 
 public class LogoutPage extends SeleniumPageObjectModel {
 
-	private static final String LOGOUT_LINK = "//a[@href='/auth/logout']";
+    private static final String LOGOUT_LINK = "//a[@href='/auth/logout']";
 
-	@FindBy(xpath = LOGOUT_LINK)
-	private WebElement logoutLink;
+    @FindBy(xpath = LOGOUT_LINK)
+    private WebElement logoutLink;
 
-	public LogoutPage(WebDriver webDriver) {
+    public LogoutPage(WebDriver webDriver) {
 
-		super(webDriver);
-	}
+        super(webDriver);
+    }
 
-	public void signOut() {
+    public void signOut() {
 
-		useJavaScriptToClickElement(logoutLink);
-	}
+        useJavaScriptToClickElement(logoutLink);
+    }
 }

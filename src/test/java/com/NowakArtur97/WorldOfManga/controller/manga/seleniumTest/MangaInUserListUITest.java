@@ -32,320 +32,320 @@ import com.NowakArtur97.WorldOfManga.testUtil.selenium.SeleniumUITest;
 @DisabledOnOs(OS.LINUX)
 public class MangaInUserListUITest extends SeleniumUITest {
 
-	private MangaList mangaList;
+    private MangaList mangaList;
 
-	private LoginPage loginPage;
+    private LoginPage loginPage;
 
-	@BeforeEach
-	public void setupPOM() {
+    @BeforeEach
+    public void setupPOM() {
 
-		mangaList = new MangaList(webDriver);
+        mangaList = new MangaList(webDriver);
 
-		loginPage = new LoginPage(webDriver);
-	}
+        loginPage = new LoginPage(webDriver);
+    }
 
-	@ParameterizedTest(name = "{index}: Language Version: {0}")
-	@EnumSource(LanguageVersion.class)
-	public void when_add_to_currently_reading_list_should_add_to_list(LanguageVersion languageVersion) {
+    @ParameterizedTest(name = "{index}: Language Version: {0}")
+    @EnumSource(LanguageVersion.class)
+    public void when_add_to_currently_reading_list_should_add_to_list(LanguageVersion languageVersion) {
 
-		loginPage.loadLoginView(languageVersion);
+        loginPage.loadLoginView(languageVersion);
 
-		loginPage.fillMandatoryLoginFields("user", "user");
+        loginPage.fillMandatoryLoginFields("user", "user");
 
-		mangaList.loadMangaList(languageVersion);
+        mangaList.loadMangaList(languageVersion);
 
-		mangaList.chooseManga(0);
+        mangaList.chooseManga(0);
 
-		int mangaStatus = 0;
+        int mangaStatus = 0;
 
-		mangaList.addOrRemoveFirstMangaFromList(mangaStatus);
+        mangaList.addOrRemoveFirstMangaFromList(mangaStatus);
 
-		mangaList.clickMangaUserListLink();
+        mangaList.clickMangaUserListLink();
 
-		mangaList.chooseCurrentlyReadingManga();
+        mangaList.chooseCurrentlyReadingManga();
 
-		assertAll(
-				() -> assertTrue(mangaList.getLastMangaCardText().contains("Tokyo Ghoul"),
-						() -> "should show new manga in currently reading list"),
-				() -> assertTrue(mangaList.countMangaCards() >= 1, () -> "should show at least one manga"),
-				() -> assertNotNull(mangaList.getMangaListText(), () -> "should load manga list fragment text"));
-	}
+        assertAll(
+                () -> assertTrue(mangaList.getLastMangaCardText().contains("Tokyo Ghoul"),
+                        () -> "should show new manga in currently reading list"),
+                () -> assertTrue(mangaList.countMangaCards() >= 1, () -> "should show at least one manga"),
+                () -> assertNotNull(mangaList.getMangaListText(), () -> "should load manga list fragment text"));
+    }
 
-	@ParameterizedTest(name = "{index}: Language Version: {0}")
-	@EnumSource(LanguageVersion.class)
-	public void when_remove_from_currently_reading_list_should_remove_from_list(LanguageVersion languageVersion) {
+    @ParameterizedTest(name = "{index}: Language Version: {0}")
+    @EnumSource(LanguageVersion.class)
+    public void when_remove_from_currently_reading_list_should_remove_from_list(LanguageVersion languageVersion) {
 
-		loginPage.loadLoginView(languageVersion);
+        loginPage.loadLoginView(languageVersion);
 
-		loginPage.fillMandatoryLoginFields("user", "user");
+        loginPage.fillMandatoryLoginFields("user", "user");
 
-		mangaList.loadMangaList(languageVersion);
+        mangaList.loadMangaList(languageVersion);
 
-		int mangaStatus = 0;
+        int mangaStatus = 0;
 
-		mangaList.chooseManga(0);
+        mangaList.chooseManga(0);
 
-		mangaList.addOrRemoveFirstMangaFromList(mangaStatus);
+        mangaList.addOrRemoveFirstMangaFromList(mangaStatus);
 
-		mangaList.chooseManga(0);
+        mangaList.chooseManga(0);
 
-		mangaList.addOrRemoveFirstMangaFromList(mangaStatus);
+        mangaList.addOrRemoveFirstMangaFromList(mangaStatus);
 
-		mangaList.clickMangaUserListLink();
+        mangaList.clickMangaUserListLink();
 
-		mangaList.chooseCompletedManga();
+        mangaList.chooseCompletedManga();
 
-		assertAll(
-				() -> assertFalse(mangaList.getLastMangaCardText().contains("Tokyo Ghoul"),
-						() -> "should not show new manga in currently reading list"),
-				() -> assertTrue(mangaList.countMangaCards() == 0, () -> "should not show any manga"),
-				() -> assertNotNull(mangaList.getMangaListText(), () -> "should load manga list fragment text"));
-	}
+        assertAll(
+                () -> assertFalse(mangaList.getLastMangaCardText().contains("Tokyo Ghoul"),
+                        () -> "should not show new manga in currently reading list"),
+                () -> assertTrue(mangaList.countMangaCards() == 0, () -> "should not show any manga"),
+                () -> assertNotNull(mangaList.getMangaListText(), () -> "should load manga list fragment text"));
+    }
 
-	@ParameterizedTest(name = "{index}: Language Version: {0}")
-	@EnumSource(LanguageVersion.class)
-	public void when_add_to_completed_list_should_add_to_list(LanguageVersion languageVersion) {
+    @ParameterizedTest(name = "{index}: Language Version: {0}")
+    @EnumSource(LanguageVersion.class)
+    public void when_add_to_completed_list_should_add_to_list(LanguageVersion languageVersion) {
 
-		loginPage.loadLoginView(languageVersion);
+        loginPage.loadLoginView(languageVersion);
 
-		loginPage.fillMandatoryLoginFields("user", "user");
+        loginPage.fillMandatoryLoginFields("user", "user");
 
-		mangaList.loadMangaList(languageVersion);
+        mangaList.loadMangaList(languageVersion);
 
-		mangaList.chooseManga(0);
+        mangaList.chooseManga(0);
 
-		int mangaStatus = 1;
+        int mangaStatus = 1;
 
-		mangaList.addOrRemoveFirstMangaFromList(mangaStatus);
+        mangaList.addOrRemoveFirstMangaFromList(mangaStatus);
 
-		mangaList.clickMangaUserListLink();
+        mangaList.clickMangaUserListLink();
 
-		mangaList.chooseCompletedManga();
+        mangaList.chooseCompletedManga();
 
-		assertAll(
-				() -> assertTrue(mangaList.getLastMangaCardText().contains("Tokyo Ghoul"),
-						() -> "should show new manga in completed list"),
-				() -> assertTrue(mangaList.countMangaCards() >= 1, () -> "should show at least one manga"),
-				() -> assertNotNull(mangaList.getMangaListText(), () -> "should load manga list fragment text"));
-	}
+        assertAll(
+                () -> assertTrue(mangaList.getLastMangaCardText().contains("Tokyo Ghoul"),
+                        () -> "should show new manga in completed list"),
+                () -> assertTrue(mangaList.countMangaCards() >= 1, () -> "should show at least one manga"),
+                () -> assertNotNull(mangaList.getMangaListText(), () -> "should load manga list fragment text"));
+    }
 
-	@ParameterizedTest(name = "{index}: Language Version: {0}")
-	@EnumSource(LanguageVersion.class)
-	public void when_remove_from_completed_list_should_remove_from_list(LanguageVersion languageVersion) {
+    @ParameterizedTest(name = "{index}: Language Version: {0}")
+    @EnumSource(LanguageVersion.class)
+    public void when_remove_from_completed_list_should_remove_from_list(LanguageVersion languageVersion) {
 
-		loginPage.loadLoginView(languageVersion);
+        loginPage.loadLoginView(languageVersion);
 
-		loginPage.fillMandatoryLoginFields("user", "user");
+        loginPage.fillMandatoryLoginFields("user", "user");
 
-		mangaList.loadMangaList(languageVersion);
+        mangaList.loadMangaList(languageVersion);
 
-		int mangaStatus = 1;
+        int mangaStatus = 1;
 
-		mangaList.chooseManga(0);
+        mangaList.chooseManga(0);
 
-		mangaList.addOrRemoveFirstMangaFromList(mangaStatus);
+        mangaList.addOrRemoveFirstMangaFromList(mangaStatus);
 
-		mangaList.chooseManga(0);
+        mangaList.chooseManga(0);
 
-		mangaList.addOrRemoveFirstMangaFromList(mangaStatus);
+        mangaList.addOrRemoveFirstMangaFromList(mangaStatus);
 
-		mangaList.clickMangaUserListLink();
+        mangaList.clickMangaUserListLink();
 
-		mangaList.chooseCompletedManga();
+        mangaList.chooseCompletedManga();
 
-		assertAll(
-				() -> assertFalse(mangaList.getLastMangaCardText().contains("Tokyo Ghoul"),
-						() -> "should not show new manga in completed list"),
-				() -> assertTrue(mangaList.countMangaCards() == 0, () -> "should not show any manga"),
-				() -> assertNotNull(mangaList.getMangaListText(), () -> "should load manga list fragment text"));
-	}
+        assertAll(
+                () -> assertFalse(mangaList.getLastMangaCardText().contains("Tokyo Ghoul"),
+                        () -> "should not show new manga in completed list"),
+                () -> assertTrue(mangaList.countMangaCards() == 0, () -> "should not show any manga"),
+                () -> assertNotNull(mangaList.getMangaListText(), () -> "should load manga list fragment text"));
+    }
 
-	@ParameterizedTest(name = "{index}: Language Version: {0}")
-	@EnumSource(LanguageVersion.class)
-	public void when_add_to_plan_to_read_list_should_add_to_list(LanguageVersion languageVersion) {
+    @ParameterizedTest(name = "{index}: Language Version: {0}")
+    @EnumSource(LanguageVersion.class)
+    public void when_add_to_plan_to_read_list_should_add_to_list(LanguageVersion languageVersion) {
 
-		loginPage.loadLoginView(languageVersion);
+        loginPage.loadLoginView(languageVersion);
 
-		loginPage.fillMandatoryLoginFields("user", "user");
+        loginPage.fillMandatoryLoginFields("user", "user");
 
-		mangaList.loadMangaList(languageVersion);
+        mangaList.loadMangaList(languageVersion);
 
-		mangaList.chooseManga(0);
+        mangaList.chooseManga(0);
 
-		int mangaStatus = 2;
+        int mangaStatus = 2;
 
-		mangaList.addOrRemoveFirstMangaFromList(mangaStatus);
+        mangaList.addOrRemoveFirstMangaFromList(mangaStatus);
 
-		mangaList.clickMangaUserListLink();
+        mangaList.clickMangaUserListLink();
 
-		mangaList.choosePlanToReadManga();
+        mangaList.choosePlanToReadManga();
 
-		assertAll(
-				() -> assertTrue(mangaList.getLastMangaCardText().contains("Tokyo Ghoul"),
-						() -> "should show new manga in plan to read list"),
-				() -> assertTrue(mangaList.countMangaCards() >= 1, () -> "should show at least one manga"),
-				() -> assertNotNull(mangaList.getMangaListText(), () -> "should load manga list fragment text"));
-	}
+        assertAll(
+                () -> assertTrue(mangaList.getLastMangaCardText().contains("Tokyo Ghoul"),
+                        () -> "should show new manga in plan to read list"),
+                () -> assertTrue(mangaList.countMangaCards() >= 1, () -> "should show at least one manga"),
+                () -> assertNotNull(mangaList.getMangaListText(), () -> "should load manga list fragment text"));
+    }
 
-	@ParameterizedTest(name = "{index}: Language Version: {0}")
-	@EnumSource(LanguageVersion.class)
-	public void when_remove_from_plan_to_read_list_should_remove_from_list(LanguageVersion languageVersion) {
+    @ParameterizedTest(name = "{index}: Language Version: {0}")
+    @EnumSource(LanguageVersion.class)
+    public void when_remove_from_plan_to_read_list_should_remove_from_list(LanguageVersion languageVersion) {
 
-		loginPage.loadLoginView(languageVersion);
+        loginPage.loadLoginView(languageVersion);
 
-		loginPage.fillMandatoryLoginFields("user", "user");
+        loginPage.fillMandatoryLoginFields("user", "user");
 
-		mangaList.loadMangaList(languageVersion);
+        mangaList.loadMangaList(languageVersion);
 
-		int mangaStatus = 2;
+        int mangaStatus = 2;
 
-		mangaList.chooseManga(0);
+        mangaList.chooseManga(0);
 
-		mangaList.addOrRemoveFirstMangaFromList(mangaStatus);
+        mangaList.addOrRemoveFirstMangaFromList(mangaStatus);
 
-		mangaList.chooseManga(0);
+        mangaList.chooseManga(0);
 
-		mangaList.addOrRemoveFirstMangaFromList(mangaStatus);
+        mangaList.addOrRemoveFirstMangaFromList(mangaStatus);
 
-		mangaList.clickMangaUserListLink();
+        mangaList.clickMangaUserListLink();
 
-		mangaList.chooseCompletedManga();
+        mangaList.chooseCompletedManga();
 
-		assertAll(
-				() -> assertFalse(mangaList.getLastMangaCardText().contains("Tokyo Ghoul"),
-						() -> "should not show new manga in plan to read list"),
-				() -> assertTrue(mangaList.countMangaCards() == 0, () -> "should not show any manga"),
-				() -> assertNotNull(mangaList.getMangaListText(), () -> "should load manga list fragment text"));
-	}
+        assertAll(
+                () -> assertFalse(mangaList.getLastMangaCardText().contains("Tokyo Ghoul"),
+                        () -> "should not show new manga in plan to read list"),
+                () -> assertTrue(mangaList.countMangaCards() == 0, () -> "should not show any manga"),
+                () -> assertNotNull(mangaList.getMangaListText(), () -> "should load manga list fragment text"));
+    }
 
-	@ParameterizedTest(name = "{index}: Language Version: {0}")
-	@EnumSource(LanguageVersion.class)
-	public void when_add_to_on_hold_list_should_add_to_list(LanguageVersion languageVersion) {
+    @ParameterizedTest(name = "{index}: Language Version: {0}")
+    @EnumSource(LanguageVersion.class)
+    public void when_add_to_on_hold_list_should_add_to_list(LanguageVersion languageVersion) {
 
-		loginPage.loadLoginView(languageVersion);
+        loginPage.loadLoginView(languageVersion);
 
-		loginPage.fillMandatoryLoginFields("user", "user");
+        loginPage.fillMandatoryLoginFields("user", "user");
 
-		mangaList.loadMangaList(languageVersion);
+        mangaList.loadMangaList(languageVersion);
 
-		mangaList.chooseManga(0);
+        mangaList.chooseManga(0);
 
-		int mangaStatus = 3;
+        int mangaStatus = 3;
 
-		mangaList.addOrRemoveFirstMangaFromList(mangaStatus);
+        mangaList.addOrRemoveFirstMangaFromList(mangaStatus);
 
-		mangaList.clickMangaUserListLink();
+        mangaList.clickMangaUserListLink();
 
-		mangaList.chooseOnHoldManga();
+        mangaList.chooseOnHoldManga();
 
-		assertAll(
-				() -> assertTrue(mangaList.getLastMangaCardText().contains("Tokyo Ghoul"),
-						() -> "should show new manga in on hold list"),
-				() -> assertTrue(mangaList.countMangaCards() >= 1, () -> "should show at least one manga"),
-				() -> assertNotNull(mangaList.getMangaListText(), () -> "should load manga list fragment text"));
-	}
+        assertAll(
+                () -> assertTrue(mangaList.getLastMangaCardText().contains("Tokyo Ghoul"),
+                        () -> "should show new manga in on hold list"),
+                () -> assertTrue(mangaList.countMangaCards() >= 1, () -> "should show at least one manga"),
+                () -> assertNotNull(mangaList.getMangaListText(), () -> "should load manga list fragment text"));
+    }
 
-	@ParameterizedTest(name = "{index}: Language Version: {0}")
-	@EnumSource(LanguageVersion.class)
-	public void when_remove_from_completed_on_hold_list_should_remove_from_list(LanguageVersion languageVersion) {
+    @ParameterizedTest(name = "{index}: Language Version: {0}")
+    @EnumSource(LanguageVersion.class)
+    public void when_remove_from_completed_on_hold_list_should_remove_from_list(LanguageVersion languageVersion) {
 
-		loginPage.loadLoginView(languageVersion);
+        loginPage.loadLoginView(languageVersion);
 
-		loginPage.fillMandatoryLoginFields("user", "user");
+        loginPage.fillMandatoryLoginFields("user", "user");
 
-		mangaList.loadMangaList(languageVersion);
+        mangaList.loadMangaList(languageVersion);
 
-		int mangaStatus = 3;
+        int mangaStatus = 3;
 
-		mangaList.chooseManga(0);
+        mangaList.chooseManga(0);
 
-		mangaList.addOrRemoveFirstMangaFromList(mangaStatus);
+        mangaList.addOrRemoveFirstMangaFromList(mangaStatus);
 
-		mangaList.chooseManga(0);
+        mangaList.chooseManga(0);
 
-		mangaList.addOrRemoveFirstMangaFromList(mangaStatus);
+        mangaList.addOrRemoveFirstMangaFromList(mangaStatus);
 
-		mangaList.clickMangaUserListLink();
+        mangaList.clickMangaUserListLink();
 
-		mangaList.chooseCompletedManga();
+        mangaList.chooseCompletedManga();
 
-		assertAll(
-				() -> assertFalse(mangaList.getLastMangaCardText().contains("Tokyo Ghoul"),
-						() -> "should not show new manga in on hold list"),
-				() -> assertTrue(mangaList.countMangaCards() == 0, () -> "should not show any manga"),
-				() -> assertNotNull(mangaList.getMangaListText(), () -> "should load manga list fragment text"));
-	}
+        assertAll(
+                () -> assertFalse(mangaList.getLastMangaCardText().contains("Tokyo Ghoul"),
+                        () -> "should not show new manga in on hold list"),
+                () -> assertTrue(mangaList.countMangaCards() == 0, () -> "should not show any manga"),
+                () -> assertNotNull(mangaList.getMangaListText(), () -> "should load manga list fragment text"));
+    }
 
-	@ParameterizedTest(name = "{index}: Language Version: {0}")
-	@EnumSource(LanguageVersion.class)
-	public void when_add_to_dropped_list_should_add_to_list(LanguageVersion languageVersion) {
+    @ParameterizedTest(name = "{index}: Language Version: {0}")
+    @EnumSource(LanguageVersion.class)
+    public void when_add_to_dropped_list_should_add_to_list(LanguageVersion languageVersion) {
 
-		loginPage.loadLoginView(languageVersion);
+        loginPage.loadLoginView(languageVersion);
 
-		loginPage.fillMandatoryLoginFields("user", "user");
+        loginPage.fillMandatoryLoginFields("user", "user");
 
-		mangaList.loadMangaList(languageVersion);
+        mangaList.loadMangaList(languageVersion);
 
-		mangaList.chooseManga(0);
+        mangaList.chooseManga(0);
 
-		int mangaStatus = 4;
+        int mangaStatus = 4;
 
-		mangaList.addOrRemoveFirstMangaFromList(mangaStatus);
+        mangaList.addOrRemoveFirstMangaFromList(mangaStatus);
 
-		mangaList.clickMangaUserListLink();
+        mangaList.clickMangaUserListLink();
 
-		mangaList.chooseDroppedManga();
+        mangaList.chooseDroppedManga();
 
-		assertAll(
-				() -> assertTrue(mangaList.getLastMangaCardText().contains("Tokyo Ghoul"),
-						() -> "should show new manga in dropped list"),
-				() -> assertTrue(mangaList.countMangaCards() >= 1, () -> "should show at least one manga"),
-				() -> assertNotNull(mangaList.getMangaListText(), () -> "should load manga list fragment text"));
-	}
+        assertAll(
+                () -> assertTrue(mangaList.getLastMangaCardText().contains("Tokyo Ghoul"),
+                        () -> "should show new manga in dropped list"),
+                () -> assertTrue(mangaList.countMangaCards() >= 1, () -> "should show at least one manga"),
+                () -> assertNotNull(mangaList.getMangaListText(), () -> "should load manga list fragment text"));
+    }
 
-	@ParameterizedTest(name = "{index}: Language Version: {0}")
-	@EnumSource(LanguageVersion.class)
-	public void when_remove_from_dropped_list_should_remove_from_list(LanguageVersion languageVersion) {
+    @ParameterizedTest(name = "{index}: Language Version: {0}")
+    @EnumSource(LanguageVersion.class)
+    public void when_remove_from_dropped_list_should_remove_from_list(LanguageVersion languageVersion) {
 
-		loginPage.loadLoginView(languageVersion);
+        loginPage.loadLoginView(languageVersion);
 
-		loginPage.fillMandatoryLoginFields("user", "user");
+        loginPage.fillMandatoryLoginFields("user", "user");
 
-		mangaList.loadMangaList(languageVersion);
+        mangaList.loadMangaList(languageVersion);
 
-		int mangaStatus = 4;
+        int mangaStatus = 4;
 
-		mangaList.chooseManga(0);
+        mangaList.chooseManga(0);
 
-		mangaList.addOrRemoveFirstMangaFromList(mangaStatus);
+        mangaList.addOrRemoveFirstMangaFromList(mangaStatus);
 
-		mangaList.chooseManga(0);
+        mangaList.chooseManga(0);
 
-		mangaList.addOrRemoveFirstMangaFromList(mangaStatus);
+        mangaList.addOrRemoveFirstMangaFromList(mangaStatus);
 
-		mangaList.clickMangaUserListLink();
+        mangaList.clickMangaUserListLink();
 
-		mangaList.chooseCompletedManga();
+        mangaList.chooseCompletedManga();
 
-		assertAll(
-				() -> assertFalse(mangaList.getLastMangaCardText().contains("Tokyo Ghoul"),
-						() -> "should not show new manga in dropped list"),
-				() -> assertTrue(mangaList.countMangaCards() == 0, () -> "should not show any manga"),
-				() -> assertNotNull(mangaList.getMangaListText(), () -> "should load manga list fragment text"));
-	}
+        assertAll(
+                () -> assertFalse(mangaList.getLastMangaCardText().contains("Tokyo Ghoul"),
+                        () -> "should not show new manga in dropped list"),
+                () -> assertTrue(mangaList.countMangaCards() == 0, () -> "should not show any manga"),
+                () -> assertNotNull(mangaList.getMangaListText(), () -> "should load manga list fragment text"));
+    }
 
-	@ParameterizedTest(name = "{index}: Language Version: {0}")
-	@EnumSource(LanguageVersion.class)
-	public void when_user_not_logged_adding_manga_to_list_should_show_login_form(LanguageVersion languageVersion) {
+    @ParameterizedTest(name = "{index}: Language Version: {0}")
+    @EnumSource(LanguageVersion.class)
+    public void when_user_not_logged_adding_manga_to_list_should_show_login_form(LanguageVersion languageVersion) {
 
-		mangaList.loadMangaList(languageVersion);
+        mangaList.loadMangaList(languageVersion);
 
-		mangaList.chooseManga(0);
+        mangaList.chooseManga(0);
 
-		int mangaStatus = 0;
+        int mangaStatus = 0;
 
-		mangaList.addOrRemoveFirstMangaFromList(mangaStatus);
+        mangaList.addOrRemoveFirstMangaFromList(mangaStatus);
 
-		assertAll(() -> assertTrue(loginPage.isUserOnLoginPage(), () -> "should show login page"));
-	}
+        assertAll(() -> assertTrue(loginPage.isUserOnLoginPage(), () -> "should show login page"));
+    }
 }

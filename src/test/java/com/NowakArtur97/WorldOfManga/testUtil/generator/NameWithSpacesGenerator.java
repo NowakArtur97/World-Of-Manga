@@ -1,67 +1,67 @@
 package com.NowakArtur97.WorldOfManga.testUtil.generator;
 
-import java.lang.reflect.Method;
-
 import org.junit.jupiter.api.DisplayNameGenerator.ReplaceUnderscores;
+
+import java.lang.reflect.Method;
 
 public class NameWithSpacesGenerator extends ReplaceUnderscores {
 
-	private final String wordEndingTestName = "should";
+    private final String wordEndingTestName = "should";
 
-	private final String signReplacedInMethodName = "_";
+    private final String signReplacedInMethodName = "_";
 
-	private final String signReplacingInMethodName = " ";
+    private final String signReplacingInMethodName = " ";
 
-	@Override
-	public String generateDisplayNameForClass(Class<?> testClass) {
+    @Override
+    public String generateDisplayNameForClass(Class<?> testClass) {
 
-		String classMethodName = super.generateDisplayNameForClass(testClass);
+        String classMethodName = super.generateDisplayNameForClass(testClass);
 
-		String displayName = addSpacesBetweenWords(classMethodName);
+        String displayName = addSpacesBetweenWords(classMethodName);
 
-		return displayName;
-	}
+        return displayName;
+    }
 
-	@Override
-	public String generateDisplayNameForNestedClass(Class<?> nestedClass) {
+    @Override
+    public String generateDisplayNameForNestedClass(Class<?> nestedClass) {
 
-		String nestedClassMethodName = nestedClass.getSimpleName();
+        String nestedClassMethodName = nestedClass.getSimpleName();
 
-		String displayName = addSpacesBetweenWords(nestedClassMethodName);
+        String displayName = addSpacesBetweenWords(nestedClassMethodName);
 
-		return displayName;
-	}
+        return displayName;
+    }
 
-	@Override
-	public String generateDisplayNameForMethod(Class<?> testClass, Method testMethod) {
+    @Override
+    public String generateDisplayNameForMethod(Class<?> testClass, Method testMethod) {
 
-		String testMethodName = testMethod.getName();
+        String testMethodName = testMethod.getName();
 
-		int indexOfShouldWord = testMethodName.indexOf(wordEndingTestName);
+        int indexOfShouldWord = testMethodName.indexOf(wordEndingTestName);
 
-		String displayName = testMethodName.substring(0, indexOfShouldWord - 1).replace(signReplacedInMethodName,
-				signReplacingInMethodName);
+        String displayName = testMethodName.substring(0, indexOfShouldWord - 1).replace(signReplacedInMethodName,
+                signReplacingInMethodName);
 
-		return displayName;
-	}
+        return displayName;
+    }
 
-	private String addSpacesBetweenWords(String className) {
+    private String addSpacesBetweenWords(String className) {
 
-		int wordLength = className.length();
+        int wordLength = className.length();
 
-		StringBuilder result = new StringBuilder();
-		result.append(className.charAt(0));
+        StringBuilder result = new StringBuilder();
+        result.append(className.charAt(0));
 
-		for (int i = 1; i < wordLength; i++) {
+        for (int i = 1; i < wordLength; i++) {
 
-			if (Character.isUpperCase(className.charAt(i))) {
+            if (Character.isUpperCase(className.charAt(i))) {
 
-				result.append(' ');
-			}
+                result.append(' ');
+            }
 
-			result.append(className.charAt(i));
-		}
+            result.append(className.charAt(i));
+        }
 
-		return result.toString();
-	}
+        return result.toString();
+    }
 }

@@ -10,29 +10,29 @@ import com.NowakArtur97.WorldOfManga.testUtil.selenium.SeleniumUITest;
 
 public class LogoutControllerUITest extends SeleniumUITest {
 
-	@Value("${header.myMangaWorld}")
-	protected String userLoggedInMangaListOption;
+    @Value("${header.myMangaWorld}")
+    protected String userLoggedInMangaListOption;
 
-	@Value("${header.signOut}")
-	protected String userLoggedInSignOutOption;
+    @Value("${header.signOut}")
+    protected String userLoggedInSignOutOption;
 
-	@Value("${header.signUp}")
-	protected String headerRegistrationOption;
+    @Value("${header.signUp}")
+    protected String headerRegistrationOption;
 
-	@Value("${header.signIn}")
-	protected String headerLoginOption;
+    @Value("${header.signIn}")
+    protected String headerLoginOption;
 
-	protected LogoutPage logoutPage;
+    protected LogoutPage logoutPage;
 
-	protected LoginPage loginPage;
+    protected LoginPage loginPage;
 
-	protected MainPage mainPage;
+    protected MainPage mainPage;
 
-	@BeforeEach
-	public void setupPOM() {
+    @BeforeEach
+    public void setupPOM() {
 
-		logoutPage = new LogoutPage(webDriver);
-		loginPage = new LoginPage(webDriver);
-		mainPage = new MainPage(webDriver);
-	}
+        logoutPage = new LogoutPage(webDriver);
+        loginPage = new LoginPage(webDriver);
+        mainPage = new MainPage(webDriver);
+    }
 }
