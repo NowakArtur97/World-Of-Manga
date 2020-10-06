@@ -1,4 +1,4 @@
-package com.NowakArtur97.WorldOfManga.service.impl;
+package com.NowakArtur97.WorldOfManga.service;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -25,9 +25,9 @@ import com.NowakArtur97.WorldOfManga.testUtil.generator.NameWithSpacesGenerator;
 @ExtendWith(MockitoExtension.class)
 @DisplayNameGeneration(NameWithSpacesGenerator.class)
 @Tag("RoleServiceImpl_Tests")
-public class RoleServiceImplTest {
+public class RoleServiceTest {
 
-	private RoleServiceImpl roleService;
+	private RoleService roleService;
 
 	@Mock
 	private RoleRepository roleRepository;
@@ -35,7 +35,7 @@ public class RoleServiceImplTest {
 	@BeforeEach
 	void setUp() {
 
-		roleService = new RoleServiceImpl(roleRepository);
+		roleService = new RoleService(roleRepository);
 	}
 
 	@Test

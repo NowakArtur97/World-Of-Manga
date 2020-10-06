@@ -1,4 +1,4 @@
-package com.NowakArtur97.WorldOfManga.service.impl;
+package com.NowakArtur97.WorldOfManga.service;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -30,9 +30,9 @@ import com.NowakArtur97.WorldOfManga.testUtil.generator.NameWithSpacesGenerator;
 @ExtendWith(MockitoExtension.class)
 @DisplayNameGeneration(NameWithSpacesGenerator.class)
 @Tag("MangaTranslationServiceImpl_Tests")
-public class MangaTranslationServiceImplTest {
+public class MangaTranslationServiceTest {
 
-	private MangaTranslationServiceImpl mangaTranslationService;
+	private MangaTranslationService mangaTranslationService;
 
 	@Mock
 	private MangaTranslationRepository mangaTranslationRepository;
@@ -49,7 +49,7 @@ public class MangaTranslationServiceImplTest {
 	@BeforeEach
 	void setUp() {
 
-		mangaTranslationService = new MangaTranslationServiceImpl(mangaTranslationRepository, mangaTranslationMapper,
+		mangaTranslationService = new MangaTranslationService(mangaTranslationRepository, mangaTranslationMapper,
 				languageService, mangaService);
 	}
 

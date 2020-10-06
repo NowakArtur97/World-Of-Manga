@@ -1,4 +1,4 @@
-package com.NowakArtur97.WorldOfManga.service.impl;
+package com.NowakArtur97.WorldOfManga.service;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -36,9 +36,9 @@ import com.NowakArtur97.WorldOfManga.testUtil.generator.NameWithSpacesGenerator;
 @ExtendWith(MockitoExtension.class)
 @DisplayNameGeneration(NameWithSpacesGenerator.class)
 @Tag("UserServiceImpl_Tests")
-public class UserServiceImplTest {
+public class UserServiceTest {
 
-	private UserServiceImpl userService;
+	private UserService userService;
 
 	@Mock
 	private UserRepository userRepository;
@@ -55,7 +55,7 @@ public class UserServiceImplTest {
 	@BeforeEach
 	void setUp() {
 
-		userService = new UserServiceImpl(userRepository);
+		userService = new UserService(userRepository);
 	}
 
 	@Nested

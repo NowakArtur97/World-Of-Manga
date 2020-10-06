@@ -1,8 +1,7 @@
-package com.NowakArtur97.WorldOfManga.service.impl;
+package com.NowakArtur97.WorldOfManga.service;
 
 import com.NowakArtur97.WorldOfManga.model.*;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -10,8 +9,8 @@ import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
 @Service
-@RequiredArgsConstructor(onConstructor = @__(@Autowired))
-public class RecommendationServiceImpl implements RecommendationService {
+@RequiredArgsConstructor
+public class RecommendationService {
 
 	private final int numberOfRecommendedManga = 10;
 
@@ -19,9 +18,9 @@ public class RecommendationServiceImpl implements RecommendationService {
 
 	private final UserService userService;
 
-	private final Comparator<Manga> SORT_BY_LIKES = (manga1, manga2) -> manga2.getUserWithMangaInFavourites().size() - manga1.getUserWithMangaInFavourites().size();
+	private final Comparator<Manga> SORT_BY_LIKES = (manga1, manga2) -> manga2.getUserWithMangaInFavourites().size()
+			- manga1.getUserWithMangaInFavourites().size();
 
-	@Override
 	public List<Manga> recommendManga() {
 
 		List<Manga> allManga = mangaService.findAll();
