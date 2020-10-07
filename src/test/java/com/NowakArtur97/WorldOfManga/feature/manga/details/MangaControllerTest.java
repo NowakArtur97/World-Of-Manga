@@ -1,20 +1,17 @@
-package com.NowakArtur97.WorldOfManga.controller.manga;
+package com.NowakArtur97.WorldOfManga.feature.manga.details;
 
-import com.NowakArtur97.WorldOfManga.dto.MangaDTO;
-import com.NowakArtur97.WorldOfManga.dto.MangaTranslationDTO;
 import com.NowakArtur97.WorldOfManga.exception.LanguageNotFoundException;
 import com.NowakArtur97.WorldOfManga.exception.MangaNotFoundException;
 import com.NowakArtur97.WorldOfManga.feature.author.Author;
 import com.NowakArtur97.WorldOfManga.feature.author.AuthorDTO;
 import com.NowakArtur97.WorldOfManga.feature.author.AuthorService;
-import com.NowakArtur97.WorldOfManga.model.Manga;
-import com.NowakArtur97.WorldOfManga.model.MangaGenre;
-import com.NowakArtur97.WorldOfManga.model.MangaTranslation;
-import com.NowakArtur97.WorldOfManga.service.MangaGenreService;
-import com.NowakArtur97.WorldOfManga.service.MangaService;
-import com.NowakArtur97.WorldOfManga.service.MangaTranslationService;
+import com.NowakArtur97.WorldOfManga.feature.manga.details.*;
+import com.NowakArtur97.WorldOfManga.feature.manga.genre.MangaGenre;
+import com.NowakArtur97.WorldOfManga.feature.manga.genre.MangaGenreService;
+import com.NowakArtur97.WorldOfManga.feature.manga.translation.MangaTranslation;
+import com.NowakArtur97.WorldOfManga.feature.manga.translation.MangaTranslationDTO;
+import com.NowakArtur97.WorldOfManga.feature.manga.translation.MangaTranslationService;
 import com.NowakArtur97.WorldOfManga.testUtil.generator.NameWithSpacesGenerator;
-import com.NowakArtur97.WorldOfManga.validation.manga.MangaValidator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.Tag;
@@ -44,11 +41,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ExtendWith(MockitoExtension.class)
 @DisplayNameGeneration(NameWithSpacesGenerator.class)
 @Tag("MangaController_Tests")
-public class MangaControllerTest {
+class MangaControllerTest {
 
     private MockMvc mockMvc;
-
-    private MangaController mangaController;
 
     @Mock
     private MangaService mangaService;
@@ -69,15 +64,15 @@ public class MangaControllerTest {
     private LocaleResolver cookieLocaleResolver;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
 
-        mangaController = new MangaController(mangaService, mangaTranslationService, mangaGenreService, mangaValidator,
+        MangaController mangaController = new MangaController(mangaService, mangaTranslationService, mangaGenreService, mangaValidator,
                 authorService, cookieLocaleResolver);
         mockMvc = MockMvcBuilders.standaloneSetup(mangaController).build();
     }
 
     @Test
-    public void when_load_add_manga_page_should_show_manga_form() {
+    void when_load_add_manga_page_should_show_manga_form() {
 
         List<Author> authors = new ArrayList<>();
         authors.add(new Author("FirstName LastName"));
@@ -101,7 +96,7 @@ public class MangaControllerTest {
     }
 
     @Test
-    public void when_load_edit_manga_page_should_show_manga_form() throws MangaNotFoundException {
+    void when_load_edit_manga_page_should_show_manga_form() throws MangaNotFoundException {
 
         Long mangaId = 1L;
 
@@ -144,7 +139,7 @@ public class MangaControllerTest {
     }
 
     @Test
-    public void when_add_manga_with_correct_data_should_save_manga()
+    void when_add_manga_with_correct_data_should_save_manga()
             throws LanguageNotFoundException, MangaNotFoundException, IOException {
 
         MangaTranslationDTO mangaTranslationEnDTO = MangaTranslationDTO.builder().title("English title")
@@ -194,7 +189,7 @@ public class MangaControllerTest {
     }
 
     @Test
-    public void when_add_or_edit_manga_with_blank_fields_and_authors_selected_should_show_manga_form() {
+    void when_add_or_edit_manga_with_blank_fields_and_authors_selected_should_show_manga_form() {
 
         String englishTitle = "";
         String englishDescription = "";
@@ -256,7 +251,7 @@ public class MangaControllerTest {
     }
 
     @Test
-    public void when_add_or_edit_manga_with_long_data_and_authors_not_selected_should_show_manga_form() {
+    void when_add_or_edit_manga_with_long_data_and_authors_not_selected_should_show_manga_form() {
 
         String title = "asdfghjklpasdfghjklpasdfghjklpasdfghjklpasdfghjklp!@#$%";
         String description = "asdfghjklpasdfghjklpasdfghjklpasdfghjklpasdfghjklp!@#$%".repeat(30);
@@ -320,7 +315,7 @@ public class MangaControllerTest {
     }
 
     @Test
-    public void when_delete_manga_should_delete_manga_and_redirect() {
+    void when_delete_manga_should_delete_manga_and_redirect() {
 
         Long mangaId = 1L;
 

@@ -1,14 +1,12 @@
-package com.NowakArtur97.WorldOfManga.service;
+package com.NowakArtur97.WorldOfManga.feature.manga.inUserList;
 
-import com.NowakArtur97.WorldOfManga.enums.MangaInUserListStatus;
 import com.NowakArtur97.WorldOfManga.exception.MangaNotFoundException;
 import com.NowakArtur97.WorldOfManga.feature.author.Author;
+import com.NowakArtur97.WorldOfManga.feature.manga.details.Manga;
+import com.NowakArtur97.WorldOfManga.feature.manga.details.MangaService;
+import com.NowakArtur97.WorldOfManga.feature.manga.translation.MangaTranslation;
 import com.NowakArtur97.WorldOfManga.feature.user.User;
 import com.NowakArtur97.WorldOfManga.feature.user.UserService;
-import com.NowakArtur97.WorldOfManga.model.Manga;
-import com.NowakArtur97.WorldOfManga.model.MangaInUserList;
-import com.NowakArtur97.WorldOfManga.model.MangaTranslation;
-import com.NowakArtur97.WorldOfManga.repository.MangaInUserListRepository;
 import com.NowakArtur97.WorldOfManga.testUtil.generator.NameWithSpacesGenerator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayNameGeneration;
@@ -30,7 +28,7 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 @DisplayNameGeneration(NameWithSpacesGenerator.class)
 @Tag("MangaInUserListService_Tests")
-public class MangaInUserListServiceTest {
+class MangaInUserListServiceTest {
 
     private MangaInUserListService mangaInUserListService;
 
@@ -50,7 +48,7 @@ public class MangaInUserListServiceTest {
     }
 
     @Test
-    public void whne_find_existing_manga_ins_user_list_by_user_and_manga_should_return_entity() throws IOException {
+    void whne_find_existing_manga_ins_user_list_by_user_and_manga_should_return_entity() throws IOException {
 
         MangaTranslation mangaTranslationEnExpected = MangaTranslation.builder().title("English title")
                 .description("English description").build();
@@ -95,7 +93,7 @@ public class MangaInUserListServiceTest {
     }
 
     @Test
-    public void whne_find_not_existing_manga_ins_user_list_by_user_and_manga_should_return_empty_optional()
+    void whne_find_not_existing_manga_ins_user_list_by_user_and_manga_should_return_empty_optional()
             throws IOException {
 
         MangaTranslation mangaTranslationEnExpected = MangaTranslation.builder().title("English title")
@@ -128,7 +126,7 @@ public class MangaInUserListServiceTest {
     }
 
     @Test
-    public void when_add_manga_to_list_for_first_time_should_add_manga_to_list()
+    void when_add_manga_to_list_for_first_time_should_add_manga_to_list()
             throws IOException, MangaNotFoundException {
 
         Long mangaId = 1L;
@@ -177,7 +175,7 @@ public class MangaInUserListServiceTest {
     }
 
     @Test
-    public void when_add_change_manga_status_should_update_status() throws IOException, MangaNotFoundException {
+    void when_add_change_manga_status_should_update_status() throws IOException, MangaNotFoundException {
 
         Long mangaId = 1L;
 
@@ -230,7 +228,7 @@ public class MangaInUserListServiceTest {
     }
 
     @Test
-    public void when_remove_manga_from_list_should_remove_from_list() throws IOException, MangaNotFoundException {
+    void when_remove_manga_from_list_should_remove_from_list() throws IOException, MangaNotFoundException {
 
         Long mangaId = 1L;
 
@@ -287,7 +285,7 @@ public class MangaInUserListServiceTest {
     }
 
     @Test
-    public void when_get_users_manga_list_by_status_should_return_specific_manga_list()
+    void when_get_users_manga_list_by_status_should_return_specific_manga_list()
             throws IOException, MangaNotFoundException {
 
         MangaTranslation mangaTranslationEnExpected = MangaTranslation.builder().title("English title")
@@ -348,7 +346,7 @@ public class MangaInUserListServiceTest {
     }
 
     @Test
-    public void when_get_users_manga_list_by_status_when_user_have_empty_list_should_return_empty_list()
+    void when_get_users_manga_list_by_status_when_user_have_empty_list_should_return_empty_list()
             throws IOException, MangaNotFoundException {
 
         String username = "principal";

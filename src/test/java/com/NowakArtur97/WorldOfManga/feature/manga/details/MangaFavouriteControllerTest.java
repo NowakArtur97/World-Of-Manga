@@ -1,6 +1,5 @@
-package com.NowakArtur97.WorldOfManga.controller.manga;
+package com.NowakArtur97.WorldOfManga.feature.manga.details;
 
-import com.NowakArtur97.WorldOfManga.service.MangaService;
 import com.NowakArtur97.WorldOfManga.testUtil.generator.NameWithSpacesGenerator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayNameGeneration;
@@ -23,24 +22,22 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ExtendWith(MockitoExtension.class)
 @DisplayNameGeneration(NameWithSpacesGenerator.class)
 @Tag("MangaFavouriteController_Tests")
-public class MangaFavouriteControllerTest {
+class MangaFavouriteControllerTest {
 
     private MockMvc mockMvc;
-
-    private MangaFavouriteController mangaFavouriteController;
 
     @Mock
     private MangaService mangaService;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
 
-        mangaFavouriteController = new MangaFavouriteController(mangaService);
+        MangaFavouriteController mangaFavouriteController = new MangaFavouriteController(mangaService);
         mockMvc = MockMvcBuilders.standaloneSetup(mangaFavouriteController).build();
     }
 
     @Test
-    public void when_add_or_remove_manga_from_favourites_should_redirect_to_last_page() {
+    void when_add_or_remove_manga_from_favourites_should_redirect_to_last_page() {
 
         Long mangaId = 1L;
 

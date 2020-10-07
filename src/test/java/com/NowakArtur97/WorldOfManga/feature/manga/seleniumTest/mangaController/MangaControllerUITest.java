@@ -1,15 +1,15 @@
-package com.NowakArtur97.WorldOfManga.controller.manga.seleniumTest.mangaController;
+package com.NowakArtur97.WorldOfManga.feature.manga.seleniumTest.mangaController;
 
-import com.NowakArtur97.WorldOfManga.controller.manga.seleniumPOM.MangaFormPage;
-import com.NowakArtur97.WorldOfManga.controller.manga.seleniumPOM.MangaList;
+import com.NowakArtur97.WorldOfManga.feature.manga.seleniumPOM.MangaFormPage;
+import com.NowakArtur97.WorldOfManga.feature.manga.seleniumPOM.MangaList;
 import com.NowakArtur97.WorldOfManga.feature.user.seleniumPOM.LoginPage;
-import com.NowakArtur97.WorldOfManga.service.MangaTranslationService;
+import com.NowakArtur97.WorldOfManga.feature.manga.translation.MangaTranslationService;
 import com.NowakArtur97.WorldOfManga.testUtil.selenium.SeleniumUITest;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
-public class MangaControllerUITest extends SeleniumUITest {
+class MangaControllerUITest extends SeleniumUITest {
 
     @Value("${mangaTranslation.titleEn.inUse}")
     protected String mangaTranslationTitleEnInUseMessage;
@@ -18,37 +18,37 @@ public class MangaControllerUITest extends SeleniumUITest {
     protected String mangaTranslationTitlePlInUseMessage;
 
     @Value("${mangaTranslation.title.notBlank}")
-    protected String mangaTranslationTitleNotBlankMessage;
+    String mangaTranslationTitleNotBlankMessage;
 
     @Value("${mangaTranslation.title.size}")
-    protected String mangaTranslationTitleSizeMessage;
+    String mangaTranslationTitleSizeMessage;
 
     @Value("${mangaTranslation.description.notBlank}")
-    protected String mangaTranslationDescriptionNotBlankMessage;
+    String mangaTranslationDescriptionNotBlankMessage;
 
     @Value("${mangaTranslation.description.size}")
-    protected String mangaTranslationDescriptionSizeMessage;
+    String mangaTranslationDescriptionSizeMessage;
 
     @Value("${manga.authors.notEmpty}")
-    protected String mangaAuthorsRequiredMessage;
+    String mangaAuthorsRequiredMessage;
 
     @Value("${manga.genres.notEmpty}")
-    protected String mangaGenresRequiredMessage;
+    String mangaGenresRequiredMessage;
 
     @Value("${manga.image.notEmpty}")
-    protected String mangaImageRequiredMessage;
+    String mangaImageRequiredMessage;
 
-    protected MangaFormPage mangaFormPage;
+    MangaFormPage mangaFormPage;
 
     protected LoginPage loginPage;
 
-    protected MangaList mangaList;
+    MangaList mangaList;
 
     @Autowired
-    protected MangaTranslationService mangaTranslationService;
+    MangaTranslationService mangaTranslationService;
 
     @BeforeEach
-    public void setupPOM() {
+    void setupPOM() {
 
         loginPage = new LoginPage(webDriver);
 

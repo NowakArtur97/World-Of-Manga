@@ -1,8 +1,5 @@
-package com.NowakArtur97.WorldOfManga.mapper;
+package com.NowakArtur97.WorldOfManga.feature.manga.translation;
 
-import com.NowakArtur97.WorldOfManga.dto.MangaTranslationDTO;
-import com.NowakArtur97.WorldOfManga.mapper.mangaTranslation.MangaTranslationMapper;
-import com.NowakArtur97.WorldOfManga.model.MangaTranslation;
 import com.NowakArtur97.WorldOfManga.testUtil.generator.NameWithSpacesGenerator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayNameGeneration;
@@ -20,7 +17,7 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 @DisplayNameGeneration(NameWithSpacesGenerator.class)
 @Tag("MangaTranslationMapper_Tests")
-public class MangaTranslationMapperTest {
+class MangaTranslationMapperTest {
 
     private MangaTranslationMapper mangaTranslationMapper;
 
@@ -28,13 +25,13 @@ public class MangaTranslationMapperTest {
     private ModelMapper modelMapper;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
 
         mangaTranslationMapper = new MangaTranslationMapper(modelMapper);
     }
 
     @Test
-    public void when_map_manga_translation_dto_to_entity_should_return_manga_translation_entity() {
+    void when_map_manga_translation_dto_to_entity_should_return_manga_translation_entity() {
 
         String title = "Manga title";
         String description = "Manga description";

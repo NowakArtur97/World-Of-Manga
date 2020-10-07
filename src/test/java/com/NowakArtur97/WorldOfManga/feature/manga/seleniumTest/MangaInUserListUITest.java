@@ -1,6 +1,6 @@
-package com.NowakArtur97.WorldOfManga.controller.manga.seleniumTest;
+package com.NowakArtur97.WorldOfManga.feature.manga.seleniumTest;
 
-import com.NowakArtur97.WorldOfManga.controller.manga.seleniumPOM.MangaList;
+import com.NowakArtur97.WorldOfManga.feature.manga.seleniumPOM.MangaList;
 import com.NowakArtur97.WorldOfManga.feature.user.seleniumPOM.LoginPage;
 import com.NowakArtur97.WorldOfManga.testUtil.enums.LanguageVersion;
 import com.NowakArtur97.WorldOfManga.testUtil.extension.ScreenshotWatcher;
@@ -26,14 +26,14 @@ import static org.junit.jupiter.api.Assertions.*;
 @Tag("MangaInUserListUI_Tests")
 @DirtiesContext(classMode = ClassMode.BEFORE_EACH_TEST_METHOD)
 @DisabledOnOs(OS.LINUX)
-public class MangaInUserListUITest extends SeleniumUITest {
+class MangaInUserListUITest extends SeleniumUITest {
 
     private MangaList mangaList;
 
     private LoginPage loginPage;
 
     @BeforeEach
-    public void setupPOM() {
+    void setupPOM() {
 
         mangaList = new MangaList(webDriver);
 
@@ -42,7 +42,7 @@ public class MangaInUserListUITest extends SeleniumUITest {
 
     @ParameterizedTest(name = "{index}: Language Version: {0}")
     @EnumSource(LanguageVersion.class)
-    public void when_add_to_currently_reading_list_should_add_to_list(LanguageVersion languageVersion) {
+    void when_add_to_currently_reading_list_should_add_to_list(LanguageVersion languageVersion) {
 
         loginPage.loadLoginView(languageVersion);
 
@@ -69,7 +69,7 @@ public class MangaInUserListUITest extends SeleniumUITest {
 
     @ParameterizedTest(name = "{index}: Language Version: {0}")
     @EnumSource(LanguageVersion.class)
-    public void when_remove_from_currently_reading_list_should_remove_from_list(LanguageVersion languageVersion) {
+    void when_remove_from_currently_reading_list_should_remove_from_list(LanguageVersion languageVersion) {
 
         loginPage.loadLoginView(languageVersion);
 
@@ -100,7 +100,7 @@ public class MangaInUserListUITest extends SeleniumUITest {
 
     @ParameterizedTest(name = "{index}: Language Version: {0}")
     @EnumSource(LanguageVersion.class)
-    public void when_add_to_completed_list_should_add_to_list(LanguageVersion languageVersion) {
+    void when_add_to_completed_list_should_add_to_list(LanguageVersion languageVersion) {
 
         loginPage.loadLoginView(languageVersion);
 
@@ -127,7 +127,7 @@ public class MangaInUserListUITest extends SeleniumUITest {
 
     @ParameterizedTest(name = "{index}: Language Version: {0}")
     @EnumSource(LanguageVersion.class)
-    public void when_remove_from_completed_list_should_remove_from_list(LanguageVersion languageVersion) {
+    void when_remove_from_completed_list_should_remove_from_list(LanguageVersion languageVersion) {
 
         loginPage.loadLoginView(languageVersion);
 
@@ -158,7 +158,7 @@ public class MangaInUserListUITest extends SeleniumUITest {
 
     @ParameterizedTest(name = "{index}: Language Version: {0}")
     @EnumSource(LanguageVersion.class)
-    public void when_add_to_plan_to_read_list_should_add_to_list(LanguageVersion languageVersion) {
+    void when_add_to_plan_to_read_list_should_add_to_list(LanguageVersion languageVersion) {
 
         loginPage.loadLoginView(languageVersion);
 
@@ -185,7 +185,7 @@ public class MangaInUserListUITest extends SeleniumUITest {
 
     @ParameterizedTest(name = "{index}: Language Version: {0}")
     @EnumSource(LanguageVersion.class)
-    public void when_remove_from_plan_to_read_list_should_remove_from_list(LanguageVersion languageVersion) {
+    void when_remove_from_plan_to_read_list_should_remove_from_list(LanguageVersion languageVersion) {
 
         loginPage.loadLoginView(languageVersion);
 
@@ -216,7 +216,7 @@ public class MangaInUserListUITest extends SeleniumUITest {
 
     @ParameterizedTest(name = "{index}: Language Version: {0}")
     @EnumSource(LanguageVersion.class)
-    public void when_add_to_on_hold_list_should_add_to_list(LanguageVersion languageVersion) {
+    void when_add_to_on_hold_list_should_add_to_list(LanguageVersion languageVersion) {
 
         loginPage.loadLoginView(languageVersion);
 
@@ -243,7 +243,7 @@ public class MangaInUserListUITest extends SeleniumUITest {
 
     @ParameterizedTest(name = "{index}: Language Version: {0}")
     @EnumSource(LanguageVersion.class)
-    public void when_remove_from_completed_on_hold_list_should_remove_from_list(LanguageVersion languageVersion) {
+    void when_remove_from_completed_on_hold_list_should_remove_from_list(LanguageVersion languageVersion) {
 
         loginPage.loadLoginView(languageVersion);
 
@@ -274,7 +274,7 @@ public class MangaInUserListUITest extends SeleniumUITest {
 
     @ParameterizedTest(name = "{index}: Language Version: {0}")
     @EnumSource(LanguageVersion.class)
-    public void when_add_to_dropped_list_should_add_to_list(LanguageVersion languageVersion) {
+    void when_add_to_dropped_list_should_add_to_list(LanguageVersion languageVersion) {
 
         loginPage.loadLoginView(languageVersion);
 
@@ -301,7 +301,7 @@ public class MangaInUserListUITest extends SeleniumUITest {
 
     @ParameterizedTest(name = "{index}: Language Version: {0}")
     @EnumSource(LanguageVersion.class)
-    public void when_remove_from_dropped_list_should_remove_from_list(LanguageVersion languageVersion) {
+    void when_remove_from_dropped_list_should_remove_from_list(LanguageVersion languageVersion) {
 
         loginPage.loadLoginView(languageVersion);
 
@@ -332,7 +332,7 @@ public class MangaInUserListUITest extends SeleniumUITest {
 
     @ParameterizedTest(name = "{index}: Language Version: {0}")
     @EnumSource(LanguageVersion.class)
-    public void when_user_not_logged_adding_manga_to_list_should_show_login_form(LanguageVersion languageVersion) {
+    void when_user_not_logged_adding_manga_to_list_should_show_login_form(LanguageVersion languageVersion) {
 
         mangaList.loadMangaList(languageVersion);
 

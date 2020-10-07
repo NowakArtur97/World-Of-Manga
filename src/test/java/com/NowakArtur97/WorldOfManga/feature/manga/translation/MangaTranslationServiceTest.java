@@ -1,14 +1,12 @@
-package com.NowakArtur97.WorldOfManga.service;
+package com.NowakArtur97.WorldOfManga.feature.manga.translation;
 
-import com.NowakArtur97.WorldOfManga.dto.MangaDTO;
-import com.NowakArtur97.WorldOfManga.dto.MangaTranslationDTO;
 import com.NowakArtur97.WorldOfManga.exception.LanguageNotFoundException;
 import com.NowakArtur97.WorldOfManga.exception.MangaNotFoundException;
-import com.NowakArtur97.WorldOfManga.mapper.mangaTranslation.MangaTranslationMapper;
-import com.NowakArtur97.WorldOfManga.model.Language;
-import com.NowakArtur97.WorldOfManga.model.Manga;
-import com.NowakArtur97.WorldOfManga.model.MangaTranslation;
-import com.NowakArtur97.WorldOfManga.repository.MangaTranslationRepository;
+import com.NowakArtur97.WorldOfManga.feature.language.Language;
+import com.NowakArtur97.WorldOfManga.feature.language.LanguageService;
+import com.NowakArtur97.WorldOfManga.feature.manga.details.Manga;
+import com.NowakArtur97.WorldOfManga.feature.manga.details.MangaDTO;
+import com.NowakArtur97.WorldOfManga.feature.manga.details.MangaService;
 import com.NowakArtur97.WorldOfManga.testUtil.generator.NameWithSpacesGenerator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayNameGeneration;
@@ -24,7 +22,7 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 @DisplayNameGeneration(NameWithSpacesGenerator.class)
 @Tag("MangaTranslationService_Tests")
-public class MangaTranslationServiceTest {
+class MangaTranslationServiceTest {
 
     private MangaTranslationService mangaTranslationService;
 
@@ -48,7 +46,7 @@ public class MangaTranslationServiceTest {
     }
 
     @Test
-    public void when_title_is_already_in_use_should_return_true() {
+    void when_title_is_already_in_use_should_return_true() {
 
         boolean isTitleInUse = true;
 
@@ -63,7 +61,7 @@ public class MangaTranslationServiceTest {
     }
 
     @Test
-    public void when_title_is_not_in_use_should_return_false() {
+    void when_title_is_not_in_use_should_return_false() {
 
         boolean isTitleInUse = false;
 
@@ -78,7 +76,7 @@ public class MangaTranslationServiceTest {
     }
 
     @Test
-    public void when_add_manga_translations_should_save_new_translations()
+    void when_add_manga_translations_should_save_new_translations()
             throws LanguageNotFoundException, MangaNotFoundException {
 
         MangaTranslationDTO mangaTranslationEnDTO = MangaTranslationDTO.builder().title("English title")
@@ -128,7 +126,7 @@ public class MangaTranslationServiceTest {
     }
 
     @Test
-    public void when_edit_manga_translations_should_edit_translations()
+    void when_edit_manga_translations_should_edit_translations()
             throws LanguageNotFoundException, MangaNotFoundException {
 
         MangaTranslationDTO mangaTranslationEnDTO = MangaTranslationDTO.builder().title("English title")

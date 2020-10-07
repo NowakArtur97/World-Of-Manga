@@ -1,7 +1,7 @@
-package com.NowakArtur97.WorldOfManga.controller.manga.seleniumTest;
+package com.NowakArtur97.WorldOfManga.feature.manga.seleniumTest;
 
-import com.NowakArtur97.WorldOfManga.controller.manga.seleniumPOM.MangaFormPage;
-import com.NowakArtur97.WorldOfManga.controller.manga.seleniumPOM.MangaList;
+import com.NowakArtur97.WorldOfManga.feature.manga.seleniumPOM.MangaFormPage;
+import com.NowakArtur97.WorldOfManga.feature.manga.seleniumPOM.MangaList;
 import com.NowakArtur97.WorldOfManga.feature.user.seleniumPOM.LoginPage;
 import com.NowakArtur97.WorldOfManga.testUtil.enums.LanguageVersion;
 import com.NowakArtur97.WorldOfManga.testUtil.extension.ScreenshotWatcher;
@@ -27,7 +27,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @Tag("MangaListUI_Tests")
 @DirtiesContext(classMode = ClassMode.BEFORE_EACH_TEST_METHOD)
 @DisabledOnOs(OS.LINUX)
-public class MangaListUITest extends SeleniumUITest {
+class MangaListUITest extends SeleniumUITest {
 
     private MangaList mangaList;
 
@@ -36,7 +36,7 @@ public class MangaListUITest extends SeleniumUITest {
     private LoginPage loginPage;
 
     @BeforeEach
-    public void setupPOM() {
+    void setupPOM() {
 
         mangaList = new MangaList(webDriver);
 
@@ -47,7 +47,7 @@ public class MangaListUITest extends SeleniumUITest {
 
     @ParameterizedTest(name = "{index}: Language Version: {0}")
     @EnumSource(LanguageVersion.class)
-    public void when_added_new_manga_should_show_manga_title_on_manga_list(LanguageVersion languageVersion) {
+    void when_added_new_manga_should_show_manga_title_on_manga_list(LanguageVersion languageVersion) {
 
         String englishTitle = "English title";
         String polishTitle = "Polish title";
@@ -80,7 +80,7 @@ public class MangaListUITest extends SeleniumUITest {
 
     @ParameterizedTest(name = "{index}: Language Version: {0}")
     @EnumSource(LanguageVersion.class)
-    public void when_added_new_manga_should_show_manga_description_on_manga_list(LanguageVersion languageVersion) {
+    void when_added_new_manga_should_show_manga_description_on_manga_list(LanguageVersion languageVersion) {
 
         String englishTitle = "English title";
         String polishTitle = "Polish title";

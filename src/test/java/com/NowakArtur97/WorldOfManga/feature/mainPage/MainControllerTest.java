@@ -3,11 +3,10 @@ package com.NowakArtur97.WorldOfManga.feature.mainPage;
 import com.NowakArtur97.WorldOfManga.feature.author.Author;
 import com.NowakArtur97.WorldOfManga.feature.user.User;
 import com.NowakArtur97.WorldOfManga.feature.user.UserService;
-import com.NowakArtur97.WorldOfManga.model.Manga;
-import com.NowakArtur97.WorldOfManga.model.MangaRating;
-import com.NowakArtur97.WorldOfManga.model.MangaTranslation;
-import com.NowakArtur97.WorldOfManga.service.MangaService;
-import com.NowakArtur97.WorldOfManga.service.RecommendationService;
+import com.NowakArtur97.WorldOfManga.feature.manga.details.Manga;
+import com.NowakArtur97.WorldOfManga.feature.manga.rating.MangaRating;
+import com.NowakArtur97.WorldOfManga.feature.manga.translation.MangaTranslation;
+import com.NowakArtur97.WorldOfManga.feature.manga.details.MangaService;
 import com.NowakArtur97.WorldOfManga.testUtil.generator.NameWithSpacesGenerator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayNameGeneration;
@@ -59,7 +58,8 @@ class MainControllerTest {
     @BeforeEach
     void setUp() {
 
-        MainController mainController = new MainController(mangaService, recommendationService, userService, cookieLocaleResolver);
+        MainController mainController = new MainController(mangaService, recommendationService,
+                userService, cookieLocaleResolver);
         mockMvc = MockMvcBuilders.standaloneSetup(mainController)
                 .setCustomArgumentResolvers(new PageableHandlerMethodArgumentResolver()).build();
     }

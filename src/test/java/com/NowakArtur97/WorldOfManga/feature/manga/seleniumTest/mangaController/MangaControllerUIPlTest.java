@@ -1,4 +1,4 @@
-package com.NowakArtur97.WorldOfManga.controller.manga.seleniumTest.mangaController;
+package com.NowakArtur97.WorldOfManga.feature.manga.seleniumTest.mangaController;
 
 import com.NowakArtur97.WorldOfManga.testUtil.enums.LanguageVersion;
 import com.NowakArtur97.WorldOfManga.testUtil.extension.ScreenshotWatcher;
@@ -23,10 +23,10 @@ import static org.junit.jupiter.api.Assertions.*;
 @Tag("MangaControllerUIPl_Tests")
 @DirtiesContext(classMode = ClassMode.BEFORE_EACH_TEST_METHOD)
 @DisabledOnOs(OS.LINUX)
-public class MangaControllerUIPlTest extends MangaControllerUITest {
+class MangaControllerUIPlTest extends MangaControllerUITest {
 
     @Test
-    public void when_correct_manga_creation_with_all_fields_should_add_manga() {
+    void when_correct_manga_creation_with_all_fields_should_add_manga() {
 
         String englishTitle = "English title";
         String polishTitle = "Polish title";
@@ -52,7 +52,7 @@ public class MangaControllerUIPlTest extends MangaControllerUITest {
     }
 
     @Test
-    public void when_correct_manga_editing_with_all_fields_should_add_manga() {
+    void when_correct_manga_editing_with_all_fields_should_add_manga() {
 
         String englishTitle = "Some english title";
         String polishTitle = "Some polish title";
@@ -80,7 +80,7 @@ public class MangaControllerUIPlTest extends MangaControllerUITest {
     }
 
     @Test
-    public void when_manga_deleting_should_remove_manga() {
+    void when_manga_deleting_should_remove_manga() {
 
         loginPage.loadLoginView(LanguageVersion.PL);
 
@@ -99,7 +99,7 @@ public class MangaControllerUIPlTest extends MangaControllerUITest {
     }
 
     @Test
-    public void when_manga_deleting_should_not_show_manga_in_rated_manga_list() {
+    void when_manga_deleting_should_not_show_manga_in_rated_manga_list() {
 
         loginPage.loadLoginView(LanguageVersion.PL);
 
@@ -124,7 +124,7 @@ public class MangaControllerUIPlTest extends MangaControllerUITest {
     }
 
     @Test
-    public void when_manga_deleting_should_not_show_manga_in_favourites() {
+    void when_manga_deleting_should_not_show_manga_in_favourites() {
 
         loginPage.loadLoginView(LanguageVersion.PL);
 
@@ -146,7 +146,7 @@ public class MangaControllerUIPlTest extends MangaControllerUITest {
     }
 
     @Test
-    public void when_manga_deleting_should_not_show_manga_in_users_manga_list() {
+    void when_manga_deleting_should_not_show_manga_in_users_manga_list() {
 
         loginPage.loadLoginView(LanguageVersion.PL);
 
@@ -170,7 +170,7 @@ public class MangaControllerUIPlTest extends MangaControllerUITest {
     }
 
     @Test
-    public void when_incorrect_manga_creation_with_all_blank_fields_and_not_selected_author_image_and_genre_should_have_errors() {
+    void when_incorrect_manga_creation_with_all_blank_fields_and_not_selected_author_image_and_genre_should_have_errors() {
 
         String blankField = "";
         boolean selectAuthor = false;
@@ -209,7 +209,7 @@ public class MangaControllerUIPlTest extends MangaControllerUITest {
     }
 
     @Test
-    public void when_incorrect_manga_creation_with_too_long_field_sizes_and_selected_author_and_image_should_have_errors() {
+    void when_incorrect_manga_creation_with_too_long_field_sizes_and_selected_author_and_image_should_have_errors() {
 
         String longTitleText = "asdfghjklpasdfghjklpasdfghjklpasdfghjklpasdfghjklp!@#$%";
         String longDescriptionText = "asdfghjklpasdfghjklpasdfghjklpasdfghjklpasdfghjklp!@#$%".repeat(30);
@@ -240,7 +240,7 @@ public class MangaControllerUIPlTest extends MangaControllerUITest {
                         () -> "should show incorrect polish title"),
                 () -> assertEquals(longDescriptionText, mangaFormPage.getPlDescription(),
                         () -> "should show incorrect polish description"),
-                () -> assertTrue(mangaFormPage.isSecodnAuthorCheckboxSelected(), () -> "should author be selected"),
+                () -> assertTrue(mangaFormPage.isSecondAuthorCheckboxSelected(), () -> "should author be selected"),
                 () -> assertTrue(mangaFormPage.isSecondGenreCheckboxSelected(), () -> "should genre be selected"));
     }
 }

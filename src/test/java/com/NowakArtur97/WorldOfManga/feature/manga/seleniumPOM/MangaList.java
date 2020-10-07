@@ -1,4 +1,4 @@
-package com.NowakArtur97.WorldOfManga.controller.manga.seleniumPOM;
+package com.NowakArtur97.WorldOfManga.feature.manga.seleniumPOM;
 
 import com.NowakArtur97.WorldOfManga.testUtil.enums.LanguageVersion;
 import com.NowakArtur97.WorldOfManga.testUtil.selenium.SeleniumPageObjectModel;
@@ -10,7 +10,7 @@ import java.util.List;
 
 public class MangaList extends SeleniumPageObjectModel {
 
-    public static final String RESOURCE_PATH = "/";
+    private static final String RESOURCE_PATH = "/";
 
     private static final int INDEX_FOR_SKIPPING_RECOMMENDATIONS_STATUSES = 50;
     private static final int INDEX_FOR_SKIPPING_RECOMMENDATIONS_RATINGS_OR_FAVOURITES = 20;

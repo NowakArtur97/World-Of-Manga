@@ -1,14 +1,15 @@
-package com.NowakArtur97.WorldOfManga.service;
+package com.NowakArtur97.WorldOfManga.feature.manga.details;
 
-import com.NowakArtur97.WorldOfManga.dto.MangaDTO;
-import com.NowakArtur97.WorldOfManga.enums.MangaInUserListStatus;
+import com.NowakArtur97.WorldOfManga.feature.manga.details.*;
+import com.NowakArtur97.WorldOfManga.feature.manga.inUserList.MangaInUserList;
+import com.NowakArtur97.WorldOfManga.feature.manga.inUserList.MangaInUserListStatus;
 import com.NowakArtur97.WorldOfManga.exception.MangaNotFoundException;
 import com.NowakArtur97.WorldOfManga.feature.author.Author;
+import com.NowakArtur97.WorldOfManga.feature.manga.genre.MangaGenre;
+import com.NowakArtur97.WorldOfManga.feature.manga.rating.MangaRating;
+import com.NowakArtur97.WorldOfManga.feature.manga.translation.MangaTranslation;
 import com.NowakArtur97.WorldOfManga.feature.user.User;
 import com.NowakArtur97.WorldOfManga.feature.user.UserService;
-import com.NowakArtur97.WorldOfManga.mapper.manga.MangaMapper;
-import com.NowakArtur97.WorldOfManga.model.*;
-import com.NowakArtur97.WorldOfManga.repository.MangaRepository;
 import com.NowakArtur97.WorldOfManga.testUtil.generator.NameWithSpacesGenerator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayNameGeneration;
@@ -28,7 +29,7 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 @DisplayNameGeneration(NameWithSpacesGenerator.class)
 @Tag("MangaService_Tests")
-public class MangaServiceTest {
+class MangaServiceTest {
 
     private MangaService mangaService;
 
@@ -48,7 +49,7 @@ public class MangaServiceTest {
     }
 
     @Test
-    public void when_add_manga_should_save_manga() throws IOException, MangaNotFoundException {
+    void when_add_manga_should_save_manga() throws IOException, MangaNotFoundException {
 
         MangaDTO mangaDTO = new MangaDTO();
 
@@ -104,7 +105,7 @@ public class MangaServiceTest {
     }
 
     @Test
-    public void when_edit_manga_should_update_manga() throws IOException, MangaNotFoundException {
+    void when_edit_manga_should_update_manga() throws IOException, MangaNotFoundException {
 
         Long mangaId = 1L;
 
@@ -174,7 +175,7 @@ public class MangaServiceTest {
     }
 
     @Test
-    public void when_delete_manga_should_remove_manga() throws IOException, MangaNotFoundException {
+    void when_delete_manga_should_remove_manga() throws IOException, MangaNotFoundException {
 
         MangaTranslation mangaTranslationEnExpected = MangaTranslation.builder().title("English title")
                 .description("English description").build();
@@ -248,7 +249,7 @@ public class MangaServiceTest {
     }
 
     @Test
-    public void when_add_manga_to_favourites_for_first_time_should_add_manga_to_favourites()
+    void when_add_manga_to_favourites_for_first_time_should_add_manga_to_favourites()
             throws MangaNotFoundException, IOException {
 
         Long mangaId = 1L;
@@ -292,7 +293,7 @@ public class MangaServiceTest {
     }
 
     @Test
-    public void when_remove_manga_from_favourites_should_remove_manga_from_favourites()
+    void when_remove_manga_from_favourites_should_remove_manga_from_favourites()
             throws MangaNotFoundException, IOException {
 
         Long mangaId = 1L;
@@ -339,7 +340,7 @@ public class MangaServiceTest {
     }
 
     @Test
-    public void when_find_all_should_return_list_of_mangas() throws IOException {
+    void when_find_all_should_return_list_of_mangas() throws IOException {
 
         MangaTranslation mangaTranslationEnExpected = MangaTranslation.builder().title("English title")
                 .description("English description").build();
@@ -392,7 +393,7 @@ public class MangaServiceTest {
     }
 
     @Test
-    public void when_find_by_id_found_manga_should_return_manga_with_id() throws IOException, MangaNotFoundException {
+    void when_find_by_id_found_manga_should_return_manga_with_id() throws IOException, MangaNotFoundException {
 
         MangaTranslation mangaTranslationEnExpected = MangaTranslation.builder().title("English title")
                 .description("English description").build();
@@ -431,7 +432,7 @@ public class MangaServiceTest {
     }
 
     @Test
-    public void when_find_by_id_bu_cannot_find_manga_should_return_manga_with_id() throws IOException {
+    void when_find_by_id_bu_cannot_find_manga_should_return_manga_with_id() throws IOException {
 
         Long id = 0L;
 

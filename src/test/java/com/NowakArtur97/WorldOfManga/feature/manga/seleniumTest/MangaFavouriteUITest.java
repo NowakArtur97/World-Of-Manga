@@ -1,6 +1,6 @@
-package com.NowakArtur97.WorldOfManga.controller.manga.seleniumTest;
+package com.NowakArtur97.WorldOfManga.feature.manga.seleniumTest;
 
-import com.NowakArtur97.WorldOfManga.controller.manga.seleniumPOM.MangaList;
+import com.NowakArtur97.WorldOfManga.feature.manga.seleniumPOM.MangaList;
 import com.NowakArtur97.WorldOfManga.feature.user.seleniumPOM.LoginPage;
 import com.NowakArtur97.WorldOfManga.testUtil.enums.LanguageVersion;
 import com.NowakArtur97.WorldOfManga.testUtil.extension.ScreenshotWatcher;
@@ -26,14 +26,14 @@ import static org.junit.jupiter.api.Assertions.*;
 @Tag("MangaFavouriteUI_Tests")
 @DirtiesContext(classMode = ClassMode.BEFORE_EACH_TEST_METHOD)
 @DisabledOnOs(OS.LINUX)
-public class MangaFavouriteUITest extends SeleniumUITest {
+class MangaFavouriteUITest extends SeleniumUITest {
 
     private MangaList mangaList;
 
     private LoginPage loginPage;
 
     @BeforeEach
-    public void setupPOM() {
+    void setupPOM() {
 
         mangaList = new MangaList(webDriver);
 
@@ -42,7 +42,7 @@ public class MangaFavouriteUITest extends SeleniumUITest {
 
     @ParameterizedTest(name = "{index}: Language Version: {0}")
     @EnumSource(LanguageVersion.class)
-    public void when_add_manga_for_the_first_time_should_add_manga_to_favourites(LanguageVersion languageVersion) {
+    void when_add_manga_for_the_first_time_should_add_manga_to_favourites(LanguageVersion languageVersion) {
 
         loginPage.loadLoginView(languageVersion);
 
@@ -58,7 +58,7 @@ public class MangaFavouriteUITest extends SeleniumUITest {
 
     @ParameterizedTest(name = "{index}: Language Version: {0}")
     @EnumSource(LanguageVersion.class)
-    public void when_add_manga_for_the_first_time_should_show_manga_in_favourites(LanguageVersion languageVersion) {
+    void when_add_manga_for_the_first_time_should_show_manga_in_favourites(LanguageVersion languageVersion) {
 
         loginPage.loadLoginView(languageVersion);
 
@@ -81,7 +81,7 @@ public class MangaFavouriteUITest extends SeleniumUITest {
 
     @ParameterizedTest(name = "{index}: Language Version: {0}")
     @EnumSource(LanguageVersion.class)
-    public void when_remove_manga_from_favourites_should_remove_manga_from_favourites(LanguageVersion languageVersion) {
+    void when_remove_manga_from_favourites_should_remove_manga_from_favourites(LanguageVersion languageVersion) {
 
         loginPage.loadLoginView(languageVersion);
 
@@ -101,7 +101,7 @@ public class MangaFavouriteUITest extends SeleniumUITest {
 
     @ParameterizedTest(name = "{index}: Language Version: {0}")
     @EnumSource(LanguageVersion.class)
-    public void when_remove_manga_from_favourites_should_not_show_manga_in_list(LanguageVersion languageVersion) {
+    void when_remove_manga_from_favourites_should_not_show_manga_in_list(LanguageVersion languageVersion) {
 
         loginPage.loadLoginView(languageVersion);
 
@@ -128,7 +128,7 @@ public class MangaFavouriteUITest extends SeleniumUITest {
 
     @ParameterizedTest(name = "{index}: Language Version: {0}")
     @EnumSource(LanguageVersion.class)
-    public void when_user_not_logged_rating_manga_should_show_login_form(LanguageVersion languageVersion) {
+    void when_user_not_logged_rating_manga_should_show_login_form(LanguageVersion languageVersion) {
 
         mangaList.loadMangaList(languageVersion);
 

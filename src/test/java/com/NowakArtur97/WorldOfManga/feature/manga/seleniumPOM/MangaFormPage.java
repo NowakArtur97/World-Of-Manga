@@ -1,4 +1,4 @@
-package com.NowakArtur97.WorldOfManga.controller.manga.seleniumPOM;
+package com.NowakArtur97.WorldOfManga.feature.manga.seleniumPOM;
 
 import com.NowakArtur97.WorldOfManga.testUtil.enums.LanguageVersion;
 import com.NowakArtur97.WorldOfManga.testUtil.selenium.SeleniumPageObjectModel;
@@ -10,7 +10,7 @@ import java.util.List;
 
 public class MangaFormPage extends SeleniumPageObjectModel {
 
-    public static final String RESOURCE_PATH = "/admin/addOrUpdateManga";
+    private static final String RESOURCE_PATH = "/admin/addOrUpdateManga";
 
     private final static String projectPath = System.getProperty("user.dir");
 
@@ -80,7 +80,7 @@ public class MangaFormPage extends SeleniumPageObjectModel {
         return titleEnInput.getAttribute("value");
     }
 
-    public void setEnTitle(String enTitle) {
+    private void setEnTitle(String enTitle) {
 
         titleEnInput.clear();
         titleEnInput.sendKeys(enTitle);
@@ -91,7 +91,7 @@ public class MangaFormPage extends SeleniumPageObjectModel {
         return descriptionEnInput.getAttribute("value");
     }
 
-    public void setEnDescription(String enDescription) {
+    private void setEnDescription(String enDescription) {
 
         descriptionEnInput.clear();
         descriptionEnInput.sendKeys(enDescription);
@@ -102,7 +102,7 @@ public class MangaFormPage extends SeleniumPageObjectModel {
         return titlePlInput.getAttribute("value");
     }
 
-    public void setPlTitle(String plTitle) {
+    private void setPlTitle(String plTitle) {
 
         titlePlInput.clear();
         titlePlInput.sendKeys(plTitle);
@@ -113,23 +113,23 @@ public class MangaFormPage extends SeleniumPageObjectModel {
         return descriptionPlInput.getAttribute("value");
     }
 
-    public void setPlDescription(String plDescription) {
+    private void setPlDescription(String plDescription) {
 
         descriptionPlInput.clear();
         descriptionPlInput.sendKeys(plDescription);
     }
 
-    public void addImage() {
+    private void addImage() {
 
         imageInput.sendKeys(projectPath + EXAMPLE_IMAGE_PATH);
     }
 
-    public void clickAuthorCheckbox(int index) {
+    private void clickAuthorCheckbox(int index) {
 
         authorsCheckboxes.get(index).click();
     }
 
-    public void showAuthors() {
+    private void showAuthors() {
 
         groupHiddenOptions.get(0).click();
     }
@@ -139,17 +139,17 @@ public class MangaFormPage extends SeleniumPageObjectModel {
         return authorsCheckboxes.get(0).isSelected();
     }
 
-    public boolean isSecodnAuthorCheckboxSelected() {
+    public boolean isSecondAuthorCheckboxSelected() {
 
         return authorsCheckboxes.get(1).isSelected();
     }
 
-    public void clickGenreCheckbox(int index) {
+    private void clickGenreCheckbox(int index) {
 
         genresCheckboxes.get(index).click();
     }
 
-    public void showGenres() {
+    private void showGenres() {
 
         groupHiddenOptions.get(1).click();
     }
@@ -164,7 +164,7 @@ public class MangaFormPage extends SeleniumPageObjectModel {
         return genresCheckboxes.get(1).isSelected();
     }
 
-    public void clickSubmitMangaFormButton() {
+    private void clickSubmitMangaFormButton() {
 
         submitButton.click();
     }

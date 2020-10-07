@@ -1,13 +1,12 @@
-package com.NowakArtur97.WorldOfManga.service;
+package com.NowakArtur97.WorldOfManga.feature.manga.rating;
 
 import com.NowakArtur97.WorldOfManga.exception.MangaNotFoundException;
 import com.NowakArtur97.WorldOfManga.feature.author.Author;
+import com.NowakArtur97.WorldOfManga.feature.manga.details.Manga;
+import com.NowakArtur97.WorldOfManga.feature.manga.details.MangaService;
+import com.NowakArtur97.WorldOfManga.feature.manga.translation.MangaTranslation;
 import com.NowakArtur97.WorldOfManga.feature.user.User;
 import com.NowakArtur97.WorldOfManga.feature.user.UserService;
-import com.NowakArtur97.WorldOfManga.model.Manga;
-import com.NowakArtur97.WorldOfManga.model.MangaRating;
-import com.NowakArtur97.WorldOfManga.model.MangaTranslation;
-import com.NowakArtur97.WorldOfManga.repository.MangaRatingRepository;
 import com.NowakArtur97.WorldOfManga.testUtil.generator.NameWithSpacesGenerator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayNameGeneration;
@@ -27,7 +26,7 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 @DisplayNameGeneration(NameWithSpacesGenerator.class)
 @Tag("MangaRatingService_Tests")
-public class MangaRatingServiceTest {
+class MangaRatingServiceTest {
 
     private MangaRatingService mangaRatingService;
 
@@ -47,7 +46,7 @@ public class MangaRatingServiceTest {
     }
 
     @Test
-    public void when_rate_manga_for_first_time_should_update_rating() throws IOException, MangaNotFoundException {
+    void when_rate_manga_for_first_time_should_update_rating() throws IOException, MangaNotFoundException {
 
         Long mangaId = 1L;
 
@@ -95,7 +94,7 @@ public class MangaRatingServiceTest {
     }
 
     @Test
-    public void when_rate_manga_for_another_time_should_update_rating() throws IOException, MangaNotFoundException {
+    void when_rate_manga_for_another_time_should_update_rating() throws IOException, MangaNotFoundException {
 
         Long mangaId = 1L;
 
@@ -144,7 +143,7 @@ public class MangaRatingServiceTest {
     }
 
     @Test
-    public void whne_find_existing_manga_rating_by_user_and_manga_should_return_entity() throws IOException {
+    void whne_find_existing_manga_rating_by_user_and_manga_should_return_entity() throws IOException {
 
         MangaTranslation mangaTranslationEnExpected = MangaTranslation.builder().title("English title")
                 .description("English description").build();
@@ -188,7 +187,7 @@ public class MangaRatingServiceTest {
     }
 
     @Test
-    public void whne_find_not_existing_manga_rating_by_user_and_manga_should_return_new_manga_rating()
+    void whne_find_not_existing_manga_rating_by_user_and_manga_should_return_new_manga_rating()
             throws IOException {
 
         MangaTranslation mangaTranslationEnExpected = MangaTranslation.builder().title("English title")

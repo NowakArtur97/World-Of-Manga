@@ -1,11 +1,8 @@
-package com.NowakArtur97.WorldOfManga.mapper;
+package com.NowakArtur97.WorldOfManga.feature.manga.details;
 
-import com.NowakArtur97.WorldOfManga.dto.MangaDTO;
 import com.NowakArtur97.WorldOfManga.feature.author.Author;
-import com.NowakArtur97.WorldOfManga.mapper.manga.MangaMapper;
-import com.NowakArtur97.WorldOfManga.model.Manga;
-import com.NowakArtur97.WorldOfManga.model.MangaGenre;
-import com.NowakArtur97.WorldOfManga.model.MangaTranslation;
+import com.NowakArtur97.WorldOfManga.feature.manga.genre.MangaGenre;
+import com.NowakArtur97.WorldOfManga.feature.manga.translation.MangaTranslation;
 import com.NowakArtur97.WorldOfManga.testUtil.generator.NameWithSpacesGenerator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayNameGeneration;
@@ -20,18 +17,18 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @DisplayNameGeneration(NameWithSpacesGenerator.class)
 @Tag("MangaMapper_Test")
-public class MangaMapperTest {
+class MangaMapperTest {
 
     private MangaMapper mangaMapper;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
 
         mangaMapper = new MangaMapper();
     }
 
     @Test
-    public void when_map_manga_dto_to_entity_should_return_manga_entity() {
+    void when_map_manga_dto_to_entity_should_return_manga_entity() {
 
         MangaTranslation mangaEnTranslationExpected = MangaTranslation.builder().title("English title")
                 .description("English description").build();
@@ -79,7 +76,7 @@ public class MangaMapperTest {
     }
 
     @Test
-    public void when_map_manga_entity_to_dto_should_return_manga_dto() {
+    void when_map_manga_entity_to_dto_should_return_manga_dto() {
 
         String enTitle = "English title";
         String plTitle = "Polish title";

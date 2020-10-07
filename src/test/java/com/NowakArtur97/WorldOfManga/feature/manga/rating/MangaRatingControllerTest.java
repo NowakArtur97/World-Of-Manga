@@ -1,6 +1,5 @@
-package com.NowakArtur97.WorldOfManga.controller.manga;
+package com.NowakArtur97.WorldOfManga.feature.manga.rating;
 
-import com.NowakArtur97.WorldOfManga.service.MangaRatingService;
 import com.NowakArtur97.WorldOfManga.testUtil.generator.NameWithSpacesGenerator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayNameGeneration;
@@ -23,7 +22,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ExtendWith(MockitoExtension.class)
 @DisplayNameGeneration(NameWithSpacesGenerator.class)
 @Tag("MangaRatingController_Tests")
-public class MangaRatingControllerTest {
+class MangaRatingControllerTest {
 
     private MockMvc mockMvc;
 
@@ -33,14 +32,14 @@ public class MangaRatingControllerTest {
     private MangaRatingService mangaRatingService;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
 
         mangaRatingController = new MangaRatingController(mangaRatingService);
         mockMvc = MockMvcBuilders.standaloneSetup(mangaRatingController).build();
     }
 
     @Test
-    public void when_rate_manga_should_rate_manga_and_redirect_to_last_page() {
+    void when_rate_manga_should_rate_manga_and_redirect_to_last_page() {
 
         Long mangaId = 1L;
         int rating = 5;

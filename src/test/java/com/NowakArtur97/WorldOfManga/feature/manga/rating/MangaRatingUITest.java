@@ -1,6 +1,6 @@
-package com.NowakArtur97.WorldOfManga.controller.manga.seleniumTest;
+package com.NowakArtur97.WorldOfManga.feature.manga.rating;
 
-import com.NowakArtur97.WorldOfManga.controller.manga.seleniumPOM.MangaList;
+import com.NowakArtur97.WorldOfManga.feature.manga.seleniumPOM.MangaList;
 import com.NowakArtur97.WorldOfManga.feature.user.seleniumPOM.LoginPage;
 import com.NowakArtur97.WorldOfManga.testUtil.enums.LanguageVersion;
 import com.NowakArtur97.WorldOfManga.testUtil.extension.ScreenshotWatcher;
@@ -25,14 +25,14 @@ import static org.junit.jupiter.api.Assertions.*;
 @Tag("MangaRatingUI_Tests")
 @DirtiesContext
 @DisabledOnOs(OS.LINUX)
-public class MangaRatingUITest extends SeleniumUITest {
+class MangaRatingUITest extends SeleniumUITest {
 
     private MangaList mangaList;
 
     private LoginPage loginPage;
 
     @BeforeEach
-    public void setupPOM() {
+    void setupPOM() {
 
         mangaList = new MangaList(webDriver);
 
@@ -41,7 +41,7 @@ public class MangaRatingUITest extends SeleniumUITest {
 
     @ParameterizedTest(name = "{index}: Language Version: {0}")
     @EnumSource(LanguageVersion.class)
-    public void when_rate_manga_should_show_updated_rating(LanguageVersion languageVersion) {
+    void when_rate_manga_should_show_updated_rating(LanguageVersion languageVersion) {
 
         loginPage.loadLoginView(languageVersion);
 
@@ -59,7 +59,7 @@ public class MangaRatingUITest extends SeleniumUITest {
 
     @ParameterizedTest(name = "{index}: Language Version: {0}")
     @EnumSource(LanguageVersion.class)
-    public void when_rate_manga_should_show_rating_on_user_manga_list(LanguageVersion languageVersion) {
+    void when_rate_manga_should_show_rating_on_user_manga_list(LanguageVersion languageVersion) {
 
         loginPage.loadLoginView(languageVersion);
 
@@ -81,7 +81,7 @@ public class MangaRatingUITest extends SeleniumUITest {
 
     @ParameterizedTest(name = "{index}: Language Version: {0}")
     @EnumSource(LanguageVersion.class)
-    public void when_rate_second_time_manga_should_show_updated_rating(LanguageVersion languageVersion) {
+    void when_rate_second_time_manga_should_show_updated_rating(LanguageVersion languageVersion) {
 
         loginPage.loadLoginView(languageVersion);
 
@@ -108,7 +108,7 @@ public class MangaRatingUITest extends SeleniumUITest {
 
     @ParameterizedTest(name = "{index}: Language Version: {0}")
     @EnumSource(LanguageVersion.class)
-    public void when_user_not_logged_rating_manga_should_show_login_form(LanguageVersion languageVersion) {
+    void when_user_not_logged_rating_manga_should_show_login_form(LanguageVersion languageVersion) {
 
         mangaList.loadMangaList(languageVersion);
 

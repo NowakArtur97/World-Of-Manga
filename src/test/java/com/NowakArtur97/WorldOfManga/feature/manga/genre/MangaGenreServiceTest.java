@@ -1,8 +1,6 @@
-package com.NowakArtur97.WorldOfManga.service;
+package com.NowakArtur97.WorldOfManga.feature.manga.genre;
 
 import com.NowakArtur97.WorldOfManga.exception.MangaGenreNotFoundException;
-import com.NowakArtur97.WorldOfManga.model.MangaGenre;
-import com.NowakArtur97.WorldOfManga.repository.MangaGenreRepository;
 import com.NowakArtur97.WorldOfManga.testUtil.generator.NameWithSpacesGenerator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayNameGeneration;
@@ -22,7 +20,7 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 @DisplayNameGeneration(NameWithSpacesGenerator.class)
 @Tag("MangaGenreService_Tests")
-public class MangaGenreServiceTest {
+class MangaGenreServiceTest {
 
     private MangaGenreService mangaGenreService;
 
@@ -36,7 +34,7 @@ public class MangaGenreServiceTest {
     }
 
     @Test
-    public void when_find_all_should_return_list_of_mangas() {
+    void when_find_all_should_return_list_of_mangas() {
 
         MangaGenre mangaGenreExpected1 = new MangaGenre("genre  en", "genre pl");
         MangaGenre mangaGenreExpected2 = new MangaGenre("genre  en 2", "genre pl 2");
@@ -60,7 +58,7 @@ public class MangaGenreServiceTest {
     }
 
     @Test
-    public void when_find_existing_by_genre_should_return_genre() throws MangaGenreNotFoundException {
+    void when_find_existing_by_genre_should_return_genre() throws MangaGenreNotFoundException {
 
         String genreEn = "genre en";
         String genrePl = "genre pl";
@@ -84,7 +82,7 @@ public class MangaGenreServiceTest {
     }
 
     @Test
-    public void when_find_not_existing_by_genre_should_return_genre() throws MangaGenreNotFoundException {
+    void when_find_not_existing_by_genre_should_return_genre() {
 
         String genre = "not existing genre";
 

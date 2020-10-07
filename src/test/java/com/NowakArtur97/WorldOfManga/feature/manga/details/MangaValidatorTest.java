@@ -1,8 +1,7 @@
-package com.NowakArtur97.WorldOfManga.validation.manga;
+package com.NowakArtur97.WorldOfManga.feature.manga.details;
 
-import com.NowakArtur97.WorldOfManga.dto.MangaDTO;
-import com.NowakArtur97.WorldOfManga.dto.MangaTranslationDTO;
-import com.NowakArtur97.WorldOfManga.service.MangaTranslationService;
+import com.NowakArtur97.WorldOfManga.feature.manga.translation.MangaTranslationDTO;
+import com.NowakArtur97.WorldOfManga.feature.manga.translation.MangaTranslationService;
 import com.NowakArtur97.WorldOfManga.testUtil.generator.NameWithSpacesGenerator;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.Tag;
@@ -21,7 +20,7 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 @DisplayNameGeneration(NameWithSpacesGenerator.class)
 @Tag("MangaValidator_Tests")
-public class MangaValidatorTest {
+class MangaValidatorTest {
 
     @InjectMocks
     private MangaValidator mangaValidator;
@@ -30,7 +29,7 @@ public class MangaValidatorTest {
     private MangaTranslationService mangaTranslationService;
 
     @Test
-    public void when_validate_correct_manga_translation_dto_should_not_have_errors() {
+    void when_validate_correct_manga_translation_dto_should_not_have_errors() {
 
         String title = "Correct title";
 
@@ -60,7 +59,7 @@ public class MangaValidatorTest {
     }
 
     @Test
-    public void when_validate_correct_manga_translation_but_title_in_both_languages_is_already_in_use_should_have_errors() {
+    void when_validate_correct_manga_translation_but_title_in_both_languages_is_already_in_use_should_have_errors() {
 
         String title = "Title in use";
 
@@ -93,7 +92,7 @@ public class MangaValidatorTest {
     }
 
     @Test
-    public void when_validate_correct_manga_translation_but_title_in_english_is_already_in_use_should_have_errors() {
+    void when_validate_correct_manga_translation_but_title_in_english_is_already_in_use_should_have_errors() {
 
         String title = "Title in use";
 
@@ -127,7 +126,7 @@ public class MangaValidatorTest {
     }
 
     @Test
-    public void when_validate_correct_manga_translation_but_title_in_polish_is_already_in_use_should_have_errors() {
+    void when_validate_correct_manga_translation_but_title_in_polish_is_already_in_use_should_have_errors() {
 
         String title = "Title in use";
 
@@ -160,7 +159,7 @@ public class MangaValidatorTest {
     }
 
     @Test
-    public void when_validate_empty_image_in_manga_dto_should_have_errors() {
+    void when_validate_empty_image_in_manga_dto_should_have_errors() {
 
         String title = "Correct title";
 

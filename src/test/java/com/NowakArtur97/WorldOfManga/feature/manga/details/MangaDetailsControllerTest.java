@@ -1,9 +1,7 @@
-package com.NowakArtur97.WorldOfManga.controller.manga;
+package com.NowakArtur97.WorldOfManga.feature.manga.details;
 
 import com.NowakArtur97.WorldOfManga.feature.author.Author;
-import com.NowakArtur97.WorldOfManga.model.Manga;
-import com.NowakArtur97.WorldOfManga.model.MangaTranslation;
-import com.NowakArtur97.WorldOfManga.service.MangaService;
+import com.NowakArtur97.WorldOfManga.feature.manga.translation.MangaTranslation;
 import com.NowakArtur97.WorldOfManga.testUtil.generator.NameWithSpacesGenerator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayNameGeneration;
@@ -25,24 +23,22 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 @DisplayNameGeneration(NameWithSpacesGenerator.class)
 @Tag("MangaDetailsController_Tests")
-public class MangaDetailsControllerTest {
+class MangaDetailsControllerTest {
 
     private MockMvc mockMvc;
-
-    private MangaDetailsController mangaDetailsController;
 
     @Mock
     private MangaService mangaService;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
 
-        mangaDetailsController = new MangaDetailsController(mangaService);
+        MangaDetailsController mangaDetailsController = new MangaDetailsController(mangaService);
         mockMvc = MockMvcBuilders.standaloneSetup(mangaDetailsController).build();
     }
 
     @Test
-    public void when_load_managa_image_should_show_manga_image() throws Exception {
+    void when_load_managa_image_should_show_manga_image() throws Exception {
 
         MangaTranslation mangaTranslationEnExpected = MangaTranslation.builder().title("English title")
                 .description("English description").build();

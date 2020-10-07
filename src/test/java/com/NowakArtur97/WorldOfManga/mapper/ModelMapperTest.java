@@ -1,12 +1,12 @@
 package com.NowakArtur97.WorldOfManga.mapper;
 
-import com.NowakArtur97.WorldOfManga.dto.MangaTranslationDTO;
+import com.NowakArtur97.WorldOfManga.feature.manga.translation.MangaTranslationDTO;
 import com.NowakArtur97.WorldOfManga.feature.author.Author;
 import com.NowakArtur97.WorldOfManga.feature.author.AuthorDTO;
 import com.NowakArtur97.WorldOfManga.feature.user.User;
 import com.NowakArtur97.WorldOfManga.feature.user.UserDTO;
 import com.NowakArtur97.WorldOfManga.feature.user.UserPasswordDTO;
-import com.NowakArtur97.WorldOfManga.model.MangaTranslation;
+import com.NowakArtur97.WorldOfManga.feature.manga.translation.MangaTranslation;
 import com.NowakArtur97.WorldOfManga.testUtil.generator.NameWithSpacesGenerator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayNameGeneration;
@@ -19,18 +19,18 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @DisplayNameGeneration(NameWithSpacesGenerator.class)
 @Tag("ModelMapper_Tests")
-public class ModelMapperTest {
+class ModelMapperTest {
 
     private ModelMapper modelMapper;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
 
         modelMapper = new ModelMapper();
     }
 
     @Test
-    public void when_map_user_dto_to_entity_should_return_entity() {
+    void when_map_user_dto_to_entity_should_return_entity() {
 
         String username = "username";
         String firstName = "first name";
@@ -66,7 +66,7 @@ public class ModelMapperTest {
     }
 
     @Test
-    public void when_map_manga_translation_dto_to_entity_should_return_entity() {
+    void when_map_manga_translation_dto_to_entity_should_return_entity() {
 
         String title = "Manga title";
         String description = "Manga description";
@@ -90,7 +90,7 @@ public class ModelMapperTest {
     }
 
     @Test
-    public void when_map_author_dto_to_entity_should_return_entity() {
+    void when_map_author_dto_to_entity_should_return_entity() {
 
         String fullName = "Firstname Lastname";
 

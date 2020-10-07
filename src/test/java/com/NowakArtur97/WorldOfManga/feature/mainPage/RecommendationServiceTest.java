@@ -1,11 +1,12 @@
-package com.NowakArtur97.WorldOfManga.service;
+package com.NowakArtur97.WorldOfManga.feature.mainPage;
 
-import com.NowakArtur97.WorldOfManga.enums.MangaInUserListStatus;
+import com.NowakArtur97.WorldOfManga.feature.manga.details.Manga;
+import com.NowakArtur97.WorldOfManga.feature.manga.details.MangaService;
+import com.NowakArtur97.WorldOfManga.feature.manga.genre.MangaGenre;
+import com.NowakArtur97.WorldOfManga.feature.manga.inUserList.MangaInUserListStatus;
+import com.NowakArtur97.WorldOfManga.feature.manga.translation.MangaTranslation;
 import com.NowakArtur97.WorldOfManga.feature.user.User;
 import com.NowakArtur97.WorldOfManga.feature.user.UserService;
-import com.NowakArtur97.WorldOfManga.model.Manga;
-import com.NowakArtur97.WorldOfManga.model.MangaGenre;
-import com.NowakArtur97.WorldOfManga.model.MangaTranslation;
 import com.NowakArtur97.WorldOfManga.testUtil.generator.NameWithSpacesGenerator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayNameGeneration;
@@ -26,7 +27,7 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 @DisplayNameGeneration(NameWithSpacesGenerator.class)
 @Tag("RecommendationService_Tests")
-public class RecommendationServiceTest {
+class RecommendationServiceTest {
 
     private RecommendationService recommendationService;
 
@@ -43,7 +44,7 @@ public class RecommendationServiceTest {
     }
 
     @Test
-    public void when_recommend_manga_for_not_logged_in_user_should_return_most_popular_manga() throws IOException {
+    void when_recommend_manga_for_not_logged_in_user_should_return_most_popular_manga() throws IOException {
 
         User userExpected = User.builder().username("user").firstName("first name").lastName("last name")
                 .password("user").email("user@email.com").isEnabled(true).build();
@@ -113,7 +114,7 @@ public class RecommendationServiceTest {
     }
 
     @Test
-    public void when_recommend_manga_for_logged_in_user_with_manga_in_favourites_should_return_unknown_manga()
+    void when_recommend_manga_for_logged_in_user_with_manga_in_favourites_should_return_unknown_manga()
             throws IOException {
 
         User userExpected = User.builder().username("user").firstName("first name").lastName("last name")
@@ -181,7 +182,7 @@ public class RecommendationServiceTest {
     }
 
     @Test
-    public void when_recommend_manga_for_logged_in_user_with_manga_rated_should_return_unknown_manga()
+    void when_recommend_manga_for_logged_in_user_with_manga_rated_should_return_unknown_manga()
             throws IOException {
 
         User userExpected = User.builder().username("user").firstName("first name").lastName("last name")
@@ -251,7 +252,7 @@ public class RecommendationServiceTest {
     }
 
     @Test
-    public void when_recommend_manga_for_logged_in_user_with_manga_in_list_should_return_unknown_manga()
+    void when_recommend_manga_for_logged_in_user_with_manga_in_list_should_return_unknown_manga()
             throws IOException {
 
         User userExpected = User.builder().username("user").firstName("first name").lastName("last name")
@@ -321,7 +322,7 @@ public class RecommendationServiceTest {
     }
 
     @Test
-    public void when_recommend_manga_for_logged_in_user_with_all_the_manga_already_known_should_return_empty_list()
+    void when_recommend_manga_for_logged_in_user_with_all_the_manga_already_known_should_return_empty_list()
             throws IOException {
 
         User userExpected = User.builder().username("user").firstName("first name").lastName("last name")
