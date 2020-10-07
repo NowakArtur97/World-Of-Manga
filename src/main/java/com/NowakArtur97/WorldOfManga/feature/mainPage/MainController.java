@@ -2,9 +2,8 @@ package com.NowakArtur97.WorldOfManga.feature.mainPage;
 
 import com.NowakArtur97.WorldOfManga.feature.user.User;
 import com.NowakArtur97.WorldOfManga.feature.user.UserService;
-import com.NowakArtur97.WorldOfManga.model.MangaRating;
-import com.NowakArtur97.WorldOfManga.service.MangaService;
-import com.NowakArtur97.WorldOfManga.service.RecommendationService;
+import com.NowakArtur97.WorldOfManga.feature.manga.rating.MangaRating;
+import com.NowakArtur97.WorldOfManga.feature.manga.details.MangaService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -21,7 +20,7 @@ import java.util.stream.Collectors;
 @Controller
 @RequestMapping(path = "/")
 @RequiredArgsConstructor
-public class MainController {
+class MainController {
 
     private final MangaService mangaService;
 
@@ -32,8 +31,8 @@ public class MainController {
     private final LocaleResolver cookieLocaleResolver;
 
     @GetMapping
-    public String showMainPage(Model theModel, HttpServletRequest request,
-                               @PageableDefault(size = 12) Pageable pageable) {
+    String showMainPage(Model theModel, HttpServletRequest request,
+                        @PageableDefault(size = 12) Pageable pageable) {
 
         Locale locale = cookieLocaleResolver.resolveLocale(request);
 

@@ -1,6 +1,6 @@
 package com.NowakArtur97.WorldOfManga.feature.author;
 
-import com.NowakArtur97.WorldOfManga.model.Manga;
+import com.NowakArtur97.WorldOfManga.feature.manga.details.Manga;
 import lombok.*;
 
 import javax.persistence.*;

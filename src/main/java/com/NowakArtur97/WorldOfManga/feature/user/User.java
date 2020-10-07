@@ -1,9 +1,9 @@
 package com.NowakArtur97.WorldOfManga.feature.user;
 
-import com.NowakArtur97.WorldOfManga.enums.MangaInUserListStatus;
-import com.NowakArtur97.WorldOfManga.model.Manga;
-import com.NowakArtur97.WorldOfManga.model.MangaInUserList;
-import com.NowakArtur97.WorldOfManga.model.MangaRating;
+import com.NowakArtur97.WorldOfManga.feature.manga.inUserList.MangaInUserListStatus;
+import com.NowakArtur97.WorldOfManga.feature.manga.details.Manga;
+import com.NowakArtur97.WorldOfManga.feature.manga.inUserList.MangaInUserList;
+import com.NowakArtur97.WorldOfManga.feature.manga.rating.MangaRating;
 import lombok.*;
 
 import javax.persistence.*;
