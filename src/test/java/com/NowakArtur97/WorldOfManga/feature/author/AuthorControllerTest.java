@@ -12,7 +12,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.validation.BindingResult;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,21 +31,16 @@ class AuthorControllerTest {
 
     private MockMvc mockMvc;
 
-    private AuthorController authorController;
-
     @Mock
     private AuthorService authorService;
 
     @Mock
     private AuthorValidator authorValidator;
 
-    @Mock
-    private BindingResult result;
-
     @BeforeEach
     private void setUp() {
 
-        authorController = new AuthorController(authorService, authorValidator);
+        AuthorController authorController = new AuthorController(authorService, authorValidator);
         mockMvc = MockMvcBuilders.standaloneSetup(authorController).build();
     }
 

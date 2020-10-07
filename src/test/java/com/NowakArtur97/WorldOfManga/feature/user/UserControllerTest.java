@@ -33,8 +33,6 @@ class UserControllerTest {
 
     private MockMvc mockMvc;
 
-    private UserController userController;
-
     @Mock
     private UserRegistrationService userRegistrationService;
 
@@ -44,7 +42,7 @@ class UserControllerTest {
     @BeforeEach
     void setUp() {
 
-        userController = new UserController(userRegistrationService, userRegistrationValidator);
+        UserController userController = new UserController(userRegistrationService, userRegistrationValidator);
         mockMvc = MockMvcBuilders.standaloneSetup(userController).build();
     }
 

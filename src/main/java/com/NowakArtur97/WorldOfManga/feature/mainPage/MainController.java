@@ -1,4 +1,4 @@
-package com.NowakArtur97.WorldOfManga.controller.main;
+package com.NowakArtur97.WorldOfManga.feature.mainPage;
 
 import com.NowakArtur97.WorldOfManga.feature.user.User;
 import com.NowakArtur97.WorldOfManga.feature.user.UserService;
@@ -49,7 +49,7 @@ public class MainController {
             loadUserData(theModel);
         }
 
-        return "views/main";
+        return "views/mainPage";
     }
 
     private void loadUserData(Model theModel) {

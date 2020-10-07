@@ -1,9 +1,10 @@
-package com.NowakArtur97.WorldOfManga.controller.main;
+package com.NowakArtur97.WorldOfManga.feature.mainPage;
 
 import com.NowakArtur97.WorldOfManga.feature.author.Author;
 import com.NowakArtur97.WorldOfManga.feature.user.User;
 import com.NowakArtur97.WorldOfManga.feature.user.UserService;
 import com.NowakArtur97.WorldOfManga.model.Manga;
+import com.NowakArtur97.WorldOfManga.model.MangaRating;
 import com.NowakArtur97.WorldOfManga.model.MangaTranslation;
 import com.NowakArtur97.WorldOfManga.service.MangaService;
 import com.NowakArtur97.WorldOfManga.service.RecommendationService;
@@ -39,11 +40,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ExtendWith(MockitoExtension.class)
 @DisplayNameGeneration(NameWithSpacesGenerator.class)
 @Tag("MainController_Tests")
-public class MainControllerTest {
+class MainControllerTest {
 
     private MockMvc mockMvc;
-
-    private MainController mainController;
 
     @Mock
     private MangaService mangaService;
@@ -58,24 +57,20 @@ public class MainControllerTest {
     private LocaleResolver cookieLocaleResolver;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
 
-        mainController = new MainController(mangaService, recommendationService, userService, cookieLocaleResolver);
+        MainController mainController = new MainController(mangaService, recommendationService, userService, cookieLocaleResolver);
         mockMvc = MockMvcBuilders.standaloneSetup(mainController)
                 .setCustomArgumentResolvers(new PageableHandlerMethodArgumentResolver()).build();
     }
 
     @Test
-    public void when_load_main_page_as_not_logged_user_should_show_main_page() throws IOException {
+    void when_load_main_page_as_not_logged_user_should_show_main_page() throws IOException {
 
         MangaTranslation mangaTranslationEnExpected = MangaTranslation.builder().title("English title")
                 .description("English description").build();
         MangaTranslation mangaTranslationPlExpected = MangaTranslation.builder().title("Polish title")
                 .description("Polish description").build();
-
-        Set<MangaTranslation> mangaTranslationsExpected = new HashSet<>();
-        mangaTranslationsExpected.add(mangaTranslationEnExpected);
-        mangaTranslationsExpected.add(mangaTranslationPlExpected);
 
         Author authorExpected = new Author("FirsName LastName");
 
@@ -90,14 +85,14 @@ public class MainControllerTest {
         List<Manga> mangas = new ArrayList<>();
         mangas.add(mangaExpected);
 
-        Page<Manga> pageMangas = new PageImpl<Manga>(mangas);
+        Page<Manga> pageMangas = new PageImpl<>(mangas);
 
         when(mangaService.findAllDividedIntoPages(PageRequest.of(0, 12))).thenReturn(pageMangas);
         when(recommendationService.recommendManga()).thenReturn(mangas);
         when(userService.isUserLoggedIn()).thenReturn(false);
 
         assertAll(
-                () -> mockMvc.perform(get("/")).andExpect(status().isOk()).andExpect(view().name("views/main"))
+                () -> mockMvc.perform(get("/")).andExpect(status().isOk()).andExpect(view().name("views/mainPage"))
                         .andExpect(model().attribute("mangas", pageMangas))
                         .andExpect(model().attribute("recommendations", mangas))
                         .andExpect(model().attributeDoesNotExist("usersFavourites"))
@@ -108,16 +103,12 @@ public class MainControllerTest {
     }
 
     @Test
-    public void when_load_main_page_as_logged_user_should_show_main_page() throws IOException {
+    void when_load_main_page_as_logged_user_should_show_main_page() throws IOException {
 
         MangaTranslation mangaTranslationEnExpected = MangaTranslation.builder().title("English title")
                 .description("English description").build();
         MangaTranslation mangaTranslationPlExpected = MangaTranslation.builder().title("Polish title")
                 .description("Polish description").build();
-
-        Set<MangaTranslation> mangaTranslationsExpected = new HashSet<>();
-        mangaTranslationsExpected.add(mangaTranslationEnExpected);
-        mangaTranslationsExpected.add(mangaTranslationPlExpected);
 
         Author authorExpected = new Author("FirsName LastName");
 
@@ -138,10 +129,10 @@ public class MainControllerTest {
         userExpected.addMangaRating(mangaExpected, 4);
         userExpected.addMangaToFavourites(mangaExpected);
 
-        Set<Manga> usersRatings = userExpected.getMangasRatings().stream().map(rating -> rating.getManga())
+        Set<Manga> usersRatings = userExpected.getMangasRatings().stream().map(MangaRating::getManga)
                 .collect(Collectors.toSet());
 
-        Page<Manga> pageMangas = new PageImpl<Manga>(mangas);
+        Page<Manga> pageMangas = new PageImpl<>(mangas);
 
         when(mangaService.findAllDividedIntoPages(PageRequest.of(0, 12))).thenReturn(pageMangas);
         when(recommendationService.recommendManga()).thenReturn(mangas);
@@ -149,7 +140,7 @@ public class MainControllerTest {
         when(userService.loadLoggedInUsername()).thenReturn(userExpected);
 
         assertAll(
-                () -> mockMvc.perform(get("/")).andExpect(status().isOk()).andExpect(view().name("views/main"))
+                () -> mockMvc.perform(get("/")).andExpect(status().isOk()).andExpect(view().name("views/mainPage"))
                         .andExpect(model().attribute("mangas", pageMangas))
                         .andExpect(model().attribute("recommendations", mangas))
                         .andExpect(model().attribute("usersFavourites", userExpected.getFavouriteMangas()))
@@ -161,7 +152,7 @@ public class MainControllerTest {
     }
 
     @Test
-    public void when_load_main_page_with_locale_should_load_locale() throws Exception {
+    void when_load_main_page_with_locale_should_load_locale() throws Exception {
 
         Locale locale = new Locale("en");
 

@@ -14,7 +14,7 @@ public class MangaFormPage extends SeleniumPageObjectModel {
 
     private final static String projectPath = System.getProperty("user.dir");
 
-    private final static String EXAMPLE_IMAGE_PATH = "\\src\\main\\resources\\static\\images\\backgrounds\\samurai.jpg";
+    private final static String EXAMPLE_IMAGE_PATH = "\\src\\mainPage\\resources\\static\\images\\backgrounds\\samurai.jpg";
 
     private static final String TITLE_EN = "enTranslation.title";
     private static final String DESCRIPTION_EN = "enTranslation.description";

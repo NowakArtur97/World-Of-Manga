@@ -13,7 +13,6 @@ public class AuthorService {
 
     private final AuthorMapper authorMapper;
 
-
     public Author addOrUpdate(AuthorDTO authorDTO) {
 
         Author author = authorMapper.mapAuthorDTOToAuthor(authorDTO);

@@ -1,6 +1,6 @@
 package com.NowakArtur97.WorldOfManga.feature.user.seleniumTest.loginController;
 
-import com.NowakArtur97.WorldOfManga.controller.main.seleniumPOM.MainPage;
+import com.NowakArtur97.WorldOfManga.feature.mainPage.seleniumPOM.MainPage;
 import com.NowakArtur97.WorldOfManga.feature.user.UserService;
 import com.NowakArtur97.WorldOfManga.feature.user.seleniumPOM.LoginPage;
 import com.NowakArtur97.WorldOfManga.testUtil.selenium.SeleniumUITest;

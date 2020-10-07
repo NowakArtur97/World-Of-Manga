@@ -1,4 +1,4 @@
-package com.NowakArtur97.WorldOfManga.controller.main.seleniumTest;
+package com.NowakArtur97.WorldOfManga.feature.mainPage.seleniumTest;
 
 import com.NowakArtur97.WorldOfManga.testUtil.enums.LanguageVersion;
 import com.NowakArtur97.WorldOfManga.testUtil.extension.ScreenshotWatcher;
@@ -26,9 +26,6 @@ class MainControllerUIPlTest extends MainControllerUITest {
 
         mainPage.loadMainView(LanguageVersion.PL);
 
-        System.out.println(mainPage.getHeaderText());
-        System.out.println(headerRegistrationOption);
-
         assertAll(
                 () -> assertTrue(mainPage.getHeaderText().contains(headerLogo),
                         () -> "should load header logo: " + headerLogo + ", but was: " + mainPage.getHeaderText()),
@@ -42,6 +39,6 @@ class MainControllerUIPlTest extends MainControllerUITest {
                         () -> "should load header language option: " + headerLanguageOption + ", but was: "
                                 + mainPage.getHeaderText()),
                 () -> assertNotNull(mainPage.getFooterText(), () -> "should load footer fragment text"),
-                () -> assertNotNull(mainPage.getMainPageText(), () -> "should load main fragment text"));
+                () -> assertNotNull(mainPage.getMainPageText(), () -> "should load mainPage fragment text"));
     }
 }

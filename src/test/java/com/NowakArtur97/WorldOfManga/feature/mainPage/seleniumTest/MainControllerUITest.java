@@ -1,6 +1,6 @@
-package com.NowakArtur97.WorldOfManga.controller.main.seleniumTest;
+package com.NowakArtur97.WorldOfManga.feature.mainPage.seleniumTest;
 
-import com.NowakArtur97.WorldOfManga.controller.main.seleniumPOM.MainPage;
+import com.NowakArtur97.WorldOfManga.feature.mainPage.seleniumPOM.MainPage;
 import com.NowakArtur97.WorldOfManga.testUtil.selenium.SeleniumUITest;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Value;
@@ -8,16 +8,16 @@ import org.springframework.beans.factory.annotation.Value;
 public class MainControllerUITest extends SeleniumUITest {
 
     @Value("${header.logo}")
-    protected String headerLogo;
+    String headerLogo;
 
     @Value("${header.signUp}")
-    protected String headerRegistrationOption;
+    String headerRegistrationOption;
 
     @Value("${header.signIn}")
-    protected String headerLoginOption;
+    String headerLoginOption;
 
     @Value("${header.language}")
-    protected String headerLanguageOption;
+    String headerLanguageOption;
 
     protected MainPage mainPage;
 

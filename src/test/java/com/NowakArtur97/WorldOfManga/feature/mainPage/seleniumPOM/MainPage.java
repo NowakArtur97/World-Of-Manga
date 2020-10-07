@@ -1,4 +1,4 @@
-package com.NowakArtur97.WorldOfManga.controller.main.seleniumPOM;
+package com.NowakArtur97.WorldOfManga.feature.mainPage.seleniumPOM;
 
 import com.NowakArtur97.WorldOfManga.testUtil.enums.LanguageVersion;
 import com.NowakArtur97.WorldOfManga.testUtil.selenium.SeleniumPageObjectModel;
@@ -8,7 +8,7 @@ import org.openqa.selenium.support.FindBy;
 
 public class MainPage extends SeleniumPageObjectModel {
 
-    public static final String RESOURCE_PATH = "/";
+    private static final String RESOURCE_PATH = "/";
 
     private static final String MAIN_PAGE_CLASS = "page";
     private static final String HEADER_CLASS = "header";
@@ -32,7 +32,6 @@ public class MainPage extends SeleniumPageObjectModel {
 
         super.connectTo(RESOURCE_PATH + ver.getLangUrl());
     }
-
 
     public String getHeaderText() {
 

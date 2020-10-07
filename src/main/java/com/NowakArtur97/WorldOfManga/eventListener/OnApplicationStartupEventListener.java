@@ -21,7 +21,7 @@ import java.net.URL;
 
 @Component
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
-public class OnApplicationStartupEventListener {
+class OnApplicationStartupEventListener {
 
     private final ImageToByteConverter imageToByteConverterImpl;
 
@@ -54,8 +54,8 @@ public class OnApplicationStartupEventListener {
     private static MangaGenre romance;
     private static MangaGenre horror;
 
-//    @EventListener(ApplicationReadyEvent.class)
-    public void onStartup() throws LanguageNotFoundException, MalformedURLException, MangaGenreNotFoundException {
+    //    @EventListener(ApplicationReadyEvent.class)
+    void onStartup() throws LanguageNotFoundException, MalformedURLException, MangaGenreNotFoundException {
 
         en = languageService.findByLocale("en");
         pl = languageService.findByLocale("pl");
@@ -94,7 +94,7 @@ public class OnApplicationStartupEventListener {
         String soloLevelingAuthor = "Gee So-Lyung";
 
         String beastarsTitle = "Beastars";
-        String beastarsDescriptionEn = "In a world populated by anthropomorphic animals, herbivores and carnivores coexist. For the adolescences of Cherryton Academy, school life is filled with hope, romance, distrust, and uneasiness.The main character is Legoshi the wolf, a member of the drama club. Despite his menacing appearance, he has a very gentle heart. Throughout most of his life, he has always been an object to be feared and hated by other animals, and he has become quite accustomed to that lifestyle. But following the murder of a classmate, he finds himself becoming more involved with his other peers, who have their own share of insecurities, and finds his life in school changing slowly.";
+        String beastarsDescriptionEn = "In a world populated by anthropomorphic animals, herbivores and carnivores coexist. For the adolescences of Cherryton Academy, school life is filled with hope, romance, distrust, and uneasiness.The mainPage character is Legoshi the wolf, a member of the drama club. Despite his menacing appearance, he has a very gentle heart. Throughout most of his life, he has always been an object to be feared and hated by other animals, and he has become quite accustomed to that lifestyle. But following the murder of a classmate, he finds himself becoming more involved with his other peers, who have their own share of insecurities, and finds his life in school changing slowly.";
         String beastarsDescriptionPl = "W świecie zamieszkałym przez antropomorficzne zwierzęta, gdzie roślinożercy i mięsożercy współpracują ze sobą, rozwija się Akademia Cherryton, szkoła wypełniona nadzieją, romansem, nieufnością i niepokojem. Główny bohater Legoshi jest wilkiem, a zarazem członkiem klubu teatralnego. Pomimo jego groźnego wyglądu, ma bardzo delikatne serce. Przez większość jego życia, inne zwierzęta bały się go, a niektóre nienawidziły, był całkiem przyzwyczajony do tego stylu życia, lecz nagle, zauważył, że staje się bardziej zaangażowany w relacje ze swoimi znajomymi z klasy, którzy dzielą się między sobą swoją niepewnością i złym samopoczuciem, wynikającym z bycia w pozycji w której są. Szkolne życie Legoshiego powoli zaczyna się zmieniać...";
         URL beastarsURL = new URL("https://img.mrcdn.info/file/mrportal/h/8/8/g/Qw.veTHmoI.jpg");
         String beastarsAuthor = "Paru Itagaki";
@@ -220,7 +220,7 @@ public class OnApplicationStartupEventListener {
     }
 
     private void saveManga(String titleEn, String descriptionEn, String titlePl, String descriptionPl, URL imageURL,
-                           String authorFullName, MangaGenre... genres) throws LanguageNotFoundException {
+                           String authorFullName, MangaGenre... genres) {
 
         MangaTranslation mangaTranslationEn = MangaTranslation.builder().title(titleEn).description(descriptionEn)
                 .language(en).build();
