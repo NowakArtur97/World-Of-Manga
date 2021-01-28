@@ -48,7 +48,7 @@ class MainController {
             loadUserData(theModel);
         }
 
-        return "views/mainPage";
+        return "views/main";
     }
 
     private void loadUserData(Model theModel) {
