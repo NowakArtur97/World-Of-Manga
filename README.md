@@ -38,11 +38,12 @@ To log in as a admin please provide:
 - PostgreSQL
 - H2
 - CircleCI
+- Docker
 
 ## Features
 Available for all users:
 - Select language (available options are: English and Polish)
-- Recomendations
+- Recommendations
 - View all added manga with genres
 
 Available for unlogged users:
@@ -59,11 +60,8 @@ Available to users with only "Admin" role:
 - Add new author
 - Add, edit and delete manga
 
-## To Do
-- Editing and deleting authors
-
 ## Status
-Project is: in progess
+Project is: in progress
 
 ## Screenshots
 ![Main Page](./screenshots/main.png)
