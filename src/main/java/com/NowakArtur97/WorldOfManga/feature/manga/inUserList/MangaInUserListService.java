@@ -1,7 +1,7 @@
 package com.NowakArtur97.WorldOfManga.feature.manga.inUserList;
 
-import com.NowakArtur97.WorldOfManga.feature.manga.details.MangaNotFoundException;
 import com.NowakArtur97.WorldOfManga.feature.manga.details.Manga;
+import com.NowakArtur97.WorldOfManga.feature.manga.details.MangaNotFoundException;
 import com.NowakArtur97.WorldOfManga.feature.manga.details.MangaService;
 import com.NowakArtur97.WorldOfManga.feature.manga.rating.MangaRating;
 import com.NowakArtur97.WorldOfManga.feature.user.User;
@@ -24,13 +24,8 @@ class MangaInUserListService {
 
     private final UserService userService;
 
-    Optional<MangaInUserList> findByUserAndManga(User user, Manga manga) {
-
-        return mangaInUserListRepository.findByUserAndManga(user, manga);
-    }
-
     @Transactional
-    MangaInUserList addOrRemoveFromList(Long mangaId, int status) throws MangaNotFoundException {
+    public MangaInUserList addOrRemoveFromList(Long mangaId, int status) throws MangaNotFoundException {
 
         Manga manga = mangaService.findById(mangaId);
 
@@ -59,6 +54,11 @@ class MangaInUserListService {
         }
 
         return mangaInUserList;
+    }
+
+    Optional<MangaInUserList> findByUserAndManga(User user, Manga manga) {
+
+        return mangaInUserListRepository.findByUserAndManga(user, manga);
     }
 
     Set<Manga> getUsersMangaListByStatus(int status) {

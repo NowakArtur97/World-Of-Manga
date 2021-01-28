@@ -36,6 +36,24 @@ public class MangaService {
         return mangaRepository.findAll(pageable);
     }
 
+    @Transactional
+    public Manga addOrRemoveFromFavourites(Long mangaId) throws MangaNotFoundException {
+
+        Manga manga = findById(mangaId);
+
+        User user = userService.loadLoggedInUsername();
+
+        if (user.getFavouriteMangas().contains(manga)) {
+
+            user.removeMangaFromFavourites(manga);
+        } else {
+
+            user.addMangaToFavourites(manga);
+        }
+
+        return manga;
+    }
+
     Manga addOrUpdate(MangaDTO mangaDTO, Manga manga) {
 
         if (mangaDTO.getId() != null) {
@@ -59,24 +77,6 @@ public class MangaService {
         manga.deleteAllRelations();
 
         mangaRepository.delete(manga);
-
-        return manga;
-    }
-
-    @Transactional
-    Manga addOrRemoveFromFavourites(Long mangaId) throws MangaNotFoundException {
-
-        Manga manga = findById(mangaId);
-
-        User user = userService.loadLoggedInUsername();
-
-        if (user.getFavouriteMangas().contains(manga)) {
-
-            user.removeMangaFromFavourites(manga);
-        } else {
-
-            user.addMangaToFavourites(manga);
-        }
 
         return manga;
     }

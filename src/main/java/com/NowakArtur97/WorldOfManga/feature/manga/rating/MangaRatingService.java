@@ -20,13 +20,8 @@ class MangaRatingService {
 
     private final UserService userService;
 
-    MangaRating findByUserAndManga(User user, Manga manga) {
-
-        return mangaRatingRepository.findByUserAndManga(user, manga).orElseGet(MangaRating::new);
-    }
-
     @Transactional
-    MangaRating rateManga(Long mangaId, int rating) throws MangaNotFoundException {
+    public MangaRating rateManga(Long mangaId, int rating) throws MangaNotFoundException {
 
         Manga manga = mangaService.findById(mangaId);
 
@@ -43,5 +38,10 @@ class MangaRatingService {
         }
 
         return mangaRating;
+    }
+
+    MangaRating findByUserAndManga(User user, Manga manga) {
+
+        return mangaRatingRepository.findByUserAndManga(user, manga).orElseGet(MangaRating::new);
     }
 }
