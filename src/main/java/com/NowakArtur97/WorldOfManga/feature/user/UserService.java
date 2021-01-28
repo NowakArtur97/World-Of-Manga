@@ -49,12 +49,8 @@ public class UserService implements UserDetailsService {
         User user = findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("Invalid username or password"));
 
-        boolean accountNonExpired = true;
-        boolean credentialsNonExpired = true;
-        boolean accountNonLocked = true;
-
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),
-                user.isEnabled(), accountNonExpired, credentialsNonExpired, accountNonLocked,
+                user.isEnabled(), true, true, true,
                 mapRolesToAuthorities(user.getRoles()));
 
     }

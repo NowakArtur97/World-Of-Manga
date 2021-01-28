@@ -1,9 +1,6 @@
 package com.NowakArtur97.WorldOfManga.feature.user;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.AssertTrue;
@@ -11,11 +8,11 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public
 class UserDTO {
 
     @NotBlank(message = "{user.username.notBlank}")

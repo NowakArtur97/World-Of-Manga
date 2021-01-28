@@ -1,12 +1,5 @@
-package com.NowakArtur97.WorldOfManga.mapper;
+package com.NowakArtur97.WorldOfManga.feature.user;
 
-import com.NowakArtur97.WorldOfManga.feature.manga.translation.MangaTranslationDTO;
-import com.NowakArtur97.WorldOfManga.feature.author.Author;
-import com.NowakArtur97.WorldOfManga.feature.author.AuthorDTO;
-import com.NowakArtur97.WorldOfManga.feature.user.User;
-import com.NowakArtur97.WorldOfManga.feature.user.UserDTO;
-import com.NowakArtur97.WorldOfManga.feature.user.UserPasswordDTO;
-import com.NowakArtur97.WorldOfManga.feature.manga.translation.MangaTranslation;
 import com.NowakArtur97.WorldOfManga.testUtil.generator.NameWithSpacesGenerator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayNameGeneration;
@@ -19,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @DisplayNameGeneration(NameWithSpacesGenerator.class)
 @Tag("ModelMapper_Tests")
-class ModelMapperTest {
+class UserModelMapperTest {
 
     private ModelMapper modelMapper;
 
@@ -63,45 +56,5 @@ class ModelMapperTest {
                 () -> assertEquals(userExpected.getEmail(), userActual.getEmail(),
                         () -> "should return user with email: " + userExpected.getEmail() + ", but was: "
                                 + userActual.getEmail()));
-    }
-
-    @Test
-    void when_map_manga_translation_dto_to_entity_should_return_entity() {
-
-        String title = "Manga title";
-        String description = "Manga description";
-
-        MangaTranslationDTO mangaTranslationDTOExpected = MangaTranslationDTO.builder().title(title)
-                .description(description).build();
-
-        MangaTranslation mangaTranslationExpected = MangaTranslation.builder().title(title).description(description)
-                .build();
-
-        MangaTranslation mangaTranslationActual = modelMapper.map(mangaTranslationDTOExpected, MangaTranslation.class);
-
-        assertAll(
-                () -> assertEquals(mangaTranslationExpected.getTitle(), mangaTranslationActual.getTitle(),
-                        () -> "should return manga translation with title: " + mangaTranslationExpected.getTitle()
-                                + ", but was: " + mangaTranslationActual.getTitle()),
-                () -> assertEquals(mangaTranslationExpected.getDescription(), mangaTranslationActual.getDescription(),
-                        () -> "should return manga translation with description: "
-                                + mangaTranslationExpected.getDescription() + ", but was: "
-                                + mangaTranslationActual.getDescription()));
-    }
-
-    @Test
-    void when_map_author_dto_to_entity_should_return_entity() {
-
-        String fullName = "Firstname Lastname";
-
-        AuthorDTO authorDTOExpected = new AuthorDTO(fullName);
-
-        Author authorExpected = new Author(fullName);
-
-        AuthorDTO authorActual = modelMapper.map(authorDTOExpected, AuthorDTO.class);
-
-        assertAll(() -> assertEquals(authorExpected.getFullName(), authorActual.getFullName(),
-                () -> "should return author with full name: " + authorExpected.getFullName() + ", but was: "
-                        + authorActual.getFullName()));
     }
 }
