@@ -1,9 +1,6 @@
-package com.NowakArtur97.WorldOfManga.configuration;
+package com.NowakArtur97.WorldOfManga.configuration.security;
 
 import com.NowakArtur97.WorldOfManga.feature.user.UserService;
-import com.NowakArtur97.WorldOfManga.handler.LoginAuthenticationFailureHandler;
-import com.NowakArtur97.WorldOfManga.handler.LoginAuthenticationSuccessHandler;
-import com.NowakArtur97.WorldOfManga.handler.UserAccessDeniedHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -26,10 +23,10 @@ class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private final UserAccessDeniedHandler userAccessDeniedHandler;
 
-
     @Autowired
     WebSecurityConfiguration(UserService userService, LoginAuthenticationSuccessHandler loginAuthenticationSuccessHandler,
-                             LoginAuthenticationFailureHandler loginAuthenticationFailureHandler, UserAccessDeniedHandler userAccessDeniedHandler) {
+                             LoginAuthenticationFailureHandler loginAuthenticationFailureHandler,
+                             UserAccessDeniedHandler userAccessDeniedHandler) {
         this.userService = userService;
         this.loginAuthenticationSuccessHandler = loginAuthenticationSuccessHandler;
         this.loginAuthenticationFailureHandler = loginAuthenticationFailureHandler;
@@ -54,7 +51,7 @@ class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
 
     @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+    protected void configure(AuthenticationManagerBuilder auth) {
 
         auth.authenticationProvider(daoAuthenticationProvider());
     }
@@ -81,5 +78,4 @@ class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout().logoutUrl("/auth/logout").logoutSuccessUrl("/user/login?logout=true").permitAll(false);
     }
-
 }

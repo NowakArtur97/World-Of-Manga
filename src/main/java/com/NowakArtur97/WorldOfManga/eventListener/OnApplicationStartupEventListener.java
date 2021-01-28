@@ -18,7 +18,6 @@ import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 
 @Component
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))

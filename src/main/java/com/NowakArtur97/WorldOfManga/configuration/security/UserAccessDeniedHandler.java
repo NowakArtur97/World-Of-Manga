@@ -1,4 +1,4 @@
-package com.NowakArtur97.WorldOfManga.handler;
+package com.NowakArtur97.WorldOfManga.configuration.security;
 
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.access.AccessDeniedHandler;
@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @Component
-public class UserAccessDeniedHandler implements AccessDeniedHandler {
+class UserAccessDeniedHandler implements AccessDeniedHandler {
 
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response,

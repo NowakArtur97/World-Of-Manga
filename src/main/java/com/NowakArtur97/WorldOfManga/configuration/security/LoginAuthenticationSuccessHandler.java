@@ -1,4 +1,4 @@
-package com.NowakArtur97.WorldOfManga.handler;
+package com.NowakArtur97.WorldOfManga.configuration.security;
 
 import com.NowakArtur97.WorldOfManga.feature.user.User;
 import com.NowakArtur97.WorldOfManga.feature.user.UserService;
@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.util.Optional;
 
 @Component
-public class LoginAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
+class LoginAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
 
     private final UserService userService;
 

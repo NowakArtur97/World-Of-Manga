@@ -1,4 +1,4 @@
-package com.NowakArtur97.WorldOfManga.handler;
+package com.NowakArtur97.WorldOfManga.configuration.security;
 
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @Component
-public class LoginAuthenticationFailureHandler implements AuthenticationFailureHandler {
+class LoginAuthenticationFailureHandler implements AuthenticationFailureHandler {
 
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
