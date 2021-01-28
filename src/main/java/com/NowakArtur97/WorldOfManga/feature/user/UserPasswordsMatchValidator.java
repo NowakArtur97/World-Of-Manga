@@ -36,5 +36,4 @@ class UserPasswordsMatchValidator implements ConstraintValidator<UserPasswordsMa
 
         return isValid;
     }
-
 }

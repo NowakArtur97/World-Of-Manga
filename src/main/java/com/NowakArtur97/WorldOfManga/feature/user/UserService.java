@@ -31,18 +31,6 @@ public class UserService implements UserDetailsService {
         return userRepository.existsUserByUsername(username);
     }
 
-    boolean isEmailAlreadyInUse(String email) {
-
-        return userRepository.existsUserByEmail(email);
-    }
-
-    public User save(User user) {
-
-        userRepository.save(user);
-
-        return user;
-    }
-
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
@@ -52,19 +40,6 @@ public class UserService implements UserDetailsService {
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),
                 user.isEnabled(), true, true, true,
                 mapRolesToAuthorities(user.getRoles()));
-
-    }
-
-    private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Set<Role> usersRoles) {
-
-        Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
-
-        for (Role role : usersRoles) {
-            SimpleGrantedAuthority authority = new SimpleGrantedAuthority(role.getName());
-            authorities.add(authority);
-        }
-
-        return authorities;
     }
 
     public User loadLoggedInUsername() throws UsernameNotFoundException {
@@ -88,5 +63,29 @@ public class UserService implements UserDetailsService {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         return null != authentication && !("anonymousUser").equals(authentication.getName());
+    }
+
+    boolean isEmailAlreadyInUse(String email) {
+
+        return userRepository.existsUserByEmail(email);
+    }
+
+    User save(User user) {
+
+        userRepository.save(user);
+
+        return user;
+    }
+
+    private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Set<Role> usersRoles) {
+
+        Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
+
+        for (Role role : usersRoles) {
+            SimpleGrantedAuthority authority = new SimpleGrantedAuthority(role.getName());
+            authorities.add(authority);
+        }
+
+        return authorities;
     }
 }

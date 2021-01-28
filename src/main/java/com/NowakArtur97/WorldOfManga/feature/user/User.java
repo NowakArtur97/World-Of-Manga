@@ -88,13 +88,11 @@ public class User {
         return manga;
     }
 
-    public Manga removeMangaFromFavourites(Manga manga) {
+    public void removeMangaFromFavourites(Manga manga) {
 
         this.getFavouriteMangas().remove(manga);
 
         manga.getUserWithMangaInFavourites().remove(this);
-
-        return manga;
     }
 
     public MangaInUserList addMangaToList(Manga manga, MangaInUserListStatus status) {
@@ -107,12 +105,10 @@ public class User {
         return mangaInList;
     }
 
-    public MangaInUserList removeMangaFromList(MangaInUserList manga) {
+    public void removeMangaFromList(MangaInUserList manga) {
 
         this.getMangaList().remove(manga);
         manga.setUser(null);
-
-        return manga;
     }
 
     @Override

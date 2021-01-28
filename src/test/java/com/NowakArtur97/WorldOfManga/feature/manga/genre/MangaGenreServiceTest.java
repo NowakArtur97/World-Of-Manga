@@ -1,6 +1,5 @@
 package com.NowakArtur97.WorldOfManga.feature.manga.genre;
 
-import com.NowakArtur97.WorldOfManga.exception.MangaGenreNotFoundException;
 import com.NowakArtur97.WorldOfManga.testUtil.generator.NameWithSpacesGenerator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayNameGeneration;

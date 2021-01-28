@@ -1,11 +1,9 @@
 package com.NowakArtur97.WorldOfManga.feature.manga.details;
 
-import com.NowakArtur97.WorldOfManga.exception.LanguageNotFoundException;
-import com.NowakArtur97.WorldOfManga.exception.MangaNotFoundException;
+import com.NowakArtur97.WorldOfManga.feature.language.LanguageNotFoundException;
 import com.NowakArtur97.WorldOfManga.feature.author.Author;
 import com.NowakArtur97.WorldOfManga.feature.author.AuthorDTO;
 import com.NowakArtur97.WorldOfManga.feature.author.AuthorService;
-import com.NowakArtur97.WorldOfManga.feature.manga.details.*;
 import com.NowakArtur97.WorldOfManga.feature.manga.genre.MangaGenre;
 import com.NowakArtur97.WorldOfManga.feature.manga.genre.MangaGenreService;
 import com.NowakArtur97.WorldOfManga.feature.manga.translation.MangaTranslation;

@@ -10,8 +10,7 @@ import javax.validation.constraints.NotBlank;
 @AllArgsConstructor
 @Builder
 @UserPasswordsMatch.List({
-        @UserPasswordsMatch(password = "password", matchingPassword = "matchingPassword",
-                message = "{userPassword.password.matchingFields}")})
+        @UserPasswordsMatch(password = "password", matchingPassword = "matchingPassword")})
 class UserPasswordDTO {
 
     @NotBlank(message = "{userPassword.password.notBlank}")

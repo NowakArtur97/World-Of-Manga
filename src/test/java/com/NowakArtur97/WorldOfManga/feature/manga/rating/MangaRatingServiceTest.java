@@ -1,6 +1,6 @@
 package com.NowakArtur97.WorldOfManga.feature.manga.rating;
 
-import com.NowakArtur97.WorldOfManga.exception.MangaNotFoundException;
+import com.NowakArtur97.WorldOfManga.feature.manga.details.MangaNotFoundException;
 import com.NowakArtur97.WorldOfManga.feature.author.Author;
 import com.NowakArtur97.WorldOfManga.feature.manga.details.Manga;
 import com.NowakArtur97.WorldOfManga.feature.manga.details.MangaService;
