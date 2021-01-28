@@ -1,0 +1,17 @@
+version: '3.7'
+
+services:
+  mysql:
+    restart: always
+    image: mysql:8
+    container_name: mysql
+    environment:
+      MYSQL_DATABASE: world_of_manga
+      MYSQL_USER: worldOfManga
+      MYSQL_PASSWORD: worldOfManga
+      MYSQL_ROOT_PASSWORD: worldOfManga
+      MYSQL_ROOT_HOST: '%'
+    ports:
+      - 3366:3306
+    healthcheck:
+      test: "/usr/bin/mysql --user=worldOfManga --password=worldOfManga--execute \"SHOW DATABASES;\""
