@@ -1,6 +1,5 @@
 package com.NowakArtur97.WorldOfManga.feature.language;
 
-import com.NowakArtur97.WorldOfManga.exception.LanguageNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

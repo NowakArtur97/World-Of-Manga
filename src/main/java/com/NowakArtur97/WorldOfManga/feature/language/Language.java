@@ -5,6 +5,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -33,5 +34,22 @@ public class Language {
 
 		mangaTranslations.add(mangaTranslation);
 		mangaTranslation.setLanguage(this);
+	}
+
+	@Override
+	public boolean equals(Object o) {
+
+		if (this == o) return true;
+		if (!(o instanceof Language)) return false;
+
+		Language language = (Language) o;
+
+		return Objects.equals(getId(), language.getId()) &&
+				Objects.equals(getLocale(), language.getLocale());
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(getId(), getLocale());
 	}
 }

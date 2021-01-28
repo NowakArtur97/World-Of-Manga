@@ -1,4 +1,4 @@
-package com.NowakArtur97.WorldOfManga.exception;
+package com.NowakArtur97.WorldOfManga.feature.language;
 
 public class LanguageNotFoundException extends Exception {
 
