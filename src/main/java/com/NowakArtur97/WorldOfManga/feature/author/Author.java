@@ -5,12 +5,15 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
 @Table(name = "author", schema = "world_of_manga")
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
+@ToString
 public class Author {
 
 	@Id
@@ -24,7 +27,6 @@ public class Author {
 
 	@ManyToMany(mappedBy = "authors")
 	@ToString.Exclude
-	@EqualsAndHashCode.Exclude
 	private final Set<Manga> createdMangas = new HashSet<>();
 
 	public Author(String fullName) {
@@ -34,5 +36,22 @@ public class Author {
 	public void removeManga(Manga manga) {
 
 		this.getCreatedMangas().remove(manga);
+	}
+
+	@Override
+	public boolean equals(Object o) {
+
+		if (this == o) return true;
+		if (!(o instanceof Author)) return false;
+
+		Author author = (Author) o;
+
+		return Objects.equals(getId(), author.getId()) &&
+				Objects.equals(getFullName(), author.getFullName());
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(getId(), getFullName());
 	}
 }
