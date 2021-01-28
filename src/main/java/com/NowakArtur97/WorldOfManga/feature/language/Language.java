@@ -9,7 +9,8 @@ import java.util.Set;
 
 @Entity
 @Table(name = "language", schema = "world_of_manga")
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -25,7 +26,7 @@ public class Language {
 	private String locale;
 
 	@OneToMany(mappedBy = "language", cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST,
-			CascadeType.REFRESH }, orphanRemoval = false, fetch = FetchType.LAZY)
+			CascadeType.REFRESH }, fetch = FetchType.LAZY)
 	private final Set<MangaTranslation> mangaTranslations = new HashSet<>();
 
 	public void addTranslation(MangaTranslation mangaTranslation) {
