@@ -1,8 +1,7 @@
 package com.NowakArtur97.WorldOfManga.eventListener;
 
-import com.NowakArtur97.WorldOfManga.converter.ImageToByteConverter;
-import com.NowakArtur97.WorldOfManga.exception.LanguageNotFoundException;
-import com.NowakArtur97.WorldOfManga.exception.MangaGenreNotFoundException;
+import com.NowakArtur97.WorldOfManga.feature.language.LanguageNotFoundException;
+import com.NowakArtur97.WorldOfManga.feature.manga.genre.MangaGenreNotFoundException;
 import com.NowakArtur97.WorldOfManga.feature.author.Author;
 import com.NowakArtur97.WorldOfManga.feature.language.Language;
 import com.NowakArtur97.WorldOfManga.feature.language.LanguageService;

@@ -1,4 +1,4 @@
-package com.NowakArtur97.WorldOfManga.converter;
+package com.NowakArtur97.WorldOfManga.eventListener;
 
 import org.apache.commons.io.output.ByteArrayOutputStream;
 import org.springframework.core.io.ClassPathResource;

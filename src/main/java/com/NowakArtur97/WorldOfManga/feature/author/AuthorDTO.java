@@ -12,7 +12,7 @@ import javax.validation.constraints.Size;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-class AuthorDTO {
+public class AuthorDTO {
 
     @NotBlank(message = "{author.fullName.notBlank}")
     @Size(message = "{author.fullName.size}{max}", max = 50)

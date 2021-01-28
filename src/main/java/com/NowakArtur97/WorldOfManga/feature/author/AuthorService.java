@@ -13,13 +13,6 @@ public class AuthorService {
 
     private final AuthorMapper authorMapper;
 
-    public Author addOrUpdate(AuthorDTO authorDTO) {
-
-        Author author = authorMapper.mapAuthorDTOToAuthor(authorDTO);
-
-        return save(author);
-    }
-
     public boolean isAuthorAlreadyInDatabase(String fullName) {
 
         return authorRepository.existsAuthorByFullName(fullName);
@@ -30,7 +23,14 @@ public class AuthorService {
         return authorRepository.findAll();
     }
 
-    public Author save(Author author) {
+    Author addOrUpdate(AuthorDTO authorDTO) {
+
+        Author author = authorMapper.mapAuthorDTOToAuthor(authorDTO);
+
+        return save(author);
+    }
+
+    Author save(Author author) {
 
         return authorRepository.save(author);
     }
