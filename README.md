@@ -66,11 +66,11 @@ Available to users with only "Admin" role:
 Project is: in progess
 
 ## Screenshots
-![Main Page](./src/main/resources/screenshots/main.png)
+![Main Page](./screenshots/main.png)
 <p style="text-align: center">Main Page</p>
 
-![Login Page](./src/main/resources/screenshots/login.png)
+![Login Page](./screenshots/login.png)
 <p style="text-align: center">Login Page</p>
 
-![Registration Page](./src/main/resources/screenshots/register.png)
+![Registration Page](./screenshots/register.png)
 <p style="text-align: center">Registration Page</p>
