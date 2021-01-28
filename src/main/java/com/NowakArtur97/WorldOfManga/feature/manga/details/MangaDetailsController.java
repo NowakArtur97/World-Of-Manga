@@ -1,6 +1,5 @@
 package com.NowakArtur97.WorldOfManga.feature.manga.details;
 
-import com.NowakArtur97.WorldOfManga.exception.MangaNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.stereotype.Controller;
@@ -16,12 +15,12 @@ import java.io.InputStream;
 @Controller
 @RequestMapping(path = "/manga")
 @RequiredArgsConstructor
-public class MangaDetailsController {
+class MangaDetailsController {
 
     private final MangaService mangaService;
 
     @GetMapping(path = "/getImage/{id}")
-    public void showAddMangaPage(HttpServletResponse response, @PathVariable("id") Long id)
+    void showAddMangaPage(HttpServletResponse response, @PathVariable("id") Long id)
             throws MangaNotFoundException {
 
         response.setContentType("image/jpeg");

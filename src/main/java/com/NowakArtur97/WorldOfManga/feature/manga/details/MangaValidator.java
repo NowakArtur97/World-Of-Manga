@@ -9,7 +9,7 @@ import org.springframework.validation.Validator;
 
 @Component
 @RequiredArgsConstructor
-public class MangaValidator implements Validator {
+class MangaValidator implements Validator {
 
     private final MangaTranslationService mangaTranslationService;
 

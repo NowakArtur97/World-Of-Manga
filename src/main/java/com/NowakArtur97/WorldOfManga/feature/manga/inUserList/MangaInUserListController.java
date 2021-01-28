@@ -1,9 +1,10 @@
 package com.NowakArtur97.WorldOfManga.feature.manga.inUserList;
 
-import com.NowakArtur97.WorldOfManga.exception.MangaNotFoundException;
+import com.NowakArtur97.WorldOfManga.feature.manga.details.MangaNotFoundException;
+import com.NowakArtur97.WorldOfManga.feature.manga.details.Manga;
+import com.NowakArtur97.WorldOfManga.feature.manga.rating.MangaRating;
 import com.NowakArtur97.WorldOfManga.feature.user.User;
 import com.NowakArtur97.WorldOfManga.feature.user.UserService;
-import com.NowakArtur97.WorldOfManga.feature.manga.details.Manga;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -27,7 +28,7 @@ import java.util.stream.Collectors;
 @Controller
 @RequestMapping(path = "/auth")
 @RequiredArgsConstructor
-public class MangaInUserListController {
+class MangaInUserListController {
 
     private final MangaInUserListService mangaInUserListService;
 
@@ -36,8 +37,8 @@ public class MangaInUserListController {
     private final UserService userService;
 
     @GetMapping(path = "/addToList")
-    public String addToList(HttpServletRequest request, @RequestParam("id") Long mangaId,
-                            @RequestParam("status") int status) throws MangaNotFoundException {
+    String addToList(HttpServletRequest request, @RequestParam("id") Long mangaId,
+                     @RequestParam("status") int status) throws MangaNotFoundException {
 
         mangaInUserListService.addOrRemoveFromList(mangaId, status);
 
@@ -47,8 +48,8 @@ public class MangaInUserListController {
     }
 
     @GetMapping(path = "/sortMangaList/{status}")
-    public String sortMangaList(Model theModel, HttpServletRequest request, @PathVariable("status") int status,
-                                @PageableDefault(size = 12) Pageable pageable) {
+    String sortMangaList(Model theModel, HttpServletRequest request, @PathVariable("status") int status,
+                         @PageableDefault(size = 12) Pageable pageable) {
 
         Locale locale = cookieLocaleResolver.resolveLocale(request);
 
@@ -66,9 +67,9 @@ public class MangaInUserListController {
 
         User user = userService.loadLoggedInUsername();
 
-        theModel.addAttribute("usersFavourites", user.getFavouriteMangas().stream().collect(Collectors.toList()));
+        theModel.addAttribute("usersFavourites", new ArrayList<>(user.getFavouriteMangas()));
         theModel.addAttribute("usersRatings",
-                user.getMangasRatings().stream().map(rating -> rating.getManga()).collect(Collectors.toSet()));
+                user.getMangasRatings().stream().map(MangaRating::getManga).collect(Collectors.toSet()));
 
         return "views/manga-list";
     }
@@ -76,7 +77,7 @@ public class MangaInUserListController {
     private Page<Manga> convertListToPage(Pageable pageable, List<Manga> mangas) {
 
         int start = (int) pageable.getOffset();
-        int end = (start + pageable.getPageSize()) > mangas.size() ? mangas.size() : (start + pageable.getPageSize());
+        int end = Math.min((start + pageable.getPageSize()), mangas.size());
 
         return new PageImpl<>(mangas.subList(start, end), pageable, mangas.size());
     }

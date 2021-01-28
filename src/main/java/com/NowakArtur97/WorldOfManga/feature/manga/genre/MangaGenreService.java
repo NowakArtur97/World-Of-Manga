@@ -1,6 +1,5 @@
 package com.NowakArtur97.WorldOfManga.feature.manga.genre;
 
-import com.NowakArtur97.WorldOfManga.exception.MangaGenreNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

@@ -124,7 +124,7 @@ class RecommendationService {
         return mostOccurrences;
     }
 
-    private List<Manga> findMoreRecommendations(User user, List<Manga> recommendations, List<Manga> allManga) {
+    private void findMoreRecommendations(User user, List<Manga> recommendations, List<Manga> allManga) {
 
         int howManyToFind = NUMBER_OF_RECOMMENDED_MANGA - recommendations.size();
 
@@ -134,7 +134,6 @@ class RecommendationService {
                         && !isMangaAlreadyRecommended(recommendations, manga))
                 .limit(howManyToFind).sorted(SORT_BY_LIKES).collect(Collectors.toList()));
 
-        return recommendations;
     }
 
     private boolean isMangaAlreadyRecommended(List<Manga> recommendations, Manga manga) {

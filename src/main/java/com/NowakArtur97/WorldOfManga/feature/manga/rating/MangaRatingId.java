@@ -1,20 +1,18 @@
 package com.NowakArtur97.WorldOfManga.feature.manga.rating;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import java.io.Serializable;
 
 @Embeddable
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class MangaRatingId implements Serializable {
+class MangaRatingId implements Serializable {
 
 	private static final long serialVersionUID = -4902130401018115529L;
 

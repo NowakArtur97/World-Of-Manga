@@ -14,10 +14,12 @@ import java.util.*;
 
 @Entity
 @Table(name = "manga", schema = "world_of_manga")
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@ToString
 public class Manga {
 
 	public final static Integer EN_TRANSLATION_INDEX = 0;
@@ -38,34 +40,30 @@ public class Manga {
 
 	@OneToMany(mappedBy = "manga", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
 	@ToString.Exclude
-	@EqualsAndHashCode.Exclude
 	private final List<MangaTranslation> translations = new ArrayList<>();
 
 	@OneToMany(mappedBy = "manga", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
 	@ToString.Exclude
-	@EqualsAndHashCode.Exclude
 	private final Set<MangaRating> mangasRatings = new HashSet<>();
 
 	@OneToMany(mappedBy = "manga", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
 	@ToString.Exclude
-	@EqualsAndHashCode.Exclude
 	private final Set<MangaInUserList> usersWithMangaInList = new HashSet<>();
 
 	@ManyToMany(cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH })
-	@JoinTable(name = "manga_author", schema = "world_of_manga", joinColumns = @JoinColumn(name = "manga_id"), inverseJoinColumns = @JoinColumn(name = "author_id"))
+	@JoinTable(name = "manga_author", schema = "world_of_manga", joinColumns = @JoinColumn(name = "manga_id"),
+			inverseJoinColumns = @JoinColumn(name = "author_id"))
 	@ToString.Exclude
-	@EqualsAndHashCode.Exclude
 	private final Set<Author> authors = new HashSet<>();
 
 	@ManyToMany(cascade = { CascadeType.MERGE, CascadeType.REFRESH })
-	@JoinTable(name = "manga_genre", schema = "world_of_manga", joinColumns = @JoinColumn(name = "manga_id"), inverseJoinColumns = @JoinColumn(name = "genre_id"))
+	@JoinTable(name = "manga_genre", schema = "world_of_manga", joinColumns = @JoinColumn(name = "manga_id"),
+			inverseJoinColumns = @JoinColumn(name = "genre_id"))
 	@ToString.Exclude
-	@EqualsAndHashCode.Exclude
 	private final Set<MangaGenre> genres = new HashSet<>();
 
 	@ManyToMany(mappedBy = "favouriteMangas")
 	@ToString.Exclude
-	@EqualsAndHashCode.Exclude
 	private final Set<User> userWithMangaInFavourites = new HashSet<>();
 
 	@PostLoad
@@ -163,5 +161,21 @@ public class Manga {
 		this.removeAllAuthors();
 
 		this.removeAllGenres();
+	}
+
+	@Override
+	public boolean equals(Object o) {
+
+		if (this == o) return true;
+		if (!(o instanceof Manga)) return false;
+
+		Manga manga = (Manga) o;
+
+		return Objects.equals(getId(), manga.getId());
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(getId());
 	}
 }

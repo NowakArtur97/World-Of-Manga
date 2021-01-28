@@ -1,7 +1,6 @@
 package com.NowakArtur97.WorldOfManga.feature.manga.details;
 
-import com.NowakArtur97.WorldOfManga.exception.LanguageNotFoundException;
-import com.NowakArtur97.WorldOfManga.exception.MangaNotFoundException;
+import com.NowakArtur97.WorldOfManga.feature.language.LanguageNotFoundException;
 import com.NowakArtur97.WorldOfManga.feature.author.AuthorDTO;
 import com.NowakArtur97.WorldOfManga.feature.author.AuthorService;
 import com.NowakArtur97.WorldOfManga.feature.manga.genre.MangaGenreService;
@@ -20,7 +19,7 @@ import java.util.Locale;
 @Controller
 @RequestMapping(path = "/admin")
 @RequiredArgsConstructor
-public class MangaController {
+class MangaController {
 
     private final MangaService mangaService;
 
@@ -35,7 +34,7 @@ public class MangaController {
     private final LocaleResolver cookieLocaleResolver;
 
     @GetMapping(path = "/addOrUpdateManga")
-    public String showAddMangaPage(Model theModel, HttpServletRequest request) {
+    String showAddMangaPage(Model theModel, HttpServletRequest request) {
 
         theModel.addAttribute("mangaDTO", new MangaDTO());
         theModel.addAttribute("authorDTO", new AuthorDTO());
@@ -52,7 +51,7 @@ public class MangaController {
     }
 
     @GetMapping(path = "/addOrUpdateManga/{id}")
-    public String showEditMangaPage(Model theModel, @PathVariable("id") Long mangaId, HttpServletRequest request)
+    String showEditMangaPage(Model theModel, @PathVariable("id") Long mangaId, HttpServletRequest request)
             throws MangaNotFoundException {
 
         MangaDTO mangaToEdit = mangaService.getMangaDTOById(mangaId);
@@ -71,8 +70,9 @@ public class MangaController {
     }
 
     @PostMapping(path = "/addOrUpdateManga")
-    public String processAddMangaPage(HttpServletRequest request, Model theModel, @ModelAttribute("mangaDTO")
-    @Valid MangaDTO mangaDTO, BindingResult result) throws LanguageNotFoundException, MangaNotFoundException {
+    String processAddMangaPage(HttpServletRequest request, Model theModel,
+                               @ModelAttribute("mangaDTO") @Valid MangaDTO mangaDTO, BindingResult result)
+            throws LanguageNotFoundException, MangaNotFoundException {
 
         mangaValidator.validate(mangaDTO, result);
 
@@ -100,7 +100,7 @@ public class MangaController {
     }
 
     @GetMapping(path = "/deleteManga/{id}")
-    public String deleteManga(HttpServletRequest request, @PathVariable("id") Long mangaId)
+    String deleteManga(HttpServletRequest request, @PathVariable("id") Long mangaId)
             throws MangaNotFoundException {
 
         mangaService.deleteManga(mangaId);

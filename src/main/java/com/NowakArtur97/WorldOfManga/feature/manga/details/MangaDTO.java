@@ -3,17 +3,15 @@ package com.NowakArtur97.WorldOfManga.feature.manga.details;
 import com.NowakArtur97.WorldOfManga.feature.author.Author;
 import com.NowakArtur97.WorldOfManga.feature.manga.genre.MangaGenre;
 import com.NowakArtur97.WorldOfManga.feature.manga.translation.MangaTranslationDTO;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import java.util.Set;
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder

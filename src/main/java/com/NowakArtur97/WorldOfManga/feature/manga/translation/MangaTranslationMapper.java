@@ -6,11 +6,11 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class MangaTranslationMapper {
+class MangaTranslationMapper {
 
     private final ModelMapper modelMapper;
 
-    public MangaTranslation mapMangaTranslationDTOToMangaTranslation(MangaTranslationDTO mangaTranslationDTO) {
+    MangaTranslation mapMangaTranslationDTOToMangaTranslation(MangaTranslationDTO mangaTranslationDTO) {
 
         return modelMapper.map(mangaTranslationDTO, MangaTranslation.class);
     }

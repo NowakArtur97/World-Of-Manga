@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
 
-public interface MangaRatingRepository extends JpaRepository<MangaRating, Long> {
+interface MangaRatingRepository extends JpaRepository<MangaRating, Long> {
 
-	Optional<MangaRating> findByUserAndManga(User user, Manga manga);
+    Optional<MangaRating> findByUserAndManga(User user, Manga manga);
 }

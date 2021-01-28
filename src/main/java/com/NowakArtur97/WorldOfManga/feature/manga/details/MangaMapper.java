@@ -10,9 +10,9 @@ import java.io.IOException;
 import java.util.Set;
 
 @Service
-public class MangaMapper {
+class MangaMapper {
 
-    public Manga mapMangaDTOToManga(Manga manga, MangaDTO mangaDTO) {
+    Manga mapMangaDTOToManga(Manga manga, MangaDTO mangaDTO) {
 
         mapAuthors(manga, mangaDTO.getAuthors());
 
@@ -23,7 +23,7 @@ public class MangaMapper {
         return manga;
     }
 
-    public MangaDTO mapMangaToDTO(Manga manga) {
+    MangaDTO mapMangaToDTO(Manga manga) {
 
         MangaTranslation enTranslation = manga.getTranslations().get(Manga.EN_TRANSLATION_INDEX);
         MangaTranslation plTranslation = manga.getTranslations().get(Manga.PL_TRANSLATION_INDEX);

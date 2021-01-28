@@ -1,6 +1,5 @@
 package com.NowakArtur97.WorldOfManga.feature.manga.details;
 
-import com.NowakArtur97.WorldOfManga.exception.MangaNotFoundException;
 import com.NowakArtur97.WorldOfManga.feature.user.User;
 import com.NowakArtur97.WorldOfManga.feature.user.UserService;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +20,23 @@ public class MangaService {
 
     private final UserService userService;
 
-    public Manga addOrUpdate(MangaDTO mangaDTO, Manga manga) throws MangaNotFoundException {
+    public Manga findById(Long id) throws MangaNotFoundException {
+
+        return mangaRepository.findById(id)
+                .orElseThrow(() -> new MangaNotFoundException("Manga with id:" + id + " not found"));
+    }
+
+    public List<Manga> findAll() {
+
+        return mangaRepository.findAll();
+    }
+
+    public Page<Manga> findAllDividedIntoPages(Pageable pageable) {
+
+        return mangaRepository.findAll(pageable);
+    }
+
+    Manga addOrUpdate(MangaDTO mangaDTO, Manga manga) {
 
         if (mangaDTO.getId() != null) {
 
@@ -37,7 +52,7 @@ public class MangaService {
         return manga;
     }
 
-    public Manga deleteManga(Long mangaId) throws MangaNotFoundException {
+    Manga deleteManga(Long mangaId) throws MangaNotFoundException {
 
         Manga manga = findById(mangaId);
 
@@ -49,7 +64,7 @@ public class MangaService {
     }
 
     @Transactional
-    public Manga addOrRemoveFromFavourites(Long mangaId) throws MangaNotFoundException {
+    Manga addOrRemoveFromFavourites(Long mangaId) throws MangaNotFoundException {
 
         Manga manga = findById(mangaId);
 
@@ -66,26 +81,10 @@ public class MangaService {
         return manga;
     }
 
-    public MangaDTO getMangaDTOById(Long mangaId) throws MangaNotFoundException {
+    MangaDTO getMangaDTOById(Long mangaId) throws MangaNotFoundException {
 
         Manga manga = findById(mangaId);
 
         return mangaMapper.mapMangaToDTO(manga);
-    }
-
-    public Manga findById(Long id) throws MangaNotFoundException {
-
-        return mangaRepository.findById(id)
-                .orElseThrow(() -> new MangaNotFoundException("Manga with id:" + id + " not found"));
-    }
-
-    public List<Manga> findAll() {
-
-        return mangaRepository.findAll();
-    }
-
-    public Page<Manga> findAllDividedIntoPages(Pageable pageable) {
-
-        return mangaRepository.findAll(pageable);
     }
 }

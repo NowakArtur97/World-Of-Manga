@@ -1,6 +1,6 @@
 package com.NowakArtur97.WorldOfManga.feature.manga.rating;
 
-import com.NowakArtur97.WorldOfManga.exception.MangaNotFoundException;
+import com.NowakArtur97.WorldOfManga.feature.manga.details.MangaNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,13 +12,13 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 @RequestMapping(path = "/auth")
 @RequiredArgsConstructor
-public class MangaRatingController {
+class MangaRatingController {
 
     private final MangaRatingService mangaRatingService;
 
     @GetMapping(path = "/rateManga")
-    public String rateManga(HttpServletRequest request, @RequestParam("id") Long mangaId,
-                            @RequestParam("rating") int rating) throws MangaNotFoundException {
+    String rateManga(HttpServletRequest request, @RequestParam("id") Long mangaId,
+                     @RequestParam("rating") int rating) throws MangaNotFoundException {
 
         mangaRatingService.rateManga(mangaId, rating);
 
