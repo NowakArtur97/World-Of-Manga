@@ -57,7 +57,7 @@ class RecommendationService {
 
         if (recommendations.size() < NUMBER_OF_RECOMMENDED_MANGA) {
 
-            recommendations = findMoreRecommendations(user, recommendations, allManga);
+            findMoreRecommendations(user, recommendations, allManga);
         }
 
         return recommendations;
@@ -91,9 +91,9 @@ class RecommendationService {
     private List<Manga> removeMangaThatIsAlreadyInUserList(List<Manga> recommendations, User user) {
 
         return recommendations.stream()
-                .filter(manga -> !isMangaAlreadyRatedByUser(user, manga)
-                        && !isMangaAlreadyInUsersFavourites(user, manga)
-                        && !isMangaAlreadyInUsersMangaList(user, manga))
+                .filter(manga -> isNotMangaAlreadyRatedByUser(user, manga)
+                        && isNotMangaAlreadyInUsersFavourites(user, manga)
+                        && isNotMangaAlreadyInUsersMangaList(user, manga))
                 .collect(Collectors.toList());
     }
 
@@ -129,8 +129,8 @@ class RecommendationService {
         int howManyToFind = NUMBER_OF_RECOMMENDED_MANGA - recommendations.size();
 
         recommendations.addAll(allManga.stream()
-                .filter(manga -> !isMangaAlreadyRatedByUser(user, manga)
-                        && !isMangaAlreadyInUsersFavourites(user, manga) && !isMangaAlreadyInUsersMangaList(user, manga)
+                .filter(manga -> isNotMangaAlreadyRatedByUser(user, manga)
+                        && isNotMangaAlreadyInUsersFavourites(user, manga) && isNotMangaAlreadyInUsersMangaList(user, manga)
                         && !isMangaAlreadyRecommended(recommendations, manga))
                 .limit(howManyToFind).sorted(SORT_BY_LIKES).collect(Collectors.toList()));
 
@@ -141,15 +141,15 @@ class RecommendationService {
         return recommendations.contains(manga);
     }
 
-    private boolean isMangaAlreadyInUsersFavourites(User user, Manga manga) {
-        return user.getFavouriteMangas().contains(manga);
+    private boolean isNotMangaAlreadyInUsersFavourites(User user, Manga manga) {
+        return !user.getFavouriteMangas().contains(manga);
     }
 
-    private boolean isMangaAlreadyRatedByUser(User user, Manga manga) {
-        return user.getMangasRatings().stream().anyMatch(rating -> rating.getManga().equals(manga));
+    private boolean isNotMangaAlreadyRatedByUser(User user, Manga manga) {
+        return user.getMangasRatings().stream().noneMatch(rating -> rating.getManga().equals(manga));
     }
 
-    private boolean isMangaAlreadyInUsersMangaList(User user, Manga manga) {
-        return user.getMangaList().stream().anyMatch(mangaInList -> mangaInList.getManga().equals(manga));
+    private boolean isNotMangaAlreadyInUsersMangaList(User user, Manga manga) {
+        return user.getMangaList().stream().noneMatch(mangaInList -> mangaInList.getManga().equals(manga));
     }
 }

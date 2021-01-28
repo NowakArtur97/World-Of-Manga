@@ -1,9 +1,9 @@
 package com.NowakArtur97.WorldOfManga.feature.mainPage;
 
+import com.NowakArtur97.WorldOfManga.feature.manga.details.MangaService;
+import com.NowakArtur97.WorldOfManga.feature.manga.rating.MangaRating;
 import com.NowakArtur97.WorldOfManga.feature.user.User;
 import com.NowakArtur97.WorldOfManga.feature.user.UserService;
-import com.NowakArtur97.WorldOfManga.feature.manga.rating.MangaRating;
-import com.NowakArtur97.WorldOfManga.feature.manga.details.MangaService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
