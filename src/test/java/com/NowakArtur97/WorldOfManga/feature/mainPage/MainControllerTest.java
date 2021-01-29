@@ -92,7 +92,7 @@ class MainControllerTest {
         when(userService.isUserLoggedIn()).thenReturn(false);
 
         assertAll(
-                () -> mockMvc.perform(get("/")).andExpect(status().isOk()).andExpect(view().name("views/mainPage"))
+                () -> mockMvc.perform(get("/")).andExpect(status().isOk()).andExpect(view().name("views/main"))
                         .andExpect(model().attribute("mangas", pageMangas))
                         .andExpect(model().attribute("recommendations", mangas))
                         .andExpect(model().attributeDoesNotExist("usersFavourites"))
@@ -140,7 +140,7 @@ class MainControllerTest {
         when(userService.loadLoggedInUsername()).thenReturn(userExpected);
 
         assertAll(
-                () -> mockMvc.perform(get("/")).andExpect(status().isOk()).andExpect(view().name("views/mainPage"))
+                () -> mockMvc.perform(get("/")).andExpect(status().isOk()).andExpect(view().name("views/main"))
                         .andExpect(model().attribute("mangas", pageMangas))
                         .andExpect(model().attribute("recommendations", mangas))
                         .andExpect(model().attribute("usersFavourites", userExpected.getFavouriteMangas()))

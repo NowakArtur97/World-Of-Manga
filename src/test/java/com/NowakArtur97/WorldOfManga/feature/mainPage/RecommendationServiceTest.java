@@ -47,13 +47,13 @@ class RecommendationServiceTest {
     void when_recommend_manga_for_not_logged_in_user_should_return_most_popular_manga() throws IOException {
 
         User userExpected = User.builder().username("user").firstName("first name").lastName("last name")
-                .password("user").email("user@email.com").isEnabled(true).build();
+                .password("user123").email("user@email.com").isEnabled(true).build();
 
-        User userExpected2 = User.builder().username("user2").firstName("first name").lastName("last name")
-                .password("user").email("user@email.com").isEnabled(true).build();
+        User userExpected2 = User.builder().username("user2").firstName("first name 2").lastName("last name 2")
+                .password("user231").email("user2@email.com").isEnabled(true).build();
 
-        User userExpected3 = User.builder().username("user3").firstName("first name").lastName("last name")
-                .password("user").email("user@email.com").isEnabled(true).build();
+        User userExpected3 = User.builder().username("user3").firstName("first name 3").lastName("last name 3")
+                .password("user321").email("user3@email.com").isEnabled(true).build();
 
         MangaTranslation mangaTranslationEnExpected = MangaTranslation.builder().title("English title")
                 .description("English description").build();
@@ -61,9 +61,9 @@ class RecommendationServiceTest {
                 .description("Polish description").build();
 
         MangaTranslation mangaTranslationEnExpected2 = MangaTranslation.builder().title("English title 2")
-                .description("English description").build();
+                .description("English description 2").build();
         MangaTranslation mangaTranslationPlExpected2 = MangaTranslation.builder().title("Polish title 2")
-                .description("Polish description").build();
+                .description("Polish description 2").build();
 
         MockMultipartFile image = new MockMultipartFile("image.jpg", "file bytes".getBytes());
         MockMultipartFile image2 = new MockMultipartFile("image2.jpg", "file bytes".getBytes());
@@ -88,18 +88,18 @@ class RecommendationServiceTest {
 
         userExpected3.addMangaToFavourites(mangaExpected2);
 
-        List<Manga> recommendationsExpected = new ArrayList<>();
-        recommendationsExpected.add(mangaExpected);
-        recommendationsExpected.add(mangaExpected2);
+        List<Manga> allMangas = new ArrayList<>();
+        allMangas.add(mangaExpected);
+        allMangas.add(mangaExpected2);
 
-        when(mangaService.findAll()).thenReturn(recommendationsExpected);
+        when(mangaService.findAll()).thenReturn(allMangas);
         when(userService.isUserLoggedIn()).thenReturn(false);
 
         List<Manga> recommendationsActual = recommendationService.recommendManga();
 
         assertAll(
-                () -> assertEquals(recommendationsExpected.size(), recommendationsActual.size(),
-                        () -> "should return " + recommendationsExpected.size() + " recommendations, but was: "
+                () -> assertEquals(allMangas.size(), recommendationsActual.size(),
+                        () -> "should return " + allMangas.size() + " recommendations, but was: "
                                 + recommendationsActual.size()),
                 () -> assertTrue(recommendationsActual.contains(mangaExpected),
                         () -> "should contain manga: " + mangaExpected + ", but was: " + recommendationsActual),
@@ -118,13 +118,13 @@ class RecommendationServiceTest {
             throws IOException {
 
         User userExpected = User.builder().username("user").firstName("first name").lastName("last name")
-                .password("user").email("user@email.com").isEnabled(true).build();
+                .password("user123").email("user@email.com").isEnabled(true).build();
 
-        User userExpected2 = User.builder().username("user2").firstName("first name").lastName("last name")
-                .password("user").email("user@email.com").isEnabled(true).build();
+        User userExpected2 = User.builder().username("user2").firstName("first name 2").lastName("last name 2")
+                .password("user231").email("user2@email.com").isEnabled(true).build();
 
-        User userExpected3 = User.builder().username("user3").firstName("first name").lastName("last name")
-                .password("user").email("user@email.com").isEnabled(true).build();
+        User userExpected3 = User.builder().username("user3").firstName("first name 3").lastName("last name 3")
+                .password("user321").email("user3@email.com").isEnabled(true).build();
 
         MangaTranslation mangaTranslationEnExpected = MangaTranslation.builder().title("English title")
                 .description("English description").build();
@@ -132,9 +132,9 @@ class RecommendationServiceTest {
                 .description("Polish description").build();
 
         MangaTranslation mangaTranslationEnExpected2 = MangaTranslation.builder().title("English title 2")
-                .description("English description").build();
+                .description("English description 2").build();
         MangaTranslation mangaTranslationPlExpected2 = MangaTranslation.builder().title("Polish title 2")
-                .description("Polish description").build();
+                .description("Polish description 2").build();
 
         MockMultipartFile image = new MockMultipartFile("image.jpg", "file bytes".getBytes());
         MockMultipartFile image2 = new MockMultipartFile("image2.jpg", "file bytes".getBytes());
@@ -159,11 +159,11 @@ class RecommendationServiceTest {
 
         userExpected3.addMangaToFavourites(mangaExpected2);
 
-        List<Manga> recommendationsExpected = new ArrayList<>();
-        recommendationsExpected.add(mangaExpected);
-        recommendationsExpected.add(mangaExpected2);
+        List<Manga> allMangas = new ArrayList<>();
+        allMangas.add(mangaExpected);
+        allMangas.add(mangaExpected2);
 
-        when(mangaService.findAll()).thenReturn(recommendationsExpected);
+        when(mangaService.findAll()).thenReturn(allMangas);
         when(userService.isUserLoggedIn()).thenReturn(true);
         when(userService.loadLoggedInUsername()).thenReturn(userExpected3);
 
@@ -186,13 +186,13 @@ class RecommendationServiceTest {
             throws IOException {
 
         User userExpected = User.builder().username("user").firstName("first name").lastName("last name")
-                .password("user").email("user@email.com").isEnabled(true).build();
+                .password("user123").email("user@email.com").isEnabled(true).build();
 
-        User userExpected2 = User.builder().username("user2").firstName("first name").lastName("last name")
-                .password("user").email("user@email.com").isEnabled(true).build();
+        User userExpected2 = User.builder().username("user2").firstName("first name 2").lastName("last name 2")
+                .password("user231").email("user2@email.com").isEnabled(true).build();
 
-        User userExpected3 = User.builder().username("user3").firstName("first name").lastName("last name")
-                .password("user").email("user@email.com").isEnabled(true).build();
+        User userExpected3 = User.builder().username("user3").firstName("first name 3").lastName("last name 3")
+                .password("user321").email("user3@email.com").isEnabled(true).build();
 
         MangaTranslation mangaTranslationEnExpected = MangaTranslation.builder().title("English title")
                 .description("English description").build();
@@ -200,9 +200,9 @@ class RecommendationServiceTest {
                 .description("Polish description").build();
 
         MangaTranslation mangaTranslationEnExpected2 = MangaTranslation.builder().title("English title 2")
-                .description("English description").build();
+                .description("English description 2").build();
         MangaTranslation mangaTranslationPlExpected2 = MangaTranslation.builder().title("Polish title 2")
-                .description("Polish description").build();
+                .description("Polish description 2").build();
 
         MockMultipartFile image = new MockMultipartFile("image.jpg", "file bytes".getBytes());
         MockMultipartFile image2 = new MockMultipartFile("image2.jpg", "file bytes".getBytes());
@@ -229,11 +229,11 @@ class RecommendationServiceTest {
 
         userExpected3.addMangaRating(mangaExpected2, mangaRating);
 
-        List<Manga> recommendationsExpected = new ArrayList<>();
-        recommendationsExpected.add(mangaExpected);
-        recommendationsExpected.add(mangaExpected2);
+        List<Manga> allMangas = new ArrayList<>();
+        allMangas.add(mangaExpected);
+        allMangas.add(mangaExpected2);
 
-        when(mangaService.findAll()).thenReturn(recommendationsExpected);
+        when(mangaService.findAll()).thenReturn(allMangas);
         when(userService.isUserLoggedIn()).thenReturn(true);
         when(userService.loadLoggedInUsername()).thenReturn(userExpected3);
 
@@ -256,13 +256,13 @@ class RecommendationServiceTest {
             throws IOException {
 
         User userExpected = User.builder().username("user").firstName("first name").lastName("last name")
-                .password("user").email("user@email.com").isEnabled(true).build();
+                .password("user123").email("user@email.com").isEnabled(true).build();
 
-        User userExpected2 = User.builder().username("user2").firstName("first name").lastName("last name")
-                .password("user").email("user@email.com").isEnabled(true).build();
+        User userExpected2 = User.builder().username("user2").firstName("first name 2").lastName("last name 2")
+                .password("user321").email("user2@email.com").isEnabled(true).build();
 
-        User userExpected3 = User.builder().username("user3").firstName("first name").lastName("last name")
-                .password("user").email("user@email.com").isEnabled(true).build();
+        User userExpected3 = User.builder().username("user3").firstName("first name 3").lastName("last name 3")
+                .password("user213").email("user3@email.com").isEnabled(true).build();
 
         MangaTranslation mangaTranslationEnExpected = MangaTranslation.builder().title("English title")
                 .description("English description").build();
@@ -270,9 +270,9 @@ class RecommendationServiceTest {
                 .description("Polish description").build();
 
         MangaTranslation mangaTranslationEnExpected2 = MangaTranslation.builder().title("English title 2")
-                .description("English description").build();
+                .description("English description 2").build();
         MangaTranslation mangaTranslationPlExpected2 = MangaTranslation.builder().title("Polish title 2")
-                .description("Polish description").build();
+                .description("Polish description 2").build();
 
         MockMultipartFile image = new MockMultipartFile("image.jpg", "file bytes".getBytes());
         MockMultipartFile image2 = new MockMultipartFile("image2.jpg", "file bytes".getBytes());
@@ -299,11 +299,11 @@ class RecommendationServiceTest {
 
         userExpected3.addMangaToList(mangaExpected2, status);
 
-        List<Manga> recommendationsExpected = new ArrayList<>();
-        recommendationsExpected.add(mangaExpected);
-        recommendationsExpected.add(mangaExpected2);
+        List<Manga> allMangas = new ArrayList<>();
+        allMangas.add(mangaExpected);
+        allMangas.add(mangaExpected2);
 
-        when(mangaService.findAll()).thenReturn(recommendationsExpected);
+        when(mangaService.findAll()).thenReturn(allMangas);
         when(userService.isUserLoggedIn()).thenReturn(true);
         when(userService.loadLoggedInUsername()).thenReturn(userExpected3);
 
@@ -326,13 +326,13 @@ class RecommendationServiceTest {
             throws IOException {
 
         User userExpected = User.builder().username("user").firstName("first name").lastName("last name")
-                .password("user").email("user@email.com").isEnabled(true).build();
+                .password("user123").email("user@email.com").isEnabled(true).build();
 
-        User userExpected2 = User.builder().username("user2").firstName("first name").lastName("last name")
-                .password("user").email("user@email.com").isEnabled(true).build();
+        User userExpected2 = User.builder().username("user2").firstName("first name 2").lastName("last name 2")
+                .password("user321").email("user2@email.com").isEnabled(true).build();
 
-        User userExpected3 = User.builder().username("user3").firstName("first name").lastName("last name")
-                .password("user").email("user@email.com").isEnabled(true).build();
+        User userExpected3 = User.builder().username("user3").firstName("first name 3").lastName("last name 3")
+                .password("user213").email("user3@email.com").isEnabled(true).build();
 
         MangaTranslation mangaTranslationEnExpected = MangaTranslation.builder().title("English title")
                 .description("English description").build();
@@ -340,9 +340,9 @@ class RecommendationServiceTest {
                 .description("Polish description").build();
 
         MangaTranslation mangaTranslationEnExpected2 = MangaTranslation.builder().title("English title 2")
-                .description("English description").build();
+                .description("English description 2").build();
         MangaTranslation mangaTranslationPlExpected2 = MangaTranslation.builder().title("Polish title 2")
-                .description("Polish description").build();
+                .description("Polish description 2").build();
 
         MockMultipartFile image = new MockMultipartFile("image.jpg", "file bytes".getBytes());
         MockMultipartFile image2 = new MockMultipartFile("image2.jpg", "file bytes".getBytes());
@@ -370,11 +370,11 @@ class RecommendationServiceTest {
 
         userExpected3.addMangaRating(mangaExpected2, mangaRating);
 
-        List<Manga> recommendationsExpected = new ArrayList<>();
-        recommendationsExpected.add(mangaExpected);
-        recommendationsExpected.add(mangaExpected2);
+        List<Manga> allMangas = new ArrayList<>();
+        allMangas.add(mangaExpected);
+        allMangas.add(mangaExpected2);
 
-        when(mangaService.findAll()).thenReturn(recommendationsExpected);
+        when(mangaService.findAll()).thenReturn(allMangas);
         when(userService.isUserLoggedIn()).thenReturn(true);
         when(userService.loadLoggedInUsername()).thenReturn(userExpected3);
 

@@ -171,11 +171,13 @@ public class Manga {
 
 		Manga manga = (Manga) o;
 
-		return Objects.equals(getId(), manga.getId());
+		return Objects.equals(getId(), manga.getId()) &&
+				Objects.equals(getTranslations(), manga.getTranslations()) &&
+				Objects.equals(getGenres(), manga.getGenres());
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(getId());
+		return Objects.hash(getId(), getTranslations(), getGenres());
 	}
 }
