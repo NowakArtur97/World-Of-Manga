@@ -7,13 +7,14 @@ import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.Objects;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-class UserDTO {
+public class UserDTO {
 
     @NotBlank(message = "{user.username.notBlank}")
     @Size(message = "{user.username.size}{max}", max = 40)
@@ -35,4 +36,24 @@ class UserDTO {
 
     @AssertTrue(message = "{user.areTermsAccepted.assertTrue}")
     private Boolean areTermsAccepted;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof UserDTO)) return false;
+
+        UserDTO userDTO = (UserDTO) o;
+
+        return Objects.equals(getUsername(), userDTO.getUsername()) &&
+                Objects.equals(getEmail(), userDTO.getEmail()) &&
+                Objects.equals(getUserPasswordDTO(), userDTO.getUserPasswordDTO()) &&
+                Objects.equals(getFirstName(), userDTO.getFirstName()) &&
+                Objects.equals(getLastName(), userDTO.getLastName()) &&
+                Objects.equals(getAreTermsAccepted(), userDTO.getAreTermsAccepted());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getUsername(), getEmail(), getUserPasswordDTO(), getFirstName(), getLastName(), getAreTermsAccepted());
+    }
 }

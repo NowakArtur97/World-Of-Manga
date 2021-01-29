@@ -5,6 +5,7 @@ import lombok.Getter;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -32,10 +33,10 @@ public class SeleniumUITest {
         capabilities.setCapability(ChromeOptions.CAPABILITY, options);
         capabilities.setBrowserName("chrome");
 
-        webDriver = new RemoteWebDriver(capabilities);
-        webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+//        webDriver = new RemoteWebDriver(capabilities);
+//        webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
-//		webDriver = new ChromeDriver();
+		webDriver = new ChromeDriver();
     }
 
     @AfterAll
