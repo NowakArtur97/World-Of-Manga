@@ -33,10 +33,10 @@ public class SeleniumUITest {
         capabilities.setCapability(ChromeOptions.CAPABILITY, options);
         capabilities.setBrowserName("chrome");
 
-//        webDriver = new RemoteWebDriver(capabilities);
-//        webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        webDriver = new RemoteWebDriver(capabilities);
+        webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
-		webDriver = new ChromeDriver();
+//		webDriver = new ChromeDriver();
     }
 
     @AfterAll
