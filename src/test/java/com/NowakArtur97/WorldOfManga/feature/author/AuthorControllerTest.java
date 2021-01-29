@@ -55,7 +55,8 @@ class AuthorControllerTest {
         assertAll(() -> mockMvc.perform(get("/admin/addOrUpdateAuthor")).andExpect(status().isOk())
                         .andExpect(view().name("views/manga-form")).andExpect(model().attribute("mangaDTO", new MangaDTO()))
                         .andExpect(model().attribute("authorDTO", new AuthorDTO()))
-                        .andExpect(model().attribute("authors", authors)), () -> verify(authorService, times(1)).findAll(),
+                        .andExpect(model().attribute("authors", authors)),
+                () -> verify(authorService, times(1)).findAll(),
                 () -> verifyNoMoreInteractions(authorService), () -> verifyNoInteractions(authorValidator));
     }
 

@@ -17,43 +17,43 @@ import java.util.Objects;
 @ToString
 public class MangaTranslation {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "manga_translation_id")
-	@Setter(value = AccessLevel.PRIVATE)
-	private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "manga_translation_id")
+    @Setter(value = AccessLevel.PRIVATE)
+    private Long id;
 
-	@Column(name = "title")
-	private String title;
+    @Column(name = "title")
+    private String title;
 
-	@Column(name = "description")
-	private String description;
+    @Column(name = "description")
+    private String description;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "manga_id")
-	@ToString.Exclude
-	private Manga manga;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "manga_id")
+    @ToString.Exclude
+    private Manga manga;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "language_id")
-	@ToString.Exclude
-	private Language language;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "language_id")
+    @ToString.Exclude
+    private Language language;
 
-	@Override
-	public boolean equals(Object o) {
+    @Override
+    public boolean equals(Object o) {
 
-		if (this == o) return true;
-		if (!(o instanceof MangaTranslation)) return false;
+        if (this == o) return true;
+        if (!(o instanceof MangaTranslation)) return false;
 
-		MangaTranslation that = (MangaTranslation) o;
+        MangaTranslation that = (MangaTranslation) o;
 
-		return Objects.equals(getId(), that.getId()) &&
-				Objects.equals(getTitle(), that.getTitle()) &&
-				Objects.equals(getDescription(), that.getDescription());
-	}
+        return Objects.equals(getId(), that.getId()) &&
+                Objects.equals(getTitle(), that.getTitle()) &&
+                Objects.equals(getDescription(), that.getDescription());
+    }
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(getId(), getTitle(), getDescription());
-	}
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getTitle(), getDescription());
+    }
 }
