@@ -5,20 +5,25 @@ import lombok.Getter;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.springframework.beans.factory.annotation.Value;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
 public class SeleniumUITest {
+
+    @Value("${app.selenium.remote-web-driver-url}")
+    private String remoteUrl;
 
     @Getter
     protected static WebDriver webDriver;
 
     @BeforeEach
-    public void setUp() {
+    public void setUp() throws MalformedURLException {
 
         WebDriverManager.chromedriver().setup();
 
@@ -33,7 +38,7 @@ public class SeleniumUITest {
         capabilities.setCapability(ChromeOptions.CAPABILITY, options);
         capabilities.setBrowserName("chrome");
 
-        webDriver = new RemoteWebDriver(capabilities);
+        webDriver = new RemoteWebDriver(new URL(remoteUrl), capabilities);
         webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
 //		webDriver = new ChromeDriver();

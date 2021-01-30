@@ -8,27 +8,29 @@ import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 
 public class SeleniumPageObjectModel {
 
-	private final static String MAIN_URL_PATH = "http://localhost:8000";
+    private final static String MAIN_URL_PATH = "http://localhost:";
 
-	private final static int TIME_TO_WAIT = 15;
+    private final static int TIME_TO_WAIT = 15;
 
-	protected final WebDriver webDriver;
+    private final static int SERVER_PORT = 8088;
 
-	protected SeleniumPageObjectModel(WebDriver webDriver) {
+    protected final WebDriver webDriver;
 
-		AjaxElementLocatorFactory factory = new AjaxElementLocatorFactory(webDriver, TIME_TO_WAIT);
-		PageFactory.initElements(factory, this);
-		this.webDriver = webDriver;
-	}
+    protected SeleniumPageObjectModel(WebDriver webDriver) {
 
-	protected void connectTo(final String RESOURCE_PATH) {
+        AjaxElementLocatorFactory factory = new AjaxElementLocatorFactory(webDriver, TIME_TO_WAIT);
+        PageFactory.initElements(factory, this);
+        this.webDriver = webDriver;
+    }
 
-		webDriver.navigate().to(MAIN_URL_PATH + RESOURCE_PATH);
-	}
-	
-	protected void useJavaScriptToClickElement(WebElement element) {
-		
-		JavascriptExecutor executor = (JavascriptExecutor) webDriver;
-		executor.executeScript("arguments[0].click();", element);
-	}
+    protected void connectTo(final String RESOURCE_PATH) {
+
+        webDriver.navigate().to(MAIN_URL_PATH + SERVER_PORT + RESOURCE_PATH);
+    }
+
+    protected void useJavaScriptToClickElement(WebElement element) {
+
+        JavascriptExecutor executor = (JavascriptExecutor) webDriver;
+        executor.executeScript("arguments[0].click();", element);
+    }
 }
