@@ -1,0 +1,35 @@
+version: '3.7'
+
+networks:
+  worldOfManga-network:
+
+services:
+  world_of_manga:
+    restart: on-failure
+    build:
+      context: .
+      dockerfile: Dockerfile
+    networks:
+      - worldOfManga-network
+    ports:
+      - 8080:8080
+    depends_on:
+      - mysql
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+  mysql:
+    restart: always
+    image: mysql:8
+    container_name: mysql
+    networks:
+      - worldOfManga-network
+    environment:
+      MYSQL_DATABASE: world_of_manga
+      MYSQL_USER: worldOfManga
+      MYSQL_PASSWORD: worldOfManga
+      MYSQL_ROOT_PASSWORD: worldOfManga
+      MYSQL_ROOT_HOST: '%'
+    ports:
+      - 3366:3306
+    healthcheck:
+      test: "/usr/bin/mysql --user=worldOfManga --password=worldOfManga--execute \"SHOW DATABASES;\""
