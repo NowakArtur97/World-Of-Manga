@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @DisplayNameGeneration(NameWithSpacesGenerator.class)
 @Tag("AuthorControllerUIPl_Tests")
 @DirtiesContext
-public class AuthorControllerUIPlTest extends AuthorControllerUITest {
+class AuthorControllerUIPlTest extends AuthorControllerUITest {
 
     @Test
     public void when_correct_author_creation_with_all_fields_should_add_author() {

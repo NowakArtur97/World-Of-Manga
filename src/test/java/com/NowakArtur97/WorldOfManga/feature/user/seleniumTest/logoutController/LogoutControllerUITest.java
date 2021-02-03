@@ -7,7 +7,7 @@ import com.NowakArtur97.WorldOfManga.testUtil.selenium.SeleniumUITest;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Value;
 
-public class LogoutControllerUITest extends SeleniumUITest {
+class LogoutControllerUITest extends SeleniumUITest {
 
     @Value("${header.myMangaWorld}")
     String userLoggedInMangaListOption;

@@ -7,7 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
-public class UserControllerUITest extends SeleniumUITest {
+class UserControllerUITest extends SeleniumUITest {
 
     @Value("${user.username.notBlank}")
     String usernameNotBlankMessage;

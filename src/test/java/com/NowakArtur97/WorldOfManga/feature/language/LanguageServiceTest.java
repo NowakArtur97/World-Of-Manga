@@ -17,7 +17,7 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 @DisplayNameGeneration(NameWithSpacesGenerator.class)
 @Tag("LanguageService_Tests")
-public class LanguageServiceTest {
+class LanguageServiceTest {
 
     private LanguageService languageService;
 

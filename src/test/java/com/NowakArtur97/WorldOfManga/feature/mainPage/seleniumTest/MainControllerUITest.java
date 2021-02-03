@@ -5,7 +5,7 @@ import com.NowakArtur97.WorldOfManga.testUtil.selenium.SeleniumUITest;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Value;
 
-public class MainControllerUITest extends SeleniumUITest {
+class MainControllerUITest extends SeleniumUITest {
 
     @Value("${header.logo}")
     String headerLogo;
