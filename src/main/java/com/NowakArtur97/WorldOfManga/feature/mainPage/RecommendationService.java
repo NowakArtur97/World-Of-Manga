@@ -8,6 +8,7 @@ import com.NowakArtur97.WorldOfManga.feature.manga.rating.MangaRating;
 import com.NowakArtur97.WorldOfManga.feature.user.User;
 import com.NowakArtur97.WorldOfManga.feature.user.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -18,14 +19,16 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 class RecommendationService {
 
-    private final int NUMBER_OF_RECOMMENDED_MANGA = 10;
+    @Value("${world-of-manga.recommendations:10}")
+    private int numberOfRecommendedManga;
 
     private final MangaService mangaService;
 
     private final UserService userService;
 
-    private final Comparator<Manga> SORT_BY_LIKES = (manga1, manga2) -> manga2.getUserWithMangaInFavourites().size()
-            - manga1.getUserWithMangaInFavourites().size();
+    private final Comparator<Manga> SORT_BY_LIKES = (manga1, manga2) ->
+            manga2.getUserWithMangaInFavourites().size()
+                    - manga1.getUserWithMangaInFavourites().size();
 
     List<Manga> recommendManga() {
 
@@ -38,7 +41,7 @@ class RecommendationService {
             recommendations = recommendMangaForLoggedInUser(recommendations, allManga);
         }
 
-        return recommendations.stream().sorted(SORT_BY_LIKES).limit(NUMBER_OF_RECOMMENDED_MANGA)
+        return recommendations.stream().sorted(SORT_BY_LIKES).limit(numberOfRecommendedManga)
                 .collect(Collectors.toList());
     }
 
@@ -55,7 +58,7 @@ class RecommendationService {
             recommendations = recommendMangaByGenre(recommendations, mostLikedGenre);
         }
 
-        if (recommendations.size() < NUMBER_OF_RECOMMENDED_MANGA) {
+        if (recommendations.size() < numberOfRecommendedManga) {
 
             findMoreRecommendations(user, recommendations, allManga);
         }
@@ -126,7 +129,7 @@ class RecommendationService {
 
     private void findMoreRecommendations(User user, List<Manga> recommendations, List<Manga> allManga) {
 
-        int howManyToFind = NUMBER_OF_RECOMMENDED_MANGA - recommendations.size();
+        int howManyToFind = numberOfRecommendedManga - recommendations.size();
 
         recommendations.addAll(allManga.stream()
                 .filter(manga -> isNotMangaAlreadyRatedByUser(user, manga)

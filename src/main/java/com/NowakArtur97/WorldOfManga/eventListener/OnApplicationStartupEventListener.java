@@ -19,7 +19,7 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 
 @Component
-@RequiredArgsConstructor(onConstructor = @__(@Autowired))
+@RequiredArgsConstructor
 class OnApplicationStartupEventListener {
 
     private final ImageToByteConverter imageToByteConverter;

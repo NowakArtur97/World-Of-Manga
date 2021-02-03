@@ -1,6 +1,7 @@
 package com.NowakArtur97.WorldOfManga.eventListener;
 
 import org.apache.commons.io.output.ByteArrayOutputStream;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 
@@ -9,11 +10,17 @@ import java.io.IOException;
 import java.io.InputStream;
 
 @Component
-public class ImageToByteConverter {
+class ImageToByteConverter {
+
+    @Value("${world-of-manga.images.path:data/images/}")
+    private String imagesFolderPath;
+
+    @Value("${world-of-manga.images.extension:.jpg}")
+    private String imagesExtension;
 
     public byte[] convertImageToByte(String fileName) throws IOException {
 
-        ClassPathResource imageFile = new ClassPathResource("data/images/" + fileName + ".jpg");
+        ClassPathResource imageFile = new ClassPathResource(imagesFolderPath + fileName + imagesExtension);
         InputStream inputStream = new BufferedInputStream(imageFile.getInputStream());
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
 
