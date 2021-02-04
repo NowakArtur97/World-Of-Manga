@@ -3,6 +3,7 @@
 ## Table of Contents
 * [General info](#general-info)
 * [Demo](#demo)
+* [Setup](#setup)
 * [Built With](#built-with)
 * [Features](#features)
 * [To Do](#to-do)
@@ -23,6 +24,22 @@ To log in as a user please provide:
 To log in as a admin please provide:
 - Username: admin
 - Password: admin
+
+## Setup
+
+To start the application, in the folder, enter the following commands in command line:
+
+- `mvnw clean package -Dspring-boot.run.profiles=docker -DskipTests`
+- `docker-compose up -d`
+  Go to: `http://YOUR_DOCKER_IP_OR_LOCALHOST:8080`,
+  where `YOUR_DOCKER_IP` is your docker machine IP address (or localhost).
+  In case of problems, also edit the docker-compose file and change the url to the database (default is `192.168.99.100`).
+  To shut down the containers enter:
+- `docker-compose down`
+
+For a development use commands:
+- `docker-compose -f docker-compose.dev.yml up -d`
+- `docker-compose -f docker-compose.dev.yml down`
 
 ## Built With 
 - Java 11
