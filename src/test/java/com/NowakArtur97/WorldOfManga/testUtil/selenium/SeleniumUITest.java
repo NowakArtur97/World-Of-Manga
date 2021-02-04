@@ -4,7 +4,9 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import lombok.Getter;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.openqa.selenium.Proxy;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -14,10 +16,15 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
+;
+
 public class SeleniumUITest {
 
-    @Value("${app.selenium.remote-web-driver-url}")
+    @Value("${world-of-manga.selenium.remote-web-driver-url:http://192.168.99.100:4444/wd/hub}")
     private String remoteUrl;
+
+    @Value("${world-of-manga.selenium.is-remotely:false}")
+    private boolean isRemotely;
 
     @Getter
     protected static WebDriver webDriver;
@@ -32,16 +39,25 @@ public class SeleniumUITest {
             webDriver.quit();
         }
 
-        DesiredCapabilities capabilities = DesiredCapabilities.chrome();
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--start-maximized");
-        capabilities.setCapability(ChromeOptions.CAPABILITY, options);
-        capabilities.setBrowserName("chrome");
+        if (isRemotely) {
+            DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+            ChromeOptions options = new ChromeOptions();
+            options.addArguments("--start-maximized");
+            capabilities.setCapability(ChromeOptions.CAPABILITY, options);
+            capabilities.setBrowserName("chrome");
 
-        webDriver = new RemoteWebDriver(new URL(remoteUrl), capabilities);
-        webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+            webDriver = new RemoteWebDriver(new URL(remoteUrl), capabilities);
+            webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
-//		webDriver = new ChromeDriver();
+        } else {
+            DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+            ChromeOptions options = new ChromeOptions();
+            options.addArguments("--start-maximized");
+            capabilities.setCapability(ChromeOptions.CAPABILITY, options);
+            capabilities.setBrowserName("chrome");
+
+            webDriver = new ChromeDriver(capabilities);
+        }
     }
 
     @AfterAll
