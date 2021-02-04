@@ -4,22 +4,22 @@ version: '3.7'
 #  worldOfManga-network:
 
 services:
-#  world_of_manga:
-#    restart: on-failure
-#    build:
-#      context: .
-#      dockerfile: Dockerfile
+  world_of_manga:
+    restart: on-failure
+    build:
+      context: .
+      dockerfile: Dockerfile
 #    networks:
 #      - worldOfManga-network
-#    ports:
-#      - 8080:8080
-#    depends_on:
-#      - postgres
-#    environment:
-#      - SPRING_PROFILES_ACTIVE=test
-#      - SPRING_DATASOURCE_URL=jdbc:postgresql://192.168.99.100:5432/world_of_manga
-#      - SPRING_DATASOURCE_USERNAME=postgres
-#      - SPRING_DATASOURCE_PASSWORD=postgresWoM
+    ports:
+      - 8080:8080
+    depends_on:
+      - postgres
+    environment:
+      - SPRING_PROFILES_ACTIVE=test
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://192.168.99.100:5432/world_of_manga
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgresWoM
   postgres:
     restart: always
     image: postgres:13.1-alpine
@@ -34,27 +34,29 @@ services:
       POSTGRES_PASSWORD: postgresWoM
 #  selenium-hub:
 #    image: selenium/hub:latest
-#    networks:
-#      - worldOfManga-network
+##    networks:
+##      - worldOfManga-network
 #    container_name: selenium-hub
 #    ports:
 #      - 4444:4444
+##    network_mode: host
 #  chrome:
 #    image: selenium/node-chrome-debug:3.141.59-yttrium
-#    networks:
-#      - worldOfManga-network
+##    networks:
+##      - worldOfManga-network
 #    container_name: chrome
 #    deploy:
 #      replicas: 5
 #    ports:
-#      - "5900:5900"
+#      - 5900:5900
 #    volumes:
 #      - /dev/shm:/dev/shm
 #    depends_on:
 #      - selenium-hub
 #    environment:
-#      - HUB_HOST=selenium-hub
+#      - HUB_HOST=localhost
 #      - HUB_PORT=4444
+#    network_mode: host
 #  firefox:
 #    image: selenium/node-firefox:3.141.59-yttrium
 #    container_name: firefox
