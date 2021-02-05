@@ -25,7 +25,7 @@ public class SeleniumPageObjectModel {
     }
 
     protected void connectTo(final String RESOURCE_PATH) {
-        
+
         webDriver.navigate().to(MAIN_URL_PATH + SERVER_PORT + RESOURCE_PATH);
     }
 
