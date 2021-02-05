@@ -22,15 +22,15 @@ class LoginControllerUITest extends SeleniumUITest {
     @Value("${header.addManga}")
     String adminAddMangaOption;
 
-    protected LoginPage loginPage;
+    LoginPage loginPage;
 
-    protected MainPage mainPage;
+    MainPage mainPage;
 
     @Autowired
-    protected UserService userService;
+    UserService userService;
 
     @BeforeEach
-    public void setupPOM() {
+    void setupPOM() {
 
         loginPage = new LoginPage(webDriver);
         mainPage = new MainPage(webDriver);

@@ -22,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class AuthorControllerUIPlTest extends AuthorControllerUITest {
 
     @Test
-    public void when_correct_author_creation_with_all_fields_should_add_author() {
+    void when_correct_author_creation_with_all_fields_should_add_author() {
 
         String fullName = "FirstName LastName";
 
@@ -40,7 +40,7 @@ class AuthorControllerUIPlTest extends AuthorControllerUITest {
     }
 
     @Test
-    public void when_incorrect_author_creation_with_full_name_blank_should_have_errors() {
+    void when_incorrect_author_creation_with_full_name_blank_should_have_errors() {
 
         String fullName = "";
 
@@ -59,7 +59,7 @@ class AuthorControllerUIPlTest extends AuthorControllerUITest {
     }
 
     @Test
-    public void when_incorrect_author_creation_with_too_long_fields_should_have_errors() {
+    void when_incorrect_author_creation_with_too_long_fields_should_have_errors() {
 
         String fullName = "asdfghjklpasdfghjklpasdfghjklpasdfghjklpasdfghjklp!@#$%";
 

@@ -5,7 +5,7 @@ import org.springframework.beans.BeanWrapperImpl;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-public class UserPasswordsMatchValidator implements ConstraintValidator<UserPasswordsMatch, Object> {
+class UserPasswordsMatchValidator implements ConstraintValidator<UserPasswordsMatch, Object> {
 
     private String password;
     private String matchingPassword;

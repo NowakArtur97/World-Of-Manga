@@ -12,40 +12,40 @@ import org.springframework.beans.factory.annotation.Value;
 class MangaControllerUITest extends SeleniumUITest {
 
     @Value("${mangaTranslation.titleEn.inUse}")
-    protected String mangaTranslationTitleEnInUseMessage;
+    String mangaTranslationTitleEnInUseMessage;
 
     @Value("${mangaTranslation.titlePl.inUse}")
-    protected String mangaTranslationTitlePlInUseMessage;
+    String mangaTranslationTitlePlInUseMessage;
 
     @Value("${mangaTranslation.title.notBlank}")
-    protected String mangaTranslationTitleNotBlankMessage;
+    String mangaTranslationTitleNotBlankMessage;
 
     @Value("${mangaTranslation.title.size}")
-    protected String mangaTranslationTitleSizeMessage;
+    String mangaTranslationTitleSizeMessage;
 
     @Value("${mangaTranslation.description.notBlank}")
-    protected String mangaTranslationDescriptionNotBlankMessage;
+    String mangaTranslationDescriptionNotBlankMessage;
 
     @Value("${mangaTranslation.description.size}")
-    protected String mangaTranslationDescriptionSizeMessage;
+    String mangaTranslationDescriptionSizeMessage;
 
     @Value("${manga.authors.notEmpty}")
-    protected String mangaAuthorsRequiredMessage;
+    String mangaAuthorsRequiredMessage;
 
     @Value("${manga.genres.notEmpty}")
-    protected String mangaGenresRequiredMessage;
+    String mangaGenresRequiredMessage;
 
     @Value("${manga.image.notEmpty}")
-    protected String mangaImageRequiredMessage;
+    String mangaImageRequiredMessage;
 
-    protected MangaFormPage mangaFormPage;
+    MangaFormPage mangaFormPage;
 
-    protected LoginPage loginPage;
+    LoginPage loginPage;
 
-    protected MangaList mangaList;
+    MangaList mangaList;
 
     @Autowired
-    protected MangaTranslationService mangaTranslationService;
+    MangaTranslationService mangaTranslationService;
 
     @BeforeEach
     void setupPOM() {

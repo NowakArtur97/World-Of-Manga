@@ -11,23 +11,23 @@ import org.springframework.beans.factory.annotation.Value;
 class AuthorControllerUITest extends SeleniumUITest {
 
     @Value("${author.fullName.notBlank}")
-    protected String authorFulNameNotBlankMessage;
+    String authorFulNameNotBlankMessage;
 
     @Value("${author.fullName.size}")
-    protected String authorFullNameSizeMessage;
+    String authorFullNameSizeMessage;
 
     @Value("${author.fullName.alreadySaved}")
-    protected String authorAlreadySavedMessage;
+    String authorAlreadySavedMessage;
 
-    protected AuthorFormPage authorFormPage;
+    AuthorFormPage authorFormPage;
 
-    protected LoginPage loginPage;
+    LoginPage loginPage;
 
     @Autowired
-    protected AuthorService authorService;
+    AuthorService authorService;
 
     @BeforeEach
-    public void setupPOM() {
+    void setupPOM() {
 
         loginPage = new LoginPage(webDriver);
 

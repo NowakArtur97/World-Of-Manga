@@ -8,21 +8,21 @@ import org.springframework.beans.factory.annotation.Value;
 class MainControllerUITest extends SeleniumUITest {
 
     @Value("${header.logo}")
-    protected String headerLogo;
+    String headerLogo;
 
     @Value("${header.signUp}")
-    protected String headerRegistrationOption;
+    String headerRegistrationOption;
 
     @Value("${header.signIn}")
-    protected String headerLoginOption;
+    String headerLoginOption;
 
     @Value("${header.language}")
-    protected String headerLanguageOption;
+    String headerLanguageOption;
 
-    protected MainPage mainPage;
+    MainPage mainPage;
 
     @BeforeEach
-    public void setupPOM() {
+    void setupPOM() {
 
         mainPage = new MainPage(webDriver);
     }

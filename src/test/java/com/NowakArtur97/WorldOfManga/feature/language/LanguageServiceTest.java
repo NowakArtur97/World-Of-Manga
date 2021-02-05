@@ -31,7 +31,7 @@ class LanguageServiceTest {
     }
 
     @Test
-    public void when_find_by_locale_should_return_language_by_locale() throws LanguageNotFoundException {
+    void when_find_by_locale_should_return_language_by_locale() throws LanguageNotFoundException {
 
         String locale = "en";
 
@@ -49,7 +49,7 @@ class LanguageServiceTest {
     }
 
     @Test
-    public void when_locale_not_found_should_throw_exception() {
+    void when_locale_not_found_should_throw_exception() {
 
         String locale = "unknown locale";
 

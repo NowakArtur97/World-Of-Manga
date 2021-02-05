@@ -154,11 +154,6 @@ public class MangaFormPage extends SeleniumPageObjectModel {
         groupHiddenOptions.get(1).click();
     }
 
-    public boolean isFirstGenreCheckboxSelected() {
-
-        return genresCheckboxes.get(0).isSelected();
-    }
-
     public boolean isSecondGenreCheckboxSelected() {
 
         return genresCheckboxes.get(1).isSelected();

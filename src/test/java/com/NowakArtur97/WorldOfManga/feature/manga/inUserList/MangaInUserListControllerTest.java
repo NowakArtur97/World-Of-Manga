@@ -49,7 +49,7 @@ class MangaInUserListControllerTest {
     private UserService userService;
 
     @BeforeEach
-    private void setUp() {
+    void setUp() {
 
         MangaInUserListController mangaInUserListController = new MangaInUserListController(mangaInUserListService, cookieLocaleResolver,
                 userService);

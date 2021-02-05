@@ -25,7 +25,7 @@ class UserControllerUITest extends SeleniumUITest {
     String emailInUseMessage;
 
     @Value("${user.email.size}")
-    protected String emailSizeMessage;
+    String emailSizeMessage;
 
     @Value("${user.email.emailFormat}")
     String emailFormatMessage;
@@ -51,10 +51,10 @@ class UserControllerUITest extends SeleniumUITest {
     RegistrationPage registrationPage;
 
     @Autowired
-    protected UserService userService;
+    UserService userService;
 
     @BeforeEach
-    public void setupPOM() {
+    void setupPOM() {
 
         registrationPage = new RegistrationPage(webDriver);
     }

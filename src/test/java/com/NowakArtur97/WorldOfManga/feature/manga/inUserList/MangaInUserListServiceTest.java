@@ -48,7 +48,7 @@ class MangaInUserListServiceTest {
     }
 
     @Test
-    void whne_find_existing_manga_ins_user_list_by_user_and_manga_should_return_entity() throws IOException {
+    void when_find_existing_manga_ins_user_list_by_user_and_manga_should_return_entity() throws IOException {
 
         MangaTranslation mangaTranslationEnExpected = MangaTranslation.builder().title("English title")
                 .description("English description").build();
@@ -93,7 +93,7 @@ class MangaInUserListServiceTest {
     }
 
     @Test
-    void whne_find_not_existing_manga_ins_user_list_by_user_and_manga_should_return_empty_optional()
+    void when_find_not_existing_manga_ins_user_list_by_user_and_manga_should_return_empty_optional()
             throws IOException {
 
         MangaTranslation mangaTranslationEnExpected = MangaTranslation.builder().title("English title")
