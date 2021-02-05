@@ -4,7 +4,6 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import lombok.Getter;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
-import org.openqa.selenium.Proxy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -26,6 +25,9 @@ public class SeleniumUITest {
     @Value("${world-of-manga.selenium.is-remotely:false}")
     private boolean isRemotely;
 
+    @Value("${world-of-manga.selenium.is-on-circle-ci:false}")
+    private boolean isOnCircleCi;
+
     @Getter
     protected static WebDriver webDriver;
 
@@ -46,7 +48,14 @@ public class SeleniumUITest {
             capabilities.setCapability(ChromeOptions.CAPABILITY, options);
             capabilities.setBrowserName("chrome");
 
-            webDriver = new RemoteWebDriver(new URL(remoteUrl), capabilities);
+            if (isOnCircleCi) {
+
+                webDriver = new RemoteWebDriver(capabilities);
+            } else {
+
+                webDriver = new RemoteWebDriver(new URL(remoteUrl), capabilities);
+            }
+
             webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
         } else {
