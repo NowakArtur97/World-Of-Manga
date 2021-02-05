@@ -2,8 +2,8 @@ package com.NowakArtur97.WorldOfManga.feature.manga.seleniumTest.mangaController
 
 import com.NowakArtur97.WorldOfManga.feature.manga.seleniumPOM.MangaFormPage;
 import com.NowakArtur97.WorldOfManga.feature.manga.seleniumPOM.MangaList;
-import com.NowakArtur97.WorldOfManga.feature.user.seleniumPOM.LoginPage;
 import com.NowakArtur97.WorldOfManga.feature.manga.translation.MangaTranslationService;
+import com.NowakArtur97.WorldOfManga.feature.user.seleniumPOM.LoginPage;
 import com.NowakArtur97.WorldOfManga.testUtil.selenium.SeleniumUITest;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,34 +18,34 @@ class MangaControllerUITest extends SeleniumUITest {
     protected String mangaTranslationTitlePlInUseMessage;
 
     @Value("${mangaTranslation.title.notBlank}")
-    String mangaTranslationTitleNotBlankMessage;
+    protected String mangaTranslationTitleNotBlankMessage;
 
     @Value("${mangaTranslation.title.size}")
-    String mangaTranslationTitleSizeMessage;
+    protected String mangaTranslationTitleSizeMessage;
 
     @Value("${mangaTranslation.description.notBlank}")
-    String mangaTranslationDescriptionNotBlankMessage;
+    protected String mangaTranslationDescriptionNotBlankMessage;
 
     @Value("${mangaTranslation.description.size}")
-    String mangaTranslationDescriptionSizeMessage;
+    protected String mangaTranslationDescriptionSizeMessage;
 
     @Value("${manga.authors.notEmpty}")
-    String mangaAuthorsRequiredMessage;
+    protected String mangaAuthorsRequiredMessage;
 
     @Value("${manga.genres.notEmpty}")
-    String mangaGenresRequiredMessage;
+    protected String mangaGenresRequiredMessage;
 
     @Value("${manga.image.notEmpty}")
-    String mangaImageRequiredMessage;
+    protected String mangaImageRequiredMessage;
 
-    MangaFormPage mangaFormPage;
+    protected MangaFormPage mangaFormPage;
 
     protected LoginPage loginPage;
 
-    MangaList mangaList;
+    protected MangaList mangaList;
 
     @Autowired
-    MangaTranslationService mangaTranslationService;
+    protected MangaTranslationService mangaTranslationService;
 
     @BeforeEach
     void setupPOM() {

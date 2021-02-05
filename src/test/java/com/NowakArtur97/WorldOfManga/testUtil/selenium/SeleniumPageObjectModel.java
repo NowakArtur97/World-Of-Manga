@@ -8,8 +8,8 @@ import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 
 public class SeleniumPageObjectModel {
 
-    private final static String MAIN_URL_PATH = "http://localhost:";
-//    private final static String MAIN_URL_PATH = "http://192.168.99.100:";
+//    private final static String MAIN_URL_PATH = "http://localhost:";
+    private final static String MAIN_URL_PATH = "http://192.168.99.100:";
 
     private final static int TIME_TO_WAIT = 15;
 

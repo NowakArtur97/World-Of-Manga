@@ -8,16 +8,16 @@ import org.springframework.beans.factory.annotation.Value;
 class MainControllerUITest extends SeleniumUITest {
 
     @Value("${header.logo}")
-    String headerLogo;
+    protected String headerLogo;
 
     @Value("${header.signUp}")
-    String headerRegistrationOption;
+    protected String headerRegistrationOption;
 
     @Value("${header.signIn}")
-    String headerLoginOption;
+    protected String headerLoginOption;
 
     @Value("${header.language}")
-    String headerLanguageOption;
+    protected String headerLanguageOption;
 
     protected MainPage mainPage;
 
