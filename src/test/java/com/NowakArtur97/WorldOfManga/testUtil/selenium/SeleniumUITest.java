@@ -30,7 +30,7 @@ public class SeleniumUITest {
     protected static WebDriver webDriver;
 
     @BeforeEach
-    public void setUp() throws MalformedURLException {
+    protected void setUp() throws MalformedURLException {
 
         WebDriverManager.chromedriver().setup();
 
@@ -63,7 +63,7 @@ public class SeleniumUITest {
     }
 
     @AfterAll
-    public static void tearDown() {
+    protected static void tearDown() {
 
         if (webDriver != null) {
 
