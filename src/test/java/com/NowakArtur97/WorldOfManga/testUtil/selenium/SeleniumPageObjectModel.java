@@ -9,10 +9,11 @@ import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 public class SeleniumPageObjectModel {
 
     private final static String MAIN_URL_PATH = "http://localhost:";
+//    private final static String MAIN_URL_PATH = "http://192.168.99.100:";
 
     private final static int TIME_TO_WAIT = 15;
 
-    private final static int SERVER_PORT = 8088;
+    private final static int SERVER_PORT = 8000;
 
     protected final WebDriver webDriver;
 
@@ -24,7 +25,7 @@ public class SeleniumPageObjectModel {
     }
 
     protected void connectTo(final String RESOURCE_PATH) {
-
+        
         webDriver.navigate().to(MAIN_URL_PATH + SERVER_PORT + RESOURCE_PATH);
     }
 
