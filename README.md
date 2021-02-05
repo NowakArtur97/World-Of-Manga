@@ -39,7 +39,13 @@ To start the application, in the folder, enter the following commands in command
 
 For a development use commands:
 - `docker-compose -f docker-compose.dev.yml up -d`
+  Then run the application in your favorite editor by setting the `dev` profile and go to: `http://localhost:8080`.
 - `docker-compose -f docker-compose.dev.yml down`
+
+For a testing use commands:
+- `docker-compose -f docker-compose.test.yml up -d`
+- `mvnw test -Dspring-boot.run.profiles=test`
+- `docker-compose -f docker-compose.test.yml down`
 
 ## Built With 
 - Java 11
