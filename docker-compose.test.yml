@@ -1,18 +1,13 @@
 version: '3.7'
 
-#networks:
-#  worldOfManga-network:
-
 services:
   world_of_manga:
     restart: on-failure
     build:
       context: .
-      dockerfile: Dockerfile
-#    networks:
-#      - worldOfManga-network
+      dockerfile: test.Dockerfile
     ports:
-      - 8080:8080
+      - 8000:8000
     depends_on:
       - postgres
     environment:
@@ -23,8 +18,6 @@ services:
   postgres:
     restart: always
     image: postgres:13.1-alpine
-#    networks:
-#      - worldOfManga-network
     container_name: postgres
     ports:
       - 5432:5432
@@ -32,32 +25,39 @@ services:
       POSTGRES_DB: world_of_manga
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgresWoM
-#  selenium-hub:
-#    image: selenium/hub:latest
-##    networks:
-##      - worldOfManga-network
-#    container_name: selenium-hub
-#    ports:
-#      - 4444:4444
-##    network_mode: host
-#  chrome:
-#    image: selenium/node-chrome-debug:3.141.59-yttrium
-##    networks:
-##      - worldOfManga-network
-#    container_name: chrome
-#    deploy:
-#      replicas: 5
-#    ports:
-#      - 5900:5900
-#    volumes:
-#      - /dev/shm:/dev/shm
-#    depends_on:
-#      - selenium-hub
-#    environment:
-#      - HUB_HOST=localhost
-#      - HUB_PORT=4444
-#    network_mode: host
-#  firefox:
+  selenium-hub:
+    restart: always
+    image: selenium/hub:latest
+    container_name: selenium-hub
+    ports:
+      - 4444:4444
+    environment:
+      - GRID_BROWSER_TIMEOUT=300
+      - GRID_TIMEOUT=300
+  selenium-chrome:
+    image: selenium/node-chrome-debug:3.141.59-yttrium
+    container_name: chrome
+    deploy:
+      replicas: 5
+    ports:
+      - 5900:5900
+    volumes:
+      - /dev/shm:/dev/shm
+    depends_on:
+      - selenium-hub
+    environment:
+      - HUB_HOST=selenium-hub
+      - HUB_PORT=4444
+      - HUB_PORT_4440_TCP_ADDR=selenium-hub
+      - HUB_PORT_4440_TCP_PORT=4440
+      - JAVA_OPT=-Xmx512m
+      - DBUS_SESSION_BUS_ADDRESS=/dev/null
+      - no_proxy=localhost
+      - HUB_ENV_no_proxy=localhost
+      - GRID_BROWSER_TIMEOUT=300
+      - GRID_TIMEOUT=300
+
+#  selenium-firefox:
 #    image: selenium/node-firefox:3.141.59-yttrium
 #    container_name: firefox
 #    deploy:

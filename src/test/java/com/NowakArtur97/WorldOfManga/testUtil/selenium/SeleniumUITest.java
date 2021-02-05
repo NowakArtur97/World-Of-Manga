@@ -54,17 +54,12 @@ public class SeleniumUITest {
                 webDriver = new RemoteWebDriver(new URL(remoteUrl), capabilities);
             }
 
-            webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-
         } else {
-            DesiredCapabilities capabilities = DesiredCapabilities.chrome();
-            ChromeOptions options = new ChromeOptions();
-            options.addArguments("--start-maximized");
-            capabilities.setCapability(ChromeOptions.CAPABILITY, options);
-            capabilities.setBrowserName("chrome");
 
-            webDriver = new ChromeDriver(capabilities);
+            webDriver = new ChromeDriver();
         }
+
+        webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
 
     @AfterAll
