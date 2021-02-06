@@ -1,4 +1,4 @@
-package com.NowakArtur97.WorldOfManga.testUtil.selenium;
+package com.NowakArtur97.WorldOfManga.testUtil.extension;
 
 import org.openqa.selenium.WebDriver;
 import ru.yandex.qatools.ashot.AShot;
@@ -9,7 +9,7 @@ import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
 
-public class ScreenshotUtil {
+class ScreenshotUtil {
 
     private final static String PROJECT_PATH = System.getProperty("user.dir");
 
@@ -19,7 +19,7 @@ public class ScreenshotUtil {
 
     private final static String DOT = ".";
 
-    public void takeScreenshot(WebDriver webDriver, String screenshotName) {
+    void takeScreenshot(WebDriver webDriver, String screenshotName) {
 
         if (webDriver != null) {
             Screenshot screenshot = new AShot().shootingStrategy(ShootingStrategies.viewportPasting(1000))
