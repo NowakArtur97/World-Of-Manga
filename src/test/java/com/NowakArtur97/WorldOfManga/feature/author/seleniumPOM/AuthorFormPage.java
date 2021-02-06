@@ -45,10 +45,10 @@ public class AuthorFormPage extends SeleniumPageObjectModel {
 
     private void clickSubmitAuthorFormButton() {
 
-        submitButton.click();
+        useJavaScriptToClickElement(submitButton);
     }
 
-    public void setFullName(String fullName) {
+    private void setFullName(String fullName) {
 
         fullNameInput.sendKeys(fullName);
     }

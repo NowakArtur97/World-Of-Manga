@@ -68,7 +68,7 @@ public class RegistrationPage extends SeleniumPageObjectModel {
         return usernameInput.getAttribute("value");
     }
 
-    public void setUsername(String username) {
+    private void setUsername(String username) {
 
         usernameInput.sendKeys(username);
     }
@@ -78,7 +78,7 @@ public class RegistrationPage extends SeleniumPageObjectModel {
         return firstNameInput.getAttribute("value");
     }
 
-    public void setFirstName(String firstName) {
+    private void setFirstName(String firstName) {
 
         firstNameInput.sendKeys(firstName);
     }
@@ -88,17 +88,17 @@ public class RegistrationPage extends SeleniumPageObjectModel {
         return lastNameInput.getAttribute("value");
     }
 
-    public void setLastName(String lastName) {
+    private void setLastName(String lastName) {
 
         lastNameInput.sendKeys(lastName);
     }
 
-    public void setPassword(String password) {
+    private void setPassword(String password) {
 
         passwordInput.sendKeys(password);
     }
 
-    public void setMatchingPassword(String matchingPassword) {
+    private void setMatchingPassword(String matchingPassword) {
 
         matchingPasswordInput.sendKeys(matchingPassword);
     }
@@ -108,7 +108,7 @@ public class RegistrationPage extends SeleniumPageObjectModel {
         return emailInput.getAttribute("value");
     }
 
-    public void setEmail(String email) {
+    private void setEmail(String email) {
 
         emailInput.sendKeys(email);
     }

@@ -37,12 +37,12 @@ public class LoginPage extends SeleniumPageObjectModel {
         super.connectTo(RESOURCE_PATH + ver.getLangUrl());
     }
 
-    void setUsername(String username) {
+    private void setUsername(String username) {
 
         usernameInput.sendKeys(username);
     }
 
-    void setPassword(String password) {
+    private void setPassword(String password) {
 
         passwordInput.sendKeys(password);
     }
