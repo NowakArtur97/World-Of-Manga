@@ -30,8 +30,10 @@ class LogoutControllerUITest extends SeleniumUITest {
     @BeforeEach
     void setupPOM() {
 
-        logoutPage = new LogoutPage(webDriver, mainUrl + serverPort);
-        loginPage = new LoginPage(webDriver, mainUrl + serverPort);
-        mainPage = new MainPage(webDriver, mainUrl + serverPort);
+        logoutPage = new LogoutPage(webDriver, mainUrl + appServerPort);
+
+        loginPage = new LoginPage(webDriver, mainUrl + appServerPort);
+
+        mainPage = new MainPage(webDriver, mainUrl + appServerPort);
     }
 }

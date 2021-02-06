@@ -50,10 +50,10 @@ class MangaControllerUITest extends SeleniumUITest {
     @BeforeEach
     void setupPOM() {
 
-        loginPage = new LoginPage(webDriver, mainUrl + serverPort);
+        loginPage = new LoginPage(webDriver, mainUrl + appServerPort);
 
-        mangaFormPage = new MangaFormPage(webDriver, mainUrl + serverPort);
+        mangaFormPage = new MangaFormPage(webDriver, mainUrl + appServerPort);
 
-        mangaList = new MangaList(webDriver, mainUrl + serverPort);
+        mangaList = new MangaList(webDriver, mainUrl + appServerPort);
     }
 }
