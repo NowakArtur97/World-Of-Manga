@@ -1,17 +1,17 @@
 package com.NowakArtur97.WorldOfManga.eventListener;
 
-import com.NowakArtur97.WorldOfManga.feature.language.LanguageNotFoundException;
-import com.NowakArtur97.WorldOfManga.feature.manga.genre.MangaGenreNotFoundException;
 import com.NowakArtur97.WorldOfManga.feature.author.Author;
 import com.NowakArtur97.WorldOfManga.feature.language.Language;
+import com.NowakArtur97.WorldOfManga.feature.language.LanguageNotFoundException;
 import com.NowakArtur97.WorldOfManga.feature.language.LanguageService;
 import com.NowakArtur97.WorldOfManga.feature.manga.details.Manga;
 import com.NowakArtur97.WorldOfManga.feature.manga.details.MangaRepository;
 import com.NowakArtur97.WorldOfManga.feature.manga.genre.MangaGenre;
+import com.NowakArtur97.WorldOfManga.feature.manga.genre.MangaGenreNotFoundException;
 import com.NowakArtur97.WorldOfManga.feature.manga.genre.MangaGenreService;
 import com.NowakArtur97.WorldOfManga.feature.manga.translation.MangaTranslation;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
@@ -20,6 +20,7 @@ import java.io.IOException;
 
 @Component
 @RequiredArgsConstructor
+@Slf4j
 class OnApplicationStartupEventListener {
 
     private final ImageToByteConverter imageToByteConverter;
@@ -180,7 +181,7 @@ class OnApplicationStartupEventListener {
         try {
             image = imageToByteConverter.convertImageToByte(titleEn);
         } catch (IOException e) {
-            e.printStackTrace();
+            log.info("Can`t  find image with name: " + titleEn);
         }
 
         Manga manga = Manga.builder().image(image).build();

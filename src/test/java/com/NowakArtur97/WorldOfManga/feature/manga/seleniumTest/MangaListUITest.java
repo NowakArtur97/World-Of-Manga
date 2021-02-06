@@ -10,8 +10,6 @@ import com.NowakArtur97.WorldOfManga.testUtil.selenium.SeleniumUITest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.condition.DisabledOnOs;
-import org.junit.jupiter.api.condition.OS;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
@@ -26,7 +24,6 @@ import static org.junit.jupiter.api.Assertions.*;
 @DisplayNameGeneration(NameWithSpacesGenerator.class)
 @Tag("MangaListUI_Tests")
 @DirtiesContext(classMode = ClassMode.BEFORE_EACH_TEST_METHOD)
-@DisabledOnOs(OS.LINUX)
 class MangaListUITest extends SeleniumUITest {
 
     private MangaList mangaList;

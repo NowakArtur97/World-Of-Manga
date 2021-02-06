@@ -6,8 +6,6 @@ import com.NowakArtur97.WorldOfManga.testUtil.generator.NameWithSpacesGenerator;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.condition.DisabledOnOs;
-import org.junit.jupiter.api.condition.OS;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
@@ -22,7 +20,6 @@ import static org.junit.jupiter.api.Assertions.*;
 @DisplayNameGeneration(NameWithSpacesGenerator.class)
 @Tag("MangaControllerUIPl_Tests")
 @DirtiesContext(classMode = ClassMode.BEFORE_EACH_TEST_METHOD)
-@DisabledOnOs(OS.LINUX)
 class MangaControllerUIPlTest extends MangaControllerUITest {
 
     @Test
