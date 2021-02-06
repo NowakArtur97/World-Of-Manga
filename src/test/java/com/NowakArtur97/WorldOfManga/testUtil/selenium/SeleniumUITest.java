@@ -10,12 +10,19 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.web.server.LocalServerPort;
 
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
 public class SeleniumUITest {
+
+    @LocalServerPort
+    protected int serverPort;
+
+    @Value("${world-of-manga.selenium.main-url:http://192.168.99.100:}")
+    protected String mainUrl;
 
     @Value("${world-of-manga.selenium.remote-web-driver-url:http://192.168.99.100:4444/wd/hub}")
     private String remoteUrl;

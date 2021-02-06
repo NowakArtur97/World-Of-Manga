@@ -33,9 +33,9 @@ public class AuthorFormPage extends SeleniumPageObjectModel {
     @FindBy(xpath = ADD_OR_UPDATE_AUTHOR_LINK)
     private WebElement addOrUpdateAuthorLink;
 
-    public AuthorFormPage(WebDriver webDriver) {
+    public AuthorFormPage(WebDriver webDriver, String mainUrl) {
 
-        super(webDriver);
+        super(webDriver, mainUrl);
     }
 
     public void loadAuthorForm(LanguageVersion ver) {

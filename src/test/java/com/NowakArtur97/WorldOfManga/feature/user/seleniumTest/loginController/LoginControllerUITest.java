@@ -32,7 +32,7 @@ class LoginControllerUITest extends SeleniumUITest {
     @BeforeEach
     void setupPOM() {
 
-        loginPage = new LoginPage(webDriver);
-        mainPage = new MainPage(webDriver);
+        loginPage = new LoginPage(webDriver, mainUrl + serverPort);
+        mainPage = new MainPage(webDriver, mainUrl + serverPort);
     }
 }

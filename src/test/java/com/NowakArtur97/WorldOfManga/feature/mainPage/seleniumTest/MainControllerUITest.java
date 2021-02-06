@@ -24,6 +24,6 @@ class MainControllerUITest extends SeleniumUITest {
     @BeforeEach
     void setupPOM() {
 
-        mainPage = new MainPage(webDriver);
+        mainPage = new MainPage(webDriver, mainUrl + serverPort);
     }
 }

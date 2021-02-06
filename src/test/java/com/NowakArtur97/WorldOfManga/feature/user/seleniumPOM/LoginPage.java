@@ -27,9 +27,9 @@ public class LoginPage extends SeleniumPageObjectModel {
     @FindBy(className = FORM_BOX_CLASS)
     private WebElement formBox;
 
-    public LoginPage(WebDriver webDriver) {
+    public LoginPage(WebDriver webDriver, String mainUrl) {
 
-        super(webDriver);
+        super(webDriver, mainUrl);
     }
 
     public void loadLoginView(LanguageVersion ver) {

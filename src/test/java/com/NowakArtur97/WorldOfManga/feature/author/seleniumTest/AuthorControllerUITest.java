@@ -29,8 +29,8 @@ class AuthorControllerUITest extends SeleniumUITest {
     @BeforeEach
     void setupPOM() {
 
-        loginPage = new LoginPage(webDriver);
+        loginPage = new LoginPage(webDriver, mainUrl + serverPort);
 
-        authorFormPage = new AuthorFormPage(webDriver);
+        authorFormPage = new AuthorFormPage(webDriver, mainUrl + serverPort);
     }
 }

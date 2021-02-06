@@ -53,9 +53,9 @@ public class RegistrationPage extends SeleniumPageObjectModel {
     @FindBy(className = SUBMIT_CLASS)
     private WebElement submitButton;
 
-    public RegistrationPage(WebDriver webDriver) {
+    public RegistrationPage(WebDriver webDriver, String mainUrl) {
 
-        super(webDriver);
+        super(webDriver, mainUrl);
     }
 
     public void loadRegistrationView(LanguageVersion ver) {

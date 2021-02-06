@@ -60,9 +60,9 @@ public class MangaList extends SeleniumPageObjectModel {
     @FindBy(xpath = MANGA_WORLD_LINK)
     private WebElement mangaUserListLink;
 
-    public MangaList(WebDriver webDriver) {
+    public MangaList(WebDriver webDriver, String mainUrl) {
 
-        super(webDriver);
+        super(webDriver, mainUrl);
     }
 
     public void loadMangaList(LanguageVersion ver) {

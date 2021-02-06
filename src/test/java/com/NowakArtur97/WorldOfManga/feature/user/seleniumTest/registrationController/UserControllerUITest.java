@@ -56,6 +56,6 @@ class UserControllerUITest extends SeleniumUITest {
     @BeforeEach
     void setupPOM() {
 
-        registrationPage = new RegistrationPage(webDriver);
+        registrationPage = new RegistrationPage(webDriver, mainUrl + serverPort);
     }
 }

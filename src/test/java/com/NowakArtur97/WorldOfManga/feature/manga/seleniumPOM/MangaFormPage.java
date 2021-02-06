@@ -65,9 +65,9 @@ public class MangaFormPage extends SeleniumPageObjectModel {
     @FindBy(xpath = ADD_OR_UPDATE_MANGA_LINK)
     private WebElement addOrUpdateMangaLink;
 
-    public MangaFormPage(WebDriver webDriver) {
+    public MangaFormPage(WebDriver webDriver, String mainUrl) {
 
-        super(webDriver);
+        super(webDriver, mainUrl);
     }
 
     public void loadMangaForm(LanguageVersion ver) {

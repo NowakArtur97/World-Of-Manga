@@ -23,9 +23,9 @@ public class MainPage extends SeleniumPageObjectModel {
     @FindBy(className = FOOTER_CLASS)
     private WebElement footer;
 
-    public MainPage(WebDriver webDriver) {
+    public MainPage(WebDriver webDriver, String mainUrl) {
 
-        super(webDriver);
+        super(webDriver, mainUrl);
     }
 
     public void loadMainView(LanguageVersion ver) {

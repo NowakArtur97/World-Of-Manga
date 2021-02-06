@@ -1,4 +1,4 @@
-package com.NowakArtur97.WorldOfManga.feature.manga.rating;
+package com.NowakArtur97.WorldOfManga.feature.manga.seleniumTest;
 
 import com.NowakArtur97.WorldOfManga.feature.manga.seleniumPOM.MangaList;
 import com.NowakArtur97.WorldOfManga.feature.user.seleniumPOM.LoginPage;
@@ -34,9 +34,9 @@ class MangaRatingUITest extends SeleniumUITest {
     @BeforeEach
     void setupPOM() {
 
-        mangaList = new MangaList(webDriver);
+        mangaList = new MangaList(webDriver, mainUrl + serverPort);
 
-        loginPage = new LoginPage(webDriver);
+        loginPage = new LoginPage(webDriver, mainUrl + serverPort);
     }
 
     @ParameterizedTest(name = "{index}: Language Version: {0}")

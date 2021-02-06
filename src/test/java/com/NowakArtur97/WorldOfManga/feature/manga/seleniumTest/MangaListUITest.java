@@ -38,11 +38,11 @@ class MangaListUITest extends SeleniumUITest {
     @BeforeEach
     void setupPOM() {
 
-        mangaList = new MangaList(webDriver);
+        mangaList = new MangaList(webDriver, mainUrl + serverPort);
 
-        loginPage = new LoginPage(webDriver);
+        loginPage = new LoginPage(webDriver, mainUrl + serverPort);
 
-        mangaFormPage = new MangaFormPage(webDriver);
+        mangaFormPage = new MangaFormPage(webDriver, mainUrl + serverPort);
     }
 
     @ParameterizedTest(name = "{index}: Language Version: {0}")

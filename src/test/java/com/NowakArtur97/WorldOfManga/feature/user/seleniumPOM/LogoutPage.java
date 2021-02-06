@@ -12,9 +12,9 @@ public class LogoutPage extends SeleniumPageObjectModel {
     @FindBy(xpath = LOGOUT_LINK)
     private WebElement logoutLink;
 
-    public LogoutPage(WebDriver webDriver) {
+    public LogoutPage(WebDriver webDriver, String mainUrl) {
 
-        super(webDriver);
+        super(webDriver, mainUrl);
     }
 
     public void signOut() {
