@@ -6,20 +6,12 @@ import java.lang.reflect.Method;
 
 public class NameWithSpacesGenerator extends ReplaceUnderscores {
 
-    private final String wordEndingTestName = "should";
-
-    private final String signReplacedInMethodName = "_";
-
-    private final String signReplacingInMethodName = " ";
-
     @Override
     public String generateDisplayNameForClass(Class<?> testClass) {
 
         String classMethodName = super.generateDisplayNameForClass(testClass);
 
-        String displayName = addSpacesBetweenWords(classMethodName);
-
-        return displayName;
+        return addSpacesBetweenWords(classMethodName);
     }
 
     @Override
@@ -27,9 +19,7 @@ public class NameWithSpacesGenerator extends ReplaceUnderscores {
 
         String nestedClassMethodName = nestedClass.getSimpleName();
 
-        String displayName = addSpacesBetweenWords(nestedClassMethodName);
-
-        return displayName;
+        return addSpacesBetweenWords(nestedClassMethodName);
     }
 
     @Override
@@ -37,12 +27,14 @@ public class NameWithSpacesGenerator extends ReplaceUnderscores {
 
         String testMethodName = testMethod.getName();
 
+        String wordEndingTestName = "should";
         int indexOfShouldWord = testMethodName.indexOf(wordEndingTestName);
 
-        String displayName = testMethodName.substring(0, indexOfShouldWord - 1).replace(signReplacedInMethodName,
-                signReplacingInMethodName);
+        String signReplacedInMethodName = "_";
+        String signReplacingInMethodName = " ";
 
-        return displayName;
+        return testMethodName.substring(0, indexOfShouldWord - 1).replace(signReplacedInMethodName,
+                signReplacingInMethodName);
     }
 
     private String addSpacesBetweenWords(String className) {
@@ -54,7 +46,7 @@ public class NameWithSpacesGenerator extends ReplaceUnderscores {
 
         for (int i = 1; i < wordLength; i++) {
 
-            if (Character.isUpperCase(className.charAt(i))) {
+            if (isUpperCase(className, i) && isNotUITest(className, i)) {
 
                 result.append(' ');
             }
@@ -63,5 +55,13 @@ public class NameWithSpacesGenerator extends ReplaceUnderscores {
         }
 
         return result.toString();
+    }
+
+    private boolean isNotUITest(String className, int i) {
+        return !className.substring(i - 1, i + 1).equals("UI");
+    }
+
+    private boolean isUpperCase(String className, int i) {
+        return Character.isUpperCase(className.charAt(i));
     }
 }
