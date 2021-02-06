@@ -18,8 +18,8 @@ import java.util.concurrent.TimeUnit;
 
 public class SeleniumUITest {
 
-    @LocalServerPort
-    protected int serverPort;
+    @Value("${server.port:8000}")
+    protected int appServerPort;
 
     @Value("${world-of-manga.selenium.main-url:http://192.168.99.100:}")
     protected String mainUrl;
