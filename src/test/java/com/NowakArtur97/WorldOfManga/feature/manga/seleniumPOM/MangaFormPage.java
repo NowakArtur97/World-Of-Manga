@@ -131,7 +131,7 @@ public class MangaFormPage extends SeleniumPageObjectModel {
 
     private void showAuthors() {
 
-        groupHiddenOptions.get(0).click();
+       useJavaScriptToClickElement(groupHiddenOptions.get(0));
     }
 
     public boolean isFirstAuthorCheckboxSelected() {
