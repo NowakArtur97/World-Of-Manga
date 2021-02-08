@@ -91,7 +91,7 @@ class MangaControllerUIEnTest extends MangaControllerUITest {
 
         int mangasQuantityAfter = mangaList.countMangaCards();
 
-        assertAll(() -> assertTrue((mangasQuantityAfter == mangasQuantityBefore - 1),
+        assertAll(() -> assertTrue((mangasQuantityAfter == mangasQuantityBefore - 2),
                 () -> "should show one less manga"));
     }
 
