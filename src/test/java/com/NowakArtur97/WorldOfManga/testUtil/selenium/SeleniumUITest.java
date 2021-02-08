@@ -10,6 +10,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.actuate.autoconfigure.web.server.LocalManagementPort;
 import org.springframework.boot.web.server.LocalServerPort;
 
 import java.net.MalformedURLException;
@@ -18,7 +19,7 @@ import java.util.concurrent.TimeUnit;
 
 public class SeleniumUITest {
 
-    @Value("${server.port:8000}")
+    @Value("${world-of-manga.selenium.server-port:8000}")
     protected int appServerPort;
 
     @Value("${world-of-manga.selenium.main-url:http://192.168.99.100:}")
