@@ -31,7 +31,7 @@ class MangaControllerUIEnTest extends MangaControllerUITest {
         boolean selectGenre = true;
         boolean addImage = true;
 
-        loginPage.loadLoginView(LanguageVersion.PL);
+        loginPage.loadLoginView(LanguageVersion.ENG);
 
         loginPage.fillMandatoryLoginFields("admin", "admin");
 
@@ -57,7 +57,7 @@ class MangaControllerUIEnTest extends MangaControllerUITest {
         boolean selectGenre = true;
         boolean addImage = true;
 
-        loginPage.loadLoginView(LanguageVersion.PL);
+        loginPage.loadLoginView(LanguageVersion.ENG);
 
         loginPage.fillMandatoryLoginFields("admin", "admin");
 
@@ -79,7 +79,7 @@ class MangaControllerUIEnTest extends MangaControllerUITest {
     @Test
     void when_manga_deleting_should_remove_manga() {
 
-        loginPage.loadLoginView(LanguageVersion.PL);
+        loginPage.loadLoginView(LanguageVersion.ENG);
 
         loginPage.fillMandatoryLoginFields("admin", "admin");
 
@@ -98,7 +98,7 @@ class MangaControllerUIEnTest extends MangaControllerUITest {
     @Test
     void when_manga_deleting_should_not_show_manga_in_rated_manga_list() {
 
-        loginPage.loadLoginView(LanguageVersion.PL);
+        loginPage.loadLoginView(LanguageVersion.ENG);
 
         loginPage.fillMandatoryLoginFields("admin", "admin");
 
@@ -123,7 +123,7 @@ class MangaControllerUIEnTest extends MangaControllerUITest {
     @Test
     void when_manga_deleting_should_not_show_manga_in_favourites() {
 
-        loginPage.loadLoginView(LanguageVersion.PL);
+        loginPage.loadLoginView(LanguageVersion.ENG);
 
         loginPage.fillMandatoryLoginFields("admin", "admin");
 
@@ -145,7 +145,7 @@ class MangaControllerUIEnTest extends MangaControllerUITest {
     @Test
     void when_manga_deleting_should_not_show_manga_in_users_manga_list() {
 
-        loginPage.loadLoginView(LanguageVersion.PL);
+        loginPage.loadLoginView(LanguageVersion.ENG);
 
         loginPage.fillMandatoryLoginFields("admin", "admin");
 
@@ -174,7 +174,7 @@ class MangaControllerUIEnTest extends MangaControllerUITest {
         boolean selectGenre = false;
         boolean addImage = false;
 
-        loginPage.loadLoginView(LanguageVersion.PL);
+        loginPage.loadLoginView(LanguageVersion.ENG);
 
         loginPage.fillMandatoryLoginFields("admin", "admin");
 
@@ -182,7 +182,7 @@ class MangaControllerUIEnTest extends MangaControllerUITest {
 
         mangaFormPage.fillMandatoryMangaFormFields(blankField, blankField, blankField, blankField, selectAuthor,
                 selectGenre, addImage);
-
+        
         assertAll(() -> assertTrue(mangaFormPage.isUserOnMangaFormPage(), () -> "should show manga form page"),
                 () -> assertTrue(mangaFormPage.countFailureMessages() == 7, () -> "should have seven errors"),
                 () -> assertTrue(mangaFormPage.getFormBoxText().contains(mangaTranslationDescriptionNotBlankMessage),
@@ -214,7 +214,7 @@ class MangaControllerUIEnTest extends MangaControllerUITest {
         boolean selectGenre = true;
         boolean addImage = true;
 
-        loginPage.loadLoginView(LanguageVersion.PL);
+        loginPage.loadLoginView(LanguageVersion.ENG);
 
         loginPage.fillMandatoryLoginFields("admin", "admin");
 
