@@ -12,6 +12,7 @@ import com.NowakArtur97.WorldOfManga.feature.manga.genre.MangaGenreService;
 import com.NowakArtur97.WorldOfManga.feature.manga.translation.MangaTranslation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
@@ -22,6 +23,11 @@ import java.io.IOException;
 @RequiredArgsConstructor
 @Slf4j
 class OnApplicationStartupEventListener {
+
+    private final static String TEST_PROFILE = "test";
+
+    @Value("${spring.profiles.active:prod}")
+    private String activeProfile;
 
     private final ImageToByteConverter imageToByteConverter;
 
@@ -146,26 +152,30 @@ class OnApplicationStartupEventListener {
                 myHeroAcademiaAuthor, superPower, comedy, action);
         saveManga(komiTitle, komiDescriptionEn, komiTitle, komiDescriptionPl, komiAuthor, schoolLife, romance,
                 comedy);
-        saveManga(irumaTitle, irumaDescriptionEn, irumaTitle, irumaDescriptionPl, irumaAuthor, demons,
-                schoolLife, comedy);
-        saveManga(fireForceTitle, fireForceDescriptionEn, fireForceTitle, fireForceDescriptionPl,
-                fireForceAuthor, action, supernatural);
-        saveManga(godOfHighschoolTitle, godOfHighschoolDescriptionEn, godOfHighschoolTitle,
-                godOfHighschoolDescriptionPl, godOfHighschoolAuthor, fantasy, adventure, martialArts);
-        saveManga(narutoTitle, narutoDescriptionEn, narutoTitle, narutoDescriptionPl, narutoAuthor, fantasy,
-                adventure, action);
-        saveManga(blueExorcistTitle, blueExorcistDescriptionEn, blueExorcistTitle, blueExorcistDescriptionPl,
-                blueExorcistAuthor, demons, action, supernatural);
-        saveManga(berserkTitle, berserkDescriptionEn, berserkTitle, berserkDescriptionPl, berserkAuthor,
-                mature, fantasy, adventure);
-        saveManga(blackCloverTitle, blackCloverDescriptionEn, blackCloverTitle, blackCloverDescriptionPl,
-                blackCloverAuthor, magic, shounen, action);
-        saveManga(kingdomTitle, kingdomDescriptionEn, kingdomTitle, kingdomDescriptionPl, kingdomAuthor,
-                historical, military, action);
-        saveManga(vinlandSagaTitle, vinlandSagaDescriptionEn, vinlandSagaTitle, vinlandSagaDescriptionPl, vinlandSagaAuthor, historical,
-                drama, action);
-        saveManga(silentVoiceTitle, silentVoiceDescriptionEn, silentVoiceTitle, silentVoiceDescriptionPl
-                , silentVoiceAuthor, sliceOfLife, drama);
+
+        if (!activeProfile.equals(TEST_PROFILE)) {
+
+            saveManga(irumaTitle, irumaDescriptionEn, irumaTitle, irumaDescriptionPl, irumaAuthor, demons,
+                    schoolLife, comedy);
+            saveManga(fireForceTitle, fireForceDescriptionEn, fireForceTitle, fireForceDescriptionPl,
+                    fireForceAuthor, action, supernatural);
+            saveManga(godOfHighschoolTitle, godOfHighschoolDescriptionEn, godOfHighschoolTitle,
+                    godOfHighschoolDescriptionPl, godOfHighschoolAuthor, fantasy, adventure, martialArts);
+            saveManga(narutoTitle, narutoDescriptionEn, narutoTitle, narutoDescriptionPl, narutoAuthor, fantasy,
+                    adventure, action);
+            saveManga(blueExorcistTitle, blueExorcistDescriptionEn, blueExorcistTitle, blueExorcistDescriptionPl,
+                    blueExorcistAuthor, demons, action, supernatural);
+            saveManga(berserkTitle, berserkDescriptionEn, berserkTitle, berserkDescriptionPl, berserkAuthor,
+                    mature, fantasy, adventure);
+            saveManga(blackCloverTitle, blackCloverDescriptionEn, blackCloverTitle, blackCloverDescriptionPl,
+                    blackCloverAuthor, magic, shounen, action);
+            saveManga(kingdomTitle, kingdomDescriptionEn, kingdomTitle, kingdomDescriptionPl, kingdomAuthor,
+                    historical, military, action);
+            saveManga(vinlandSagaTitle, vinlandSagaDescriptionEn, vinlandSagaTitle, vinlandSagaDescriptionPl, vinlandSagaAuthor, historical,
+                    drama, action);
+            saveManga(silentVoiceTitle, silentVoiceDescriptionEn, silentVoiceTitle, silentVoiceDescriptionPl
+                    , silentVoiceAuthor, sliceOfLife, drama);
+        }
     }
 
     private void saveManga(String titleEn, String descriptionEn, String titlePl, String descriptionPl,
