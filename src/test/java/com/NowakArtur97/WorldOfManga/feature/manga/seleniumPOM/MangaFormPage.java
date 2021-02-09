@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.io.File;
 import java.util.List;
 
 public class MangaFormPage extends SeleniumPageObjectModel {
@@ -125,6 +126,20 @@ public class MangaFormPage extends SeleniumPageObjectModel {
     }
 
     private void addImage() {
+
+        String[] pathnames;
+
+        File f = new File(projectPath + exampleImagePath);
+
+        pathnames = f.list();
+
+        System.out.println("**********");
+        if (pathnames != null) {
+            for (String pathname : pathnames) {
+                System.out.println(pathname);
+            }
+        }
+        System.out.println("**********");
 
         imageInput.sendKeys(projectPath + exampleImagePath);
     }
