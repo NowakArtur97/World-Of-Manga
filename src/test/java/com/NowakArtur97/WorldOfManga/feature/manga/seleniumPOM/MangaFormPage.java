@@ -54,7 +54,7 @@ public class MangaFormPage extends SeleniumPageObjectModel {
     private List<WebElement> groupHiddenOptions;
 
     @FindBy(className = FORM_MESSAGE_FAILURE_CLASS)
-    private List<WebElement> failrueMessages;
+    private List<WebElement> failureMessages;
 
     @FindBy(name = FORM_BOX_NAME)
     private WebElement formBox;
@@ -176,7 +176,7 @@ public class MangaFormPage extends SeleniumPageObjectModel {
 
     public int countFailureMessages() {
 
-        return failrueMessages.size();
+        return failureMessages.size();
     }
 
     public void fillMandatoryMangaFormFields(String enTitle, String enDescription, String plTitle, String plDescription,

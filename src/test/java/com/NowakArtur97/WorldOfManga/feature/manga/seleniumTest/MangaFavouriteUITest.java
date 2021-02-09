@@ -61,7 +61,9 @@ class MangaFavouriteUITest extends SeleniumUITest {
 
         loginPage.fillMandatoryLoginFields("user", "user");
 
-        mangaList.chooseManga(0);
+        String lastMangaTitle = mangaList.getLastMangaTitle();
+
+        mangaList.chooseLastManga();
 
         mangaList.addOrRemoveLastMangaFromFavourites();
 
@@ -70,8 +72,8 @@ class MangaFavouriteUITest extends SeleniumUITest {
         mangaList.chooseFavouritesManga();
 
         assertAll(
-                () -> assertTrue(mangaList.getLastMangaCardText().contains("Black Clover"),
-                        () -> "should show new manga in favourites"),
+                () -> assertTrue(mangaList.getLastMangaCardText().contains(lastMangaTitle),
+                        () -> "should show new manga: " + lastMangaTitle + " in favourites"),
                 () -> assertTrue(mangaList.countMangaCards() >= 1, () -> "should show at least one manga"),
                 () -> assertNotNull(mangaList.getMangaListText(), () -> "should load manga list fragment text"));
     }

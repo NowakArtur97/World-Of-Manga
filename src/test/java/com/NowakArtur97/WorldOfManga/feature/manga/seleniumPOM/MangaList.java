@@ -12,13 +12,14 @@ public class MangaList extends SeleniumPageObjectModel {
 
     private static final String RESOURCE_PATH = "/";
 
-    private static final int INDEX_FOR_SKIPPING_RECOMMENDATIONS_STATUSES = 50;
-    private static final int INDEX_FOR_SKIPPING_RECOMMENDATIONS_RATINGS_OR_FAVOURITES = 20;
+    private static final int NUMBER_OF_MANGA_STATUSES = 5;
+    private static final int NUMBER_OF_MANGA_STARS = 5;
 
     private static final String MANGA_LIST_CLASS = "manga_list";
     private static final String MANGA_CARD_CLASS = "manga_card";
     private static final String MANGA_STAR_CLASS = "manga_card__icon--star";
     private static final String MANGA_RATING_CLASS = "manga_card_rating";
+    private static final String MANGA_TITLE_CLASS = "manga_card__title";
     private static final String MANGA_FAVOURITE_COUNTER_CLASS = "manga_card__likes";
     private static final String MANGA_FAVOURITE_CLASS = "manga_card__icon--heart";
     private static final String MANGA_STATUS_CLASS = "manga_card__icon--status";
@@ -37,13 +38,16 @@ public class MangaList extends SeleniumPageObjectModel {
     private List<WebElement> mangaStars;
 
     @FindBy(className = MANGA_RATING_CLASS)
-    private List<WebElement> mangaRating;
+    private List<WebElement> mangaRatings;
+
+    @FindBy(className = MANGA_TITLE_CLASS)
+    private List<WebElement> mangaTitles;
 
     @FindBy(className = MANGA_FAVOURITE_CLASS)
-    private List<WebElement> mangaFavouriteLink;
+    private List<WebElement> mangaFavouriteLinks;
 
     @FindBy(className = MANGA_FAVOURITE_COUNTER_CLASS)
-    private List<WebElement> mangaFavouritesCounter;
+    private List<WebElement> mangaFavouritesCounters;
 
     @FindBy(className = MANGA_STATUS_CLASS)
     private List<WebElement> mangaStatuses;
@@ -52,7 +56,7 @@ public class MangaList extends SeleniumPageObjectModel {
     private List<WebElement> adminOptions;
 
     @FindBy(className = MANGA_LIST_TYPE_CLASS)
-    private List<WebElement> mangaListType;
+    private List<WebElement> mangaListTypes;
 
     @FindBy(xpath = MANGA_LIST_LINK)
     private WebElement mangaListLink;
@@ -73,6 +77,11 @@ public class MangaList extends SeleniumPageObjectModel {
     public String getMangaListText() {
 
         return mangaList.getText();
+    }
+
+    public String getLastMangaTitle() {
+
+        return mangaTitles.get(mangaCards.size() - 1).getText();
     }
 
     public int countMangaCards() {
@@ -111,42 +120,42 @@ public class MangaList extends SeleniumPageObjectModel {
 
     public void rateFirstManga(int rating) {
 
-        useJavaScriptToClickElement(mangaStars.get(INDEX_FOR_SKIPPING_RECOMMENDATIONS_STATUSES + rating - 1));
+        useJavaScriptToClickElement(mangaStars.get(rating + mangaCards.size() / 2 * NUMBER_OF_MANGA_STATUSES));
     }
 
     public void rateLastManga(int rating) {
 
-        useJavaScriptToClickElement(mangaStars.get((mangaStars.size() - 5) + rating - 1));
+        useJavaScriptToClickElement(mangaStars.get((mangaStars.size() - NUMBER_OF_MANGA_STARS) + rating - 1));
     }
 
     public String getFirstMangaRating() {
 
-        return mangaRating.get(INDEX_FOR_SKIPPING_RECOMMENDATIONS_RATINGS_OR_FAVOURITES).getText();
+        return mangaRatings.get(mangaCards.size()).getText();
     }
 
     public String getFirstMangaRatingOnMangaList() {
 
-        return mangaRating.get(0).getText();
+        return mangaRatings.get(0).getText();
     }
 
     public void addOrRemoveFirstMangaFromFavourites() {
 
-        useJavaScriptToClickElement(mangaFavouriteLink.get(INDEX_FOR_SKIPPING_RECOMMENDATIONS_RATINGS_OR_FAVOURITES));
+        useJavaScriptToClickElement(mangaFavouriteLinks.get(mangaCards.size() / 2));
     }
 
     public void addOrRemoveLastMangaFromFavourites() {
 
-        useJavaScriptToClickElement(mangaFavouriteLink.get(mangaFavouriteLink.size() - 1));
+        useJavaScriptToClickElement(mangaFavouriteLinks.get(mangaFavouriteLinks.size() - 1));
     }
 
     public String getLastMangaFavouritesCounter() {
 
-        return mangaFavouritesCounter.get(mangaFavouritesCounter.size() - 2).getText();
+        return mangaFavouritesCounters.get(mangaFavouritesCounters.size() - 2).getText();
     }
 
     public void addOrRemoveFirstMangaFromList(int mangaStatus) {
 
-        mangaStatuses.get(INDEX_FOR_SKIPPING_RECOMMENDATIONS_STATUSES + mangaStatus).click();
+        mangaStatuses.get(mangaStatus + +mangaCards.size() / 2 * NUMBER_OF_MANGA_STATUSES).click();
     }
 
     public void addLastMangaToList(int mangaStatus) {
@@ -156,37 +165,37 @@ public class MangaList extends SeleniumPageObjectModel {
 
     public void chooseFavouritesManga() {
 
-        useJavaScriptToClickElement(mangaListType.get(0));
+        useJavaScriptToClickElement(mangaListTypes.get(0));
     }
 
     public void chooseRatedManga() {
 
-        useJavaScriptToClickElement(mangaListType.get(1));
+        useJavaScriptToClickElement(mangaListTypes.get(1));
     }
 
     public void chooseCurrentlyReadingManga() {
 
-        useJavaScriptToClickElement(mangaListType.get(2));
+        useJavaScriptToClickElement(mangaListTypes.get(2));
     }
 
     public void chooseCompletedManga() {
 
-        useJavaScriptToClickElement(mangaListType.get(3));
+        useJavaScriptToClickElement(mangaListTypes.get(3));
     }
 
     public void choosePlanToReadManga() {
 
-        useJavaScriptToClickElement(mangaListType.get(4));
+        useJavaScriptToClickElement(mangaListTypes.get(4));
     }
 
     public void chooseOnHoldManga() {
 
-        useJavaScriptToClickElement(mangaListType.get(5));
+        useJavaScriptToClickElement(mangaListTypes.get(5));
     }
 
     public void chooseDroppedManga() {
 
-        useJavaScriptToClickElement(mangaListType.get(6));
+        useJavaScriptToClickElement(mangaListTypes.get(6));
     }
 
     public void editFirstManga() {
