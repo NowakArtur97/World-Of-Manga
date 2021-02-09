@@ -39,7 +39,8 @@ jobs:
     - run:
         name: Wait for Postgresql
         command: dockerize -wait tcp://localhost:5432 -timeout 2m
-    - run: mvn test
+    - run: mvn test -Dgroups=MangaListUI_Tests
+#    - run: mvn test
   deploy:
     docker:
     - image: circleci/buildpack-deps:trusty

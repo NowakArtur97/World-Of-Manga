@@ -40,6 +40,9 @@ public class SeleniumUITest {
     @Value("${world-of-manga.selenium.is-on-circle-ci:false}")
     private boolean isOnCircleCi;
 
+    @Value("${world-of-manga.images.example-image-path:\\src\\main\\resources\\static\\images\\backgrounds\\samurai.jpg}")
+    protected String exampleImagePath;
+
     @Getter
     protected static WebDriver webDriver;
 

@@ -52,7 +52,7 @@ class MangaControllerUITest extends SeleniumUITest {
 
         loginPage = new LoginPage(webDriver, mainUrl + localServerPort);
 
-        mangaFormPage = new MangaFormPage(webDriver, mainUrl + localServerPort);
+        mangaFormPage = new MangaFormPage(webDriver, mainUrl + localServerPort, exampleImagePath);
 
         mangaList = new MangaList(webDriver, mainUrl + localServerPort);
     }

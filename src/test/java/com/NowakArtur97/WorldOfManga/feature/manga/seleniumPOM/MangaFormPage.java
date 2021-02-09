@@ -14,7 +14,7 @@ public class MangaFormPage extends SeleniumPageObjectModel {
 
     private final static String projectPath = System.getProperty("user.dir");
 
-    private final static String EXAMPLE_IMAGE_PATH = "\\src\\main\\resources\\static\\images\\backgrounds\\samurai.jpg";
+    private final String exampleImagePath;
 
     private static final String TITLE_EN = "enTranslation.title";
     private static final String DESCRIPTION_EN = "enTranslation.description";
@@ -65,9 +65,10 @@ public class MangaFormPage extends SeleniumPageObjectModel {
     @FindBy(xpath = ADD_OR_UPDATE_MANGA_LINK)
     private WebElement addOrUpdateMangaLink;
 
-    public MangaFormPage(WebDriver webDriver, String mainUrl) {
+    public MangaFormPage(WebDriver webDriver, String mainUrl, String exampleImagePath) {
 
         super(webDriver, mainUrl);
+        this.exampleImagePath = exampleImagePath;
     }
 
     public void loadMangaForm(LanguageVersion ver) {
@@ -125,7 +126,7 @@ public class MangaFormPage extends SeleniumPageObjectModel {
 
     private void addImage() {
 
-        imageInput.sendKeys(projectPath + EXAMPLE_IMAGE_PATH);
+        imageInput.sendKeys(projectPath + exampleImagePath);
     }
 
     private void clickAuthorCheckbox(int index) {
