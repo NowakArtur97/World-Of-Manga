@@ -125,17 +125,17 @@ public class MangaList extends SeleniumPageObjectModel {
 
     public void rateFirstManga(int rating) {
 
-        useJavaScriptToClickElement(mangaStars.get(rating + mangaCards.size() / 2 * NUMBER_OF_MANGA_STATUSES));
+        useJavaScriptToClickElement(mangaStars.get(rating + mangaCards.size() / 2 * NUMBER_OF_MANGA_STARS - 1));
     }
 
     public void rateLastManga(int rating) {
 
-        useJavaScriptToClickElement(mangaStars.get((mangaStars.size() - NUMBER_OF_MANGA_STARS) + rating - 1));
+        useJavaScriptToClickElement(mangaStars.get(rating + mangaStars.size() - NUMBER_OF_MANGA_STARS - 1));
     }
 
     public String getFirstMangaRating() {
 
-        return mangaRatings.get(mangaCards.size()).getText();
+        return mangaRatings.get(mangaCards.size() - 1).getText();
     }
 
     public String getFirstMangaRatingOnMangaList() {

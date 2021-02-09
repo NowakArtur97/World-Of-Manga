@@ -105,7 +105,7 @@ class MangaRatingUITest extends SeleniumUITest {
 
     @ParameterizedTest(name = "{index}: Language Version: {0}")
     @EnumSource(LanguageVersion.class)
-    void when_user_not_logged_rating_manga_should_show_login_form(LanguageVersion languageVersion) {
+    void when_not_logged_user_try_to_rate_manga_should_show_login_form(LanguageVersion languageVersion) {
 
         mangaList.loadMangaList(languageVersion);
 
