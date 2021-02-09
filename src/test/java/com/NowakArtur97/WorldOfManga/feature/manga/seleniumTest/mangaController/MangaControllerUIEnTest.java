@@ -14,7 +14,7 @@ import org.springframework.test.context.TestPropertySource;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @ExtendWith(ScreenshotWatcher.class)
 @TestPropertySource({"classpath:/validation/messages_en.properties", "classpath:/pageContent/messages_en.properties"})
 @DisplayNameGeneration(NameWithSpacesGenerator.class)
