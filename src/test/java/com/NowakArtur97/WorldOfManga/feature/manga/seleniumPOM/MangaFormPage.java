@@ -186,6 +186,8 @@ public class MangaFormPage extends SeleniumPageObjectModel {
     public void fillMandatoryMangaFormFields(String enTitle, String enDescription, String plTitle, String plDescription,
                                              boolean selectAuthor, boolean selectGenres, boolean addImage) {
 
+        waitFor(300);
+
         setEnTitle(enTitle);
 
         waitFor(200);

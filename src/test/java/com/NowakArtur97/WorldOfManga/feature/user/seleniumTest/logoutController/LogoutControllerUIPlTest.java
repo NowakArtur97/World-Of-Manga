@@ -12,13 +12,14 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.TestPropertySource;
 
 import static org.junit.jupiter.api.Assertions.*;
+import org.springframework.test.annotation.DirtiesContext.ClassMode;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ExtendWith(ScreenshotWatcher.class)
 @TestPropertySource("classpath:/pageContent/messages_pl.properties")
 @DisplayNameGeneration(NameWithSpacesGenerator.class)
 @Tag("LogoutControllerUIPl_Tests")
-@DirtiesContext
+@DirtiesContext(classMode = ClassMode.BEFORE_EACH_TEST_METHOD)
 class LogoutControllerUIPlTest extends LogoutControllerUITest {
 
     @Test

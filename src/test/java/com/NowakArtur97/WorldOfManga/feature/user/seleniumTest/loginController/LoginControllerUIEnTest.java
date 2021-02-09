@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.annotation.DirtiesContext.ClassMode;
 import org.springframework.test.context.TestPropertySource;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -18,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @TestPropertySource("classpath:/pageContent/messages_en.properties")
 @DisplayNameGeneration(NameWithSpacesGenerator.class)
 @Tag("RegistrationControllerUIEn_Tests")
-@DirtiesContext
+@DirtiesContext(classMode = ClassMode.BEFORE_EACH_TEST_METHOD)
 class LoginControllerUIEnTest extends LoginControllerUITest {
 
     @Test

@@ -70,6 +70,8 @@ public class RegistrationPage extends SeleniumPageObjectModel {
 
     private void setUsername(String username) {
 
+        usernameInput.click();
+        usernameInput.clear();
         usernameInput.sendKeys(username);
     }
 
@@ -80,6 +82,8 @@ public class RegistrationPage extends SeleniumPageObjectModel {
 
     private void setFirstName(String firstName) {
 
+        firstNameInput.click();
+        firstNameInput.clear();
         firstNameInput.sendKeys(firstName);
     }
 
@@ -90,16 +94,22 @@ public class RegistrationPage extends SeleniumPageObjectModel {
 
     private void setLastName(String lastName) {
 
+        lastNameInput.click();
+        lastNameInput.clear();
         lastNameInput.sendKeys(lastName);
     }
 
     private void setPassword(String password) {
 
+        passwordInput.click();
+        passwordInput.clear();
         passwordInput.sendKeys(password);
     }
 
     private void setMatchingPassword(String matchingPassword) {
 
+        matchingPasswordInput.click();
+        matchingPasswordInput.clear();
         matchingPasswordInput.sendKeys(matchingPassword);
     }
 
@@ -110,6 +120,8 @@ public class RegistrationPage extends SeleniumPageObjectModel {
 
     private void setEmail(String email) {
 
+        emailInput.click();
+        emailInput.clear();
         emailInput.sendKeys(email);
     }
 
@@ -140,6 +152,8 @@ public class RegistrationPage extends SeleniumPageObjectModel {
 
     public void fillMandatoryRegistrationFields(String username, String password, String matchingPassword, String email,
                                                 boolean areTermsConfirmed) {
+
+        waitFor(300);
 
         setUsername(username);
 

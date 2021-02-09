@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.annotation.DirtiesContext.ClassMode;
 import org.springframework.test.context.TestPropertySource;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -18,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @TestPropertySource({"classpath:/validation/messages_pl.properties", "classpath:/pageContent/messages_pl.properties"})
 @DisplayNameGeneration(NameWithSpacesGenerator.class)
 @Tag("RegistrationControllerUIPl_Tests")
-@DirtiesContext
+@DirtiesContext(classMode = ClassMode.BEFORE_EACH_TEST_METHOD)
 class UserControllerUIPlTest extends UserControllerUITest {
 
     @Test
@@ -33,7 +34,7 @@ class UserControllerUIPlTest extends UserControllerUITest {
         registrationPage.fillMandatoryRegistrationFields(username, "password", "password", email, areTermsAccepted);
 
         assertAll(() -> assertTrue(registrationPage.isUserOnRegistrationPage(), () -> "should show registration page"),
-                () -> assertTrue(registrationPage.countFailureMessages() == 1, () -> "should have error"),
+                () -> assertEquals(registrationPage.countFailureMessages(), 1, () -> "should have error"),
                 () -> assertTrue(registrationPage.getFormBoxText().contains(usernameInUseMessage),
                         () -> "should show username is already in use message"),
                 () -> assertEquals(username, registrationPage.getUsername(), () -> "should show incorrect username"),
@@ -53,7 +54,7 @@ class UserControllerUIPlTest extends UserControllerUITest {
         registrationPage.fillMandatoryRegistrationFields(username, "password", "password", email, areTermsAccepted);
 
         assertAll(() -> assertTrue(registrationPage.isUserOnRegistrationPage(), () -> "should show registration page"),
-                () -> assertTrue(registrationPage.countFailureMessages() == 1, () -> "should have error"),
+                () -> assertEquals(registrationPage.countFailureMessages(), 1, () -> "should have error"),
                 () -> assertTrue(registrationPage.getFormBoxText().contains(emailInUseMessage),
                         () -> "should show email is already in use message"),
                 () -> assertEquals(username, registrationPage.getUsername(), () -> "should show username"),
@@ -73,7 +74,7 @@ class UserControllerUIPlTest extends UserControllerUITest {
         registrationPage.fillMandatoryRegistrationFields(username, "password", "password1", email, areTermsAccepted);
 
         assertAll(() -> assertTrue(registrationPage.isUserOnRegistrationPage(), () -> "should show registration page"),
-                () -> assertTrue(registrationPage.countFailureMessages() == 4, () -> "should have three errors"),
+                () -> assertEquals(registrationPage.countFailureMessages(), 4, () -> "should have three errors"),
                 () -> assertTrue(registrationPage.getFormBoxText().contains(usernameNotBlankMessage),
                         () -> "should show username is a required field message"),
                 () -> assertTrue(registrationPage.getFormBoxText().contains(passwordMatchingFieldsMessage),
@@ -99,7 +100,7 @@ class UserControllerUIPlTest extends UserControllerUITest {
         registrationPage.fillMandatoryRegistrationFields(username, "", "password", email, areTermsAccepted);
 
         assertAll(() -> assertTrue(registrationPage.isUserOnRegistrationPage(), () -> "should show registration page"),
-                () -> assertTrue(registrationPage.countFailureMessages() == 4, () -> "should have four errors"),
+                () -> assertEquals(registrationPage.countFailureMessages(), 4, () -> "should have four errors"),
                 () -> assertTrue(registrationPage.getFormBoxText().contains(usernameSizeMessage),
                         () -> "should show username size exceed message"),
                 () -> assertTrue(registrationPage.getFormBoxText().contains(passwordMatchingFieldsMessage),
@@ -130,7 +131,7 @@ class UserControllerUIPlTest extends UserControllerUITest {
                 areTermsAccepted);
 
         assertAll(() -> assertTrue(registrationPage.isUserOnRegistrationPage(), () -> "should show registration page"),
-                () -> assertTrue(registrationPage.countFailureMessages() == 6, () -> "should have six errors"),
+                () -> assertEquals(registrationPage.countFailureMessages(), 6, () -> "should have six errors"),
                 () -> assertTrue(registrationPage.getFormBoxText().contains(usernameNotBlankMessage),
                         () -> "should show username is a required field message"),
                 () -> assertTrue(registrationPage.getFormBoxText().contains(passwordFieldsNotBlankMessage),

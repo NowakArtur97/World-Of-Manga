@@ -39,11 +39,15 @@ public class LoginPage extends SeleniumPageObjectModel {
 
     private void setUsername(String username) {
 
+        usernameInput.click();
+        usernameInput.clear();
         usernameInput.sendKeys(username);
     }
 
     private void setPassword(String password) {
 
+        passwordInput.click();
+        passwordInput.clear();
         passwordInput.sendKeys(password);
     }
 
@@ -58,6 +62,8 @@ public class LoginPage extends SeleniumPageObjectModel {
     }
 
     public void fillMandatoryLoginFields(String username, String password) {
+
+        waitFor(300);
 
         setUsername(username);
 
