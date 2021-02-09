@@ -105,7 +105,7 @@ public class MangaList extends SeleniumPageObjectModel {
 
     public void clickMangaListLink() {
 
-        mangaListLink.click();
+        useJavaScriptToClickElement(mangaListLink);
     }
 
     public void clickMangaUserListLink() {

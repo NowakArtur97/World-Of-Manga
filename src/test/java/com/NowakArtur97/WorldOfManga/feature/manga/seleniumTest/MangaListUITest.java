@@ -46,8 +46,8 @@ class MangaListUITest extends SeleniumUITest {
     @EnumSource(LanguageVersion.class)
     void when_added_new_manga_should_show_manga_title_on_manga_list(LanguageVersion languageVersion) {
 
-        String englishTitle = "English title";
-        String polishTitle = "Polish title";
+        String englishTitle = "Manga english title";
+        String polishTitle = "Manga polish title";
         String englishDescription = "English description";
         String polishDescription = "Polish description";
         boolean selectAuthor = true;
@@ -68,7 +68,7 @@ class MangaListUITest extends SeleniumUITest {
         String title = languageVersion.name().equals("ENG") ? englishTitle : polishTitle;
 
         assertAll(
-                () -> assertTrue(mangaList.getLastMangaCardText().contains(title),
+                () -> assertEquals(title, mangaList.getLastMangaTitle(),
                         () -> "should show new manga with title: " + title + ", but was: "
                                 + mangaList.getLastMangaCardText()),
                 () -> assertTrue(mangaList.countMangaCards() >= 1, () -> "should show at least one manga"),
@@ -79,8 +79,8 @@ class MangaListUITest extends SeleniumUITest {
     @EnumSource(LanguageVersion.class)
     void when_added_new_manga_should_show_manga_description_on_manga_list(LanguageVersion languageVersion) {
 
-        String englishTitle = "English title";
-        String polishTitle = "Polish title";
+        String englishTitle = "Manga with english title";
+        String polishTitle = "Manga with polish title";
         String englishDescription = "English description";
         String polishDescription = "Polish description";
         boolean selectAuthor = true;

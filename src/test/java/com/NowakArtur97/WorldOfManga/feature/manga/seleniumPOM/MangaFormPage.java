@@ -29,16 +29,16 @@ public class MangaFormPage extends SeleniumPageObjectModel {
     private static final String SUBMIT_MANGA = "addOrUpdateMangaSubmitBtn";
     private static final String ADD_OR_UPDATE_MANGA_LINK = "//a[@href='/admin/addOrUpdateManga']";
 
-    @FindBy(name = TITLE_EN)
+    @FindBy(id = TITLE_EN)
     private WebElement titleEnInput;
 
-    @FindBy(name = DESCRIPTION_EN)
+    @FindBy(id = DESCRIPTION_EN)
     private WebElement descriptionEnInput;
 
-    @FindBy(name = TITLE_PL)
+    @FindBy(id = TITLE_PL)
     private WebElement titlePlInput;
 
-    @FindBy(name = DESCRIPTION_PL)
+    @FindBy(id = DESCRIPTION_PL)
     private WebElement descriptionPlInput;
 
     @FindBy(name = IMAGE)
@@ -82,6 +82,7 @@ public class MangaFormPage extends SeleniumPageObjectModel {
 
     private void setEnTitle(String enTitle) {
 
+        titleEnInput.click();
         titleEnInput.clear();
         titleEnInput.sendKeys(enTitle);
     }
@@ -93,6 +94,7 @@ public class MangaFormPage extends SeleniumPageObjectModel {
 
     private void setEnDescription(String enDescription) {
 
+        descriptionEnInput.click();
         descriptionEnInput.clear();
         descriptionEnInput.sendKeys(enDescription);
     }
@@ -104,6 +106,7 @@ public class MangaFormPage extends SeleniumPageObjectModel {
 
     private void setPlTitle(String plTitle) {
 
+        titlePlInput.click();
         titlePlInput.clear();
         titlePlInput.sendKeys(plTitle);
     }
@@ -115,12 +118,15 @@ public class MangaFormPage extends SeleniumPageObjectModel {
 
     private void setPlDescription(String plDescription) {
 
+        descriptionPlInput.click();
         descriptionPlInput.clear();
         descriptionPlInput.sendKeys(plDescription);
     }
 
     private void addImage() {
 
+        imageInput.click();
+        imageInput.clear();
         imageInput.sendKeys(projectPath + EXAMPLE_IMAGE_PATH);
     }
 
@@ -131,7 +137,7 @@ public class MangaFormPage extends SeleniumPageObjectModel {
 
     private void showAuthors() {
 
-       useJavaScriptToClickElement(groupHiddenOptions.get(0));
+        useJavaScriptToClickElement(groupHiddenOptions.get(0));
     }
 
     public boolean isFirstAuthorCheckboxSelected() {
