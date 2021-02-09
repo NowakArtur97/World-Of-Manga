@@ -47,9 +47,11 @@ class MangaInUserListUITest extends SeleniumUITest {
 
         mangaList.loadMangaList(languageVersion);
 
-        mangaList.chooseManga(0);
+        String firstMangaTitle = mangaList.getMangaTitle(0);
 
         int mangaStatus = 0;
+
+        mangaList.chooseManga(0);
 
         mangaList.addOrRemoveFirstMangaFromList(mangaStatus);
 
@@ -58,7 +60,7 @@ class MangaInUserListUITest extends SeleniumUITest {
         mangaList.chooseCurrentlyReadingManga();
 
         assertAll(
-                () -> assertTrue(mangaList.getLastMangaCardText().contains("Tokyo Ghoul"),
+                () -> assertTrue(mangaList.getLastMangaCardText().contains(firstMangaTitle),
                         () -> "should show new manga in currently reading list"),
                 () -> assertTrue(mangaList.countMangaCards() >= 1, () -> "should show at least one manga"),
                 () -> assertNotNull(mangaList.getMangaListText(), () -> "should load manga list fragment text"));
@@ -74,6 +76,8 @@ class MangaInUserListUITest extends SeleniumUITest {
 
         mangaList.loadMangaList(languageVersion);
 
+        String firstMangaTitle = mangaList.getMangaTitle(0);
+
         int mangaStatus = 0;
 
         mangaList.chooseManga(0);
@@ -89,9 +93,9 @@ class MangaInUserListUITest extends SeleniumUITest {
         mangaList.chooseCompletedManga();
 
         assertAll(
-                () -> assertFalse(mangaList.getLastMangaCardText().contains("Tokyo Ghoul"),
+                () -> assertFalse(mangaList.getLastMangaCardText().contains(firstMangaTitle),
                         () -> "should not show new manga in currently reading list"),
-                () -> assertTrue(mangaList.countMangaCards() == 0, () -> "should not show any manga"),
+                () -> assertEquals(mangaList.countMangaCards(), 0, () -> "should not show any manga"),
                 () -> assertNotNull(mangaList.getMangaListText(), () -> "should load manga list fragment text"));
     }
 
@@ -105,6 +109,8 @@ class MangaInUserListUITest extends SeleniumUITest {
 
         mangaList.loadMangaList(languageVersion);
 
+        String firstMangaTitle = mangaList.getMangaTitle(0);
+
         mangaList.chooseManga(0);
 
         int mangaStatus = 1;
@@ -116,7 +122,7 @@ class MangaInUserListUITest extends SeleniumUITest {
         mangaList.chooseCompletedManga();
 
         assertAll(
-                () -> assertTrue(mangaList.getLastMangaCardText().contains("Tokyo Ghoul"),
+                () -> assertTrue(mangaList.getLastMangaCardText().contains(firstMangaTitle),
                         () -> "should show new manga in completed list"),
                 () -> assertTrue(mangaList.countMangaCards() >= 1, () -> "should show at least one manga"),
                 () -> assertNotNull(mangaList.getMangaListText(), () -> "should load manga list fragment text"));
@@ -132,6 +138,8 @@ class MangaInUserListUITest extends SeleniumUITest {
 
         mangaList.loadMangaList(languageVersion);
 
+        String firstMangaTitle = mangaList.getMangaTitle(0);
+
         int mangaStatus = 1;
 
         mangaList.chooseManga(0);
@@ -147,9 +155,9 @@ class MangaInUserListUITest extends SeleniumUITest {
         mangaList.chooseCompletedManga();
 
         assertAll(
-                () -> assertFalse(mangaList.getLastMangaCardText().contains("Tokyo Ghoul"),
+                () -> assertFalse(mangaList.getLastMangaCardText().contains(firstMangaTitle),
                         () -> "should not show new manga in completed list"),
-                () -> assertTrue(mangaList.countMangaCards() == 0, () -> "should not show any manga"),
+                () -> assertEquals(mangaList.countMangaCards(), 0, () -> "should not show any manga"),
                 () -> assertNotNull(mangaList.getMangaListText(), () -> "should load manga list fragment text"));
     }
 
@@ -163,6 +171,8 @@ class MangaInUserListUITest extends SeleniumUITest {
 
         mangaList.loadMangaList(languageVersion);
 
+        String firstMangaTitle = mangaList.getMangaTitle(0);
+
         mangaList.chooseManga(0);
 
         int mangaStatus = 2;
@@ -174,7 +184,7 @@ class MangaInUserListUITest extends SeleniumUITest {
         mangaList.choosePlanToReadManga();
 
         assertAll(
-                () -> assertTrue(mangaList.getLastMangaCardText().contains("Tokyo Ghoul"),
+                () -> assertTrue(mangaList.getLastMangaCardText().contains(firstMangaTitle),
                         () -> "should show new manga in plan to read list"),
                 () -> assertTrue(mangaList.countMangaCards() >= 1, () -> "should show at least one manga"),
                 () -> assertNotNull(mangaList.getMangaListText(), () -> "should load manga list fragment text"));
@@ -192,6 +202,8 @@ class MangaInUserListUITest extends SeleniumUITest {
 
         int mangaStatus = 2;
 
+        String firstMangaTitle = mangaList.getMangaTitle(0);
+
         mangaList.chooseManga(0);
 
         mangaList.addOrRemoveFirstMangaFromList(mangaStatus);
@@ -205,9 +217,9 @@ class MangaInUserListUITest extends SeleniumUITest {
         mangaList.chooseCompletedManga();
 
         assertAll(
-                () -> assertFalse(mangaList.getLastMangaCardText().contains("Tokyo Ghoul"),
+                () -> assertFalse(mangaList.getLastMangaCardText().contains(firstMangaTitle),
                         () -> "should not show new manga in plan to read list"),
-                () -> assertTrue(mangaList.countMangaCards() == 0, () -> "should not show any manga"),
+                () -> assertEquals(mangaList.countMangaCards(), 0, () -> "should not show any manga"),
                 () -> assertNotNull(mangaList.getMangaListText(), () -> "should load manga list fragment text"));
     }
 
@@ -221,6 +233,8 @@ class MangaInUserListUITest extends SeleniumUITest {
 
         mangaList.loadMangaList(languageVersion);
 
+        String firstMangaTitle = mangaList.getMangaTitle(0);
+
         mangaList.chooseManga(0);
 
         int mangaStatus = 3;
@@ -232,7 +246,7 @@ class MangaInUserListUITest extends SeleniumUITest {
         mangaList.chooseOnHoldManga();
 
         assertAll(
-                () -> assertTrue(mangaList.getLastMangaCardText().contains("Tokyo Ghoul"),
+                () -> assertTrue(mangaList.getLastMangaCardText().contains(firstMangaTitle),
                         () -> "should show new manga in on hold list"),
                 () -> assertTrue(mangaList.countMangaCards() >= 1, () -> "should show at least one manga"),
                 () -> assertNotNull(mangaList.getMangaListText(), () -> "should load manga list fragment text"));
@@ -248,6 +262,8 @@ class MangaInUserListUITest extends SeleniumUITest {
 
         mangaList.loadMangaList(languageVersion);
 
+        String firstMangaTitle = mangaList.getMangaTitle(0);
+
         int mangaStatus = 3;
 
         mangaList.chooseManga(0);
@@ -263,9 +279,9 @@ class MangaInUserListUITest extends SeleniumUITest {
         mangaList.chooseCompletedManga();
 
         assertAll(
-                () -> assertFalse(mangaList.getLastMangaCardText().contains("Tokyo Ghoul"),
+                () -> assertFalse(mangaList.getLastMangaCardText().contains(firstMangaTitle),
                         () -> "should not show new manga in on hold list"),
-                () -> assertTrue(mangaList.countMangaCards() == 0, () -> "should not show any manga"),
+                () -> assertEquals(mangaList.countMangaCards(), 0, () -> "should not show any manga"),
                 () -> assertNotNull(mangaList.getMangaListText(), () -> "should load manga list fragment text"));
     }
 
@@ -279,6 +295,8 @@ class MangaInUserListUITest extends SeleniumUITest {
 
         mangaList.loadMangaList(languageVersion);
 
+        String firstMangaTitle = mangaList.getMangaTitle(0);
+
         mangaList.chooseManga(0);
 
         int mangaStatus = 4;
@@ -290,7 +308,7 @@ class MangaInUserListUITest extends SeleniumUITest {
         mangaList.chooseDroppedManga();
 
         assertAll(
-                () -> assertTrue(mangaList.getLastMangaCardText().contains("Tokyo Ghoul"),
+                () -> assertTrue(mangaList.getLastMangaCardText().contains(firstMangaTitle),
                         () -> "should show new manga in dropped list"),
                 () -> assertTrue(mangaList.countMangaCards() >= 1, () -> "should show at least one manga"),
                 () -> assertNotNull(mangaList.getMangaListText(), () -> "should load manga list fragment text"));
@@ -305,6 +323,8 @@ class MangaInUserListUITest extends SeleniumUITest {
         loginPage.fillMandatoryLoginFields("user", "user");
 
         mangaList.loadMangaList(languageVersion);
+
+        String firstMangaTitle = mangaList.getMangaTitle(0);
 
         int mangaStatus = 4;
 
@@ -321,9 +341,9 @@ class MangaInUserListUITest extends SeleniumUITest {
         mangaList.chooseCompletedManga();
 
         assertAll(
-                () -> assertFalse(mangaList.getLastMangaCardText().contains("Tokyo Ghoul"),
+                () -> assertFalse(mangaList.getLastMangaCardText().contains(firstMangaTitle),
                         () -> "should not show new manga in dropped list"),
-                () -> assertTrue(mangaList.countMangaCards() == 0, () -> "should not show any manga"),
+                () -> assertEquals(mangaList.countMangaCards(), 0, () -> "should not show any manga"),
                 () -> assertNotNull(mangaList.getMangaListText(), () -> "should load manga list fragment text"));
     }
 

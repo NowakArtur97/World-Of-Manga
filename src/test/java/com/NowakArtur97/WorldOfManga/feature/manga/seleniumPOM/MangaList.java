@@ -79,6 +79,11 @@ public class MangaList extends SeleniumPageObjectModel {
         return mangaList.getText();
     }
 
+    public String getMangaTitle(int index) {
+
+        return mangaTitles.get(index + mangaCards.size() / 2).getText();
+    }
+
     public String getLastMangaTitle() {
 
         return mangaTitles.get(mangaCards.size() - 1).getText();
@@ -155,7 +160,7 @@ public class MangaList extends SeleniumPageObjectModel {
 
     public void addOrRemoveFirstMangaFromList(int mangaStatus) {
 
-        mangaStatuses.get(mangaStatus + +mangaCards.size() / 2 * NUMBER_OF_MANGA_STATUSES).click();
+        mangaStatuses.get(mangaStatus + mangaCards.size() / 2 * NUMBER_OF_MANGA_STATUSES).click();
     }
 
     public void addLastMangaToList(int mangaStatus) {
