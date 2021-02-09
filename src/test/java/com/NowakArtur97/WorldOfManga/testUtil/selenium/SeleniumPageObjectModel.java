@@ -31,4 +31,13 @@ public class SeleniumPageObjectModel {
         JavascriptExecutor executor = (JavascriptExecutor) webDriver;
         executor.executeScript("arguments[0].click();", element);
     }
+
+    protected void waitFor(long millis) {
+
+        try {
+            Thread.sleep(millis);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 }

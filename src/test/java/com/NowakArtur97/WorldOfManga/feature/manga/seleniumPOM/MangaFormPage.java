@@ -219,14 +219,6 @@ public class MangaFormPage extends SeleniumPageObjectModel {
         clickSubmitMangaFormButton();
     }
 
-    private void waitFor(long millis) {
-        try {
-            Thread.sleep(millis);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-
     public boolean isUserOnMangaFormPage() {
 
         return webDriver.getCurrentUrl().contains(RESOURCE_PATH);

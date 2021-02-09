@@ -18,7 +18,7 @@ public class AuthorFormPage extends SeleniumPageObjectModel {
     private static final String SUBMIT_AUTHOR = "addOrUpdateAuthorSubmitBtn";
     private static final String ADD_OR_UPDATE_AUTHOR_LINK = "//a[@href='/admin/addOrUpdateManga']";
 
-    @FindBy(name = FULL_NAME)
+    @FindBy(id = FULL_NAME)
     private WebElement fullNameInput;
 
     @FindBy(className = FORM_MESSAGE_FAILURE_CLASS)
@@ -50,6 +50,8 @@ public class AuthorFormPage extends SeleniumPageObjectModel {
 
     private void setFullName(String fullName) {
 
+        fullNameInput.click();
+        fullNameInput.clear();
         fullNameInput.sendKeys(fullName);
     }
 
@@ -75,7 +77,11 @@ public class AuthorFormPage extends SeleniumPageObjectModel {
 
     public void fillMandatoryAuthorFormFields(String fullName) {
 
+        waitFor(200);
+
         setFullName(fullName);
+
+        waitFor(200);
 
         clickSubmitAuthorFormButton();
     }
