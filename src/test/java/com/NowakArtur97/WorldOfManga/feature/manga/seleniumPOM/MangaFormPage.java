@@ -41,7 +41,7 @@ public class MangaFormPage extends SeleniumPageObjectModel {
     @FindBy(id = DESCRIPTION_PL)
     private WebElement descriptionPlInput;
 
-    @FindBy(name = IMAGE)
+    @FindBy(id = IMAGE)
     private WebElement imageInput;
 
     @FindBy(name = AUTHORS)
@@ -125,8 +125,6 @@ public class MangaFormPage extends SeleniumPageObjectModel {
 
     private void addImage() {
 
-        imageInput.click();
-        imageInput.clear();
         imageInput.sendKeys(projectPath + EXAMPLE_IMAGE_PATH);
     }
 
@@ -190,7 +188,11 @@ public class MangaFormPage extends SeleniumPageObjectModel {
 
         setEnTitle(enTitle);
 
+        waitFor(200);
+
         setEnDescription(enDescription);
+
+        waitFor(200);
 
         setPlTitle(plTitle);
 
@@ -215,6 +217,14 @@ public class MangaFormPage extends SeleniumPageObjectModel {
         }
 
         clickSubmitMangaFormButton();
+    }
+
+    private void waitFor(long millis) {
+        try {
+            Thread.sleep(millis);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     public boolean isUserOnMangaFormPage() {

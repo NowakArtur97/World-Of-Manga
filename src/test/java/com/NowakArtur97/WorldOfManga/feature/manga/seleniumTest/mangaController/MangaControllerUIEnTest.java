@@ -41,7 +41,7 @@ class MangaControllerUIEnTest extends MangaControllerUITest {
                 "Polish description", selectAuthor, selectGenre, addImage);
 
         assertAll(() -> assertTrue(mangaFormPage.isUserOnMangaFormPage(), () -> "should show manga form page"),
-                () -> assertTrue(mangaFormPage.countFailureMessages() == 0, () -> "shouldn`t have errors"),
+                () -> assertEquals(mangaFormPage.countFailureMessages(), 0, () -> "shouldn`t have errors"),
                 () -> assertTrue(mangaTranslationService.isTitleAlreadyInUse(englishTitle),
                         () -> "should save english manga translation in database"),
                 () -> assertTrue(mangaTranslationService.isTitleAlreadyInUse(polishTitle),
@@ -49,7 +49,7 @@ class MangaControllerUIEnTest extends MangaControllerUITest {
     }
 
     @Test
-    void when_correct_manga_editing_with_all_fields_should_add_manga() {
+    void when_correct_manga_editing_with_all_fields_should_edit_manga() {
 
         String englishTitle = "Some english title";
         String polishTitle = "Some polish title";
@@ -69,7 +69,7 @@ class MangaControllerUIEnTest extends MangaControllerUITest {
                 "Polish description", selectAuthor, selectGenre, addImage);
 
         assertAll(() -> assertTrue(mangaFormPage.isUserOnMangaFormPage(), () -> "should show manga form page"),
-                () -> assertTrue(mangaFormPage.countFailureMessages() == 0, () -> "shouldn`t have errors"),
+                () -> assertEquals(mangaFormPage.countFailureMessages(), 0, () -> "shouldn`t have errors"),
                 () -> assertTrue(mangaTranslationService.isTitleAlreadyInUse(englishTitle),
                         () -> "should update english manga translation in database"),
                 () -> assertTrue(mangaTranslationService.isTitleAlreadyInUse(polishTitle),
@@ -77,7 +77,7 @@ class MangaControllerUIEnTest extends MangaControllerUITest {
     }
 
     @Test
-    void when_manga_deleting_should_remove_manga() {
+    void when_deleted_manga_is_in_main_page_should_remove_manga_from_list() {
 
         loginPage.loadLoginView(LanguageVersion.ENG);
 
@@ -96,7 +96,7 @@ class MangaControllerUIEnTest extends MangaControllerUITest {
     }
 
     @Test
-    void when_manga_deleting_should_not_show_manga_in_rated_manga_list() {
+    void when_deleted_manga_is_in_users_rated_manga_list_should_delete_manga_from_users_rated_manga_list() {
 
         loginPage.loadLoginView(LanguageVersion.ENG);
 
@@ -121,7 +121,7 @@ class MangaControllerUIEnTest extends MangaControllerUITest {
     }
 
     @Test
-    void when_manga_deleting_should_not_show_manga_in_favourites() {
+    void when_deleted_manga_is_in_users_favourites_should_delete_manga_from_favourites() {
 
         loginPage.loadLoginView(LanguageVersion.ENG);
 
@@ -143,7 +143,7 @@ class MangaControllerUIEnTest extends MangaControllerUITest {
     }
 
     @Test
-    void when_manga_deleting_should_not_show_manga_in_users_manga_list() {
+    void when_deleted_manga_is_in_users_manga_list_should_delete_manga_from_users_manga_list() {
 
         loginPage.loadLoginView(LanguageVersion.ENG);
 
@@ -182,9 +182,9 @@ class MangaControllerUIEnTest extends MangaControllerUITest {
 
         mangaFormPage.fillMandatoryMangaFormFields(blankField, blankField, blankField, blankField, selectAuthor,
                 selectGenre, addImage);
-        
+
         assertAll(() -> assertTrue(mangaFormPage.isUserOnMangaFormPage(), () -> "should show manga form page"),
-                () -> assertTrue(mangaFormPage.countFailureMessages() == 7, () -> "should have seven errors"),
+                () -> assertEquals(mangaFormPage.countFailureMessages(), 7, () -> "should have seven errors"),
                 () -> assertTrue(mangaFormPage.getFormBoxText().contains(mangaTranslationDescriptionNotBlankMessage),
                         () -> "should show title is a required field message twice"),
                 () -> assertTrue(mangaFormPage.getFormBoxText().contains(mangaTranslationTitleNotBlankMessage),
@@ -224,7 +224,7 @@ class MangaControllerUIEnTest extends MangaControllerUITest {
                 longDescriptionText, selectAuthor, selectGenre, addImage);
 
         assertAll(() -> assertTrue(mangaFormPage.isUserOnMangaFormPage(), () -> "should show manga form page"),
-                () -> assertTrue(mangaFormPage.countFailureMessages() == 4, () -> "should have four errors"),
+                () -> assertEquals(mangaFormPage.countFailureMessages(), 4, () -> "should have four errors"),
                 () -> assertTrue(mangaFormPage.getFormBoxText().contains(mangaTranslationTitleSizeMessage),
                         () -> "should show title is too long message twice"),
                 () -> assertTrue(mangaFormPage.getFormBoxText().contains(mangaTranslationDescriptionSizeMessage),
