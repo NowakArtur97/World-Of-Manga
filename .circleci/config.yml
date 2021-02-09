@@ -39,18 +39,6 @@ jobs:
     - run:
         name: Wait for Postgresql
         command: dockerize -wait tcp://localhost:5432 -timeout 2m
-    - run:
-        name: Where I am
-        command: |
-          pwd
-    - run:
-        name: Find image
-        command: |
-          sudo find $PWD -print | grep -i 'samurai.jpg*'
-    - run:
-        name: Code Has Arrived
-        command: |
-          ls -ld $(find .)
     - run: mvn test -Dgroups=MangaListUI_Tests
 #    - run: mvn test
   deploy:
