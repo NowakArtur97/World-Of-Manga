@@ -160,6 +160,6 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-**/test/resources/screenshots/**
+**/test/resources/screenshots/*.jpg
 .idea
 .mvn
