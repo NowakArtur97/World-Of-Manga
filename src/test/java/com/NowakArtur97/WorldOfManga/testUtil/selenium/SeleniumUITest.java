@@ -4,9 +4,9 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import lombok.Getter;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.LocalFileDetector;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.server.LocalServerPort;
@@ -44,7 +44,7 @@ public class SeleniumUITest {
     protected String exampleImagePath;
 
     @Getter
-    protected static WebDriver webDriver;
+    protected static RemoteWebDriver webDriver;
 
     @BeforeEach
     protected void setUp() throws MalformedURLException {
@@ -75,6 +75,8 @@ public class SeleniumUITest {
 
                 webDriver = new RemoteWebDriver(new URL(remoteUrl), capabilities);
             }
+
+            webDriver.setFileDetector(new LocalFileDetector());
 
         } else {
 
