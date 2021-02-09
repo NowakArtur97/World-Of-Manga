@@ -39,6 +39,11 @@ jobs:
     - run:
         name: Wait for Postgresql
         command: dockerize -wait tcp://localhost:5432 -timeout 2m
+    - run:
+        name: Code Has Arrived
+        command: |
+          ls -al
+          echo '^^^That should look familiar^^^'
     - run: mvn test -Dgroups=MangaListUI_Tests
 #    - run: mvn test
   deploy:
