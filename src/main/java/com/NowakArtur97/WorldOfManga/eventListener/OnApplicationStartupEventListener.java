@@ -24,7 +24,7 @@ import java.io.IOException;
 @Slf4j
 class OnApplicationStartupEventListener {
 
-    private final static String TEST_PROFILE = "test";
+    private final static String PROD_PROFILE = "prod";
 
     @Value("${spring.profiles.active:prod}")
     private String activeProfile;
@@ -153,7 +153,7 @@ class OnApplicationStartupEventListener {
         saveManga(komiTitle, komiDescriptionEn, komiTitle, komiDescriptionPl, komiAuthor, schoolLife, romance,
                 comedy);
 
-        if (!activeProfile.equals(TEST_PROFILE)) {
+        if (activeProfile.equals(PROD_PROFILE)) {
 
             saveManga(irumaTitle, irumaDescriptionEn, irumaTitle, irumaDescriptionPl, irumaAuthor, demons,
                     schoolLife, comedy);
