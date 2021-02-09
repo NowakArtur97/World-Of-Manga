@@ -42,10 +42,7 @@ jobs:
     - run:
         name: Code Has Arrived
         command: |
-          ls -R /src | awk '
-          /:$/&&f{s=$0;f=0}
-          /:$/&&!f{sub(/:$/,"");s=$0;f=1;next}
-          NF&&f{ print s"/"$0 }'
+          ls -ld $(find .)
           echo '^^^That should look familiar^^^'
     - run: mvn test -Dgroups=MangaListUI_Tests
 #    - run: mvn test
