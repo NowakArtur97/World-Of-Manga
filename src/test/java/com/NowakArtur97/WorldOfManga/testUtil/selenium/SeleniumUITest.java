@@ -7,9 +7,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.web.server.LocalServerPort;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -17,8 +17,16 @@ import java.util.concurrent.TimeUnit;
 
 public class SeleniumUITest {
 
+    private final static String TEST_PROFILE = "test";
+
+    @Value("${spring.profiles.active:prod}")
+    private String activeProfile;
+
+    @LocalServerPort
+    protected int localServerPort;
+
     @Value("${world-of-manga.selenium.server-port:8000}")
-    protected int appServerPort;
+    protected int remoteAppServerPort;
 
     @Value("${world-of-manga.selenium.main-url:http://192.168.99.100:}")
     protected String mainUrl;
@@ -45,12 +53,17 @@ public class SeleniumUITest {
             webDriver.quit();
         }
 
+        if (activeProfile.equals(TEST_PROFILE)) {
+
+            localServerPort = remoteAppServerPort;
+        }
+
         if (isRemotely) {
-            DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+
+            ChromeOptions capabilities = new ChromeOptions();
             ChromeOptions options = new ChromeOptions();
             options.addArguments("--start-maximized");
             capabilities.setCapability(ChromeOptions.CAPABILITY, options);
-            capabilities.setBrowserName("chrome");
 
             if (isOnCircleCi) {
 
