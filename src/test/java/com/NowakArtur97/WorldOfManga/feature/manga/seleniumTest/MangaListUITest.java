@@ -32,7 +32,6 @@ class MangaListUITest extends SeleniumUITest {
 
     private LoginPage loginPage;
 
-    //    @BeforeEach
     void launchBrowser(String browserName, String language) {
 
         setUp(browserName, language);
@@ -72,9 +71,9 @@ class MangaListUITest extends SeleniumUITest {
         String title = languageVersion.name().equals("ENG") ? englishTitle : polishTitle;
 
         assertAll(
-                () -> assertTrue(mangaList.getLastMangaTitle().contains(title),
+                () -> assertEquals(title, mangaList.getLastMangaTitle(),
                         () -> "should show new manga with title: " + title + ", but was: "
-                                + mangaList.getLastMangaCardText()),
+                        + mangaList.getLastMangaCardText()),
                 () -> assertTrue(mangaList.countMangaCards() >= 1, () -> "should show at least one manga"),
                 () -> assertNotNull(mangaList.getMangaListText(), () -> "should load manga list fragment text"));
     }

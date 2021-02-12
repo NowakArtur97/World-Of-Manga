@@ -102,7 +102,7 @@ public class SeleniumUITest {
                 webDriver = new ChromeDriver();
 
             } else if (browser.equals(Browser.FIREFOX)) {
-
+                
                 webDriver = new FirefoxDriver();
             }
         }

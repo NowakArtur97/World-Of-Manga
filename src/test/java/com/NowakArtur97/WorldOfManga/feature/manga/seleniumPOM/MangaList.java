@@ -86,7 +86,7 @@ public class MangaList extends SeleniumPageObjectModel {
 
     public String getLastMangaTitle() {
 
-        return mangaTitles.get(mangaCards.size() - 1).getText();
+        return mangaTitles.get(mangaCards.size() - 1).getAttribute("innerText");
     }
 
     public int countMangaCards() {
