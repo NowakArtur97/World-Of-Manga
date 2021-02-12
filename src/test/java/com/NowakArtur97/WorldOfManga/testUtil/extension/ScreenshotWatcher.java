@@ -23,4 +23,13 @@ public class ScreenshotWatcher implements TestWatcher {
             screenshotUtil.takeScreenshot(webDriver, context.getRequiredTestMethod().getName());
         }
     }
+
+    @Override
+    public void testSuccessful(ExtensionContext context) {
+
+        if (SeleniumUITest.getWebDriver() != null) {
+
+            SeleniumUITest.getWebDriver().quit();
+        }
+    }
 }

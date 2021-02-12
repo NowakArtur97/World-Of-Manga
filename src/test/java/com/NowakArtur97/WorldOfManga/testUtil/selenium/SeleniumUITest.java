@@ -1,11 +1,16 @@
 package com.NowakArtur97.WorldOfManga.testUtil.selenium;
 
+import com.NowakArtur97.WorldOfManga.testUtil.enums.Browser;
+import com.NowakArtur97.WorldOfManga.testUtil.enums.LanguageVersion;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import lombok.Getter;
+import lombok.SneakyThrows;
 import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeEach;
+import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.LocalFileDetector;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.springframework.beans.factory.annotation.Value;
@@ -13,6 +18,7 @@ import org.springframework.boot.web.server.LocalServerPort;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
 public class SeleniumUITest {
@@ -46,42 +52,29 @@ public class SeleniumUITest {
     @Getter
     protected static RemoteWebDriver webDriver;
 
-    @BeforeEach
-    protected void setUp() throws MalformedURLException {
+    protected LanguageVersion languageVersion;
 
-        WebDriverManager.chromedriver().setup();
+    protected void setUp(String browserName, String language) {
 
-        if (webDriver != null) {
+        Browser browser = Arrays.stream(Browser.values())
+                .filter(brow -> brow.name().equalsIgnoreCase(browserName))
+                .findFirst()
+                .orElse(Browser.CHROME);
 
-            webDriver.quit();
-        }
+        languageVersion = Arrays.stream(LanguageVersion.values())
+                .filter(lang -> lang.name().equalsIgnoreCase(language))
+                .findFirst()
+                .orElse(LanguageVersion.ENG);
 
         if (activeProfile.equals(TEST_PROFILE)) {
 
             localServerPort = remoteAppServerPort;
         }
 
-        if (isRemotely) {
+        WebDriverManager.chromedriver().setup();
+        WebDriverManager.firefoxdriver().setup();
 
-            ChromeOptions capabilities = new ChromeOptions();
-            ChromeOptions options = new ChromeOptions();
-            options.addArguments("--start-maximized");
-            capabilities.setCapability(ChromeOptions.CAPABILITY, options);
-
-            if (isOnCircleCi) {
-
-                webDriver = new RemoteWebDriver(capabilities);
-            } else {
-
-                webDriver = new RemoteWebDriver(new URL(remoteUrl), capabilities);
-            }
-
-            webDriver.setFileDetector(new LocalFileDetector());
-
-        } else {
-
-            webDriver = new ChromeDriver();
-        }
+        setUpWebDriver(browser);
 
         webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
@@ -93,5 +86,56 @@ public class SeleniumUITest {
 
             webDriver.quit();
         }
+    }
+
+    @SneakyThrows
+    private void setUpWebDriver(Browser browser) {
+
+        if (isRemotely) {
+
+            setupRemoteWebDriver(browser);
+
+        } else {
+
+            if (browser.equals(Browser.CHROME)) {
+
+                webDriver = new ChromeDriver();
+
+            } else if (browser.equals(Browser.FIREFOX)) {
+
+                webDriver = new FirefoxDriver();
+            }
+        }
+    }
+
+    private void setupRemoteWebDriver(Browser browser) throws MalformedURLException {
+
+        MutableCapabilities capabilities = null;
+
+        if (browser.equals(Browser.CHROME)) {
+
+            capabilities = new ChromeOptions();
+            ChromeOptions options = new ChromeOptions();
+            options.addArguments("--start-maximized");
+            capabilities.setCapability(ChromeOptions.CAPABILITY, options);
+
+        } else if (browser.equals(Browser.FIREFOX)) {
+
+            capabilities = new FirefoxOptions();
+            FirefoxOptions options = new FirefoxOptions();
+            options.addArguments("--start-maximized");
+            capabilities.setCapability(FirefoxOptions.FIREFOX_OPTIONS, options);
+        }
+
+        if (isOnCircleCi) {
+
+            webDriver = new RemoteWebDriver(capabilities);
+
+        } else {
+
+            webDriver = new RemoteWebDriver(new URL(remoteUrl), capabilities);
+        }
+
+        webDriver.setFileDetector(new LocalFileDetector());
     }
 }

@@ -7,11 +7,11 @@ import com.NowakArtur97.WorldOfManga.testUtil.enums.LanguageVersion;
 import com.NowakArtur97.WorldOfManga.testUtil.extension.ScreenshotWatcher;
 import com.NowakArtur97.WorldOfManga.testUtil.generator.NameWithSpacesGenerator;
 import com.NowakArtur97.WorldOfManga.testUtil.selenium.SeleniumUITest;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.EnumSource;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
@@ -32,8 +32,10 @@ class MangaListUITest extends SeleniumUITest {
 
     private LoginPage loginPage;
 
-    @BeforeEach
-    void setupPOM() {
+    //    @BeforeEach
+    void launchBrowser(String browserName, String language) {
+
+        setUp(browserName, language);
 
         mangaList = new MangaList(webDriver, mainUrl + localServerPort);
 
@@ -42,9 +44,9 @@ class MangaListUITest extends SeleniumUITest {
         mangaFormPage = new MangaFormPage(webDriver, mainUrl + localServerPort, exampleImagePath);
     }
 
-    @ParameterizedTest(name = "{index}: Language Version: {0}")
-    @EnumSource(LanguageVersion.class)
-    void when_added_new_manga_should_show_manga_title_on_manga_list(LanguageVersion languageVersion) {
+    @ParameterizedTest(name = "{index}: Browser: {0} | Language Version: {1}")
+    @CsvSource({"Firefox, ENG", "Firefox, PL", "Chrome, ENG", "Chrome, PL"})
+    void when_added_new_manga_should_show_manga_title_on_manga_list(String browserName, String language) {
 
         String englishTitle = "Manga english title";
         String polishTitle = "Manga polish title";
@@ -53,6 +55,8 @@ class MangaListUITest extends SeleniumUITest {
         boolean selectAuthor = true;
         boolean selectGenre = true;
         boolean addImage = true;
+
+        launchBrowser(browserName, language);
 
         loginPage.loadLoginView(languageVersion);
 
@@ -68,7 +72,7 @@ class MangaListUITest extends SeleniumUITest {
         String title = languageVersion.name().equals("ENG") ? englishTitle : polishTitle;
 
         assertAll(
-                () -> assertEquals(title, mangaList.getLastMangaTitle(),
+                () -> assertTrue(mangaList.getLastMangaTitle().contains(title),
                         () -> "should show new manga with title: " + title + ", but was: "
                                 + mangaList.getLastMangaCardText()),
                 () -> assertTrue(mangaList.countMangaCards() >= 1, () -> "should show at least one manga"),
