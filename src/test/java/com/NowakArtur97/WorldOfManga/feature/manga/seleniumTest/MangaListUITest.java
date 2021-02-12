@@ -3,7 +3,6 @@ package com.NowakArtur97.WorldOfManga.feature.manga.seleniumTest;
 import com.NowakArtur97.WorldOfManga.feature.manga.seleniumPOM.MangaFormPage;
 import com.NowakArtur97.WorldOfManga.feature.manga.seleniumPOM.MangaList;
 import com.NowakArtur97.WorldOfManga.feature.user.seleniumPOM.LoginPage;
-import com.NowakArtur97.WorldOfManga.testUtil.enums.LanguageVersion;
 import com.NowakArtur97.WorldOfManga.testUtil.extension.ScreenshotWatcher;
 import com.NowakArtur97.WorldOfManga.testUtil.generator.NameWithSpacesGenerator;
 import com.NowakArtur97.WorldOfManga.testUtil.selenium.SeleniumUITest;
@@ -12,7 +11,6 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import org.junit.jupiter.params.provider.EnumSource;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.annotation.DirtiesContext.ClassMode;
@@ -32,7 +30,7 @@ class MangaListUITest extends SeleniumUITest {
 
     private LoginPage loginPage;
 
-    void launchBrowser(String browserName, String language) {
+    private void launchBrowser(String browserName, String language) {
 
         setUp(browserName, language);
 
@@ -45,7 +43,7 @@ class MangaListUITest extends SeleniumUITest {
 
     @ParameterizedTest(name = "{index}: Browser: {0} | Language Version: {1}")
     @CsvSource({"Firefox, ENG", "Firefox, PL", "Chrome, ENG", "Chrome, PL"})
-    void when_added_new_manga_should_show_manga_title_on_manga_list(String browserName, String language) {
+    void when_added_new_manga_with_title_should_show_manga_title_on_manga_list(String browserName, String language) {
 
         String englishTitle = "Manga english title";
         String polishTitle = "Manga polish title";
@@ -71,16 +69,17 @@ class MangaListUITest extends SeleniumUITest {
         String title = languageVersion.name().equals("ENG") ? englishTitle : polishTitle;
 
         assertAll(
-                () -> assertEquals(title, mangaList.getLastMangaTitle(),
+                () -> assertTrue(title.equals(mangaList.getLastMangaTitle())
+                                || mangaList.getMangaListText().contains(title),
                         () -> "should show new manga with title: " + title + ", but was: "
-                        + mangaList.getLastMangaCardText()),
+                                + mangaList.getLastMangaCardText()),
                 () -> assertTrue(mangaList.countMangaCards() >= 1, () -> "should show at least one manga"),
                 () -> assertNotNull(mangaList.getMangaListText(), () -> "should load manga list fragment text"));
     }
 
-    @ParameterizedTest(name = "{index}: Language Version: {0}")
-    @EnumSource(LanguageVersion.class)
-    void when_added_new_manga_should_show_manga_description_on_manga_list(LanguageVersion languageVersion) {
+    @ParameterizedTest(name = "{index}: Browser: {0} | Language Version: {1}")
+    @CsvSource({"Firefox, ENG", "Firefox, PL", "Chrome, ENG", "Chrome, PL"})
+    void when_added_new_manga_with_description_should_show_manga_description_on_manga_list(String browserName, String language) {
 
         String englishTitle = "Manga with english title";
         String polishTitle = "Manga with polish title";
@@ -89,6 +88,8 @@ class MangaListUITest extends SeleniumUITest {
         boolean selectAuthor = true;
         boolean selectGenre = true;
         boolean addImage = true;
+
+        launchBrowser(browserName, language);
 
         loginPage.loadLoginView(languageVersion);
 
@@ -106,7 +107,8 @@ class MangaListUITest extends SeleniumUITest {
         String description = languageVersion.name().equals("ENG") ? englishDescription : polishDescription;
 
         assertAll(
-                () -> assertTrue(mangaList.getLastMangaCardText().contains(description),
+                () -> assertTrue(mangaList.getLastMangaCardText().contains(description)
+                                || mangaList.getMangaListText().contains(description),
                         () -> "should show new manga with description: " + description + ", but was: "
                                 + mangaList.getLastMangaCardText()),
                 () -> assertTrue(mangaList.countMangaCards() >= 1, () -> "should show at least one manga"),

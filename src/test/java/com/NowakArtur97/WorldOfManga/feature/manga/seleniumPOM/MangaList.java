@@ -115,11 +115,12 @@ public class MangaList extends SeleniumPageObjectModel {
 
     public void chooseManga(int mangaIndex) {
 
-        mangaCards.get(mangaIndex + mangaCards.size() / 2).click();
+        useJavaScriptToClickElement(mangaCards.get(mangaIndex + mangaCards.size() / 2));
     }
 
     public void chooseLastManga() {
 
+        useJavaScriptToClickElement(mangaCards.get(mangaCards.size() - 1));
         mangaCards.get(mangaCards.size() - 1).click();
     }
 
