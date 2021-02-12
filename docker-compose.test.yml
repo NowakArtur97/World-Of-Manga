@@ -11,6 +11,7 @@ services:
     depends_on:
       - postgres
     environment:
+      - SERVER_PORT=8000
       - SPRING_PROFILES_ACTIVE=test
       - SPRING_DATASOURCE_URL=jdbc:postgresql://192.168.99.100:5432/world_of_manga
       - SPRING_DATASOURCE_USERNAME=postgres
@@ -40,7 +41,7 @@ services:
     deploy:
       replicas: 5
     ports:
-      - 5900:5900
+      - 5901:5900
     volumes:
       - /dev/shm:/dev/shm
     depends_on:
@@ -56,16 +57,25 @@ services:
       - HUB_ENV_no_proxy=localhost
       - GRID_BROWSER_TIMEOUT=300
       - GRID_TIMEOUT=300
-
-#  selenium-firefox:
-#    image: selenium/node-firefox:3.141.59-yttrium
-#    container_name: firefox
-#    deploy:
-#      replicas: 8
-#    volumes:
-#      - /dev/shm:/dev/shm
-#    depends_on:
-#      - selenium-hub
-#    environment:
-#      - HUB_HOST=selenium-hub
-#      - HUB_PORT=4444
+  selenium-firefox:
+    image: selenium/node-firefox:3.141.59-yttrium
+    container_name: firefox
+    deploy:
+      replicas: 5
+    ports:
+      - 5902:5900
+    volumes:
+      - /dev/shm:/dev/shm
+    depends_on:
+      - selenium-hub
+    environment:
+      - HUB_HOST=selenium-hub
+      - HUB_PORT=4444
+      - HUB_PORT_4440_TCP_ADDR=selenium-hub
+      - HUB_PORT_4440_TCP_PORT=4440
+      - JAVA_OPT=-Xmx512m
+      - DBUS_SESSION_BUS_ADDRESS=/dev/null
+      - no_proxy=localhost
+      - HUB_ENV_no_proxy=localhost
+      - GRID_BROWSER_TIMEOUT=300
+      - GRID_TIMEOUT=300
