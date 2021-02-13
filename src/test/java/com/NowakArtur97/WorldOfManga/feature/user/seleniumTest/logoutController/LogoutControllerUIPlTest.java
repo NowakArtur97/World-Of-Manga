@@ -5,14 +5,15 @@ import com.NowakArtur97.WorldOfManga.testUtil.extension.ScreenshotWatcher;
 import com.NowakArtur97.WorldOfManga.testUtil.generator.NameWithSpacesGenerator;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.annotation.DirtiesContext.ClassMode;
 import org.springframework.test.context.TestPropertySource;
 
 import static org.junit.jupiter.api.Assertions.*;
-import org.springframework.test.annotation.DirtiesContext.ClassMode;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ExtendWith(ScreenshotWatcher.class)
@@ -22,17 +23,22 @@ import org.springframework.test.annotation.DirtiesContext.ClassMode;
 @DirtiesContext(classMode = ClassMode.BEFORE_EACH_TEST_METHOD)
 class LogoutControllerUIPlTest extends LogoutControllerUITest {
 
-    @Test
-    void when_correct_logout_should_sing_out_user() {
+    @ParameterizedTest(name = "{index}: Browser: {0}")
+    @ValueSource(strings = {"Firefox", "Chrome"})
+    void when_correct_logout_should_sing_out_user(String browserName) {
 
         String username = "user";
         String password = "user";
 
-        loginPage.loadLoginView(LanguageVersion.PL);
+        languageVersion = LanguageVersion.PL;
+
+        launchBrowser(browserName, languageVersion.name());
+
+        loginPage.loadLoginView(languageVersion);
 
         loginPage.fillMandatoryLoginFields(username, password);
 
-        logoutPage.signOut();
+        logoutPage.signOut(browser);
 
         assertAll(
                 () -> assertFalse(mainPage.getHeaderText().contains(userLoggedInMangaListOption),

@@ -1,5 +1,6 @@
 package com.NowakArtur97.WorldOfManga.feature.user.seleniumPOM;
 
+import com.NowakArtur97.WorldOfManga.testUtil.enums.Browser;
 import com.NowakArtur97.WorldOfManga.testUtil.selenium.SeleniumPageObjectModel;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -17,8 +18,15 @@ public class LogoutPage extends SeleniumPageObjectModel {
         super(webDriver, mainUrl);
     }
 
-    public void signOut() {
+    public void signOut(Browser browser) {
 
-        useJavaScriptToClickElement(logoutLink);
+        switch (browser) {
+            case FIREFOX:
+                logoutLink.click();
+                break;
+            case CHROME:
+            default:
+                useJavaScriptToClickElement(logoutLink);
+        }
     }
 }

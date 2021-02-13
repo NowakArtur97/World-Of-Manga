@@ -53,10 +53,11 @@ public class SeleniumUITest {
     protected static RemoteWebDriver webDriver;
 
     protected LanguageVersion languageVersion;
+    protected Browser browser;
 
     protected void setUp(String browserName, String language) {
 
-        Browser browser = Arrays.stream(Browser.values())
+        browser = Arrays.stream(Browser.values())
                 .filter(brow -> brow.name().equalsIgnoreCase(browserName))
                 .findFirst()
                 .orElse(Browser.CHROME);
@@ -100,7 +101,6 @@ public class SeleniumUITest {
             if (browser.equals(Browser.CHROME)) {
 
                 webDriver = new ChromeDriver();
-
             } else if (browser.equals(Browser.FIREFOX)) {
 
                 webDriver = new FirefoxDriver();
