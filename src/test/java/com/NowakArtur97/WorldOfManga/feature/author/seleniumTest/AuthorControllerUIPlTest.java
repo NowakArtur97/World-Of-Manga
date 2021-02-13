@@ -5,8 +5,9 @@ import com.NowakArtur97.WorldOfManga.testUtil.extension.ScreenshotWatcher;
 import com.NowakArtur97.WorldOfManga.testUtil.generator.NameWithSpacesGenerator;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.TestPropertySource;
@@ -21,12 +22,17 @@ import static org.junit.jupiter.api.Assertions.*;
 @DirtiesContext
 class AuthorControllerUIPlTest extends AuthorControllerUITest {
 
-    @Test
-    void when_correct_author_creation_with_all_fields_should_add_author() {
+    @ParameterizedTest(name = "{index}: Browser: {0}")
+    @ValueSource(strings = {"Firefox", "Chrome"})
+    void when_correct_author_creation_with_all_fields_should_add_author(String browserName) {
 
-        String fullName = "FirstName LastName";
+        String fullName = "FirstName LastName " + browserName;
 
-        loginPage.loadLoginView(LanguageVersion.PL);
+        languageVersion = LanguageVersion.PL;
+
+        launchBrowser(browserName, languageVersion.name());
+
+        loginPage.loadLoginView(languageVersion);
 
         loginPage.fillMandatoryLoginFields("admin", "admin");
 
@@ -39,12 +45,17 @@ class AuthorControllerUIPlTest extends AuthorControllerUITest {
                         () -> "should save author in database"));
     }
 
-    @Test
-    void when_incorrect_author_creation_with_full_name_blank_should_have_errors() {
+    @ParameterizedTest(name = "{index}: Browser: {0}")
+    @ValueSource(strings = {"Firefox", "Chrome"})
+    void when_incorrect_author_creation_with_full_name_blank_should_have_errors(String browserName) {
 
         String fullName = "";
 
-        loginPage.loadLoginView(LanguageVersion.PL);
+        languageVersion = LanguageVersion.PL;
+
+        launchBrowser(browserName, languageVersion.name());
+
+        loginPage.loadLoginView(languageVersion);
 
         loginPage.fillMandatoryLoginFields("admin", "admin");
 
@@ -58,12 +69,17 @@ class AuthorControllerUIPlTest extends AuthorControllerUITest {
                 () -> assertEquals(fullName, authorFormPage.getFullName(), () -> "should show incorrect full name"));
     }
 
-    @Test
-    void when_incorrect_author_creation_with_too_long_fields_should_have_errors() {
+    @ParameterizedTest(name = "{index}: Browser: {0}")
+    @ValueSource(strings = {"Firefox", "Chrome"})
+    void when_incorrect_author_creation_with_too_long_fields_should_have_errors(String browserName) {
 
         String fullName = "asdfghjklpasdfghjklpasdfghjklpasdfghjklpasdfghjklp!@#$%";
 
-        loginPage.loadLoginView(LanguageVersion.PL);
+        languageVersion = LanguageVersion.PL;
+
+        launchBrowser(browserName, languageVersion.name());
+
+        loginPage.loadLoginView(languageVersion);
 
         loginPage.fillMandatoryLoginFields("admin", "admin");
 

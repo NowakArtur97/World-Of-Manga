@@ -4,7 +4,6 @@ import com.NowakArtur97.WorldOfManga.feature.author.AuthorService;
 import com.NowakArtur97.WorldOfManga.feature.author.seleniumPOM.AuthorFormPage;
 import com.NowakArtur97.WorldOfManga.feature.user.seleniumPOM.LoginPage;
 import com.NowakArtur97.WorldOfManga.testUtil.selenium.SeleniumUITest;
-import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
@@ -26,8 +25,9 @@ class AuthorControllerUITest extends SeleniumUITest {
     @Autowired
     AuthorService authorService;
 
-    @BeforeEach
-    void setupPOM() {
+    void launchBrowser(String browserName, String language) {
+
+        setUp(browserName, language);
 
         loginPage = new LoginPage(webDriver, mainUrl + localServerPort);
 
