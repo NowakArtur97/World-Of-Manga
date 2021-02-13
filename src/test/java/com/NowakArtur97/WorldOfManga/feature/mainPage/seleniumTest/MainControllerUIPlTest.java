@@ -5,8 +5,9 @@ import com.NowakArtur97.WorldOfManga.testUtil.extension.ScreenshotWatcher;
 import com.NowakArtur97.WorldOfManga.testUtil.generator.NameWithSpacesGenerator;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.TestPropertySource;
@@ -21,10 +22,15 @@ import static org.junit.jupiter.api.Assertions.*;
 @DirtiesContext
 class MainControllerUIPlTest extends MainControllerUITest {
 
-    @Test
-    void when_load_main_page_should_load_all_page_content() {
+    @ParameterizedTest(name = "{index}: Browser: {0}")
+    @ValueSource(strings = {"Firefox", "Chrome"})
+    void when_load_main_page_should_load_all_page_content(String browserName) {
 
-        mainPage.loadMainView(LanguageVersion.PL);
+        languageVersion = LanguageVersion.PL;
+
+        launchBrowser(browserName, languageVersion.name());
+
+        mainPage.loadMainView(languageVersion);
 
         assertAll(
                 () -> assertTrue(mainPage.getHeaderText().contains(headerLogo),
