@@ -94,6 +94,15 @@ public class MangaList extends SeleniumPageObjectModel {
         return mangaCards.size();
     }
 
+    public String getFirstMangaCardTextAfterRating() {
+
+        if (mangaCards.size() > 0) {
+            return mangaCards.get(mangaCards.size() / 2 ).getText();
+        } else {
+            return "";
+        }
+    }
+
     public String getLastMangaCardText() {
 
         if (mangaCards.size() > 0) {

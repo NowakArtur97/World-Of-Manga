@@ -2,16 +2,14 @@ package com.NowakArtur97.WorldOfManga.feature.manga.seleniumTest;
 
 import com.NowakArtur97.WorldOfManga.feature.manga.seleniumPOM.MangaList;
 import com.NowakArtur97.WorldOfManga.feature.user.seleniumPOM.LoginPage;
-import com.NowakArtur97.WorldOfManga.testUtil.enums.LanguageVersion;
 import com.NowakArtur97.WorldOfManga.testUtil.extension.ScreenshotWatcher;
 import com.NowakArtur97.WorldOfManga.testUtil.generator.NameWithSpacesGenerator;
 import com.NowakArtur97.WorldOfManga.testUtil.selenium.SeleniumUITest;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.EnumSource;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 
@@ -28,17 +26,20 @@ class MangaRatingUITest extends SeleniumUITest {
 
     private LoginPage loginPage;
 
-    @BeforeEach
-    void setupPOM() {
+    private void launchBrowser(String browserName, String language) {
+
+        setUp(browserName, language);
 
         mangaList = new MangaList(webDriver, mainUrl + localServerPort);
 
         loginPage = new LoginPage(webDriver, mainUrl + localServerPort);
     }
 
-    @ParameterizedTest(name = "{index}: Language Version: {0}")
-    @EnumSource(LanguageVersion.class)
-    void when_rate_manga_should_show_updated_rating(LanguageVersion languageVersion) {
+    @ParameterizedTest(name = "{index}: Browser: {0} | Language Version: {1}")
+    @CsvSource({"Firefox, ENG", "Firefox, PL", "Chrome, ENG", "Chrome, PL"})
+    void when_rate_manga_on_main_page_should_show_updated_rating(String browserName, String language) {
+
+        launchBrowser(browserName, language);
 
         loginPage.loadLoginView(languageVersion);
 
@@ -54,9 +55,11 @@ class MangaRatingUITest extends SeleniumUITest {
                 () -> "should show manga rating"));
     }
 
-    @ParameterizedTest(name = "{index}: Language Version: {0}")
-    @EnumSource(LanguageVersion.class)
-    void when_rate_manga_should_show_rating_on_user_manga_list(LanguageVersion languageVersion) {
+    @ParameterizedTest(name = "{index}: Browser: {0} | Language Version: {1}")
+    @CsvSource({"Firefox, ENG", "Firefox, PL", "Chrome, ENG", "Chrome, PL"})
+    void when_rate_manga_should_show_rating_on_user_manga_list(String browserName, String language) {
+
+        launchBrowser(browserName, language);
 
         loginPage.loadLoginView(languageVersion);
 
@@ -76,9 +79,11 @@ class MangaRatingUITest extends SeleniumUITest {
                 () -> "should show manga rating on manga list"));
     }
 
-    @ParameterizedTest(name = "{index}: Language Version: {0}")
-    @EnumSource(LanguageVersion.class)
-    void when_rate_second_time_manga_should_show_updated_rating(LanguageVersion languageVersion) {
+    @ParameterizedTest(name = "{index}: Browser: {0} | Language Version: {1}")
+    @CsvSource({"Firefox, ENG", "Firefox, PL", "Chrome, ENG", "Chrome, PL"})
+    void when_rate_manga_second_time_should_show_updated_rating(String browserName, String language) {
+
+        launchBrowser(browserName, language);
 
         loginPage.loadLoginView(languageVersion);
 
@@ -103,9 +108,11 @@ class MangaRatingUITest extends SeleniumUITest {
                         () -> "should show updated manga rating"));
     }
 
-    @ParameterizedTest(name = "{index}: Language Version: {0}")
-    @EnumSource(LanguageVersion.class)
-    void when_not_logged_user_try_to_rate_manga_should_show_login_form(LanguageVersion languageVersion) {
+    @ParameterizedTest(name = "{index}: Browser: {0} | Language Version: {1}")
+    @CsvSource({"Firefox, ENG", "Firefox, PL", "Chrome, ENG", "Chrome, PL"})
+    void when_not_logged_user_try_to_rate_manga_should_show_login_form(String browserName, String language) {
+
+        launchBrowser(browserName, language);
 
         mangaList.loadMangaList(languageVersion);
 

@@ -74,6 +74,6 @@ public class LoginPage extends SeleniumPageObjectModel {
 
     public boolean isUserOnLoginPage() {
 
-        return webDriver.getCurrentUrl().contains(RESOURCE_PATH);
+        return webDriver.getCurrentUrl().contains(RESOURCE_PATH) || formBox.isDisplayed();
     }
 }
