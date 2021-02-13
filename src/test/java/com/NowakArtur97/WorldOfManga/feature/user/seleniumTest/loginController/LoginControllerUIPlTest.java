@@ -5,8 +5,9 @@ import com.NowakArtur97.WorldOfManga.testUtil.extension.ScreenshotWatcher;
 import com.NowakArtur97.WorldOfManga.testUtil.generator.NameWithSpacesGenerator;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.annotation.DirtiesContext.ClassMode;
@@ -22,13 +23,18 @@ import static org.junit.jupiter.api.Assertions.*;
 @DirtiesContext(classMode = ClassMode.BEFORE_EACH_TEST_METHOD)
 class LoginControllerUIPlTest extends LoginControllerUITest {
 
-    @Test
-    void when_login_with_bad_credentials_should_show_bad_credentials_message() {
+    @ParameterizedTest(name = "{index}: Browser: {0}")
+    @ValueSource(strings = {"Firefox", "Chrome"})
+    void when_login_with_bad_credentials_should_show_bad_credentials_message(String browserName) {
 
         String username = "resu";
         String password = "resu";
 
-        loginPage.loadLoginView(LanguageVersion.PL);
+        languageVersion = LanguageVersion.PL;
+
+        launchBrowser(browserName, languageVersion.name());
+
+        loginPage.loadLoginView(languageVersion);
 
         loginPage.fillMandatoryLoginFields(username, password);
 
@@ -39,13 +45,18 @@ class LoginControllerUIPlTest extends LoginControllerUITest {
                         () -> "user with username: + " + username + " shouldn`t exist"));
     }
 
-    @Test
-    void when_correct_user_login_with_user_role_should_sing_in_user() {
+    @ParameterizedTest(name = "{index}: Browser: {0}")
+    @ValueSource(strings = {"Firefox", "Chrome"})
+    void when_correct_user_login_with_user_role_should_sing_in_user(String browserName) {
 
         String username = "user";
         String password = "user";
 
-        loginPage.loadLoginView(LanguageVersion.PL);
+        languageVersion = LanguageVersion.PL;
+
+        launchBrowser(browserName, languageVersion.name());
+
+        loginPage.loadLoginView(languageVersion);
 
         loginPage.fillMandatoryLoginFields(username, password);
 
@@ -63,13 +74,18 @@ class LoginControllerUIPlTest extends LoginControllerUITest {
                                 + mainPage.getHeaderText()));
     }
 
-    @Test
-    void when_correct_user_login_with_admin_role_should_sing_in_admin() {
+    @ParameterizedTest(name = "{index}: Browser: {0}")
+    @ValueSource(strings = {"Firefox", "Chrome"})
+    void when_correct_user_login_with_admin_role_should_sing_in_admin(String browserName) {
 
         String username = "admin";
         String password = "admin";
 
-        loginPage.loadLoginView(LanguageVersion.PL);
+        languageVersion = LanguageVersion.PL;
+
+        launchBrowser(browserName, languageVersion.name());
+
+        loginPage.loadLoginView(languageVersion);
 
         loginPage.fillMandatoryLoginFields(username, password);
 

@@ -64,7 +64,7 @@ class AuthorControllerUIEnTest extends AuthorControllerUITest {
 
         authorFormPage.fillMandatoryAuthorFormFields(fullName);
 
-        assertAll(() -> assertEquals(authorFormPage.countFailureMessages(), 1, () -> "should have one error"),
+        assertAll(() -> assertEquals(1, authorFormPage.countFailureMessages(), () -> "should have one error"),
                 () -> assertTrue(authorFormPage.getFormBoxText().contains(authorFulNameNotBlankMessage),
                         () -> "should show full name is a required field message"),
                 () -> assertEquals(fullName, authorFormPage.getFullName(), () -> "should show incorrect full name"));
@@ -88,7 +88,7 @@ class AuthorControllerUIEnTest extends AuthorControllerUITest {
 
         authorFormPage.fillMandatoryAuthorFormFields(fullName);
 
-        assertAll(() -> assertEquals(authorFormPage.countFailureMessages(), 1, () -> "should have one error"),
+        assertAll(() -> assertEquals(1, authorFormPage.countFailureMessages(), () -> "should have one error"),
                 () -> assertTrue(authorFormPage.getFormBoxText().contains(authorFullNameSizeMessage),
                         () -> "should show full name is too long message"),
                 () -> assertEquals(fullName, authorFormPage.getFullName(), () -> "should show incorrect full name"));
