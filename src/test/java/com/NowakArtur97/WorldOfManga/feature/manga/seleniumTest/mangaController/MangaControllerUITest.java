@@ -5,7 +5,6 @@ import com.NowakArtur97.WorldOfManga.feature.manga.seleniumPOM.MangaList;
 import com.NowakArtur97.WorldOfManga.feature.manga.translation.MangaTranslationService;
 import com.NowakArtur97.WorldOfManga.feature.user.seleniumPOM.LoginPage;
 import com.NowakArtur97.WorldOfManga.testUtil.selenium.SeleniumUITest;
-import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
@@ -47,8 +46,9 @@ class MangaControllerUITest extends SeleniumUITest {
     @Autowired
     MangaTranslationService mangaTranslationService;
 
-    @BeforeEach
-    void setupPOM() {
+    void launchBrowser(String browserName, String language) {
+
+        setUp(browserName, language);
 
         loginPage = new LoginPage(webDriver, mainUrl + localServerPort);
 

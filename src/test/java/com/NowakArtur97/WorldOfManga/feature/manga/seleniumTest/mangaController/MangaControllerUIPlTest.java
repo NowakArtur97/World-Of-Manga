@@ -5,8 +5,9 @@ import com.NowakArtur97.WorldOfManga.testUtil.extension.ScreenshotWatcher;
 import com.NowakArtur97.WorldOfManga.testUtil.generator.NameWithSpacesGenerator;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.annotation.DirtiesContext.ClassMode;
@@ -22,16 +23,21 @@ import static org.junit.jupiter.api.Assertions.*;
 @DirtiesContext(classMode = ClassMode.BEFORE_EACH_TEST_METHOD)
 class MangaControllerUIPlTest extends MangaControllerUITest {
 
-    @Test
-    void when_correct_manga_creation_with_all_fields_should_add_manga() {
+    @ParameterizedTest(name = "{index}: Browser: {0}")
+    @ValueSource(strings = {"Firefox", "Chrome"})
+    void when_correct_manga_creation_with_all_fields_should_add_manga(String browserName) {
 
-        String englishTitle = "English title 2";
-        String polishTitle = "Polish title 2";
+        String englishTitle = "English title 2 " + browserName;
+        String polishTitle = "Polish title 2 " + browserName;
         boolean selectAuthor = true;
         boolean selectGenre = true;
         boolean addImage = true;
 
-        loginPage.loadLoginView(LanguageVersion.PL);
+        languageVersion = LanguageVersion.PL;
+
+        launchBrowser(browserName, languageVersion.name());
+
+        loginPage.loadLoginView(languageVersion);
 
         loginPage.fillMandatoryLoginFields("admin", "admin");
 
@@ -41,23 +47,28 @@ class MangaControllerUIPlTest extends MangaControllerUITest {
                 "Polish description", selectAuthor, selectGenre, addImage);
 
         assertAll(() -> assertTrue(mangaFormPage.isUserOnMangaFormPage(), () -> "should show manga form page"),
-                () -> assertEquals(mangaFormPage.countFailureMessages(), 0, () -> "shouldn`t have errors"),
+                () -> assertEquals(0, mangaFormPage.countFailureMessages(), () -> "shouldn`t have errors"),
                 () -> assertTrue(mangaTranslationService.isTitleAlreadyInUse(englishTitle),
                         () -> "should save english manga translation in database"),
                 () -> assertTrue(mangaTranslationService.isTitleAlreadyInUse(polishTitle),
                         () -> "should save polish manga translation in database"));
     }
 
-    @Test
-    void when_correct_manga_editing_with_all_fields_should_edit_manga() {
+    @ParameterizedTest(name = "{index}: Browser: {0}")
+    @ValueSource(strings = {"Firefox", "Chrome"})
+    void when_correct_manga_editing_with_all_fields_should_edit_manga(String browserName) {
 
-        String englishTitle = "Some english title 2";
-        String polishTitle = "Some polish title 2";
+        String englishTitle = "Some english title 2 " + browserName;
+        String polishTitle = "Some polish title 2 " + browserName;
         boolean selectAuthor = true;
         boolean selectGenre = true;
         boolean addImage = true;
 
-        loginPage.loadLoginView(LanguageVersion.PL);
+        languageVersion = LanguageVersion.PL;
+
+        launchBrowser(browserName, languageVersion.name());
+
+        loginPage.loadLoginView(languageVersion);
 
         loginPage.fillMandatoryLoginFields("admin", "admin");
 
@@ -69,17 +80,22 @@ class MangaControllerUIPlTest extends MangaControllerUITest {
                 "Polish description", selectAuthor, selectGenre, addImage);
 
         assertAll(() -> assertTrue(mangaFormPage.isUserOnMangaFormPage(), () -> "should show manga form page"),
-                () -> assertEquals(mangaFormPage.countFailureMessages(), 0, () -> "shouldn`t have errors"),
+                () -> assertEquals(0, mangaFormPage.countFailureMessages(), () -> "shouldn`t have errors"),
                 () -> assertTrue(mangaTranslationService.isTitleAlreadyInUse(englishTitle),
                         () -> "should update english manga translation in database"),
                 () -> assertTrue(mangaTranslationService.isTitleAlreadyInUse(polishTitle),
                         () -> "should update polish manga translation in database"));
     }
 
-    @Test
-    void when_deleted_manga_is_in_main_page_should_remove_manga_from_list() {
+    @ParameterizedTest(name = "{index}: Browser: {0}")
+    @ValueSource(strings = {"Firefox", "Chrome"})
+    void when_deleted_manga_is_in_main_page_should_remove_manga_from_list(String browserName) {
 
-        loginPage.loadLoginView(LanguageVersion.PL);
+        languageVersion = LanguageVersion.PL;
+
+        launchBrowser(browserName, languageVersion.name());
+
+        loginPage.loadLoginView(languageVersion);
 
         loginPage.fillMandatoryLoginFields("admin", "admin");
 
@@ -91,14 +107,18 @@ class MangaControllerUIPlTest extends MangaControllerUITest {
 
         int mangasQuantityAfter = mangaList.countMangaCards();
 
-        assertAll(() -> assertTrue((mangasQuantityAfter == mangasQuantityBefore - 2),
-                () -> "should show one less manga"));
+        assertAll(() -> assertEquals(mangasQuantityBefore - 2, mangasQuantityAfter, () -> "should show one less manga"));
     }
 
-    @Test
-    void when_deleted_manga_is_in_users_rated_manga_list_should_delete_manga_from_users_rated_manga_list() {
+    @ParameterizedTest(name = "{index}: Browser: {0}")
+    @ValueSource(strings = {"Firefox", "Chrome"})
+    void when_deleted_manga_is_in_users_rated_manga_list_should_delete_manga_from_users_rated_manga_list(String browserName) {
 
-        loginPage.loadLoginView(LanguageVersion.PL);
+        languageVersion = LanguageVersion.PL;
+
+        launchBrowser(browserName, languageVersion.name());
+
+        loginPage.loadLoginView(languageVersion);
 
         loginPage.fillMandatoryLoginFields("admin", "admin");
 
@@ -120,10 +140,15 @@ class MangaControllerUIPlTest extends MangaControllerUITest {
                 () -> assertEquals(0, mangaList.countMangaCards(), () -> "shouldn`t show manga rating on manga list"));
     }
 
-    @Test
-    void when_deleted_manga_is_in_users_favourites_should_delete_manga_from_favourites() {
+    @ParameterizedTest(name = "{index}: Browser: {0}")
+    @ValueSource(strings = {"Firefox", "Chrome"})
+    void when_deleted_manga_is_in_users_favourites_should_delete_manga_from_favourites(String browserName) {
 
-        loginPage.loadLoginView(LanguageVersion.PL);
+        languageVersion = LanguageVersion.PL;
+
+        launchBrowser(browserName, languageVersion.name());
+
+        loginPage.loadLoginView(languageVersion);
 
         loginPage.fillMandatoryLoginFields("admin", "admin");
 
@@ -142,10 +167,15 @@ class MangaControllerUIPlTest extends MangaControllerUITest {
         assertAll(() -> assertEquals(0, mangaList.countMangaCards(), () -> "shouldn`t show manga on favourites"));
     }
 
-    @Test
-    void when_deleted_manga_is_in_users_manga_list_should_delete_manga_from_users_manga_list() {
+    @ParameterizedTest(name = "{index}: Browser: {0}")
+    @ValueSource(strings = {"Firefox", "Chrome"})
+    void when_deleted_manga_is_in_users_manga_list_should_delete_manga_from_users_manga_list(String browserName) {
 
-        loginPage.loadLoginView(LanguageVersion.PL);
+        languageVersion = LanguageVersion.PL;
+
+        launchBrowser(browserName, languageVersion.name());
+
+        loginPage.loadLoginView(languageVersion);
 
         loginPage.fillMandatoryLoginFields("admin", "admin");
 
@@ -166,15 +196,20 @@ class MangaControllerUIPlTest extends MangaControllerUITest {
         assertAll(() -> assertEquals(0, mangaList.countMangaCards(), () -> "shouldn`t show manga on list"));
     }
 
-    @Test
-    void when_incorrect_manga_creation_with_all_blank_fields_and_not_selected_author_image_and_genre_should_have_errors() {
+    @ParameterizedTest(name = "{index}: Browser: {0}")
+    @ValueSource(strings = {"Firefox", "Chrome"})
+    void when_incorrect_manga_creation_with_all_blank_fields_and_not_selected_author_image_and_genre_should_have_errors(String browserName) {
 
         String blankField = "";
         boolean selectAuthor = false;
         boolean selectGenre = false;
         boolean addImage = false;
 
-        loginPage.loadLoginView(LanguageVersion.PL);
+        languageVersion = LanguageVersion.PL;
+
+        launchBrowser(browserName, languageVersion.name());
+
+        loginPage.loadLoginView(languageVersion);
 
         loginPage.fillMandatoryLoginFields("admin", "admin");
 
@@ -184,7 +219,7 @@ class MangaControllerUIPlTest extends MangaControllerUITest {
                 selectGenre, addImage);
 
         assertAll(() -> assertTrue(mangaFormPage.isUserOnMangaFormPage(), () -> "should show manga form page"),
-                () -> assertEquals(mangaFormPage.countFailureMessages(), 7, () -> "should have seven errors"),
+                () -> assertEquals(7, mangaFormPage.countFailureMessages(), () -> "should have seven errors"),
                 () -> assertTrue(mangaFormPage.getFormBoxText().contains(mangaTranslationDescriptionNotBlankMessage),
                         () -> "should show title is a required field message twice"),
                 () -> assertTrue(mangaFormPage.getFormBoxText().contains(mangaTranslationTitleNotBlankMessage),
@@ -205,8 +240,9 @@ class MangaControllerUIPlTest extends MangaControllerUITest {
                 () -> assertFalse(mangaFormPage.isSecondGenreCheckboxSelected(), () -> "shouldn`t genre be selected"));
     }
 
-    @Test
-    void when_incorrect_manga_creation_with_too_long_field_sizes_and_selected_author_and_image_should_have_errors() {
+    @ParameterizedTest(name = "{index}: Browser: {0}")
+    @ValueSource(strings = {"Firefox", "Chrome"})
+    void when_incorrect_manga_creation_with_too_long_field_sizes_and_selected_author_and_image_should_have_errors(String browserName) {
 
         String longTitleText = "asdfghjklpasdfghjklpasdfghjklpasdfghjklpasdfghjklp!@#$%";
         String longDescriptionText = "asdfghjklpasdfghjklpasdfghjklpasdfghjklpasdfghjklp!@#$%".repeat(30);
@@ -214,7 +250,11 @@ class MangaControllerUIPlTest extends MangaControllerUITest {
         boolean selectGenre = true;
         boolean addImage = true;
 
-        loginPage.loadLoginView(LanguageVersion.PL);
+        languageVersion = LanguageVersion.PL;
+
+        launchBrowser(browserName, languageVersion.name());
+
+        loginPage.loadLoginView(languageVersion);
 
         loginPage.fillMandatoryLoginFields("admin", "admin");
 
@@ -224,7 +264,7 @@ class MangaControllerUIPlTest extends MangaControllerUITest {
                 longDescriptionText, selectAuthor, selectGenre, addImage);
 
         assertAll(() -> assertTrue(mangaFormPage.isUserOnMangaFormPage(), () -> "should show manga form page"),
-                () -> assertEquals(mangaFormPage.countFailureMessages(), 4, () -> "should have four errors"),
+                () -> assertEquals(4, mangaFormPage.countFailureMessages(), () -> "should have four errors"),
                 () -> assertTrue(mangaFormPage.getFormBoxText().contains(mangaTranslationTitleSizeMessage),
                         () -> "should show title is too long message twice"),
                 () -> assertTrue(mangaFormPage.getFormBoxText().contains(mangaTranslationDescriptionSizeMessage),
