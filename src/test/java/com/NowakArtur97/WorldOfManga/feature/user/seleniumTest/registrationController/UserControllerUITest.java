@@ -3,7 +3,6 @@ package com.NowakArtur97.WorldOfManga.feature.user.seleniumTest.registrationCont
 import com.NowakArtur97.WorldOfManga.feature.user.UserService;
 import com.NowakArtur97.WorldOfManga.feature.user.seleniumPOM.RegistrationPage;
 import com.NowakArtur97.WorldOfManga.testUtil.selenium.SeleniumUITest;
-import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
@@ -53,8 +52,9 @@ class UserControllerUITest extends SeleniumUITest {
     @Autowired
     UserService userService;
 
-    @BeforeEach
-    void setupPOM() {
+    void launchBrowser(String browserName, String language) {
+
+        setUp(browserName, language);
 
         registrationPage = new RegistrationPage(webDriver, mainUrl + localServerPort);
     }

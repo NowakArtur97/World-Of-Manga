@@ -5,8 +5,9 @@ import com.NowakArtur97.WorldOfManga.testUtil.extension.ScreenshotWatcher;
 import com.NowakArtur97.WorldOfManga.testUtil.generator.NameWithSpacesGenerator;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.annotation.DirtiesContext.ClassMode;
@@ -22,14 +23,19 @@ import static org.junit.jupiter.api.Assertions.*;
 @DirtiesContext(classMode = ClassMode.BEFORE_EACH_TEST_METHOD)
 class UserControllerUIEnTest extends UserControllerUITest {
 
-    @Test
-    void when_username_is_already_in_use_should_have_error() {
+    @ParameterizedTest(name = "{index}: Browser: {0}")
+    @ValueSource(strings = {"Firefox", "Chrome"})
+    void when_username_is_already_in_use_should_have_error(String browserName) {
 
         String username = "user";
         String email = "email@email.com";
         boolean areTermsAccepted = true;
 
-        registrationPage.loadRegistrationView(LanguageVersion.ENG);
+        languageVersion = LanguageVersion.ENG;
+
+        launchBrowser(browserName, languageVersion.name());
+
+        registrationPage.loadRegistrationView(languageVersion);
 
         registrationPage.fillMandatoryRegistrationFields(username, "password", "password", email, areTermsAccepted);
 
@@ -42,14 +48,19 @@ class UserControllerUIEnTest extends UserControllerUITest {
                 () -> assertTrue(registrationPage.getConfirmTerms(), () -> "should show accepted terms"));
     }
 
-    @Test
-    void when_email_is_already_in_use_should_have_error() {
+    @ParameterizedTest(name = "{index}: Browser: {0}")
+    @ValueSource(strings = {"Firefox", "Chrome"})
+    void when_email_is_already_in_use_should_have_error(String browserName) {
 
         String username = "username";
         String email = "user@email.com";
         boolean areTermsAccepted = true;
 
-        registrationPage.loadRegistrationView(LanguageVersion.ENG);
+        languageVersion = LanguageVersion.ENG;
+
+        launchBrowser(browserName, languageVersion.name());
+
+        registrationPage.loadRegistrationView(languageVersion);
 
         registrationPage.fillMandatoryRegistrationFields(username, "password", "password", email, areTermsAccepted);
 
@@ -62,14 +73,19 @@ class UserControllerUIEnTest extends UserControllerUITest {
                 () -> assertTrue(registrationPage.getConfirmTerms(), () -> "should show accepted terms"));
     }
 
-    @Test
-    void when_incorrect_registration_with_mandatory_fields_should_have_errors() {
+    @ParameterizedTest(name = "{index}: Browser: {0}")
+    @ValueSource(strings = {"Firefox", "Chrome"})
+    void when_incorrect_registration_with_mandatory_fields_should_have_errors(String browserName) {
 
         String username = "";
         String email = "";
         boolean areTermsAccepted = false;
 
-        registrationPage.loadRegistrationView(LanguageVersion.ENG);
+        languageVersion = LanguageVersion.ENG;
+
+        launchBrowser(browserName, languageVersion.name());
+
+        registrationPage.loadRegistrationView(languageVersion);
 
         registrationPage.fillMandatoryRegistrationFields(username, "password", "password1", email, areTermsAccepted);
 
@@ -88,14 +104,19 @@ class UserControllerUIEnTest extends UserControllerUITest {
                 () -> assertFalse(registrationPage.getConfirmTerms(), () -> "should show not accepted terms"));
     }
 
-    @Test
-    void when_incorrect_registration_fields_size_with_mandatory_fields_should_have_errors() {
+    @ParameterizedTest(name = "{index}: Browser: {0}")
+    @ValueSource(strings = {"Firefox", "Chrome"})
+    void when_incorrect_registration_fields_size_with_mandatory_fields_should_have_errors(String browserName) {
 
         String username = "asdfghjklpasdfghjklpasdfghjklpasdfghjklpasdfghjklp";
         String email = "email,";
         boolean areTermsAccepted = false;
 
-        registrationPage.loadRegistrationView(LanguageVersion.ENG);
+        languageVersion = LanguageVersion.ENG;
+
+        launchBrowser(browserName, languageVersion.name());
+
+        registrationPage.loadRegistrationView(languageVersion);
 
         registrationPage.fillMandatoryRegistrationFields(username, "", "password", email, areTermsAccepted);
 
@@ -114,8 +135,9 @@ class UserControllerUIEnTest extends UserControllerUITest {
                 () -> assertFalse(registrationPage.getConfirmTerms(), () -> "should show not accepted terms"));
     }
 
-    @Test
-    void when_incorrect_registration_with_all_fields_should_have_errors() {
+    @ParameterizedTest(name = "{index}: Browser: {0}")
+    @ValueSource(strings = {"Firefox", "Chrome"})
+    void when_incorrect_registration_with_all_fields_should_have_errors(String browserName) {
 
         String username = "";
         String email = "";
@@ -125,7 +147,11 @@ class UserControllerUIEnTest extends UserControllerUITest {
         String firstName = "asdfghjklpasdfghjklpasdfghjklpasdfghjklpasdfghjklp";
         String lastName = "asdfghjklpasdfghjklpasdfghjklpasdfghjklpasdfghjklp";
 
-        registrationPage.loadRegistrationView(LanguageVersion.ENG);
+        languageVersion = LanguageVersion.ENG;
+
+        launchBrowser(browserName, languageVersion.name());
+
+        registrationPage.loadRegistrationView(languageVersion);
 
         registrationPage.fillAllRegistrationFields(username, email, password, matchingPassword, firstName, lastName,
                 areTermsAccepted);
@@ -150,15 +176,20 @@ class UserControllerUIEnTest extends UserControllerUITest {
                 () -> assertTrue(registrationPage.getConfirmTerms(), () -> "should show accepted terms"));
     }
 
-    @Test
-    void when_correct_registration_with_all_fields_should_register_user() {
+    @ParameterizedTest(name = "{index}: Browser: {0}")
+    @ValueSource(strings = {"Firefox", "Chrome"})
+    void when_correct_registration_with_all_fields_should_register_user(String browserName) {
 
-        String username = "user name 123";
+        String username = "user name 222" + browserName;
 
-        registrationPage.loadRegistrationView(LanguageVersion.ENG);
+        languageVersion = LanguageVersion.ENG;
 
-        registrationPage.fillAllRegistrationFields(username, "password", "password", "user123@email.com", "firstName",
-                "lastName", true);
+        launchBrowser(browserName, languageVersion.name());
+
+        registrationPage.loadRegistrationView(languageVersion);
+
+        registrationPage.fillAllRegistrationFields(username, "password", "password",
+                browserName + "user222@email.com", "firstName", "lastName", true);
 
         assertAll(() -> assertTrue(registrationPage.isUserOnRegistrationPage(), () -> "should show registration page"),
                 () -> assertTrue(userService.isUsernameAlreadyInUse(username), () -> "should save user in database"),
