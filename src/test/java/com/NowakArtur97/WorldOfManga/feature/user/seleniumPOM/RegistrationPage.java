@@ -2,9 +2,11 @@ package com.NowakArtur97.WorldOfManga.feature.user.seleniumPOM;
 
 import com.NowakArtur97.WorldOfManga.testUtil.enums.LanguageVersion;
 import com.NowakArtur97.WorldOfManga.testUtil.selenium.SeleniumPageObjectModel;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
 
@@ -12,40 +14,40 @@ public class RegistrationPage extends SeleniumPageObjectModel {
 
     private static final String RESOURCE_PATH = "/user/register";
 
-    private static final String USERNAME = "username";
-    private static final String FIRSTNAME = "firstName";
-    private static final String LASTNAME = "lastName";
-    private static final String PASSWORD = "userPasswordDTO.password";
-    private static final String MATCHING_PASSWORD = "userPasswordDTO.matchingPassword";
-    private static final String EMAIL = "email";
-    private static final String TERMS = "areTermsAccepted";
+    private static final String USERNAME_NAME = "username";
+    private static final String FIRSTNAME_NAME = "firstName";
+    private static final String LASTNAME_NAME = "lastName";
+    private static final String PASSWORD_NAME = "userPasswordDTO.password";
+    private static final String MATCHING_PASSWORD_NAME = "userPasswordDTO.matchingPassword";
+    private static final String EMAIL_NAME = "email";
+    private static final String TERMS_NAME = "areTermsAccepted";
     private static final String SUBMIT_CLASS = "form__submit";
     private static final String FORM_MESSAGE_FAILURE_CLASS = "form__message--failure";
     private static final String FORM_BOX_CLASS = "form__box";
 
-    @FindBy(name = USERNAME)
+    @FindBy(name = USERNAME_NAME)
     private WebElement usernameInput;
 
-    @FindBy(name = FIRSTNAME)
+    @FindBy(name = FIRSTNAME_NAME)
     private WebElement firstNameInput;
 
-    @FindBy(name = LASTNAME)
+    @FindBy(name = LASTNAME_NAME)
     private WebElement lastNameInput;
 
-    @FindBy(name = PASSWORD)
+    @FindBy(name = PASSWORD_NAME)
     private WebElement passwordInput;
 
-    @FindBy(name = MATCHING_PASSWORD)
+    @FindBy(name = MATCHING_PASSWORD_NAME)
     private WebElement matchingPasswordInput;
 
-    @FindBy(name = EMAIL)
+    @FindBy(name = EMAIL_NAME)
     private WebElement emailInput;
 
-    @FindBy(name = TERMS)
+    @FindBy(name = TERMS_NAME)
     private WebElement terms;
 
     @FindBy(className = FORM_MESSAGE_FAILURE_CLASS)
-    private List<WebElement> failrueMessages;
+    private List<WebElement> failureMessages;
 
     @FindBy(className = FORM_BOX_CLASS)
     private WebElement formBox;
@@ -142,7 +144,7 @@ public class RegistrationPage extends SeleniumPageObjectModel {
 
     public int countFailureMessages() {
 
-        return failrueMessages.size();
+        return failureMessages.size();
     }
 
     public String getFormBoxText() {
@@ -153,7 +155,7 @@ public class RegistrationPage extends SeleniumPageObjectModel {
     public void fillMandatoryRegistrationFields(String username, String password, String matchingPassword, String email,
                                                 boolean areTermsConfirmed) {
 
-        waitFor(300);
+        webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.className(SUBMIT_CLASS)));
 
         setUsername(username);
 
