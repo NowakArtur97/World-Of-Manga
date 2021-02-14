@@ -2,9 +2,11 @@ package com.NowakArtur97.WorldOfManga.feature.manga.seleniumPOM;
 
 import com.NowakArtur97.WorldOfManga.testUtil.enums.LanguageVersion;
 import com.NowakArtur97.WorldOfManga.testUtil.selenium.SeleniumPageObjectModel;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
 
@@ -16,38 +18,38 @@ public class MangaFormPage extends SeleniumPageObjectModel {
 
     private final String exampleImagePath;
 
-    private static final String TITLE_EN = "enTranslation.title";
-    private static final String DESCRIPTION_EN = "enTranslation.description";
-    private static final String TITLE_PL = "plTranslation.title";
-    private static final String DESCRIPTION_PL = "plTranslation.description";
-    private static final String IMAGE = "image";
-    private static final String AUTHORS = "authors";
-    private static final String GENRES = "genres";
+    private static final String TITLE_EN_ID = "enTranslation.title";
+    private static final String DESCRIPTION_EN_ID = "enTranslation.description";
+    private static final String TITLE_PL_ID = "plTranslation.title";
+    private static final String DESCRIPTION_PL_ID = "plTranslation.description";
+    private static final String IMAGE_ID = "image";
+    private static final String AUTHORS_NAME = "authors";
+    private static final String GENRES_NAME = "genres";
     private static final String FORM_GROUP_SHOW_CLASS = "form__label--show";
     private static final String FORM_MESSAGE_FAILURE_CLASS = "form__message--failure";
     private static final String FORM_BOX_NAME = "addOrUpdateMangaForm";
-    private static final String SUBMIT_MANGA = "addOrUpdateMangaSubmitBtn";
+    private static final String SUBMIT_MANGA_NAME = "addOrUpdateMangaSubmitBtn";
     private static final String ADD_OR_UPDATE_MANGA_LINK = "//a[@href='/admin/addOrUpdateManga']";
 
-    @FindBy(id = TITLE_EN)
+    @FindBy(id = TITLE_EN_ID)
     private WebElement titleEnInput;
 
-    @FindBy(id = DESCRIPTION_EN)
+    @FindBy(id = DESCRIPTION_EN_ID)
     private WebElement descriptionEnInput;
 
-    @FindBy(id = TITLE_PL)
+    @FindBy(id = TITLE_PL_ID)
     private WebElement titlePlInput;
 
-    @FindBy(id = DESCRIPTION_PL)
+    @FindBy(id = DESCRIPTION_PL_ID)
     private WebElement descriptionPlInput;
 
-    @FindBy(id = IMAGE)
+    @FindBy(id = IMAGE_ID)
     private WebElement imageInput;
 
-    @FindBy(name = AUTHORS)
+    @FindBy(name = AUTHORS_NAME)
     private List<WebElement> authorsCheckboxes;
 
-    @FindBy(name = GENRES)
+    @FindBy(name = GENRES_NAME)
     private List<WebElement> genresCheckboxes;
 
     @FindBy(className = FORM_GROUP_SHOW_CLASS)
@@ -59,7 +61,7 @@ public class MangaFormPage extends SeleniumPageObjectModel {
     @FindBy(name = FORM_BOX_NAME)
     private WebElement formBox;
 
-    @FindBy(name = SUBMIT_MANGA)
+    @FindBy(name = SUBMIT_MANGA_NAME)
     private WebElement submitButton;
 
     @FindBy(xpath = ADD_OR_UPDATE_MANGA_LINK)
@@ -187,15 +189,11 @@ public class MangaFormPage extends SeleniumPageObjectModel {
     public void fillMandatoryMangaFormFields(String enTitle, String enDescription, String plTitle, String plDescription,
                                              boolean selectAuthor, boolean selectGenres, boolean addImage) {
 
-        waitFor(300);
+        webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.name(SUBMIT_MANGA_NAME)));
 
         setEnTitle(enTitle);
 
-        waitFor(200);
-
         setEnDescription(enDescription);
-
-        waitFor(200);
 
         setPlTitle(plTitle);
 
@@ -205,12 +203,16 @@ public class MangaFormPage extends SeleniumPageObjectModel {
 
             showAuthors();
 
+            webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.name(AUTHORS_NAME)));
+
             clickAuthorCheckbox(1);
         }
 
         if (selectGenres) {
 
             showGenres();
+
+            webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.name(GENRES_NAME)));
 
             clickGenreCheckbox(1);
         }
