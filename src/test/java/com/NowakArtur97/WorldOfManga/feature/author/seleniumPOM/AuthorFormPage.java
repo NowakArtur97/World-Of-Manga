@@ -2,9 +2,11 @@ package com.NowakArtur97.WorldOfManga.feature.author.seleniumPOM;
 
 import com.NowakArtur97.WorldOfManga.testUtil.enums.LanguageVersion;
 import com.NowakArtur97.WorldOfManga.testUtil.selenium.SeleniumPageObjectModel;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
 
@@ -12,22 +14,22 @@ public class AuthorFormPage extends SeleniumPageObjectModel {
 
     private static final String RESOURCE_PATH = "/admin/addOrUpdateAuthor";
 
-    private static final String FULL_NAME = "fullName";
+    private static final String FULL_NAME_ID = "fullName";
     private static final String FORM_MESSAGE_FAILURE_CLASS = "form__message--failure";
     private static final String FORM_BOX_NAME = "addOrUpdateAuthorForm";
-    private static final String SUBMIT_AUTHOR = "addOrUpdateAuthorSubmitBtn";
+    private static final String SUBMIT_AUTHOR_NAME = "addOrUpdateAuthorSubmitBtn";
     private static final String ADD_OR_UPDATE_AUTHOR_LINK = "//a[@href='/admin/addOrUpdateManga']";
 
-    @FindBy(id = FULL_NAME)
+    @FindBy(id = FULL_NAME_ID)
     private WebElement fullNameInput;
 
     @FindBy(className = FORM_MESSAGE_FAILURE_CLASS)
-    private List<WebElement> failrueMessages;
+    private List<WebElement> failureMessages;
 
     @FindBy(name = FORM_BOX_NAME)
     private WebElement formBox;
 
-    @FindBy(name = SUBMIT_AUTHOR)
+    @FindBy(name = SUBMIT_AUTHOR_NAME)
     private WebElement submitButton;
 
     @FindBy(xpath = ADD_OR_UPDATE_AUTHOR_LINK)
@@ -67,7 +69,7 @@ public class AuthorFormPage extends SeleniumPageObjectModel {
 
     public int countFailureMessages() {
 
-        return failrueMessages.size();
+        return failureMessages.size();
     }
 
     public void clickAddOrUpdateAuthorLinkButton() {
@@ -77,11 +79,9 @@ public class AuthorFormPage extends SeleniumPageObjectModel {
 
     public void fillMandatoryAuthorFormFields(String fullName) {
 
-        waitFor(200);
+        webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.name(SUBMIT_AUTHOR_NAME)));
 
         setFullName(fullName);
-
-        waitFor(200);
 
         clickSubmitAuthorFormButton();
     }
