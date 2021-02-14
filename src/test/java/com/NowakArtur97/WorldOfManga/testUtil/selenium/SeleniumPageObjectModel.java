@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class SeleniumPageObjectModel {
 
@@ -12,6 +13,7 @@ public class SeleniumPageObjectModel {
     private final String mainUrl;
 
     protected final WebDriver webDriver;
+    protected final WebDriverWait webDriverWait;
 
     protected SeleniumPageObjectModel(WebDriver webDriver, String mainUrl) {
 
@@ -19,6 +21,7 @@ public class SeleniumPageObjectModel {
         PageFactory.initElements(factory, this);
         this.webDriver = webDriver;
         this.mainUrl = mainUrl;
+        this.webDriverWait = new WebDriverWait(webDriver, TIME_TO_WAIT);
     }
 
     protected void connectTo(final String RESOURCE_PATH) {
@@ -31,14 +34,5 @@ public class SeleniumPageObjectModel {
 
         JavascriptExecutor executor = (JavascriptExecutor) webDriver;
         executor.executeScript("arguments[0].click();", element);
-    }
-
-    protected void waitFor(long millis) {
-
-        try {
-            Thread.sleep(millis);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
     }
 }
