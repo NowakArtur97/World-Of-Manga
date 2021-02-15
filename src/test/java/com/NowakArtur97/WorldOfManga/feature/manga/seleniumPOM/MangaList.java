@@ -192,7 +192,7 @@ public class MangaList extends SeleniumPageObjectModel {
 
         waitFor(2000);
 
-        return mangaFavouritesCounters.get(mangaFavouritesCounters.size() / 2 - 1).getText();
+        return mangaFavouritesCounters.get(mangaFavouritesCounters.size() / 2 - 1).getAttribute("innerText");
     }
 
     public String getLastMangaFavouritesCounter() {

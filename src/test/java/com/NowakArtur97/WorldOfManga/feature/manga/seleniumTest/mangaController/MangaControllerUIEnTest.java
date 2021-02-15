@@ -1,5 +1,6 @@
 package com.NowakArtur97.WorldOfManga.feature.manga.seleniumTest.mangaController;
 
+import com.NowakArtur97.WorldOfManga.testUtil.enums.Browser;
 import com.NowakArtur97.WorldOfManga.testUtil.enums.LanguageVersion;
 import com.NowakArtur97.WorldOfManga.testUtil.extension.ScreenshotWatcher;
 import com.NowakArtur97.WorldOfManga.testUtil.generator.NameWithSpacesGenerator;
@@ -7,7 +8,7 @@ import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
+import org.junit.jupiter.params.provider.EnumSource;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.annotation.DirtiesContext.ClassMode;
@@ -24,18 +25,18 @@ import static org.junit.jupiter.api.Assertions.*;
 class MangaControllerUIEnTest extends MangaControllerUITest {
 
     @ParameterizedTest(name = "{index}: Browser: {0}")
-    @ValueSource(strings = {"Firefox", "Chrome"})
-    void when_correct_manga_creation_with_all_fields_should_add_manga(String browserName) {
+    @EnumSource(Browser.class)
+    void when_correct_manga_creation_with_all_fields_should_add_manga(Browser browser) {
 
-        String englishTitle = "English title 1 " + browserName;
-        String polishTitle = "Polish title 1 " + browserName;
+        String englishTitle = "English title 1 " + browser.name();
+        String polishTitle = "Polish title 1 " + browser.name();
         boolean selectAuthor = true;
         boolean selectGenre = true;
         boolean addImage = true;
 
         languageVersion = LanguageVersion.ENG;
 
-        launchBrowser(browserName, languageVersion.name());
+        launchBrowser(browser.name(), languageVersion.name());
 
         loginPage.loadLoginView(languageVersion);
 
@@ -55,18 +56,18 @@ class MangaControllerUIEnTest extends MangaControllerUITest {
     }
 
     @ParameterizedTest(name = "{index}: Browser: {0}")
-    @ValueSource(strings = {"Firefox", "Chrome"})
-    void when_correct_manga_editing_with_all_fields_should_edit_manga(String browserName) {
+    @EnumSource(Browser.class)
+    void when_correct_manga_editing_with_all_fields_should_edit_manga(Browser browser) {
 
-        String englishTitle = "Some english title 1 " + browserName;
-        String polishTitle = "Some polish title 1 " + browserName;
+        String englishTitle = "Some english title 1 " + browser.name();
+        String polishTitle = "Some polish title 1 " + browser.name();
         boolean selectAuthor = true;
         boolean selectGenre = true;
         boolean addImage = true;
 
         languageVersion = LanguageVersion.ENG;
 
-        launchBrowser(browserName, languageVersion.name());
+        launchBrowser(browser.name(), languageVersion.name());
 
         loginPage.loadLoginView(languageVersion);
 
@@ -88,12 +89,12 @@ class MangaControllerUIEnTest extends MangaControllerUITest {
     }
 
     @ParameterizedTest(name = "{index}: Browser: {0}")
-    @ValueSource(strings = {"Firefox", "Chrome"})
-    void when_deleted_manga_is_in_main_page_should_remove_manga_from_list(String browserName) {
+    @EnumSource(Browser.class)
+    void when_deleted_manga_is_in_main_page_should_remove_manga_from_list(Browser browser) {
 
         languageVersion = LanguageVersion.ENG;
 
-        launchBrowser(browserName, languageVersion.name());
+        launchBrowser(browser.name(), languageVersion.name());
 
         loginPage.loadLoginView(languageVersion);
 
@@ -111,12 +112,12 @@ class MangaControllerUIEnTest extends MangaControllerUITest {
     }
 
     @ParameterizedTest(name = "{index}: Browser: {0}")
-    @ValueSource(strings = {"Firefox", "Chrome"})
-    void when_deleted_manga_is_in_users_rated_manga_list_should_delete_manga_from_users_rated_manga_list(String browserName) {
+    @EnumSource(Browser.class)
+    void when_deleted_manga_is_in_users_rated_manga_list_should_delete_manga_from_users_rated_manga_list(Browser browser) {
 
         languageVersion = LanguageVersion.ENG;
 
-        launchBrowser(browserName, languageVersion.name());
+        launchBrowser(browser.name(), languageVersion.name());
 
         loginPage.loadLoginView(languageVersion);
 
@@ -141,12 +142,12 @@ class MangaControllerUIEnTest extends MangaControllerUITest {
     }
 
     @ParameterizedTest(name = "{index}: Browser: {0}")
-    @ValueSource(strings = {"Firefox", "Chrome"})
-    void when_deleted_manga_is_in_users_favourites_should_delete_manga_from_favourites(String browserName) {
+    @EnumSource(Browser.class)
+    void when_deleted_manga_is_in_users_favourites_should_delete_manga_from_favourites(Browser browser) {
 
         languageVersion = LanguageVersion.ENG;
 
-        launchBrowser(browserName, languageVersion.name());
+        launchBrowser(browser.name(), languageVersion.name());
 
         loginPage.loadLoginView(languageVersion);
 
@@ -168,12 +169,12 @@ class MangaControllerUIEnTest extends MangaControllerUITest {
     }
 
     @ParameterizedTest(name = "{index}: Browser: {0}")
-    @ValueSource(strings = {"Firefox", "Chrome"})
-    void when_deleted_manga_is_in_users_manga_list_should_delete_manga_from_users_manga_list(String browserName) {
+    @EnumSource(Browser.class)
+    void when_deleted_manga_is_in_users_manga_list_should_delete_manga_from_users_manga_list(Browser browser) {
 
         languageVersion = LanguageVersion.ENG;
 
-        launchBrowser(browserName, languageVersion.name());
+        launchBrowser(browser.name(), languageVersion.name());
 
         loginPage.loadLoginView(languageVersion);
 
@@ -197,8 +198,8 @@ class MangaControllerUIEnTest extends MangaControllerUITest {
     }
 
     @ParameterizedTest(name = "{index}: Browser: {0}")
-    @ValueSource(strings = {"Firefox", "Chrome"})
-    void when_incorrect_manga_creation_with_all_blank_fields_and_not_selected_author_image_and_genre_should_have_errors(String browserName) {
+    @EnumSource(Browser.class)
+    void when_incorrect_manga_creation_with_all_blank_fields_and_not_selected_author_image_and_genre_should_have_errors(Browser browser) {
 
         String blankField = "";
         boolean selectAuthor = false;
@@ -207,7 +208,7 @@ class MangaControllerUIEnTest extends MangaControllerUITest {
 
         languageVersion = LanguageVersion.ENG;
 
-        launchBrowser(browserName, languageVersion.name());
+        launchBrowser(browser.name(), languageVersion.name());
 
         loginPage.loadLoginView(languageVersion);
 
@@ -241,8 +242,8 @@ class MangaControllerUIEnTest extends MangaControllerUITest {
     }
 
     @ParameterizedTest(name = "{index}: Browser: {0}")
-    @ValueSource(strings = {"Firefox", "Chrome"})
-    void when_incorrect_manga_creation_with_too_long_field_sizes_and_selected_author_and_image_should_have_errors(String browserName) {
+    @EnumSource(Browser.class)
+    void when_incorrect_manga_creation_with_too_long_field_sizes_and_selected_author_and_image_should_have_errors(Browser browser) {
 
         String longTitleText = "asdfghjklpasdfghjklpasdfghjklpasdfghjklpasdfghjklp!@#$%";
         String longDescriptionText = "asdfghjklpasdfghjklpasdfghjklpasdfghjklpasdfghjklp!@#$%".repeat(30);
@@ -252,7 +253,7 @@ class MangaControllerUIEnTest extends MangaControllerUITest {
 
         languageVersion = LanguageVersion.ENG;
 
-        launchBrowser(browserName, languageVersion.name());
+        launchBrowser(browser.name(), languageVersion.name());
 
         loginPage.loadLoginView(languageVersion);
 

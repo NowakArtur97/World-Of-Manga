@@ -1,5 +1,6 @@
 package com.NowakArtur97.WorldOfManga.feature.user.seleniumTest.registrationController;
 
+import com.NowakArtur97.WorldOfManga.testUtil.enums.Browser;
 import com.NowakArtur97.WorldOfManga.testUtil.enums.LanguageVersion;
 import com.NowakArtur97.WorldOfManga.testUtil.extension.ScreenshotWatcher;
 import com.NowakArtur97.WorldOfManga.testUtil.generator.NameWithSpacesGenerator;
@@ -7,7 +8,7 @@ import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
+import org.junit.jupiter.params.provider.EnumSource;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.annotation.DirtiesContext.ClassMode;
@@ -24,8 +25,8 @@ import static org.junit.jupiter.api.Assertions.*;
 class UserControllerUIEnTest extends UserControllerUITest {
 
     @ParameterizedTest(name = "{index}: Browser: {0}")
-    @ValueSource(strings = {"Firefox", "Chrome"})
-    void when_username_is_already_in_use_should_have_error(String browserName) {
+    @EnumSource(Browser.class)
+    void when_username_is_already_in_use_should_have_error(Browser browser) {
 
         String username = "user";
         String email = "email@email.com";
@@ -33,7 +34,7 @@ class UserControllerUIEnTest extends UserControllerUITest {
 
         languageVersion = LanguageVersion.ENG;
 
-        launchBrowser(browserName, languageVersion.name());
+        launchBrowser(browser.name(), languageVersion.name());
 
         registrationPage.loadRegistrationView(languageVersion);
 
@@ -49,8 +50,8 @@ class UserControllerUIEnTest extends UserControllerUITest {
     }
 
     @ParameterizedTest(name = "{index}: Browser: {0}")
-    @ValueSource(strings = {"Firefox", "Chrome"})
-    void when_email_is_already_in_use_should_have_error(String browserName) {
+    @EnumSource(Browser.class)
+    void when_email_is_already_in_use_should_have_error(Browser browser) {
 
         String username = "username";
         String email = "user@email.com";
@@ -58,7 +59,7 @@ class UserControllerUIEnTest extends UserControllerUITest {
 
         languageVersion = LanguageVersion.ENG;
 
-        launchBrowser(browserName, languageVersion.name());
+        launchBrowser(browser.name(), languageVersion.name());
 
         registrationPage.loadRegistrationView(languageVersion);
 
@@ -74,8 +75,8 @@ class UserControllerUIEnTest extends UserControllerUITest {
     }
 
     @ParameterizedTest(name = "{index}: Browser: {0}")
-    @ValueSource(strings = {"Firefox", "Chrome"})
-    void when_incorrect_registration_with_mandatory_fields_should_have_errors(String browserName) {
+    @EnumSource(Browser.class)
+    void when_incorrect_registration_with_mandatory_fields_should_have_errors(Browser browser) {
 
         String username = "";
         String email = "";
@@ -83,7 +84,7 @@ class UserControllerUIEnTest extends UserControllerUITest {
 
         languageVersion = LanguageVersion.ENG;
 
-        launchBrowser(browserName, languageVersion.name());
+        launchBrowser(browser.name(), languageVersion.name());
 
         registrationPage.loadRegistrationView(languageVersion);
 
@@ -105,8 +106,8 @@ class UserControllerUIEnTest extends UserControllerUITest {
     }
 
     @ParameterizedTest(name = "{index}: Browser: {0}")
-    @ValueSource(strings = {"Firefox", "Chrome"})
-    void when_incorrect_registration_fields_size_with_mandatory_fields_should_have_errors(String browserName) {
+    @EnumSource(Browser.class)
+    void when_incorrect_registration_fields_size_with_mandatory_fields_should_have_errors(Browser browser) {
 
         String username = "asdfghjklpasdfghjklpasdfghjklpasdfghjklpasdfghjklp";
         String email = "email,";
@@ -114,7 +115,7 @@ class UserControllerUIEnTest extends UserControllerUITest {
 
         languageVersion = LanguageVersion.ENG;
 
-        launchBrowser(browserName, languageVersion.name());
+        launchBrowser(browser.name(), languageVersion.name());
 
         registrationPage.loadRegistrationView(languageVersion);
 
@@ -136,8 +137,8 @@ class UserControllerUIEnTest extends UserControllerUITest {
     }
 
     @ParameterizedTest(name = "{index}: Browser: {0}")
-    @ValueSource(strings = {"Firefox", "Chrome"})
-    void when_incorrect_registration_with_all_fields_should_have_errors(String browserName) {
+    @EnumSource(Browser.class)
+    void when_incorrect_registration_with_all_fields_should_have_errors(Browser browser) {
 
         String username = "";
         String email = "";
@@ -149,7 +150,7 @@ class UserControllerUIEnTest extends UserControllerUITest {
 
         languageVersion = LanguageVersion.ENG;
 
-        launchBrowser(browserName, languageVersion.name());
+        launchBrowser(browser.name(), languageVersion.name());
 
         registrationPage.loadRegistrationView(languageVersion);
 
@@ -177,19 +178,19 @@ class UserControllerUIEnTest extends UserControllerUITest {
     }
 
     @ParameterizedTest(name = "{index}: Browser: {0}")
-    @ValueSource(strings = {"Firefox", "Chrome"})
-    void when_correct_registration_with_all_fields_should_register_user(String browserName) {
+    @EnumSource(Browser.class)
+    void when_correct_registration_with_all_fields_should_register_user(Browser browser) {
 
-        String username = "user name 222" + browserName;
+        String username = "user name 222" + browser.name();
 
         languageVersion = LanguageVersion.ENG;
 
-        launchBrowser(browserName, languageVersion.name());
+        launchBrowser(browser.name(), languageVersion.name());
 
         registrationPage.loadRegistrationView(languageVersion);
 
         registrationPage.fillAllRegistrationFields(username, "password", "password",
-                browserName + "user222@email.com", "firstName", "lastName", true);
+                browser.name() + "user222@email.com", "firstName", "lastName", true);
 
         assertAll(() -> assertTrue(registrationPage.isUserOnRegistrationPage(), () -> "should show registration page"),
                 () -> assertTrue(userService.isUsernameAlreadyInUse(username), () -> "should save user in database"),
