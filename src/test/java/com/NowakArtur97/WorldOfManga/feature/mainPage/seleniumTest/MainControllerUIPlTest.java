@@ -25,11 +25,12 @@ class MainControllerUIPlTest extends MainControllerUITest {
 
     @ParameterizedTest(name = "{index}: Browser: {0}")
     @EnumSource(Browser.class)
-    void when_load_main_page_should_load_all_page_content(Browser browser) {
+    void when_load_main_page_should_load_all_page_content(Browser browserForTest) {
 
         languageVersion = LanguageVersion.PL;
+        browser = browserForTest;
 
-        launchBrowser(browser.name(), languageVersion.name());
+        launchBrowser();
 
         mainPage.loadMainView(languageVersion);
 

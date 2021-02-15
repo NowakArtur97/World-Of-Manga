@@ -20,9 +20,9 @@ class MainControllerUITest extends SeleniumUITest {
 
     MainPage mainPage;
 
-    void launchBrowser(String browserName, String language) {
+    void launchBrowser() {
 
-        setUp(browserName, language);
+        setUpWebDriver();
 
         mainPage = new MainPage(webDriver, mainUrl + localServerPort);
     }
