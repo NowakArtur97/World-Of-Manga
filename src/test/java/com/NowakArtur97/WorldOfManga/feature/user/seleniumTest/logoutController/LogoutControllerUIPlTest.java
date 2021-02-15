@@ -26,14 +26,15 @@ class LogoutControllerUIPlTest extends LogoutControllerUITest {
 
     @ParameterizedTest(name = "{index}: Browser: {0}")
     @EnumSource(Browser.class)
-    void when_correct_logout_should_sing_out_user(Browser browser) {
+    void when_correct_logout_should_sing_out_user(Browser browserForTest) {
 
         String username = "user";
         String password = "user";
 
         languageVersion = LanguageVersion.PL;
+        browser = browserForTest;
 
-        launchBrowser(browser.name(), languageVersion.name());
+        launchBrowser();
 
         loginPage.loadLoginView(languageVersion);
 

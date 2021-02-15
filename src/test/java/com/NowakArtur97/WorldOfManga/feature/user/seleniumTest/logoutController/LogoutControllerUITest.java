@@ -26,9 +26,9 @@ class LogoutControllerUITest extends SeleniumUITest {
 
     MainPage mainPage;
 
-    void launchBrowser(String browserName, String language) {
+    void launchBrowser() {
 
-        setUp(browserName, language);
+        setUpWebDriver();
 
         logoutPage = new LogoutPage(webDriver, mainUrl + localServerPort);
 
