@@ -1,11 +1,13 @@
 package com.NowakArtur97.WorldOfManga.feature.manga.seleniumPOM;
 
+import com.NowakArtur97.WorldOfManga.feature.mainPage.seleniumPOM.MainPage;
 import com.NowakArtur97.WorldOfManga.testUtil.enums.LanguageVersion;
 import com.NowakArtur97.WorldOfManga.testUtil.selenium.SeleniumPageObjectModel;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
 
@@ -23,7 +25,7 @@ public class MangaList extends SeleniumPageObjectModel {
     private static final String MANGA_TITLE_CLASS = "manga_card__title";
     private static final String MANGA_FAVOURITE_COUNTER_CLASS = "manga_card__likes";
     private static final String MANGA_FAVOURITE_CLASS = "manga_card__icon--heart";
-    private static final String MANGA_STATUS_CLASS = "manga_card__icon--status";
+    private static final String MANGA_STATUS_LINK = "[href*='auth/addToList']";
     private static final String MANGA_ADMIN_LINK = "[href*='admin']";
     private static final String MANGA_LIST_TYPE_CLASS = "manga_list_types__type";
     private static final String MANGA_LIST_LINK = "//a[@href='/']";
@@ -50,7 +52,7 @@ public class MangaList extends SeleniumPageObjectModel {
     @FindBy(className = MANGA_FAVOURITE_COUNTER_CLASS)
     private List<WebElement> mangaFavouritesCounters;
 
-    @FindBy(className = MANGA_STATUS_CLASS)
+    @FindBy(css = MANGA_STATUS_LINK)
     private List<WebElement> mangaStatuses;
 
     @FindBy(css = MANGA_ADMIN_LINK)
@@ -92,9 +94,11 @@ public class MangaList extends SeleniumPageObjectModel {
 
     public int countMangaCards() {
 
-        waitFor(2000);
+        webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.className(MainPage.MAIN_PAGE_CLASS)));
 
-        return webDriver.findElements(By.className(MANGA_CARD_CLASS)).size();
+        waitFor(1000);
+
+        return mangaCards.size();
     }
 
     public String getLastMangaCardText() {
@@ -113,24 +117,32 @@ public class MangaList extends SeleniumPageObjectModel {
 
     public void clickMangaUserListLink() {
 
-        waitFor(200);
+        webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.className(MANGA_RATING_CLASS)));
+
         useJavaScriptToClickElement(mangaUserListLink);
     }
 
     public void chooseManga(int mangaIndex) {
+
+        webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.className(MANGA_RATING_CLASS)));
 
         useJavaScriptToClickElement(mangaCards.get(mangaIndex + mangaCards.size() / 2));
     }
 
     public void chooseLastManga() {
 
+        webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.className(MANGA_RATING_CLASS)));
+
         useJavaScriptToClickElement(mangaCards.get(mangaCards.size() - 1));
-        mangaCards.get(mangaCards.size() - 1).click();
     }
 
     public void rateFirstManga(int rating) {
 
+        webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.className(MANGA_CARD_CLASS)));
+
         useJavaScriptToClickElement(mangaStars.get(rating + mangaCards.size() / 2 * NUMBER_OF_MANGA_STARS - 1));
+
+        webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.className(MANGA_CARD_CLASS)));
     }
 
     public void rateLastManga(int rating) {
@@ -140,17 +152,25 @@ public class MangaList extends SeleniumPageObjectModel {
 
     public String getFirstMangaRating() {
 
+        webDriver.navigate().refresh();
+
+        webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.className(MANGA_RATING_CLASS)));
+
         return mangaRatings.get(mangaCards.size() - 1).getText();
     }
 
     public String getFirstMangaRatingOnMangaList() {
+
+        webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.className(MANGA_CARD_CLASS)));
 
         return mangaRatings.get(0).getText();
     }
 
     public void addOrRemoveFirstMangaFromFavourites() {
 
-        waitFor(2000);
+        webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.className(MANGA_CARD_CLASS)));
+
+        waitFor(1000);
 
         useJavaScriptToClickElement(mangaFavouriteLinks.get(mangaFavouriteLinks.size() / 2));
     }
@@ -164,21 +184,21 @@ public class MangaList extends SeleniumPageObjectModel {
 
     public String getFirstMangaFavouritesCounter() {
 
-        waitFor(2000);
+       waitFor(2000);
 
         return mangaFavouritesCounters.get(mangaFavouritesCounters.size() / 2 - 1).getText();
     }
 
     public String getLastMangaFavouritesCounter() {
 
-        waitFor(2000);
+       waitFor(2000);
 
         return mangaFavouritesCounters.get(mangaFavouritesCounters.size() - 2).getText();
     }
 
     public void addOrRemoveFirstMangaFromList(int mangaStatus) {
 
-        mangaStatuses.get(mangaStatus + mangaCards.size() / 2 * NUMBER_OF_MANGA_STATUSES).click();
+        useJavaScriptToClickElement(mangaStatuses.get(mangaStatus + mangaCards.size() / 2 * NUMBER_OF_MANGA_STATUSES));
     }
 
     public void addLastMangaToList(int mangaStatus) {
@@ -228,8 +248,10 @@ public class MangaList extends SeleniumPageObjectModel {
 
     public void deleteLastManga() {
 
-        waitFor(2000);
+        webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.className(MANGA_RATING_CLASS)));
 
         useJavaScriptToClickElement(adminOptions.get(adminOptions.size() - 1));
+
+        webDriver.navigate().refresh();
     }
 }

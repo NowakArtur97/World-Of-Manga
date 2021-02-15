@@ -10,7 +10,7 @@ public class MainPage extends SeleniumPageObjectModel {
 
     private static final String RESOURCE_PATH = "/";
 
-    private static final String MAIN_PAGE_CLASS = "page";
+    public static final String MAIN_PAGE_CLASS = "page";
     private static final String HEADER_CLASS = "header";
     private static final String FOOTER_CLASS = "footer";
 

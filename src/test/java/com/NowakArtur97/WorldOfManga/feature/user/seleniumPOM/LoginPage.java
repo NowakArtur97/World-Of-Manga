@@ -1,5 +1,6 @@
 package com.NowakArtur97.WorldOfManga.feature.user.seleniumPOM;
 
+import com.NowakArtur97.WorldOfManga.feature.mainPage.seleniumPOM.MainPage;
 import com.NowakArtur97.WorldOfManga.testUtil.enums.LanguageVersion;
 import com.NowakArtur97.WorldOfManga.testUtil.selenium.SeleniumPageObjectModel;
 import org.openqa.selenium.By;
@@ -12,7 +13,6 @@ public class LoginPage extends SeleniumPageObjectModel {
 
     private static final String RESOURCE_PATH = "/user/login";
 
-    private static final String MAIN_PAGE_CLASS = "page";
     private static final String FORM_BOX_CLASS = "form__box";
     private static final String USERNAME_NAME = "username";
     private static final String PASSWORD_NAME = "password";
@@ -77,8 +77,8 @@ public class LoginPage extends SeleniumPageObjectModel {
 
     public boolean isUserOnLoginPage() {
 
-        webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.className(MAIN_PAGE_CLASS)));
+        webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.className(MainPage.MAIN_PAGE_CLASS)));
 
-        return webDriver.getCurrentUrl().contains(RESOURCE_PATH);
+        return webDriver.getCurrentUrl().contains(RESOURCE_PATH) || isElementFound(formBox);
     }
 }

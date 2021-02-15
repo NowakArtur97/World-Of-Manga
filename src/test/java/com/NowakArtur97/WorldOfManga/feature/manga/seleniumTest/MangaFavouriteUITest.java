@@ -50,7 +50,7 @@ class MangaFavouriteUITest extends SeleniumUITest {
 
         mangaList.addOrRemoveFirstMangaFromFavourites();
 
-        assertAll(() -> assertTrue(mangaList.getFirstMangaFavouritesCounter().contains("1"),
+        assertAll(() -> assertEquals("1", mangaList.getFirstMangaFavouritesCounter(),
                 () -> "should show manga with one heart, but was: " + mangaList.getFirstMangaFavouritesCounter()));
     }
 
@@ -113,8 +113,6 @@ class MangaFavouriteUITest extends SeleniumUITest {
 
         loginPage.fillMandatoryLoginFields("user", "user");
 
-        String firstMangaTitle = mangaList.getMangaTitle(0);
-
         mangaList.chooseManga(0);
 
         mangaList.addOrRemoveFirstMangaFromFavourites();
@@ -128,8 +126,6 @@ class MangaFavouriteUITest extends SeleniumUITest {
         mangaList.chooseFavouritesManga();
 
         assertAll(
-                () -> assertFalse(mangaList.getLastMangaCardText().contains(firstMangaTitle),
-                        () -> "should not show manga in favourites"),
                 () -> assertEquals(0, mangaList.countMangaCards(), () -> "should not show any manga"),
                 () -> assertNotNull(mangaList.getMangaListText(), () -> "should load manga list fragment text"));
     }

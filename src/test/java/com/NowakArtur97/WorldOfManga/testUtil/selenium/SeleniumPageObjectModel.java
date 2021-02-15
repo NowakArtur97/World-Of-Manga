@@ -1,6 +1,7 @@
 package com.NowakArtur97.WorldOfManga.testUtil.selenium;
 
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -34,5 +35,36 @@ public class SeleniumPageObjectModel {
 
         JavascriptExecutor executor = (JavascriptExecutor) webDriver;
         executor.executeScript("arguments[0].click();", element);
+    }
+
+    protected void waitFor(long millis) {
+
+        try {
+            Thread.sleep(millis);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    protected boolean isElementFound(WebElement element) {
+
+        if (element == null) {
+            return false;
+        }
+
+        boolean isElementFound;
+
+        try {
+
+            element.isDisplayed();
+
+            isElementFound = true;
+
+        } catch (NoSuchElementException ignored) {
+
+            isElementFound = false;
+        }
+
+        return isElementFound;
     }
 }
