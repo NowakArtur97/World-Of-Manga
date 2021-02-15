@@ -79,7 +79,9 @@ public class MangaList extends SeleniumPageObjectModel {
 
     public String getMangaListText() {
 
-        return mangaList.getText();
+        webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.className(MANGA_LIST_CLASS)));
+
+        return mangaList.getAttribute("textContent");
     }
 
     public String getMangaTitle(int index) {
@@ -103,6 +105,8 @@ public class MangaList extends SeleniumPageObjectModel {
 
     public String getLastMangaCardText() {
 
+        webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.className(MANGA_LIST_CLASS)));
+
         if (mangaCards.size() > 0) {
             return mangaCards.get(mangaCards.size() - 1).getText();
         } else {
@@ -111,6 +115,8 @@ public class MangaList extends SeleniumPageObjectModel {
     }
 
     public void clickMangaListLink() {
+
+        webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(MANGA_LIST_LINK)));
 
         useJavaScriptToClickElement(mangaListLink);
     }
@@ -184,14 +190,14 @@ public class MangaList extends SeleniumPageObjectModel {
 
     public String getFirstMangaFavouritesCounter() {
 
-       waitFor(2000);
+        waitFor(2000);
 
         return mangaFavouritesCounters.get(mangaFavouritesCounters.size() / 2 - 1).getText();
     }
 
     public String getLastMangaFavouritesCounter() {
 
-       waitFor(2000);
+        waitFor(2000);
 
         return mangaFavouritesCounters.get(mangaFavouritesCounters.size() - 2).getText();
     }
