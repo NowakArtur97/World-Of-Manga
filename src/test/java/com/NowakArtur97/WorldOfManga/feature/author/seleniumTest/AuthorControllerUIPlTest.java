@@ -25,13 +25,14 @@ class AuthorControllerUIPlTest extends AuthorControllerUITest {
 
     @ParameterizedTest(name = "{index}: Browser: {0}")
     @EnumSource(Browser.class)
-    void when_correct_author_creation_with_all_fields_should_add_author(Browser browser) {
+    void when_correct_author_creation_with_all_fields_should_add_author(Browser browserForTest) {
+
+        languageVersion = LanguageVersion.PL;
+        browser = browserForTest;
 
         String fullName = "FirstName LastName " + browser.name();
 
-        languageVersion = LanguageVersion.PL;
-
-        launchBrowser(browser.name(), languageVersion.name());
+        launchBrowser();
 
         loginPage.loadLoginView(languageVersion);
 
@@ -49,13 +50,14 @@ class AuthorControllerUIPlTest extends AuthorControllerUITest {
 
     @ParameterizedTest(name = "{index}: Browser: {0}")
     @EnumSource(Browser.class)
-    void when_incorrect_author_creation_with_full_name_blank_should_have_errors(Browser browser) {
+    void when_incorrect_author_creation_with_full_name_blank_should_have_errors(Browser browserForTest) {
 
         String fullName = "";
 
         languageVersion = LanguageVersion.PL;
+        browser = browserForTest;
 
-        launchBrowser(browser.name(), languageVersion.name());
+        launchBrowser();
 
         loginPage.loadLoginView(languageVersion);
 
@@ -73,13 +75,14 @@ class AuthorControllerUIPlTest extends AuthorControllerUITest {
 
     @ParameterizedTest(name = "{index}: Browser: {0}")
     @EnumSource(Browser.class)
-    void when_incorrect_author_creation_with_too_long_fields_should_have_errors(Browser browser) {
+    void when_incorrect_author_creation_with_too_long_fields_should_have_errors(Browser browserForTest) {
 
         String fullName = "asdfghjklpasdfghjklpasdfghjklpasdfghjklpasdfghjklp!@#$%";
 
         languageVersion = LanguageVersion.PL;
+        browser = browserForTest;
 
-        launchBrowser(browser.name(), languageVersion.name());
+        launchBrowser();
 
         loginPage.loadLoginView(languageVersion);
 

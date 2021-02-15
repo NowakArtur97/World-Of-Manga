@@ -67,17 +67,7 @@ public class SeleniumUITest {
                 .findFirst()
                 .orElse(LanguageVersion.ENG);
 
-        if (activeProfile.equals(TEST_PROFILE)) {
-
-            localServerPort = remoteAppServerPort;
-        }
-
-        WebDriverManager.chromedriver().setup();
-        WebDriverManager.firefoxdriver().setup();
-
-        setUpWebDriver(browser);
-
-        webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        setUpWebDriver();
     }
 
     @AfterAll
@@ -90,7 +80,15 @@ public class SeleniumUITest {
     }
 
     @SneakyThrows
-    private void setUpWebDriver(Browser browser) {
+    protected void setUpWebDriver() {
+
+        if (activeProfile.equals(TEST_PROFILE)) {
+
+            localServerPort = remoteAppServerPort;
+        }
+
+        WebDriverManager.chromedriver().setup();
+        WebDriverManager.firefoxdriver().setup();
 
         if (isRemotely) {
 
@@ -101,11 +99,14 @@ public class SeleniumUITest {
             if (browser.equals(Browser.CHROME)) {
 
                 webDriver = new ChromeDriver();
+
             } else if (browser.equals(Browser.FIREFOX)) {
 
                 webDriver = new FirefoxDriver();
             }
         }
+
+        webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
 
     private void setupRemoteWebDriver(Browser browser) throws MalformedURLException {
