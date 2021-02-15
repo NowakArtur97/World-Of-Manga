@@ -186,10 +186,10 @@ class UserControllerUIPlTest extends UserControllerUITest {
     @EnumSource(Browser.class)
     void when_correct_registration_with_all_fields_should_register_user(Browser browserForTest) {
 
-        String username = "user name 111" + browser.name();
-
         languageVersion = LanguageVersion.PL;
         browser = browserForTest;
+
+        String username = "user name 111" + browser.name();
 
         launchBrowser();
 
