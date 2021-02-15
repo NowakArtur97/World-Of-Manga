@@ -52,9 +52,9 @@ class UserControllerUITest extends SeleniumUITest {
     @Autowired
     UserService userService;
 
-    void launchBrowser(String browserName, String language) {
+    void launchBrowser() {
 
-        setUp(browserName, language);
+        setUpWebDriver();
 
         registrationPage = new RegistrationPage(webDriver, mainUrl + localServerPort);
     }

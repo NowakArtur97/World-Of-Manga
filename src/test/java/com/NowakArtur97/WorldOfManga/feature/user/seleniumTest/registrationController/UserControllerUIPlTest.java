@@ -26,15 +26,16 @@ class UserControllerUIPlTest extends UserControllerUITest {
 
     @ParameterizedTest(name = "{index}: Browser: {0}")
     @EnumSource(Browser.class)
-    void when_username_is_already_in_use_should_have_error(Browser browser) {
+    void when_username_is_already_in_use_should_have_error(Browser browserForTest) {
 
         String username = "user";
         String email = "email@email.com";
         boolean areTermsAccepted = true;
 
         languageVersion = LanguageVersion.PL;
+        browser = browserForTest;
 
-        launchBrowser(browser.name(), languageVersion.name());
+        launchBrowser();
 
         registrationPage.loadRegistrationView(languageVersion);
 
@@ -51,15 +52,16 @@ class UserControllerUIPlTest extends UserControllerUITest {
 
     @ParameterizedTest(name = "{index}: Browser: {0}")
     @EnumSource(Browser.class)
-    void when_email_is_already_in_use_should_have_error(Browser browser) {
+    void when_email_is_already_in_use_should_have_error(Browser browserForTest) {
 
         String username = "username";
         String email = "user@email.com";
         boolean areTermsAccepted = true;
 
         languageVersion = LanguageVersion.PL;
+        browser = browserForTest;
 
-        launchBrowser(browser.name(), languageVersion.name());
+        launchBrowser();
 
         registrationPage.loadRegistrationView(languageVersion);
 
@@ -76,15 +78,16 @@ class UserControllerUIPlTest extends UserControllerUITest {
 
     @ParameterizedTest(name = "{index}: Browser: {0}")
     @EnumSource(Browser.class)
-    void when_incorrect_registration_with_mandatory_fields_should_have_errors(Browser browser) {
+    void when_incorrect_registration_with_mandatory_fields_should_have_errors(Browser browserForTest) {
 
         String username = "";
         String email = "";
         boolean areTermsAccepted = false;
 
         languageVersion = LanguageVersion.PL;
+        browser = browserForTest;
 
-        launchBrowser(browser.name(), languageVersion.name());
+        launchBrowser();
 
         registrationPage.loadRegistrationView(languageVersion);
 
@@ -107,15 +110,16 @@ class UserControllerUIPlTest extends UserControllerUITest {
 
     @ParameterizedTest(name = "{index}: Browser: {0}")
     @EnumSource(Browser.class)
-    void when_incorrect_registration_fields_size_with_mandatory_fields_should_have_errors(Browser browser) {
+    void when_incorrect_registration_fields_size_with_mandatory_fields_should_have_errors(Browser browserForTest) {
 
         String username = "asdfghjklpasdfghjklpasdfghjklpasdfghjklpasdfghjklp";
         String email = "email,";
         boolean areTermsAccepted = false;
 
         languageVersion = LanguageVersion.PL;
+        browser = browserForTest;
 
-        launchBrowser(browser.name(), languageVersion.name());
+        launchBrowser();
 
         registrationPage.loadRegistrationView(languageVersion);
 
@@ -138,7 +142,7 @@ class UserControllerUIPlTest extends UserControllerUITest {
 
     @ParameterizedTest(name = "{index}: Browser: {0}")
     @EnumSource(Browser.class)
-    void when_incorrect_registration_with_all_fields_should_have_errors(Browser browser) {
+    void when_incorrect_registration_with_all_fields_should_have_errors(Browser browserForTest) {
 
         String username = "";
         String email = "";
@@ -149,8 +153,9 @@ class UserControllerUIPlTest extends UserControllerUITest {
         String lastName = "asdfghjklpasdfghjklpasdfghjklpasdfghjklpasdfghjklp";
 
         languageVersion = LanguageVersion.PL;
+        browser = browserForTest;
 
-        launchBrowser(browser.name(), languageVersion.name());
+        launchBrowser();
 
         registrationPage.loadRegistrationView(languageVersion);
 
@@ -179,13 +184,14 @@ class UserControllerUIPlTest extends UserControllerUITest {
 
     @ParameterizedTest(name = "{index}: Browser: {0}")
     @EnumSource(Browser.class)
-    void when_correct_registration_with_all_fields_should_register_user(Browser browser) {
+    void when_correct_registration_with_all_fields_should_register_user(Browser browserForTest) {
 
         String username = "user name 111" + browser.name();
 
         languageVersion = LanguageVersion.PL;
+        browser = browserForTest;
 
-        launchBrowser(browser.name(), languageVersion.name());
+        launchBrowser();
 
         registrationPage.loadRegistrationView(languageVersion);
 
