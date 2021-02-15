@@ -28,9 +28,9 @@ class LoginControllerUITest extends SeleniumUITest {
     @Autowired
     UserService userService;
 
-    void launchBrowser(String browserName, String language) {
+    void launchBrowser() {
 
-        setUp(browserName, language);
+        setUpWebDriver();
 
         loginPage = new LoginPage(webDriver, mainUrl + localServerPort);
 

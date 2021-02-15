@@ -26,14 +26,15 @@ class LoginControllerUIEnTest extends LoginControllerUITest {
 
     @ParameterizedTest(name = "{index}: Browser: {0}")
     @EnumSource(Browser.class)
-    void when_login_with_bad_credentials_should_show_bad_credentials_message(Browser browser) {
+    void when_login_with_bad_credentials_should_show_bad_credentials_message(Browser browserForTest) {
 
         String username = "resu";
         String password = "resu";
 
         languageVersion = LanguageVersion.ENG;
+        browser = browserForTest;
 
-        launchBrowser(browser.name(), languageVersion.name());
+        launchBrowser();
 
         loginPage.loadLoginView(languageVersion);
 
@@ -48,14 +49,15 @@ class LoginControllerUIEnTest extends LoginControllerUITest {
 
     @ParameterizedTest(name = "{index}: Browser: {0}")
     @EnumSource(Browser.class)
-    void when_correct_user_login_with_user_role_should_sing_in_user(Browser browser) {
+    void when_correct_user_login_with_user_role_should_sing_in_user(Browser browserForTest) {
 
         String username = "user";
         String password = "user";
 
         languageVersion = LanguageVersion.ENG;
+        browser = browserForTest;
 
-        launchBrowser(browser.name(), languageVersion.name());
+        launchBrowser();
 
         loginPage.loadLoginView(languageVersion);
 
@@ -77,14 +79,15 @@ class LoginControllerUIEnTest extends LoginControllerUITest {
 
     @ParameterizedTest(name = "{index}: Browser: {0}")
     @EnumSource(Browser.class)
-    void when_correct_user_login_with_admin_role_should_sing_in_admin(Browser browser) {
+    void when_correct_user_login_with_admin_role_should_sing_in_admin(Browser browserForTest) {
 
         String username = "admin";
         String password = "admin";
 
         languageVersion = LanguageVersion.ENG;
+        browser = browserForTest;
 
-        launchBrowser(browser.name(), languageVersion.name());
+        launchBrowser();
 
         loginPage.loadLoginView(languageVersion);
 
