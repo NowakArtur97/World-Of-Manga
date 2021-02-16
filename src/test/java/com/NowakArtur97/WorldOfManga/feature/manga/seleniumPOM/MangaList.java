@@ -156,7 +156,7 @@ public class MangaList extends SeleniumPageObjectModel {
         useJavaScriptToClickElement(mangaStars.get(rating + mangaStars.size() - NUMBER_OF_MANGA_STARS - 1));
     }
 
-    public String getFirstMangaRating() {
+    public String getLastMangaRating() {
 
         webDriver.navigate().refresh();
 
@@ -164,7 +164,7 @@ public class MangaList extends SeleniumPageObjectModel {
         webDriverWait.until(ExpectedConditions.visibilityOf(mangaRatings.get(mangaCards.size() - 1)));
         webDriverWait.until(ExpectedConditions.attributeToBeNotEmpty(mangaRatings.get(mangaCards.size() - 1), "textContent"));
 
-        return webDriver.findElements(By.className(MANGA_RATING_CLASS)).get(mangaCards.size() - 1).getAttribute("textContent");
+        return webDriver.findElements(By.className(MANGA_RATING_CLASS)).get(mangaRatings.size() - 1).getAttribute("textContent");
     }
 
     public String getFirstMangaRatingOnMangaList() {

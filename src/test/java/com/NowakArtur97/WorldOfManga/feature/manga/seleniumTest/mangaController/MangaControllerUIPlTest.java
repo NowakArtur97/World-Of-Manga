@@ -27,7 +27,10 @@ class MangaControllerUIPlTest extends MangaControllerUITest {
 
     @ParameterizedTest(name = "{index}: Browser: {0}")
     @EnumSource(Browser.class)
-    void when_correct_manga_creation_with_all_fields_should_add_manga(Browser browser) {
+    void when_correct_manga_creation_with_all_fields_should_add_manga(Browser browserForTest) {
+
+        languageVersion = LanguageVersion.PL;
+        browser = browserForTest;
 
         String englishTitle = "English title 2 " + browser.name();
         String polishTitle = "Polish title 2 " + browser.name();
@@ -35,9 +38,7 @@ class MangaControllerUIPlTest extends MangaControllerUITest {
         boolean selectGenre = true;
         boolean addImage = true;
 
-        languageVersion = LanguageVersion.PL;
-
-        launchBrowser(browser.name(), languageVersion.name());
+        launchBrowser();
 
         loginPage.loadLoginView(languageVersion);
 
@@ -58,7 +59,10 @@ class MangaControllerUIPlTest extends MangaControllerUITest {
 
     @ParameterizedTest(name = "{index}: Browser: {0}")
     @EnumSource(Browser.class)
-    void when_correct_manga_editing_with_all_fields_should_edit_manga(Browser browser) {
+    void when_correct_manga_editing_with_all_fields_should_edit_manga(Browser browserForTest) {
+
+        languageVersion = LanguageVersion.PL;
+        browser = browserForTest;
 
         String englishTitle = "Some english title 2 " + browser.name();
         String polishTitle = "Some polish title 2 " + browser.name();
@@ -66,9 +70,7 @@ class MangaControllerUIPlTest extends MangaControllerUITest {
         boolean selectGenre = true;
         boolean addImage = true;
 
-        languageVersion = LanguageVersion.PL;
-
-        launchBrowser(browser.name(), languageVersion.name());
+        launchBrowser();
 
         loginPage.loadLoginView(languageVersion);
 
@@ -91,11 +93,12 @@ class MangaControllerUIPlTest extends MangaControllerUITest {
 
     @ParameterizedTest(name = "{index}: Browser: {0}")
     @EnumSource(Browser.class)
-    void when_deleted_manga_is_in_main_page_should_remove_manga_from_list(Browser browser) {
+    void when_deleted_manga_is_in_main_page_should_remove_manga_from_list(Browser browserForTest) {
 
         languageVersion = LanguageVersion.PL;
+        browser = browserForTest;
 
-        launchBrowser(browser.name(), languageVersion.name());
+        launchBrowser();
 
         loginPage.loadLoginView(languageVersion);
 
@@ -114,11 +117,12 @@ class MangaControllerUIPlTest extends MangaControllerUITest {
 
     @ParameterizedTest(name = "{index}: Browser: {0}")
     @EnumSource(Browser.class)
-    void when_deleted_manga_is_in_users_rated_manga_list_should_delete_manga_from_users_rated_manga_list(Browser browser) {
+    void when_deleted_manga_is_in_users_rated_manga_list_should_delete_manga_from_users_rated_manga_list(Browser browserForTest) {
 
         languageVersion = LanguageVersion.PL;
+        browser = browserForTest;
 
-        launchBrowser(browser.name(), languageVersion.name());
+        launchBrowser();
 
         loginPage.loadLoginView(languageVersion);
 
@@ -144,11 +148,12 @@ class MangaControllerUIPlTest extends MangaControllerUITest {
 
     @ParameterizedTest(name = "{index}: Browser: {0}")
     @EnumSource(Browser.class)
-    void when_deleted_manga_is_in_users_favourites_should_delete_manga_from_favourites(Browser browser) {
+    void when_deleted_manga_is_in_users_favourites_should_delete_manga_from_favourites(Browser browserForTest) {
 
         languageVersion = LanguageVersion.PL;
+        browser = browserForTest;
 
-        launchBrowser(browser.name(), languageVersion.name());
+        launchBrowser();
 
         loginPage.loadLoginView(languageVersion);
 
@@ -171,11 +176,12 @@ class MangaControllerUIPlTest extends MangaControllerUITest {
 
     @ParameterizedTest(name = "{index}: Browser: {0}")
     @EnumSource(Browser.class)
-    void when_deleted_manga_is_in_users_manga_list_should_delete_manga_from_users_manga_list(Browser browser) {
+    void when_deleted_manga_is_in_users_manga_list_should_delete_manga_from_users_manga_list(Browser browserForTest) {
 
         languageVersion = LanguageVersion.PL;
+        browser = browserForTest;
 
-        launchBrowser(browser.name(), languageVersion.name());
+        launchBrowser();
 
         loginPage.loadLoginView(languageVersion);
 
@@ -200,7 +206,7 @@ class MangaControllerUIPlTest extends MangaControllerUITest {
 
     @ParameterizedTest(name = "{index}: Browser: {0}")
     @EnumSource(Browser.class)
-    void when_incorrect_manga_creation_with_all_blank_fields_and_not_selected_author_image_and_genre_should_have_errors(Browser browser) {
+    void when_incorrect_manga_creation_with_all_blank_fields_and_not_selected_author_image_and_genre_should_have_errors(Browser browserForTest) {
 
         String blankField = "";
         boolean selectAuthor = false;
@@ -208,8 +214,9 @@ class MangaControllerUIPlTest extends MangaControllerUITest {
         boolean addImage = false;
 
         languageVersion = LanguageVersion.PL;
+        browser = browserForTest;
 
-        launchBrowser(browser.name(), languageVersion.name());
+        launchBrowser();
 
         loginPage.loadLoginView(languageVersion);
 
@@ -244,7 +251,7 @@ class MangaControllerUIPlTest extends MangaControllerUITest {
 
     @ParameterizedTest(name = "{index}: Browser: {0}")
     @EnumSource(Browser.class)
-    void when_incorrect_manga_creation_with_too_long_field_sizes_and_selected_author_and_image_should_have_errors(Browser browser) {
+    void when_incorrect_manga_creation_with_too_long_field_sizes_and_selected_author_and_image_should_have_errors(Browser browserForTest) {
 
         String longTitleText = "asdfghjklpasdfghjklpasdfghjklpasdfghjklpasdfghjklp!@#$%";
         String longDescriptionText = "asdfghjklpasdfghjklpasdfghjklpasdfghjklpasdfghjklp!@#$%".repeat(30);
@@ -253,8 +260,9 @@ class MangaControllerUIPlTest extends MangaControllerUITest {
         boolean addImage = true;
 
         languageVersion = LanguageVersion.PL;
+        browser = browserForTest;
 
-        launchBrowser(browser.name(), languageVersion.name());
+        launchBrowser();
 
         loginPage.loadLoginView(languageVersion);
 
