@@ -20,6 +20,7 @@ public class SeleniumPageObjectModel {
 
         AjaxElementLocatorFactory factory = new AjaxElementLocatorFactory(webDriver, TIME_TO_WAIT);
         PageFactory.initElements(factory, this);
+
         this.webDriver = webDriver;
         this.mainUrl = mainUrl;
         this.webDriverWait = new WebDriverWait(webDriver, TIME_TO_WAIT);
@@ -35,15 +36,6 @@ public class SeleniumPageObjectModel {
 
         JavascriptExecutor executor = (JavascriptExecutor) webDriver;
         executor.executeScript("arguments[0].click();", element);
-    }
-
-    protected void waitFor(long millis) {
-
-        try {
-            Thread.sleep(millis);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
     }
 
     protected boolean isElementFound(WebElement element) {

@@ -79,8 +79,6 @@ public class MangaList extends SeleniumPageObjectModel {
 
     public String getMangaListText() {
 
-        webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.className(MANGA_LIST_CLASS)));
-
         return mangaList.getAttribute("textContent");
     }
 
@@ -91,21 +89,25 @@ public class MangaList extends SeleniumPageObjectModel {
 
     public String getLastMangaTitle() {
 
-        return mangaTitles.get(mangaCards.size() - 1).getAttribute("innerText");
+        return mangaTitles.get(mangaCards.size() - 1).getAttribute("textContent");
     }
 
     public int countMangaCards() {
 
+        webDriver.navigate().refresh();
+
         webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.className(MainPage.MAIN_PAGE_CLASS)));
 
-        waitFor(1000);
-
-        return mangaCards.size();
+        return webDriver.findElements(By.className(MANGA_CARD_CLASS)).size();
     }
 
     public String getLastMangaCardText() {
 
+        webDriver.navigate().refresh();
+
         webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.className(MANGA_LIST_CLASS)));
+
+        mangaCards = webDriver.findElements(By.className(MANGA_CARD_CLASS));
 
         if (mangaCards.size() > 0) {
             return mangaCards.get(mangaCards.size() - 1).getText();
@@ -147,8 +149,6 @@ public class MangaList extends SeleniumPageObjectModel {
         webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.className(MANGA_CARD_CLASS)));
 
         useJavaScriptToClickElement(mangaStars.get(rating + mangaCards.size() / 2 * NUMBER_OF_MANGA_STARS - 1));
-
-        webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.className(MANGA_CARD_CLASS)));
     }
 
     public void rateLastManga(int rating) {
@@ -160,9 +160,11 @@ public class MangaList extends SeleniumPageObjectModel {
 
         webDriver.navigate().refresh();
 
-        webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.className(MANGA_RATING_CLASS)));
+        webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.className(MANGA_CARD_CLASS)));
+        webDriverWait.until(ExpectedConditions.visibilityOf(mangaRatings.get(mangaCards.size() - 1)));
+        webDriverWait.until(ExpectedConditions.attributeToBeNotEmpty(mangaRatings.get(mangaCards.size() - 1), "textContent"));
 
-        return mangaRatings.get(mangaCards.size() - 1).getText();
+        return webDriver.findElements(By.className(MANGA_RATING_CLASS)).get(mangaCards.size() - 1).getAttribute("textContent");
     }
 
     public String getFirstMangaRatingOnMangaList() {
@@ -174,32 +176,27 @@ public class MangaList extends SeleniumPageObjectModel {
 
     public void addOrRemoveFirstMangaFromFavourites() {
 
-        webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.className(MANGA_CARD_CLASS)));
-
-        waitFor(1000);
+        webDriverWait.until(ExpectedConditions.visibilityOfAllElements(mangaCards));
 
         useJavaScriptToClickElement(mangaFavouriteLinks.get(mangaFavouriteLinks.size() / 2));
     }
 
     public void addOrRemoveLastMangaFromFavourites() {
 
-        waitFor(2000);
+        webDriver.navigate().refresh();
+
+        webDriverWait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.className(MANGA_CARD_CLASS)));
 
         useJavaScriptToClickElement(mangaFavouriteLinks.get(mangaFavouriteLinks.size() - 1));
     }
 
-    public String getFirstMangaFavouritesCounter() {
-
-        waitFor(2000);
-
-        return mangaFavouritesCounters.get(mangaFavouritesCounters.size() / 2 - 1).getAttribute("innerText");
-    }
-
     public String getLastMangaFavouritesCounter() {
 
-        waitFor(2000);
+        webDriver.navigate().refresh();
 
-        return mangaFavouritesCounters.get(mangaFavouritesCounters.size() - 2).getText();
+        webDriverWait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.className(MANGA_CARD_CLASS)));
+
+        return mangaFavouritesCounters.get(mangaFavouritesCounters.size() - 2).getAttribute("textContent");
     }
 
     public void addOrRemoveFirstMangaFromList(int mangaStatus) {

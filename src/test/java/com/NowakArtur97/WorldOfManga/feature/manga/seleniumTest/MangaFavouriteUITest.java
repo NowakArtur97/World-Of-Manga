@@ -46,12 +46,12 @@ class MangaFavouriteUITest extends SeleniumUITest {
 
         loginPage.fillMandatoryLoginFields("user", "user");
 
-        mangaList.chooseManga(0);
+        mangaList.chooseLastManga();
 
-        mangaList.addOrRemoveFirstMangaFromFavourites();
+        mangaList.addOrRemoveLastMangaFromFavourites();
 
-        assertAll(() -> assertEquals("1", mangaList.getFirstMangaFavouritesCounter(),
-                () -> "should show manga with one heart, but was: " + mangaList.getFirstMangaFavouritesCounter()));
+        assertAll(() -> assertTrue(mangaList.getMangaListText().contains("1"),
+                () -> "should show manga with one heart, but was: " + mangaList.getLastMangaCardText()));
     }
 
     @ParameterizedTest(name = "{index}: Browser: {0} | Language Version: {1}")
@@ -113,13 +113,13 @@ class MangaFavouriteUITest extends SeleniumUITest {
 
         loginPage.fillMandatoryLoginFields("user", "user");
 
-        mangaList.chooseManga(0);
+        mangaList.chooseLastManga();
 
-        mangaList.addOrRemoveFirstMangaFromFavourites();
+        mangaList.addOrRemoveLastMangaFromFavourites();
 
-        mangaList.chooseManga(0);
+        mangaList.chooseLastManga();
 
-        mangaList.addOrRemoveFirstMangaFromFavourites();
+        mangaList.addOrRemoveLastMangaFromFavourites();
 
         mangaList.clickMangaUserListLink();
 
