@@ -126,6 +126,7 @@ public class SeleniumUITest {
             FirefoxOptions options = new FirefoxOptions();
             options.addArguments("--start-maximized");
             options.addArguments("--headless");
+            options.addArguments("--no-sandbox");
             capabilities.setCapability(FirefoxOptions.FIREFOX_OPTIONS, options);
         }
 
