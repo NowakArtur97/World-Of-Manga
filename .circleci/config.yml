@@ -44,7 +44,7 @@ jobs:
         command: dockerize -wait tcp://localhost:5432 -timeout 2m
     - run:
         name: Testing
-        command: mvn test -Dspring-boot.run.profiles=ci -Dgroups=MangaControllerUIPlTest
+        command: mvn test -Dspring-boot.run.profiles=ci
   deploy:
     docker:
     - image: circleci/buildpack-deps:trusty
@@ -59,10 +59,9 @@ workflows:
   build-deploy:
     jobs:
     - build
-    - deploy
-#    - deploy:
-#        requires:
-#        - build
-#        filters:
-#          branches:
-#            only: master
+    - deploy:
+        requires:
+        - build
+        filters:
+          branches:
+            only: master

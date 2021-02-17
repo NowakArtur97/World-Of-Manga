@@ -54,7 +54,7 @@ For a testing use commands:
 - Lombok - 1.18.10
 - jUnit5 - 5.5.2
 - Mockito - 3.1.0
-- Selenium - 3.141.59
+- Selenium, Selenium Grid - 3.141.59
 - Model Mapper - 2.3.0
 - Maven
 - MySQL
@@ -84,7 +84,7 @@ Available to users with only "Admin" role:
 - Add, edit and delete manga
 
 ## Status
-Project is: in progress
+Project is: finished
 
 ## Screenshots
 ![Main Page](./screenshots/main.png)
