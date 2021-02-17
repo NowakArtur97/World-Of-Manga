@@ -92,7 +92,7 @@ public class SeleniumUITest {
 
         if (isRemotely) {
 
-            setupRemoteWebDriver(browser);
+            setupRemoteWebDriver();
 
         } else {
 
@@ -109,7 +109,7 @@ public class SeleniumUITest {
         webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
 
-    private void setupRemoteWebDriver(Browser browser) throws MalformedURLException {
+    private void setupRemoteWebDriver() throws MalformedURLException {
 
         MutableCapabilities capabilities = null;
 
@@ -125,6 +125,7 @@ public class SeleniumUITest {
             capabilities = new FirefoxOptions();
             FirefoxOptions options = new FirefoxOptions();
             options.addArguments("--start-maximized");
+            options.addArguments("--headless");
             capabilities.setCapability(FirefoxOptions.FIREFOX_OPTIONS, options);
         }
 
