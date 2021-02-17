@@ -44,7 +44,7 @@ jobs:
         command: dockerize -wait tcp://localhost:5432 -timeout 2m
     - run:
         name: Testing
-        command: mvn test -Dspring-boot.run.profiles=ci -Dgroups=MangaListUITest
+        command: mvn test -Dspring-boot.run.profiles=ci -Dgroups=MangaListUI_Tests
   deploy:
     docker:
     - image: circleci/buildpack-deps:trusty
