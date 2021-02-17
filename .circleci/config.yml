@@ -32,13 +32,13 @@ jobs:
         command: docker network create grid
     - run:
         name: Install selenium-hub
-        command: docker run -d --rm -p 4444:4444 --net grid --name selenium-hub selenium/hub:3.11.0
+        command: docker run -d --rm -p 4444:4444 --net grid --name selenium-hub selenium/hub:latest
     - run:
         name: Install selenium-chrome-node
-        command: docker run -d --rm --net grid -e HUB_HOST=selenium-hub -v /dev/shm:/dev/shm selenium/node-chrome:3.11.0
+        command: docker run -d --rm --net grid -e HUB_HOST=selenium-hub -v /dev/shm:/dev/shm selenium/node-chrome:3.141.59-yttrium
     - run:
         name: Install selenium-firefox-node
-        command: docker run -d --rm --net grid -e HUB_HOST=selenium-hub -v /dev/shm:/dev/shm selenium/node-firefox:3.11.0
+        command: docker run -d --rm --net grid -e HUB_HOST=selenium-hub -v /dev/shm:/dev/shm selenium/node-firefox:3.141.59-yttrium
     - run:
         name: Wait for Postgresql
         command: dockerize -wait tcp://localhost:5432 -timeout 2m
