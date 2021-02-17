@@ -80,10 +80,14 @@ public class MangaFormPage extends SeleniumPageObjectModel {
 
     public String getEnTitle() {
 
+        webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.id(TITLE_EN_ID)));
+
         return titleEnInput.getAttribute("value");
     }
 
     private void setEnTitle(String enTitle) {
+
+        webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.id(TITLE_EN_ID)));
 
         titleEnInput.click();
         titleEnInput.clear();
@@ -92,10 +96,14 @@ public class MangaFormPage extends SeleniumPageObjectModel {
 
     public String getEnDescription() {
 
+        webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.id(DESCRIPTION_EN_ID)));
+
         return descriptionEnInput.getAttribute("value");
     }
 
     private void setEnDescription(String enDescription) {
+
+        webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.id(DESCRIPTION_EN_ID)));
 
         descriptionEnInput.click();
         descriptionEnInput.clear();
@@ -104,10 +112,14 @@ public class MangaFormPage extends SeleniumPageObjectModel {
 
     public String getPlTitle() {
 
+        webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.id(TITLE_PL_ID)));
+
         return titlePlInput.getAttribute("value");
     }
 
     private void setPlTitle(String plTitle) {
+
+        webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.id(TITLE_PL_ID)));
 
         titlePlInput.click();
         titlePlInput.clear();
@@ -116,10 +128,14 @@ public class MangaFormPage extends SeleniumPageObjectModel {
 
     public String getPlDescription() {
 
+        webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.id(DESCRIPTION_PL_ID)));
+
         return descriptionPlInput.getAttribute("value");
     }
 
     private void setPlDescription(String plDescription) {
+
+        webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.id(DESCRIPTION_PL_ID)));
 
         descriptionPlInput.click();
         descriptionPlInput.clear();
