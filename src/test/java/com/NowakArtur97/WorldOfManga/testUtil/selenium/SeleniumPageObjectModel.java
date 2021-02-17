@@ -29,7 +29,6 @@ public class SeleniumPageObjectModel {
     protected void connectTo(final String RESOURCE_PATH) {
 
         webDriver.navigate().to(mainUrl + RESOURCE_PATH);
-        webDriver.manage().window().maximize();
     }
 
     protected void useJavaScriptToClickElement(WebElement element) {
