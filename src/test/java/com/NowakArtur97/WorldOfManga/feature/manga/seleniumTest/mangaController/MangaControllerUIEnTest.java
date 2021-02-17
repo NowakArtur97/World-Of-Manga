@@ -198,7 +198,7 @@ class MangaControllerUIEnTest extends MangaControllerUITest {
 
         mangaList.clickMangaUserListLink();
 
-        mangaList.chooseCurrentlyReadingManga();
+        mangaList.chooseListByStatus(mangaStatus, languageVersion);
 
         assertAll(() -> assertEquals(0, mangaList.countMangaCards(), () -> "shouldn`t show manga on list"));
     }

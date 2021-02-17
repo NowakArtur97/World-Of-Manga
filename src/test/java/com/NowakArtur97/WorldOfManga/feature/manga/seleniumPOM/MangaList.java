@@ -30,6 +30,7 @@ public class MangaList extends SeleniumPageObjectModel {
     private static final String MANGA_LIST_TYPE_CLASS = "manga_list_types__type";
     private static final String MANGA_LIST_LINK = "//a[@href='/']";
     private static final String MANGA_WORLD_LINK = "//a[@href='/auth/sortMangaList/5']";
+    private static final String STATUS_LIST_LINK = "auth/sortMangaList/";
 
     @FindBy(className = MANGA_LIST_CLASS)
     private WebElement mangaList;
@@ -217,13 +218,13 @@ public class MangaList extends SeleniumPageObjectModel {
         return mangaFavouritesCounters.get(mangaFavouritesCounters.size() - 2).getAttribute("textContent");
     }
 
-    public void addOrRemoveFirstMangaFromList(int mangaStatus) {
+    public void addOrRemoveLastMangaFromList(int mangaStatus) {
 
         webDriver.navigate().refresh();
 
-        webDriverWait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.className(MANGA_CARD_CLASS)));
+        webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.className(MANGA_CARD_CLASS)));
 
-        useJavaScriptToClickElement(mangaStatuses.get(mangaStatus + mangaCards.size() / 2 * NUMBER_OF_MANGA_STATUSES));
+        useJavaScriptToClickElement(mangaStatuses.get(mangaStatus + mangaStatuses.size() - NUMBER_OF_MANGA_STATUSES));
     }
 
     public void addLastMangaToList(int mangaStatus) {
@@ -241,29 +242,9 @@ public class MangaList extends SeleniumPageObjectModel {
         useJavaScriptToClickElement(mangaListTypes.get(1));
     }
 
-    public void chooseCurrentlyReadingManga() {
+    public void chooseListByStatus(int status, LanguageVersion ver) {
 
-        useJavaScriptToClickElement(mangaListTypes.get(2));
-    }
-
-    public void chooseCompletedManga() {
-
-        useJavaScriptToClickElement(mangaListTypes.get(3));
-    }
-
-    public void choosePlanToReadManga() {
-
-        useJavaScriptToClickElement(mangaListTypes.get(4));
-    }
-
-    public void chooseOnHoldManga() {
-
-        useJavaScriptToClickElement(mangaListTypes.get(5));
-    }
-
-    public void chooseDroppedManga() {
-
-        useJavaScriptToClickElement(mangaListTypes.get(6));
+        super.connectTo(RESOURCE_PATH + STATUS_LIST_LINK + status + ver.getLangUrl());
     }
 
     public void editFirstManga() {

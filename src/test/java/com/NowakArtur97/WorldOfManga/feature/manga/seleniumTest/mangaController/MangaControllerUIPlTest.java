@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
-import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.annotation.DirtiesContext.ClassMode;
@@ -199,7 +198,7 @@ class MangaControllerUIPlTest extends MangaControllerUITest {
 
         mangaList.clickMangaUserListLink();
 
-        mangaList.chooseCurrentlyReadingManga();
+        mangaList.chooseListByStatus(mangaStatus, languageVersion);
 
         assertAll(() -> assertEquals(0, mangaList.countMangaCards(), () -> "shouldn`t show manga on list"));
     }
