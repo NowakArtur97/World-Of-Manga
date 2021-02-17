@@ -116,6 +116,21 @@ public class MangaList extends SeleniumPageObjectModel {
         }
     }
 
+    public String getLastMangaCardTextInMainList() {
+
+        webDriver.navigate().refresh();
+
+        webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.className(MainPage.MAIN_PAGE_CLASS)));
+
+        mangaCards = webDriver.findElements(By.className(MANGA_CARD_CLASS));
+
+        if (mangaCards.size() > 0) {
+            return mangaCards.get(mangaCards.size() - 1).getText();
+        } else {
+            return "";
+        }
+    }
+
     public void clickMangaListLink() {
 
         webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(MANGA_LIST_LINK)));
@@ -139,9 +154,10 @@ public class MangaList extends SeleniumPageObjectModel {
 
     public void chooseLastManga() {
 
-        webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.className(MANGA_RATING_CLASS)));
+        webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.className(MANGA_CARD_CLASS)));
 
         useJavaScriptToClickElement(mangaCards.get(mangaCards.size() - 1));
+        mangaCards.get(mangaCards.size() - 1).click();
     }
 
     public void rateFirstManga(int rating) {
@@ -152,6 +168,8 @@ public class MangaList extends SeleniumPageObjectModel {
     }
 
     public void rateLastManga(int rating) {
+
+        webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.className(MANGA_CARD_CLASS)));
 
         useJavaScriptToClickElement(mangaStars.get(rating + mangaStars.size() - NUMBER_OF_MANGA_STARS - 1));
     }
@@ -200,6 +218,10 @@ public class MangaList extends SeleniumPageObjectModel {
     }
 
     public void addOrRemoveFirstMangaFromList(int mangaStatus) {
+
+        webDriver.navigate().refresh();
+
+        webDriverWait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.className(MANGA_CARD_CLASS)));
 
         useJavaScriptToClickElement(mangaStatuses.get(mangaStatus + mangaCards.size() / 2 * NUMBER_OF_MANGA_STATUSES));
     }

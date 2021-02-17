@@ -45,13 +45,14 @@ class MangaRatingUITest extends SeleniumUITest {
 
         loginPage.fillMandatoryLoginFields("user", "user");
 
-        mangaList.chooseManga(0);
+        mangaList.chooseLastManga();
 
         int mangaRating = 5;
 
-        mangaList.rateFirstManga(mangaRating);
+        mangaList.rateLastManga(mangaRating);
 
-        assertAll(() -> assertTrue(mangaList.getFirstMangaRating().contains(String.valueOf(mangaRating)),
+        assertAll(() -> assertTrue(mangaList.getLastMangaRating().contains(String.valueOf(mangaRating))
+                        || mangaList.getLastMangaCardText().contains(String.valueOf(mangaRating)),
                 () -> "should show manga rating"));
     }
 
@@ -65,17 +66,12 @@ class MangaRatingUITest extends SeleniumUITest {
 
         loginPage.fillMandatoryLoginFields("user", "user");
 
-        mangaList.chooseManga(0);
-
         int mangaRating = 5;
 
-        mangaList.rateFirstManga(mangaRating);
+        mangaList.rateLastManga(mangaRating);
 
-        mangaList.clickMangaUserListLink();
-
-        mangaList.chooseRatedManga();
-
-        assertAll(() -> assertTrue(mangaList.getFirstMangaRatingOnMangaList().contains(String.valueOf(mangaRating)),
+        assertAll(() -> assertTrue(mangaList.getLastMangaRating().contains(String.valueOf(mangaRating))
+                        || mangaList.getLastMangaCardText().contains(String.valueOf(mangaRating)),
                 () -> "should show manga rating on manga list"));
     }
 
@@ -89,22 +85,23 @@ class MangaRatingUITest extends SeleniumUITest {
 
         loginPage.fillMandatoryLoginFields("user", "user");
 
-        mangaList.chooseManga(0);
+        mangaList.chooseLastManga();
 
         int firstMangaRating = 5;
 
-        mangaList.rateFirstManga(firstMangaRating);
+        mangaList.rateLastManga(firstMangaRating);
 
-        mangaList.chooseManga(0);
+        mangaList.chooseLastManga();
 
         int secondMangaRating = 4;
 
-        mangaList.rateFirstManga(secondMangaRating);
+        mangaList.rateLastManga(secondMangaRating);
 
         assertAll(
-                () -> assertFalse(mangaList.getFirstMangaRating().contains(String.valueOf(firstMangaRating)),
+                () -> assertFalse(mangaList.getLastMangaRating().contains(String.valueOf(firstMangaRating)),
                         () -> "shouldn`t show old manga rating"),
-                () -> assertTrue(mangaList.getFirstMangaRating().contains(String.valueOf(secondMangaRating)),
+                () -> assertTrue(mangaList.getLastMangaRating().contains(String.valueOf(secondMangaRating))
+                                || mangaList.getLastMangaCardText().contains(String.valueOf(secondMangaRating)),
                         () -> "should show updated manga rating"));
     }
 
