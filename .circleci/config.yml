@@ -40,9 +40,8 @@ jobs:
     - run:
         name: Install the latest firefox
         command: |
-          sudo apt-get update &&
-          sudo apt install firefox &&
-          firefox --version
+          sudo apt-get -f update &&
+          sudo apt-get install firefox
     - run:
         name: Install selenium-hub
         command: docker run -d --rm -p 4444:4444 --net grid --name selenium-hub selenium/hub:3.141.59-20200525
