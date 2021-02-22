@@ -31,6 +31,13 @@ jobs:
         name: Create docker network
         command: docker network create grid
     - run:
+        name: Install and update webdriver
+        command: sudo npm install -g webdriver-manager && sudo -s webdriver-manager update
+    - run:
+        name: Start webdriver
+        background: true
+        command: npm run webdriver:start
+    - run:
         name: Install selenium-hub
         command: docker run -d --rm -p 4444:4444 --net grid --name selenium-hub selenium/hub:3.141.59-20200525
 #    - run:
