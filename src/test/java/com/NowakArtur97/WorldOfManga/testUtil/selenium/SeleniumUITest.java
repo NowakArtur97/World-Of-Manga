@@ -87,9 +87,6 @@ public class SeleniumUITest {
             localServerPort = remoteAppServerPort;
         }
 
-        WebDriverManager.chromedriver().setup();
-        WebDriverManager.firefoxdriver().setup();
-
         if (isRemotely) {
 
             setupRemoteWebDriver();
@@ -115,12 +112,16 @@ public class SeleniumUITest {
 
         if (browser.equals(Browser.CHROME)) {
 
+            WebDriverManager.chromedriver().setup();
+
             capabilities = new ChromeOptions();
             ChromeOptions options = new ChromeOptions();
             options.addArguments("--start-maximized");
             capabilities.setCapability(ChromeOptions.CAPABILITY, options);
 
         } else if (browser.equals(Browser.FIREFOX)) {
+
+            WebDriverManager.firefoxdriver().gitHubTokenSecret("644b466f17e8dbf8b69b1540419ca21a3f1077bc").setup();
 
             capabilities = new FirefoxOptions();
             FirefoxOptions options = new FirefoxOptions();
