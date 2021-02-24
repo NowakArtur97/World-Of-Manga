@@ -42,7 +42,7 @@ class MangaListUITest extends SeleniumUITest {
     }
 
     @ParameterizedTest(name = "{index}: Browser: {0} | Language Version: {1}")
-    @CsvSource({"Firefox, ENG", "Firefox, PL"})
+    @CsvSource({"Firefox, ENG", "Firefox, PL", "Chrome, ENG", "Chrome, PL"})
     void when_added_new_manga_with_title_should_show_manga_title_on_manga_list(String browserName, String language) {
 
         String englishTitle = "Manga english title";
@@ -78,7 +78,7 @@ class MangaListUITest extends SeleniumUITest {
     }
 
     @ParameterizedTest(name = "{index}: Browser: {0} | Language Version: {1}")
-    @CsvSource({"Firefox, ENG", "Firefox, PL"})
+    @CsvSource({"Firefox, ENG", "Firefox, PL", "Chrome, ENG", "Chrome, PL"})
     void when_added_new_manga_with_description_should_show_manga_description_on_manga_list(String browserName, String language) {
 
         String englishTitle = "Manga with english title";
