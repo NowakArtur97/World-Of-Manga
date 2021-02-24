@@ -12,7 +12,7 @@ jobs:
         POSTGRES_DB: world_of_manga
         POSTGRES_PASSWORD: postgres
 #    - image: selenium/standalone-firefox:3.4.0
-#    - image: selenium/standalone-chrome:3.4.0
+    - image: selenium/standalone-chrome:3.4.0
     working_directory: ~/world_of_manga
     environment:
       MAVEN_OPTS: -Xmx3200m
