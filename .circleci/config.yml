@@ -12,6 +12,7 @@ jobs:
         POSTGRES_DB: world_of_manga
         POSTGRES_PASSWORD: postgres
     - image: selenium/standalone-chrome:3.11.0
+    - image: selenium/standalone-firefox:3.11.0
     working_directory: ~/world_of_manga
     environment:
       MAVEN_OPTS: -Xmx3200m
@@ -31,26 +32,14 @@ jobs:
         name: Create docker network
         command: docker network create grid
     - run:
-        name: Install and start geckodriver
-        command: |
-          wget https://github.com/mozilla/geckodriver/releases/download/v0.26.0/geckodriver-v0.26.0-linux64.tar.gz &&
-          tar -xvzf geckodriver* &&
-          chmod +x geckodriver &&
-          sudo mv geckodriver /usr/local/bin
-    - run:
-        name: Install the latest firefox
-        command: |
-          sudo apt-get -f update &&
-          sudo apt-get install firefox
-    - run:
         name: Install selenium-hub
         command: docker run -d --rm -p 4444:4444 --net grid --name selenium-hub selenium/hub:3.141.59-20200525
-#    - run:
-#        name: Install selenium-chrome-node
-#        command: docker run -d --rm --net grid -e HUB_HOST=selenium-hub -v /dev/shm:/dev/shm selenium/node-chrome:3.141.59-20200525
+    - run:
+        name: Install selenium-chrome-node
+        command: docker run -d --rm --net grid -e HUB_HOST=selenium-hub -v /dev/shm:/dev/shm selenium/node-chrome:3.11.0
     - run:
         name: Install selenium-firefox-node
-        command: docker run -d --privileged --rm --net grid -e HUB_HOST=selenium-hub -v /dev/shm:/dev/shm selenium/node-firefox:3.141.59-20200525
+        command: docker run -d --rm --net grid -e HUB_HOST=selenium-hub -v /dev/shm:/dev/shm selenium/node-firefox:3.11.0
     - run:
         name: Wait for Postgresql
         command: dockerize -wait tcp://localhost:5432 -timeout 2m
