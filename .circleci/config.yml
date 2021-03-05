@@ -11,7 +11,7 @@ jobs:
       environment:
         POSTGRES_DB: world_of_manga
         POSTGRES_PASSWORD: postgres
-    - image: selenium/standalone-firefox:3.4.0
+    - image: selenium/standalone-firefox-debug:3.141.59
       environment:
         - HUB_HOST=selenium-hub
         - HUB_PORT=4444
@@ -23,7 +23,8 @@ jobs:
         - HUB_ENV_no_proxy=localhost
         - GRID_BROWSER_TIMEOUT=300
         - GRID_TIMEOUT=300
-    - image: selenium/standalone-chrome:3.4.0
+        - SE_OPTS: -port 5902
+    - image: selenium/standalone-chrome-debug:3.141.59
       environment:
         - HUB_HOST=selenium-hub
         - HUB_PORT=4444
@@ -35,6 +36,7 @@ jobs:
         - HUB_ENV_no_proxy=localhost
         - GRID_BROWSER_TIMEOUT=300
         - GRID_TIMEOUT=300
+        - SE_OPTS: -port 5901
     working_directory: ~/world_of_manga
     environment:
       MAVEN_OPTS: -Xmx3200m
