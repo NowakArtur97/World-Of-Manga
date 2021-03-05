@@ -121,7 +121,7 @@ public class SeleniumUITest {
 
         } else if (browser.equals(Browser.FIREFOX)) {
 
-            WebDriverManager.firefoxdriver().gitHubTokenSecret("644b466f17e8dbf8b69b1540419ca21a3f1077bc").setup();
+            WebDriverManager.firefoxdriver().gitHubTokenSecret("9d08f687a0572cfebb8d1abc0ad383b37854f5dc ").setup();
 
             capabilities = new FirefoxOptions();
             FirefoxOptions options = new FirefoxOptions();
