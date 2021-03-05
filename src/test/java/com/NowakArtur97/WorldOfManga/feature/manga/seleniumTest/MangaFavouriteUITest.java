@@ -14,7 +14,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.annotation.DirtiesContext.ClassMode;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ExtendWith(ScreenshotWatcher.class)
@@ -37,7 +38,7 @@ class MangaFavouriteUITest extends SeleniumUITest {
     }
 
     @ParameterizedTest(name = "{index}: Browser: {0} | Language Version: {1}")
-    @CsvSource({"Firefox, ENG", "Firefox, PL", "Chrome, ENG", "Chrome, PL"})
+    @CsvSource({"Chrome, ENG", "Chrome, PL"})
     void when_add_manga_for_the_first_time_on_main_page_should_add_manga_to_favourites(String browserName, String language) {
 
         launchBrowser(browserName, language);
@@ -55,7 +56,7 @@ class MangaFavouriteUITest extends SeleniumUITest {
     }
 
 //    @ParameterizedTest(name = "{index}: Browser: {0} | Language Version: {1}")
-//    @CsvSource({"Firefox, ENG", "Firefox, PL", "Chrome, ENG", "Chrome, PL"})
+//    @CsvSource({ "Chrome, ENG", "Chrome, PL"})
 //    void when_add_manga_for_the_first_time_should_show_manga_in_favourites(String browserName, String language) {
 //
 //        launchBrowser(browserName, language);
@@ -82,7 +83,7 @@ class MangaFavouriteUITest extends SeleniumUITest {
 //    }
 //
 //    @ParameterizedTest(name = "{index}: Browser: {0} | Language Version: {1}")
-//    @CsvSource({"Firefox, ENG", "Firefox, PL", "Chrome, ENG", "Chrome, PL"})
+//    @CsvSource({ "Chrome, ENG", "Chrome, PL"})
 //    void when_remove_manga_from_favourites_on_main_page_should_remove_manga_from_favourites(String browserName, String language) {
 //
 //        launchBrowser(browserName, language);
@@ -104,7 +105,7 @@ class MangaFavouriteUITest extends SeleniumUITest {
 //    }
 //
 //    @ParameterizedTest(name = "{index}: Browser: {0} | Language Version: {1}")
-//    @CsvSource({"Firefox, ENG", "Firefox, PL", "Chrome, ENG", "Chrome, PL"})
+//    @CsvSource({ "Chrome, ENG", "Chrome, PL"})
 //    void when_remove_manga_from_favourites_should_not_show_manga_in_list(String browserName, String language) {
 //
 //        launchBrowser(browserName, language);
@@ -131,7 +132,7 @@ class MangaFavouriteUITest extends SeleniumUITest {
 //    }
 
     @ParameterizedTest(name = "{index}: Browser: {0} | Language Version: {1}")
-    @CsvSource({"Firefox, ENG", "Firefox, PL", "Chrome, ENG", "Chrome, PL"})
+    @CsvSource({"Chrome, ENG", "Chrome, PL"})
     void when_user_not_logged_rating_manga_should_show_login_form(String browserName, String language) {
 
         launchBrowser(browserName, language);
