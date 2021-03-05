@@ -12,30 +12,8 @@ jobs:
         POSTGRES_DB: world_of_manga
         POSTGRES_PASSWORD: postgres
     - image: selenium/standalone-chrome-debug:3.141.59
-      environment:
-        - HUB_HOST=selenium-hub
-        - HUB_PORT=4444
-        - HUB_PORT_4440_TCP_ADDR=selenium-hub
-        - HUB_PORT_4440_TCP_PORT=4440
-        - JAVA_OPT=-Xmx512m
-        - DBUS_SESSION_BUS_ADDRESS=/dev/null
-        - no_proxy=localhost
-        - HUB_ENV_no_proxy=localhost
-        - GRID_BROWSER_TIMEOUT=300
-        - GRID_TIMEOUT=300
-        - SE_OPTS= -port 5901
 #    - image: selenium/standalone-firefox-debug:3.141.59
 #      environment:
-#        - HUB_HOST=selenium-hub
-#        - HUB_PORT=4444
-#        - HUB_PORT_4440_TCP_ADDR=selenium-hub
-#        - HUB_PORT_4440_TCP_PORT=4440
-#        - JAVA_OPT=-Xmx512m
-#        - DBUS_SESSION_BUS_ADDRESS=/dev/null
-#        - no_proxy=localhost
-#        - HUB_ENV_no_proxy=localhost
-#        - GRID_BROWSER_TIMEOUT=300
-#        - GRID_TIMEOUT=300
 #        - SE_OPTS= -port 5902
 #        - WDM_GITHUBTOKENSECRET=9d08f687a0572cfebb8d1abc0ad383b37854f5dc
     working_directory: ~/world_of_manga
@@ -61,7 +39,7 @@ jobs:
         command: docker run -d --rm -p 4444:4444 --net grid --name selenium-hub selenium/hub:3.141.59-20200525
     - run:
         name: Install selenium-chrome-node
-        command: docker run -d --rm -p 5901:5900 --net grid -e HUB_HOST=selenium-hub -v /dev/shm:/dev/shm selenium/standalone-chrome-debug:3.141.59
+        command: docker run -d --rm -p --net grid -e HUB_HOST=selenium-hub -v /dev/shm:/dev/shm selenium/standalone-chrome-debug:3.141.59
 #    - run:
 #        name: Install selenium-firefox-node
 #        command: docker run -d --rm -p 5902:5900 --net grid -e HUB_HOST=selenium-hub -v /dev/shm:/dev/shm selenium/standalone-firefox-debug:3.141.59
