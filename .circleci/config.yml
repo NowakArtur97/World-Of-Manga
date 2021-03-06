@@ -13,7 +13,8 @@ jobs:
         POSTGRES_PASSWORD: postgres
 #    - image: selenium/standalone-chrome:3.4.0
 #    - image: selenium/standalone-firefox-debug:3.141.59
-    - image: selenium/standalone-firefox:3.4.0
+    - image: selenium/standalone-firefox:3.141.59-yttrium
+#    - image: selenium/standalone-firefox:3.4.0
 #      environment:
 #        - SE_OPTS= -port 5901
 #        - WDM_GITHUBTOKENSECRET=9d08f687a0572cfebb8d1abc0ad383b37854f5dc
