@@ -87,50 +87,57 @@ public class SeleniumUITest {
             localServerPort = remoteAppServerPort;
         }
 
-        if (isRemotely) {
+        switch (browser) {
+            case CHROME:
 
-            setupRemoteWebDriver();
+                WebDriverManager.chromedriver().setup();
 
-        } else {
+                if (isRemotely) {
+                    setupRemoteChromeWebDriver();
+                } else {
+                    webDriver = new ChromeDriver();
+                }
+                break;
 
-            if (browser.equals(Browser.CHROME)) {
+            case FIREFOX:
 
-                webDriver = new ChromeDriver();
+                WebDriverManager.firefoxdriver().setup();
 
-            } else if (browser.equals(Browser.FIREFOX)) {
-
-                webDriver = new FirefoxDriver();
-            }
+                if (isRemotely) {
+                    setupRemoteFirefoxWebDriver();
+                } else {
+                    webDriver = new FirefoxDriver();
+                }
+                break;
         }
 
         webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
 
-    private void setupRemoteWebDriver() throws MalformedURLException {
+    private void setupRemoteChromeWebDriver() throws MalformedURLException {
 
-        MutableCapabilities capabilities = null;
+        MutableCapabilities capabilities = new ChromeOptions();
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--start-maximized");
+        capabilities.setCapability(ChromeOptions.CAPABILITY, options);
 
-        if (browser.equals(Browser.CHROME)) {
+        setupRemoteWebDriver(capabilities);
+    }
 
-            WebDriverManager.chromedriver().setup();
+    private void setupRemoteFirefoxWebDriver() throws MalformedURLException {
 
-            capabilities = new ChromeOptions();
-            ChromeOptions options = new ChromeOptions();
-            options.addArguments("--start-maximized");
-            capabilities.setCapability(ChromeOptions.CAPABILITY, options);
+        MutableCapabilities capabilities = new FirefoxOptions();
+        FirefoxOptions options = new FirefoxOptions();
+        options.setHeadless(true);
+        options.addArguments("--start-maximized");
+        options.addArguments("--headless");
+        options.addArguments("--no-sandbox");
+        capabilities.setCapability(FirefoxOptions.FIREFOX_OPTIONS, options);
 
-        } else if (browser.equals(Browser.FIREFOX)) {
+        setupRemoteWebDriver(capabilities);
+    }
 
-            WebDriverManager.firefoxdriver().gitHubTokenSecret("9d08f687a0572cfebb8d1abc0ad383b37854f5dc ").setup();
-
-            capabilities = new FirefoxOptions();
-            FirefoxOptions options = new FirefoxOptions();
-            options.setHeadless(true);
-            options.addArguments("--start-maximized");
-            options.addArguments("--headless");
-            options.addArguments("--no-sandbox");
-            capabilities.setCapability(FirefoxOptions.FIREFOX_OPTIONS, options);
-        }
+    private void setupRemoteWebDriver(MutableCapabilities capabilities) throws MalformedURLException {
 
         if (isOnCircleCi) {
 
