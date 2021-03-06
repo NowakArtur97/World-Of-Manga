@@ -11,7 +11,7 @@ jobs:
       environment:
         POSTGRES_DB: world_of_manga
         POSTGRES_PASSWORD: postgres
-    - image: selenium/standalone-chrome:3.11.0
+    - image: selenium/standalone-chrome:3.4.0
 #    - image: selenium/standalone-firefox-debug:3.141.59
 #      environment:
 #        - SE_OPTS= -port 5902
@@ -42,7 +42,7 @@ jobs:
         command: docker run -d --rm --net grid -e HUB_HOST=selenium-hub -v /dev/shm:/dev/shm selenium/node-chrome:3.11.0
     - run:
         name: Install selenium-firefox-node
-        command: docker run -d --rm --net grid -e HUB_HOST=selenium-hub -v /dev/shm:/dev/shm selenium/node-firefox:3.11.0
+        command: docker run -d --rm --net grid -e HUB_HOST=selenium-hub -v /dev/shm:/dev/shm selenium/node-firefox:3.141.59-yttrium
     - run:
         name: Wait for Postgresql
         command: dockerize -wait tcp://localhost:5432 -timeout 2m
