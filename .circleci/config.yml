@@ -12,12 +12,10 @@ jobs:
         POSTGRES_DB: world_of_manga
         POSTGRES_PASSWORD: postgres
     - image: selenium/standalone-chrome:3.11.0
-#    - image: selenium/standalone-firefox-debug:3.141.59
     - image: selenium/standalone-firefox:3.141.59-yttrium
-      environment:
-        - SE_OPTS= -port 5901
-        - WDM_GITHUBTOKENSECRET=9d08f687a0572cfebb8d1abc0ad383b37854f5dc
-#    - image: selenium/standalone-firefox:3.4.0
+#      environment:
+#        - SE_OPTS= -port 5901
+#        - WDM_GITHUBTOKENSECRET=9d08f687a0572cfebb8d1abc0ad383b37854f5dc
     working_directory: ~/world_of_manga
     environment:
       MAVEN_OPTS: -Xmx3200m
@@ -44,7 +42,7 @@ jobs:
         command: docker run -d --rm --net grid -e HUB_HOST=selenium-hub -v /dev/shm:/dev/shm selenium/node-chrome:3.11.0
     - run:
         name: Install selenium-firefox-node
-        command: docker run -d --rm -p 5901:5900 --net grid -e HUB_HOST=selenium-hub -v /dev/shm:/dev/shm selenium/node-firefox:3.141.59-yttrium
+        command: docker run -d --rm --net grid -e HUB_HOST=selenium-hub -v /dev/shm:/dev/shm selenium/node-firefox:3.141.59-yttrium
     - run:
         name: Wait for Postgresql
         command: dockerize -wait tcp://localhost:5432 -timeout 2m
