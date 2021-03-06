@@ -101,7 +101,7 @@ public class SeleniumUITest {
 
             case FIREFOX:
 
-                WebDriverManager.firefoxdriver().setup();
+                WebDriverManager.firefoxdriver().gitHubTokenSecret("9d08f687a0572cfebb8d1abc0ad383b37854f5dc").setup();
 
                 if (isRemotely) {
                     setupRemoteFirefoxWebDriver();
