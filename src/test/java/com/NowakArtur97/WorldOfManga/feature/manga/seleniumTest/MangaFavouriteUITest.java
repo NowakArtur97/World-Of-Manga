@@ -37,24 +37,24 @@ class MangaFavouriteUITest extends SeleniumUITest {
         loginPage = new LoginPage(webDriver, mainUrl + localServerPort);
     }
 
-    @ParameterizedTest(name = "{index}: Browser: {0} | Language Version: {1}")
-    @CsvSource({"Firefox, ENG", "Firefox, PL"})
-    void when_add_manga_for_the_first_time_on_main_page_should_add_manga_to_favourites(String browserName, String language) {
-
-        launchBrowser(browserName, language);
-
-        loginPage.loadLoginView(languageVersion);
-
-        loginPage.fillMandatoryLoginFields("user", "user");
-
-        mangaList.chooseLastManga();
-
-        mangaList.addOrRemoveLastMangaFromFavourites();
-
-        assertAll(() -> assertTrue(mangaList.getMangaListText().contains("1"),
-                () -> "should show manga with one heart, but was: " + mangaList.getLastMangaCardText()));
-    }
-
+//    @ParameterizedTest(name = "{index}: Browser: {0} | Language Version: {1}")
+//    @CsvSource({"Firefox, ENG", "Firefox, PL", "Chrome, ENG", "Chrome, PL"})
+//    void when_add_manga_for_the_first_time_on_main_page_should_add_manga_to_favourites(String browserName, String language) {
+//
+//        launchBrowser(browserName, language);
+//
+//        loginPage.loadLoginView(languageVersion);
+//
+//        loginPage.fillMandatoryLoginFields("user", "user");
+//
+//        mangaList.chooseLastManga();
+//
+//        mangaList.addOrRemoveLastMangaFromFavourites();
+//
+//        assertAll(() -> assertTrue(mangaList.getMangaListText().contains("1"),
+//                () -> "should show manga with one heart, but was: " + mangaList.getLastMangaCardText()));
+//    }
+//
 //    @ParameterizedTest(name = "{index}: Browser: {0} | Language Version: {1}")
 //    @CsvSource({ "Chrome, ENG", "Chrome, PL"})
 //    void when_add_manga_for_the_first_time_should_show_manga_in_favourites(String browserName, String language) {
@@ -132,7 +132,7 @@ class MangaFavouriteUITest extends SeleniumUITest {
 //    }
 
     @ParameterizedTest(name = "{index}: Browser: {0} | Language Version: {1}")
-    @CsvSource({"Firefox, ENG", "Firefox, PL"})
+    @CsvSource({"Firefox, ENG", "Firefox, PL", "Chrome, ENG", "Chrome, PL"})
     void when_user_not_logged_rating_manga_should_show_login_form(String browserName, String language) {
 
         launchBrowser(browserName, language);

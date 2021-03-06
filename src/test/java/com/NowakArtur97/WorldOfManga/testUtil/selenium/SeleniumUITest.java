@@ -119,6 +119,7 @@ public class SeleniumUITest {
         MutableCapabilities capabilities = new ChromeOptions();
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--start-maximized");
+        options.addArguments("--headless");
         capabilities.setCapability(ChromeOptions.CAPABILITY, options);
 
         setupRemoteWebDriver(capabilities);
