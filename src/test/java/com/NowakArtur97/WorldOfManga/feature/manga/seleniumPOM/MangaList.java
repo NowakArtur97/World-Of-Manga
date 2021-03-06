@@ -195,16 +195,15 @@ public class MangaList extends SeleniumPageObjectModel {
 
     public void addOrRemoveFirstMangaFromFavourites() {
 
-        webDriverWait.until(ExpectedConditions.visibilityOfAllElements(mangaCards));
+        webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.className(MANGA_CARD_CLASS)));
 
         useJavaScriptToClickElement(mangaFavouriteLinks.get(mangaFavouriteLinks.size() / 2));
     }
 
     public void addOrRemoveLastMangaFromFavourites() {
 
-        webDriver.navigate().refresh();
-
-        webDriverWait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.className(MANGA_CARD_CLASS)));
+        webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.className(MANGA_CARD_CLASS)));
+        webDriverWait.until(ExpectedConditions.visibilityOf(mangaFavouriteLinks.get(mangaFavouriteLinks.size() - 1)));
 
         useJavaScriptToClickElement(mangaFavouriteLinks.get(mangaFavouriteLinks.size() - 1));
     }
