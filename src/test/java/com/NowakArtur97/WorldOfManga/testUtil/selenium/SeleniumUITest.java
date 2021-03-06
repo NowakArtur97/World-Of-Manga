@@ -46,6 +46,9 @@ public class SeleniumUITest {
     @Value("${world-of-manga.selenium.is-on-circle-ci:false}")
     private boolean isOnCircleCi;
 
+    @Value("${world-of-manga.selenium.browser-on-ci}")
+    private String chosenBrowser;
+
     @Value("${world-of-manga.images.example-image-path:\\src\\main\\resources\\static\\images\\backgrounds\\samurai.jpg}")
     protected String exampleImagePath;
 
@@ -57,8 +60,12 @@ public class SeleniumUITest {
 
     protected void setUp(String browserName, String language) {
 
+        if (chosenBrowser.equals("DEFAULT")) {
+            chosenBrowser = browserName;
+        }
+
         browser = Arrays.stream(Browser.values())
-                .filter(brow -> brow.name().equalsIgnoreCase(browserName))
+                .filter(brow -> brow.name().equalsIgnoreCase(chosenBrowser))
                 .findFirst()
                 .orElse(Browser.CHROME);
 
