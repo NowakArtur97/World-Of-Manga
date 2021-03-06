@@ -98,8 +98,8 @@ workflows:
   test-deploy:
     jobs:
     - test-Chrome
-    - test-Firefox
-      requires:
+    - test-Firefox:
+        requires:
         - test-Chrome
     - deploy:
         requires:
