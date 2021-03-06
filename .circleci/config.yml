@@ -11,13 +11,13 @@ jobs:
       environment:
         POSTGRES_DB: world_of_manga
         POSTGRES_PASSWORD: postgres
-#    - image: selenium/standalone-chrome:3.4.0
+    - image: selenium/standalone-chrome:3.11.0
 #    - image: selenium/standalone-firefox-debug:3.141.59
     - image: selenium/standalone-firefox:3.141.59-yttrium
-#    - image: selenium/standalone-firefox:3.4.0
 #      environment:
 #        - SE_OPTS= -port 5901
 #        - WDM_GITHUBTOKENSECRET=9d08f687a0572cfebb8d1abc0ad383b37854f5dc
+#    - image: selenium/standalone-firefox:3.4.0
     working_directory: ~/world_of_manga
     environment:
       MAVEN_OPTS: -Xmx3200m
@@ -39,9 +39,9 @@ jobs:
     - run:
         name: Install selenium-hub
         command: docker run -d --rm -p 4444:4444 --net grid --name selenium-hub selenium/hub:3.11.0
-#    - run:
-#        name: Install selenium-chrome-node
-#        command: docker run -d --rm --net grid -e HUB_HOST=selenium-hub -v /dev/shm:/dev/shm selenium/node-chrome:3.11.0
+    - run:
+        name: Install selenium-chrome-node
+        command: docker run -d --rm --net grid -e HUB_HOST=selenium-hub -v /dev/shm:/dev/shm selenium/node-chrome:3.11.0
     - run:
         name: Install selenium-firefox-node
         command: docker run -d --rm --net grid -e HUB_HOST=selenium-hub -v /dev/shm:/dev/shm selenium/node-firefox:3.141.59-yttrium
