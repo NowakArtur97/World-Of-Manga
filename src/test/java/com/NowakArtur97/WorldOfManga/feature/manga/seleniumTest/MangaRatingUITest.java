@@ -10,7 +10,7 @@ import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 
@@ -37,7 +37,7 @@ class MangaRatingUITest extends SeleniumUITest {
     }
 
     @ParameterizedTest(name = "{index}: Browser: {0} | Language Version: {1}")
-    @CsvSource({"Firefox, ENG", "Firefox, PL", "Chrome, ENG", "Chrome, PL"})
+    @MethodSource("setBrowserAndLanguageBasedOnProfile")
     void when_rate_manga_on_main_page_should_show_updated_rating(Browser browser, String language) {
 
         launchBrowser(browser, language);
@@ -58,7 +58,7 @@ class MangaRatingUITest extends SeleniumUITest {
     }
 
     @ParameterizedTest(name = "{index}: Browser: {0} | Language Version: {1}")
-    @CsvSource({"Firefox, ENG", "Firefox, PL", "Chrome, ENG", "Chrome, PL"})
+    @MethodSource("setBrowserAndLanguageBasedOnProfile")
     void when_rate_manga_should_show_rating_on_user_manga_list(Browser browser, String language) {
 
         launchBrowser(browser, language);
@@ -77,7 +77,7 @@ class MangaRatingUITest extends SeleniumUITest {
     }
 
     @ParameterizedTest(name = "{index}: Browser: {0} | Language Version: {1}")
-    @CsvSource({"Firefox, ENG", "Firefox, PL", "Chrome, ENG", "Chrome, PL"})
+    @MethodSource("setBrowserAndLanguageBasedOnProfile")
     void when_rate_manga_second_time_should_show_updated_rating(Browser browser, String language) {
 
         launchBrowser(browser, language);
@@ -107,7 +107,7 @@ class MangaRatingUITest extends SeleniumUITest {
     }
 
     @ParameterizedTest(name = "{index}: Browser: {0} | Language Version: {1}")
-    @CsvSource({"Firefox, ENG", "Firefox, PL", "Chrome, ENG", "Chrome, PL"})
+    @MethodSource("setBrowserAndLanguageBasedOnProfile")
     void when_not_logged_user_try_to_rate_manga_should_show_login_form(Browser browser, String language) {
 
         launchBrowser(browser, language);

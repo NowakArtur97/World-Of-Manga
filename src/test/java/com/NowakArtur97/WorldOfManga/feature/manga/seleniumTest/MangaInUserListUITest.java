@@ -38,7 +38,7 @@ class MangaInUserListUITest extends SeleniumUITest {
     }
 
     @ParameterizedTest(name = "{index}: Browser: {0} | Language Version: {1}")
-    @MethodSource("setBrowserBasedOnProfile")
+    @MethodSource("setBrowserAndLanguageBasedOnProfile")
     void when_add_to_currently_reading_list_should_add_to_list(Browser browser, String language) {
 
         setUp(browser, language);
@@ -69,7 +69,7 @@ class MangaInUserListUITest extends SeleniumUITest {
     }
 
     @ParameterizedTest(name = "{index}: Browser: {0} | Language Version: {1}")
-    @MethodSource("setBrowserBasedOnProfile")
+    @MethodSource("setBrowserAndLanguageBasedOnProfile")
     void when_remove_from_currently_reading_list_should_remove_from_list(Browser browser, String language) {
 
         setUp(browser, language);
@@ -104,7 +104,7 @@ class MangaInUserListUITest extends SeleniumUITest {
     }
 
     @ParameterizedTest(name = "{index}: Browser: {0} | Language Version: {1}")
-    @MethodSource("setBrowserBasedOnProfile")
+    @MethodSource("setBrowserAndLanguageBasedOnProfile")
     void when_add_to_completed_list_should_add_to_list(Browser browser, String language) {
 
         setUp(browser, language);
@@ -135,7 +135,7 @@ class MangaInUserListUITest extends SeleniumUITest {
     }
 
     @ParameterizedTest(name = "{index}: Browser: {0} | Language Version: {1}")
-    @MethodSource("setBrowserBasedOnProfile")
+    @MethodSource("setBrowserAndLanguageBasedOnProfile")
     void when_remove_from_completed_list_should_remove_from_list(Browser browser, String language) {
 
         setUp(browser, language);
@@ -170,7 +170,7 @@ class MangaInUserListUITest extends SeleniumUITest {
     }
 
     @ParameterizedTest(name = "{index}: Browser: {0} | Language Version: {1}")
-    @MethodSource("setBrowserBasedOnProfile")
+    @MethodSource("setBrowserAndLanguageBasedOnProfile")
     void when_add_to_plan_to_read_list_should_add_to_list(Browser browser, String language) {
 
         setUp(browser, language);
@@ -201,7 +201,7 @@ class MangaInUserListUITest extends SeleniumUITest {
     }
 
     @ParameterizedTest(name = "{index}: Browser: {0} | Language Version: {1}")
-    @MethodSource("setBrowserBasedOnProfile")
+    @MethodSource("setBrowserAndLanguageBasedOnProfile")
     void when_remove_from_plan_to_read_list_should_remove_from_list(Browser browser, String language) {
 
         setUp(browser, language);
@@ -236,7 +236,7 @@ class MangaInUserListUITest extends SeleniumUITest {
     }
 
     @ParameterizedTest(name = "{index}: Browser: {0} | Language Version: {1}")
-    @MethodSource("setBrowserBasedOnProfile")
+    @MethodSource("setBrowserAndLanguageBasedOnProfile")
     void when_add_to_on_hold_list_should_add_to_list(Browser browser, String language) {
 
         setUp(browser, language);
@@ -267,7 +267,7 @@ class MangaInUserListUITest extends SeleniumUITest {
     }
 
     @ParameterizedTest(name = "{index}: Browser: {0} | Language Version: {1}")
-    @MethodSource("setBrowserBasedOnProfile")
+    @MethodSource("setBrowserAndLanguageBasedOnProfile")
     void when_remove_from_completed_on_hold_list_should_remove_from_list(Browser browser, String language) {
 
         setUp(browser, language);
@@ -302,7 +302,7 @@ class MangaInUserListUITest extends SeleniumUITest {
     }
 
     @ParameterizedTest(name = "{index}: Browser: {0} | Language Version: {1}")
-    @MethodSource("setBrowserBasedOnProfile")
+    @MethodSource("setBrowserAndLanguageBasedOnProfile")
     void when_add_to_dropped_list_should_add_to_list(Browser browser, String language) {
 
         setUp(browser, language);
@@ -333,7 +333,7 @@ class MangaInUserListUITest extends SeleniumUITest {
     }
 
     @ParameterizedTest(name = "{index}: Browser: {0} | Language Version: {1}")
-    @MethodSource("setBrowserBasedOnProfile")
+    @MethodSource("setBrowserAndLanguageBasedOnProfile")
     void when_remove_from_dropped_list_should_remove_from_list(Browser browser, String language) {
 
         setUp(browser, language);
@@ -368,7 +368,7 @@ class MangaInUserListUITest extends SeleniumUITest {
     }
 
     @ParameterizedTest(name = "{index}: Browser: {0} | Language Version: {1}")
-    @MethodSource("setBrowserBasedOnProfile")
+    @MethodSource("setBrowserAndLanguageBasedOnProfile")
     void when_user_not_logged_adding_manga_to_list_should_show_login_form(Browser browser, String language) {
 
         setUp(browser, language);

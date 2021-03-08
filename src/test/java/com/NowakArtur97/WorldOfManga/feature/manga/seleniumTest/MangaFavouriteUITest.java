@@ -38,7 +38,7 @@ class MangaFavouriteUITest extends SeleniumUITest {
     }
 
     @ParameterizedTest(name = "{index}: Browser: {0} | Language Version: {1}")
-    @MethodSource("setBrowserBasedOnProfile")
+    @MethodSource("setBrowserAndLanguageBasedOnProfile")
     void when_add_manga_for_the_first_time_on_main_page_should_add_manga_to_favourites(Browser browser, String language) {
 
         launchBrowser(browser, language);
@@ -56,7 +56,7 @@ class MangaFavouriteUITest extends SeleniumUITest {
     }
 
     @ParameterizedTest(name = "{index}: Browser: {0} | Language Version: {1}")
-    @MethodSource("setBrowserBasedOnProfile")
+    @MethodSource("setBrowserAndLanguageBasedOnProfile")
     void when_add_manga_for_the_first_time_should_show_manga_in_favourites(Browser browser, String language) {
 
         launchBrowser(browser, language);
@@ -83,7 +83,7 @@ class MangaFavouriteUITest extends SeleniumUITest {
     }
 
     @ParameterizedTest(name = "{index}: Browser: {0} | Language Version: {1}")
-    @MethodSource("setBrowserBasedOnProfile")
+    @MethodSource("setBrowserAndLanguageBasedOnProfile")
     void when_remove_manga_from_favourites_on_main_page_should_remove_manga_from_favourites(Browser browser, String language) {
 
         launchBrowser(browser, language);
@@ -105,7 +105,7 @@ class MangaFavouriteUITest extends SeleniumUITest {
     }
 
     @ParameterizedTest(name = "{index}: Browser: {0} | Language Version: {1}")
-    @MethodSource("setBrowserBasedOnProfile")
+    @MethodSource("setBrowserAndLanguageBasedOnProfile")
     void when_remove_manga_from_favourites_should_not_show_manga_in_list(Browser browser, String language) {
 
         launchBrowser(browser, language);
@@ -132,7 +132,7 @@ class MangaFavouriteUITest extends SeleniumUITest {
     }
 
     @ParameterizedTest(name = "{index}: Browser: {0} | Language Version: {1}")
-    @MethodSource("setBrowserBasedOnProfile")
+    @MethodSource("setBrowserAndLanguageBasedOnProfile")
     void when_user_not_logged_rating_manga_should_show_login_form(Browser browser, String language) {
 
         launchBrowser(browser, language);

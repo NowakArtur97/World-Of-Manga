@@ -11,7 +11,7 @@ import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.annotation.DirtiesContext.ClassMode;
@@ -43,7 +43,7 @@ class MangaListUITest extends SeleniumUITest {
     }
 
     @ParameterizedTest(name = "{index}: Browser: {0} | Language Version: {1}")
-    @CsvSource({"Firefox, ENG", "Firefox, PL", "Chrome, ENG", "Chrome, PL"})
+    @MethodSource("setBrowserAndLanguageBasedOnProfile")
     void when_added_new_manga_with_title_should_show_manga_title_on_manga_list(Browser browser, String language) {
 
         String englishTitle = "Manga english title";
@@ -79,7 +79,7 @@ class MangaListUITest extends SeleniumUITest {
     }
 
     @ParameterizedTest(name = "{index}: Browser: {0} | Language Version: {1}")
-    @CsvSource({"Firefox, ENG", "Firefox, PL", "Chrome, ENG", "Chrome, PL"})
+    @MethodSource("setBrowserAndLanguageBasedOnProfile")
     void when_added_new_manga_with_description_should_show_manga_description_on_manga_list(Browser browser, String language) {
 
         String englishTitle = "Manga with english title";

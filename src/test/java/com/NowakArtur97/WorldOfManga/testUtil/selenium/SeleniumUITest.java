@@ -164,7 +164,7 @@ public class SeleniumUITest {
         CHOSEN_BROWSER = chosenBrowser;
     }
 
-    protected static Stream<Arguments> setBrowserBasedOnProfile() {
+    protected static Stream<Arguments> setBrowserAndLanguageBasedOnProfile() {
 
         if (ACTIVE_PROFILE.equals(CI_PROFILE)) {
             Browser browser = Arrays.stream(Browser.values())
