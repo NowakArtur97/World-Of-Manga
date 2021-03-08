@@ -6,6 +6,8 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import lombok.Getter;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.params.provider.Arguments;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -20,13 +22,16 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Stream;
 
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class SeleniumUITest {
 
+    private final static String CI_PROFILE = "ci";
     private final static String TEST_PROFILE = "test";
 
-    @Value("${spring.profiles.active:prod}")
-    private String activeProfile;
+    private static String ACTIVE_PROFILE;
+    private static String CHOSEN_BROWSER;
 
     @LocalServerPort
     protected int localServerPort;
@@ -46,9 +51,6 @@ public class SeleniumUITest {
     @Value("${world-of-manga.selenium.is-on-circle-ci:false}")
     private boolean isOnCircleCi;
 
-    @Value("${world-of-manga.selenium.browser-on-ci}")
-    private String chosenBrowser;
-
     @Value("${world-of-manga.images.example-image-path:\\src\\main\\resources\\static\\images\\backgrounds\\samurai.jpg}")
     protected String exampleImagePath;
 
@@ -58,16 +60,9 @@ public class SeleniumUITest {
     protected LanguageVersion languageVersion;
     protected Browser browser;
 
-    protected void setUp(String browserName, String language) {
+    protected void setUp(Browser browser, String language) {
 
-        if (chosenBrowser.equals("DEFAULT")) {
-            chosenBrowser = browserName;
-        }
-
-        browser = Arrays.stream(Browser.values())
-                .filter(brow -> brow.name().equalsIgnoreCase(chosenBrowser))
-                .findFirst()
-                .orElse(Browser.CHROME);
+        this.browser = browser;
 
         languageVersion = Arrays.stream(LanguageVersion.values())
                 .filter(lang -> lang.name().equalsIgnoreCase(language))
@@ -89,7 +84,7 @@ public class SeleniumUITest {
     @SneakyThrows
     protected void setUpWebDriver() {
 
-        if (activeProfile.equals(TEST_PROFILE)) {
+        if (ACTIVE_PROFILE.equals(TEST_PROFILE)) {
 
             localServerPort = remoteAppServerPort;
         }
@@ -157,5 +152,35 @@ public class SeleniumUITest {
         }
 
         webDriver.setFileDetector(new LocalFileDetector());
+    }
+
+    @Value("${spring.profiles.active:ci}")
+    public void setPrivateName(String activeProfile) {
+        ACTIVE_PROFILE = activeProfile;
+    }
+
+    @Value("${world-of-manga.selenium.browser-on-ci:DEFAULT}")
+    public void setChosenBrowser(String chosenBrowser) {
+        CHOSEN_BROWSER = chosenBrowser;
+    }
+
+    protected static Stream<Arguments> setBrowserBasedOnProfile() {
+
+        if (ACTIVE_PROFILE.equals(CI_PROFILE)) {
+            Browser browser = Arrays.stream(Browser.values())
+                    .filter(brow -> brow.name().equalsIgnoreCase(CHOSEN_BROWSER))
+                    .findFirst()
+                    .orElse(Browser.CHROME);
+            return Stream.of(
+                    Arguments.of(browser, "ENG"),
+                    Arguments.of(browser, "PL")
+            );
+        } else {
+            return Stream.of(
+                    Arguments.of(Browser.CHROME, "ENG"),
+                    Arguments.of(Browser.CHROME, "PL"),
+                    Arguments.of(Browser.FIREFOX, "ENG"),
+                    Arguments.of(Browser.FIREFOX, "PL"));
+        }
     }
 }
