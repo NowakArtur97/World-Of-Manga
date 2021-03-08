@@ -8,7 +8,7 @@ import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.EnumSource;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.annotation.DirtiesContext.ClassMode;
@@ -25,7 +25,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class LoginControllerUIPlTest extends LoginControllerUITest {
 
     @ParameterizedTest(name = "{index}: Browser: {0}")
-    @EnumSource(Browser.class)
+    @MethodSource("setBrowserBasedOnProfile")
     void when_login_with_bad_credentials_should_show_bad_credentials_message(Browser browserToTest) {
 
         String username = "resu";
@@ -48,7 +48,7 @@ class LoginControllerUIPlTest extends LoginControllerUITest {
     }
 
     @ParameterizedTest(name = "{index}: Browser: {0}")
-    @EnumSource(Browser.class)
+    @MethodSource("setBrowserBasedOnProfile")
     void when_correct_user_login_with_user_role_should_sing_in_user(Browser browserToTest) {
 
         String username = "user";
@@ -78,7 +78,7 @@ class LoginControllerUIPlTest extends LoginControllerUITest {
     }
 
     @ParameterizedTest(name = "{index}: Browser: {0}")
-    @EnumSource(Browser.class)
+    @MethodSource("setBrowserBasedOnProfile")
     void when_correct_user_login_with_admin_role_should_sing_in_admin(Browser browserToTest) {
 
         String username = "admin";
