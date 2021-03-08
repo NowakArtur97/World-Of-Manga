@@ -164,6 +164,19 @@ public class SeleniumUITest {
         CHOSEN_BROWSER = chosenBrowser;
     }
 
+    protected static Stream<Browser> setBrowserBasedOnProfile() {
+
+        if (ACTIVE_PROFILE.equals(CI_PROFILE)) {
+            return Stream.of(
+                    Arrays.stream(Browser.values())
+                            .filter(brow -> brow.name().equalsIgnoreCase(CHOSEN_BROWSER))
+                            .findFirst()
+                            .orElse(Browser.CHROME));
+        } else {
+            return Arrays.stream(Browser.values());
+        }
+    }
+
     protected static Stream<Arguments> setBrowserAndLanguageBasedOnProfile() {
 
         if (ACTIVE_PROFILE.equals(CI_PROFILE)) {

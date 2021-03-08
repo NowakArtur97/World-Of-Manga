@@ -253,8 +253,6 @@ public class MangaList extends SeleniumPageObjectModel {
 
     public void deleteLastManga() {
 
-        webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.className(MANGA_RATING_CLASS)));
-
         useJavaScriptToClickElement(adminOptions.get(adminOptions.size() - 1));
 
         webDriver.navigate().refresh();

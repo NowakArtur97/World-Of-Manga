@@ -8,7 +8,7 @@ import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.EnumSource;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.annotation.DirtiesContext.ClassMode;
@@ -25,7 +25,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class MangaControllerUIPlTest extends MangaControllerUITest {
 
     @ParameterizedTest(name = "{index}: Browser: {0}")
-    @EnumSource(Browser.class)
+    @MethodSource("setBrowserBasedOnProfile")
     void when_correct_manga_creation_with_all_fields_should_add_manga(Browser browserForTest) {
 
         languageVersion = LanguageVersion.PL;
@@ -57,7 +57,7 @@ class MangaControllerUIPlTest extends MangaControllerUITest {
     }
 
     @ParameterizedTest(name = "{index}: Browser: {0}")
-    @EnumSource(Browser.class)
+    @MethodSource("setBrowserBasedOnProfile")
     void when_correct_manga_editing_with_all_fields_should_edit_manga(Browser browserForTest) {
 
         languageVersion = LanguageVersion.PL;
@@ -91,7 +91,7 @@ class MangaControllerUIPlTest extends MangaControllerUITest {
     }
 
     @ParameterizedTest(name = "{index}: Browser: {0}")
-    @EnumSource(Browser.class)
+    @MethodSource("setBrowserBasedOnProfile")
     void when_deleted_manga_is_in_main_page_should_remove_manga_from_list(Browser browserForTest) {
 
         languageVersion = LanguageVersion.PL;
@@ -115,7 +115,7 @@ class MangaControllerUIPlTest extends MangaControllerUITest {
     }
 
     @ParameterizedTest(name = "{index}: Browser: {0}")
-    @EnumSource(Browser.class)
+    @MethodSource("setBrowserBasedOnProfile")
     void when_deleted_manga_is_in_users_rated_manga_list_should_delete_manga_from_users_rated_manga_list(Browser browserForTest) {
 
         languageVersion = LanguageVersion.PL;
@@ -146,7 +146,7 @@ class MangaControllerUIPlTest extends MangaControllerUITest {
     }
 
     @ParameterizedTest(name = "{index}: Browser: {0}")
-    @EnumSource(Browser.class)
+    @MethodSource("setBrowserBasedOnProfile")
     void when_deleted_manga_is_in_users_favourites_should_delete_manga_from_favourites(Browser browserForTest) {
 
         languageVersion = LanguageVersion.PL;
@@ -174,7 +174,7 @@ class MangaControllerUIPlTest extends MangaControllerUITest {
     }
 
     @ParameterizedTest(name = "{index}: Browser: {0}")
-    @EnumSource(Browser.class)
+    @MethodSource("setBrowserBasedOnProfile")
     void when_deleted_manga_is_in_users_manga_list_should_delete_manga_from_users_manga_list(Browser browserForTest) {
 
         languageVersion = LanguageVersion.PL;
@@ -204,7 +204,7 @@ class MangaControllerUIPlTest extends MangaControllerUITest {
     }
 
     @ParameterizedTest(name = "{index}: Browser: {0}")
-    @EnumSource(Browser.class)
+    @MethodSource("setBrowserBasedOnProfile")
     void when_incorrect_manga_creation_with_all_blank_fields_and_not_selected_author_image_and_genre_should_have_errors(Browser browserForTest) {
 
         String blankField = "";
@@ -249,7 +249,7 @@ class MangaControllerUIPlTest extends MangaControllerUITest {
     }
 
     @ParameterizedTest(name = "{index}: Browser: {0}")
-    @EnumSource(Browser.class)
+    @MethodSource("setBrowserBasedOnProfile")
     void when_incorrect_manga_creation_with_too_long_field_sizes_and_selected_author_and_image_should_have_errors(Browser browserForTest) {
 
         String longTitleText = "asdfghjklpasdfghjklpasdfghjklpasdfghjklpasdfghjklp!@#$%";
