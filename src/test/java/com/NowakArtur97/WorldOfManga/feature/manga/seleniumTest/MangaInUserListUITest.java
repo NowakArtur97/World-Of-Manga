@@ -31,7 +31,7 @@ class MangaInUserListUITest extends SeleniumUITest {
 
     private void launchBrowser(Browser browser, String language) {
 
-        launchBrowser(browser, language);
+        setUp(browser, language);
 
         mangaList = new MangaList(webDriver, mainUrl + localServerPort);
 
