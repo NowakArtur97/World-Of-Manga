@@ -27,6 +27,8 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 @DisplayNameGeneration(NameWithSpacesGenerator.class)
+@Tag("Main_Tests")
+@Tag("Unit_Tests")
 @Tag("RecommendationService_Tests")
 class RecommendationServiceTest {
 
