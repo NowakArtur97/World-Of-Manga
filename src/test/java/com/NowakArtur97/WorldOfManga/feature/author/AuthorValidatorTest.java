@@ -40,9 +40,9 @@ class AuthorValidatorTest {
 
         authorValidator.validate(authorDTO, errors);
 
-        assertAll(() -> assertFalse(errors.hasErrors(), () -> "shouldn`t have errors: " + errors.hasErrors()),
+        assertAll(() -> assertFalse(errors.hasErrors(), () -> "shouldn't have errors: " + errors.hasErrors()),
                 () -> assertNull(errors.getFieldError("fullName"),
-                        () -> "shouldn`t full name be in use, but was: " + errors.getFieldError("fullName")),
+                        () -> "shouldn't full name be in use, but was: " + errors.getFieldError("fullName")),
                 () -> verify(authorService, times(1)).isAuthorAlreadyInDatabase(fullName));
     }
 

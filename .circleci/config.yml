@@ -73,7 +73,7 @@ jobs:
         command: dockerize -wait tcp://localhost:5432 -timeout 2m
     - run:
         name: Testing
-        command: mvn test -Dspring-boot.run.profiles=ci -Dgroups=RegistrationControllerUIPl_Tests -Dworld-of-manga.selenium.browser-on-ci=Chrome
+        command: mvn test -Dspring-boot.run.profiles=ci -Dgroups=AuthorControllerUIPl_Tests -Dworld-of-manga.selenium.browser-on-ci=Chrome
 #        command: mvn test -Dspring-boot.run.profiles=ci -Dgroups=E2E_Tests -Dworld-of-manga.selenium.browser-on-ci=Chrome
   test-Firefox:
     docker:
@@ -116,7 +116,7 @@ jobs:
           command: dockerize -wait tcp://localhost:5432 -timeout 2m
       - run:
           name: Testing
-          command: mvn test -Dspring-boot.run.profiles=ci -Dgroups=RegistrationControllerUIPl_Tests -Dworld-of-manga.selenium.browser-on-ci=Firefox
+          command: mvn test -Dspring-boot.run.profiles=ci -Dgroups=AuthorControllerUIPl_Tests -Dworld-of-manga.selenium.browser-on-ci=Firefox
   #        command: mvn test -Dspring-boot.run.profiles=ci -Dgroups=E2E_Tests -Dworld-of-manga.selenium.browser-on-ci=Chrome
   deploy:
     docker:

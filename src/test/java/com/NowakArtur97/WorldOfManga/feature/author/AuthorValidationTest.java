@@ -36,7 +36,7 @@ class AuthorValidationTest {
         Set<ConstraintViolation<AuthorDTO>> violations = validator.validate(authorDTO);
 
         assertAll(() -> assertTrue(violations.isEmpty(),
-                () -> "shouldn`t have violations, but have: " + violations.size()));
+                () -> "shouldn't have violations, but have: " + violations.size()));
     }
 
     @Nested

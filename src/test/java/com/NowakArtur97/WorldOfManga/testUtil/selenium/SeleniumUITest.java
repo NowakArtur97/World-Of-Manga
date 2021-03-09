@@ -5,7 +5,6 @@ import com.NowakArtur97.WorldOfManga.testUtil.enums.LanguageVersion;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import lombok.Getter;
 import lombok.SneakyThrows;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.params.provider.Arguments;
@@ -74,21 +73,17 @@ public class SeleniumUITest {
         setUpWebDriver();
     }
 
-    @AfterAll
-    protected static void tearDown() {
-
-        if (webDriver != null) {
-
-            webDriver.quit();
-        }
-    }
-
     @SneakyThrows
     protected void setUpWebDriver() {
 
         if (ACTIVE_PROFILE.equals(TEST_PROFILE)) {
 
             localServerPort = remoteAppServerPort;
+        }
+
+        if (webDriver != null) {
+
+            webDriver.quit();
         }
 
         switch (browser) {

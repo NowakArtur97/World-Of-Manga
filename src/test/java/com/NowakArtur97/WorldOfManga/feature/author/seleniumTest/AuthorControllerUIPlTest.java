@@ -43,7 +43,7 @@ class AuthorControllerUIPlTest extends AuthorControllerUITest {
         authorFormPage.fillMandatoryAuthorFormFields(fullName);
 
         assertAll(() -> assertEquals(0, authorFormPage.countFailureMessages(),
-                () -> "shouldn`t have errors"),
+                () -> "shouldn't have errors"),
                 () -> assertTrue(authorService.isAuthorAlreadyInDatabase(fullName),
                         () -> "should save author in database"));
     }

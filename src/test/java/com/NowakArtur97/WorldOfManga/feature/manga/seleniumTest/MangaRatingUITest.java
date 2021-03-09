@@ -101,7 +101,7 @@ class MangaRatingUITest extends SeleniumUITest {
 
         assertAll(
                 () -> assertFalse(mangaList.getLastMangaRating().contains(String.valueOf(firstMangaRating)),
-                        () -> "shouldn`t show old manga rating"),
+                        () -> "shouldn't show old manga rating"),
                 () -> assertTrue(mangaList.getLastMangaRating().contains(String.valueOf(secondMangaRating))
                                 || mangaList.getLastMangaCardText().contains(String.valueOf(secondMangaRating)),
                         () -> "should show updated manga rating"));

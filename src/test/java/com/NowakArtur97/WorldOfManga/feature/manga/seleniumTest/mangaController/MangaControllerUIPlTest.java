@@ -49,7 +49,7 @@ class MangaControllerUIPlTest extends MangaControllerUITest {
                 "Polish description", selectAuthor, selectGenre, addImage);
 
         assertAll(() -> assertTrue(mangaFormPage.isUserOnMangaFormPage(), () -> "should show manga form page"),
-                () -> assertEquals(0, mangaFormPage.countFailureMessages(), () -> "shouldn`t have errors"),
+                () -> assertEquals(0, mangaFormPage.countFailureMessages(), () -> "shouldn't have errors"),
                 () -> assertTrue(mangaTranslationService.isTitleAlreadyInUse(englishTitle),
                         () -> "should save english manga translation in database"),
                 () -> assertTrue(mangaTranslationService.isTitleAlreadyInUse(polishTitle),
@@ -83,7 +83,7 @@ class MangaControllerUIPlTest extends MangaControllerUITest {
                 "Polish description", selectAuthor, selectGenre, addImage);
 
         assertAll(() -> assertTrue(mangaFormPage.isUserOnMangaFormPage(), () -> "should show manga form page"),
-                () -> assertEquals(0, mangaFormPage.countFailureMessages(), () -> "shouldn`t have errors"),
+                () -> assertEquals(0, mangaFormPage.countFailureMessages(), () -> "shouldn't have errors"),
                 () -> assertTrue(mangaTranslationService.isTitleAlreadyInUse(englishTitle),
                         () -> "should update english manga translation in database"),
                 () -> assertTrue(mangaTranslationService.isTitleAlreadyInUse(polishTitle),
@@ -142,7 +142,7 @@ class MangaControllerUIPlTest extends MangaControllerUITest {
         mangaList.chooseRatedManga();
 
         assertAll(
-                () -> assertEquals(0, mangaList.countMangaCards(), () -> "shouldn`t show manga rating on manga list"));
+                () -> assertEquals(0, mangaList.countMangaCards(), () -> "shouldn't show manga rating on manga list"));
     }
 
     @ParameterizedTest(name = "{index}: Browser: {0}")
@@ -170,7 +170,7 @@ class MangaControllerUIPlTest extends MangaControllerUITest {
 
         mangaList.chooseFavouritesManga();
 
-        assertAll(() -> assertEquals(0, mangaList.countMangaCards(), () -> "shouldn`t show manga on favourites"));
+        assertAll(() -> assertEquals(0, mangaList.countMangaCards(), () -> "shouldn't show manga on favourites"));
     }
 
     @ParameterizedTest(name = "{index}: Browser: {0}")
@@ -200,7 +200,7 @@ class MangaControllerUIPlTest extends MangaControllerUITest {
 
         mangaList.chooseListByStatus(mangaStatus, languageVersion);
 
-        assertAll(() -> assertEquals(0, mangaList.countMangaCards(), () -> "shouldn`t show manga on list"));
+        assertAll(() -> assertEquals(0, mangaList.countMangaCards(), () -> "shouldn't show manga on list"));
     }
 
     @ParameterizedTest(name = "{index}: Browser: {0}")
@@ -244,8 +244,8 @@ class MangaControllerUIPlTest extends MangaControllerUITest {
                 () -> assertEquals(blankField, mangaFormPage.getPlTitle(), () -> "should show incorrect polish title"),
                 () -> assertEquals(blankField, mangaFormPage.getPlDescription(),
                         () -> "should show incorrect polish description"),
-                () -> assertFalse(mangaFormPage.isFirstAuthorCheckboxSelected(), () -> "shouldn`t author be selected"),
-                () -> assertFalse(mangaFormPage.isSecondGenreCheckboxSelected(), () -> "shouldn`t genre be selected"));
+                () -> assertFalse(mangaFormPage.isFirstAuthorCheckboxSelected(), () -> "shouldn't author be selected"),
+                () -> assertFalse(mangaFormPage.isSecondGenreCheckboxSelected(), () -> "shouldn't genre be selected"));
     }
 
     @ParameterizedTest(name = "{index}: Browser: {0}")

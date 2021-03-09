@@ -35,7 +35,7 @@ class MangaTranslationValidationTest {
         Set<ConstraintViolation<MangaTranslationDTO>> violations = validator.validate(mangaTranslationDTO);
 
         assertAll(() -> assertTrue(violations.isEmpty(),
-                () -> "shouldn`t have violations, but have: " + violations.size()));
+                () -> "shouldn't have violations, but have: " + violations.size()));
     }
 
     @Test

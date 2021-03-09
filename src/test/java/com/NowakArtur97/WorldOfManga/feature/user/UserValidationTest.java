@@ -36,7 +36,7 @@ class UserValidationTest {
         Set<ConstraintViolation<UserDTO>> violations = validator.validate(userDTO);
 
         assertAll(() -> assertTrue(violations.isEmpty(),
-                () -> "shouldn`t have violations, but have: " + violations.size()));
+                () -> "shouldn't have violations, but have: " + violations.size()));
     }
 
     @Nested

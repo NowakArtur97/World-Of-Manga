@@ -40,7 +40,7 @@ class UserPasswordsMatchValidatorTest {
         Set<ConstraintViolation<UserPasswordDTO>> violations = validator.validate(userPasswordDTO);
 
         assertAll(() -> assertTrue(violations.isEmpty(),
-                () -> "shouldn`t have violations, but have: " + violations.size()));
+                () -> "shouldn't have violations, but have: " + violations.size()));
     }
 
     @Test
