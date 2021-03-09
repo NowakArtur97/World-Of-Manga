@@ -86,8 +86,8 @@ jobs:
           POSTGRES_DB: world_of_manga
           POSTGRES_PASSWORD: postgres
       - image: selenium/standalone-firefox:3.141.59-yttrium
-          environment:
-            - WDM_GITHUBTOKENSECRET=$GITHUB_TOKEN_SECRET
+        environment:
+          WDM_GITHUBTOKENSECRET: $GITHUB_TOKEN_SECRET
     working_directory: ~/world_of_manga
     environment:
       MAVEN_OPTS: -Xmx3200m
