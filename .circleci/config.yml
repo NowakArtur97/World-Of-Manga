@@ -131,7 +131,7 @@ workflows:
   version: 2
   test-deploy:
     jobs:
-    - test-Unit:
+    - test-Unit
     - test-Chrome:
         requires:
           - test-Unit
