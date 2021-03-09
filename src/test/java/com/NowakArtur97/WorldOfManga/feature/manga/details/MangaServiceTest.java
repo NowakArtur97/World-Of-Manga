@@ -26,6 +26,8 @@ import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 @DisplayNameGeneration(NameWithSpacesGenerator.class)
+@Tag("Manga_Tests")
+@Tag("Unit_Tests")
 @Tag("MangaService_Tests")
 class MangaServiceTest {
 

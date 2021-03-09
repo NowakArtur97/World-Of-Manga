@@ -21,6 +21,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ExtendWith(ScreenshotWatcher.class)
 @DisplayNameGeneration(NameWithSpacesGenerator.class)
+@Tag("Manga_Tests")
 @Tag("MangaListUI_Tests")
 @DirtiesContext(classMode = ClassMode.BEFORE_EACH_TEST_METHOD)
 class MangaListUITest extends SeleniumUITest {

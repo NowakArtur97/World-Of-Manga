@@ -11,6 +11,8 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @DisplayNameGeneration(NameWithSpacesGenerator.class)
+@Tag("Manga_Tests")
+@Tag("Unit_Tests")
 @Tag("ModelMapper_Tests")
 class MangaTranslationModelMapperTest {
 

@@ -19,6 +19,8 @@ import java.util.Set;
 import static org.junit.jupiter.api.Assertions.*;
 
 @DisplayNameGeneration(NameWithSpacesGenerator.class)
+@Tag("Manga_Tests")
+@Tag("Unit_Tests")
 @Tag("MangaValidation_Tests")
 class MangaValidationTest {
 
