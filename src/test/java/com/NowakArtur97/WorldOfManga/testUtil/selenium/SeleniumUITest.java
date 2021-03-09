@@ -30,6 +30,7 @@ public class SeleniumUITest {
 
     private final static String CI_PROFILE = "ci";
     private final static String TEST_PROFILE = "test";
+    private final static String DEFAULT_GITHUB_TOKEN = "DEFAULT";
 
     private static String ACTIVE_PROFILE;
     private static String CHOSEN_BROWSER;
@@ -54,6 +55,9 @@ public class SeleniumUITest {
 
     @Value("${world-of-manga.images.example-image-path:\\src\\main\\resources\\static\\images\\backgrounds\\samurai.jpg}")
     protected String exampleImagePath;
+
+    @Value("${world-of-manga.github.token:DEFAULT}")
+    protected String githubToken;
 
     @Getter
     protected static RemoteWebDriver webDriver;
@@ -100,7 +104,11 @@ public class SeleniumUITest {
 
             case FIREFOX:
 
-                WebDriverManager.firefoxdriver().setup();
+                if (!githubToken.equals(DEFAULT_GITHUB_TOKEN)) {
+                    WebDriverManager.firefoxdriver().gitHubTokenSecret(githubToken).setup();
+                } else {
+                    WebDriverManager.firefoxdriver().setup();
+                }
 
                 if (isRemotely) {
                     setupRemoteFirefoxWebDriver();
