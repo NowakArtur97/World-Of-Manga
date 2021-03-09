@@ -28,6 +28,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @ExtendWith(MockitoExtension.class)
 @DisplayNameGeneration(NameWithSpacesGenerator.class)
+@Tag("User_Tests")
+@Tag("Unit_Tests")
 @Tag("RegistrationController_Tests")
 class UserControllerTest {
 
