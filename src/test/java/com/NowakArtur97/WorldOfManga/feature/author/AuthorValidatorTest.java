@@ -16,6 +16,8 @@ import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 @DisplayNameGeneration(NameWithSpacesGenerator.class)
+@Tag("Author_Tests")
+@Tag("Unit_Tests")
 @Tag("AuthorValidator_Tests")
 class AuthorValidatorTest {
 

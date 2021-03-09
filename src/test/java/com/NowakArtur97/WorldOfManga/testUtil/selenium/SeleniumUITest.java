@@ -6,6 +6,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import lombok.Getter;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.params.provider.Arguments;
 import org.openqa.selenium.MutableCapabilities;
@@ -25,6 +26,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.stream.Stream;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
+@Tag("E2E_Tests")
 public class SeleniumUITest {
 
     private final static String CI_PROFILE = "ci";
