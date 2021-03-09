@@ -1,5 +1,37 @@
 version: 2
 jobs:
+  test-Unit:
+    docker:
+      - image: circleci/openjdk:11.0.3-jdk-stretch
+        environment:
+          JDBC_DATABASE_URL: jdbc:postgresql://127.0.0.1:5432/world_of_manga
+          JDBC_DATABASE_USERNAME: postgres
+          JDBC_DATABASE_PASSWORD: postgres
+      - image: postgres:9.6
+        environment:
+          POSTGRES_DB: world_of_manga
+          POSTGRES_PASSWORD: postgres
+    working_directory: ~/world_of_manga
+    environment:
+      MAVEN_OPTS: -Xmx3200m
+    steps:
+      - checkout
+      - setup_remote_docker
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "pom.xml" }}
+            - v1-dependencies-
+      - run: mvn dependency:go-offline
+      - save_cache:
+          paths:
+            - ~/.m2
+          key: v1-dependencies-{{ checksum "pom.xml" }}
+      - run:
+          name: Wait for Postgresql
+          command: dockerize -wait tcp://localhost:5432 -timeout 2m
+      - run:
+          name: Testing
+          command: mvn test -Dspring-boot.run.profiles=ci -Dgroups=Unit_Tests
   test-Chrome:
     docker:
     - image: circleci/openjdk:11.0.3-jdk-stretch
@@ -42,6 +74,7 @@ jobs:
     - run:
         name: Testing
         command: mvn test -Dspring-boot.run.profiles=ci -Dgroups=RegistrationControllerUIPl_Tests -Dworld-of-manga.selenium.browser-on-ci=Chrome
+#        command: mvn test -Dspring-boot.run.profiles=ci -Dgroups=E2E_Tests -Dworld-of-manga.selenium.browser-on-ci=Chrome
   test-Firefox:
     docker:
       - image: circleci/openjdk:11.0.3-jdk-stretch
@@ -84,6 +117,7 @@ jobs:
       - run:
           name: Testing
           command: mvn test -Dspring-boot.run.profiles=ci -Dgroups=RegistrationControllerUIPl_Tests -Dworld-of-manga.selenium.browser-on-ci=Firefox
+  #        command: mvn test -Dspring-boot.run.profiles=ci -Dgroups=E2E_Tests -Dworld-of-manga.selenium.browser-on-ci=Chrome
   deploy:
     docker:
     - image: circleci/buildpack-deps:trusty
@@ -97,12 +131,17 @@ workflows:
   version: 2
   test-deploy:
     jobs:
-    - test-Chrome
+    - test-Unit:
+    - test-Chrome:
+        requires:
+          - test-Unit
     - test-Firefox:
         requires:
-        - test-Chrome
+          - test-Unit
     - deploy:
         requires:
+        - test-Unit
+        - test-Chrome
         - test-Firefox
         filters:
           branches:
