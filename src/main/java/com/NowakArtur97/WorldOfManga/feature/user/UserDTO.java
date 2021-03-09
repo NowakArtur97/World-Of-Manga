@@ -14,7 +14,7 @@ import java.util.Objects;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-class UserDTO {
+public class UserDTO {
 
     @NotBlank(message = "{user.username.notBlank}")
     @Size(message = "{user.username.size}{max}", max = 40)
