@@ -5,6 +5,7 @@ import com.NowakArtur97.WorldOfManga.testUtil.enums.LanguageVersion;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import lombok.Getter;
 import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.params.provider.Arguments;
@@ -26,6 +27,7 @@ import java.util.stream.Stream;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @Tag("E2E_Tests")
+@Slf4j
 public class SeleniumUITest {
 
     private final static String CI_PROFILE = "ci";
@@ -79,6 +81,9 @@ public class SeleniumUITest {
 
     @SneakyThrows
     protected void setUpWebDriver() {
+
+        log.info("Browser used in the test: {}", browser);
+        log.info("Interface language used in the test: {}", languageVersion);
 
         if (ACTIVE_PROFILE.equals(TEST_PROFILE)) {
 
