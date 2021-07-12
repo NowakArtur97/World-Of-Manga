@@ -140,7 +140,7 @@ workflows:
 #          - test-Unit
     - deploy:
         requires:
-        - test-Unit
+#        - test-Unit
         - test-Chrome
         - test-Firefox
         filters:
