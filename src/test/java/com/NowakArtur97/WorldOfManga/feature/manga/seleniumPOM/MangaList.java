@@ -106,7 +106,7 @@ public class MangaList extends SeleniumPageObjectModel {
 
         webDriver.navigate().refresh();
 
-        webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.className(MANGA_LIST_CLASS)));
+        webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.className(MANGA_CARD_CLASS)));
 
         mangaCards = webDriver.findElements(By.className(MANGA_CARD_CLASS));
 
@@ -141,6 +141,7 @@ public class MangaList extends SeleniumPageObjectModel {
 
     public void clickMangaUserListLink() {
 
+        webDriver.navigate().refresh();
         webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.className(MANGA_RATING_CLASS)));
 
         useJavaScriptToClickElement(mangaUserListLink);
@@ -155,7 +156,9 @@ public class MangaList extends SeleniumPageObjectModel {
 
     public void chooseLastManga() {
 
-        webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.className(MANGA_CARD_CLASS)));
+        webDriver.navigate().refresh();
+        webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.className(MANGA_LIST_CLASS)));
+        webDriverWait.until(ExpectedConditions.visibilityOf(mangaCards.get(mangaCards.size() - 1)));
 
         useJavaScriptToClickElement(mangaCards.get(mangaCards.size() - 1));
         mangaCards.get(mangaCards.size() - 1).click();
@@ -186,13 +189,6 @@ public class MangaList extends SeleniumPageObjectModel {
         return webDriver.findElements(By.className(MANGA_RATING_CLASS)).get(mangaRatings.size() - 1).getAttribute("textContent");
     }
 
-    public String getFirstMangaRatingOnMangaList() {
-
-        webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.className(MANGA_CARD_CLASS)));
-
-        return mangaRatings.get(0).getText();
-    }
-
     public void addOrRemoveFirstMangaFromFavourites() {
 
         webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.className(MANGA_CARD_CLASS)));
@@ -202,6 +198,7 @@ public class MangaList extends SeleniumPageObjectModel {
 
     public void addOrRemoveLastMangaFromFavourites() {
 
+        webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.className(MANGA_LIST_CLASS)));
         webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.className(MANGA_CARD_CLASS)));
         webDriverWait.until(ExpectedConditions.visibilityOf(mangaFavouriteLinks.get(mangaFavouriteLinks.size() - 1)));
 
@@ -212,7 +209,7 @@ public class MangaList extends SeleniumPageObjectModel {
 
         webDriver.navigate().refresh();
 
-        webDriverWait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.className(MANGA_CARD_CLASS)));
+        webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.className(MANGA_CARD_CLASS)));
 
         return mangaFavouritesCounters.get(mangaFavouritesCounters.size() - 2).getAttribute("textContent");
     }

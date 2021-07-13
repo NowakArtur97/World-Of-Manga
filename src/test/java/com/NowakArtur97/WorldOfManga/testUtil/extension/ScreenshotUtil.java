@@ -1,5 +1,6 @@
 package com.NowakArtur97.WorldOfManga.testUtil.extension;
 
+import org.openqa.selenium.NoSuchSessionException;
 import org.openqa.selenium.WebDriver;
 import ru.yandex.qatools.ashot.AShot;
 import ru.yandex.qatools.ashot.Screenshot;
@@ -21,18 +22,20 @@ class ScreenshotUtil {
 
     void takeScreenshot(WebDriver webDriver, String screenshotName) {
 
-        if (webDriver != null) {
-            Screenshot screenshot = new AShot().shootingStrategy(ShootingStrategies.viewportPasting(1000))
-                    .takeScreenshot(webDriver);
+        try {
+            if (webDriver != null) {
+                Screenshot screenshot = new AShot().shootingStrategy(ShootingStrategies.viewportPasting(1000))
+                        .takeScreenshot(webDriver);
 
-            try {
-                ImageIO.write(screenshot.getImage(), SCREENSHOT_FORMAT,
-                        new File(PROJECT_PATH + SCREENSHOT_PATH + screenshotName + DOT + SCREENSHOT_FORMAT));
-            } catch (IOException e) {
-                System.out.println("Can`t take screenshot on path: " + PROJECT_PATH + SCREENSHOT_PATH);
+                try {
+                    ImageIO.write(screenshot.getImage(), SCREENSHOT_FORMAT,
+                            new File(PROJECT_PATH + SCREENSHOT_PATH + screenshotName + DOT + SCREENSHOT_FORMAT));
+                } catch (IOException e) {
+                    System.out.println("Can`t take screenshot on path: " + PROJECT_PATH + SCREENSHOT_PATH);
+                }
             }
-
-            webDriver.close();
+        } catch (NoSuchSessionException e) {
+            System.out.println("Session ID is null");
         }
     }
 }

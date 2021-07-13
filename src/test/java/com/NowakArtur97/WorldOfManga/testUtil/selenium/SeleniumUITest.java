@@ -76,24 +76,21 @@ public class SeleniumUITest {
                 .findFirst()
                 .orElse(LanguageVersion.ENG);
 
+        log.info("Browser used in the test: {}", browser);
+        log.info("Interface language used in the test: {}", languageVersion);
+
         setUpWebDriver();
     }
 
     @SneakyThrows
     protected void setUpWebDriver() {
 
-        log.info("Browser used in the test: {}", browser);
-        log.info("Interface language used in the test: {}", languageVersion);
-
         if (ACTIVE_PROFILE.equals(TEST_PROFILE)) {
 
             localServerPort = remoteAppServerPort;
         }
 
-        if (webDriver != null) {
-
-            webDriver.quit();
-        }
+        closeDriver();
 
         switch (browser) {
             case CHROME:
@@ -109,10 +106,10 @@ public class SeleniumUITest {
 
             case FIREFOX:
 
-                if (!githubToken.equals(DEFAULT_GITHUB_TOKEN)) {
-                    WebDriverManager.firefoxdriver().gitHubTokenSecret(githubToken).setup();
-                } else {
+                if (githubToken.equals(DEFAULT_GITHUB_TOKEN)) {
                     WebDriverManager.firefoxdriver().setup();
+                } else {
+                    WebDriverManager.firefoxdriver().gitHubTokenSecret(githubToken).setup();
                 }
 
                 if (isRemotely) {
@@ -200,10 +197,23 @@ public class SeleniumUITest {
             );
         } else {
             return Stream.of(
-                    Arguments.of(Browser.CHROME, "ENG"),
-                    Arguments.of(Browser.CHROME, "PL"),
                     Arguments.of(Browser.FIREFOX, "ENG"),
-                    Arguments.of(Browser.FIREFOX, "PL"));
+                    Arguments.of(Browser.FIREFOX, "PL"),
+                    Arguments.of(Browser.CHROME, "ENG"),
+                    Arguments.of(Browser.CHROME, "PL")
+            );
+        }
+    }
+
+    public static void closeDriver() {
+
+        if (webDriver != null) {
+            try {
+                webDriver.quit();
+            } catch (Exception e) {
+                System.out.println("Exception when quiting web driver");
+                System.out.println("Message: " + e.getMessage());
+            }
         }
     }
 }
