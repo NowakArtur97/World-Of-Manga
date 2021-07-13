@@ -141,6 +141,7 @@ public class MangaList extends SeleniumPageObjectModel {
 
     public void clickMangaUserListLink() {
 
+        webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.className(MANGA_LIST_CLASS)));
         webDriver.navigate().refresh();
         webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.className(MANGA_RATING_CLASS)));
 
@@ -218,7 +219,9 @@ public class MangaList extends SeleniumPageObjectModel {
 
         webDriver.navigate().refresh();
 
+        webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.className(MANGA_LIST_CLASS)));
         webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.className(MANGA_CARD_CLASS)));
+        webDriverWait.until(ExpectedConditions.visibilityOf(mangaCards.get(mangaCards.size() - 1)));
 
         useJavaScriptToClickElement(mangaStatuses.get(mangaStatus + mangaStatuses.size() - NUMBER_OF_MANGA_STATUSES));
     }

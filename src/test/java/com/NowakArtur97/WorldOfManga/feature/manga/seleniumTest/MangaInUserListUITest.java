@@ -269,7 +269,7 @@ class MangaInUserListUITest extends SeleniumUITest {
 
     @ParameterizedTest(name = "{index}: Browser: {0} | Language Version: {1}")
     @MethodSource("setBrowserAndLanguageBasedOnProfile")
-    void when_remove_from_completed_on_hold_list_should_remove_from_list(Browser browser, String language) {
+    void when_remove_from_on_hold_list_should_remove_from_list(Browser browser, String language) {
 
         launchBrowser(browser, language);
 

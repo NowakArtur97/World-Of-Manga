@@ -32,10 +32,15 @@ class ScreenshotUtil {
                             new File(PROJECT_PATH + SCREENSHOT_PATH + screenshotName + DOT + SCREENSHOT_FORMAT));
                 } catch (IOException e) {
                     System.out.println("Can`t take screenshot on path: " + PROJECT_PATH + SCREENSHOT_PATH);
+                    System.out.println("Message: " + e.getMessage());
                 }
             }
         } catch (NoSuchSessionException e) {
             System.out.println("Session ID is null");
+            System.out.println("Message: " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Exception when taking screenshot");
+            System.out.println("Message: " + e.getMessage());
         }
     }
 }
