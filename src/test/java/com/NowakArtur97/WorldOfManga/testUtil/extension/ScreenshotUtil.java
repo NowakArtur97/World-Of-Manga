@@ -9,8 +9,13 @@ import ru.yandex.qatools.ashot.shooting.ShootingStrategies;
 import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
+import java.text.Format;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 class ScreenshotUtil {
+
+    private Format simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
 
     private final static String PROJECT_PATH = System.getProperty("user.dir");
 
@@ -28,8 +33,10 @@ class ScreenshotUtil {
                         .takeScreenshot(webDriver);
 
                 try {
+                    String dateAsString = simpleDateFormat.format(Calendar.getInstance().getTime());
                     ImageIO.write(screenshot.getImage(), SCREENSHOT_FORMAT,
-                            new File(PROJECT_PATH + SCREENSHOT_PATH + screenshotName + DOT + SCREENSHOT_FORMAT));
+                            new File(PROJECT_PATH + SCREENSHOT_PATH + screenshotName + " " + dateAsString
+                                    + DOT + SCREENSHOT_FORMAT));
                 } catch (IOException e) {
                     System.out.println("Can`t take screenshot on path: " + PROJECT_PATH + SCREENSHOT_PATH);
                     System.out.println("Message: " + e.getMessage());
