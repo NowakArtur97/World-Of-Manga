@@ -73,7 +73,7 @@ jobs:
         command: dockerize -wait tcp://localhost:5432 -timeout 2m
     - run:
         name: Testing
-        command: mvn test -Dspring-boot.run.profiles=ci -Dgroups=MangaInUserListUI_Tests -Dworld-of-manga.selenium.browser-on-ci=Chrome
+        command: mvn test -Dspring-boot.run.profiles=ci -Dgroups=Main_Tests -Dworld-of-manga.selenium.browser-on-ci=Chrome
   test-Firefox:
     docker:
       - image: circleci/openjdk:11.0.3-jdk-stretch
@@ -117,7 +117,7 @@ jobs:
           command: dockerize -wait tcp://localhost:5432 -timeout 2m
       - run:
           name: Testing
-          command: mvn test -Dspring-boot.run.profiles=ci -Dgroups=MangaInUserListUI_Tests -Dworld-of-manga.selenium.browser-on-ci=Firefox
+          command: mvn test -Dspring-boot.run.profiles=ci -Dgroups=Main_Tests -Dworld-of-manga.selenium.browser-on-ci=Firefox
   deploy:
     docker:
     - image: circleci/buildpack-deps:trusty
