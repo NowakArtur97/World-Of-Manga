@@ -32,7 +32,7 @@ public class MangaList extends SeleniumPageObjectModel {
     private static final String MANGA_ADMIN_LINK = "[href*='" + ADMIN_URL + "']";
     private static final String MANGA_LIST_TYPE_CLASS = "manga_list_types__type";
     private static final String MANGA_LIST_LINK = "//a[@href='/']";
-    private static final String MANGA_WORLD_LINK = "//a[@href='/" + AUTH_URL + " /sortMangaList/5']";
+    private static final String MANGA_WORLD_LINK = "//a[@href='/" + AUTH_URL + "/sortMangaList/5']";
     private static final String STATUS_LIST_LINK = AUTH_URL + "/sortMangaList/";
 
     @FindBy(className = MANGA_LIST_CLASS)
@@ -156,14 +156,16 @@ public class MangaList extends SeleniumPageObjectModel {
 
     public void clickMangaUserListLink() {
 
-        webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.className(MANGA_LIST_CLASS)));
+        webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.className(MainPage.MAIN_PAGE_CLASS)));
         webDriver.navigate().refresh();
-        webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.className(MANGA_RATING_CLASS)));
 
         useJavaScriptToClickElement(mangaUserListLink);
 
+        webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.className(MainPage.MAIN_PAGE_CLASS)));
+
         if (!webDriver.getCurrentUrl().contains(AUTH_URL)) {
-            clickMangaListLink();
+
+            clickMangaUserListLink();
         }
     }
 

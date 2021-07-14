@@ -23,8 +23,6 @@ class ScreenshotUtil {
 
     private final static String SCREENSHOT_FORMAT = "jpg";
 
-    private final static String DOT = ".";
-
     void takeScreenshot(WebDriver webDriver, String screenshotName) {
 
         try {
@@ -35,8 +33,8 @@ class ScreenshotUtil {
                 try {
                     String dateAsString = simpleDateFormat.format(Calendar.getInstance().getTime());
                     ImageIO.write(screenshot.getImage(), SCREENSHOT_FORMAT,
-                            new File(PROJECT_PATH + SCREENSHOT_PATH + screenshotName + " " + dateAsString
-                                    + DOT + SCREENSHOT_FORMAT));
+                            new File(PROJECT_PATH + SCREENSHOT_PATH + screenshotName + "_" + dateAsString
+                                    + "." + SCREENSHOT_FORMAT));
                 } catch (IOException e) {
                     System.out.println("Can`t take screenshot on path: " + PROJECT_PATH + SCREENSHOT_PATH);
                     System.out.println("Message: " + e.getMessage());
