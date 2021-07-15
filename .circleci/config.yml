@@ -132,10 +132,10 @@ workflows:
   test-deploy:
     jobs:
     - test-Unit
-    - test-Chrome
+    - test-Chrome:
         requires:
           - test-Unit
-    - test-Firefox
+    - test-Firefox:
         requires:
           - test-Unit
     - deploy:
