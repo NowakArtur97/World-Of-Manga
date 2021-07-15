@@ -16,6 +16,8 @@ import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 @DisplayNameGeneration(NameWithSpacesGenerator.class)
+@Tag("User_Tests")
+@Tag("Unit_Tests")
 @Tag("UserRegistrationValidator_Tests")
 class UserRegistrationValidatorTest {
 
@@ -43,11 +45,11 @@ class UserRegistrationValidatorTest {
 
         userRegistrationValidator.validate(userDTO, errors);
 
-        assertAll(() -> assertFalse(errors.hasErrors(), () -> "shouldn`t have errors: " + errors.hasErrors()),
+        assertAll(() -> assertFalse(errors.hasErrors(), () -> "shouldn't have errors: " + errors.hasErrors()),
                 () -> assertNull(errors.getFieldError("username"),
-                        () -> "shouldn`t username be in use, but was: " + errors.getFieldError("username")),
+                        () -> "shouldn't username be in use, but was: " + errors.getFieldError("username")),
                 () -> assertNull(errors.getFieldError("email"),
-                        () -> "shouldn`t email be in use, but was: " + errors.getFieldError("email")),
+                        () -> "shouldn't email be in use, but was: " + errors.getFieldError("email")),
                 () -> verify(userService, times(1)).isUsernameAlreadyInUse(username),
                 () -> verify(userService, times(1)).isEmailAlreadyInUse(email));
     }
@@ -72,7 +74,7 @@ class UserRegistrationValidatorTest {
 
         assertAll(() -> assertTrue(errors.hasErrors(), () -> "should have errors: " + errors.hasErrors()),
                 () -> assertNull(errors.getFieldError("username"),
-                        () -> "shouldn`t username be in use, but was: " + errors.getFieldError("username")),
+                        () -> "shouldn't username be in use, but was: " + errors.getFieldError("username")),
                 () -> assertNotNull(errors.getFieldError("email"),
                         () -> "should email be in use, but was: " + errors.getFieldError("email")),
                 () -> verify(userService, times(1)).isUsernameAlreadyInUse(username),
@@ -101,7 +103,7 @@ class UserRegistrationValidatorTest {
                 () -> assertNotNull(errors.getFieldError("username"),
                         () -> "should username be in use, but was: " + errors.getFieldError("username")),
                 () -> assertNull(errors.getFieldError("email"),
-                        () -> "shouldn`t email be in use, but was: " + errors.getFieldError("email")),
+                        () -> "shouldn't email be in use, but was: " + errors.getFieldError("email")),
                 () -> verify(userService, times(1)).isUsernameAlreadyInUse(username),
                 () -> verify(userService, times(1)).isEmailAlreadyInUse(email));
     }

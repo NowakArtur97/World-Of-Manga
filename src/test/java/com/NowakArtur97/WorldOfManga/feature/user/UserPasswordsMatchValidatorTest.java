@@ -15,6 +15,8 @@ import java.util.Set;
 import static org.junit.jupiter.api.Assertions.*;
 
 @DisplayNameGeneration(NameWithSpacesGenerator.class)
+@Tag("User_Tests")
+@Tag("Unit_Tests")
 @Tag("UserPasswordsMatchValidator_Tests")
 class UserPasswordsMatchValidatorTest {
 
@@ -38,7 +40,7 @@ class UserPasswordsMatchValidatorTest {
         Set<ConstraintViolation<UserPasswordDTO>> violations = validator.validate(userPasswordDTO);
 
         assertAll(() -> assertTrue(violations.isEmpty(),
-                () -> "shouldn`t have violations, but have: " + violations.size()));
+                () -> "shouldn't have violations, but have: " + violations.size()));
     }
 
     @Test

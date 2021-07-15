@@ -2,11 +2,9 @@ package com.NowakArtur97.WorldOfManga.feature.author.seleniumPOM;
 
 import com.NowakArtur97.WorldOfManga.testUtil.enums.LanguageVersion;
 import com.NowakArtur97.WorldOfManga.testUtil.selenium.SeleniumPageObjectModel;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
 
@@ -78,8 +76,6 @@ public class AuthorFormPage extends SeleniumPageObjectModel {
     }
 
     public void fillMandatoryAuthorFormFields(String fullName) {
-
-        webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.name(SUBMIT_AUTHOR_NAME)));
 
         setFullName(fullName);
 

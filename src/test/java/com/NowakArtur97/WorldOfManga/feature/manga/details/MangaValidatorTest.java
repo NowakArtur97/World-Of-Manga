@@ -19,6 +19,8 @@ import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 @DisplayNameGeneration(NameWithSpacesGenerator.class)
+@Tag("Manga_Tests")
+@Tag("Unit_Tests")
 @Tag("MangaValidator_Tests")
 class MangaValidatorTest {
 
@@ -52,9 +54,9 @@ class MangaValidatorTest {
 
         mangaValidator.validate(mangaDTO, errors);
 
-        assertAll(() -> assertFalse(errors.hasErrors(), () -> "shouldn`t have errors: " + errors.hasErrors()),
+        assertAll(() -> assertFalse(errors.hasErrors(), () -> "shouldn't have errors: " + errors.hasErrors()),
                 () -> assertNull(errors.getFieldError("title"),
-                        () -> "shouldn`t title be in use, but was: " + errors.getFieldError("title")),
+                        () -> "shouldn't title be in use, but was: " + errors.getFieldError("title")),
                 () -> verify(mangaTranslationService, times(2)).isTitleAlreadyInUse(title));
     }
 
@@ -120,7 +122,7 @@ class MangaValidatorTest {
                         () -> "should english title be in use, but was: "
                                 + errors.getFieldError("enTranslation.title")),
                 () -> assertNull(errors.getFieldError("plTranslation.title"),
-                        () -> "shouldn`t polish title be in use, but was: "
+                        () -> "shouldn't polish title be in use, but was: "
                                 + errors.getFieldError("plTranslation.title")),
                 () -> verify(mangaTranslationService, times(2)).isTitleAlreadyInUse(title));
     }
@@ -151,7 +153,7 @@ class MangaValidatorTest {
 
         assertAll(() -> assertTrue(errors.hasErrors(), () -> "should have errors: " + errors.hasErrors()),
                 () -> assertNull(errors.getFieldError("enTranslation.title"),
-                        () -> "shouldn`t english title be in use, but was: "
+                        () -> "shouldn't english title be in use, but was: "
                                 + errors.getFieldError("enTranslation.title")),
                 () -> assertNotNull(errors.getFieldError("plTranslation.title"),
                         () -> "should polish title be in use, but was: " + errors.getFieldError("plTranslation.title")),

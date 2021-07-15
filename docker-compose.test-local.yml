@@ -1,32 +1,6 @@
 version: '3.7'
 
 services:
-  world_of_manga:
-    restart: on-failure
-    build:
-      context: .
-      dockerfile: test.Dockerfile
-    container_name: world_of_manga
-    ports:
-      - 8000:8000
-    depends_on:
-      - postgres
-    environment:
-      - SERVER_PORT=8000
-      - SPRING_PROFILES_ACTIVE=test
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://192.168.99.100:5432/world_of_manga
-      - SPRING_DATASOURCE_USERNAME=postgres
-      - SPRING_DATASOURCE_PASSWORD=postgresWoM
-  postgres:
-    restart: always
-    image: postgres:13.1-alpine
-    container_name: postgres
-    ports:
-      - 5432:5432
-    environment:
-      POSTGRES_DB: world_of_manga
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgresWoM
   selenium-hub:
     restart: always
     image: selenium/hub:latest
@@ -36,9 +10,10 @@ services:
     environment:
       - GRID_BROWSER_TIMEOUT=300
       - GRID_TIMEOUT=300
+
   selenium-chrome:
     image: selenium/node-chrome-debug:3.141.59-yttrium
-    container_name: chrome
+    container_name: selenium-chrome
     deploy:
       replicas: 5
     ports:
@@ -58,9 +33,10 @@ services:
       - HUB_ENV_no_proxy=localhost
       - GRID_BROWSER_TIMEOUT=300
       - GRID_TIMEOUT=300
+
   selenium-firefox:
     image: selenium/node-firefox:3.141.59-yttrium
-    container_name: firefox
+    container_name: selenium-firefox
     deploy:
       replicas: 5
     ports:

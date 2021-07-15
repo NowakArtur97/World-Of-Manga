@@ -19,6 +19,8 @@ import java.util.Set;
 import static org.junit.jupiter.api.Assertions.*;
 
 @DisplayNameGeneration(NameWithSpacesGenerator.class)
+@Tag("Manga_Tests")
+@Tag("Unit_Tests")
 @Tag("MangaValidation_Tests")
 class MangaValidationTest {
 
@@ -52,7 +54,7 @@ class MangaValidationTest {
         Set<ConstraintViolation<MangaDTO>> violations = validator.validate(mangaDTO);
 
         assertAll(() -> assertTrue(violations.isEmpty(),
-                () -> "shouldn`t have violations, but have: " + violations.size()));
+                () -> "shouldn't have violations, but have: " + violations.size()));
     }
 
     @Test

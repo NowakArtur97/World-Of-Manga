@@ -21,6 +21,8 @@ import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 @DisplayNameGeneration(NameWithSpacesGenerator.class)
+@Tag("User_Tests")
+@Tag("Unit_Tests")
 @Tag("UserService_Tests")
 class UserServiceTest {
 
@@ -203,7 +205,7 @@ class UserServiceTest {
 
             boolean isUserLoggedInActual = userService.isUserLoggedIn();
 
-            assertAll(() -> assertTrue(isUserLoggedInActual, () -> "should user be logged in but wasn`t"),
+            assertAll(() -> assertTrue(isUserLoggedInActual, () -> "should user be logged in but wasn't"),
                     () -> verify(securityContext, times(1)).getAuthentication(),
                     () -> verify(authentication, times(1)).getName());
         }
@@ -218,7 +220,7 @@ class UserServiceTest {
 
             boolean isUserLoggedInActual = userService.isUserLoggedIn();
 
-            assertAll(() -> assertFalse(isUserLoggedInActual, () -> "should user be logged in but wasn`t"),
+            assertAll(() -> assertFalse(isUserLoggedInActual, () -> "should user be logged in but wasn't"),
                     () -> verify(securityContext, times(1)).getAuthentication(),
                     () -> verify(authentication, times(1)).getName());
         }
@@ -232,7 +234,7 @@ class UserServiceTest {
 
             boolean isUserLoggedInActual = userService.isUserLoggedIn();
 
-            assertAll(() -> assertFalse(isUserLoggedInActual, () -> "should user be logged in but wasn`t"),
+            assertAll(() -> assertFalse(isUserLoggedInActual, () -> "should user be logged in but wasn't"),
                     () -> verify(securityContext, times(1)).getAuthentication(),
                     () -> verify(authentication, never()).getName());
         }

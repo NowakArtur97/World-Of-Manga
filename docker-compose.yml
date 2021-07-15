@@ -17,6 +17,7 @@ services:
       - SPRING_DATASOURCE_URL=jdbc:mysql://192.168.99.100:3366/world_of_manga?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=Europe/Warsaw
       - SPRING_DATASOURCE_USERNAME=worldOfManga
       - SPRING_DATASOURCE_PASSWORD=worldOfManga
+
   mysql:
     restart: always
     image: mysql:8

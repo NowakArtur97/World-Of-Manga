@@ -8,7 +8,7 @@ import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.EnumSource;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.TestPropertySource;
@@ -24,7 +24,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class AuthorControllerUIPlTest extends AuthorControllerUITest {
 
     @ParameterizedTest(name = "{index}: Browser: {0}")
-    @EnumSource(Browser.class)
+    @MethodSource("setBrowserBasedOnProfile")
     void when_correct_author_creation_with_all_fields_should_add_author(Browser browserForTest) {
 
         languageVersion = LanguageVersion.PL;
@@ -43,13 +43,13 @@ class AuthorControllerUIPlTest extends AuthorControllerUITest {
         authorFormPage.fillMandatoryAuthorFormFields(fullName);
 
         assertAll(() -> assertEquals(0, authorFormPage.countFailureMessages(),
-                () -> "shouldn`t have errors"),
+                () -> "shouldn't have errors"),
                 () -> assertTrue(authorService.isAuthorAlreadyInDatabase(fullName),
                         () -> "should save author in database"));
     }
 
     @ParameterizedTest(name = "{index}: Browser: {0}")
-    @EnumSource(Browser.class)
+    @MethodSource("setBrowserBasedOnProfile")
     void when_incorrect_author_creation_with_full_name_blank_should_have_errors(Browser browserForTest) {
 
         String fullName = "";
@@ -74,7 +74,7 @@ class AuthorControllerUIPlTest extends AuthorControllerUITest {
     }
 
     @ParameterizedTest(name = "{index}: Browser: {0}")
-    @EnumSource(Browser.class)
+    @MethodSource("setBrowserBasedOnProfile")
     void when_incorrect_author_creation_with_too_long_fields_should_have_errors(Browser browserForTest) {
 
         String fullName = "asdfghjklpasdfghjklpasdfghjklpasdfghjklpasdfghjklp!@#$%";

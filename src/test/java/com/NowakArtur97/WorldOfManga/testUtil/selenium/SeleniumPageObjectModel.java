@@ -10,7 +10,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class SeleniumPageObjectModel {
 
-    private final static int TIME_TO_WAIT = 15;
+    protected final static int TIME_TO_WAIT = 10;
     private final String mainUrl;
 
     protected final WebDriver webDriver;
@@ -29,7 +29,6 @@ public class SeleniumPageObjectModel {
     protected void connectTo(final String RESOURCE_PATH) {
 
         webDriver.navigate().to(mainUrl + RESOURCE_PATH);
-        webDriver.manage().window().maximize();
     }
 
     protected void useJavaScriptToClickElement(WebElement element) {

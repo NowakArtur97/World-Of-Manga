@@ -28,6 +28,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @ExtendWith(MockitoExtension.class)
 @DisplayNameGeneration(NameWithSpacesGenerator.class)
+@Tag("User_Tests")
+@Tag("Unit_Tests")
 @Tag("RegistrationController_Tests")
 class UserControllerTest {
 
@@ -100,7 +102,8 @@ class UserControllerTest {
                         .andExpect(model().attributeHasFieldErrors("userDTO", "userPasswordDTO.password"))
                         .andExpect(model().attributeHasFieldErrors("userDTO", "email"))
                         .andExpect(model().attributeHasFieldErrors("userDTO", "areTermsAccepted"))
-                        .andExpect(model().attribute("userDTO", hasProperty("username", is(username))))
+                        .andExpect(model().attribute("userDTO",
+                                hasProperty("username", is(username))))
                         .andExpect(model().attribute("userDTO",
                                 hasProperty("userPasswordDTO",
                                         hasProperty("password", is(userPasswordDTO.getPassword())))))

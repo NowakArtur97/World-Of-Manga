@@ -3,6 +3,7 @@ package com.NowakArtur97.WorldOfManga.feature.manga.seleniumTest;
 import com.NowakArtur97.WorldOfManga.feature.manga.seleniumPOM.MangaFormPage;
 import com.NowakArtur97.WorldOfManga.feature.manga.seleniumPOM.MangaList;
 import com.NowakArtur97.WorldOfManga.feature.user.seleniumPOM.LoginPage;
+import com.NowakArtur97.WorldOfManga.testUtil.enums.Browser;
 import com.NowakArtur97.WorldOfManga.testUtil.extension.ScreenshotWatcher;
 import com.NowakArtur97.WorldOfManga.testUtil.generator.NameWithSpacesGenerator;
 import com.NowakArtur97.WorldOfManga.testUtil.selenium.SeleniumUITest;
@@ -10,7 +11,7 @@ import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.annotation.DirtiesContext.ClassMode;
@@ -20,6 +21,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ExtendWith(ScreenshotWatcher.class)
 @DisplayNameGeneration(NameWithSpacesGenerator.class)
+@Tag("Manga_Tests")
 @Tag("MangaListUI_Tests")
 @DirtiesContext(classMode = ClassMode.BEFORE_EACH_TEST_METHOD)
 class MangaListUITest extends SeleniumUITest {
@@ -30,9 +32,9 @@ class MangaListUITest extends SeleniumUITest {
 
     private LoginPage loginPage;
 
-    private void launchBrowser(String browserName, String language) {
+    private void launchBrowser(Browser browser, String language) {
 
-        setUp(browserName, language);
+        setUp(browser, language);
 
         mangaList = new MangaList(webDriver, mainUrl + localServerPort);
 
@@ -42,8 +44,8 @@ class MangaListUITest extends SeleniumUITest {
     }
 
     @ParameterizedTest(name = "{index}: Browser: {0} | Language Version: {1}")
-    @CsvSource({"Firefox, ENG", "Firefox, PL", "Chrome, ENG", "Chrome, PL"})
-    void when_added_new_manga_with_title_should_show_manga_title_on_manga_list(String browserName, String language) {
+    @MethodSource("setBrowserAndLanguageBasedOnProfile")
+    void when_added_new_manga_with_title_should_show_manga_title_on_manga_list(Browser browser, String language) {
 
         String englishTitle = "Manga english title";
         String polishTitle = "Manga polish title";
@@ -53,7 +55,7 @@ class MangaListUITest extends SeleniumUITest {
         boolean selectGenre = true;
         boolean addImage = true;
 
-        launchBrowser(browserName, language);
+        launchBrowser(browser, language);
 
         loginPage.loadLoginView(languageVersion);
 
@@ -78,8 +80,8 @@ class MangaListUITest extends SeleniumUITest {
     }
 
     @ParameterizedTest(name = "{index}: Browser: {0} | Language Version: {1}")
-    @CsvSource({"Firefox, ENG", "Firefox, PL", "Chrome, ENG", "Chrome, PL"})
-    void when_added_new_manga_with_description_should_show_manga_description_on_manga_list(String browserName, String language) {
+    @MethodSource("setBrowserAndLanguageBasedOnProfile")
+    void when_added_new_manga_with_description_should_show_manga_description_on_manga_list(Browser browser, String language) {
 
         String englishTitle = "Manga with english title";
         String polishTitle = "Manga with polish title";
@@ -89,7 +91,7 @@ class MangaListUITest extends SeleniumUITest {
         boolean selectGenre = true;
         boolean addImage = true;
 
-        launchBrowser(browserName, language);
+        launchBrowser(browser, language);
 
         loginPage.loadLoginView(languageVersion);
 

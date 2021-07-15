@@ -8,7 +8,7 @@ import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.EnumSource;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.annotation.DirtiesContext.ClassMode;
@@ -25,7 +25,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class UserControllerUIEnTest extends UserControllerUITest {
 
     @ParameterizedTest(name = "{index}: Browser: {0}")
-    @EnumSource(Browser.class)
+    @MethodSource("setBrowserBasedOnProfile")
     void when_username_is_already_in_use_should_have_error(Browser browserForTest) {
 
         String username = "user";
@@ -51,7 +51,7 @@ class UserControllerUIEnTest extends UserControllerUITest {
     }
 
     @ParameterizedTest(name = "{index}: Browser: {0}")
-    @EnumSource(Browser.class)
+    @MethodSource("setBrowserBasedOnProfile")
     void when_email_is_already_in_use_should_have_error(Browser browserForTest) {
 
         String username = "username";
@@ -77,7 +77,7 @@ class UserControllerUIEnTest extends UserControllerUITest {
     }
 
     @ParameterizedTest(name = "{index}: Browser: {0}")
-    @EnumSource(Browser.class)
+    @MethodSource("setBrowserBasedOnProfile")
     void when_incorrect_registration_with_mandatory_fields_should_have_errors(Browser browserForTest) {
 
         String username = "";
@@ -109,7 +109,7 @@ class UserControllerUIEnTest extends UserControllerUITest {
     }
 
     @ParameterizedTest(name = "{index}: Browser: {0}")
-    @EnumSource(Browser.class)
+    @MethodSource("setBrowserBasedOnProfile")
     void when_incorrect_registration_fields_size_with_mandatory_fields_should_have_errors(Browser browserForTest) {
 
         String username = "asdfghjklpasdfghjklpasdfghjklpasdfghjklpasdfghjklp";
@@ -141,7 +141,7 @@ class UserControllerUIEnTest extends UserControllerUITest {
     }
 
     @ParameterizedTest(name = "{index}: Browser: {0}")
-    @EnumSource(Browser.class)
+    @MethodSource("setBrowserBasedOnProfile")
     void when_incorrect_registration_with_all_fields_should_have_errors(Browser browserForTest) {
 
         String username = "";
@@ -183,7 +183,7 @@ class UserControllerUIEnTest extends UserControllerUITest {
     }
 
     @ParameterizedTest(name = "{index}: Browser: {0}")
-    @EnumSource(Browser.class)
+    @MethodSource("setBrowserBasedOnProfile")
     void when_correct_registration_with_all_fields_should_register_user(Browser browserForTest) {
 
         languageVersion = LanguageVersion.ENG;

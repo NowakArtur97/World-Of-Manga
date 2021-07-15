@@ -3,9 +3,13 @@ package com.NowakArtur97.WorldOfManga.testUtil.selenium;
 import com.NowakArtur97.WorldOfManga.testUtil.enums.Browser;
 import com.NowakArtur97.WorldOfManga.testUtil.enums.LanguageVersion;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import io.github.bonigarcia.wdm.config.WebDriverManagerException;
 import lombok.Getter;
 import lombok.SneakyThrows;
-import org.junit.jupiter.api.AfterAll;
+import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.params.provider.Arguments;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -20,13 +24,19 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Stream;
 
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+@Tag("E2E_Tests")
+@Slf4j
 public class SeleniumUITest {
 
+    private final static String CI_PROFILE = "ci";
     private final static String TEST_PROFILE = "test";
+    private final static String DEFAULT_GITHUB_TOKEN = "DEFAULT";
 
-    @Value("${spring.profiles.active:prod}")
-    private String activeProfile;
+    private static String ACTIVE_PROFILE;
+    private static String CHOSEN_BROWSER;
 
     @LocalServerPort
     protected int localServerPort;
@@ -49,84 +59,102 @@ public class SeleniumUITest {
     @Value("${world-of-manga.images.example-image-path:\\src\\main\\resources\\static\\images\\backgrounds\\samurai.jpg}")
     protected String exampleImagePath;
 
+    @Value("${world-of-manga.github.token:DEFAULT}")
+    protected String githubToken;
+
     @Getter
     protected static RemoteWebDriver webDriver;
 
     protected LanguageVersion languageVersion;
     protected Browser browser;
 
-    protected void setUp(String browserName, String language) {
+    protected void setUp(Browser browser, String language) {
 
-        browser = Arrays.stream(Browser.values())
-                .filter(brow -> brow.name().equalsIgnoreCase(browserName))
-                .findFirst()
-                .orElse(Browser.CHROME);
+        this.browser = browser;
 
         languageVersion = Arrays.stream(LanguageVersion.values())
                 .filter(lang -> lang.name().equalsIgnoreCase(language))
                 .findFirst()
                 .orElse(LanguageVersion.ENG);
 
+        log.info("Browser used in the test: {}", browser);
+        log.info("Interface language used in the test: {}", languageVersion);
+
         setUpWebDriver();
-    }
-
-    @AfterAll
-    protected static void tearDown() {
-
-        if (webDriver != null) {
-
-            webDriver.quit();
-        }
     }
 
     @SneakyThrows
     protected void setUpWebDriver() {
 
-        if (activeProfile.equals(TEST_PROFILE)) {
+        if (ACTIVE_PROFILE.equals(TEST_PROFILE)) {
 
             localServerPort = remoteAppServerPort;
         }
 
-        WebDriverManager.chromedriver().setup();
-        WebDriverManager.firefoxdriver().setup();
+        closeDriver();
 
-        if (isRemotely) {
+        switch (browser) {
+            case CHROME:
 
-            setupRemoteWebDriver(browser);
+                WebDriverManager.chromedriver().setup();
 
-        } else {
+                if (isRemotely) {
+                    setupRemoteChromeWebDriver();
+                } else {
+                    webDriver = new ChromeDriver();
+                }
+                break;
 
-            if (browser.equals(Browser.CHROME)) {
+            case FIREFOX:
 
-                webDriver = new ChromeDriver();
+                if (githubToken.equals(DEFAULT_GITHUB_TOKEN)) {
+                    WebDriverManager.firefoxdriver().setup();
+                } else {
+                    try {
+                        WebDriverManager.firefoxdriver().gitHubTokenSecret(githubToken).setup();
+                    } catch (WebDriverManagerException e) {
+                        log.info("Exception creating Firefox Driver using Github Token");
+                        log.info("Message: " + e.getMessage());
+                        setUpWebDriver();
+                    }
+                }
 
-            } else if (browser.equals(Browser.FIREFOX)) {
-
-                webDriver = new FirefoxDriver();
-            }
+                if (isRemotely) {
+                    setupRemoteFirefoxWebDriver();
+                } else {
+                    webDriver = new FirefoxDriver();
+                }
+                break;
         }
 
         webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
 
-    private void setupRemoteWebDriver(Browser browser) throws MalformedURLException {
+    private void setupRemoteChromeWebDriver() throws MalformedURLException {
 
-        MutableCapabilities capabilities = null;
+        MutableCapabilities capabilities = new ChromeOptions();
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--start-maximized");
+        options.addArguments("--headless");
+        capabilities.setCapability(ChromeOptions.CAPABILITY, options);
 
-        if (browser.equals(Browser.CHROME)) {
+        setupRemoteWebDriver(capabilities);
+    }
 
-            capabilities = new ChromeOptions();
-            ChromeOptions options = new ChromeOptions();
-            options.addArguments("--start-maximized");
-            capabilities.setCapability(ChromeOptions.CAPABILITY, options);
+    private void setupRemoteFirefoxWebDriver() throws MalformedURLException {
 
-        } else if (browser.equals(Browser.FIREFOX)) {
+        MutableCapabilities capabilities = new FirefoxOptions();
+        FirefoxOptions options = new FirefoxOptions();
+        options.setHeadless(true);
+        options.addArguments("--start-maximized");
+        options.addArguments("--headless");
+        options.addArguments("--no-sandbox");
+        capabilities.setCapability(FirefoxOptions.FIREFOX_OPTIONS, options);
 
-            capabilities = new FirefoxOptions();
-            FirefoxOptions options = new FirefoxOptions();
-            options.addArguments("--start-maximized");
-            capabilities.setCapability(FirefoxOptions.FIREFOX_OPTIONS, options);
-        }
+        setupRemoteWebDriver(capabilities);
+    }
+
+    private void setupRemoteWebDriver(MutableCapabilities capabilities) throws MalformedURLException {
 
         if (isOnCircleCi) {
 
@@ -138,5 +166,61 @@ public class SeleniumUITest {
         }
 
         webDriver.setFileDetector(new LocalFileDetector());
+    }
+
+    @Value("${spring.profiles.active:ci}")
+    public void setPrivateName(String activeProfile) {
+        ACTIVE_PROFILE = activeProfile;
+    }
+
+    @Value("${world-of-manga.selenium.browser-on-ci:DEFAULT}")
+    public void setChosenBrowser(String chosenBrowser) {
+        CHOSEN_BROWSER = chosenBrowser;
+    }
+
+    protected static Stream<Browser> setBrowserBasedOnProfile() {
+
+        if (ACTIVE_PROFILE.equals(CI_PROFILE)) {
+            return Stream.of(
+                    Arrays.stream(Browser.values())
+                            .filter(brow -> brow.name().equalsIgnoreCase(CHOSEN_BROWSER))
+                            .findFirst()
+                            .orElse(Browser.CHROME));
+        } else {
+            return Arrays.stream(Browser.values());
+        }
+    }
+
+    protected static Stream<Arguments> setBrowserAndLanguageBasedOnProfile() {
+
+        if (ACTIVE_PROFILE.equals(CI_PROFILE)) {
+            Browser browser = Arrays.stream(Browser.values())
+                    .filter(brow -> brow.name().equalsIgnoreCase(CHOSEN_BROWSER))
+                    .findFirst()
+                    .orElse(Browser.CHROME);
+            return Stream.of(
+                    Arguments.of(browser, "ENG"),
+                    Arguments.of(browser, "PL")
+            );
+        } else {
+            return Stream.of(
+                    Arguments.of(Browser.FIREFOX, "ENG"),
+                    Arguments.of(Browser.FIREFOX, "PL"),
+                    Arguments.of(Browser.CHROME, "ENG"),
+                    Arguments.of(Browser.CHROME, "PL")
+            );
+        }
+    }
+
+    public static void closeDriver() {
+
+        if (webDriver != null) {
+            try {
+                webDriver.quit();
+            } catch (Exception e) {
+                System.out.println("Exception when quiting web driver");
+                System.out.println("Message: " + e.getMessage());
+            }
+        }
     }
 }

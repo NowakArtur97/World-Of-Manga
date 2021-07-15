@@ -8,7 +8,7 @@ import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.EnumSource;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.TestPropertySource;
@@ -24,7 +24,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class MainControllerUIEnTest extends MainControllerUITest {
 
     @ParameterizedTest(name = "{index}: Browser: {0}")
-    @EnumSource(Browser.class)
+    @MethodSource("setBrowserBasedOnProfile")
     void when_load_main_page_should_load_all_page_content(Browser browserForTest) {
 
         languageVersion = LanguageVersion.ENG;

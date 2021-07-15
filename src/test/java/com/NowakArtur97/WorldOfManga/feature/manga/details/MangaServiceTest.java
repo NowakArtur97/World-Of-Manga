@@ -1,9 +1,9 @@
 package com.NowakArtur97.WorldOfManga.feature.manga.details;
 
-import com.NowakArtur97.WorldOfManga.feature.manga.inUserList.MangaInUserList;
-import com.NowakArtur97.WorldOfManga.feature.manga.inUserList.MangaInUserListStatus;
 import com.NowakArtur97.WorldOfManga.feature.author.Author;
 import com.NowakArtur97.WorldOfManga.feature.manga.genre.MangaGenre;
+import com.NowakArtur97.WorldOfManga.feature.manga.inUserList.MangaInUserList;
+import com.NowakArtur97.WorldOfManga.feature.manga.inUserList.MangaInUserListStatus;
 import com.NowakArtur97.WorldOfManga.feature.manga.rating.MangaRating;
 import com.NowakArtur97.WorldOfManga.feature.manga.translation.MangaTranslation;
 import com.NowakArtur97.WorldOfManga.feature.user.User;
@@ -26,6 +26,8 @@ import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 @DisplayNameGeneration(NameWithSpacesGenerator.class)
+@Tag("Manga_Tests")
+@Tag("Unit_Tests")
 @Tag("MangaService_Tests")
 class MangaServiceTest {
 
@@ -180,13 +182,9 @@ class MangaServiceTest {
         MangaTranslation mangaTranslationPlExpected = MangaTranslation.builder().title("Polish title")
                 .description("Polish description").build();
 
-        Set<Author> authorsExpected = new HashSet<>();
         Author authorExpected = new Author("FirsName LastName");
-        authorsExpected.add(authorExpected);
 
-        Set<MangaGenre> genresExpected = new HashSet<>();
         MangaGenre genreExpected = new MangaGenre("genre en", "genre pl");
-        genresExpected.add(genreExpected);
 
         MockMultipartFile image = new MockMultipartFile("image.jpg", "file bytes".getBytes());
 
@@ -220,28 +218,28 @@ class MangaServiceTest {
 
         assertAll(
                 () -> assertTrue(mangaActual.getAuthors().isEmpty(),
-                        () -> "shouldn`t manga have authors, but was: " + mangaActual.getAuthors()),
+                        () -> "shouldn't manga have authors, but was: " + mangaActual.getAuthors()),
                 () -> assertFalse(mangaActual.getAuthors().contains(authorExpected),
-                        () -> "shouldn`t contain author, but was: " + mangaActual.getAuthors()),
+                        () -> "shouldn't contain author, but was: " + mangaActual.getAuthors()),
                 () -> assertTrue(mangaActual.getMangasRatings().isEmpty(),
-                        () -> "shouldn`t manga have ratings, but was: " + mangaActual.getMangasRatings()),
+                        () -> "shouldn't manga have ratings, but was: " + mangaActual.getMangasRatings()),
                 () -> assertFalse(mangaActual.getMangasRatings().contains(mangaRatingExpected),
-                        () -> "shouldn`t contain rating, but was: " + mangaActual.getMangasRatings()),
+                        () -> "shouldn't contain rating, but was: " + mangaActual.getMangasRatings()),
                 () -> assertTrue(mangaActual.getGenres().isEmpty(),
-                        () -> "shouldn`t manga have genres, but was: " + mangaActual.getGenres()),
+                        () -> "shouldn't manga have genres, but was: " + mangaActual.getGenres()),
                 () -> assertFalse(mangaActual.getGenres().contains(genreExpected),
-                        () -> "shouldn`t contain genre, but was: " + mangaActual.getGenres()),
+                        () -> "shouldn't contain genre, but was: " + mangaActual.getGenres()),
                 () -> assertTrue(mangaActual.getUsersWithMangaInList().isEmpty(),
-                        () -> "shouldn`t manga have users with manga in their lists, but was: "
+                        () -> "shouldn't manga have users with manga in their lists, but was: "
                                 + mangaActual.getUsersWithMangaInList()),
                 () -> assertFalse(mangaActual.getUsersWithMangaInList().contains(mangaInListExpected),
-                        () -> "shouldn`t any user have manga in list, but was: "
+                        () -> "shouldn't any user have manga in list, but was: "
                                 + mangaActual.getUsersWithMangaInList()),
                 () -> assertTrue(mangaActual.getUserWithMangaInFavourites().isEmpty(),
-                        () -> "shouldn`t manga have users with manga in their favourites, but was: "
+                        () -> "shouldn't manga have users with manga in their favourites, but was: "
                                 + mangaActual.getUserWithMangaInFavourites()),
                 () -> assertFalse(mangaActual.getUserWithMangaInFavourites().contains(userExpected),
-                        () -> "shouldn`t manga have users with manga in their favourites, but was: "
+                        () -> "shouldn't manga have users with manga in their favourites, but was: "
                                 + mangaActual.getUserWithMangaInFavourites()),
                 () -> verify(mangaRepository, times(1)).findById(mangaId));
     }
@@ -282,9 +280,9 @@ class MangaServiceTest {
                 () -> assertEquals(mangaExpected, mangaActual,
                         () -> "should return added to list manga: " + mangaExpected + ", but was: " + mangaActual),
                 () -> assertTrue(userExpected.getFavouriteMangas().contains(mangaActual),
-                        () -> "should manga be in users favourites but wasn`t: " + userExpected.getFavouriteMangas()),
+                        () -> "should manga be in users favourites but wasn't: " + userExpected.getFavouriteMangas()),
                 () -> assertTrue(mangaActual.getUserWithMangaInFavourites().contains(userExpected),
-                        () -> "should user be one of the people with the manga in favorites but wasn`t: "
+                        () -> "should user be one of the people with the manga in favorites but wasn't: "
                                 + userExpected.getFavouriteMangas()),
                 () -> verify(mangaRepository, times(1)).findById(mangaId),
                 () -> verify(userService, times(1)).loadLoggedInUsername());
@@ -329,9 +327,9 @@ class MangaServiceTest {
                         () -> "should return deleted manga from list manga: " + mangaExpected + ", but was: "
                                 + mangaActual),
                 () -> assertFalse(userExpected.getFavouriteMangas().contains(mangaActual),
-                        () -> "shouldn`t manga be in users favourites but was: " + userExpected.getFavouriteMangas()),
+                        () -> "shouldn't manga be in users favourites but was: " + userExpected.getFavouriteMangas()),
                 () -> assertFalse(mangaActual.getUserWithMangaInFavourites().contains(userExpected),
-                        () -> "shouldn`t  user be one of the people with the manga in favorites but was: "
+                        () -> "shouldn't  user be one of the people with the manga in favorites but was: "
                                 + mangaActual.getUserWithMangaInFavourites()),
                 () -> verify(mangaRepository, times(1)).findById(mangaId),
                 () -> verify(userService, times(1)).loadLoggedInUsername());
