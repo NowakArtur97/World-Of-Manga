@@ -140,9 +140,9 @@ class MangaFavouriteUITest extends SeleniumUITest {
 
         mangaList.loadMangaList(languageVersion);
 
-        mangaList.chooseManga(0);
+        mangaList.chooseLastManga();
 
-        mangaList.addOrRemoveFirstMangaFromFavourites();
+        mangaList.addOrRemoveLastMangaFromFavourites();
 
         assertAll(() -> assertTrue(loginPage.isUserOnLoginPage(), () -> "should show login page"));
     }

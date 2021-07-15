@@ -4,6 +4,7 @@ import com.NowakArtur97.WorldOfManga.feature.mainPage.seleniumPOM.MainPage;
 import com.NowakArtur97.WorldOfManga.testUtil.enums.LanguageVersion;
 import com.NowakArtur97.WorldOfManga.testUtil.selenium.SeleniumPageObjectModel;
 import org.openqa.selenium.By;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -141,30 +142,37 @@ public class MangaList extends SeleniumPageObjectModel {
 
     public void clickMangaListLink() {
 
-        new WebDriverWait(webDriver, 10)
-                .until(ExpectedConditions.visibilityOfElementLocated(By.xpath(MANGA_LIST_LINK)));
+        try {
+            webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(MANGA_LIST_LINK)));
 
-        useJavaScriptToClickElement(mangaListLink);
+            useJavaScriptToClickElement(mangaListLink);
 
-        new WebDriverWait(webDriver, 10)
-                .until(ExpectedConditions.visibilityOfElementLocated(By.className(MainPage.MAIN_PAGE_CLASS)));
+            new WebDriverWait(webDriver, TIME_TO_WAIT)
+                    .until(ExpectedConditions.visibilityOfElementLocated(By.className(MainPage.MAIN_PAGE_CLASS)));
 
-        if (webDriver.getCurrentUrl().contains(ADMIN_URL)) {
+            if (webDriver.getCurrentUrl().contains(ADMIN_URL)) {
+                clickMangaListLink();
+            }
+        } catch (NullPointerException e) {
             clickMangaListLink();
         }
     }
 
     public void clickMangaUserListLink() {
 
-        webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.className(MainPage.MAIN_PAGE_CLASS)));
-        webDriver.navigate().refresh();
+        try {
+            webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.className(MainPage.MAIN_PAGE_CLASS)));
+            webDriver.navigate().refresh();
 
-        useJavaScriptToClickElement(mangaUserListLink);
+            useJavaScriptToClickElement(mangaUserListLink);
 
-        webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.className(MainPage.MAIN_PAGE_CLASS)));
+            webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.className(MainPage.MAIN_PAGE_CLASS)));
 
-        if (!webDriver.getCurrentUrl().contains(AUTH_URL)) {
+            if (!webDriver.getCurrentUrl().contains(AUTH_URL)) {
 
+                clickMangaUserListLink();
+            }
+        } catch (NullPointerException e) {
             clickMangaUserListLink();
         }
     }
@@ -254,7 +262,11 @@ public class MangaList extends SeleniumPageObjectModel {
 
     public void chooseFavouritesManga() {
 
-        useJavaScriptToClickElement(mangaListTypes.get(0));
+        try {
+            useJavaScriptToClickElement(mangaListTypes.get(0));
+        } catch (StaleElementReferenceException e) {
+            useJavaScriptToClickElement(webDriver.findElements(By.className(MANGA_LIST_TYPE_CLASS)).get(0));
+        }
     }
 
     public void chooseRatedManga() {

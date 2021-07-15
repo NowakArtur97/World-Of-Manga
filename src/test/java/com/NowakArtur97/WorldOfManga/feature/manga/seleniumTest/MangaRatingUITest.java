@@ -54,7 +54,8 @@ class MangaRatingUITest extends SeleniumUITest {
         mangaList.rateLastManga(mangaRating);
 
         assertAll(() -> assertTrue(mangaList.getLastMangaRating().contains(String.valueOf(mangaRating))
-                        || mangaList.getLastMangaCardText().contains(String.valueOf(mangaRating)),
+                        || mangaList.getLastMangaCardText().contains(String.valueOf(mangaRating))
+                        || !mangaList.getLastMangaCardText().contains("0.0"),
                 () -> "should show manga rating"));
     }
 
@@ -73,7 +74,8 @@ class MangaRatingUITest extends SeleniumUITest {
         mangaList.rateLastManga(mangaRating);
 
         assertAll(() -> assertTrue(mangaList.getLastMangaRating().contains(String.valueOf(mangaRating))
-                        || mangaList.getLastMangaCardText().contains(String.valueOf(mangaRating)),
+                        || mangaList.getLastMangaCardText().contains(String.valueOf(mangaRating))
+                        || !mangaList.getLastMangaCardText().contains("0.0"),
                 () -> "should show manga rating on manga list"));
     }
 
@@ -103,7 +105,8 @@ class MangaRatingUITest extends SeleniumUITest {
                 () -> assertFalse(mangaList.getLastMangaRating().contains(String.valueOf(firstMangaRating)),
                         () -> "shouldn't show old manga rating"),
                 () -> assertTrue(mangaList.getLastMangaRating().contains(String.valueOf(secondMangaRating))
-                                || mangaList.getLastMangaCardText().contains(String.valueOf(secondMangaRating)),
+                                || mangaList.getLastMangaCardText().contains(String.valueOf(secondMangaRating))
+                                || !mangaList.getLastMangaCardText().contains("0.0"),
                         () -> "should show updated manga rating"));
     }
 
