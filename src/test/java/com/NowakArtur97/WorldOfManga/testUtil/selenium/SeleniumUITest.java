@@ -3,6 +3,7 @@ package com.NowakArtur97.WorldOfManga.testUtil.selenium;
 import com.NowakArtur97.WorldOfManga.testUtil.enums.Browser;
 import com.NowakArtur97.WorldOfManga.testUtil.enums.LanguageVersion;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import io.github.bonigarcia.wdm.config.WebDriverManagerException;
 import lombok.Getter;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -109,7 +110,13 @@ public class SeleniumUITest {
                 if (githubToken.equals(DEFAULT_GITHUB_TOKEN)) {
                     WebDriverManager.firefoxdriver().setup();
                 } else {
-                    WebDriverManager.firefoxdriver().gitHubTokenSecret(githubToken).setup();
+                    try {
+                        WebDriverManager.firefoxdriver().gitHubTokenSecret(githubToken).setup();
+                    } catch (WebDriverManagerException e) {
+                        log.info("Exception creating Firefox Driver using Github Token");
+                        log.info("Message: " + e.getMessage());
+                        setUpWebDriver();
+                    }
                 }
 
                 if (isRemotely) {

@@ -77,8 +77,11 @@ public class LoginPage extends SeleniumPageObjectModel {
 
     public boolean isUserOnLoginPage() {
 
-        webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.className(MainPage.MAIN_PAGE_CLASS)));
-
+        try {
+            webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.className(MainPage.MAIN_PAGE_CLASS)));
+        } catch (NullPointerException e) {
+            return isUserOnLoginPage();
+        }
         return webDriver.getCurrentUrl().contains(RESOURCE_PATH) || isElementFound(formBox);
     }
 }
