@@ -64,6 +64,12 @@ For a testing use commands:
 - Docker
 
 ## Features
+
+- Continuous integration and deployment with CircleCI
+- Deployment on Heroku
+- Loading data at application startup
+- Database selection depending on the profile
+
 Available for all users:
 - Select language (available options are: English and Polish)
 - Recommendations
