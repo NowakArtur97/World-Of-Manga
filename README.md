@@ -6,7 +6,6 @@
 * [Setup](#setup)
 * [Built With](#built-with)
 * [Features](#features)
-* [To Do](#to-do)
 * [Status](#status)
 * [Screenshots](#screenshots)
 
