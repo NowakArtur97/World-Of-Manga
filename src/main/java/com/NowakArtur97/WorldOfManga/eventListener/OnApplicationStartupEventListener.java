@@ -25,6 +25,7 @@ import java.io.IOException;
 class OnApplicationStartupEventListener {
 
     private final static String PROD_PROFILE = "prod";
+    private final static String AWS_PROFILE = "aws";
 
     @Value("${spring.profiles.active:prod}")
     private String activeProfile;
@@ -153,7 +154,7 @@ class OnApplicationStartupEventListener {
         saveManga(komiTitle, komiDescriptionEn, komiTitle, komiDescriptionPl, komiAuthor, schoolLife, romance,
                 comedy);
 
-        if (activeProfile.equals(PROD_PROFILE)) {
+        if (activeProfile.equals(PROD_PROFILE) || activeProfile.equals(AWS_PROFILE)) {
 
             saveManga(irumaTitle, irumaDescriptionEn, irumaTitle, irumaDescriptionPl, irumaAuthor, demons,
                     schoolLife, comedy);
