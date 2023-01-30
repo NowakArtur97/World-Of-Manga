@@ -10,12 +10,46 @@ Resources:
       Tags:
         - Key: Name
           Value: world-of-manga-vpc
+  InternetGateway:
+    Type: "AWS::EC2::InternetGateway"
+    Properties:
+      Tags:
+        - Key: Name
+          Value: world-of-manga-igw
+  InternetGatewayAttachment:
+    Type: "AWS::EC2::VPCGatewayAttachment"
+    Properties:
+      VpcId: !Ref VPC
+      InternetGatewayId: !Ref InternetGateway
+  RouteTableApp:
+    Type: "AWS::EC2::RouteTable"
+    Properties:
+      VpcId: !Ref VPC
+      Tags:
+        - Key: Name
+          Value: world-of-manga-rt-app
+  RouteTableAppDefaultIPv4:
+    Type: "AWS::EC2::Route"
+    DependsOn: InternetGatewayAttachment
+    Properties:
+      RouteTableId:
+        Ref: RouteTableApp
+      DestinationCidrBlock: "0.0.0.0/0"
+      GatewayId:
+        Ref: InternetGateway
+  RouteTableAssociationApp:
+    Type: "AWS::EC2::SubnetRouteTableAssociation"
+    Properties:
+      SubnetId: !Ref SubnetApp
+      RouteTableId:
+        Ref: RouteTableApp
   SubnetApp:
     Type: AWS::EC2::Subnet
     Properties:
       VpcId: !Ref VPC
       AvailabilityZone: !Select [0, !GetAZs ""]
       CidrBlock: 10.16.0.0/27
+      MapPublicIpOnLaunch: true
       Tags:
         - Key: Name
           Value: world-of-manga-sn-app
@@ -28,3 +62,19 @@ Resources:
       Tags:
         - Key: Name
           Value: world-of-manga-sn-database
+  SecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: A Security Group for World Of Manga VPC
+      VpcId: !Ref VPC
+      SecurityGroupIngress:
+        - CidrIp: 0.0.0.0/0
+          IpProtocol: -1
+        - CidrIp: 0.0.0.0/0
+          FromPort: 8080
+          ToPort: 8080
+          IpProtocol: tcp
+        - CidrIp: XXXX
+          FromPort: 22
+          ToPort: 22
+          IpProtocol: tcp
