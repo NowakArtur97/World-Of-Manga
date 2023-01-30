@@ -1,0 +1,30 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: World Of Manga base VPC Template
+Resources:
+  VPC:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: 10.16.0.0/24
+      EnableDnsSupport: true
+      EnableDnsHostnames: true
+      Tags:
+        - Key: Name
+          Value: world-of-manga-vpc
+  SubnetApp:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref VPC
+      AvailabilityZone: !Select [0, !GetAZs ""]
+      CidrBlock: 10.16.0.0/27
+      Tags:
+        - Key: Name
+          Value: world-of-manga-sn-app
+  SubnetDatabase:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref VPC
+      AvailabilityZone: !Select [0, !GetAZs ""]
+      CidrBlock: 10.16.0.32/27
+      Tags:
+        - Key: Name
+          Value: world-of-manga-sn-database
