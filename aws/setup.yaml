@@ -1,5 +1,15 @@
 AWSTemplateFormatVersion: 2010-09-09
 Description: World Of Manga base VPC Template
+Parameters:
+  DBName:
+    Type: "String"
+    Default: "world_of_manga"
+  DBUsername:
+    Type: "String"
+    Default: "worldOfManga"
+  DBPassword:
+    Type: "String"
+    Default: "worldOfManga"
 Resources:
   VPC:
     Type: AWS::EC2::VPC
@@ -53,7 +63,7 @@ Resources:
       Tags:
         - Key: Name
           Value: world-of-manga-sn-app
-  SubnetDatabase:
+  SubnetDatabaseA:
     Type: AWS::EC2::Subnet
     Properties:
       VpcId: !Ref VPC
@@ -61,7 +71,24 @@ Resources:
       CidrBlock: 10.16.0.32/27
       Tags:
         - Key: Name
-          Value: world-of-manga-sn-database
+          Value: world-of-manga-sn-database-a
+  SubnetDatabaseB:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref VPC
+      AvailabilityZone: !Select [1, !GetAZs ""]
+      CidrBlock: 10.16.0.64/27
+      Tags:
+        - Key: Name
+          Value: world-of-manga-sn-database-b
+  SubnetGroup:
+    Type: "AWS::RDS::DBSubnetGroup"
+    Properties:
+      DBSubnetGroupName: "world-of-manga-sn-group"
+      DBSubnetGroupDescription: "Database Subnet Group"
+      SubnetIds:
+        - !Ref SubnetDatabaseA
+        - !Ref SubnetDatabaseB
   SecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
@@ -74,7 +101,38 @@ Resources:
           FromPort: 8080
           ToPort: 8080
           IpProtocol: tcp
-        - CidrIp: XXXX
+        - CidrIp: X.X.X.X/X
           FromPort: 22
           ToPort: 22
           IpProtocol: tcp
+      SecurityGroupEgress:
+        - CidrIp: 0.0.0.0/0
+          IpProtocol: -1
+  Database:
+    Type: AWS::RDS::DBInstance
+    Properties:
+      DBSubnetGroupName: !Ref SubnetGroup
+      VPCSecurityGroups:
+        - !Ref DatabaseSecurityGroup
+      AllocatedStorage: "20"
+      DBInstanceClass: db.t3.micro
+      Engine: MySQL
+      DBName: !Ref DBName
+      MasterUsername: !Ref DBUsername
+      MasterUserPassword: !Ref DBPassword
+  DatabaseSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    DependsOn: SecurityGroup
+    Properties:
+      GroupDescription: Open database for application access
+      VpcId: !Ref VPC
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 3306
+          ToPort: 3306
+          SourceSecurityGroupId: !Ref SecurityGroup
+      SecurityGroupEgress:
+        - IpProtocol: tcp
+          FromPort: 3306
+          ToPort: 3306
+          SourceSecurityGroupId: !Ref SecurityGroup
