@@ -1,6 +1,10 @@
 AWSTemplateFormatVersion: 2010-09-09
 Description: World Of Manga base VPC Template
 Parameters:
+  EC2KeyPairName:
+    Type: String
+    Description: The name of an existing Amazon EC2 key pair in this region to use to SSH into the Amazon EC2 instances
+    Default: "wom"
   DBName:
     Type: "String"
     Default: "world_of_manga"
@@ -136,3 +140,17 @@ Resources:
           FromPort: 3306
           ToPort: 3306
           SourceSecurityGroupId: !Ref SecurityGroup
+  EC2Instance:
+    Type: AWS::EC2::Instance
+    Properties:
+      ImageId: ami-06c39ed6b42908a36
+      KeyName: !Ref EC2KeyPairName
+      InstanceType: t2.micro
+      SubnetId: !Ref SubnetApp
+      SecurityGroupIds:
+        - !Ref SecurityGroup
+      UserData:
+        Fn::Base64: !Sub |
+          #!/bin/bash
+          yum update -y
+          sudo amazon-linux-extras install java-openjdk11 -y
