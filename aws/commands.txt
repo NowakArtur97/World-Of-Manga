@@ -1,0 +1,33 @@
+sudo yum install docker -y
+sudo service docker start
+sudo usermod -a -G docker ec2-user
+
+sudo curl -L https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+
+echo "FROM openjdk:11-jdk-slim
+COPY target/WorldOfManga-0.0.1-SNAPSHOT.jar .
+EXPOSE 8080
+CMD ["java","-jar","WorldOfManga-0.0.1-SNAPSHOT.jar"]" > Dockerfile
+
+echo "version: '3.7'
+services:
+  world_of_manga:
+    restart: on-failure
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: world_of_manga
+    ports:
+      - 8080:8080
+    environment:
+      - SPRING_PROFILES_ACTIVE=aws
+      - SPRING_DATASOURCE_URL=jdbc:mysql://XXX:3306/world_of_manga
+      - SPRING_DATASOURCE_USERNAME=worldOfManga
+      - SPRING_DATASOURCE_PASSWORD=worldOfManga
+    volumes:
+      - ./target:/target" > docker-compose.yaml
+sudo /usr/local/bin/docker-compose up
+sudo /usr/local/bin/docker-compose down
+sudo docker images
+sudo docker rmi 
