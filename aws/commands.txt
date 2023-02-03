@@ -1,4 +1,0 @@
-sudo /usr/local/bin/docker-compose -f docker-compose.aws.yml up
-sudo /usr/local/bin/docker-compose down
-sudo docker images
-sudo docker rmi 

@@ -159,3 +159,23 @@ Resources:
           sudo usermod -a -G docker ec2-user
           sudo curl -L https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
           sudo chmod +x /usr/local/bin/docker-compose
+          cd /home/ec2-user
+          mkdir world_of_manga
+          cd world_of_manga
+          export DB_CONNECTION="${Database.Endpoint.Address}"
+          echo "version: '3.7'
+          services:
+            world_of_manga:
+              restart: on-failure
+              image: jooki997/worldofmanga:1.0.0
+              container_name: world_of_manga
+              ports:
+                - 8080:8080
+              environment:
+                - SPRING_PROFILES_ACTIVE=aws
+                - SPRING_DATASOURCE_URL=jdbc:mysql://DB_CONNECTION:3306/world_of_manga
+                - SPRING_DATASOURCE_USERNAME=worldOfManga
+                - SPRING_DATASOURCE_PASSWORD=worldOfManga
+          " > docker-compose.yaml
+          sed "s/DB_CONNECTION/$DB_CONNECTION/g" -i docker-compose.yaml
+          sudo /usr/local/bin/docker-compose up -d
