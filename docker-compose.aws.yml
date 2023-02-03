@@ -1,0 +1,15 @@
+version: "3.7"
+services:
+  world_of_manga:
+    restart: on-failure
+    build:
+      context: .
+      dockerfile: aws.Dockerfile
+    container_name: world_of_manga
+    ports:
+      - 8080:8080
+    environment:
+      - SPRING_PROFILES_ACTIVE=aws
+      - SPRING_DATASOURCE_URL=jdbc:mysql://XXX:3306/world_of_manga
+      - SPRING_DATASOURCE_USERNAME=worldOfManga
+      - SPRING_DATASOURCE_PASSWORD=worldOfManga
