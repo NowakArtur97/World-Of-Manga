@@ -1,0 +1,25 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: World Of Manga Auto Scaling Template
+Parameters:
+  LaunchTemplateId:
+    Type: String
+    Description: Id of the launch template with runnig World Of Manga app
+    Default: "lt-0433ecec7172861d1"
+  LatestVersionNumber:
+    Type: String
+    Description: Version number of the launch template with runnig World Of Manga app
+    Default: "1"
+  Subnets:
+    Type: "List<AWS::EC2::Subnet::Id>"
+    Description: A list of subnets for the Auto Scaling group
+Resources:
+  AutoScalingGroup:
+    Type: AWS::AutoScaling::AutoScalingGroup
+    Properties:
+      LaunchTemplate:
+        LaunchTemplateId: !Ref LaunchTemplateId
+        Version: !Ref LatestVersionNumber
+      MaxSize: "1"
+      MinSize: "0"
+      DesiredCapacity: "1"
+      VPCZoneIdentifier: !Ref Subnets
