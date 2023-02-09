@@ -140,42 +140,60 @@ Resources:
           FromPort: 3306
           ToPort: 3306
           SourceSecurityGroupId: !Ref SecurityGroup
-  EC2Instance:
-    Type: AWS::EC2::Instance
+  AutoScalingGroup:
+    Type: AWS::AutoScaling::AutoScalingGroup
     Properties:
-      ImageId: ami-06c39ed6b42908a36
-      KeyName: !Ref EC2KeyPairName
-      InstanceType: t2.micro
-      SubnetId: !Ref SubnetApp
-      SecurityGroupIds:
-        - !Ref SecurityGroup
-      UserData:
-        Fn::Base64: !Sub |
-          #!/bin/bash
-          sudo yum update -y
-          sudo amazon-linux-extras install java-openjdk11 -y
-          sudo yum install docker -y
-          sudo service docker start
-          sudo usermod -a -G docker ec2-user
-          sudo curl -L https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
-          sudo chmod +x /usr/local/bin/docker-compose
-          cd /home/ec2-user
-          mkdir world_of_manga
-          cd world_of_manga
-          export DB_CONNECTION="${Database.Endpoint.Address}"
-          echo "version: '3.7'
-          services:
-            world_of_manga:
-              restart: on-failure
-              image: jooki997/worldofmanga:1.0.0
-              container_name: world_of_manga
-              ports:
-                - 8080:8080
-              environment:
-                - SPRING_PROFILES_ACTIVE=aws
-                - SPRING_DATASOURCE_URL=jdbc:mysql://DB_CONNECTION:3306/world_of_manga
-                - SPRING_DATASOURCE_USERNAME=worldOfManga
-                - SPRING_DATASOURCE_PASSWORD=worldOfManga
-          " > docker-compose.yaml
-          sed "s/DB_CONNECTION/$DB_CONNECTION/g" -i docker-compose.yaml
-          sudo /usr/local/bin/docker-compose up -d
+      LaunchTemplate:
+        LaunchTemplateId: !Ref LaunchTemplate
+        Version: "1"
+      MaxSize: "1"
+      MinSize: "0"
+      DesiredCapacity: "1"
+      VPCZoneIdentifier:
+        - !Ref SubnetApp
+  LaunchTemplate:
+    Type: AWS::EC2::LaunchTemplate
+    Properties:
+      LaunchTemplateName: !Sub "${AWS::StackName}-wom"
+      LaunchTemplateData:
+        NetworkInterfaces:
+          - DeviceIndex: 0
+            AssociatePublicIpAddress: true
+            Groups:
+              - !Ref SecurityGroup
+            DeleteOnTermination: true
+        Placement:
+          Tenancy: default
+        ImageId: ami-06c39ed6b42908a36
+        KeyName: !Ref EC2KeyPairName
+        InstanceType: t2.micro
+        UserData:
+          Fn::Base64: !Sub |
+            #!/bin/bash
+            sudo yum update -y
+            sudo amazon-linux-extras install java-openjdk11 -y
+            sudo yum install docker -y
+            sudo service docker start
+            sudo usermod -a -G docker ec2-user
+            sudo curl -L https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
+            sudo chmod +x /usr/local/bin/docker-compose
+            cd /home/ec2-user
+            mkdir world_of_manga
+            cd world_of_manga
+            export DB_CONNECTION="${Database.Endpoint.Address}"
+            echo "version: '3.7'
+            services:
+              world_of_manga:
+                restart: on-failure
+                image: jooki997/worldofmanga:1.0.0
+                container_name: world_of_manga
+                ports:
+                  - 8080:8080
+                environment:
+                  - SPRING_PROFILES_ACTIVE=aws
+                  - SPRING_DATASOURCE_URL=jdbc:mysql://DB_CONNECTION:3306/world_of_manga
+                  - SPRING_DATASOURCE_USERNAME=worldOfManga
+                  - SPRING_DATASOURCE_PASSWORD=worldOfManga
+            " > docker-compose.yaml
+            sed "s/DB_CONNECTION/$DB_CONNECTION/g" -i docker-compose.yaml
+            sudo /usr/local/bin/docker-compose up -d
